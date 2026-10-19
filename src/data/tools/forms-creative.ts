@@ -291,7 +291,7 @@ export const podcastScript: ToolDefinition = {
     ],
     workedExample: {
       heading: 'Worked example',
-      body: 'Episode 42 targets 28 minutes with a cold-open hook, three segments, a sponsor CTA, and show-notes placeholders—ready to hand a co-host.',
+      body: 'Episode 42 targets 28 minutes with a cold-open hook, three segments, a sponsor CTA, and blank show-notes lines for links—ready to hand a co-host.',
     },
     commonMistakes: ['No timed segments', 'CTA buried after the outro music'],
     tips: ['Record cold open twice; pick the better energy in edit.'],
