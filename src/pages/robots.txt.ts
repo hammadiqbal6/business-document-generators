@@ -1,4 +1,10 @@
-User-agent: *
+import type { APIRoute } from 'astro';
+import { siteConfig } from '../config/site';
+
+/** Build-time robots.txt — Sitemap origin from PUBLIC_SITE_URL. */
+export const GET: APIRoute = () => {
+  const origin = siteConfig.siteUrl.replace(/\/$/, '');
+  const body = `User-agent: *
 Allow: /
 Disallow: /tools/*/embed/
 
@@ -22,4 +28,9 @@ Allow: /
 User-agent: CCBot
 Disallow: /
 
-Sitemap: https://docuforge.example/sitemap-index.xml
+Sitemap: ${origin}/sitemap-index.xml
+`;
+  return new Response(body, {
+    headers: { 'Content-Type': 'text/plain; charset=utf-8' },
+  });
+};

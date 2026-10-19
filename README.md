@@ -103,7 +103,7 @@ GitHub Actions runs `npm run proof` and uploads `docs/proof/` as a workflow arti
 
 ## SEO / AdSense / deploy
 
-- **[docs/DEPLOYMENT.md](docs/DEPLOYMENT.md)** — full step-by-step: DNS, Cloudflare Pages / Vercel / Netlify, env vars, GSC, AdSense, launch checklist
+- **[docs/DEPLOYMENT.md](docs/DEPLOYMENT.md)** — full step-by-step: DNS, Cloudflare Workers Builds (`wrangler.jsonc`), env vars (see `.env.example`), GSC, AdSense, launch checklist
 - [docs/SEO-GUIDE.md](docs/SEO-GUIDE.md)
 - [docs/ADSENSE.md](docs/ADSENSE.md)
 - [docs/SEO-PLAYBOOK.md](docs/SEO-PLAYBOOK.md)
@@ -122,4 +122,4 @@ GitHub Actions runs `npm run proof` and uploads `docs/proof/` as a workflow arti
 
 ## License
 
-Tool code: use for your deployment; replace `docuforge.example` branding in `site.ts` and `public/robots.txt` before launch.
+Tool code: use for your deployment; set `PUBLIC_*` env vars (see `.env.example`). Canonicals, sitemap, robots.txt, and llms.txt follow `PUBLIC_SITE_URL`.

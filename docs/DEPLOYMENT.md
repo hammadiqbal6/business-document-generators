@@ -2,7 +2,7 @@
 
 This guide walks you from a local clone to a live, HTTPS site on a custom domain, with Search Console, optional AdSense, and analytics. It matches **this repository’s** real commands, config files, and build output (`dist/`).
 
-**Recommended host:** [Cloudflare Pages](https://pages.cloudflare.com/) (free tier, fast global CDN, `_headers` support). **Alternatives:** Vercel, Netlify.
+**Recommended host:** Cloudflare Workers (static assets) via Workers Builds — Worker name `business-document-generators`, see `wrangler.jsonc`. **Alternatives:** Cloudflare Pages, Vercel, Netlify.
 
 ---
 
@@ -66,7 +66,7 @@ Fix any failures before pushing to `main`.
 
 All owner-specific branding and IDs should be set via **environment variables** at build time. Astro exposes variables prefixed with `PUBLIC_` to the client bundle.
 
-Defaults live in `src/config/site.ts` (placeholder domain `docuforge.example`). **Do not commit real secrets**; set env vars in your host’s dashboard.
+Defaults live in `src/config/site.ts` (fallback origin is the Workers `workers.dev` hostname). **Do not commit real secrets**; set env vars in your host’s dashboard. See `.env.example` for the full list.
 
 ### Environment variables (complete list)
 
@@ -99,19 +99,9 @@ npm run preview
 
 These ship in the repo with **neutral placeholders**. Replace before or right after first deploy.
 
-#### `public/robots.txt`
+#### `robots.txt` / `llms.txt`
 
-Update the `Sitemap:` line to your real origin:
-
-```text
-Sitemap: https://tools.yourbrand.com/sitemap-index.xml
-```
-
-(Keep bot allow/disallow rules unless you have a reason to change them; see `docs/SEO-GUIDE.md`.)
-
-#### `public/llms.txt` (optional)
-
-Replace every `https://docuforge.example` URL with your live domain. Google Search does not require this file.
+Generated at build from `PUBLIC_SITE_URL` (`src/pages/robots.txt.ts`, `src/pages/llms.txt.ts`). Set the env var in Workers Builds — no manual domain edit in `public/`.
 
 #### `public/ads.txt` (before / after AdSense)
 

@@ -1,10 +1,14 @@
 /**
  * SINGLE OWNER CONFIG — fill these placeholders before launch.
  * Prefer env vars (PUBLIC_*) when deploying; this file supplies defaults.
+ * Workers Builds sets PUBLIC_SITE_URL at build; fallback matches the workers.dev hostname.
  */
+const DEFAULT_SITE_URL =
+  'https://business-document-generators.hammadiqbal117.workers.dev';
+
 export const siteConfig = {
-  /** Public site origin (no trailing slash). Used for canonicals, sitemap, OG. */
-  siteUrl: import.meta.env.PUBLIC_SITE_URL || 'https://docuforge.example',
+  /** Public site origin (no trailing slash). Used for canonicals, sitemap, OG, robots, llms. */
+  siteUrl: import.meta.env.PUBLIC_SITE_URL || DEFAULT_SITE_URL,
   /** Brand shown in header, titles, schema Organization. */
   siteName: import.meta.env.PUBLIC_SITE_NAME || 'DocuForge Tools',
   /** Short tagline for homepage and Organization description. */
