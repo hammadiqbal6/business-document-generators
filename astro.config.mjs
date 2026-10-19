@@ -2,7 +2,10 @@
 import { defineConfig } from 'astro/config';
 import react from '@astrojs/react';
 import sitemap from '@astrojs/sitemap';
-const siteUrl = process.env.PUBLIC_SITE_URL || 'https://docuforge.example';
+// Must stay in sync with DEFAULT_SITE_URL in src/config/site.ts
+const siteUrl =
+  process.env.PUBLIC_SITE_URL ||
+  'https://business-document-generators.hammadiqbal117.workers.dev';
 
 export default defineConfig({
   site: siteUrl,

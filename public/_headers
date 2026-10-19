@@ -4,7 +4,13 @@
   Referrer-Policy: strict-origin-when-cross-origin
   Permissions-Policy: camera=(), microphone=(), geolocation=()
   Strict-Transport-Security: max-age=31536000; includeSubDomains; preload
+  # No script-src CSP here so GA4 (PUBLIC_GA4_MEASUREMENT_ID) and AdSense keep working.
+  # If you add CSP, allow: https://www.googletagmanager.com https://www.google-analytics.com
+  # (and AdSense hosts when PUBLIC_ADS_ENABLED=true).
 
-/tools/*/embed/*
-  X-Frame-Options: ALLOWALL
+# Embeddable tool widgets must be iframe-able.
+# Workers allow one splat (*) per rule; :slug matches one path segment.
+# Detach inherited X-Frame-Options — empty values are rejected; use "! Header".
+/tools/:slug/embed/*
+  ! X-Frame-Options
   Content-Security-Policy: frame-ancestors *

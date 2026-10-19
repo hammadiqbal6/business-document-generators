@@ -1,9 +1,0 @@
-# DocuForge Tools (optional llms.txt — not used by Google Search)
-# https://docuforge.example/
-
-> Free in-browser niche business document generators. Privacy-first: no server-side storage.
-
-- [All tools](https://docuforge.example/tools/)
-- [Construction estimate](https://docuforge.example/tools/construction-estimate-template/)
-- [Photography contract](https://docuforge.example/tools/photography-contract-template/)
-- [Guides](https://docuforge.example/guides/)
