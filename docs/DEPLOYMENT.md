@@ -50,6 +50,17 @@ npm ci
 | `npm run audit` | Build + SEO / AdSense readiness / JS budget / link check |
 | `npm run proof` | Regenerates committed evidence in `docs/proof/` (Lighthouse, screenshots, etc.) |
 | `npm run check` | `npm test` + `npm run audit` |
+| `npm run deploy` | `npx wrangler deploy` (publish `dist/` to the Worker) |
+| `npm run indexnow` | POST sitemap URLs to IndexNow (safe; always exits 0) |
+| `npm run deploy:indexnow` | Deploy, then ping IndexNow |
+
+**Cloudflare Workers Builds deploy command** (set in the Workers Builds trigger — run IndexNow *after* deploy so the key file is live):
+
+```bash
+npx wrangler deploy && node scripts/indexnow.mjs
+```
+
+Or equivalently: `npm run deploy:indexnow` (requires `dist/` already built by the build step). Do **not** run IndexNow inside `npm run build`.
 
 **Before first production deploy**, run:
 
@@ -113,11 +124,10 @@ google.com, pub-XXXXXXXXXXXXXXXX, DIRECT, f08c47fec0942fa0
 
 #### IndexNow key file
 
-1. Choose a key string (e.g. 32 random alphanumeric characters).
-2. Set `PUBLIC_INDEXNOW_KEY` to that string in the host env.
-3. Rename or replace `public/docuforge-indexnow-key-replace-me.txt` so the filename is **`public/{YOUR_KEY}.txt`** containing only the key on one line.
+Shipped as `public/4d6f1ea5473a0968a83c67ceda5a0387.txt` (contents = the key). IndexNow keys are public by design.
 
-Example: key `myindexnowkey99` → file `public/myindexnowkey99.txt`.
+- Optional env override: `PUBLIC_INDEXNOW_KEY` (build) / `INDEXNOW_KEY` (ping script) must match the filename.
+- After each production deploy, run `node scripts/indexnow.mjs` (via `npm run deploy:indexnow` or the Workers Builds command above). The script reads `dist/sitemap-index.xml` (+ child sitemaps), POSTs batches of up to 10,000 URLs to `https://api.indexnow.org/indexnow`, logs the HTTP status, and **never fails the deploy** (catches errors, exits 0). Skip with `INDEXNOW_DISABLE=1`. Dry-run: `node scripts/indexnow.mjs --dry-run`.
 
 #### `public/_headers` (security + embed)
 
@@ -281,16 +291,14 @@ Click **Request indexing** after each inspection (reasonable pace; no need to do
 1. [Bing Webmaster](https://www.bing.com/webmasters/) → **Add your site**.
 2. **Import from Google Search Console** (fastest) or verify with `PUBLIC_BING_SITE_VERIFICATION` + redeploy.
 3. Submit the same sitemap URL.
-4. **IndexNow:** after deploy, notify Bing of key URLs:
+4. **IndexNow:** after deploy (key file must already be live), ping from the built sitemap:
 
 ```bash
-KEY=your-indexnow-key-from-env
-HOST=https://yourbrand.com
-URL="$HOST/tools/construction-estimate-template/"
-curl -s "https://api.indexnow.org/indexnow?url=${URL}&key=${KEY}"
+npm run indexnow
+# or: node scripts/indexnow.mjs --dry-run   # count URLs / print payload, no POST
 ```
 
-Repeat for changed URLs after content updates (see `docs/SEO-GUIDE.md`).
+Workers Builds should use `npx wrangler deploy && node scripts/indexnow.mjs` so the ping runs only after deploy. See `docs/SEO-GUIDE.md`.
 
 ### Rich Results Test (live)
 
@@ -397,7 +405,7 @@ When you change templates or add tools, run `npm run audit` locally before deplo
 3. Host auto-builds from Git (Cloudflare/Vercel/Netlify).
 4. Confirm build green in host dashboard.
 5. Spot-check live site + URL Inspection for changed URLs.
-6. Optional: IndexNow POST for changed URLs.
+6. IndexNow runs automatically when the deploy command is `npx wrangler deploy && node scripts/indexnow.mjs` (or `npm run deploy:indexnow`).
 
 ### Regenerate proof (for releases)
 
@@ -448,7 +456,8 @@ Copy this into your issue tracker and check off on go-live day.
 - [ ] `PUBLIC_SITE_URL`, `PUBLIC_SITE_NAME`, `PUBLIC_CONTACT_EMAIL` set for **Production**  
 - [ ] `public/robots.txt` Sitemap URL updated  
 - [ ] `public/llms.txt` URLs updated (optional)  
-- [ ] IndexNow key file renamed and `PUBLIC_INDEXNOW_KEY` set  
+- [ ] IndexNow key file present (`public/4d6f1ea5473a0968a83c67ceda5a0387.txt`); Workers Builds deploy command includes `node scripts/indexnow.mjs` after wrangler deploy  
+
 - [ ] Placeholder `docuforge.example` removed from user-visible copy where needed  
 
 ### Hosting

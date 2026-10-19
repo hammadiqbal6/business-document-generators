@@ -28,17 +28,20 @@ Generated at build from `src/pages/robots.txt.ts` (Sitemap origin from `PUBLIC_S
 3. URL Inspection → request indexing for home, hubs, top 5 tools.
 4. Monitor Page indexing, Core Web Vitals, and Generative AI performance reports.
 
-## Bing
+## Bing / IndexNow
 
 1. Import from GSC in Bing Webmaster Tools.
-2. Enable IndexNow: host key file at `https://yourdomain.com/{PUBLIC_INDEXNOW_KEY}.txt`
-3. POST changed URLs:
+2. Key file is committed at `public/4d6f1ea5473a0968a83c67ceda5a0387.txt` (served at `/{key}.txt` after deploy).
+3. After deploy, submit all sitemap URLs via `scripts/indexnow.mjs` (never wired into `build` — the key must be live first):
 
 ```bash
-KEY=your-indexnow-key
-URL=https://yourdomain.com/tools/construction-estimate-template/
-curl -s "https://api.indexnow.org/indexnow?url=$URL&key=$KEY"
+npm run deploy:indexnow
+# Workers Builds deploy command:
+#   npx wrangler deploy && node scripts/indexnow.mjs
+node scripts/indexnow.mjs --dry-run   # parse sitemap only
 ```
+
+Override key with `INDEXNOW_KEY`; skip with `INDEXNOW_DISABLE=1`. The script always exits 0 so a ping failure cannot break deploy.
 
 (IndexNow does not affect Google.)
 

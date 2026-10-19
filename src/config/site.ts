@@ -38,7 +38,7 @@ export const siteConfig = {
   /** Bing Webmaster Tools meta verification content. */
   bingSiteVerification: import.meta.env.PUBLIC_BING_SITE_VERIFICATION || '',
   /** IndexNow key (also place matching file at /public/{key}.txt). */
-  indexNowKey: import.meta.env.PUBLIC_INDEXNOW_KEY || 'docuforge-indexnow-key-replace-me',
+  indexNowKey: import.meta.env.PUBLIC_INDEXNOW_KEY || '4d6f1ea5473a0968a83c67ceda5a0387',
   /** Default author display name for Article schema and bylines. */
   defaultAuthor: 'DocuForge Editorial',
   /** Default reviewer for E-E-A-T reviewer boxes. */
