@@ -1,11 +1,11 @@
-<!-- progress: 12 -->
+<!-- progress: 28 -->
 # Build progress
-Status: Scaffolding Astro + TypeScript site config and shared generator framework; tool definitions next.
-Updated: 2026-10-19T06:09:00Z
+Status: Tool data + generator island complete; committing WIP, then building Astro layouts, pages, guides, docs, audits, and CI.
+Updated: 2026-10-19T06:19:30Z
 
 - [x] Project scaffold & config
-- [ ] Tools implemented (0 of 16)
-- [ ] Tool page content written (0 of 16)
+- [x] Tools implemented (16 of 16) — React generator + PDF/DOCX lazy export
+- [x] Tool page content written (16 of 16) — in tool definitions
 - [ ] Guides/articles (0 of 5)
 - [ ] Required pages (About, Contact, Privacy, Terms, Methodology)
 - [ ] Technical SEO (sitemap, robots, schema, canonicals, OG)
