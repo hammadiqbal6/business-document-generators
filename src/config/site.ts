@@ -27,8 +27,14 @@ export const siteConfig = {
   adsenseAutoAds: (import.meta.env.PUBLIC_ADSENSE_AUTO_ADS || 'false') === 'true',
   /** GA4 measurement ID, e.g. G-XXXXXXXXXX. Empty = no GA4 script. */
   ga4MeasurementId: import.meta.env.PUBLIC_GA4_MEASUREMENT_ID || '',
-  /** Google Search Console HTML tag content value (meta name="google-site-verification"). */
-  googleSiteVerification: import.meta.env.PUBLIC_GOOGLE_SITE_VERIFICATION || '',
+  /**
+   * Google Search Console HTML tag content value (meta name="google-site-verification").
+   * Prefer PUBLIC_GSC_VERIFICATION; PUBLIC_GOOGLE_SITE_VERIFICATION kept as a fallback alias.
+   */
+  googleSiteVerification:
+    import.meta.env.PUBLIC_GSC_VERIFICATION ||
+    import.meta.env.PUBLIC_GOOGLE_SITE_VERIFICATION ||
+    '',
   /** Bing Webmaster Tools meta verification content. */
   bingSiteVerification: import.meta.env.PUBLIC_BING_SITE_VERIFICATION || '',
   /** IndexNow key (also place matching file at /public/{key}.txt). */

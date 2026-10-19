@@ -18,6 +18,20 @@ const { tool } = Astro.props;
     <meta name="robots" content="noindex, follow" />
     <title>{tool.name} (embed) | {siteConfig.siteName}</title>
     <link rel="canonical" href={`/tools/${tool.slug}/`} />
+    {siteConfig.googleSiteVerification && (
+      <meta name="google-site-verification" content={siteConfig.googleSiteVerification} />
+    )}
+    {siteConfig.ga4MeasurementId && (
+      <>
+        <script async src={`https://www.googletagmanager.com/gtag/js?id=${siteConfig.ga4MeasurementId}`}></script>
+        <script is:inline define:vars={{ id: siteConfig.ga4MeasurementId }}>
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', id);
+        </script>
+      </>
+    )}
   </head>
   <body style="margin:0;padding:0.5rem;font-family:system-ui,sans-serif;">
     <p style="font-size:0.85rem;margin:0 0 0.5rem;">
