@@ -1,0 +1,65 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Breadcrumbs from '../../components/content/Breadcrumbs.astro';
+import RelatedTools from '../../components/content/RelatedTools.astro';
+import ToolPageContent from '../../components/content/ToolPageContent.astro';
+import AdSlot from '../../components/ads/AdSlot.astro';
+import DocumentGeneratorLazy from '../../components/generators/DocumentGeneratorLazy.astro';
+import { allTools, getRelatedTools, getToolBySlug, CATEGORY_META } from '../../data/tools';
+import { absoluteUrl, breadcrumbJsonLd, webApplicationJsonLd } from '../../lib/seo';
+
+export function getStaticPaths() {
+  return allTools.map((tool) => ({ params: { slug: tool.slug }, props: { tool } }));
+}
+
+const { tool } = Astro.props;
+const category = CATEGORY_META[tool.category];
+const pagePath = `/tools/${tool.slug}/`;
+const pageUrl = absoluteUrl(pagePath);
+const crumbs = [
+  { name: 'Home', path: '/' },
+  { name: 'Tools', path: '/tools/' },
+  { name: category.name, path: `/hubs/${category.slug}/` },
+  { name: tool.shortName, path: pagePath },
+];
+const jsonLd = [
+  breadcrumbJsonLd(crumbs),
+  webApplicationJsonLd(tool, pageUrl),
+];
+const related = getRelatedTools(tool);
+---
+<BaseLayout
+  title={tool.title}
+  description={tool.metaDescription}
+  path={pagePath}
+  ogType="website"
+  jsonLd={jsonLd}
+>
+  <Breadcrumbs items={crumbs} />
+  <header>
+    <h1>{tool.h1}</h1>
+    <p class="content-meta">
+      Primary keyword: {tool.primaryKeyword} · Updated <time datetime={tool.updatedAt}>{tool.updatedAt}</time>
+    </p>
+    <p class="lead">{tool.answerFirst}</p>
+  </header>
+
+  <AdSlot slot="tool-top" minHeight={90} />
+
+  <DocumentGeneratorLazy tool={tool} />
+
+  <AdSlot slot="tool-mid" minHeight={250} />
+
+  <ToolPageContent tool={tool} />
+
+  <RelatedTools tools={related} />
+
+  <section class="embed-note" style="overflow-wrap:anywhere;">
+    <h2>Embed this tool</h2>
+    <p>
+      Add a lightweight iframe to your site with attribution:
+      <code>{`<iframe src="${pageUrl.replace(/\/$/, '')}/embed/" title="${tool.name}" width="100%" height="720" loading="lazy"></iframe>`}</code>
+    </p>
+    <p><a href={`/tools/${tool.slug}/embed/`}>Open embeddable version →</a></p>
+  </section>
+</BaseLayout>

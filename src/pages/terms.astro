@@ -1,0 +1,29 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Breadcrumbs from '../components/content/Breadcrumbs.astro';
+import { siteConfig } from '../config/site';
+
+const path = '/terms/';
+---
+<BaseLayout
+  title="Terms of Use"
+  description="Terms of use for free document generators—no warranty, not legal advice, acceptable use."
+  path={path}
+>
+  <Breadcrumbs items={[{ name: 'Home', path: '/' }, { name: 'Terms', path }]} />
+  <h1>Terms of Use</h1>
+  <p class="content-meta">Last updated: 2026-10-19</p>
+  <p>By using {siteConfig.siteName}, you agree to these terms.</p>
+  <h2>Service</h2>
+  <p>We provide free browser-based document generators and educational content “as is.” We may change or remove tools at any time.</p>
+  <h2>No legal or professional advice</h2>
+  <p>
+    Contract, NDA, vendor, consent, and rental content is general information only—not legal, tax, or medical advice. Consult qualified professionals before relying on generated documents.
+  </p>
+  <h2>Your responsibility</h2>
+  <p>You are responsible for reviewing exported documents, complying with laws, and obtaining necessary signatures and licenses.</p>
+  <h2>Limitation of liability</h2>
+  <p>To the fullest extent permitted by law, we are not liable for indirect or consequential damages arising from use of the site or exported files.</p>
+  <h2>Acceptable use</h2>
+  <p>Do not abuse the site, attempt unauthorized access, or use automated means to degrade service.</p>
+</BaseLayout>

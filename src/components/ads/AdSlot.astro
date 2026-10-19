@@ -1,0 +1,32 @@
+---
+import { siteConfig } from '../../config/site';
+
+interface Props {
+  slot: string;
+  label?: string;
+  minHeight?: number;
+}
+
+const { slot, label = 'Advertisement', minHeight = 90 } = Astro.props;
+const enabled = siteConfig.adsEnabled && siteConfig.adsensePublisherId;
+---
+<div
+  class="ad-slot"
+  data-ad-slot={slot}
+  data-enabled={enabled ? 'true' : 'false'}
+  style={`min-height:${minHeight}px`}
+  aria-hidden={!enabled}
+>
+  {enabled ? (
+    <ins
+      class="adsbygoogle"
+      style="display:block"
+      data-ad-client={siteConfig.adsensePublisherId}
+      data-ad-slot={slot}
+      data-ad-format="auto"
+      data-full-width-responsive="true"
+    />
+  ) : (
+    <span>Ad slot reserved ({slot}) — enable in site config after AdSense approval</span>
+  )}
+</div>

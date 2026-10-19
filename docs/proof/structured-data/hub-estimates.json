@@ -1,0 +1,22 @@
+[
+  {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "name": "DocuForge Tools",
+    "url": "https://docuforge.example/",
+    "description": "Free niche business document generators — fill a form, preview live, export PDF or DOCX. Nothing leaves your browser.",
+    "inLanguage": "en-US",
+    "publisher": {
+      "@id": "https://docuforge.example/#organization"
+    }
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "@id": "https://docuforge.example/#organization",
+    "name": "DocuForge Tools",
+    "url": "https://docuforge.example/",
+    "email": "hello@docuforge.example",
+    "logo": "https://docuforge.example/favicon.svg"
+  }
+]

@@ -1,0 +1,62 @@
+[
+  {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "name": "DocuForge Tools",
+    "url": "https://docuforge.example/",
+    "description": "Free niche business document generators — fill a form, preview live, export PDF or DOCX. Nothing leaves your browser.",
+    "inLanguage": "en-US",
+    "publisher": {
+      "@id": "https://docuforge.example/#organization"
+    }
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "@id": "https://docuforge.example/#organization",
+    "name": "DocuForge Tools",
+    "url": "https://docuforge.example/",
+    "email": "hello@docuforge.example",
+    "logo": "https://docuforge.example/favicon.svg"
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Home",
+        "item": "https://docuforge.example/"
+      },
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "name": "Guides",
+        "item": "https://docuforge.example/guides/"
+      },
+      {
+        "@type": "ListItem",
+        "position": 3,
+        "name": "How to Write a Construction Estimate That Wins Jobs",
+        "item": "https://docuforge.example/guides/construction-estimate-that-wins-jobs/"
+      }
+    ]
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": "How to Write a Construction Estimate That Wins Jobs",
+    "description": "Learn what to include in a construction estimate, how to price line items, set validity dates, and avoid disputes—plus a free template generator.",
+    "datePublished": "2026-10-19",
+    "dateModified": "2026-10-19",
+    "author": {
+      "@type": "Person",
+      "name": "DocuForge Editorial"
+    },
+    "publisher": {
+      "@id": "https://docuforge.example/#organization"
+    },
+    "mainEntityOfPage": "https://docuforge.example/guides/construction-estimate-that-wins-jobs/"
+  }
+]

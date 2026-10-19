@@ -1,0 +1,25 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Breadcrumbs from '../components/content/Breadcrumbs.astro';
+import { siteConfig } from '../config/site';
+
+const path = '/contact/';
+---
+<BaseLayout
+  title="Contact"
+  description={`Contact ${siteConfig.siteName} for corrections, accessibility issues, or partnership inquiries.`}
+  path={path}
+>
+  <Breadcrumbs items={[{ name: 'Home', path: '/' }, { name: 'Contact', path }]} />
+  <h1>Contact</h1>
+  <p class="lead">We read every message. We cannot provide legal advice on contracts or consent forms.</p>
+  <p>
+    Email: <a href={`mailto:${siteConfig.contactEmail}`}>{siteConfig.contactEmail}</a>
+  </p>
+  <p>
+    For privacy requests (cookies, analytics), include “Privacy” in the subject line and the page URL you visited.
+  </p>
+  <p>
+    For embed partnerships (iframe widgets with attribution), describe your site and audience—we respond within a few business days.
+  </p>
+</BaseLayout>

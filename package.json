@@ -1,0 +1,48 @@
+{
+  "name": "docuforge-tools",
+  "type": "module",
+  "version": "1.0.0",
+  "description": "Free in-browser niche business document generators with PDF and DOCX export",
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "astro": "astro",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "audit": "npm run build && node scripts/audit/run-all.mjs",
+    "audit:seo": "node scripts/audit/seo-audit.mjs",
+    "audit:adsense": "node scripts/audit/adsense-audit.mjs",
+    "audit:budget": "node scripts/audit/budget-audit.mjs",
+    "audit:links": "node scripts/audit/link-check.mjs",
+    "lhci": "lhci autorun",
+    "check": "npm run test && npm run audit",
+    "proof": "node scripts/proof/generate-all.mjs"
+  },
+  "dependencies": {
+    "@astrojs/react": "^4.4.2",
+    "@astrojs/sitemap": "^3.7.4",
+    "astro": "^5.18.2",
+    "docx": "^9.12.0",
+    "file-saver": "^2.0.5",
+    "jspdf": "^4.2.1",
+    "react": "^19.3.1",
+    "react-dom": "^19.3.1"
+  },
+  "devDependencies": {
+    "@lhci/cli": "^0.15.1",
+    "@playwright/test": "^1.64.1",
+    "@types/file-saver": "^2.0.7",
+    "@types/node": "^22.13.10",
+    "@types/react": "^19.0.12",
+    "@types/react-dom": "^19.0.4",
+    "jsdom": "^26.0.0",
+    "lighthouse": "^12.4.0",
+    "playwright": "^1.64.1",
+    "typescript": "^5.8.2",
+    "vitest": "^3.0.9"
+  }
+}

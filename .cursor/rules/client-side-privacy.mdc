@@ -1,0 +1,5 @@
+---
+description: Client-side only privacy
+globs: src/components/generators/**
+---
+- No server upload of form data; document localStorage behavior clearly.

@@ -1,0 +1,70 @@
+[
+  {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "name": "DocuForge Tools",
+    "url": "https://docuforge.example/",
+    "description": "Free niche business document generators — fill a form, preview live, export PDF or DOCX. Nothing leaves your browser.",
+    "inLanguage": "en-US",
+    "publisher": {
+      "@id": "https://docuforge.example/#organization"
+    }
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "@id": "https://docuforge.example/#organization",
+    "name": "DocuForge Tools",
+    "url": "https://docuforge.example/",
+    "email": "hello@docuforge.example",
+    "logo": "https://docuforge.example/favicon.svg"
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Home",
+        "item": "https://docuforge.example/"
+      },
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "name": "Tools",
+        "item": "https://docuforge.example/tools/"
+      },
+      {
+        "@type": "ListItem",
+        "position": 3,
+        "name": "Estimates & Invoices",
+        "item": "https://docuforge.example/hubs/estimates-invoices/"
+      },
+      {
+        "@type": "ListItem",
+        "position": 4,
+        "name": "Construction Estimate",
+        "item": "https://docuforge.example/tools/construction-estimate-template/"
+      }
+    ]
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "Construction Estimate Template",
+    "applicationCategory": "BusinessApplication",
+    "operatingSystem": "Web browser",
+    "browserRequirements": "Requires JavaScript",
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "USD"
+    },
+    "description": "Fill a free construction estimate template in your browser. Add line items, tax, and notes, preview live, then export PDF or DOCX. Nothing stored server-side.",
+    "url": "https://docuforge.example/tools/construction-estimate-template/",
+    "isAccessibleForFree": true,
+    "datePublished": "2026-10-19",
+    "dateModified": "2026-10-19"
+  }
+]

@@ -1,0 +1,31 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Breadcrumbs from '../components/content/Breadcrumbs.astro';
+import AuthorBox from '../components/content/AuthorBox.astro';
+import { siteConfig } from '../config/site';
+
+const path = '/about/';
+const crumbs = [{ name: 'Home', path: '/' }, { name: 'About', path }];
+---
+<BaseLayout
+  title="About DocuForge Tools"
+  description="Who builds these free niche business document generators, our privacy-first approach, and editorial standards."
+  path={path}
+>
+  <Breadcrumbs items={crumbs} />
+  <h1>About {siteConfig.siteName}</h1>
+  <p class="lead">
+    We publish free, profession-specific document generators—construction estimates, contracts, consent forms, and more—with original guidance on every page. Tools run entirely in your browser; we do not store your entries on our servers.
+  </p>
+  <h2>What we build</h2>
+  <p>
+    Each page pairs a working generator above the fold with explainers, worked examples, FAQs, and cited sources. Clause text is written for this site—not copied from third-party legal templates. Contract and consent tools include clear “not legal advice” notices.
+  </p>
+  <h2>Who we are</h2>
+  <p>
+    {siteConfig.siteName} is maintained by a small editorial team focused on practical small-business paperwork. We verify fee tables and sample defaults against public guidance (SBA, FTC, HUD, Copyright Office, CDC infection-control overviews) and update pages when practices change.
+  </p>
+  <h2>Contact</h2>
+  <p>Questions or corrections: <a href={`mailto:${siteConfig.contactEmail}`}>{siteConfig.contactEmail}</a> or visit our <a href="/contact/">contact page</a>.</p>
+  <AuthorBox updatedAt="2026-10-19" />
+</BaseLayout>

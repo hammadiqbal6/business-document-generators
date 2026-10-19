@@ -1,0 +1,14 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { allTools } from '../data/tools';
+---
+<BaseLayout title="Page not found" description="This page could not be found." path="/404/" noindex={true}>
+  <h1>Page not found</h1>
+  <p>Try one of our document generators:</p>
+  <ul>
+    {allTools.slice(0, 8).map((t) => (
+      <li><a href={`/tools/${t.slug}/`}>{t.name}</a></li>
+    ))}
+  </ul>
+  <p><a href="/tools/">All tools</a> · <a href="/">Home</a></p>
+</BaseLayout>

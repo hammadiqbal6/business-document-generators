@@ -1,0 +1,7 @@
+---
+description: Performance budgets
+globs: src/components/generators/**,package.json,lighthouserc.cjs
+---
+- Lazy-load jspdf/docx on export only; use client:visible for generator island.
+- Keep initial route JS within budget (scripts/audit/budget-audit.mjs).
+- Lighthouse mobile >= 95 enforced in lighthouserc.cjs.

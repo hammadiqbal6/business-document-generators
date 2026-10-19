@@ -1,0 +1,47 @@
+---
+import { siteConfig } from '../../config/site';
+import { absoluteUrl, truncate } from '../../lib/seo';
+
+interface Props {
+  title: string;
+  description: string;
+  path: string;
+  ogType?: string;
+  noindex?: boolean;
+  jsonLd?: object[];
+}
+
+const { title, description, path, ogType = 'website', noindex = false, jsonLd = [] } = Astro.props;
+const canonical = absoluteUrl(path);
+const fullTitle = title.includes(siteConfig.siteName) ? title : `${truncate(title, 52)} | ${siteConfig.siteName}`;
+const metaDesc = truncate(description, 155);
+---
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>{fullTitle}</title>
+<meta name="description" content={metaDesc} />
+<link rel="canonical" href={canonical} />
+{noindex && <meta name="robots" content="noindex, follow" />}
+<meta property="og:type" content={ogType} />
+<meta property="og:title" content={fullTitle} />
+<meta property="og:description" content={metaDesc} />
+<meta property="og:url" content={canonical} />
+<meta property="og:site_name" content={siteConfig.siteName} />
+<meta property="og:locale" content="en_US" />
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:title" content={fullTitle} />
+<meta name="twitter:description" content={metaDesc} />
+{siteConfig.twitterHandle && <meta name="twitter:site" content={`@${siteConfig.twitterHandle.replace('@', '')}`} />}
+<link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+<link rel="icon" href="/favicon.ico" sizes="any" />
+<link rel="manifest" href="/site.webmanifest" />
+<meta name="theme-color" content={siteConfig.themeColor} />
+{siteConfig.googleSiteVerification && (
+  <meta name="google-site-verification" content={siteConfig.googleSiteVerification} />
+)}
+{siteConfig.bingSiteVerification && (
+  <meta name="msvalidate.01" content={siteConfig.bingSiteVerification} />
+)}
+{jsonLd.map((ld) => (
+  <script type="application/ld+json" set:html={JSON.stringify(ld)} />
+))}

@@ -1,0 +1,21 @@
+# npm run audit — 2026-10-19T06:50:26.832Z
+
+
+=== SEO audit ===
+SEO audit OK (51 HTML files, 17 tool pages)
+
+=== AdSense readiness ===
+AdSense readiness audit OK
+
+=== JS budget ===
+index.html: initial JS ~0.0KB gzip
+tools/construction-estimate-template/index.html: initial JS ~0.0KB gzip
+Budget audit OK
+
+=== Link check ===
+Link check OK (50 internal paths)
+
+All audits passed.
+
+
+Exit code: 0

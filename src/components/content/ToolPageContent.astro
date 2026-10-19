@@ -1,0 +1,64 @@
+---
+import type { ToolDefinition } from '../../data/tools/types';
+import AuthorBox from './AuthorBox.astro';
+
+interface Props {
+  tool: ToolDefinition;
+}
+
+const { tool } = Astro.props;
+const c = tool.content;
+---
+<article class="prose tool-content">
+  <div class="summary-box">
+    <p>{tool.answerFirst}</p>
+  </div>
+
+  <h2>How to use this {tool.shortName.toLowerCase()} generator</h2>
+  <ol>
+    {c.howToUse.map((step) => <li>{step}</li>)}
+  </ol>
+
+  {c.whatToInclude.map((section) => (
+    <>
+      <h2>{section.heading}</h2>
+      <p>{section.body}</p>
+    </>
+  ))}
+
+  <h2>{c.workedExample.heading}</h2>
+  <p>{c.workedExample.body}</p>
+
+  {c.tips.length > 0 && (
+    <>
+      <h2>Tips</h2>
+      <ul>
+        {c.tips.map((t) => <li>{t}</li>)}
+      </ul>
+    </>
+  )}
+
+  <h2>Common mistakes</h2>
+  <ul>
+    {c.commonMistakes.map((m) => <li>{m}</li>)}
+  </ul>
+
+  <h2>FAQ</h2>
+  <div class="faq">
+    {c.faq.map((item) => (
+      <details>
+        <summary>{item.question}</summary>
+        <p>{item.answer}</p>
+      </details>
+    ))}
+  </div>
+
+  <h2>Sources</h2>
+  <ul>
+    {c.sources.map((s) => (
+      <li><a href={s.url} rel="noopener noreferrer">{s.label}</a></li>
+    ))}
+  </ul>
+
+  <AuthorBox updatedAt={tool.updatedAt} />
+</article>
