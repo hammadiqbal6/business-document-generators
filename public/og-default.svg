@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630" role="img" aria-label="DocuForge Tools">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#0a2a2b"/>
+      <stop offset="55%" stop-color="#0f3d3e"/>
+      <stop offset="100%" stop-color="#1a5c5e"/>
+    </linearGradient>
+    <linearGradient id="accent" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#7ec8c3"/>
+      <stop offset="100%" stop-color="#d4e8e6"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="630" fill="url(#bg)"/>
+  <circle cx="1040" cy="-40" r="280" fill="#1f6b6d" opacity="0.35"/>
+  <circle cx="80" cy="700" r="260" fill="#083233" opacity="0.55"/>
+  <rect x="72" y="72" width="8" height="486" rx="4" fill="url(#accent)"/>
+  <text x="112" y="250" fill="#f4faf9" font-family="Georgia, 'Times New Roman', serif" font-size="78" font-weight="700" letter-spacing="-1.5">DocuForge Tools</text>
+  <text x="112" y="340" fill="#c5e6e3" font-family="Georgia, 'Times New Roman', serif" font-size="34">
+    Free niche business document generators
+  </text>
+  <text x="112" y="400" fill="#9ec9c5" font-family="ui-sans-serif, system-ui, sans-serif" font-size="26">
+    Fill a form · Preview live · Export PDF or DOCX
+  </text>
+  <text x="112" y="520" fill="#7eb8b3" font-family="ui-sans-serif, system-ui, sans-serif" font-size="22">
+    Nothing leaves your browser
+  </text>
+</svg>
