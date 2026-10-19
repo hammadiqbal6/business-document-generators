@@ -20,7 +20,10 @@
     "audit:links": "node scripts/audit/link-check.mjs",
     "lhci": "lhci autorun",
     "check": "npm run test && npm run audit",
-    "proof": "node scripts/proof/generate-all.mjs"
+    "proof": "node scripts/proof/generate-all.mjs",
+    "deploy": "npx wrangler deploy",
+    "indexnow": "node scripts/indexnow.mjs",
+    "deploy:indexnow": "npm run deploy && node scripts/indexnow.mjs"
   },
   "dependencies": {
     "@astrojs/react": "^4.4.2",
