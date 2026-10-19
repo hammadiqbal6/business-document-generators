@@ -18,7 +18,7 @@ Allow: /
 User-agent: Claude-SearchBot
 Allow: /
 
-# AI model training — owner may disallow; documented in docs/SEO-GUIDE.md
+# AI model training — allowed (including CCBot / Common Crawl); see docs/SEO-GUIDE.md
 User-agent: GPTBot
 Allow: /
 User-agent: ClaudeBot
@@ -26,7 +26,7 @@ Allow: /
 User-agent: Google-Extended
 Allow: /
 User-agent: CCBot
-Disallow: /
+Allow: /
 
 Sitemap: ${origin}/sitemap-index.xml
 `;

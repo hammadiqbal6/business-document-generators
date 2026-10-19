@@ -12,6 +12,15 @@ See also `docs/SEO-PLAYBOOK.md` (governing playbook) and `docs/KEYWORD-MAP.md`.
 - [ ] Mobile Lighthouse ≥ 95 (run `npm run build && npx lhci autorun`)
 - [ ] `npm run audit` passes
 
+## robots.txt / AI crawlers
+
+Generated at build from `src/pages/robots.txt.ts` (Sitemap origin from `PUBLIC_SITE_URL`).
+
+- Default `User-agent: *` allows `/` and disallows `/tools/*/embed/`.
+- AI search / answer bots (`OAI-SearchBot`, `ChatGPT-User`, `PerplexityBot`, `Claude-SearchBot`) are allowed.
+- AI training / dataset bots (`GPTBot`, `ClaudeBot`, `Google-Extended`, `CCBot`) are also **allowed**, including Common Crawl (`CCBot`), matching the other training crawlers.
+- Keep the `Sitemap:` line pointing at `sitemap-index.xml`.
+
 ## Google Search Console
 
 1. Add **domain** property; verify DNS.
