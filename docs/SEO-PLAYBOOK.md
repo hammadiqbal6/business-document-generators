@@ -10,7 +10,7 @@ Prepared for Sidney Karanja, 19 Oct 2026 (PKT). Every claim links to its source 
 2. **The tool sits above the fold and works without signup.** Below it goes real explanatory content: the formula, a worked example, assumptions and limits, sources, and an FAQ.
 3. **Avoid scaled content abuse.** Don't mass-generate near-duplicate pages, whether with AI or templates, such as one page per city or per phone model with no unique value. Google names "using generative AI tools… to generate many pages without adding value" as spam [Google spam policies].
 4. **Google says GEO/AEO is still SEO.** There's no special markup. You can ignore llms.txt, "chunking", and AI-specific rewrites for Google Search [Google AI optimization guide].
-5. **Allow the AI search crawlers** (OAI-SearchBot, PerplexityBot, Claude-SearchBot, and Googlebot) to stay eligible for citations. Training bots (GPTBot, ClaudeBot, Google-Extended) are a separate choice [OpenAI bots] [Perplexity bots] [Anthropic bots] [Google crawlers].
+5. **Allow the AI search crawlers** (OAI-SearchBot, PerplexityBot, Claude-SearchBot, and Googlebot) to stay eligible for citations. Training bots (GPTBot, ClaudeBot, Google-Extended, CCBot) are a separate choice; this site allows them, including Common Crawl [OpenAI bots] [Perplexity bots] [Anthropic bots] [Google crawlers].
 6. **Technical basics:** HTTPS, mobile-first rendering, tool output server-rendered or crawlable, Core Web Vitals good (LCP ≤2.5s, INP ≤200ms, CLS ≤0.1) [web.dev], XML sitemap with accurate `<lastmod>` [Google sitemaps], self-referencing canonicals.
 7. **Structured data:** `SoftwareApplication`/`WebApplication` (rich result needs a real rating/review plus offers), `BreadcrumbList`, and `Organization`. **FAQ rich results were removed from Google Search in May 2026, and HowTo rich results were deprecated in 2023.** The markup is valid schema.org but gives no Google SERP feature [Google updates] [Google HowTo/FAQ 2023] [Google search gallery].
 8. **Links come from usefulness.** Calculator pages from real small businesses average 51.5 referring domains, against roughly zero for normal content pages (the median is 6) [Meyerhans]. Do resource-page outreach, niche communities, and embeddable versions with honest attribution. Never buy links or use keyword-rich widget links [Google spam policies].
@@ -85,6 +85,8 @@ Allow: /
 User-agent: ClaudeBot
 Allow: /
 User-agent: Google-Extended
+Allow: /
+User-agent: CCBot
 Allow: /
 
 Sitemap: https://example.com/sitemap.xml
