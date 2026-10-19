@@ -19,7 +19,8 @@
     "audit:budget": "node scripts/audit/budget-audit.mjs",
     "audit:links": "node scripts/audit/link-check.mjs",
     "lhci": "lhci autorun",
-    "check": "npm run test && npm run audit"
+    "check": "npm run test && npm run audit",
+    "proof": "node scripts/proof/generate-all.mjs"
   },
   "dependencies": {
     "@astrojs/react": "^4.4.2",

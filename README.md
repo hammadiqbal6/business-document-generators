@@ -89,9 +89,17 @@ Set via `PUBLIC_*` env vars at deploy time:
 
 See **AGENTS.md** and `.cursor/skills/add-new-tool/SKILL.md`.
 
+## Proof (SEO, performance, AdSense)
+
+Committed, reproducible evidence lives in **[docs/proof/](docs/proof/)** (Lighthouse HTML/JSON, audits, structured-data extracts, mobile screenshots, bundle sizes).
+
+```bash
+npm run proof   # rebuilds dist and regenerates docs/proof/
+```
+
 ## Audits & CI
 
-GitHub Actions: `.github/workflows/ci.yml` runs test, build, audit, Lighthouse.
+GitHub Actions runs `npm run proof` and uploads `docs/proof/` as a workflow artifact.
 
 ## SEO / AdSense / deploy
 

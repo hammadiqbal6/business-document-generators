@@ -1,6 +1,8 @@
 .generator {
   display: grid;
   gap: 1rem;
+  max-width: 100%;
+  overflow-x: clip;
 }
 
 .generator__legal {
@@ -274,6 +276,25 @@
   display: grid;
   grid-template-columns: 8.5rem 1fr;
   gap: 0.5rem;
+}
+
+@media (max-width: 480px) {
+  .doc-preview__kv div {
+    grid-template-columns: 1fr;
+  }
+  .doc-preview__table {
+    display: block;
+    width: 100%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+  .line-items__row input {
+    min-width: 0;
+  }
+  .generator__preview {
+    position: static;
+    max-width: 100%;
+  }
 }
 
 .doc-preview__kv dt {

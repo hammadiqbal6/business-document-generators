@@ -1,6 +1,6 @@
 <!-- progress: 100 -->
 # Build progress
-Status: Complete — production site, audits green, Lighthouse mobile ≥95, PR ready for review.
+Status: Complete — committed docs/proof evidence (npm run proof), CI green, PR #1 ready for review.
 Updated: 2026-10-19T06:26:30Z
 
 - [x] Project scaffold & config

@@ -33,6 +33,17 @@ body {
   line-height: 1.55;
   color: var(--ink);
   background: var(--page);
+  overflow-x: clip;
+  max-width: 100%;
+}
+
+.site-main {
+  overflow-x: clip;
+  max-width: 100%;
+}
+
+code {
+  word-break: break-word;
 }
 
 img {

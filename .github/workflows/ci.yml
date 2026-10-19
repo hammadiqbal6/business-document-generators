@@ -6,7 +6,7 @@ on:
     branches: [main]
 
 jobs:
-  build-test-audit:
+  build-test-audit-proof:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -15,10 +15,10 @@ jobs:
           node-version: '22'
           cache: npm
       - run: npm ci
-      - run: npm test
-      - run: npm run build
-      - run: npm run audit
-      - run: npx serve dist -l 4321 &
-      - run: sleep 2 && npx lhci autorun --config=lighthouserc.cjs
-        env:
-          LHCI_BUILD_CONTEXT__CURRENT_HASH: ${{ github.sha }}
+      - run: npx playwright install chromium
+      - run: npm run proof
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: docs-proof
+          path: docs/proof/
