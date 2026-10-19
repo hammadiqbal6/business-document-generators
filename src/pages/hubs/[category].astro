@@ -1,0 +1,41 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Breadcrumbs from '../../components/content/Breadcrumbs.astro';
+import { CATEGORY_META, getToolsByCategory } from '../../data/tools';
+import type { ToolCategory } from '../../data/tools/types';
+
+export function getStaticPaths() {
+  return (Object.keys(CATEGORY_META) as ToolCategory[]).map((category) => ({
+    params: { category: CATEGORY_META[category].slug },
+    props: { category },
+  }));
+}
+
+const { category } = Astro.props;
+const meta = CATEGORY_META[category];
+const tools = getToolsByCategory(category);
+const path = `/hubs/${meta.slug}/`;
+const crumbs = [
+  { name: 'Home', path: '/' },
+  { name: 'Tools', path: '/tools/' },
+  { name: meta.name, path },
+];
+---
+<BaseLayout
+  title={`${meta.name} – Free Templates`}
+  description={meta.description}
+  path={path}
+>
+  <Breadcrumbs items={crumbs} />
+  <h1>{meta.name}</h1>
+  <p class="lead">{meta.description}</p>
+  <div class="tool-grid">
+    {tools.map((t) => (
+      <a class="tool-card" href={`/tools/${t.slug}/`}>
+        <h3>{t.name}</h3>
+        <p>{t.answerFirst.slice(0, 120)}…</p>
+      </a>
+    ))}
+  </div>
+  <p><a href="/guides/">Read how-to guides →</a></p>
+</BaseLayout>

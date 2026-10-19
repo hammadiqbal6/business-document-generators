@@ -1,0 +1,6 @@
+---
+description: Content quality and E-E-A-T
+globs: src/data/**/*.ts,src/pages/**/*.astro
+---
+- Tool pages need answer-first paragraph, how-to, worked example, FAQ, sources, author box.
+- No lorem ipsum, TODOs, or thin duplicate pages.

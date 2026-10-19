@@ -1,0 +1,6 @@
+---
+description: Legal and consent disclaimers
+globs: src/data/tools/contracts.ts,src/data/tools/forms-creative.ts,src/components/generators/**
+---
+- Contract/consent tools: isLegalAdjacent + visible not-legal-advice notice.
+- Do not present generated docs as attorney-reviewed.

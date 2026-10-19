@@ -1,43 +1,117 @@
-# Astro Starter Kit: Minimal
+# DocuForge Tools
 
-```sh
-npm create astro@latest -- --template minimal
+Free **niche business document generators**: fill a form in the browser, live preview, export **PDF** or **DOCX**. Nothing is stored server-side; optional **localStorage** drafts stay on your device.
+
+```mermaid
+flowchart LR
+  subgraph browser [Browser]
+    Form[Tool form]
+    Preview[Live preview]
+    LS[(localStorage)]
+    PDF[jsPDF lazy]
+    DOCX[docx lazy]
+  end
+  Form --> Preview
+  Form --> LS
+  Form --> PDF
+  Form --> DOCX
 ```
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
+## Tools (16)
 
-## 🚀 Project Structure
+| Tool | Path |
+|------|------|
+| Construction estimate | `/tools/construction-estimate-template/` |
+| Contractor invoice | `/tools/contractor-invoice/` |
+| Photography contract | `/tools/photography-contract-template/` |
+| Videography contract | `/tools/videography-contract/` |
+| Podcast script | `/tools/podcast-script-template/` |
+| Real estate flyer | `/tools/real-estate-flyer-template/` |
+| Tattoo consent form | `/tools/tattoo-consent-form-template/` |
+| Freelance / web design contract | `/tools/freelance-web-design-contract/` |
+| Cleaning invoice / estimate | `/tools/cleaning-service-invoice/` |
+| Catering quote | `/tools/catering-quote/` |
+| Event / wedding vendor contract | `/tools/event-wedding-vendor-contract/` |
+| Rental / lease application | `/tools/rental-lease-application/` |
+| Simple NDA | `/tools/simple-nda/` |
+| Work order | `/tools/work-order/` |
+| Receipt generator | `/tools/receipt-generator/` |
+| Quote / estimate | `/tools/quote-estimate-generator/` |
 
-Inside of your Astro project, you'll see the following folders and files:
+Hubs: `/hubs/estimates-invoices/`, `/hubs/contracts/`, `/hubs/forms/`, `/hubs/creative-templates/`
 
-```text
-/
-├── public/
-├── src/
-│   └── pages/
-│       └── index.astro
-└── package.json
+## Stack
+
+- [Astro 5](https://astro.build) static output + TypeScript
+- React island (`client:visible`) for generators only
+- jsPDF + docx lazy-loaded on export
+
+## Folder structure
+
+```
+src/config/site.ts       # Owner placeholders (domain, AdSense, GA4)
+src/data/tools/          # Tool definitions + SEO content
+src/components/generators/
+src/pages/               # Routes, hubs, guides, trust pages
+docs/                    # DEPLOYMENT, SEO-GUIDE, ADSENSE, research
+scripts/audit/           # npm run audit
 ```
 
-Astro looks for `.astro` or `.md` files in the `src/pages/` directory. Each page is exposed as a route based on its file name.
+## Local setup
 
-There's nothing special about `src/components/`, but that's where we like to put any Astro/React/Vue/Svelte/Preact components.
+```bash
+npm ci
+npm run dev      # http://localhost:4321
+npm run build
+npm run preview
+```
 
-Any static assets, like images, can be placed in the `public/` directory.
+## Scripts
 
-## 🧞 Commands
+| Script | Description |
+|--------|-------------|
+| `npm test` | Vitest — form validation + PDF export |
+| `npm run audit` | SEO, AdSense readiness, JS budget, internal links |
+| `npm run check` | test + audit |
+| `npx lhci autorun` | Lighthouse mobile (after build) |
 
-All commands are run from the root of the project, from a terminal:
+## Configuration (`src/config/site.ts`)
 
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `npm install`             | Installs dependencies                            |
-| `npm run dev`             | Starts local dev server at `localhost:4321`      |
-| `npm run build`           | Build your production site to `./dist/`          |
-| `npm run preview`         | Preview your build locally, before deploying     |
-| `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `npm run astro -- --help` | Get help using the Astro CLI                     |
+Set via `PUBLIC_*` env vars at deploy time:
 
-## 👀 Want to learn more?
+- `PUBLIC_SITE_URL`, `PUBLIC_SITE_NAME`, `PUBLIC_CONTACT_EMAIL`
+- `PUBLIC_ADSENSE_PUBLISHER_ID`, `PUBLIC_ADS_ENABLED`
+- `PUBLIC_GA4_MEASUREMENT_ID`
+- `PUBLIC_GOOGLE_SITE_VERIFICATION`, `PUBLIC_BING_SITE_VERIFICATION`
+- `PUBLIC_INDEXNOW_KEY` (file in `public/`)
 
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+## Adding a tool or article
+
+See **AGENTS.md** and `.cursor/skills/add-new-tool/SKILL.md`.
+
+## Audits & CI
+
+GitHub Actions: `.github/workflows/ci.yml` runs test, build, audit, Lighthouse.
+
+## SEO / AdSense / deploy
+
+- [docs/DEPLOYMENT.md](docs/DEPLOYMENT.md)
+- [docs/SEO-GUIDE.md](docs/SEO-GUIDE.md)
+- [docs/ADSENSE.md](docs/ADSENSE.md)
+- [docs/SEO-PLAYBOOK.md](docs/SEO-PLAYBOOK.md)
+- [docs/KEYWORD-MAP.md](docs/KEYWORD-MAP.md)
+- [docs/ideas/README.md](docs/ideas/README.md) — all 23 research ideas (#20 built here)
+
+## Research in repo
+
+- `docs/MARKET-RESEARCH.md`, `docs/ideas/ideas.csv`, `docs/ideas/MORE-IDEAS.md`
+
+## Troubleshooting
+
+- **Build fails on Node**: use Node 20+.
+- **PDF export slow first time**: expected — library loads on first click.
+- **Lighthouse**: run `npm run build` then `npx lhci autorun`.
+
+## License
+
+Tool code: use for your deployment; replace `docuforge.example` branding in `site.ts` and `public/robots.txt` before launch.

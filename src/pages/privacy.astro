@@ -1,0 +1,44 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Breadcrumbs from '../components/content/Breadcrumbs.astro';
+import { siteConfig } from '../config/site';
+
+const path = '/privacy/';
+---
+<BaseLayout
+  title="Privacy Policy"
+  description="Privacy policy for DocuForge Tools: client-side tools, cookies, Google AdSense and Analytics disclosures."
+  path={path}
+>
+  <Breadcrumbs items={[{ name: 'Home', path: '/' }, { name: 'Privacy', path }]} />
+  <h1>Privacy Policy</h1>
+  <p class="content-meta">Last updated: 2026-10-19</p>
+  <p>
+    {siteConfig.siteName} (“we”) operates {siteConfig.siteUrl}. This policy explains what we collect when you use our website and tools.
+  </p>
+  <h2>Document generators (no server storage)</h2>
+  <p>
+    Form data you enter in our generators is processed in your browser to render previews and exports. We do not transmit your document contents to our servers. If you click “Save locally,” data is stored in your browser’s localStorage only.
+  </p>
+  <h2>Log data</h2>
+  <p>
+    Our hosting provider may log IP addresses, user agents, and requested URLs for security and performance. We use these logs only for operations and abuse prevention.
+  </p>
+  <h2>Google Analytics (optional)</h2>
+  <p>
+    If enabled, we use Google Analytics 4 to understand aggregate traffic. You can opt out via browser add-ons and Google’s tools. Measurement ID is configured in site settings.
+  </p>
+  <h2>Google AdSense and advertising cookies</h2>
+  <p>
+    If we display Google AdSense ads, Google and its partners may use cookies to serve ads based on your prior visits to this or other websites. You can opt out of personalized advertising by visiting
+    <a href="https://www.google.com/settings/ads" rel="noopener noreferrer">Google Ads Settings</a> and
+    <a href="https://optout.aboutads.info/" rel="noopener noreferrer">aboutads.info</a>.
+  </p>
+  <p>
+    Users in the EEA, UK, and Switzerland require a Google-certified CMP for personalized ads—see the repository <code>docs/ADSENSE.md</code> before enabling ads on your deployment.
+  </p>
+  <h2>Children</h2>
+  <p>This site is intended for business users and is not directed at children under 13.</p>
+  <h2>Contact</h2>
+  <p>Privacy questions: <a href={`mailto:${siteConfig.contactEmail}`}>{siteConfig.contactEmail}</a></p>
+</BaseLayout>

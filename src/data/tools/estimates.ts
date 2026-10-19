@@ -239,7 +239,7 @@ export const cleaningInvoice: ToolDefinition = {
   category: 'estimates-invoices',
   primaryKeyword: 'cleaning service invoice',
   secondaryKeywords: ['cleaning estimate template', 'house cleaning invoice', 'commercial cleaning quote'],
-  title: 'Cleaning Service Invoice & Estimate – Free Generator',
+  title: 'Cleaning Service Invoice & Estimate – Free PDF',
   metaDescription:
     'Make a cleaning service invoice or estimate: rooms, frequency, line items, tax, live preview, PDF/DOCX export. Private—runs in your browser.',
   h1: 'Cleaning Service Invoice & Estimate Generator',

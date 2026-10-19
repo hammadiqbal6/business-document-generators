@@ -1,0 +1,29 @@
+---
+import '../../../styles/global.css';
+import DocumentGenerator from '../../../components/generators/DocumentGenerator';
+import { allTools } from '../../../data/tools';
+import { siteConfig } from '../../../config/site';
+
+export function getStaticPaths() {
+  return allTools.map((tool) => ({ params: { slug: tool.slug }, props: { tool } }));
+}
+
+const { tool } = Astro.props;
+---
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="robots" content="noindex, follow" />
+    <title>{tool.name} (embed) | {siteConfig.siteName}</title>
+    <link rel="canonical" href={`/tools/${tool.slug}/`} />
+  </head>
+  <body style="margin:0;padding:0.5rem;font-family:system-ui,sans-serif;">
+    <p style="font-size:0.85rem;margin:0 0 0.5rem;">
+      <a href={`/tools/${tool.slug}/`} target="_top" rel="noopener">{tool.name}</a>
+      — powered by {siteConfig.siteName}
+    </p>
+    <DocumentGenerator client:visible tool={tool} embed={true} />
+  </body>
+</html>

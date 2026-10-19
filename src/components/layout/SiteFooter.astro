@@ -1,0 +1,51 @@
+---
+import { siteConfig } from '../../config/site';
+import { allTools } from '../../data/tools';
+const year = new Date().getFullYear();
+---
+<footer class="site-footer">
+  <div class="site-footer__inner">
+    <div class="footer-grid">
+      <div>
+        <h2>Tools</h2>
+        <ul>
+          {allTools.slice(0, 6).map((t) => (
+            <li><a href={`/tools/${t.slug}/`}>{t.shortName}</a></li>
+          ))}
+          <li><a href="/tools/">All {allTools.length} tools →</a></li>
+        </ul>
+      </div>
+      <div>
+        <h2>Categories</h2>
+        <ul>
+          <li><a href="/hubs/estimates-invoices/">Estimates & invoices</a></li>
+          <li><a href="/hubs/contracts/">Contracts</a></li>
+          <li><a href="/hubs/forms/">Forms</a></li>
+          <li><a href="/hubs/creative-templates/">Creative templates</a></li>
+        </ul>
+      </div>
+      <div>
+        <h2>Company</h2>
+        <ul>
+          <li><a href="/about/">About</a></li>
+          <li><a href="/contact/">Contact</a></li>
+          <li><a href="/methodology/">Methodology</a></li>
+          <li><a href="/guides/">Guides</a></li>
+        </ul>
+      </div>
+      <div>
+        <h2>Legal</h2>
+        <ul>
+          <li><a href="/privacy/">Privacy</a></li>
+          <li><a href="/terms/">Terms</a></li>
+          <li><a href="/cookies/">Cookies</a></li>
+        </ul>
+      </div>
+    </div>
+    <p>
+      © {year} {siteConfig.siteName}. Free tools run in your browser; we do not store your form data on our servers.
+      Contract and consent pages are not legal advice.
+    </p>
+    <p><a href={`mailto:${siteConfig.contactEmail}`}>{siteConfig.contactEmail}</a></p>
+  </div>
+</footer>

@@ -1,0 +1,51 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Breadcrumbs from '../../components/content/Breadcrumbs.astro';
+import { allTools, CATEGORY_META } from '../../data/tools';
+import type { ToolCategory } from '../../data/tools/types';
+
+const crumbs = [{ name: 'Home', path: '/' }, { name: 'Tools', path: '/tools/' }];
+const byCat = Object.keys(CATEGORY_META) as ToolCategory[];
+---
+<BaseLayout
+  title="Free Business Document Generators"
+  description="Browse 16+ free niche document generators: estimates, invoices, contracts, forms, and creative templates. Export PDF or DOCX in your browser."
+  path="/tools/"
+>
+  <Breadcrumbs items={crumbs} />
+  <h1>All document generators</h1>
+  <p class="lead">
+    Pick a profession-specific template, fill the form, preview live, and export PDF or DOCX. Nothing is stored on our servers—optional drafts save in your browser only.
+  </p>
+  <div class="summary-box">
+    <p>
+      Each generator targets a low-competition keyword such as construction estimate template (Ahrefs KD 2), photography contract template (KD 6), or tattoo consent form template (KD 0). Below the tool you will find original guidance: what to include, worked examples, FAQs, and authoritative sources—not copied legalese.
+    </p>
+  </div>
+  <h2>How our generators work</h2>
+  <p>
+    Open any tool page, enter your business and client details, and watch the document preview update instantly. PDF and DOCX export libraries load only when you click export, keeping first paint fast on mobile. Shareable links encode form state in the query string; canonical URLs stay clean for search engines.
+  </p>
+  <h2>Privacy and security</h2>
+  <p>
+    We never receive your contract text, line items, or client names. Optional “Save locally” uses localStorage on your device. For legal-adjacent pages, edit clauses and have qualified counsel review before signing.
+  </p>
+  {byCat.map((cat) => {
+    const meta = CATEGORY_META[cat];
+    const tools = allTools.filter((t) => t.category === cat);
+    return (
+      <section>
+        <h2><a href={`/hubs/${meta.slug}/`}>{meta.name}</a></h2>
+        <p>{meta.description}</p>
+        <div class="tool-grid">
+          {tools.map((t) => (
+            <a class="tool-card" href={`/tools/${t.slug}/`}>
+              <h3>{t.shortName}</h3>
+              <p>{t.primaryKeyword}</p>
+            </a>
+          ))}
+        </div>
+      </section>
+    );
+  })}
+</BaseLayout>

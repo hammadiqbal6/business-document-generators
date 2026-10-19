@@ -1,0 +1,35 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Breadcrumbs from '../components/content/Breadcrumbs.astro';
+import AuthorBox from '../components/content/AuthorBox.astro';
+
+const path = '/methodology/';
+---
+<BaseLayout
+  title="Editorial Methodology & Sources"
+  description="How we write tool pages, verify examples, handle legal-adjacent content, and update dates."
+  path={path}
+>
+  <Breadcrumbs items={[{ name: 'Home', path: '/' }, { name: 'Methodology', path }]} />
+  <h1>Methodology</h1>
+  <p class="lead">
+    Our quality bar: working tools, original prose, cited sources, visible update dates, and honest limits on legal/financial advice.
+  </p>
+  <h2>Research process</h2>
+  <ol>
+    <li>Keyword research from Ahrefs-published template volumes and autocomplete modifiers (profession + “template”, “PDF”, year).</li>
+    <li>One primary intent per page—no cannibalizing duplicate slugs.</li>
+    <li>Draft answer-first intros (40–60 words) for snippets and AI Overviews.</li>
+    <li>Worked numeric examples tied to generator defaults.</li>
+    <li>Link authoritative sources (government, SBA, HUD, Copyright Office, CDC overview pages).</li>
+  </ol>
+  <h2>Legal-adjacent content</h2>
+  <p>
+    Contracts, NDAs, vendor agreements, tattoo consent, and rental applications use editable sample clauses written for this site. We label pages as not legal advice and recommend attorney review before signing.
+  </p>
+  <h2>Updates</h2>
+  <p>
+    We change <code>lastmod</code> in the sitemap only when main content, tool behavior, or structured data meaningfully changes—not for cosmetic footer years.
+  </p>
+  <AuthorBox updatedAt="2026-10-19" reviewer="Editorial QA" />
+</BaseLayout>

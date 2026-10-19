@@ -2,10 +2,10 @@
 import { defineConfig } from 'astro/config';
 import react from '@astrojs/react';
 import sitemap from '@astrojs/sitemap';
-import { siteConfig } from './src/config/site.ts';
+const siteUrl = process.env.PUBLIC_SITE_URL || 'https://docuforge.example';
 
 export default defineConfig({
-  site: siteConfig.siteUrl,
+  site: siteUrl,
   trailingSlash: 'always',
   integrations: [
     react(),

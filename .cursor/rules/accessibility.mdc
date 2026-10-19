@@ -1,0 +1,5 @@
+---
+description: Accessibility
+globs: src/components/**,src/styles/**
+---
+- Labels on all inputs; 48px tap targets; 16px+ body text; keyboard usable forms.

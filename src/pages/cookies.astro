@@ -1,0 +1,18 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Breadcrumbs from '../components/content/Breadcrumbs.astro';
+
+const path = '/cookies/';
+---
+<BaseLayout
+  title="Cookie Notice"
+  description="Cookie notice for analytics and AdSense on DocuForge Tools."
+  path={path}
+>
+  <Breadcrumbs items={[{ name: 'Home', path: '/' }, { name: 'Cookies', path }]} />
+  <h1>Cookie notice</h1>
+  <p>
+    Our generators do not require cookies to function. Optional cookies may be set if you enable Google Analytics or AdSense in site configuration.
+  </p>
+  <p>See our <a href="/privacy/">Privacy Policy</a> for opt-out links and CMP requirements in the EEA/UK/CH.</p>
+</BaseLayout>

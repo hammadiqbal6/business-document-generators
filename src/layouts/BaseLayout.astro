@@ -1,0 +1,52 @@
+---
+import '../styles/global.css';
+import SiteHeader from '../components/layout/SiteHeader.astro';
+import SiteFooter from '../components/layout/SiteFooter.astro';
+import Head from '../components/seo/Head.astro';
+import { siteConfig } from '../config/site';
+import { organizationJsonLd, webSiteJsonLd } from '../lib/seo';
+
+interface Props {
+  title: string;
+  description: string;
+  path: string;
+  ogType?: string;
+  noindex?: boolean;
+  jsonLd?: object[];
+}
+
+const { title, description, path, ogType, noindex, jsonLd = [] } = Astro.props;
+const allLd = [webSiteJsonLd(), organizationJsonLd(), ...jsonLd];
+---
+<!doctype html>
+<html lang="en">
+  <head>
+    <Head title={title} description={description} path={path} ogType={ogType} noindex={noindex} jsonLd={allLd} />
+    {siteConfig.ga4MeasurementId && (
+      <>
+        <script async src={`https://www.googletagmanager.com/gtag/js?id=${siteConfig.ga4MeasurementId}`}></script>
+        <script is:inline define:vars={{ id: siteConfig.ga4MeasurementId }}>
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', id);
+        </script>
+      </>
+    )}
+    {siteConfig.adsEnabled && siteConfig.adsensePublisherId && (
+      <script
+        async
+        src={`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${siteConfig.adsensePublisherId}`}
+        crossorigin="anonymous"
+      ></script>
+    )}
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Skip to content</a>
+    <SiteHeader />
+    <main id="main" class="site-main">
+      <slot />
+    </main>
+    <SiteFooter />
+  </body>
+</html>

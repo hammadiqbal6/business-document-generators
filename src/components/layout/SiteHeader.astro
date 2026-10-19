@@ -1,0 +1,28 @@
+---
+import { siteConfig } from '../../config/site';
+---
+<header class="site-header">
+  <div class="site-header__inner">
+    <a class="site-logo" href="/">{siteConfig.siteName}</a>
+    <button type="button" class="nav-toggle" id="nav-toggle" aria-expanded="false" aria-controls="site-nav">
+      Menu
+    </button>
+    <nav class="site-nav" id="site-nav" aria-label="Main">
+      <ul>
+        <li><a href="/tools/">All tools</a></li>
+        <li><a href="/hubs/estimates-invoices/">Estimates</a></li>
+        <li><a href="/hubs/contracts/">Contracts</a></li>
+        <li><a href="/guides/">Guides</a></li>
+        <li><a href="/about/">About</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+<script>
+  const btn = document.getElementById('nav-toggle');
+  const nav = document.getElementById('site-nav');
+  btn?.addEventListener('click', () => {
+    const open = nav?.classList.toggle('is-open');
+    btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+  });
+</script>

@@ -1,0 +1,24 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Breadcrumbs from '../../components/content/Breadcrumbs.astro';
+import { guides } from '../../data/guides';
+
+const crumbs = [{ name: 'Home', path: '/' }, { name: 'Guides', path: '/guides/' }];
+---
+<BaseLayout
+  title="Guides for Business Documents & Contracts"
+  description="Original guides on construction estimates, photography contracts, catering quotes, tattoo consent, and rental applications—linked to our free generators."
+  path="/guides/"
+>
+  <Breadcrumbs items={crumbs} />
+  <h1>Guides</h1>
+  <p class="lead">Answer-first articles that support our tools and AdSense quality guidelines. Not legal advice where noted.</p>
+  <div class="tool-grid">
+    {guides.map((g) => (
+      <a class="tool-card" href={`/guides/${g.slug}/`}>
+        <h3>{g.title}</h3>
+        <p>{g.metaDescription.slice(0, 110)}…</p>
+      </a>
+    ))}
+  </div>
+</BaseLayout>

@@ -1,16 +1,60 @@
 ---
----
+import BaseLayout from '../layouts/BaseLayout.astro';
+import AdSlot from '../components/ads/AdSlot.astro';
+import { siteConfig } from '../config/site';
+import { allTools, CATEGORY_META } from '../data/tools';
+import type { ToolCategory } from '../data/tools/types';
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="icon" href="/favicon.ico" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
-	</head>
-	<body>
-		<h1>Astro</h1>
-	</body>
-</html>
+const featured = allTools.slice(0, 6);
+const cats = Object.keys(CATEGORY_META) as ToolCategory[];
+---
+<BaseLayout
+  title="Free Niche Business Document Generators"
+  description={siteConfig.tagline}
+  path="/"
+>
+  <section class="hero">
+    <h1>{siteConfig.siteName}</h1>
+    <p class="lead">{siteConfig.tagline}</p>
+    <div class="hero-actions">
+      <a href="/tools/">Browse all tools</a>
+      <a class="secondary" href="/guides/">Read guides</a>
+    </div>
+  </section>
+
+  <AdSlot slot="home-top" minHeight={90} />
+
+  <section>
+    <h2>Popular generators</h2>
+    <div class="tool-grid">
+      {featured.map((t) => (
+        <a class="tool-card" href={`/tools/${t.slug}/`}>
+          <h3>{t.shortName}</h3>
+          <p>{t.primaryKeyword}</p>
+        </a>
+      ))}
+    </div>
+  </section>
+
+  <section>
+    <h2>Categories</h2>
+    <div class="tool-grid">
+      {cats.map((c) => {
+        const m = CATEGORY_META[c];
+        return (
+          <a class="tool-card" href={`/hubs/${m.slug}/`}>
+            <h3>{m.name}</h3>
+            <p>{m.description}</p>
+          </a>
+        );
+      })}
+    </div>
+  </section>
+
+  <section class="summary-box">
+    <h2>Privacy-first</h2>
+    <p>
+      Every generator runs client-side in your browser. We do not upload your contracts, estimates, or client data. Optional drafts use localStorage on your device only.
+    </p>
+  </section>
+</BaseLayout>

@@ -1,0 +1,53 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Breadcrumbs from '../../components/content/Breadcrumbs.astro';
+import AuthorBox from '../../components/content/AuthorBox.astro';
+import RelatedTools from '../../components/content/RelatedTools.astro';
+import { guides, getGuide } from '../../data/guides';
+import { getToolBySlug } from '../../data/tools';
+import { articleJsonLd, breadcrumbJsonLd } from '../../lib/seo';
+
+export function getStaticPaths() {
+  return guides.map((g) => ({ params: { slug: g.slug }, props: { guide: g } }));
+}
+
+const { guide } = Astro.props;
+const path = `/guides/${guide.slug}/`;
+const crumbs = [{ name: 'Home', path: '/' }, { name: 'Guides', path: '/guides/' }, { name: guide.title, path }];
+const related = guide.relatedToolSlugs.map((s) => getToolBySlug(s)).filter(Boolean);
+const jsonLd = [
+  breadcrumbJsonLd(crumbs),
+  articleJsonLd({
+    title: guide.title,
+    description: guide.metaDescription,
+    path,
+    publishedAt: guide.publishedAt,
+    updatedAt: guide.updatedAt,
+  }),
+];
+---
+<BaseLayout title={guide.title} description={guide.metaDescription} path={path} ogType="article" jsonLd={jsonLd}>
+  <Breadcrumbs items={crumbs} />
+  <article class="prose">
+    <h1>{guide.title}</h1>
+    <p class="content-meta">Published <time datetime={guide.publishedAt}>{guide.publishedAt}</time></p>
+    <div class="summary-box"><p>{guide.answerFirst}</p></div>
+    {guide.sections.map((s) => (
+      <>
+        <h2>{s.heading}</h2>
+        <p>{s.body}</p>
+      </>
+    ))}
+    <h2>FAQ</h2>
+    <div class="faq">
+      {guide.faq.map((f) => (
+        <details>
+          <summary>{f.question}</summary>
+          <p>{f.answer}</p>
+        </details>
+      ))}
+    </div>
+    <AuthorBox updatedAt={guide.updatedAt} />
+  </article>
+  <RelatedTools tools={related} title="Try these generators" />
+</BaseLayout>

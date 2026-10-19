@@ -1,0 +1,7 @@
+---
+description: On-page SEO rules for tool and guide pages
+globs: src/pages/**/*.astro,src/data/tools/**/*.ts
+---
+- One H1, unique title <60 chars, meta <155, self canonical.
+- Primary keyword in title/H1; no duplicate intents (see docs/KEYWORD-MAP.md).
+- Breadcrumbs + JSON-LD on every indexable page.
