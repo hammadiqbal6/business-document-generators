@@ -1,6 +1,6 @@
 <!-- progress: 100 -->
 # Build progress
-Status: Complete — committed docs/proof evidence (npm run proof), CI green, PR #1 ready for review.
+Status: Complete — docs/proof + expanded DEPLOYMENT.md; PR #1 ready for review.
 Updated: 2026-10-19T06:26:30Z
 
 - [x] Project scaffold & config
