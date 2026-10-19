@@ -4,7 +4,7 @@ import Breadcrumbs from '../../components/content/Breadcrumbs.astro';
 import RelatedTools from '../../components/content/RelatedTools.astro';
 import ToolPageContent from '../../components/content/ToolPageContent.astro';
 import AdSlot from '../../components/ads/AdSlot.astro';
-import DocumentGenerator from '../../components/generators/DocumentGenerator';
+import DocumentGeneratorLazy from '../../components/generators/DocumentGeneratorLazy.astro';
 import { allTools, getRelatedTools, getToolBySlug, CATEGORY_META } from '../../data/tools';
 import { absoluteUrl, breadcrumbJsonLd, webApplicationJsonLd } from '../../lib/seo';
 
@@ -46,7 +46,7 @@ const related = getRelatedTools(tool);
 
   <AdSlot slot="tool-top" minHeight={90} />
 
-  <DocumentGenerator client:visible tool={tool} />
+  <DocumentGeneratorLazy tool={tool} />
 
   <AdSlot slot="tool-mid" minHeight={250} />
 

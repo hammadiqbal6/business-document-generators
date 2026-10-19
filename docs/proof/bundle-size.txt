@@ -1,4 +1,4 @@
-# bundle-size — 2026-10-19T06:36:48.512Z
+# bundle-size — 2026-10-19T06:50:26.832Z
 
 # Bundle sizes (gzip) — budget: initial JS ≤ 50 KB per page
 
@@ -16,19 +16,19 @@
 
 ## tools/construction-estimate-template/index.html
 - Initial JS: 0.0 KB gzip — PASS
-- CSS: 3.1 KB gzip
+- CSS: 1.6 KB gzip
 - Assets:
   - (none in HTML)
 
 ## tools/photography-contract-template/index.html
 - Initial JS: 0.0 KB gzip — PASS
-- CSS: 3.1 KB gzip
+- CSS: 1.6 KB gzip
 - Assets:
   - (none in HTML)
 
 ## tools/simple-nda/index.html
 - Initial JS: 0.0 KB gzip — PASS
-- CSS: 3.1 KB gzip
+- CSS: 1.6 KB gzip
 - Assets:
   - (none in HTML)
 

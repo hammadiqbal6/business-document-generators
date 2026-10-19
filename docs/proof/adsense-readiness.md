@@ -1,6 +1,6 @@
 # AdSense readiness evidence
 
-Generated: 2026-10-19T06:36:55.130Z UTC
+Generated: 2026-10-19T06:50:30.922Z UTC
 
 ## Required pages
 
@@ -28,7 +28,7 @@ Generated: 2026-10-19T06:36:55.130Z UTC
 
 ## Content depth (sample tool page)
 
-- `tools/construction-estimate-template/index.html`: **955** words (target ≥600 for tool pages)
+- `tools/construction-estimate-template/index.html`: **693** words (target ≥600 for tool pages)
 
 ## Navigation
 

@@ -1,6 +1,6 @@
 ---
 import '../../../styles/global.css';
-import DocumentGenerator from '../../../components/generators/DocumentGenerator';
+import DocumentGeneratorLazy from '../../../components/generators/DocumentGeneratorLazy.astro';
 import { allTools } from '../../../data/tools';
 import { siteConfig } from '../../../config/site';
 
@@ -24,6 +24,6 @@ const { tool } = Astro.props;
       <a href={`/tools/${tool.slug}/`} target="_top" rel="noopener">{tool.name}</a>
       — powered by {siteConfig.siteName}
     </p>
-    <DocumentGenerator client:visible tool={tool} embed={true} />
+    <DocumentGeneratorLazy tool={tool} embed={true} />
   </body>
 </html>

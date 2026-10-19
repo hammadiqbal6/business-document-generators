@@ -1,4 +1,4 @@
-# Sitemap & robots proof — 2026-10-19T06:36:55.080Z
+# Sitemap & robots proof — 2026-10-19T06:50:30.874Z
 
 Built HTML pages (excl. embed): 35
 Sitemap <loc> count: 1
@@ -44,5 +44,5 @@ Sitemap: https://docuforge.example/sitemap-index.xml
 
 ## Sitemap sample (first 2k chars)
 ```xml
-<?xml version="1.0" encoding="UTF-8"?><sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"><sitemap><loc>https://docuforge.example/sitemap-0.xml</loc><lastmod>2026-10-19T06:36:53.967Z</lastmod></sitemap></sitemapindex>
+<?xml version="1.0" encoding="UTF-8"?><sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"><sitemap><loc>https://docuforge.example/sitemap-0.xml</loc><lastmod>2026-10-19T06:50:29.809Z</lastmod></sitemap></sitemapindex>
 ```

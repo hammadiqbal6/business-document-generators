@@ -1,15 +1,15 @@
-# mobile capture — 2026-10-19T06:36:48.512Z
+# mobile capture — 2026-10-19T06:50:26.832Z
 
 home @ 360px: horizontalScroll=PASS, smallTapTargets(sample)=10
 hub-estimates @ 360px: horizontalScroll=PASS, smallTapTargets(sample)=15
-tool-construction @ 360px: horizontalScroll=PASS, smallTapTargets(sample)=8
-tool-photography @ 360px: horizontalScroll=PASS, smallTapTargets(sample)=15
-tool-nda @ 360px: horizontalScroll=PASS, smallTapTargets(sample)=15
+tool-construction @ 360px: horizontalScroll=PASS, smallTapTargets(sample)=20
+tool-photography @ 360px: horizontalScroll=PASS, smallTapTargets(sample)=21
+tool-nda @ 360px: horizontalScroll=PASS, smallTapTargets(sample)=21
 home @ 768px: horizontalScroll=PASS, smallTapTargets(sample)=10
 hub-estimates @ 768px: horizontalScroll=PASS, smallTapTargets(sample)=15
-tool-construction @ 768px: horizontalScroll=PASS, smallTapTargets(sample)=10
-tool-photography @ 768px: horizontalScroll=PASS, smallTapTargets(sample)=16
-tool-nda @ 768px: horizontalScroll=PASS, smallTapTargets(sample)=16
+tool-construction @ 768px: horizontalScroll=PASS, smallTapTargets(sample)=22
+tool-photography @ 768px: horizontalScroll=PASS, smallTapTargets(sample)=22
+tool-nda @ 768px: horizontalScroll=PASS, smallTapTargets(sample)=22
 
 Overall viewport: PASS
 

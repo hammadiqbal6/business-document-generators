@@ -1,0 +1,63 @@
+---
+import type { ToolDefinition } from '../../data/tools/types';
+
+interface Props {
+  tool: ToolDefinition;
+  embed?: boolean;
+}
+
+const { tool, embed = false } = Astro.props;
+const toolJson = JSON.stringify(tool);
+---
+
+<div class="generator-lazy" data-embed={embed ? '1' : '0'}>
+  <div class="generator-lazy__prompt">
+    <p>
+      Open the editor to fill fields, see a live preview, and export PDF or DOCX. Heavy scripts load only
+      after you click—nothing runs until then.
+    </p>
+    <button type="button" class="btn btn--primary" data-generator-load>Open editor</button>
+  </div>
+  <div class="generator-lazy__mount" hidden></div>
+</div>
+
+<style>
+  .generator-lazy__prompt {
+    margin: 1.25rem 0;
+    padding: 1rem 1.25rem;
+    border: 1px solid var(--color-border, #d8dee4);
+    border-radius: 8px;
+    background: var(--color-surface, #f6f8fa);
+  }
+  .generator-lazy__prompt p {
+    margin: 0 0 0.75rem;
+    max-width: 52ch;
+  }
+</style>
+
+<script define:vars={{ toolJson }}>
+  function wireLazyGenerator(root) {
+    const btn = root.querySelector('[data-generator-load]');
+    const prompt = root.querySelector('.generator-lazy__prompt');
+    const mountEl = root.querySelector('.generator-lazy__mount');
+    const embed = root.dataset.embed === '1';
+    if (!btn || !mountEl) return;
+
+    let started = false;
+    async function openEditor() {
+      if (started) return;
+      started = true;
+      btn.disabled = true;
+      btn.textContent = 'Loading editor…';
+      const tool = JSON.parse(toolJson);
+      const { mountDocumentGenerator } = await import('../../lib/mountDocumentGenerator.tsx');
+      prompt?.remove();
+      mountEl.hidden = false;
+      mountDocumentGenerator(mountEl, tool, embed);
+    }
+
+    btn.addEventListener('click', () => void openEditor(), { once: true });
+  }
+
+  document.querySelectorAll('.generator-lazy').forEach(wireLazyGenerator);
+</script>
