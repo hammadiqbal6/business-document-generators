@@ -1,7 +1,6 @@
 /**
- * SINGLE OWNER CONFIG — fill these placeholders before launch.
- * Prefer env vars (PUBLIC_*) when deploying; this file supplies defaults.
- * Workers Builds sets PUBLIC_SITE_URL at build; fallback matches the workers.dev hostname.
+ * SINGLE OWNER CONFIG — prefer env vars (PUBLIC_*) when deploying; this file supplies defaults.
+ * Workers Builds should set PUBLIC_* keys (see .env.example); fallbacks match production workers.dev.
  */
 const DEFAULT_SITE_URL =
   'https://business-document-generators.hammadiqbal117.workers.dev';
@@ -26,7 +25,7 @@ export const siteConfig = {
   /** Enable Auto ads (documented in docs/ADSENSE.md). Requires adsEnabled. */
   adsenseAutoAds: (import.meta.env.PUBLIC_ADSENSE_AUTO_ADS || 'false') === 'true',
   /** GA4 measurement ID, e.g. G-XXXXXXXXXX. Empty = no GA4 script. */
-  ga4MeasurementId: import.meta.env.PUBLIC_GA4_MEASUREMENT_ID || '',
+  ga4MeasurementId: import.meta.env.PUBLIC_GA4_MEASUREMENT_ID || 'G-HR4DDMD97H',
   /**
    * Google Search Console HTML tag content value (meta name="google-site-verification").
    * Prefer PUBLIC_GSC_VERIFICATION; PUBLIC_GOOGLE_SITE_VERIFICATION kept as a fallback alias.
@@ -34,7 +33,8 @@ export const siteConfig = {
   googleSiteVerification:
     import.meta.env.PUBLIC_GSC_VERIFICATION ||
     import.meta.env.PUBLIC_GOOGLE_SITE_VERIFICATION ||
-    '',
+    '0-q_NxhBgfgCm4WOLfbe9VrHrjbLzaxh8SXsbo2Q-UU',
+
   /** Bing Webmaster Tools meta verification content. */
   bingSiteVerification: import.meta.env.PUBLIC_BING_SITE_VERIFICATION || '',
   /** IndexNow key (also place matching file at /public/{key}.txt). */

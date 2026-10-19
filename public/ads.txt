@@ -1,2 +1,2 @@
-# Replace pub-XXXXXXXXXXXXXXXX with your AdSense publisher ID before launch.
-# google.com, pub-XXXXXXXXXXXXXXXX, DIRECT, f08c47fec0942fa0
+# AdSense publisher line intentionally omitted until approval.
+# When approved, add: google.com, pub-YOUR_PUBLISHER_ID, DIRECT, f08c47fec0942fa0
