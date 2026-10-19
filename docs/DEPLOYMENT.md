@@ -78,7 +78,7 @@ Defaults live in `src/config/site.ts` (fallback origin is the Workers `workers.d
 | `PUBLIC_CONTACT_EMAIL` | **Yes** | `hello@yourbrand.com` | Contact page, footer, schema |
 | `PUBLIC_TWITTER_HANDLE` | No | `yourbrand` (no `@`) | Twitter card meta |
 | `PUBLIC_GA4_MEASUREMENT_ID` | No | `G-XXXXXXXXXX` | Google Analytics 4 script in `BaseLayout.astro` |
-| `PUBLIC_GOOGLE_SITE_VERIFICATION` | Recommended | Meta **content** token only | `<meta name="google-site-verification" content="…">` |
+| `PUBLIC_GSC_VERIFICATION` | Recommended | Meta **content** token only | `<meta name="google-site-verification" content="…">` (alias: `PUBLIC_GOOGLE_SITE_VERIFICATION`) |
 | `PUBLIC_BING_SITE_VERIFICATION` | Recommended | Bing meta content | `<meta name="msvalidate.01" content="…">` |
 | `PUBLIC_INDEXNOW_KEY` | Recommended | Random string, e.g. `a1b2c3d4e5` | IndexNow; must match key file (below) |
 | `PUBLIC_ADSENSE_PUBLISHER_ID` | After AdSense approval | `ca-pub-XXXXXXXXXXXXXXXX` | AdSense script + `ads.txt` |
@@ -254,7 +254,7 @@ Every pull request can get a `*.pages.dev` preview URL. Use it for QA; set `PUBL
 1. Go to [Google Search Console](https://search.google.com/search-console).
 2. **Add property** → **Domain** `yourbrand.com` (recommended) OR **URL prefix** `https://yourbrand.com/`.
 3. **Domain property verification:** add the TXT record Google gives you at your DNS host → Verify.
-   - Alternatively, set `PUBLIC_GOOGLE_SITE_VERIFICATION` to the **meta tag content** value, redeploy, then verify via HTML tag method.
+   - Alternatively, set `PUBLIC_GSC_VERIFICATION` to the **meta tag content** value, redeploy, then verify via HTML tag method.
 4. **Sitemaps:** left menu → **Sitemaps** → submit:
 
 ```text
@@ -425,7 +425,7 @@ Also revert the Git commit on `main` if the bad change is in source control.
 | Build fails on host, works locally | Wrong Node version | Set `NODE_VERSION=22`; use `npm ci` not `npm install` |
 | Canonical URLs still `docuforge.example` | `PUBLIC_SITE_URL` not set at build | Set env var in host; **redeploy** (rebuild required) |
 | Sitemap has wrong domain | Same as above | Rebuild with correct `PUBLIC_SITE_URL` |
-| Google verification fails | Meta not in HTML | Set `PUBLIC_GOOGLE_SITE_VERIFICATION`, redeploy, view source |
+| Google verification fails | Meta not in HTML | Set `PUBLIC_GSC_VERIFICATION`, redeploy, view source |
 | PDF export blank / error | Mixed content or blocked JS | Ensure site is HTTPS; check browser console |
 | Horizontal scroll on mobile | Wide tables in preview | Fixed in generator CSS; pull latest, rebuild |
 | `npm run audit` fails thin content | Tool page word count | Add content in `src/data/tools/*.ts` |
