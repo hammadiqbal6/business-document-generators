@@ -38,6 +38,7 @@ Static Astro + TypeScript site with React islands for in-browser document genera
 | `npm test` | Vitest (validation + PDF export) |
 | `npm run audit` | Build + SEO/AdSense/budget/links |
 | `npx lhci autorun` | Lighthouse mobile budgets |
+| `npm run proof` | Regenerate committed `docs/proof/` evidence |
 
 ## Definition of done
 
