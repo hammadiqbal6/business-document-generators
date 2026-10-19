@@ -103,7 +103,7 @@ GitHub Actions runs `npm run proof` and uploads `docs/proof/` as a workflow arti
 
 ## SEO / AdSense / deploy
 
-- [docs/DEPLOYMENT.md](docs/DEPLOYMENT.md)
+- **[docs/DEPLOYMENT.md](docs/DEPLOYMENT.md)** — full step-by-step: DNS, Cloudflare Pages / Vercel / Netlify, env vars, GSC, AdSense, launch checklist
 - [docs/SEO-GUIDE.md](docs/SEO-GUIDE.md)
 - [docs/ADSENSE.md](docs/ADSENSE.md)
 - [docs/SEO-PLAYBOOK.md](docs/SEO-PLAYBOOK.md)
