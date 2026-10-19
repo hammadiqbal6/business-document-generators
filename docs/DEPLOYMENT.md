@@ -75,7 +75,7 @@ Defaults live in `src/config/site.ts` (fallback origin is the Workers `workers.d
 | `PUBLIC_SITE_URL` | **Yes** | `https://tools.yourbrand.com` | Canonical URLs, sitemap, Open Graph, JSON-LD |
 | `PUBLIC_SITE_NAME` | **Yes** | `Your Brand Tools` | Titles, header, Organization schema |
 | `PUBLIC_SITE_TAGLINE` | No | Short one-liner | Homepage lead, Organization description |
-| `PUBLIC_CONTACT_EMAIL` | **Yes** | `hello@yourbrand.com` | Contact page, footer, schema |
+| `PUBLIC_CONTACT_EMAIL` | No (default in `site.ts`) | `hammadiqbal117@gmail.com` | Contact page, footer, privacy/terms, schema |
 | `PUBLIC_TWITTER_HANDLE` | No | `yourbrand` (no `@`) | Twitter card meta |
 | `PUBLIC_GA4_MEASUREMENT_ID` | No | `G-XXXXXXXXXX` | Google Analytics 4 script in `BaseLayout.astro` |
 | `PUBLIC_GSC_VERIFICATION` | Recommended | Meta **content** token only | `<meta name="google-site-verification" content="…">` (alias: `PUBLIC_GOOGLE_SITE_VERIFICATION`) |
@@ -90,7 +90,7 @@ Defaults live in `src/config/site.ts` (fallback origin is the Workers `workers.d
 ```bash
 PUBLIC_SITE_URL=https://tools.yourbrand.com \
 PUBLIC_SITE_NAME="Your Brand Tools" \
-PUBLIC_CONTACT_EMAIL=hello@yourbrand.com \
+PUBLIC_CONTACT_EMAIL=hammadiqbal117@gmail.com \
 npm run build
 npm run preview
 ```

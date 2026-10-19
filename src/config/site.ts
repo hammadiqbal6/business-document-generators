@@ -16,7 +16,7 @@ export const siteConfig = {
     import.meta.env.PUBLIC_SITE_TAGLINE ||
     'Free niche business document generators — fill a form, preview live, export PDF or DOCX. Nothing leaves your browser.',
   /** Contact email for Contact page and schema. */
-  contactEmail: import.meta.env.PUBLIC_CONTACT_EMAIL || 'hello@docuforge.example',
+  contactEmail: import.meta.env.PUBLIC_CONTACT_EMAIL || 'hammadiqbal117@gmail.com',
   /** Optional Twitter/X handle without @. */
   twitterHandle: import.meta.env.PUBLIC_TWITTER_HANDLE || '',
   /** Google AdSense publisher ID, e.g. ca-pub-XXXXXXXXXXXXXXXX. Leave empty to disable ads. */
