@@ -1,0 +1,6 @@
+# Sitemap alias (tools that request /sitemap.xml)
+/sitemap.xml /sitemap-index.xml 301
+
+# Authors → About (one author URL per site)
+/authors /about/ 301
+/authors/ /about/ 301

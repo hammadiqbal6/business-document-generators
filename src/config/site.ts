@@ -1,15 +1,23 @@
 /**
  * SINGLE OWNER CONFIG — prefer env vars (PUBLIC_*) when deploying; this file supplies defaults.
  * Workers Builds should set PUBLIC_* keys (see .env.example); fallbacks match production workers.dev.
+ *
+ * Authorship follows docs/playbook (one-person tool site): named maintainer only,
+ * no fabricated reviewers, same Person @id across sibling tool sites.
  */
 const DEFAULT_SITE_URL =
   'https://business-document-generators.hammadiqbal117.workers.dev';
+
+/** Stable Person @id shared across all five sibling tool sites. */
+export const CANONICAL_PERSON_URL = 'https://github.com/hammadiqbal6';
 
 export const siteConfig = {
   /** Public site origin (no trailing slash). Used for canonicals, sitemap, OG, robots, llms. */
   siteUrl: import.meta.env.PUBLIC_SITE_URL || DEFAULT_SITE_URL,
   /** Brand shown in header, titles, schema Organization. */
   siteName: import.meta.env.PUBLIC_SITE_NAME || 'DocuForge Tools',
+  /** Short name for apple-mobile-web-app-title / manifest. */
+  siteShortName: 'DocuForge',
   /** Short tagline for homepage and Organization description. */
   tagline:
     import.meta.env.PUBLIC_SITE_TAGLINE ||
@@ -39,16 +47,56 @@ export const siteConfig = {
   bingSiteVerification: import.meta.env.PUBLIC_BING_SITE_VERIFICATION || '',
   /** IndexNow key (also place matching file at /public/{key}.txt). */
   indexNowKey: import.meta.env.PUBLIC_INDEXNOW_KEY || '4d6f1ea5473a0968a83c67ceda5a0387',
-  /** Default author display name for Article schema and bylines. */
-  defaultAuthor: 'DocuForge Editorial',
-  /** Default reviewer for E-E-A-T reviewer boxes. */
-  defaultReviewer: 'DocuForge Review Team',
+
+  author: {
+    name: 'Hammad Iqbal',
+    email: 'hammadiqbal117@gmail.com',
+    /** Honest short bio — no invented credentials. */
+    shortBio:
+      'I build and maintain free in-browser tools. I turn published public sources into practical generators and show which sources each page uses. I am not a lawyer, accountant, or licensed professional advisor.',
+    /** Canonical Person @id (same on all sibling sites). */
+    canonicalPersonUrl: CANONICAL_PERSON_URL,
+    /** Real profile URLs only. */
+    sameAs: [CANONICAL_PERSON_URL] as string[],
+    knowsAbout: [
+      'business document templates',
+      'in-browser PDF generators',
+      'small-business paperwork',
+    ],
+  },
+
+  /** @deprecated use author.name */
+  defaultAuthor: 'Hammad Iqbal',
+
   /** ISO date used as sitewide "published" baseline when a page omits one. */
   launchedAt: '2026-10-19',
   /** Locale for schema and html lang. */
   locale: 'en_US',
   /** Theme color for manifest / browser chrome. */
-  themeColor: '#0f3d3e',
+  themeColor: '#0f6b5c',
+  /** Default Open Graph image (1200×630 PNG). */
+  ogImagePath: '/og-default.png',
+  ogImageAlt: 'DocuForge Tools — free invoice, estimate, and contract templates with PDF export',
+
+  /** Sibling tool sites by the same maintainer (listed only on /about/). */
+  siblingSites: [
+    {
+      name: 'FeeCalc (payment fee calculators)',
+      url: 'https://payment-fee-calculators.hammadiqbal117.workers.dev/',
+    },
+    {
+      name: 'YardCalc (home & garden calculators)',
+      url: 'https://home-garden-calculators.hammadiqbal117.workers.dev/',
+    },
+    {
+      name: 'FiberCalc (knitting & crochet calculators)',
+      url: 'https://fiber-arts-calculators.hammadiqbal117.workers.dev/',
+    },
+    {
+      name: 'PetCalc (pet calculators)',
+      url: 'https://pet-calculators.hammadiqbal117.workers.dev/',
+    },
+  ],
 } as const;
 
 export type SiteConfig = typeof siteConfig;

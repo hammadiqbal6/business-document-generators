@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="720" height="400" viewBox="0 0 720 400" role="img">
+  <defs>
+    <linearGradient id="g" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#e8f5f1"/>
+      <stop offset="100%" stop-color="#f7f1df"/>
+    </linearGradient>
+  </defs>
+  <rect width="720" height="400" fill="url(#g)"/>
+  <rect x="48" y="40" width="624" height="320" rx="8" fill="#fff" stroke="#0f6b5c" stroke-width="2"/>
+  <rect x="48" y="40" width="624" height="48" rx="8" fill="#0f6b5c"/>
+  <text x="72" y="72" fill="#fff" font-family="Georgia, serif" font-size="22">videography contract</text>
+  <rect x="72" y="112" width="280" height="14" rx="3" fill="#d8e3de"/>
+  <rect x="72" y="140" width="220" height="14" rx="3" fill="#d8e3de"/>
+  <rect x="72" y="180" width="560" height="10" rx="2" fill="#eef5f2"/>
+  <rect x="72" y="204" width="560" height="10" rx="2" fill="#eef5f2"/>
+  <rect x="72" y="228" width="480" height="10" rx="2" fill="#eef5f2"/>
+  <rect x="72" y="268" width="160" height="36" rx="4" fill="#0f6b5c"/>
+  <text x="92" y="292" fill="#fff" font-family="system-ui,sans-serif" font-size="14">PDF / DOCX</text>
+  <circle cx="620" cy="300" r="28" fill="#c9a227"/>
+</svg>

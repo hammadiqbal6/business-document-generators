@@ -23,5 +23,8 @@
 | `/guides/catering-quote-deposits/` | catering quote deposit | wedding catering pricing | supports catering quote |
 | `/guides/tattoo-consent-documentation/` | tattoo consent form requirements | tattoo waiver explained | supports consent tool |
 | `/guides/rental-application-fair-housing/` | rental application fair housing | what to ask on rental application | supports rental form |
+| `/guides/invoice-vs-estimate/` | invoice vs estimate | when to use estimate or invoice | differentiates estimate vs invoice tools |
+| `/guides/line-item-totals-explained/` | how line item totals work | estimate tax deposit math | supports all commercial generators |
+| `/guides/freelance-payment-schedule-milestones/` | freelance payment schedule | web design contract milestones | supports freelance contract tool |
 
-Cannibalization rule: head terms like “invoice template” (KD 43) are not targeted; each page keeps a distinct profession or document type.
+Cannibalization rule: head terms like “invoice template” (KD 43) are not targeted; each page keeps a distinct profession or document type. Guides answer “when/why/how”; tools own “free template / generator” intent.

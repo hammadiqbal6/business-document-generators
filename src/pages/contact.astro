@@ -6,20 +6,24 @@ import { siteConfig } from '../config/site';
 const path = '/contact/';
 ---
 <BaseLayout
-  title="Contact"
-  description={`Contact ${siteConfig.siteName} for corrections, accessibility issues, or partnership inquiries.`}
+  title="Contact DocuForge Tools"
+  description="Email Hammad Iqbal about DocuForge Tools: corrections, privacy requests, or feedback on the free document generators."
   path={path}
 >
   <Breadcrumbs items={[{ name: 'Home', path: '/' }, { name: 'Contact', path }]} />
   <h1>Contact</h1>
-  <p class="lead">We read every message. We cannot provide legal advice on contracts or consent forms.</p>
+  <p class="lead">
+    This site is maintained by <a href="/about/#maintainer">{siteConfig.author.name}</a>.
+    For corrections, broken links, or product feedback, email directly—there is no support ticket queue.
+  </p>
   <p>
     Email: <a href={`mailto:${siteConfig.contactEmail}`}>{siteConfig.contactEmail}</a>
   </p>
   <p>
     For privacy requests (cookies, analytics), include “Privacy” in the subject line and the page URL you visited.
+    We do not host user-generated documents on our servers, so we typically have no form contents to delete.
   </p>
   <p>
-    For embed partnerships (iframe widgets with attribution), describe your site and audience—we respond within a few business days.
+    Please do not send confidential client contracts or personal data for “review”—we cannot provide legal advice.
   </p>
 </BaseLayout>

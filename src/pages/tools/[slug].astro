@@ -2,11 +2,20 @@
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import Breadcrumbs from '../../components/content/Breadcrumbs.astro';
 import RelatedTools from '../../components/content/RelatedTools.astro';
+import SisterTools from '../../components/content/SisterTools.astro';
 import ToolPageContent from '../../components/content/ToolPageContent.astro';
+import EmbedSnippet from '../../components/content/EmbedSnippet.astro';
 import AdSlot from '../../components/ads/AdSlot.astro';
 import DocumentGeneratorLazy from '../../components/generators/DocumentGeneratorLazy.astro';
-import { allTools, getRelatedTools, getToolBySlug, CATEGORY_META } from '../../data/tools';
-import { absoluteUrl, breadcrumbJsonLd, webApplicationJsonLd } from '../../lib/seo';
+import SampleDocumentPreview from '../../components/generators/SampleDocumentPreview.astro';
+import { allTools, getRelatedTools, CATEGORY_META } from '../../data/tools';
+import { siteConfig } from '../../config/site';
+import {
+  absoluteUrl,
+  breadcrumbJsonLd,
+  faqPageJsonLd,
+  toolPageGraphJsonLd,
+} from '../../lib/seo';
 
 export function getStaticPaths() {
   return allTools.map((tool) => ({ params: { slug: tool.slug }, props: { tool } }));
@@ -22,11 +31,14 @@ const crumbs = [
   { name: category.name, path: `/hubs/${category.slug}/` },
   { name: tool.shortName, path: pagePath },
 ];
+const faqLd = faqPageJsonLd(tool.content.faq);
 const jsonLd = [
   breadcrumbJsonLd(crumbs),
-  webApplicationJsonLd(tool, pageUrl),
+  toolPageGraphJsonLd(tool, pageUrl),
+  ...(faqLd ? [faqLd] : []),
 ];
 const related = getRelatedTools(tool);
+const previewImage = `/images/tools/${tool.slug}.svg`;
 ---
 <BaseLayout
   title={tool.title}
@@ -38,13 +50,32 @@ const related = getRelatedTools(tool);
   <Breadcrumbs items={crumbs} />
   <header>
     <h1>{tool.h1}</h1>
-    <p class="content-meta">
-      Primary keyword: {tool.primaryKeyword} · Updated <time datetime={tool.updatedAt}>{tool.updatedAt}</time>
+    <p class="content-meta byline">
+      Built and maintained by
+      <a href="/about/#maintainer" rel="author">{siteConfig.author.name}</a>
+      · Last reviewed <time datetime={tool.updatedAt}>{tool.updatedAt}</time>
+      · <a href="/methodology/">How this tool works</a>
     </p>
     <p class="lead">{tool.answerFirst}</p>
   </header>
 
+  <figure class="tool-figure">
+    <img
+      src={previewImage}
+      width="720"
+      height="400"
+      alt={`Document preview illustration for the ${tool.shortName} template showing typical fields and layout`}
+      loading="lazy"
+      decoding="async"
+    />
+    <figcaption>
+      Preview illustration of a filled {tool.shortName.toLowerCase()} — customize yours in the editor below.
+    </figcaption>
+  </figure>
+
   <AdSlot slot="tool-top" minHeight={90} />
+
+  <SampleDocumentPreview tool={tool} />
 
   <DocumentGeneratorLazy tool={tool} />
 
@@ -52,14 +83,9 @@ const related = getRelatedTools(tool);
 
   <ToolPageContent tool={tool} />
 
+  <SisterTools toolSlug={tool.slug} />
+
   <RelatedTools tools={related} />
 
-  <section class="embed-note" style="overflow-wrap:anywhere;">
-    <h2>Embed this tool</h2>
-    <p>
-      Add a lightweight iframe to your site with attribution:
-      <code>{`<iframe src="${pageUrl.replace(/\/$/, '')}/embed/" title="${tool.name}" width="100%" height="720" loading="lazy"></iframe>`}</code>
-    </p>
-    <p><a href={`/tools/${tool.slug}/embed/`}>Open embeddable version →</a></p>
-  </section>
+  <EmbedSnippet tool={tool} />
 </BaseLayout>

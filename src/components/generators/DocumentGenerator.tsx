@@ -2,6 +2,7 @@ import { useEffect, useMemo, useState } from 'react';
 import type { ClauseItem, FieldDef, LineItem, ToolDefinition } from '../../data/tools/types';
 import { emptyLineItem } from '../../data/tools/line-item-defaults';
 import { validateForm } from '../../lib/validation';
+import { trackEvent } from '../../lib/analytics';
 import { buildDocumentBlocks } from './documentModel';
 import './generator.css';
 
@@ -41,6 +42,11 @@ export default function DocumentGenerator({ tool, embed = false }: Props) {
   const [status, setStatus] = useState('');
   const [exporting, setExporting] = useState<'pdf' | 'docx' | null>(null);
   const [savedFlash, setSavedFlash] = useState(false);
+  const [mobileTab, setMobileTab] = useState<'edit' | 'preview'>('edit');
+
+  useEffect(() => {
+    trackEvent('tool_opened', { tool_slug: tool.slug, embed: embed ? '1' : '0' });
+  }, [tool.slug, embed]);
 
   useEffect(() => {
     if (typeof window === 'undefined') return;
@@ -130,6 +136,7 @@ export default function DocumentGenerator({ tool, embed = false }: Props) {
       const { exportPdf } = await import('./exportPdf');
       await exportPdf(`${tool.slug}.pdf`, blocks);
       setStatus('PDF downloaded.');
+      trackEvent('tool_export_pdf', { tool_slug: tool.slug });
     } catch (err) {
       console.error(err);
       setStatus('PDF export failed. Try again or use print.');
@@ -146,6 +153,7 @@ export default function DocumentGenerator({ tool, embed = false }: Props) {
       const { exportDocx } = await import('./exportDocx');
       await exportDocx(`${tool.slug}.docx`, blocks);
       setStatus('DOCX downloaded.');
+      trackEvent('tool_export_docx', { tool_slug: tool.slug });
     } catch (err) {
       console.error(err);
       setStatus('DOCX export failed.');
@@ -166,7 +174,26 @@ export default function DocumentGenerator({ tool, embed = false }: Props) {
         </p>
       )}
 
-      <div className="generator__layout">
+      <div className="generator__tabs" role="tablist" aria-label="Editor views">
+        <button
+          type="button"
+          role="tab"
+          aria-selected={mobileTab === 'edit'}
+          onClick={() => setMobileTab('edit')}
+        >
+          Edit
+        </button>
+        <button
+          type="button"
+          role="tab"
+          aria-selected={mobileTab === 'preview'}
+          onClick={() => setMobileTab('preview')}
+        >
+          Preview
+        </button>
+      </div>
+
+      <div className="generator__layout" data-mobile-tab={mobileTab}>
         <form
           className="generator__form"
           onSubmit={(e) => {
@@ -212,11 +239,9 @@ export default function DocumentGenerator({ tool, embed = false }: Props) {
               </button>
             )}
           </div>
-          {status && (
-            <p className="generator__status" aria-live="polite">
-              {status}
-            </p>
-          )}
+          <p className="generator__status" role="status" aria-live="polite" aria-atomic="true">
+            {status}
+          </p>
           <p className="generator__privacy">
             Privacy: processing stays in your browser. Optional drafts use localStorage on this device only—nothing is uploaded to our servers.
           </p>
@@ -224,15 +249,35 @@ export default function DocumentGenerator({ tool, embed = false }: Props) {
 
         <aside className="generator__preview" aria-label="Live document preview">
           <div className="generator__preview-bar">
-            <strong>Live preview</strong>
+            <strong id="preview-heading">Live preview</strong>
             <span>Updates as you type</span>
           </div>
-          <div className="doc-preview" id="doc-preview">
+          <div
+            className="doc-preview"
+            id="doc-preview"
+            role="region"
+            aria-labelledby="preview-heading"
+            aria-live="polite"
+            aria-relevant="additions text"
+          >
             {blocks.map((block, i) => (
               <PreviewBlock key={i} block={block} />
             ))}
           </div>
         </aside>
+      </div>
+
+      <div className="generator__mobile-bar">
+        <button
+          type="button"
+          className="btn"
+          onClick={() => setMobileTab(mobileTab === 'edit' ? 'preview' : 'edit')}
+        >
+          {mobileTab === 'edit' ? 'Preview' : 'Edit'}
+        </button>
+        <button type="button" className="btn btn--primary" onClick={() => void onExportPdf()} disabled={!!exporting}>
+          {exporting === 'pdf' ? 'Exporting…' : 'Export PDF'}
+        </button>
       </div>
     </div>
   );
@@ -260,64 +305,64 @@ function FieldControl({
         <div className="line-items">
           {items.map((item, idx) => (
             <div className="line-items__row" key={idx}>
-              <label className="sr-only" htmlFor={`${id}-desc-${idx}`}>
-                Description {idx + 1}
-              </label>
-              <input
-                id={`${id}-desc-${idx}`}
-                value={item.description}
-                placeholder="Description"
-                onChange={(e) => {
-                  const next = [...items];
-                  next[idx] = { ...next[idx], description: e.target.value };
-                  onChange(next);
-                }}
-              />
-              <label className="sr-only" htmlFor={`${id}-qty-${idx}`}>
-                Qty
-              </label>
-              <input
-                id={`${id}-qty-${idx}`}
-                type="number"
-                inputMode="decimal"
-                value={item.quantity}
-                onChange={(e) => {
-                  const next = [...items];
-                  next[idx] = { ...next[idx], quantity: Number(e.target.value) };
-                  onChange(next);
-                }}
-              />
-              <label className="sr-only" htmlFor={`${id}-unit-${idx}`}>
-                Unit
-              </label>
-              <input
-                id={`${id}-unit-${idx}`}
-                value={item.unit}
-                placeholder="Unit"
-                onChange={(e) => {
-                  const next = [...items];
-                  next[idx] = { ...next[idx], unit: e.target.value };
-                  onChange(next);
-                }}
-              />
-              <label className="sr-only" htmlFor={`${id}-rate-${idx}`}>
-                Rate
-              </label>
-              <input
-                id={`${id}-rate-${idx}`}
-                type="number"
-                inputMode="decimal"
-                step="0.01"
-                value={item.rate}
-                onChange={(e) => {
-                  const next = [...items];
-                  next[idx] = { ...next[idx], rate: Number(e.target.value) };
-                  onChange(next);
-                }}
-              />
+              <div className="line-items__cell line-items__desc">
+                <label htmlFor={`${id}-desc-${idx}`}>Description</label>
+                <input
+                  id={`${id}-desc-${idx}`}
+                  value={item.description}
+                  placeholder="Description"
+                  onChange={(e) => {
+                    const next = [...items];
+                    next[idx] = { ...next[idx], description: e.target.value };
+                    onChange(next);
+                  }}
+                />
+              </div>
+              <div className="line-items__cell">
+                <label htmlFor={`${id}-qty-${idx}`}>Qty</label>
+                <input
+                  id={`${id}-qty-${idx}`}
+                  type="number"
+                  inputMode="decimal"
+                  value={item.quantity}
+                  onChange={(e) => {
+                    const next = [...items];
+                    next[idx] = { ...next[idx], quantity: Number(e.target.value) };
+                    onChange(next);
+                  }}
+                />
+              </div>
+              <div className="line-items__cell">
+                <label htmlFor={`${id}-unit-${idx}`}>Unit</label>
+                <input
+                  id={`${id}-unit-${idx}`}
+                  value={item.unit}
+                  placeholder="hr / ls"
+                  onChange={(e) => {
+                    const next = [...items];
+                    next[idx] = { ...next[idx], unit: e.target.value };
+                    onChange(next);
+                  }}
+                />
+              </div>
+              <div className="line-items__cell">
+                <label htmlFor={`${id}-rate-${idx}`}>Rate</label>
+                <input
+                  id={`${id}-rate-${idx}`}
+                  type="number"
+                  inputMode="decimal"
+                  step="0.01"
+                  value={item.rate}
+                  onChange={(e) => {
+                    const next = [...items];
+                    next[idx] = { ...next[idx], rate: Number(e.target.value) };
+                    onChange(next);
+                  }}
+                />
+              </div>
               <button
                 type="button"
-                className="btn btn--ghost btn--icon"
+                className="btn btn--ghost btn--icon line-items__remove"
                 aria-label={`Remove line ${idx + 1}`}
                 onClick={() => onChange(items.filter((_, i) => i !== idx))}
               >

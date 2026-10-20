@@ -1,0 +1,102 @@
+---
+import type { ToolDefinition } from '../../data/tools/types';
+import { buildDocumentBlocks } from './documentModel';
+import './generator.css';
+
+interface Props {
+  tool: ToolDefinition;
+}
+
+const { tool } = Astro.props;
+const blocks = buildDocumentBlocks(tool, tool.defaults);
+---
+
+<section class="sample-preview" aria-label="Sample document preview">
+  <div class="sample-preview__bar">
+    <strong>Sample preview</strong>
+    <span>Filled with example defaults — open the editor to customize</span>
+  </div>
+  <div class="doc-preview sample-preview__doc">
+    {blocks.map((block) => {
+      if (block.type === 'heading') return <h2 class="doc-preview__h">{block.text}</h2>;
+      if (block.type === 'subheading') return <h3 class="doc-preview__h3">{block.text}</h3>;
+      if (block.type === 'paragraph') return <p class="doc-preview__p">{block.text}</p>;
+      if (block.type === 'hr') return <hr />;
+      if (block.type === 'kv') {
+        return (
+          <dl class="doc-preview__kv">
+            {block.pairs?.map((p) => (
+              <div>
+                <dt>{p.label}</dt>
+                <dd>{p.value}</dd>
+              </div>
+            ))}
+          </dl>
+        );
+      }
+      if (block.type === 'table' && block.rows) {
+        return (
+          <div class="table-scroll">
+            <table class="doc-preview__table">
+              <tbody>
+                {block.rows.map((row, i) => (
+                  <tr>
+                    {row.map((cell) => (i === 0 ? <th>{cell}</th> : <td>{cell}</td>))}
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        );
+      }
+      if (block.type === 'totals') {
+        return (
+          <ul class="doc-preview__totals">
+            {block.totals?.map((t) => (
+              <li class={t.emphasize ? 'is-strong' : undefined}>
+                <span>{t.label}</span>
+                <span>{t.value}</span>
+              </li>
+            ))}
+          </ul>
+        );
+      }
+      if (block.type === 'clauses') {
+        return (
+          <div class="doc-preview__clauses">
+            {block.clauses?.map((c) => (
+              <section>
+                <h4>{c.title}</h4>
+                <p>{c.body}</p>
+              </section>
+            ))}
+          </div>
+        );
+      }
+      return null;
+    })}
+  </div>
+</section>
+
+<style>
+  .sample-preview {
+    margin: 1.25rem 0;
+    border: 1px solid var(--border, #d8e3de);
+    background: #fbfcfa;
+    max-width: 100%;
+  }
+  .sample-preview__bar {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 0.5rem;
+    padding: 0.65rem 0.85rem;
+    border-bottom: 1px solid var(--border, #d8e3de);
+    background: #eef5f2;
+    font-size: 0.9rem;
+  }
+  .sample-preview__doc {
+    max-height: none;
+    overflow: visible;
+  }
+</style>

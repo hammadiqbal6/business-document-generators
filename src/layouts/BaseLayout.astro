@@ -3,8 +3,9 @@ import '../styles/global.css';
 import SiteHeader from '../components/layout/SiteHeader.astro';
 import SiteFooter from '../components/layout/SiteFooter.astro';
 import Head from '../components/seo/Head.astro';
+import Analytics from '../components/seo/Analytics.astro';
 import { siteConfig } from '../config/site';
-import { organizationJsonLd, webSiteJsonLd } from '../lib/seo';
+import { organizationJsonLd, personJsonLd, webSiteJsonLd } from '../lib/seo';
 
 interface Props {
   title: string;
@@ -13,26 +14,28 @@ interface Props {
   ogType?: string;
   noindex?: boolean;
   jsonLd?: object[];
+  /** When false, caller supplies WebSite/Organization/Person (e.g. home @graph). */
+  includeSiteGraph?: boolean;
 }
 
-const { title, description, path, ogType, noindex, jsonLd = [] } = Astro.props;
-const allLd = [webSiteJsonLd(), organizationJsonLd(), ...jsonLd];
+const {
+  title,
+  description,
+  path,
+  ogType,
+  noindex,
+  jsonLd = [],
+  includeSiteGraph = true,
+} = Astro.props;
+const allLd = includeSiteGraph
+  ? [webSiteJsonLd(), organizationJsonLd(), personJsonLd(), ...jsonLd]
+  : jsonLd;
 ---
 <!doctype html>
 <html lang="en">
   <head>
     <Head title={title} description={description} path={path} ogType={ogType} noindex={noindex} jsonLd={allLd} />
-    {siteConfig.ga4MeasurementId && (
-      <>
-        <script async src={`https://www.googletagmanager.com/gtag/js?id=${siteConfig.ga4MeasurementId}`}></script>
-        <script is:inline define:vars={{ id: siteConfig.ga4MeasurementId }}>
-          window.dataLayer = window.dataLayer || [];
-          function gtag(){dataLayer.push(arguments);}
-          gtag('js', new Date());
-          gtag('config', id);
-        </script>
-      </>
-    )}
+    <Analytics />
     {siteConfig.adsEnabled && siteConfig.adsensePublisherId && (
       <script
         async
@@ -48,5 +51,50 @@ const allLd = [webSiteJsonLd(), organizationJsonLd(), ...jsonLd];
       <slot />
     </main>
     <SiteFooter />
+
+    <div
+      id="cookie-banner"
+      class="cookie-banner"
+      role="dialog"
+      aria-modal="false"
+      aria-label="Cookie notice"
+      hidden
+    >
+      <p>
+        We use cookies for analytics.
+        <a href="/cookies/">Privacy</a>
+      </p>
+      <div class="cookie-banner__actions">
+        <button type="button" class="btn btn--primary" data-cookie-accept>OK</button>
+      </div>
+    </div>
+
+    <script>
+      const KEY = 'docuforge:cookie-ok';
+      const banner = document.getElementById('cookie-banner');
+      if (banner) {
+        try {
+          if (!localStorage.getItem(KEY)) {
+            banner.hidden = false;
+            document.body.classList.add('has-cookie-banner');
+          }
+        } catch {
+          banner.hidden = false;
+          document.body.classList.add('has-cookie-banner');
+        }
+        banner.querySelector('[data-cookie-accept]')?.addEventListener('click', () => {
+          try {
+            localStorage.setItem(KEY, '1');
+          } catch {
+            /* ignore */
+          }
+          banner.hidden = true;
+          document.body.classList.remove('has-cookie-banner');
+          const grant = (window as Window & { __docuforgeGrantAnalytics?: () => void })
+            .__docuforgeGrantAnalytics;
+          grant?.();
+        });
+      }
+    </script>
   </body>
 </html>

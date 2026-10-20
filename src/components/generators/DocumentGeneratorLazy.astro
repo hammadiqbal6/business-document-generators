@@ -1,5 +1,6 @@
 ---
 import type { ToolDefinition } from '../../data/tools/types';
+import './generator.css';
 
 interface Props {
   tool: ToolDefinition;
@@ -10,7 +11,7 @@ const { tool, embed = false } = Astro.props;
 const toolJson = JSON.stringify(tool);
 ---
 
-<div class="generator-lazy" data-embed={embed ? '1' : '0'}>
+<div class="generator-lazy" data-embed={embed ? '1' : '0'} data-tool={toolJson}>
   <div class="generator-lazy__prompt">
     <p>
       Open the editor to fill fields, see a live preview, and export PDF or DOCX. Heavy scripts load only
@@ -33,9 +34,13 @@ const toolJson = JSON.stringify(tool);
     margin: 0 0 0.75rem;
     max-width: 52ch;
   }
+  .generator-lazy__error {
+    color: #a12020;
+    margin: 0 0 0.75rem;
+  }
 </style>
 
-<script define:vars={{ toolJson }}>
+<script>
   function wireLazyGenerator(root) {
     const btn = root.querySelector('[data-generator-load]');
     const prompt = root.querySelector('.generator-lazy__prompt');
@@ -48,12 +53,26 @@ const toolJson = JSON.stringify(tool);
       if (started) return;
       started = true;
       btn.disabled = true;
+      btn.setAttribute('aria-busy', 'true');
       btn.textContent = 'Loading editor…';
-      const tool = JSON.parse(toolJson);
-      const { mountDocumentGenerator } = await import('../../lib/mountDocumentGenerator.tsx');
-      prompt?.remove();
-      mountEl.hidden = false;
-      mountDocumentGenerator(mountEl, tool, embed);
+      try {
+        const tool = JSON.parse(root.dataset.tool || '{}');
+        const { mountDocumentGenerator } = await import('../../lib/mountDocumentGenerator.tsx');
+        prompt?.remove();
+        mountEl.hidden = false;
+        mountDocumentGenerator(mountEl, tool, embed);
+      } catch (err) {
+        console.error(err);
+        started = false;
+        btn.disabled = false;
+        btn.removeAttribute('aria-busy');
+        btn.textContent = 'Open editor';
+        const msg = document.createElement('p');
+        msg.className = 'generator-lazy__error';
+        msg.setAttribute('role', 'alert');
+        msg.textContent = 'Could not load the editor. Please refresh and try again.';
+        root.prepend(msg);
+      }
     }
 
     btn.addEventListener('click', () => void openEditor(), { once: true });

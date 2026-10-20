@@ -1,20 +1,6 @@
 import type { ToolDefinition } from './types';
 import { clause } from './line-item-defaults';
-
-const legalSources = [
-  {
-    label: 'FTC — Writing contracts that work',
-    url: 'https://www.ftc.gov/business-guidance',
-  },
-  {
-    label: 'SBA — Get legal help',
-    url: 'https://www.sba.gov/business-guide/launch-your-business/get-business-licenses-permits',
-  },
-  {
-    label: 'Copyright Office — Visual arts (photographers)',
-    url: 'https://www.copyright.gov/engage/photographers/',
-  },
-];
+import { contractSources } from './shared-sources';
 
 const legalNotice =
   'This generator produces editable sample language for discussion. It is not legal advice, not a law-firm product, and not a substitute for an attorney licensed in your jurisdiction. Laws vary by location and situation.';
@@ -30,15 +16,18 @@ export const photographyContract: ToolDefinition = {
     'wedding photography contract',
     'portrait photography agreement',
   ],
-  title: 'Photography Contract Template – Free Editable PDF',
+  title: 'Free Photography Contract Template (Editable PDF)',
   metaDescription:
-    'Fill a free photography contract template: parties, date, fee, deliverables, usage rights, editable clauses. Preview live; export PDF/DOCX. Not legal advice.',
+    'Create a photography contract with retainer, deliverables, usage rights and cancellation clauses. Edit every clause, preview live, download PDF or DOCX free.',
   h1: 'Free Photography Contract Template',
   answerFirst:
     'A photography contract template sets the shoot date, location, fee, deliverables, turnaround, cancellation terms, and image usage rights between photographer and client. Customize the editable clauses below, preview the agreement, and export PDF or DOCX. Not legal advice—review with counsel before signing.',
   applicationCategory: 'BusinessApplication',
   isLegalAdjacent: true,
   documentTitle: 'Photography Services Agreement',
+  toolVersion: '1.0',
+  formulaNote:
+    'Fees and retainers are taken from the fields you enter; clause text is included only when its toggle is on. Totals are display values—not legal calculations.',
   fields: [
     { id: 'photographerName', label: 'Photographer / studio', type: 'text', required: true, section: 'Parties' },
     { id: 'photographerAddress', label: 'Photographer address', type: 'textarea', rows: 2, section: 'Parties' },
@@ -151,11 +140,11 @@ export const photographyContract: ToolDefinition = {
           'Yes. Use a contractor or second-shooter agreement covering pay, deliverable ownership, and non-solicitation if relevant.',
       },
     ],
-    sources: legalSources,
+    sources: contractSources,
   },
   relatedSlugs: ['videography-contract', 'event-wedding-vendor-contract', 'freelance-web-design-contract'],
   publishedAt: '2026-10-19',
-  updatedAt: '2026-10-19',
+  updatedAt: '2026-10-20',
 };
 
 export const videographyContract: ToolDefinition = {
@@ -174,6 +163,9 @@ export const videographyContract: ToolDefinition = {
   applicationCategory: 'BusinessApplication',
   isLegalAdjacent: true,
   documentTitle: 'Videography Services Agreement',
+  toolVersion: '1.0',
+  formulaNote:
+    "Project fee and deposit fields are echoed in the preview. Clause toggles control which sample language is included.",
   fields: [
     { id: 'companyName', label: 'Videographer / company', type: 'text', required: true, section: 'Parties' },
     { id: 'clientName', label: 'Client', type: 'text', required: true, section: 'Parties' },
@@ -232,11 +224,11 @@ export const videographyContract: ToolDefinition = {
           'Only if priced and licensed. Raw files increase storage and misuse risk; many videographers sell raw as an add-on.',
       },
     ],
-    sources: legalSources,
+    sources: contractSources,
   },
   relatedSlugs: ['photography-contract-template', 'freelance-web-design-contract', 'event-wedding-vendor-contract'],
   publishedAt: '2026-10-19',
-  updatedAt: '2026-10-19',
+  updatedAt: '2026-10-20',
 };
 
 export const freelanceWebContract: ToolDefinition = {
@@ -255,6 +247,9 @@ export const freelanceWebContract: ToolDefinition = {
   applicationCategory: 'BusinessApplication',
   isLegalAdjacent: true,
   documentTitle: 'Freelance Web Design Agreement',
+  toolVersion: '1.0',
+  formulaNote:
+    "Milestone amounts are listed as you enter them; the generator does not prorate or calculate late fees.",
   fields: [
     { id: 'freelancerName', label: 'Freelancer / studio', type: 'text', required: true, section: 'Parties' },
     { id: 'clientName', label: 'Client', type: 'text', required: true, section: 'Parties' },
@@ -309,11 +304,11 @@ export const freelanceWebContract: ToolDefinition = {
           'It depends on jurisdiction and leverage. Many freelancers assign IP on full payment instead. Ask a lawyer which structure fits your location.',
       },
     ],
-    sources: legalSources,
+    sources: contractSources,
   },
   relatedSlugs: ['simple-nda', 'photography-contract-template', 'quote-estimate-generator'],
   publishedAt: '2026-10-19',
-  updatedAt: '2026-10-19',
+  updatedAt: '2026-10-20',
 };
 
 export const eventVendorContract: ToolDefinition = {
@@ -332,6 +327,9 @@ export const eventVendorContract: ToolDefinition = {
   applicationCategory: 'BusinessApplication',
   isLegalAdjacent: true,
   documentTitle: 'Event Vendor Services Agreement',
+  toolVersion: '1.0',
+  formulaNote:
+    "Package price and deposit % are taken from your inputs. Always confirm venue and force-majeure language with counsel.",
   fields: [
     { id: 'vendorName', label: 'Vendor / business', type: 'text', required: true, section: 'Parties' },
     { id: 'serviceType', label: 'Service type', type: 'text', required: true, section: 'Parties', placeholder: 'e.g. Florist, DJ, Officiant' },
@@ -389,11 +387,11 @@ export const eventVendorContract: ToolDefinition = {
           'Many venues require certificates of insurance. Ask the venue early and attach requirements as an exhibit.',
       },
     ],
-    sources: legalSources,
+    sources: contractSources,
   },
   relatedSlugs: ['photography-contract-template', 'catering-quote', 'videography-contract'],
   publishedAt: '2026-10-19',
-  updatedAt: '2026-10-19',
+  updatedAt: '2026-10-20',
 };
 
 export const simpleNda: ToolDefinition = {
@@ -412,6 +410,9 @@ export const simpleNda: ToolDefinition = {
   applicationCategory: 'BusinessApplication',
   isLegalAdjacent: true,
   documentTitle: 'Non-Disclosure Agreement',
+  toolVersion: '1.0',
+  formulaNote:
+    "No numeric formula—this generator assembles party names and selected confidentiality clauses into sample language only.",
   fields: [
     { id: 'ndaType', label: 'NDA type', type: 'select', section: 'Type', options: [
       { value: 'Mutual', label: 'Mutual' },
@@ -466,9 +467,9 @@ export const simpleNda: ToolDefinition = {
           'Often no. Investors may refuse broad NDAs; employees usually need invention-assignment and confidentiality in employment docs. Seek counsel.',
       },
     ],
-    sources: legalSources,
+    sources: contractSources,
   },
   relatedSlugs: ['freelance-web-design-contract', 'photography-contract-template', 'event-wedding-vendor-contract'],
   publishedAt: '2026-10-19',
-  updatedAt: '2026-10-19',
+  updatedAt: '2026-10-20',
 };

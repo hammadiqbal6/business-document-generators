@@ -6,13 +6,34 @@ const path = '/cookies/';
 ---
 <BaseLayout
   title="Cookie Notice"
-  description="Cookie notice for analytics and AdSense on DocuForge Tools."
+  description="How DocuForge Tools uses cookies for optional analytics with Consent Mode v2. Generators work without cookies."
   path={path}
 >
   <Breadcrumbs items={[{ name: 'Home', path: '/' }, { name: 'Cookies', path }]} />
   <h1>Cookie notice</h1>
-  <p>
-    Our generators do not require cookies to function. Optional cookies may be set if you enable Google Analytics or AdSense in site configuration.
+  <p class="lead">
+    Our document generators do not require cookies to fill forms, preview documents, or export PDF/DOCX.
+    Everything in the editor runs in your browser.
   </p>
-  <p>See our <a href="/privacy/">Privacy Policy</a> for opt-out links and CMP requirements in the EEA/UK/CH.</p>
+  <h2>Analytics and Consent Mode</h2>
+  <p>
+    If Google Analytics (GA4) is configured, we load it only after you accept the cookie bar (or if you
+    previously accepted). Until then, Google Consent Mode v2 defaults keep <code>analytics_storage</code>
+    denied. The GA script is deferred until after page load / idle so it is not render-blocking.
+  </p>
+  <p>
+    Accepting stores <code>docuforge:cookie-ok</code> in localStorage on this device. Clearing site data
+    will show the bar again.
+  </p>
+  <h2>Advertising</h2>
+  <p>
+    Google AdSense is off unless explicitly enabled in site configuration. When enabled for EEA/UK
+    traffic, a certified CMP should be added per Google’s requirements. See the
+    <a href="/privacy/">privacy policy</a>.
+  </p>
+  <h2>Your choices</h2>
+  <p>
+    Use browser settings to block or delete cookies. For personalized ads from Google, visit
+    <a href="https://adssettings.google.com/" rel="noopener noreferrer">Google Ad Settings</a>.
+  </p>
 </BaseLayout>

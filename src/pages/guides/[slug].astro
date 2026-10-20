@@ -30,7 +30,11 @@ const jsonLd = [
   <Breadcrumbs items={crumbs} />
   <article class="prose">
     <h1>{guide.title}</h1>
-    <p class="content-meta">Published <time datetime={guide.publishedAt}>{guide.publishedAt}</time></p>
+    <p class="content-meta byline">
+      Built and maintained by <a href="/about/#maintainer" rel="author">Hammad Iqbal</a>
+      · Last reviewed <time datetime={guide.updatedAt}>{guide.updatedAt}</time>
+      · Published <time datetime={guide.publishedAt}>{guide.publishedAt}</time>
+    </p>
     <div class="summary-box"><p>{guide.answerFirst}</p></div>
     {guide.sections.map((s) => (
       <>

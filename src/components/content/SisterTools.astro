@@ -1,0 +1,115 @@
+---
+/**
+ * Sparse cross-links to sibling tool sites — only when genuinely topical.
+ * Never render a sitewide footer of all five properties.
+ */
+interface SisterLink {
+  label: string;
+  href: string;
+  why: string;
+}
+
+interface Props {
+  /** Current tool slug — picks a small topical set */
+  toolSlug: string;
+}
+
+const { toolSlug } = Astro.props;
+
+const payment = 'https://payment-fee-calculators.hammadiqbal117.workers.dev';
+const garden = 'https://home-garden-calculators.hammadiqbal117.workers.dev';
+
+const map: Record<string, SisterLink[]> = {
+  'construction-estimate-template': [
+    {
+      label: 'Concrete calculator (bags & yards)',
+      href: `${garden}/calculators/concrete-calculator/`,
+      why: 'When your remodel estimate includes slab or footing pours',
+    },
+  ],
+  'contractor-invoice': [
+    {
+      label: 'Stripe fee calculator',
+      href: `${payment}/tools/stripe-fee-calculator/`,
+      why: 'See card-processing fees before you set invoice totals',
+    },
+  ],
+  'cleaning-service-invoice': [
+    {
+      label: 'PayPal fee calculator',
+      href: `${payment}/tools/paypal-fee-calculator/`,
+      why: 'If clients pay cleaning invoices by PayPal',
+    },
+  ],
+  'catering-quote': [
+    {
+      label: 'Compare payment processor fees',
+      href: `${payment}/tools/compare-payment-fees/`,
+      why: 'Useful when deposits and balances hit different processors',
+    },
+  ],
+  'quote-estimate-generator': [
+    {
+      label: 'Stripe fee calculator',
+      href: `${payment}/tools/stripe-fee-calculator/`,
+      why: 'Price quotes so net payout still covers your costs',
+    },
+  ],
+  'receipt-generator': [
+    {
+      label: 'PayPal fee calculator',
+      href: `${payment}/tools/paypal-fee-calculator/`,
+      why: 'Match receipt totals to what the processor actually deposited',
+    },
+  ],
+  'freelance-web-design-contract': [
+    {
+      label: 'Stripe fee calculator',
+      href: `${payment}/tools/stripe-fee-calculator/`,
+      why: 'Factor processing fees into milestone payment schedules',
+    },
+  ],
+};
+
+const links = map[toolSlug] || [];
+---
+
+{links.length > 0 && (
+  <aside class="sister-tools" aria-label="Related tools from our other sites">
+    <h2>Related tools from our other sites</h2>
+    <p class="sister-tools__note">
+      Same maintainer, different niche—linked only when it helps this workflow.
+    </p>
+    <ul>
+      {links.map((l) => (
+        <li>
+          <a href={l.href} rel="noopener noreferrer">{l.label}</a>
+          <span> — {l.why}</span>
+        </li>
+      ))}
+    </ul>
+  </aside>
+)}
+
+<style>
+  .sister-tools {
+    margin: 2rem 0;
+    padding: 1rem 1.1rem;
+    border-left: 4px solid var(--border-strong);
+    background: var(--surface);
+  }
+  .sister-tools h2 {
+    margin-top: 0;
+    font-size: 1.1rem;
+  }
+  .sister-tools__note {
+    font-size: 0.9rem;
+    color: var(--muted);
+    margin-bottom: 0.5rem;
+  }
+  .sister-tools a {
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+  }
+</style>

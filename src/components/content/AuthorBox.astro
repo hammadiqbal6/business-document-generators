@@ -3,16 +3,19 @@ import { siteConfig } from '../../config/site';
 
 interface Props {
   updatedAt: string;
-  reviewer?: string;
 }
 
-const { updatedAt, reviewer = siteConfig.defaultReviewer } = Astro.props;
+const { updatedAt } = Astro.props;
+const author = siteConfig.author;
 ---
-<aside class="author-box" aria-label="Author and review">
-  <p><strong>Author:</strong> {siteConfig.defaultAuthor}</p>
-  <p><strong>Reviewed by:</strong> {reviewer}</p>
-  <p><strong>Last updated:</strong> <time datetime={updatedAt}>{updatedAt}</time></p>
+<aside class="author-box" aria-label="Author">
   <p>
-    We write original guidance and verify sample defaults against common industry practice. Contract pages are not legal advice—consult a licensed attorney.
+    Built and maintained by
+    <a href="/about/#maintainer" rel="author">{author.name}</a>
+    · Last reviewed <time datetime={updatedAt}>{updatedAt}</time>
+  </p>
+  <p>
+    {author.shortBio}
+    Contract and consent pages are editable samples only—not legal advice.
   </p>
 </aside>

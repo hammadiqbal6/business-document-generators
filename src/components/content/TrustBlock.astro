@@ -1,0 +1,75 @@
+---
+import type { ToolDefinition } from '../../data/tools/types';
+import { siteConfig } from '../../config/site';
+
+interface Props {
+  tool: ToolDefinition;
+}
+
+const { tool } = Astro.props;
+const author = siteConfig.author;
+const version = tool.toolVersion || '1.0';
+const reviewed = tool.updatedAt;
+
+function formatDate(iso: string) {
+  const d = new Date(`${iso}T12:00:00Z`);
+  return d.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric', timeZone: 'UTC' });
+}
+---
+
+<section class="trust" aria-labelledby="sources-h">
+  <p class="byline content-meta">
+    Built and maintained by
+    <a href="/about/#maintainer" rel="author">{author.name}</a>
+    · Last reviewed <time datetime={reviewed}>{formatDate(reviewed)}</time>
+    · <a href="/methodology/">How this tool works</a>
+  </p>
+
+  {tool.formulaNote && (
+    <>
+      <h2 id="formula-h">How totals are calculated</h2>
+      <p>{tool.formulaNote}</p>
+    </>
+  )}
+
+  <h2 id="sources-h">Sources</h2>
+  <ol class="refs">
+    {tool.content.sources.map((s) => (
+      <li>
+        <a href={s.url} rel="noopener noreferrer">{s.label}</a>.
+        {s.usedFor ? <> Used for: {s.usedFor}.</> : null}
+        {' '}Checked <time datetime={reviewed}>{reviewed}</time>.
+      </li>
+    ))}
+  </ol>
+
+  <p class="disclaimer">
+    {tool.isLegalAdjacent
+      ? 'Editable sample language only — not legal advice. Laws vary by state and country; have a licensed attorney review before you rely on any clause.'
+      : 'Estimates and templates only. Confirm tax rates, payment terms, and local requirements for your job.'}
+    {' '}Not affiliated with the organizations cited above.
+    Found an error? <a href="/contact/">Tell me</a>.
+  </p>
+  <p class="version">
+    Generator version {version} · <a href="/methodology/#changelog">Changelog</a>
+  </p>
+</section>
+
+<style>
+  .trust {
+    margin: 2rem 0 1.5rem;
+    padding-top: 1rem;
+    border-top: 1px solid var(--border);
+  }
+  .refs {
+    padding-left: 1.25rem;
+  }
+  .refs li {
+    margin-bottom: 0.65rem;
+  }
+  .disclaimer,
+  .version {
+    font-size: 0.92rem;
+    color: var(--muted);
+  }
+</style>

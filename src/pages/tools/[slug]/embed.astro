@@ -3,12 +3,14 @@ import '../../../styles/global.css';
 import DocumentGeneratorLazy from '../../../components/generators/DocumentGeneratorLazy.astro';
 import { allTools } from '../../../data/tools';
 import { siteConfig } from '../../../config/site';
+import { absoluteUrl } from '../../../lib/seo';
 
 export function getStaticPaths() {
   return allTools.map((tool) => ({ params: { slug: tool.slug }, props: { tool } }));
 }
 
 const { tool } = Astro.props;
+const canonical = absoluteUrl(`/tools/${tool.slug}/`);
 ---
 <!doctype html>
 <html lang="en">
@@ -17,7 +19,9 @@ const { tool } = Astro.props;
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="robots" content="noindex, follow" />
     <title>{tool.name} (embed) | {siteConfig.siteName}</title>
-    <link rel="canonical" href={`/tools/${tool.slug}/`} />
+    <link rel="canonical" href={canonical} />
+    <link rel="icon" href="/favicon.ico" sizes="any" />
+    <meta name="theme-color" content={siteConfig.themeColor} />
     {siteConfig.googleSiteVerification && (
       <meta name="google-site-verification" content={siteConfig.googleSiteVerification} />
     )}
@@ -28,7 +32,7 @@ const { tool } = Astro.props;
           window.dataLayer = window.dataLayer || [];
           function gtag(){dataLayer.push(arguments);}
           gtag('js', new Date());
-          gtag('config', id);
+          gtag('config', id, { anonymize_ip: true });
         </script>
       </>
     )}
