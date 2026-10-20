@@ -2,7 +2,10 @@
 /**
  * Sparse cross-links to sibling tool sites — only when genuinely topical.
  * Never render a sitewide footer of all five properties.
+ * Origins come from PUBLIC_SITE_URL_* via src/config/sisterSites.ts.
  */
+import { sisterUrl } from '../../config/sisterSites';
+
 interface SisterLink {
   label: string;
   href: string;
@@ -16,56 +19,53 @@ interface Props {
 
 const { toolSlug } = Astro.props;
 
-const payment = 'https://payment-fee-calculators.hammadiqbal117.workers.dev';
-const garden = 'https://home-garden-calculators.hammadiqbal117.workers.dev';
-
 const map: Record<string, SisterLink[]> = {
   'construction-estimate-template': [
     {
       label: 'Concrete calculator (bags & yards)',
-      href: `${garden}/calculators/concrete-calculator/`,
+      href: sisterUrl('homeGarden', '/calculators/concrete-calculator/'),
       why: 'When your remodel estimate includes slab or footing pours',
     },
   ],
   'contractor-invoice': [
     {
       label: 'Stripe fee calculator',
-      href: `${payment}/tools/stripe-fee-calculator/`,
+      href: sisterUrl('paymentFees', '/tools/stripe-fee-calculator/'),
       why: 'See card-processing fees before you set invoice totals',
     },
   ],
   'cleaning-service-invoice': [
     {
       label: 'PayPal fee calculator',
-      href: `${payment}/tools/paypal-fee-calculator/`,
+      href: sisterUrl('paymentFees', '/tools/paypal-fee-calculator/'),
       why: 'If clients pay cleaning invoices by PayPal',
     },
   ],
   'catering-quote': [
     {
       label: 'Compare payment processor fees',
-      href: `${payment}/tools/compare-payment-fees/`,
+      href: sisterUrl('paymentFees', '/tools/compare-payment-fees/'),
       why: 'Useful when deposits and balances hit different processors',
     },
   ],
   'quote-estimate-generator': [
     {
       label: 'Stripe fee calculator',
-      href: `${payment}/tools/stripe-fee-calculator/`,
+      href: sisterUrl('paymentFees', '/tools/stripe-fee-calculator/'),
       why: 'Price quotes so net payout still covers your costs',
     },
   ],
   'receipt-generator': [
     {
       label: 'PayPal fee calculator',
-      href: `${payment}/tools/paypal-fee-calculator/`,
+      href: sisterUrl('paymentFees', '/tools/paypal-fee-calculator/'),
       why: 'Match receipt totals to what the processor actually deposited',
     },
   ],
   'freelance-web-design-contract': [
     {
       label: 'Stripe fee calculator',
-      href: `${payment}/tools/stripe-fee-calculator/`,
+      href: sisterUrl('paymentFees', '/tools/stripe-fee-calculator/'),
       why: 'Factor processing fees into milestone payment schedules',
     },
   ],

@@ -5,6 +5,16 @@ on:
   push:
     branches: [main]
 
+# Build-time PUBLIC_* values (same names as Workers Builds / .env.example).
+# Fallbacks in src/config also cover missing vars; CI sets them explicitly for consistency.
+env:
+  PUBLIC_SITE_URL: https://business-document-generators.hammadiqbal117.workers.dev
+  PUBLIC_SITE_URL_PAYMENT_FEES: https://payment-fee-calculators.hammadiqbal117.workers.dev
+  PUBLIC_SITE_URL_BUSINESS_DOCS: https://business-document-generators.hammadiqbal117.workers.dev
+  PUBLIC_SITE_URL_HOME_GARDEN: https://home-garden-calculators.hammadiqbal117.workers.dev
+  PUBLIC_SITE_URL_FIBER_ARTS: https://fiber-arts-calculators.hammadiqbal117.workers.dev
+  PUBLIC_SITE_URL_PET: https://pet-calculators.hammadiqbal117.workers.dev
+
 jobs:
   build-test-audit-proof:
     runs-on: ubuntu-latest

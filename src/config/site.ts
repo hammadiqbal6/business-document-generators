@@ -5,6 +5,8 @@
  * Authorship follows docs/playbook (one-person tool site): named maintainer only,
  * no fabricated reviewers, same Person @id across sibling tool sites.
  */
+import { sisterSites, sisterUrl } from './sisterSites';
+
 const DEFAULT_SITE_URL =
   'https://business-document-generators.hammadiqbal117.workers.dev';
 
@@ -78,25 +80,32 @@ export const siteConfig = {
   ogImagePath: '/og-default.png',
   ogImageAlt: 'DocuForge Tools — free invoice, estimate, and contract templates with PDF export',
 
-  /** Sibling tool sites by the same maintainer (listed only on /about/). */
+  /**
+   * Sibling tool sites by the same maintainer (listed only on /about/).
+   * Origins come from PUBLIC_SITE_URL_* env vars via sisterSites config.
+   */
   siblingSites: [
     {
       name: 'FeeCalc (payment fee calculators)',
-      url: 'https://payment-fee-calculators.hammadiqbal117.workers.dev/',
+      url: sisterUrl('paymentFees'),
     },
     {
       name: 'YardCalc (home & garden calculators)',
-      url: 'https://home-garden-calculators.hammadiqbal117.workers.dev/',
+      url: sisterUrl('homeGarden'),
     },
     {
       name: 'FiberCalc (knitting & crochet calculators)',
-      url: 'https://fiber-arts-calculators.hammadiqbal117.workers.dev/',
+      url: sisterUrl('fiberArts'),
     },
     {
       name: 'PetCalc (pet calculators)',
-      url: 'https://pet-calculators.hammadiqbal117.workers.dev/',
+      url: sisterUrl('pet'),
     },
   ],
+
+  /** Raw sister origins (no trailing slash) for any other consumers. */
+  sisterSites,
 } as const;
 
 export type SiteConfig = typeof siteConfig;
+export { sisterSites, sisterUrl };
