@@ -25,14 +25,10 @@ export default defineConfig({
   },
   vite: {
     build: {
-      rollupOptions: {
-        output: {
-          manualChunks(id) {
-            if (id.includes('jspdf')) return 'jspdf';
-            if (id.includes('docx')) return 'docx';
-          },
-        },
-      },
+      // Do not force jspdf/docx into manualChunks: Rollup was placing Vite's shared
+      // __vitePreload helper inside the jspdf chunk, so the click-to-load editor
+      // script statically imported ~126KB gzip of jspdf on every tool page view.
+      modulePreload: false,
     },
   },
 });

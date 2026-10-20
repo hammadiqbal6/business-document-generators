@@ -65,7 +65,8 @@ const previewImage = `/images/tools/${tool.slug}.svg`;
       width="720"
       height="400"
       alt={`Document preview illustration for the ${tool.shortName} template showing typical fields and layout`}
-      loading="lazy"
+      loading="eager"
+      fetchpriority="high"
       decoding="async"
     />
     <figcaption>

@@ -582,8 +582,10 @@ textarea {
 }
 
 .cookie-banner .btn--primary {
-  background: #2a9d84;
-  border-color: #2a9d84;
+  /* Must clear WCAG AA 4.5:1 with white label (old #2a9d84 was ~3.35). */
+  background: #0f6b5c;
+  border-color: #0f6b5c;
+  color: #fff;
 }
 
 @media (min-width: 600px) {
