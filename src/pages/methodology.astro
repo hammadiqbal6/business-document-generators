@@ -1,35 +1,112 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Breadcrumbs from '../components/content/Breadcrumbs.astro';
-import AuthorBox from '../components/content/AuthorBox.astro';
+import { siteConfig } from '../config/site';
 
 const path = '/methodology/';
+const author = siteConfig.author;
 ---
 <BaseLayout
-  title="Editorial Methodology & Sources"
-  description="How we write tool pages, verify examples, handle legal-adjacent content, and update dates."
+  title="Methodology & Correction Log | DocuForge"
+  description="How DocuForge Tools are built: sources policy, what templates leave out, AI disclosure, changelog, and correction log. Maintained by Hammad Iqbal."
   path={path}
 >
   <Breadcrumbs items={[{ name: 'Home', path: '/' }, { name: 'Methodology', path }]} />
   <h1>Methodology</h1>
   <p class="lead">
-    Our quality bar: working tools, original prose, cited sources, visible update dates, and honest limits on legal/financial advice.
+    This page explains how I produce the generators and educational copy on {siteConfig.siteName},
+    what the tools leave out, and how I correct mistakes. Maintained by {author.name}.
   </p>
-  <h2>Research process</h2>
+
+  <h2>Sources policy</h2>
+  <p>
+    Tool pages cite primary public sources relevant to the document type—for example IRS pages on
+    independent contractors and recordkeeping, Cornell LII Wex/CFR definitions, SBA small-business
+    guides, HUD fair-housing and rental pages, CDC infection-control overviews, the U.S. Copyright
+    Office’s photographer materials, and FTC small-business / endorsement guidance. I link the final
+    URL I checked. I do not invent statutes or pretend a page was attorney-reviewed.
+  </p>
+  <p>
+    Each tool’s <strong>Sources</strong> list says what the citation is used for and the date I last
+    checked it. “Last reviewed” on a page changes only when the formula, sources, or substantive
+    text actually change—not to look fresh.
+  </p>
+
+  <h2>What the tools leave out</h2>
+  <ul>
+    <li>Jurisdiction-specific statutory language (state landlord-tenant codes, local tattoo regs, etc.).</li>
+    <li>Tax advice, filing obligations, or employer/contractor classification determinations.</li>
+    <li>Attorney review, notarization, e-sign compliance, or enforceability guarantees.</li>
+    <li>Server-side storage of your filled documents—exports stay on your device.</li>
+  </ul>
+
+  <h2>How a generator works</h2>
   <ol>
-    <li>Keyword research from Ahrefs-published template volumes and autocomplete modifiers (profession + “template”, “PDF”, year).</li>
-    <li>One primary intent per page—no cannibalizing duplicate slugs.</li>
-    <li>Draft answer-first intros (40–60 words) for snippets and AI Overviews.</li>
-    <li>Worked numeric examples tied to generator defaults.</li>
-    <li>Link authoritative sources (government, SBA, HUD, Copyright Office, CDC overview pages).</li>
+    <li>Sample defaults render in the HTML as a static preview (indexable, useful before JavaScript).</li>
+    <li>The interactive editor loads on demand; validation and live preview run in your browser.</li>
+    <li>PDF/DOCX engines load only when you export.</li>
+    <li>Optional drafts use <code>localStorage</code> under a per-tool key—never uploaded to our servers.</li>
   </ol>
-  <h2>Legal-adjacent content</h2>
+
+  <h2>AI / automation disclosure</h2>
   <p>
-    Contracts, NDAs, vendor agreements, tattoo consent, and rental applications use editable sample clauses written for this site. We label pages as not legal advice and recommend attorney review before signing.
+    Drafts may be written with AI assistance. Every formula, sample default, and reference link is
+    checked by {author.name} against the sources listed on each page before publication.
   </p>
-  <h2>Updates</h2>
+
+  <h2 id="changelog">Changelog</h2>
+  <div class="table-scroll">
+    <table>
+      <thead>
+        <tr>
+          <th scope="col">Date</th>
+          <th scope="col">Change</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><time datetime="2026-10-20">2026-10-20</time></td>
+          <td>
+            Mobile SEO audit fixes: editor loader bundling, TrustBlock authorship, playbook favicon
+            set, sample HTML previews, IRS/LII/SBA source list, Edit/Preview mobile tabs.
+          </td>
+        </tr>
+        <tr>
+          <td><time datetime="2026-10-19">2026-10-19</time></td>
+          <td>Initial public launch of sixteen document generators on workers.dev.</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h2 id="corrections">Correction log</h2>
   <p>
-    We change <code>lastmod</code> in the sitemap only when main content, tool behavior, or structured data meaningfully changes—not for cosmetic footer years.
+    Confirmed factual fixes will be listed here with the date, page, and what changed. Removing an
+    unsupported “editorial team” or “reviewed by” claim counts as a correction.
   </p>
-  <AuthorBox updatedAt="2026-10-19" reviewer="Editorial QA" />
+  <div class="table-scroll">
+    <table>
+      <thead>
+        <tr>
+          <th scope="col">Date</th>
+          <th scope="col">Correction</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><time datetime="2026-10-20">2026-10-20</time></td>
+          <td>
+            Removed anonymous “DocuForge Editorial / Review Team” authorship. Site is maintained by
+            {author.name} alone; there is no separate reviewer. Added honest About and Methodology pages.
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h2>Found a mistake?</h2>
+  <p>
+    Email <a href={`mailto:${siteConfig.contactEmail}`}>{siteConfig.contactEmail}</a> with the page,
+    what looks wrong, and a source URL. See also <a href="/contact/">Contact</a>.
+  </p>
 </BaseLayout>

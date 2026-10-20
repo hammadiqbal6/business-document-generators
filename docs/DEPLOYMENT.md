@@ -84,6 +84,11 @@ Defaults live in `src/config/site.ts` (fallback origin is the Workers `workers.d
 | Variable | Required at launch? | Example | Used for |
 |----------|---------------------|---------|----------|
 | `PUBLIC_SITE_URL` | **Yes** | `https://tools.yourbrand.com` | Canonical URLs, sitemap, Open Graph, JSON-LD |
+| `PUBLIC_SITE_URL_PAYMENT_FEES` | Recommended | `https://payment-fee-calculators…` (or custom domain) | Sister-site links (`src/config/sisterSites.ts`) |
+| `PUBLIC_SITE_URL_BUSINESS_DOCS` | Recommended | `https://business-document-generators…` | Sister-site links (this site’s origin for the other four repos) |
+| `PUBLIC_SITE_URL_HOME_GARDEN` | Recommended | `https://home-garden-calculators…` | Sister-site links |
+| `PUBLIC_SITE_URL_FIBER_ARTS` | Recommended | `https://fiber-arts-calculators…` | Sister-site links |
+| `PUBLIC_SITE_URL_PET` | Recommended | `https://pet-calculators…` | Sister-site links |
 | `PUBLIC_SITE_NAME` | **Yes** | `Your Brand Tools` | Titles, header, Organization schema |
 | `PUBLIC_SITE_TAGLINE` | No | Short one-liner | Homepage lead, Organization description |
 | `PUBLIC_CONTACT_EMAIL` | No (default in `site.ts`) | `hammadiqbal117@gmail.com` | Contact page, footer, privacy/terms, schema |
@@ -453,7 +458,9 @@ Copy this into your issue tracker and check off on go-live day.
 ### Code & config
 
 - [ ] `npm run check` passes locally  
-- [ ] `PUBLIC_SITE_URL`, `PUBLIC_SITE_NAME`, `PUBLIC_CONTACT_EMAIL` set for **Production**  
+- [ ] `PUBLIC_SITE_URL`, `PUBLIC_SITE_NAME`, `PUBLIC_CONTACT_EMAIL` set for **Production**
+- [ ] Sister-site URLs set for **Production** (`PUBLIC_SITE_URL_PAYMENT_FEES`, `PUBLIC_SITE_URL_BUSINESS_DOCS`, `PUBLIC_SITE_URL_HOME_GARDEN`, `PUBLIC_SITE_URL_FIBER_ARTS`, `PUBLIC_SITE_URL_PET`) — same names on all five repos; update when custom domains arrive  
+
 - [ ] `public/robots.txt` Sitemap URL updated  
 - [ ] `public/llms.txt` URLs updated (optional)  
 - [ ] IndexNow key file present (`public/4d6f1ea5473a0968a83c67ceda5a0387.txt`); Workers Builds deploy command includes `node scripts/indexnow.mjs` after wrangler deploy  

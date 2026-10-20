@@ -1,20 +1,6 @@
 import type { ToolDefinition } from './types';
 import { clause } from './line-item-defaults';
-
-const formSources = [
-  {
-    label: 'CDC — Infection control basics (tattoo/piercing context)',
-    url: 'https://www.cdc.gov/infection-control/index.html',
-  },
-  {
-    label: 'CFPB — Renting a home basics',
-    url: 'https://www.consumerfinance.gov/owning-a-home/',
-  },
-  {
-    label: 'HUD — Rental assistance & fair housing overview',
-    url: 'https://www.hud.gov/topics/rental_assistance',
-  },
-];
+import { formSources, ftcEndorsements, hudFairHousing, copyrightPhotographers } from './shared-sources';
 
 export const tattooConsent: ToolDefinition = {
   slug: 'tattoo-consent-form-template',
@@ -36,6 +22,9 @@ export const tattooConsent: ToolDefinition = {
   applicationCategory: 'BusinessApplication',
   isLegalAdjacent: true,
   documentTitle: 'Tattoo Consent & Release',
+  toolVersion: '1.0',
+  formulaNote:
+    "No pricing formula. The form records acknowledgements and signatures; follow local body-art rules.",
   fields: [
     { id: 'studioName', label: 'Studio name', type: 'text', required: true, section: 'Studio' },
     { id: 'artistName', label: 'Artist name', type: 'text', required: true, section: 'Studio' },
@@ -118,7 +107,7 @@ export const tattooConsent: ToolDefinition = {
   },
   relatedSlugs: ['simple-nda', 'photography-contract-template', 'receipt-generator'],
   publishedAt: '2026-10-19',
-  updatedAt: '2026-10-19',
+  updatedAt: '2026-10-20',
 };
 
 export const rentalApplication: ToolDefinition = {
@@ -141,6 +130,9 @@ export const rentalApplication: ToolDefinition = {
   applicationCategory: 'BusinessApplication',
   isLegalAdjacent: true,
   documentTitle: 'Residential Rental Application',
+  toolVersion: '1.0',
+  formulaNote:
+    "No pricing formula. Screening fields and authorization language are sample templates—not a lease.",
   fields: [
     { id: 'propertyAddress', label: 'Property address', type: 'text', required: true, section: 'Property' },
     { id: 'unit', label: 'Unit #', type: 'text', section: 'Property' },
@@ -222,7 +214,7 @@ export const rentalApplication: ToolDefinition = {
   },
   relatedSlugs: ['simple-nda', 'receipt-generator', 'quote-estimate-generator'],
   publishedAt: '2026-10-19',
-  updatedAt: '2026-10-19',
+  updatedAt: '2026-10-20',
 };
 
 export const podcastScript: ToolDefinition = {
@@ -245,6 +237,9 @@ export const podcastScript: ToolDefinition = {
   applicationCategory: 'BusinessApplication',
   isLegalAdjacent: false,
   documentTitle: 'Podcast Episode Script',
+  toolVersion: '1.0',
+  formulaNote:
+    "Segment timings are for planning; they do not auto-sum to episode length—check your target runtime manually.",
   fields: [
     { id: 'showName', label: 'Show name', type: 'text', required: true, section: 'Episode' },
     { id: 'episodeNumber', label: 'Episode #', type: 'text', required: true, section: 'Episode' },
@@ -302,16 +297,11 @@ export const podcastScript: ToolDefinition = {
           'No. Use full scripts for solo storytelling; use run-of-show outlines for interviews so conversation stays natural.',
       },
     ],
-    sources: [
-      {
-        label: 'FTC — Endorsement guides (sponsor disclosures)',
-        url: 'https://www.ftc.gov/business-guidance/resources/ftcs-endorsement-guides-what-people-are-asking',
-      },
-    ],
+    sources: [ftcEndorsements],
   },
   relatedSlugs: ['real-estate-flyer-template', 'videography-contract', 'quote-estimate-generator'],
   publishedAt: '2026-10-19',
-  updatedAt: '2026-10-19',
+  updatedAt: '2026-10-20',
 };
 
 export const realEstateFlyer: ToolDefinition = {
@@ -334,6 +324,9 @@ export const realEstateFlyer: ToolDefinition = {
   applicationCategory: 'BusinessApplication',
   isLegalAdjacent: false,
   documentTitle: 'Property Flyer',
+  toolVersion: '1.0',
+  formulaNote:
+    "Price and property facts are display fields you enter; the flyer does not calculate mortgages or commissions.",
   fields: [
     { id: 'headline', label: 'Headline', type: 'text', required: true, section: 'Listing' },
     { id: 'address', label: 'Property address', type: 'text', required: true, section: 'Listing' },
@@ -393,14 +386,9 @@ export const realEstateFlyer: ToolDefinition = {
           'No. It is a marketing flyer. Follow brokerage and MLS rules for required disclosures and photo usage.',
       },
     ],
-    sources: [
-      {
-        label: 'HUD — Fair housing',
-        url: 'https://www.hud.gov/fairhousing',
-      },
-    ],
+    sources: [hudFairHousing, copyrightPhotographers],
   },
   relatedSlugs: ['podcast-script-template', 'rental-lease-application', 'quote-estimate-generator'],
   publishedAt: '2026-10-19',
-  updatedAt: '2026-10-19',
+  updatedAt: '2026-10-20',
 };

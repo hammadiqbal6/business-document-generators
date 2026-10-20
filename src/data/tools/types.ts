@@ -66,6 +66,13 @@ export interface ContentSection {
   body: string;
 }
 
+export interface SourceRef {
+  label: string;
+  url: string;
+  /** What this page uses the source for (shown in TrustBlock). */
+  usedFor?: string;
+}
+
 export interface ToolDefinition {
   slug: string;
   name: string;
@@ -86,6 +93,10 @@ export interface ToolDefinition {
   defaults: Record<string, unknown>;
   /** Document title used in preview/export */
   documentTitle: string;
+  /** Semver-ish generator version shown in TrustBlock */
+  toolVersion?: string;
+  /** Plain-language formula / totals note for TrustBlock */
+  formulaNote?: string;
   content: {
     howToUse: string[];
     whatToInclude: ContentSection[];
@@ -93,10 +104,11 @@ export interface ToolDefinition {
     commonMistakes: string[];
     tips: string[];
     faq: FaqItem[];
-    sources: { label: string; url: string }[];
+    sources: SourceRef[];
   };
   relatedSlugs: string[];
   publishedAt: string;
+  /** Change only when formula, sources, or substantive text changes */
   updatedAt: string;
 }
 

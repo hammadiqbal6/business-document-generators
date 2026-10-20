@@ -1,0 +1,93 @@
+---
+import { siteConfig } from '../../config/site';
+
+const gaId = siteConfig.ga4MeasurementId;
+---
+{gaId && (
+  <script is:inline define:vars={{ gaId }}>
+    (function () {
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      window.gtag = gtag;
+
+      // Consent Mode v2 defaults — denied until the user accepts the cookie bar.
+      gtag('consent', 'default', {
+        ad_storage: 'denied',
+        ad_user_data: 'denied',
+        ad_personalization: 'denied',
+        analytics_storage: 'denied',
+        wait_for_update: 500,
+      });
+      gtag('js', new Date());
+      gtag('set', 'anonymize_ip', true);
+
+      var CONSENT_KEY = 'docuforge:cookie-ok';
+      var loaded = false;
+
+      function loadGa() {
+        if (loaded || !gaId) return;
+        loaded = true;
+        var s = document.createElement('script');
+        s.async = true;
+        s.src = 'https://www.googletagmanager.com/gtag/js?id=' + gaId;
+        document.head.appendChild(s);
+        gtag('config', gaId, {
+          anonymize_ip: true,
+          send_page_view: true,
+        });
+      }
+
+      function grantAnalytics() {
+        gtag('consent', 'update', {
+          analytics_storage: 'granted',
+        });
+        loadGa();
+      }
+
+      function scheduleLoad() {
+        var run = function () {
+          try {
+            if (localStorage.getItem(CONSENT_KEY) === '1') grantAnalytics();
+          } catch (e) {
+            /* ignore */
+          }
+        };
+        if ('requestIdleCallback' in window) {
+          requestIdleCallback(run, { timeout: 4000 });
+        } else {
+          setTimeout(run, 2000);
+        }
+      }
+
+      // If consent already given, defer GA until idle / after load.
+      // Otherwise wait for first interaction after accept (banner handles grant).
+      if (document.readyState === 'complete') scheduleLoad();
+      else window.addEventListener('load', scheduleLoad, { once: true });
+
+      window.__docuforgeGrantAnalytics = grantAnalytics;
+
+      // Outbound reference clicks (sources / references)
+      document.addEventListener(
+        'click',
+        function (ev) {
+          var t = ev.target;
+          if (!(t instanceof Element)) return;
+          var a = t.closest('a[href]');
+          if (!a || typeof window.gtag !== 'function') return;
+          var href = a.getAttribute('href') || '';
+          if (!/^https?:\/\//i.test(href)) return;
+          if (href.indexOf(location.hostname) !== -1) return;
+          var inRefs = a.closest('.refs, .trust, .prose');
+          if (!inRefs) return;
+          window.gtag('event', 'outbound_reference_click', {
+            link_url: href,
+            link_text: (a.textContent || '').trim().slice(0, 100),
+          });
+        },
+        true,
+      );
+    })();
+  </script>
+)}

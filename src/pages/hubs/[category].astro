@@ -11,8 +11,51 @@ export function getStaticPaths() {
   }));
 }
 
+const hubCopy: Record<
+  ToolCategory,
+  { title: string; description: string; intro: string; whenToUse: string }
+> = {
+  'estimates-invoices': {
+    title: 'Estimate & Invoice Templates – Free PDF/DOCX',
+    description:
+      'Free construction estimates, contractor invoices, cleaning and catering quotes, receipts and work orders. Fill in your browser, preview live, export PDF or Word.',
+    intro:
+      'Estimates and invoices are the backbone of small-trade cash flow. Use an estimate when you are proposing scope and price before work starts; switch to an invoice when you are billing for completed (or deposit) work. Receipts confirm payment; work orders assign tasks to crew.',
+    whenToUse:
+      'Pick the construction estimate for remodel bids with allowances, the contractor invoice for progress billing, cleaning or catering tools when line items are service packages, the generic quote generator for mixed scopes, and the receipt or work order when you need a simple confirmation or job ticket.',
+  },
+  contracts: {
+    title: 'Contract Templates – Photo, Freelance & NDA',
+    description:
+      'Editable photography, videography, freelance web design, event vendor contracts and a simple NDA. Preview clauses live and export PDF or DOCX—not legal advice.',
+    intro:
+      'Creative and freelance contracts spell out deliverables, payment schedules, usage rights, cancellation, and liability limits. These generators provide editable sample language so you can start a draft quickly. They are not attorney-reviewed and are not a substitute for counsel in your jurisdiction.',
+    whenToUse:
+      'Use photography or videography contracts when usage rights matter, the freelance web design contract for project milestones and IP, the event/wedding vendor contract for venue dates and force majeure style notes, and the simple NDA when you only need a mutual confidentiality starting point.',
+  },
+  forms: {
+    title: 'Client Forms – Consent & Rental Applications',
+    description:
+      'Fillable tattoo consent forms and rental or lease applications with live preview and PDF export. Educational templates—not medical or legal advice.',
+    intro:
+      'Client intake forms capture identity, acknowledgements, and signatures before a service or tenancy begins. Keep copies for your records and follow local licensing, health, or fair-housing rules that apply to your business.',
+    whenToUse:
+      'The tattoo consent form is for studio risk acknowledgements and aftercare notes. The rental application gathers employment, income, and household details for screening—pair it with official fair-housing guidance and your local landlord-tenant rules.',
+  },
+  'creative-templates': {
+    title: 'Creative Templates – Podcast & Real Estate',
+    description:
+      'Free podcast episode script planner and real estate flyer layout. Fill fields in your browser, preview the layout, then download PDF or DOCX.',
+    intro:
+      'Creative templates help you structure content and marketing collateral without starting from a blank page. Scripts keep interviews on track; flyers present listing facts in a scannable layout for print or social posts.',
+    whenToUse:
+      'Use the podcast script when you need cold open, segment timings, and CTA placeholders. Use the real estate flyer when you want beds, baths, price, and highlight bullets laid out for a one-page handout.',
+  },
+};
+
 const { category } = Astro.props;
 const meta = CATEGORY_META[category];
+const copy = hubCopy[category];
 const tools = getToolsByCategory(category);
 const path = `/hubs/${meta.slug}/`;
 const crumbs = [
@@ -22,13 +65,16 @@ const crumbs = [
 ];
 ---
 <BaseLayout
-  title={`${meta.name} – Free Templates`}
-  description={meta.description}
+  title={copy.title}
+  description={copy.description}
   path={path}
 >
   <Breadcrumbs items={crumbs} />
   <h1>{meta.name}</h1>
-  <p class="lead">{meta.description}</p>
+  <p class="lead">{copy.intro}</p>
+  <p>{copy.whenToUse}</p>
+
+  <h2>Templates in this category</h2>
   <div class="tool-grid">
     {tools.map((t) => (
       <a class="tool-card" href={`/tools/${t.slug}/`}>

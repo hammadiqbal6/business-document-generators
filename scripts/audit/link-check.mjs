@@ -21,13 +21,32 @@ for (const file of htmlFiles) {
   for (const m of html.matchAll(/href="(\/[^"#?]*)"/g)) {
     const href = m[1].replace(/\/$/, '') || '/';
     if (href.startsWith('/_astro')) continue;
-    if (href.endsWith('.svg') || href.endsWith('.ico') || href.endsWith('.webmanifest')) continue;
     if (href.startsWith('/docs')) continue;
     hrefs.add(href);
   }
 }
 
+/** Paths declared in public/_redirects (source → destination). */
+function redirectSources() {
+  const file = path.join(dist, '_redirects');
+  if (!fs.existsSync(file)) return new Set();
+  const set = new Set();
+  for (const line of fs.readFileSync(file, 'utf8').split('\n')) {
+    const trimmed = line.trim();
+    if (!trimmed || trimmed.startsWith('#')) continue;
+    const src = trimmed.split(/\s+/)[0];
+    if (src) set.add(src.replace(/\/$/, '') || '/');
+  }
+  return set;
+}
+const redirects = redirectSources();
+
 function resolveInternal(href) {
+  const normalized = href.replace(/\/$/, '') || '/';
+  if (redirects.has(normalized)) return true;
+  // Static asset (png/svg/ico/txt/xml/webmanifest/etc.)
+  const asFile = path.join(dist, href.replace(/^\//, ''));
+  if (fs.existsSync(asFile) && fs.statSync(asFile).isFile()) return true;
   const clean = href === '/' ? '/index.html' : `${href}/index.html`;
   const alt = `${href}.html`;
   const p1 = path.join(dist, clean.slice(1));

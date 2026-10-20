@@ -4,9 +4,10 @@ import { siteConfig } from '../config/site';
 /** Build-time robots.txt — Sitemap origin from PUBLIC_SITE_URL. */
 export const GET: APIRoute = () => {
   const origin = siteConfig.siteUrl.replace(/\/$/, '');
+  // No Disallow on embeds: they carry noindex + canonical to the tool page.
+  // Avoid per-bot Allow-only groups that would cancel Disallows for Googlebot/Bingbot.
   const body = `User-agent: *
 Allow: /
-Disallow: /tools/*/embed/
 
 # AI search / answer engines (allow citations)
 User-agent: OAI-SearchBot

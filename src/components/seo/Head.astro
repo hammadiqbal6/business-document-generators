@@ -1,6 +1,6 @@
 ---
 import { siteConfig } from '../../config/site';
-import { absoluteUrl, truncate } from '../../lib/seo';
+import { absoluteUrl, buildPageTitle } from '../../lib/seo';
 
 interface Props {
   title: string;
@@ -13,16 +13,22 @@ interface Props {
 
 const { title, description, path, ogType = 'website', noindex = false, jsonLd = [] } = Astro.props;
 const canonical = absoluteUrl(path);
-const fullTitle = title.includes(siteConfig.siteName) ? title : `${truncate(title, 52)} | ${siteConfig.siteName}`;
-const metaDesc = truncate(description, 155);
-const ogImage = absoluteUrl('/og-default.png');
+const fullTitle = buildPageTitle(title);
+const metaDesc = description;
+const ogImage = absoluteUrl(siteConfig.ogImagePath);
+const ogAlt = siteConfig.ogImageAlt;
 ---
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>{fullTitle}</title>
 <meta name="description" content={metaDesc} />
+<meta name="author" content={siteConfig.author.name} />
 <link rel="canonical" href={canonical} />
-{noindex && <meta name="robots" content="noindex, follow" />}
+{noindex ? (
+  <meta name="robots" content="noindex, follow" />
+) : (
+  <meta name="robots" content="index, follow, max-image-preview:large" />
+)}
 <meta property="og:type" content={ogType} />
 <meta property="og:title" content={fullTitle} />
 <meta property="og:description" content={metaDesc} />
@@ -32,14 +38,19 @@ const ogImage = absoluteUrl('/og-default.png');
 <meta property="og:image" content={ogImage} />
 <meta property="og:image:width" content="1200" />
 <meta property="og:image:height" content="630" />
+<meta property="og:image:alt" content={ogAlt} />
 <meta name="twitter:card" content="summary_large_image" />
 <meta name="twitter:title" content={fullTitle} />
 <meta name="twitter:description" content={metaDesc} />
 <meta name="twitter:image" content={ogImage} />
+<meta name="twitter:image:alt" content={ogAlt} />
 {siteConfig.twitterHandle && <meta name="twitter:site" content={`@${siteConfig.twitterHandle.replace('@', '')}`} />}
+<link rel="icon" href="/favicon.ico" sizes="48x48" />
 <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
-<link rel="icon" href="/favicon.ico" sizes="any" />
+<link rel="icon" href="/favicon-96x96.png" type="image/png" sizes="96x96" />
+<link rel="apple-touch-icon" href="/apple-touch-icon.png" sizes="180x180" />
 <link rel="manifest" href="/site.webmanifest" />
+<meta name="apple-mobile-web-app-title" content={siteConfig.siteShortName} />
 <meta name="theme-color" content={siteConfig.themeColor} />
 {siteConfig.googleSiteVerification && (
   <meta name="google-site-verification" content={siteConfig.googleSiteVerification} />

@@ -1,6 +1,6 @@
 ---
 import type { ToolDefinition } from '../../data/tools/types';
-import AuthorBox from './AuthorBox.astro';
+import TrustBlock from './TrustBlock.astro';
 
 interface Props {
   tool: ToolDefinition;
@@ -53,12 +53,5 @@ const c = tool.content;
     ))}
   </div>
 
-  <h2>Sources</h2>
-  <ul>
-    {c.sources.map((s) => (
-      <li><a href={s.url} rel="noopener noreferrer">{s.label}</a></li>
-    ))}
-  </ul>
-
-  <AuthorBox updatedAt={tool.updatedAt} />
+  <TrustBlock tool={tool} />
 </article>

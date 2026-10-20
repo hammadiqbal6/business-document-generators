@@ -1,16 +1,6 @@
 import type { ToolDefinition } from './types';
 import { clause } from './line-item-defaults';
-
-const sharedSources = [
-  {
-    label: 'SBA — Pricing your products and services',
-    url: 'https://www.sba.gov/business-guide/manage-your-business/pricing-products-services',
-  },
-  {
-    label: 'IRS — Recordkeeping for small businesses',
-    url: 'https://www.irs.gov/businesses/small-businesses-self-employed/recordkeeping',
-  },
-];
+import { estimateSources } from './shared-sources';
 
 export const constructionEstimate: ToolDefinition = {
   slug: 'construction-estimate-template',
@@ -23,15 +13,18 @@ export const constructionEstimate: ToolDefinition = {
     'contractor estimate form',
     'building estimate template PDF',
   ],
-  title: 'Construction Estimate Template – Free PDF & DOCX',
+  title: 'Free Construction Estimate Template – PDF & DOCX',
   metaDescription:
-    'Fill a free construction estimate template in your browser. Add line items, tax, and notes, preview live, then export PDF or DOCX. Nothing stored server-side.',
+    'Fill a free construction estimate template with line items, labor, materials and tax, preview it live, then download a PDF or Word file. No signup required.',
   h1: 'Free Construction Estimate Template',
   answerFirst:
     'A construction estimate template lists project scope, labor and material line items, allowances, tax, and a total so a contractor can present pricing before work starts. Use this free generator to fill those fields in your browser, preview the estimate, and export PDF or DOCX—nothing is uploaded.',
   applicationCategory: 'BusinessApplication',
   isLegalAdjacent: false,
   documentTitle: 'Construction Estimate',
+  toolVersion: '1.0',
+  formulaNote:
+    'Line-item amount = quantity × rate. Subtotal = sum of line amounts. Tax = subtotal × (tax rate ÷ 100). Deposit = total × (deposit % ÷ 100). The sample kitchen remodel in the defaults walks through this with tax at 8.31% and a 30% deposit.',
   fields: [
     { id: 'companyName', label: 'Company name', type: 'text', required: true, section: 'Your business' },
     { id: 'companyAddress', label: 'Company address', type: 'textarea', rows: 2, section: 'Your business' },
@@ -127,11 +120,11 @@ export const constructionEstimate: ToolDefinition = {
           'Follow your jurisdiction’s rules. Many estimates show a single tax rate on taxable subtotal; some materials are tax-exempt for resale—label those clearly.',
       },
     ],
-    sources: sharedSources,
+    sources: estimateSources,
   },
   relatedSlugs: ['contractor-invoice', 'work-order', 'quote-estimate-generator'],
   publishedAt: '2026-10-19',
-  updatedAt: '2026-10-19',
+  updatedAt: '2026-10-20',
 };
 
 export const contractorInvoice: ToolDefinition = {
@@ -141,15 +134,18 @@ export const contractorInvoice: ToolDefinition = {
   category: 'estimates-invoices',
   primaryKeyword: 'contractor invoice',
   secondaryKeywords: ['contractor invoice template', 'construction invoice PDF', 'free contractor invoice'],
-  title: 'Contractor Invoice Template – Free Online Generator',
+  title: 'Free Contractor Invoice Template & Generator',
   metaDescription:
-    'Create a contractor invoice online: line items, tax, payments due, live preview, export PDF/DOCX. Client-side only—no account required.',
-  h1: 'Free Contractor Invoice Generator',
+    'Make a contractor invoice online with line items, tax, deposits and payment terms. Live preview, then download a PDF or DOCX. Free, no account needed.',
+  h1: 'Free Contractor Invoice Template',
   answerFirst:
     'A contractor invoice bills for completed or progress-billed work: invoice number, dates, client, line items, tax, amount due, and payment instructions. Generate yours here in the browser, preview it live, and download PDF or DOCX without uploading data.',
   applicationCategory: 'BusinessApplication',
   isLegalAdjacent: false,
   documentTitle: 'Invoice',
+  toolVersion: '1.0',
+  formulaNote:
+    "Line-item amount = quantity × rate. Subtotal = sum of lines. Tax = subtotal × (tax rate ÷ 100). Amount due = total − amount already paid.",
   fields: [
     { id: 'companyName', label: 'Company name', type: 'text', required: true, section: 'Your business' },
     { id: 'companyAddress', label: 'Company address', type: 'textarea', rows: 2, section: 'Your business' },
@@ -225,29 +221,32 @@ export const contractorInvoice: ToolDefinition = {
           'Net 14 or Net 30 are common for residential work; commercial jobs may specify retainage. State late fees only if your agreement allows them.',
       },
     ],
-    sources: sharedSources,
+    sources: estimateSources,
   },
   relatedSlugs: ['construction-estimate-template', 'receipt-generator', 'work-order'],
   publishedAt: '2026-10-19',
-  updatedAt: '2026-10-19',
+  updatedAt: '2026-10-20',
 };
 
 export const cleaningInvoice: ToolDefinition = {
   slug: 'cleaning-service-invoice',
-  name: 'Cleaning Service Invoice & Estimate',
+  name: 'Cleaning Service Invoice',
   shortName: 'Cleaning Invoice',
   category: 'estimates-invoices',
   primaryKeyword: 'cleaning service invoice',
-  secondaryKeywords: ['cleaning estimate template', 'house cleaning invoice', 'commercial cleaning quote'],
-  title: 'Cleaning Service Invoice & Estimate – Free PDF',
+  secondaryKeywords: ['house cleaning invoice', 'commercial cleaning invoice', 'maid service invoice template'],
+  title: 'Free Cleaning Service Invoice Template (PDF)',
   metaDescription:
-    'Make a cleaning service invoice or estimate: rooms, frequency, line items, tax, live preview, PDF/DOCX export. Private—runs in your browser.',
-  h1: 'Cleaning Service Invoice & Estimate Generator',
+    'Create a cleaning service invoice with rooms, frequency, line items and tax. Live preview in your browser, then download PDF or DOCX—no signup.',
+  h1: 'Free Cleaning Service Invoice Template',
   answerFirst:
-    'A cleaning service invoice or estimate spells out the property, service frequency, rooms or square footage, add-ons, rate, tax, and total. Build one free here with a live preview and PDF or DOCX export; your entries stay on your device.',
+    'A cleaning service invoice spells out the property, service frequency, rooms or square footage, add-ons, rate, tax, and total due. Build one free here with a live preview and PDF or DOCX export; your entries stay on your device.',
   applicationCategory: 'BusinessApplication',
   isLegalAdjacent: false,
   documentTitle: 'Cleaning Service Document',
+  toolVersion: '1.0',
+  formulaNote:
+    "Line items are summed (quantity × rate). Tax applies to the subtotal. Choose Estimate or Invoice with the document-type field—same math either way.",
   fields: [
     { id: 'docType', label: 'Document type', type: 'select', section: 'Document', options: [
       { value: 'Estimate', label: 'Estimate' },
@@ -319,11 +318,11 @@ export const cleaningInvoice: ToolDefinition = {
           'State whether pricing includes supplies or if the client provides preferred products. Call out eco-friendly product upcharges.',
       },
     ],
-    sources: sharedSources,
+    sources: estimateSources,
   },
   relatedSlugs: ['quote-estimate-generator', 'receipt-generator', 'catering-quote'],
   publishedAt: '2026-10-19',
-  updatedAt: '2026-10-19',
+  updatedAt: '2026-10-20',
 };
 
 export const cateringQuote: ToolDefinition = {
@@ -342,6 +341,9 @@ export const cateringQuote: ToolDefinition = {
   applicationCategory: 'BusinessApplication',
   isLegalAdjacent: false,
   documentTitle: 'Catering Quote',
+  toolVersion: '1.0',
+  formulaNote:
+    "Per-guest or package lines use quantity × rate. Staff and fees are additional lines. Tax and deposit % apply to the computed total.",
   fields: [
     { id: 'companyName', label: 'Caterer name', type: 'text', required: true, section: 'Business' },
     { id: 'companyPhone', label: 'Phone', type: 'tel', section: 'Business' },
@@ -410,11 +412,11 @@ export const cateringQuote: ToolDefinition = {
           'Usually not until signed with deposit terms. Convert accepted quotes into a catering agreement covering cancelation and force majeure.',
       },
     ],
-    sources: sharedSources,
+    sources: estimateSources,
   },
   relatedSlugs: ['event-wedding-vendor-contract', 'quote-estimate-generator', 'cleaning-service-invoice'],
   publishedAt: '2026-10-19',
-  updatedAt: '2026-10-19',
+  updatedAt: '2026-10-20',
 };
 
 export const quoteEstimate: ToolDefinition = {
@@ -424,15 +426,18 @@ export const quoteEstimate: ToolDefinition = {
   category: 'estimates-invoices',
   primaryKeyword: 'quote estimate generator',
   secondaryKeywords: ['free estimate generator', 'business quote template', 'service estimate PDF'],
-  title: 'Quote & Estimate Generator – Free PDF Export',
+  title: 'Free Quote & Estimate Template Generator (PDF)',
   metaDescription:
-    'Generate a professional service quote or estimate online. Custom line items, tax, validity date, live preview, PDF and DOCX—no signup.',
-  h1: 'Free Quote & Estimate Generator',
+    'Generate a professional service quote or estimate with line items, tax and a validity date. Live preview, then download PDF or DOCX—no signup.',
+  h1: 'Free Quote & Estimate Template Generator',
   answerFirst:
     'A quote or estimate presents proposed pricing for goods or services: parties, description, line items, tax, total, and how long the price holds. This free generator builds that document in your browser with live preview and PDF/DOCX export.',
   applicationCategory: 'BusinessApplication',
   isLegalAdjacent: false,
   documentTitle: 'Quote',
+  toolVersion: '1.0',
+  formulaNote:
+    "Each line is quantity × rate. Subtotal sums lines; tax = subtotal × (tax rate ÷ 100). Validity date is informational.",
   fields: [
     { id: 'docLabel', label: 'Label', type: 'select', section: 'Document', options: [
       { value: 'Quote', label: 'Quote' },
@@ -497,11 +502,11 @@ export const quoteEstimate: ToolDefinition = {
           'Yes—reuse the same line items in the contractor invoice or receipt tools once work is accepted or paid.',
       },
     ],
-    sources: sharedSources,
+    sources: estimateSources,
   },
   relatedSlugs: ['construction-estimate-template', 'contractor-invoice', 'receipt-generator'],
   publishedAt: '2026-10-19',
-  updatedAt: '2026-10-19',
+  updatedAt: '2026-10-20',
 };
 
 export const receiptGenerator: ToolDefinition = {
@@ -520,6 +525,9 @@ export const receiptGenerator: ToolDefinition = {
   applicationCategory: 'BusinessApplication',
   isLegalAdjacent: false,
   documentTitle: 'Receipt',
+  toolVersion: '1.0',
+  formulaNote:
+    "Amount received is what you enter; line items (if any) should match that total for your records.",
   fields: [
     { id: 'companyName', label: 'Business name', type: 'text', required: true, section: 'Business' },
     { id: 'companyAddress', label: 'Address', type: 'textarea', rows: 2, section: 'Business' },
@@ -577,11 +585,11 @@ export const receiptGenerator: ToolDefinition = {
           'Receipts prove payment. Some regions require formal tax invoices with registration numbers—add those fields in Notes if your locality requires them.',
       },
     ],
-    sources: sharedSources,
+    sources: estimateSources,
   },
   relatedSlugs: ['contractor-invoice', 'quote-estimate-generator', 'work-order'],
   publishedAt: '2026-10-19',
-  updatedAt: '2026-10-19',
+  updatedAt: '2026-10-20',
 };
 
 export const workOrder: ToolDefinition = {
@@ -600,6 +608,9 @@ export const workOrder: ToolDefinition = {
   applicationCategory: 'BusinessApplication',
   isLegalAdjacent: false,
   documentTitle: 'Work Order',
+  toolVersion: '1.0',
+  formulaNote:
+    "Labor and material lines use quantity × rate for planned cost; the work order itself is an assignment ticket, not a tax invoice.",
   fields: [
     { id: 'companyName', label: 'Company', type: 'text', required: true, section: 'Business' },
     { id: 'woNumber', label: 'Work order #', type: 'text', required: true, section: 'Job' },
@@ -664,9 +675,9 @@ export const workOrder: ToolDefinition = {
           'No. A work order directs the job; an invoice bills for it afterward. Many shops convert completed work orders into invoices.',
       },
     ],
-    sources: sharedSources,
+    sources: estimateSources,
   },
   relatedSlugs: ['construction-estimate-template', 'contractor-invoice', 'receipt-generator'],
   publishedAt: '2026-10-19',
-  updatedAt: '2026-10-19',
+  updatedAt: '2026-10-20',
 };

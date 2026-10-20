@@ -1,31 +1,92 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Breadcrumbs from '../components/content/Breadcrumbs.astro';
-import AuthorBox from '../components/content/AuthorBox.astro';
 import { siteConfig } from '../config/site';
+import { profilePageJsonLd } from '../lib/seo';
 
 const path = '/about/';
 const crumbs = [{ name: 'Home', path: '/' }, { name: 'About', path }];
+const author = siteConfig.author;
+const jsonLd = [
+  profilePageJsonLd({
+    dateCreated: `${siteConfig.launchedAt}T00:00:00+05:00`,
+    dateModified: '2026-10-20T00:00:00+05:00',
+  }),
+];
 ---
 <BaseLayout
   title="About DocuForge Tools"
-  description="Who builds these free niche business document generators, our privacy-first approach, and editorial standards."
+  description="DocuForge Tools is a free set of business document generators built and maintained by Hammad Iqbal. Honest about page, sources, and limits."
   path={path}
+  jsonLd={jsonLd}
 >
   <Breadcrumbs items={crumbs} />
   <h1>About {siteConfig.siteName}</h1>
   <p class="lead">
-    We publish free, profession-specific document generators—construction estimates, contracts, consent forms, and more—with original guidance on every page. Tools run entirely in your browser; we do not store your entries on our servers.
+    {siteConfig.siteName} is a free set of business document generators—estimates, invoices,
+    contracts, consent forms, and creative templates—built and maintained by one person: me,
+    {author.name}.
   </p>
-  <h2>What we build</h2>
+
+  <h2>Why I built it</h2>
   <p>
-    Each page pairs a working generator above the fold with explainers, worked examples, FAQs, and cited sources. Clause text is written for this site—not copied from third-party legal templates. Contract and consent tools include clear “not legal advice” notices.
+    I kept needing profession-specific paperwork (a construction estimate with allowances, a
+    photography contract with usage rights, a cleaning invoice with rooms and frequency) and found
+    either blank PDFs with no guidance, or template mills that hid the clauses behind a signup wall.
+    I wanted fillable tools that run in the browser, show a live preview, export PDF or DOCX, and
+    cite the public sources behind the educational copy—without uploading anyone’s client data.
   </p>
-  <h2>Who we are</h2>
+
+  <h2 id="maintainer">Who I am</h2>
   <p>
-    {siteConfig.siteName} is maintained by a small editorial team focused on practical small-business paperwork. We verify fee tables and sample defaults against public guidance (SBA, FTC, HUD, Copyright Office, CDC infection-control overviews) and update pages when practices change.
+    {author.shortBio} This site isn’t a law firm, accounting practice, or licensed advisory service.
+    What I do is turn published, authoritative sources (IRS, SBA, Cornell LII, HUD, CDC overviews,
+    U.S. Copyright Office) into tools that are easy to use, and show exactly which sources each
+    tool uses.
   </p>
-  <h2>Contact</h2>
-  <p>Questions or corrections: <a href={`mailto:${siteConfig.contactEmail}`}>{siteConfig.contactEmail}</a> or visit our <a href="/contact/">contact page</a>.</p>
-  <AuthorBox updatedAt="2026-10-19" />
+  <p>
+    Find me on
+    <a href={author.canonicalPersonUrl} rel="noopener noreferrer">GitHub</a>
+    · Email <a href={`mailto:${author.email}`}>{author.email}</a>.
+  </p>
+  <p>
+    There is no photo here on purpose. Google’s guidance says not to invent headshots or credentials;
+    I’d rather leave the image out than fake one.
+  </p>
+
+  <h2>How the tools are made</h2>
+  <p>
+    Every tool lists how totals are calculated (when applicable) and its sources at the bottom of
+    the page. Sources are official pages (IRS, SBA, Cornell LII Wex/CFR, HUD, CDC, Copyright Office,
+    FTC) that I have checked. Each page shows the date I last reviewed it against those sources.
+    Full details: <a href="/methodology/">Methodology</a>.
+  </p>
+
+  <h2>What this site doesn’t do</h2>
+  <ul>
+    <li>It doesn’t give legal, tax, or medical advice. Contract and consent pages are editable samples.</li>
+    <li>Your form inputs stay in your browser. Optional drafts use localStorage on your device. Analytics cookies are described on the <a href="/cookies/">cookie notice</a>.</li>
+    <li>It isn’t affiliated with the IRS, SBA, HUD, CDC, FTC, or any brand named in examples.</li>
+  </ul>
+
+  <h2>How the site is funded</h2>
+  <p>
+    The site is free. Google Analytics is configured for aggregate traffic. Google AdSense may be
+    enabled later (currently off unless the publisher flag is set). There are no affiliate links today.
+  </p>
+
+  <h2>Other free tool sites I maintain</h2>
+  <p>Same maintainer, different niches—listed here only, not in every footer:</p>
+  <ul>
+    {siteConfig.siblingSites.map((s) => (
+      <li><a href={s.url} rel="noopener noreferrer">{s.name}</a></li>
+    ))}
+  </ul>
+
+  <h2>Found a mistake?</h2>
+  <p>
+    Email <a href={`mailto:${siteConfig.contactEmail}`}>{siteConfig.contactEmail}</a> with the page
+    URL, what looks wrong, and a link to the source that shows the right information. Confirmed
+    fixes are listed in the <a href="/methodology/#corrections">correction log</a>.
+  </p>
 </BaseLayout>
