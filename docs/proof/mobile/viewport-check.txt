@@ -1,15 +1,15 @@
-# mobile capture — 2026-10-19T06:50:26.832Z
+# mobile capture — 2026-10-20T07:27:20.694Z
 
-home @ 360px: horizontalScroll=PASS, smallTapTargets(sample)=10
-hub-estimates @ 360px: horizontalScroll=PASS, smallTapTargets(sample)=15
-tool-construction @ 360px: horizontalScroll=PASS, smallTapTargets(sample)=20
-tool-photography @ 360px: horizontalScroll=PASS, smallTapTargets(sample)=21
-tool-nda @ 360px: horizontalScroll=PASS, smallTapTargets(sample)=21
-home @ 768px: horizontalScroll=PASS, smallTapTargets(sample)=10
-hub-estimates @ 768px: horizontalScroll=PASS, smallTapTargets(sample)=15
-tool-construction @ 768px: horizontalScroll=PASS, smallTapTargets(sample)=22
-tool-photography @ 768px: horizontalScroll=PASS, smallTapTargets(sample)=22
-tool-nda @ 768px: horizontalScroll=PASS, smallTapTargets(sample)=22
+home @ 360px: horizontalScroll=PASS, smallTapTargets(sample)=1
+hub-estimates @ 360px: horizontalScroll=PASS, smallTapTargets(sample)=4
+tool-construction @ 360px: horizontalScroll=PASS, smallTapTargets(sample)=7
+tool-photography @ 360px: horizontalScroll=PASS, smallTapTargets(sample)=9
+tool-nda @ 360px: horizontalScroll=PASS, smallTapTargets(sample)=9
+home @ 768px: horizontalScroll=PASS, smallTapTargets(sample)=1
+hub-estimates @ 768px: horizontalScroll=PASS, smallTapTargets(sample)=4
+tool-construction @ 768px: horizontalScroll=PASS, smallTapTargets(sample)=8
+tool-photography @ 768px: horizontalScroll=PASS, smallTapTargets(sample)=12
+tool-nda @ 768px: horizontalScroll=PASS, smallTapTargets(sample)=12
 
 Overall viewport: PASS
 

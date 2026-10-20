@@ -1,6 +1,6 @@
-OK home: 2 JSON-LD block(s) — types: WebSite, Organization
-OK tool-construction: 4 JSON-LD block(s) — types: WebSite, Organization, BreadcrumbList, WebApplication
-OK hub-estimates: 2 JSON-LD block(s) — types: WebSite, Organization
-OK guide-construction: 4 JSON-LD block(s) — types: WebSite, Organization, BreadcrumbList, Article
+OK home: 1 JSON-LD block(s) — types: 
+OK tool-construction: 6 JSON-LD block(s) — types: WebSite, Organization, Person, BreadcrumbList, , FAQPage
+OK hub-estimates: 3 JSON-LD block(s) — types: WebSite, Organization, Person
+OK guide-construction: 5 JSON-LD block(s) — types: WebSite, Organization, Person, BreadcrumbList, Article
 
 Validation: PASS

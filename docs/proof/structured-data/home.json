@@ -1,22 +1,59 @@
 [
   {
     "@context": "https://schema.org",
-    "@type": "WebSite",
-    "name": "DocuForge Tools",
-    "url": "https://docuforge.example/",
-    "description": "Free niche business document generators — fill a form, preview live, export PDF or DOCX. Nothing leaves your browser.",
-    "inLanguage": "en-US",
-    "publisher": {
-      "@id": "https://docuforge.example/#organization"
-    }
-  },
-  {
-    "@context": "https://schema.org",
-    "@type": "Organization",
-    "@id": "https://docuforge.example/#organization",
-    "name": "DocuForge Tools",
-    "url": "https://docuforge.example/",
-    "email": "hammadiqbal117@gmail.com",
-    "logo": "https://docuforge.example/favicon.svg"
+    "@graph": [
+      {
+        "@type": "WebSite",
+        "@id": "https://business-document-generators.hammadiqbal117.workers.dev/#website",
+        "name": "DocuForge Tools",
+        "alternateName": [
+          "DocuForge"
+        ],
+        "url": "https://business-document-generators.hammadiqbal117.workers.dev/",
+        "inLanguage": "en",
+        "description": "Free niche business document generators — fill a form, preview live, export PDF or DOCX. Nothing leaves your browser.",
+        "publisher": {
+          "@id": "https://business-document-generators.hammadiqbal117.workers.dev/#organization"
+        }
+      },
+      {
+        "@type": "Organization",
+        "@id": "https://business-document-generators.hammadiqbal117.workers.dev/#organization",
+        "name": "DocuForge Tools",
+        "url": "https://business-document-generators.hammadiqbal117.workers.dev/",
+        "email": "hammadiqbal117@gmail.com",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://business-document-generators.hammadiqbal117.workers.dev/logo-512.png",
+          "width": 512,
+          "height": 512
+        },
+        "founder": {
+          "@id": "https://github.com/hammadiqbal6#person"
+        },
+        "publishingPrinciples": "https://business-document-generators.hammadiqbal117.workers.dev/methodology/",
+        "contactPoint": {
+          "@type": "ContactPoint",
+          "email": "hammadiqbal117@gmail.com",
+          "contactType": "customer support",
+          "url": "https://business-document-generators.hammadiqbal117.workers.dev/contact/"
+        }
+      },
+      {
+        "@type": "Person",
+        "@id": "https://github.com/hammadiqbal6#person",
+        "name": "Hammad Iqbal",
+        "url": "https://business-document-generators.hammadiqbal117.workers.dev/about/",
+        "description": "I build and maintain free in-browser tools. I turn published public sources into practical generators and show which sources each page uses. I am not a lawyer, accountant, or licensed professional advisor.",
+        "sameAs": [
+          "https://github.com/hammadiqbal6"
+        ],
+        "knowsAbout": [
+          "business document templates",
+          "in-browser PDF generators",
+          "small-business paperwork"
+        ]
+      }
+    ]
   }
 ]

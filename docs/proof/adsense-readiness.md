@@ -1,14 +1,14 @@
 # AdSense readiness evidence
 
-Generated: 2026-10-19T06:50:30.922Z UTC
+Generated: 2026-10-20T07:27:26.375Z UTC
 
 ## Required pages
 
-- [x] **About** — `about/index.html` (242 words rendered)
-- [x] **Contact** — `contact/index.html` (134 words rendered)
-- [x] **Privacy** — `privacy/index.html` (299 words rendered)
-- [x] **Terms** — `terms/index.html` (212 words rendered)
-- [x] **Methodology** — `methodology/index.html` (241 words rendered)
+- [x] **About** — `about/index.html` (523 words rendered)
+- [x] **Contact** — `contact/index.html` (165 words rendered)
+- [x] **Privacy** — `privacy/index.html` (362 words rendered)
+- [x] **Terms** — `terms/index.html` (225 words rendered)
+- [x] **Methodology** — `methodology/index.html` (460 words rendered)
 
 ## Privacy / ads language
 
@@ -17,8 +17,8 @@ Generated: 2026-10-19T06:50:30.922Z UTC
 
 ## ads.txt
 ```
-# Replace pub-XXXXXXXXXXXXXXXX with your AdSense publisher ID before launch.
-# google.com, pub-XXXXXXXXXXXXXXXX, DIRECT, f08c47fec0942fa0
+# AdSense publisher line intentionally omitted until approval.
+# When approved, add: google.com, pub-YOUR_PUBLISHER_ID, DIRECT, f08c47fec0942fa0
 ```
 
 ## CMP / consent banner
@@ -28,7 +28,7 @@ Generated: 2026-10-19T06:50:30.922Z UTC
 
 ## Content depth (sample tool page)
 
-- `tools/construction-estimate-template/index.html`: **693** words (target ≥600 for tool pages)
+- `tools/construction-estimate-template/index.html`: **1051** words (target ≥600 for tool pages)
 
 ## Navigation
 

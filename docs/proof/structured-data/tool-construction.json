@@ -2,22 +2,51 @@
   {
     "@context": "https://schema.org",
     "@type": "WebSite",
+    "@id": "https://business-document-generators.hammadiqbal117.workers.dev/#website",
     "name": "DocuForge Tools",
-    "url": "https://docuforge.example/",
+    "alternateName": [
+      "DocuForge"
+    ],
+    "url": "https://business-document-generators.hammadiqbal117.workers.dev/",
     "description": "Free niche business document generators — fill a form, preview live, export PDF or DOCX. Nothing leaves your browser.",
-    "inLanguage": "en-US",
+    "inLanguage": "en",
     "publisher": {
-      "@id": "https://docuforge.example/#organization"
+      "@id": "https://business-document-generators.hammadiqbal117.workers.dev/#organization"
     }
   },
   {
     "@context": "https://schema.org",
     "@type": "Organization",
-    "@id": "https://docuforge.example/#organization",
+    "@id": "https://business-document-generators.hammadiqbal117.workers.dev/#organization",
     "name": "DocuForge Tools",
-    "url": "https://docuforge.example/",
+    "url": "https://business-document-generators.hammadiqbal117.workers.dev/",
     "email": "hammadiqbal117@gmail.com",
-    "logo": "https://docuforge.example/favicon.svg"
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://business-document-generators.hammadiqbal117.workers.dev/logo-512.png",
+      "width": 512,
+      "height": 512
+    },
+    "founder": {
+      "@id": "https://github.com/hammadiqbal6#person"
+    },
+    "publishingPrinciples": "https://business-document-generators.hammadiqbal117.workers.dev/methodology/"
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "@id": "https://github.com/hammadiqbal6#person",
+    "name": "Hammad Iqbal",
+    "url": "https://business-document-generators.hammadiqbal117.workers.dev/about/",
+    "description": "I build and maintain free in-browser tools. I turn published public sources into practical generators and show which sources each page uses. I am not a lawyer, accountant, or licensed professional advisor.",
+    "sameAs": [
+      "https://github.com/hammadiqbal6"
+    ],
+    "knowsAbout": [
+      "business document templates",
+      "in-browser PDF generators",
+      "small-business paperwork"
+    ]
   },
   {
     "@context": "https://schema.org",
@@ -27,44 +56,139 @@
         "@type": "ListItem",
         "position": 1,
         "name": "Home",
-        "item": "https://docuforge.example/"
+        "item": "https://business-document-generators.hammadiqbal117.workers.dev/"
       },
       {
         "@type": "ListItem",
         "position": 2,
         "name": "Tools",
-        "item": "https://docuforge.example/tools/"
+        "item": "https://business-document-generators.hammadiqbal117.workers.dev/tools/"
       },
       {
         "@type": "ListItem",
         "position": 3,
         "name": "Estimates & Invoices",
-        "item": "https://docuforge.example/hubs/estimates-invoices/"
+        "item": "https://business-document-generators.hammadiqbal117.workers.dev/hubs/estimates-invoices/"
       },
       {
         "@type": "ListItem",
         "position": 4,
         "name": "Construction Estimate",
-        "item": "https://docuforge.example/tools/construction-estimate-template/"
+        "item": "https://business-document-generators.hammadiqbal117.workers.dev/tools/construction-estimate-template/"
       }
     ]
   },
   {
     "@context": "https://schema.org",
-    "@type": "WebApplication",
-    "name": "Construction Estimate Template",
-    "applicationCategory": "BusinessApplication",
-    "operatingSystem": "Web browser",
-    "browserRequirements": "Requires JavaScript",
-    "offers": {
-      "@type": "Offer",
-      "price": "0",
-      "priceCurrency": "USD"
-    },
-    "description": "Fill a free construction estimate template in your browser. Add line items, tax, and notes, preview live, then export PDF or DOCX. Nothing stored server-side.",
-    "url": "https://docuforge.example/tools/construction-estimate-template/",
-    "isAccessibleForFree": true,
-    "datePublished": "2026-10-19",
-    "dateModified": "2026-10-19"
+    "@graph": [
+      {
+        "@type": "WebApplication",
+        "@id": "https://business-document-generators.hammadiqbal117.workers.dev/tools/construction-estimate-template/#app",
+        "name": "Construction Estimate Template",
+        "url": "https://business-document-generators.hammadiqbal117.workers.dev/tools/construction-estimate-template/",
+        "applicationCategory": "BusinessApplication",
+        "operatingSystem": "Any",
+        "isAccessibleForFree": true,
+        "browserRequirements": "Requires JavaScript for the interactive editor",
+        "offers": {
+          "@type": "Offer",
+          "price": "0",
+          "priceCurrency": "USD"
+        },
+        "description": "Fill a free construction estimate template with line items, labor, materials and tax, preview it live, then download a PDF or Word file. No signup required.",
+        "author": {
+          "@type": "Person",
+          "@id": "https://github.com/hammadiqbal6#person",
+          "name": "Hammad Iqbal",
+          "url": "https://business-document-generators.hammadiqbal117.workers.dev/about/"
+        },
+        "publisher": {
+          "@id": "https://business-document-generators.hammadiqbal117.workers.dev/#organization"
+        }
+      },
+      {
+        "@type": "WebPage",
+        "@id": "https://business-document-generators.hammadiqbal117.workers.dev/tools/construction-estimate-template/#webpage",
+        "url": "https://business-document-generators.hammadiqbal117.workers.dev/tools/construction-estimate-template/",
+        "name": "Free Construction Estimate Template – PDF & DOCX",
+        "isPartOf": {
+          "@id": "https://business-document-generators.hammadiqbal117.workers.dev/#website"
+        },
+        "mainEntity": {
+          "@id": "https://business-document-generators.hammadiqbal117.workers.dev/tools/construction-estimate-template/#app"
+        },
+        "datePublished": "2026-10-19T00:00:00+05:00",
+        "dateModified": "2026-10-20T00:00:00+05:00",
+        "lastReviewed": "2026-10-20",
+        "author": {
+          "@id": "https://github.com/hammadiqbal6#person"
+        },
+        "primaryImageOfPage": {
+          "@type": "ImageObject",
+          "url": "https://business-document-generators.hammadiqbal117.workers.dev/images/tools/construction-estimate-template.svg",
+          "width": 720,
+          "height": 400
+        },
+        "citation": [
+          "https://www.sba.gov/business-guide/manage-your-business/marketing-sales",
+          "https://www.sba.gov/business-guide/plan-your-business/calculate-your-startup-costs/break-even-point",
+          "https://www.irs.gov/businesses/small-businesses-self-employed/recordkeeping",
+          "https://www.sba.gov/"
+        ]
+      },
+      {
+        "@type": "Person",
+        "@id": "https://github.com/hammadiqbal6#person",
+        "name": "Hammad Iqbal",
+        "url": "https://business-document-generators.hammadiqbal117.workers.dev/about/",
+        "description": "I build and maintain free in-browser tools. I turn published public sources into practical generators and show which sources each page uses. I am not a lawyer, accountant, or licensed professional advisor.",
+        "sameAs": [
+          "https://github.com/hammadiqbal6"
+        ],
+        "knowsAbout": [
+          "business document templates",
+          "in-browser PDF generators",
+          "small-business paperwork"
+        ]
+      }
+    ]
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Is a construction estimate legally binding?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Often an estimate is an invitation to agree on price, not a contract—unless your wording or local law treats it as an offer you both accept. Pair accepted estimates with a signed contract or work order."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How long should an estimate stay valid?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Many contractors use 14–30 days. Material-heavy jobs may need shorter windows when lumber or appliance prices move quickly."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What is the difference between an estimate and a bid?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "An estimate is typically a professional opinion of cost; a bid is often a firm offer in a competitive process. Confirm how your client uses the terms."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Do I need to include tax on every line?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Follow your jurisdiction’s rules. Many estimates show a single tax rate on taxable subtotal; some materials are tax-exempt for resale—label those clearly."
+        }
+      }
+    ]
   }
 ]
