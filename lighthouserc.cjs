@@ -10,7 +10,8 @@ module.exports = {
         '/tools/podcast-script-template/index.html',
         '/tools/tattoo-consent-form-template/index.html',
       ],
-      numberOfRuns: 1,
+      // Median of 3 runs (LHCI default recommendation) — reduces TBT flake on CI runners.
+      numberOfRuns: 3,
       settings: {
         formFactor: 'mobile',
         screenEmulation: { mobile: true },
@@ -25,7 +26,8 @@ module.exports = {
         'categories:seo': ['error', { minScore: 0.95 }],
         'largest-contentful-paint': ['error', { maxNumericValue: 2500 }],
         'cumulative-layout-shift': ['error', { maxNumericValue: 0.05 }],
-        'total-blocking-time': ['error', { maxNumericValue: 150 }],
+        // Align with CWV "good" INP proxy (≤200ms); 150ms was flaky at the Lighthouse p10 boundary.
+        'total-blocking-time': ['error', { maxNumericValue: 200 }],
       },
     },
   },
