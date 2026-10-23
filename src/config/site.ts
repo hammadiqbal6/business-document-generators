@@ -27,6 +27,15 @@ export const siteConfig = {
     'Free niche business document generators — fill a form, preview live, export PDF or DOCX. Nothing leaves your browser.',
   /** Contact email for Contact page and schema. */
   contactEmail: import.meta.env.PUBLIC_CONTACT_EMAIL || 'hammadiqbal117@gmail.com',
+  /**
+   * EmailJS (free plan) — public IDs only. All three required to show the contact form.
+   * Private key must never be committed. See docs/CONTACT-EMAILJS.md.
+   */
+  emailjs: {
+    serviceId: (import.meta.env.PUBLIC_EMAILJS_SERVICE_ID || '').trim(),
+    templateId: (import.meta.env.PUBLIC_EMAILJS_TEMPLATE_ID || '').trim(),
+    publicKey: (import.meta.env.PUBLIC_EMAILJS_PUBLIC_KEY || '').trim(),
+  },
   /** Optional Twitter/X handle without @. */
   twitterHandle: import.meta.env.PUBLIC_TWITTER_HANDLE || '',
   /** Google AdSense publisher ID, e.g. ca-pub-XXXXXXXXXXXXXXXX. Leave empty to disable ads. */

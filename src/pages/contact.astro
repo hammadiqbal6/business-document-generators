@@ -1,24 +1,46 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Breadcrumbs from '../components/content/Breadcrumbs.astro';
+import ContactForm from '../components/contact/ContactForm.astro';
 import { siteConfig } from '../config/site';
 
 const path = '/contact/';
+const { serviceId, templateId, publicKey } = siteConfig.emailjs;
+const emailjsReady = Boolean(serviceId && templateId && publicKey);
 ---
 <BaseLayout
-  title="Contact DocuForge Tools"
-  description="Email Hammad Iqbal about DocuForge Tools: corrections, privacy requests, or feedback on the free document generators."
+  title="Contact DocuForge Tools – Email and Corrections"
+  description="Contact DocuForge Tools by email for corrections, privacy requests, or feedback on our free document generators and educational business guides."
   path={path}
 >
   <Breadcrumbs items={[{ name: 'Home', path: '/' }, { name: 'Contact', path }]} />
   <h1>Contact</h1>
   <p class="lead">
     This site is maintained by <a href="/about/#maintainer">{siteConfig.author.name}</a>.
-    For corrections, broken links, or product feedback, email directly—there is no support ticket queue.
+    For corrections, broken links, or product feedback, use the form below or email directly—there is no support ticket queue.
   </p>
-  <p>
-    Email: <a href={`mailto:${siteConfig.contactEmail}`}>{siteConfig.contactEmail}</a>
-  </p>
+
+  {emailjsReady ? (
+    <>
+      <h2 class="contact-form-heading">Send a message</h2>
+      <ContactForm serviceId={serviceId} templateId={templateId} publicKey={publicKey} />
+      <noscript>
+        <p>
+          JavaScript is required for the form.
+          Email <a href={`mailto:${siteConfig.contactEmail}`}>{siteConfig.contactEmail}</a> instead.
+        </p>
+      </noscript>
+      <p>
+        Or email directly:
+        <a href={`mailto:${siteConfig.contactEmail}`}>{siteConfig.contactEmail}</a>
+      </p>
+    </>
+  ) : (
+    <p>
+      Email: <a href={`mailto:${siteConfig.contactEmail}`}>{siteConfig.contactEmail}</a>
+    </p>
+  )}
+
   <p>
     For privacy requests (cookies, analytics), include “Privacy” in the subject line and the page URL you visited.
     We do not host user-generated documents on our servers, so we typically have no form contents to delete.
@@ -27,3 +49,10 @@ const path = '/contact/';
     Please do not send confidential client contracts or personal data for “review”—we cannot provide legal advice.
   </p>
 </BaseLayout>
+
+<style>
+  .contact-form-heading {
+    font-size: 1.15rem;
+    margin: 1.25rem 0 0.5rem;
+  }
+</style>

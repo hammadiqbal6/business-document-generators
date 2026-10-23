@@ -15,7 +15,7 @@ Follow `docs/SEO-GUARDRAILS.md` and `docs/CUSTOM-DOMAIN.md`.
 - Site origin: `PUBLIC_SITE_URL` or `DEFAULT_SITE_URL` in `src/config/siteDefaults.mjs` only — never hardcode this site’s workers.dev hostname elsewhere.
 - Trailing slash: run-first `src/worker.ts` returns **308**; `FILE_EXT` `{1,16}` for `.webmanifest`.
 - `public/_headers`: `/_astro/*` immutable long cache; sensible favicon/image max-age.
-- Titles ≤60; meta descriptions 50–165; one H1; self-canonical; no `og:image` trailing slash; no `example.com`.
+- Titles 25–65 chars (target ~30–60); meta descriptions 70–160 (target ~120–160); og/twitter title+desc must match; one H1; self-canonical; no `og:image` trailing slash; no `example.com`.
 - Tool pages: Learn more → guides; guides: ≥800 words, FAQPage, topic-specific related tools.
 - Wrangler: `"previews": {}`, no top-level `vars` for `PUBLIC_*` (breaks `npx wrangler preview`).
 - Do not change custom domains/routes unless explicitly asked.

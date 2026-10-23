@@ -1,0 +1,304 @@
+---
+/**
+ * EmailJS contact form — only rendered when all PUBLIC_EMAILJS_* vars are set.
+ * Tiny page-local script (no @emailjs/browser SDK). See docs/CONTACT-EMAILJS.md.
+ */
+import { siteConfig } from '../../config/site';
+
+interface Props {
+  serviceId: string;
+  templateId: string;
+  publicKey: string;
+}
+
+const { serviceId, templateId, publicKey } = Astro.props;
+const siteName = siteConfig.siteName;
+const maxMessage = 2000;
+const throttleMs = 60_000;
+---
+<form
+  id="contact-form"
+  class="contact-form"
+  novalidate
+  data-service-id={serviceId}
+  data-template-id={templateId}
+  data-public-key={publicKey}
+  data-site-name={siteName}
+  data-max-message={String(maxMessage)}
+  data-throttle-ms={String(throttleMs)}
+>
+  <div class="contact-form__field">
+    <label for="contact-name">Name <span class="req" aria-hidden="true">*</span></label>
+    <input
+      id="contact-name"
+      name="from_name"
+      type="text"
+      autocomplete="name"
+      required
+      maxlength="120"
+      aria-required="true"
+    />
+  </div>
+
+  <div class="contact-form__field">
+    <label for="contact-email">Email <span class="req" aria-hidden="true">*</span></label>
+    <input
+      id="contact-email"
+      name="reply_to"
+      type="email"
+      autocomplete="email"
+      required
+      maxlength="200"
+      aria-required="true"
+    />
+  </div>
+
+  <div class="contact-form__field">
+    <label for="contact-message">Message <span class="req" aria-hidden="true">*</span></label>
+    <textarea
+      id="contact-message"
+      name="message"
+      rows="6"
+      required
+      maxlength={maxMessage}
+      aria-required="true"
+      aria-describedby="contact-message-hint"
+    ></textarea>
+    <p id="contact-message-hint" class="contact-form__hint">Up to {maxMessage} characters.</p>
+  </div>
+
+  {/* Honeypot — leave empty. Hidden from assistive tech and keyboard. */}
+  <div class="contact-form__hp" aria-hidden="true">
+    <label for="contact-company">Company</label>
+    <input
+      id="contact-company"
+      name="company"
+      type="text"
+      tabindex="-1"
+      autocomplete="off"
+    />
+  </div>
+
+  <p
+    id="contact-status"
+    class="contact-form__status"
+    role="status"
+    aria-live="polite"
+    aria-atomic="true"
+  ></p>
+
+  <button type="submit" class="btn btn--primary" id="contact-submit">
+    Send message
+  </button>
+</form>
+
+<style>
+  .contact-form {
+    max-width: 32rem;
+    margin: 1.25rem 0 1.75rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .contact-form__field {
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+  }
+
+  .contact-form__field label {
+    font-weight: 650;
+  }
+
+  .contact-form__field .req {
+    color: var(--brand-dark, #0a4f44);
+  }
+
+  .contact-form__field input,
+  .contact-form__field textarea {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 0.65rem 0.75rem;
+    border: 1px solid var(--border-strong, #c5d0cb);
+    border-radius: 4px;
+    background: #fff;
+    color: var(--ink, #1a1f1e);
+    font: inherit;
+    line-height: 1.4;
+    min-height: 48px;
+  }
+
+  .contact-form__field textarea {
+    min-height: 9rem;
+    resize: vertical;
+  }
+
+  .contact-form__field input:focus-visible,
+  .contact-form__field textarea:focus-visible {
+    outline: 2px solid var(--brand, #0f6b5c);
+    outline-offset: 2px;
+  }
+
+  .contact-form__hint {
+    margin: 0;
+    font-size: 0.88rem;
+    color: var(--muted, #5a6560);
+  }
+
+  .contact-form__hp {
+    position: absolute;
+    left: -10000px;
+    top: auto;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+  }
+
+  .contact-form__status {
+    min-height: 1.5rem;
+    margin: 0;
+    font-size: 0.95rem;
+  }
+
+  .contact-form__status[data-tone='ok'] {
+    color: var(--brand-dark, #0a4f44);
+  }
+
+  .contact-form__status[data-tone='err'] {
+    color: #8b1a1a;
+  }
+
+  .contact-form .btn {
+    align-self: flex-start;
+  }
+</style>
+
+<script>
+  const form = document.getElementById('contact-form') as HTMLFormElement | null;
+  if (form) {
+    const statusEl = document.getElementById('contact-status') as HTMLElement | null;
+    const submitBtn = document.getElementById('contact-submit') as HTMLButtonElement | null;
+    const serviceId = form.dataset.serviceId || '';
+    const templateId = form.dataset.templateId || '';
+    const publicKey = form.dataset.publicKey || '';
+    const siteName = form.dataset.siteName || '';
+    const maxMessage = Number(form.dataset.maxMessage || '2000');
+    const throttleMs = Number(form.dataset.throttleMs || '60000');
+    const STORAGE_KEY = 'docuforge:contact-sent-at';
+    const ENDPOINT = 'https://api.emailjs.com/api/v1.0/email/send';
+
+    function setStatus(message: string, tone: '' | 'ok' | 'err') {
+      if (!statusEl) return;
+      statusEl.textContent = message;
+      if (tone) statusEl.dataset.tone = tone;
+      else delete statusEl.dataset.tone;
+    }
+
+    function throttleRemaining(): number {
+      try {
+        const raw = localStorage.getItem(STORAGE_KEY);
+        if (!raw) return 0;
+        const last = Number(raw);
+        if (!Number.isFinite(last)) return 0;
+        const left = throttleMs - (Date.now() - last);
+        return left > 0 ? left : 0;
+      } catch {
+        return 0;
+      }
+    }
+
+    function markSent() {
+      try {
+        localStorage.setItem(STORAGE_KEY, String(Date.now()));
+      } catch {
+        /* ignore quota / private mode */
+      }
+    }
+
+    form.addEventListener('submit', async (event) => {
+      event.preventDefault();
+      setStatus('', '');
+
+      const hp = (form.elements.namedItem('company') as HTMLInputElement | null)?.value?.trim();
+      if (hp) {
+        // Bot filled honeypot — fake success, do not call API.
+        setStatus('Thanks — your message was sent.', 'ok');
+        form.reset();
+        return;
+      }
+
+      const nameInput = form.elements.namedItem('from_name') as HTMLInputElement;
+      const emailInput = form.elements.namedItem('reply_to') as HTMLInputElement;
+      const messageInput = form.elements.namedItem('message') as HTMLTextAreaElement;
+
+      const fromName = nameInput.value.trim();
+      const replyTo = emailInput.value.trim();
+      const message = messageInput.value.trim();
+
+      if (!fromName || !replyTo || !message) {
+        setStatus('Please fill in your name, email, and message.', 'err');
+        return;
+      }
+      if (!emailInput.checkValidity()) {
+        setStatus('Please enter a valid email address.', 'err');
+        emailInput.focus();
+        return;
+      }
+      if (message.length > maxMessage) {
+        setStatus(`Please keep your message under ${maxMessage} characters.`, 'err');
+        return;
+      }
+
+      const wait = throttleRemaining();
+      if (wait > 0) {
+        const secs = Math.ceil(wait / 1000);
+        setStatus(`Please wait ${secs}s before sending another message.`, 'err');
+        return;
+      }
+
+      if (!serviceId || !templateId || !publicKey) {
+        setStatus('Contact form is not configured. Please use the email link below.', 'err');
+        return;
+      }
+
+      if (submitBtn) submitBtn.disabled = true;
+      setStatus('Sending…', '');
+
+      try {
+        const res = await fetch(ENDPOINT, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            service_id: serviceId,
+            template_id: templateId,
+            user_id: publicKey,
+            template_params: {
+              from_name: fromName,
+              reply_to: replyTo,
+              message,
+              page_url: window.location.href,
+              site_name: siteName,
+            },
+          }),
+        });
+
+        if (!res.ok) {
+          const text = await res.text().catch(() => '');
+          throw new Error(text || `HTTP ${res.status}`);
+        }
+
+        markSent();
+        form.reset();
+        setStatus('Thanks — your message was sent. We will reply by email when we can.', 'ok');
+      } catch {
+        setStatus(
+          'Something went wrong sending your message. Please try again later or use the email link below.',
+          'err',
+        );
+      } finally {
+        if (submitBtn) submitBtn.disabled = false;
+      }
+    });
+  }
+</script>

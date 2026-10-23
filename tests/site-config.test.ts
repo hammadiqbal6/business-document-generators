@@ -20,4 +20,12 @@ describe('site origin', () => {
   it('absoluteUrl keeps page trailing slashes', () => {
     expect(absoluteUrl('/tools/')).toBe(`${siteConfig.siteUrl}/tools/`);
   });
+
+  it('exposes EmailJS public config (empty unless PUBLIC_EMAILJS_* set)', () => {
+    expect(siteConfig.emailjs).toEqual({
+      serviceId: expect.any(String),
+      templateId: expect.any(String),
+      publicKey: expect.any(String),
+    });
+  });
 });
