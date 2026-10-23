@@ -78,7 +78,7 @@
     "headline": "How to Write a Construction Estimate That Wins Jobs",
     "description": "Learn what to include in a construction estimate, how to price line items, set validity dates, and avoid disputes—plus a free template generator.",
     "datePublished": "2026-10-19T00:00:00+05:00",
-    "dateModified": "2026-10-19T00:00:00+05:00",
+    "dateModified": "2026-10-23T00:00:00+05:00",
     "author": [
       {
         "@type": "Person",
@@ -98,5 +98,59 @@
       }
     },
     "mainEntityOfPage": "https://business-document-generators.hammadiqbal117.workers.dev/guides/construction-estimate-that-wins-jobs/"
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Should estimates include sales tax?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Follow your state and local rules. Many contractors show one tax rate applied to a taxable subtotal and label exempt items such as certain labor or materials. If you are unsure, ask your accountant how to split taxable and non-taxable lines before you send the PDF."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What deposit is normal on a remodel?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Residential remodels often use twenty-five to forty percent deposits tied to material orders or schedule lock-in. Commercial jobs may use smaller deposits with progress billing. Put the percentage and due date on the estimate so it matches your contract."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How detailed should labor hours be?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Detailed enough that you can explain the total if challenged, but not so granular that the client micromanages each hour. Phase-level labor lines for rough-in, finish, and punch are a practical middle ground."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Can I reuse the same estimate for insurance?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Insurance carriers may want photos, codes, and separate material and labor breakdowns. Keep your original estimate and add supplements as change orders rather than editing history silently."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "When does an estimate become a contract?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "When both parties sign a written agreement or you accept a deposit with clear terms referencing the estimate. Until then, treat the estimate as an offer that can expire."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Should I itemize subcontractor quotes?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Show client-facing lines that match your scope story. You may collapse sub quotes into one line with backup in your internal file. Transparency reduces change-order fights when the client sees HVAC as its own line instead of hidden in general conditions."
+        }
+      }
+    ]
   }
 ]

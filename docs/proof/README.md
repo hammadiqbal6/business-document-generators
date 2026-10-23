@@ -1,6 +1,6 @@
 # Proof artifacts
 
-Regenerated: **2026-10-23T10:08:32.000Z** (UTC)
+Regenerated: **2026-10-23T11:17:59.513Z** (UTC)
 
 Reproduce everything:
 
@@ -12,15 +12,15 @@ npm run proof
 
 | Check | Tool | Version | Date (UTC) | Result | Reproduce |
 |-------|------|---------|------------|--------|-----------|
-| Unit tests | Vitest | ^3.0.9 | 2026-10-23T10:08:32.000Z | PASS | `npm test` → [tests.txt](./tests.txt) |
-| SEO / links / budget | Node audit scripts | repo | 2026-10-23T10:08:32.000Z | PASS | `npm run audit` → [seo-audit.txt](./seo-audit.txt) |
-| Lighthouse | Lighthouse CLI | 12.8.2 | 2026-10-23T10:08:32.000Z | PASS | [lighthouse/SUMMARY.md](./lighthouse/SUMMARY.md) |
-| Structured data | Node extractor | repo | 2026-10-23T10:08:32.000Z | see validation log | [structured-data/](./structured-data/) |
-| Sitemap / robots | Node script | repo | 2026-10-23T10:08:32.000Z | see file | [sitemap-robots.txt](./sitemap-robots.txt) |
-| Mobile UX | Playwright | — | 2026-10-23T10:08:32.000Z | see viewport log | [mobile/](./mobile/) |
-| AdSense readiness | Node script | repo | 2026-10-23T10:08:32.000Z | see checklist | [adsense-readiness.md](./adsense-readiness.md) |
-| Bundle sizes | Node script | repo | 2026-10-23T10:08:32.000Z | see file | [bundle-size.txt](./bundle-size.txt) |
-| Build | Astro | ^5.18.2 | 2026-10-23T10:08:32.000Z | PASS | `npm run build` |
+| Unit tests | Vitest | ^3.0.9 | 2026-10-23T11:17:59.513Z | PASS | `npm test` → [tests.txt](./tests.txt) |
+| SEO / links / budget | Node audit scripts | repo | 2026-10-23T11:17:59.513Z | PASS | `npm run audit` → [seo-audit.txt](./seo-audit.txt) |
+| Lighthouse | Lighthouse CLI | 12.8.2 | 2026-10-23T11:17:59.513Z | PASS | [lighthouse/SUMMARY.md](./lighthouse/SUMMARY.md) |
+| Structured data | Node extractor | repo | 2026-10-23T11:17:59.513Z | see validation log | [structured-data/](./structured-data/) |
+| Sitemap / robots | Node script | repo | 2026-10-23T11:17:59.513Z | see file | [sitemap-robots.txt](./sitemap-robots.txt) |
+| Mobile UX | Playwright | — | 2026-10-23T11:17:59.513Z | see viewport log | [mobile/](./mobile/) |
+| AdSense readiness | Node script | repo | 2026-10-23T11:17:59.513Z | see checklist | [adsense-readiness.md](./adsense-readiness.md) |
+| Bundle sizes | Node script | repo | 2026-10-23T11:17:59.513Z | see file | [bundle-size.txt](./bundle-size.txt) |
+| Build | Astro | ^5.18.2 | 2026-10-23T11:17:59.513Z | PASS | `npm run build` |
 
 Numbers in Lighthouse JSON/HTML reports are machine-generated; do not edit by hand.
 
