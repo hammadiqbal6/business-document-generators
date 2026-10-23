@@ -962,7 +962,7 @@ export const guides: Guide[] = [
       },
       {
         "heading": "Invoices, receipts, and processor fees",
-        "body": "When you invoice each milestone, match line items to the contract schedule. If clients pay by card, factor processor fees into pricing so net cash still covers the work.\n\nIssue a receipt after each cleared payment. The invoice requests; the receipt proves payment for both tax records and client peace of mind."
+        "body": "When you invoice each milestone, match line items to the contract schedule. If clients pay by card, factor processor fees into pricing so net cash still covers the work.\n\nIssue a receipt after each cleared payment. The invoice requests; the receipt proves payment for both tax records and client peace of mind.\n\nName the milestone in the invoice subject line—wireframe approval—so accounting approvers do not confuse it with the launch invoice sitting in the same inbox."
       },
       {
         "heading": "NDAs and kickoff",
@@ -1106,7 +1106,7 @@ export const guides: Guide[] = [
       },
       {
         "heading": "Description of goods or services",
-        "body": "One or two lines are enough: deposit for kitchen remodel per invoice 1042, or annual maintenance plan renewal. Detailed line items usually stay on the invoice; the receipt summarizes.\n\nFor donations or retail, SKU detail may matter; for services, link to the invoice line items instead of duplicating entire tables."
+        "body": "One or two lines are enough: deposit for kitchen remodel per invoice 1042, or annual maintenance plan renewal. Detailed line items usually stay on the invoice; the receipt summarizes.\n\nFor donations or retail, SKU detail may matter; for services, link to the invoice line items instead of duplicating entire tables.\n\nInclude the service date on the receipt when clients expense multiple visits in one month—finance teams match receipts to calendar months."
       },
       {
         "heading": "Worked example: contractor deposit receipt",
@@ -1252,7 +1252,7 @@ export const guides: Guide[] = [
       },
       {
         "heading": "Tax and tips",
-        "body": "Sales tax on cleaning varies by state and whether labor is taxable. Show tax on a labeled subtotal. Gratuity is voluntary unless your jurisdiction treats mandatory service charges differently; label accordingly.\n\nCommercial clients may require PO numbers on the invoice header."
+        "body": "Sales tax on cleaning varies by state and whether labor is taxable. Show tax on a labeled subtotal. Gratuity is voluntary unless your jurisdiction treats mandatory service charges differently; label accordingly.\n\nCommercial clients may require PO numbers on the invoice header.\n\nIf you exempt certain nonprofit clients from tax, note the exemption certificate number on the invoice memo line your accountant prefers."
       },
       {
         "heading": "Worked example: move-out deep clean",
@@ -1394,7 +1394,7 @@ export const guides: Guide[] = [
       },
       {
         "heading": "Definition of confidential information",
-        "body": "Good NDAs define what counts as confidential: marked confidential, orally identified and confirmed in writing, or reasonably understood as secret. They list exclusions such as public domain, independently developed, or rightfully received from a third party.\n\nOverbroad definitions may be unenforceable; counsel should tune scope."
+        "body": "Good NDAs define what counts as confidential: marked confidential, orally identified and confirmed in writing, or reasonably understood as secret. They list exclusions such as public domain, independently developed, or rightfully received from a third party.\n\nOverbroad definitions may be unenforceable; counsel should tune scope.\n\nPublic pricing on a website is usually not confidential—do not let clients sweep already-published marketing into NDA coverage without pushback."
       },
       {
         "heading": "Term, return of materials, and remedies",
@@ -1920,7 +1920,7 @@ export const guides: Guide[] = [
       },
       {
         "heading": "CTA, outro, and compliance",
-        "body": "Calls to action might be newsletter signup, product link, or next episode tease. Outro thanks guest, repeats show name, and gives social handles.\n\nFinancial or health topics may need disclaimers; legal advice shows should state they are not attorneys. Mark disclaimer text verbatim in the script."
+        "body": "Calls to action might be newsletter signup, product link, or next episode tease. Outro thanks guest, repeats show name, and gives social handles.\n\nFinancial or health topics may need disclaimers; legal advice shows should state they are not attorneys. Mark disclaimer text verbatim in the script.\n\nRepeat the primary URL twice—once mid-episode and once in the outro—so listeners driving cannot miss the spelling."
       },
       {
         "heading": "Worked example: twenty-eight minute interview",
@@ -2056,7 +2056,7 @@ export const guides: Guide[] = [
       },
       {
         "heading": "Open house, QR codes, and contact",
-        "body": "Open house date, time, and address if different from listing. QR code to virtual tour or MLS page should be tested before print.\n\nAgent photo, phone, email, team name, and brokerage logo with equal housing opportunity and state license lines as your board requires."
+        "body": "Open house date, time, and address if different from listing. QR code to virtual tour or MLS page should be tested before print.\n\nAgent photo, phone, email, team name, and brokerage logo with equal housing opportunity and state license lines as your board requires.\n\nUse a trackable short link on the flyer when your brokerage provides analytics so you know which open houses drove online traffic."
       },
       {
         "heading": "Worked example: suburban listing flyer",
