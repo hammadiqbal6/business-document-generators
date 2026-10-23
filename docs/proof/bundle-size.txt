@@ -1,4 +1,4 @@
-# bundle-size — 2026-10-20T07:27:20.694Z
+# bundle-size — 2026-10-23T10:08:32.000Z
 
 # Bundle sizes (gzip) — budget: initial JS ≤ 50 KB per page
 

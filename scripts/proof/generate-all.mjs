@@ -140,7 +140,14 @@ async function main() {
     process.exit(1);
   }
 
-  if (fs.existsSync(proofDir)) fs.rmSync(proofDir, { recursive: true, force: true });
+  // Clear generated proof dirs but keep committed verification screenshots (e.g. mobile-seo/).
+  const preserveDirs = new Set(['mobile-seo']);
+  if (fs.existsSync(proofDir)) {
+    for (const entry of fs.readdirSync(proofDir, { withFileTypes: true })) {
+      if (preserveDirs.has(entry.name)) continue;
+      fs.rmSync(path.join(proofDir, entry.name), { recursive: true, force: true });
+    }
+  }
   fs.mkdirSync(path.join(proofDir, 'lighthouse'), { recursive: true });
   fs.mkdirSync(path.join(proofDir, 'structured-data'), { recursive: true });
   fs.mkdirSync(path.join(proofDir, 'mobile'), { recursive: true });

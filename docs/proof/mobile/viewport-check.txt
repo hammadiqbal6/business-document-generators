@@ -1,4 +1,4 @@
-# mobile capture — 2026-10-20T07:27:20.694Z
+# mobile capture — 2026-10-23T10:08:32.000Z
 
 home @ 360px: horizontalScroll=PASS, smallTapTargets(sample)=1
 hub-estimates @ 360px: horizontalScroll=PASS, smallTapTargets(sample)=4

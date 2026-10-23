@@ -1,6 +1,6 @@
 # AdSense readiness evidence
 
-Generated: 2026-10-20T07:27:26.375Z UTC
+Generated: 2026-10-23T10:08:37.954Z UTC
 
 ## Required pages
 
