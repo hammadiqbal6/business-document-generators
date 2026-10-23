@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630" role="img">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#0a4a40"/>
+      <stop offset="100%" stop-color="#0f6b5c"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="630" fill="url(#bg)"/>
+  <rect x="0" y="0" width="16" height="630" fill="#c9a227"/>
+  <text x="72" y="120" fill="#c9a227" font-family="system-ui,sans-serif" font-size="28" letter-spacing="0.04em">DOCUMENT GENERATOR</text>
+  <text x="72" y="300" fill="#f8faf9" font-family="Georgia, serif" font-size="48" font-weight="700">Catering Quote</text>
+  <text x="72" y="560" fill="#d8e3de" font-family="system-ui,sans-serif" font-size="26">DocuForge Tools · Free PDF / DOCX templates</text>
+</svg>

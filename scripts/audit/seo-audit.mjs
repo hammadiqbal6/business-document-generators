@@ -31,13 +31,19 @@ for (const file of htmlFiles) {
     continue;
   }
   const html = fs.readFileSync(file, 'utf8');
+  const is404 = rel === '404.html' || rel.endsWith(`${path.sep}404.html`);
+
   const titles = [...html.matchAll(/<title>([^<]*)<\/title>/gi)];
   if (titles.length !== 1) errors.push(`${rel}: expected 1 title, got ${titles.length}`);
-  else if (titles[0][1].length > 75) errors.push(`${rel}: title too long (${titles[0][1].length})`);
+  else if (!is404 && titles[0][1].length > 60) {
+    errors.push(`${rel}: title too long (${titles[0][1].length}; max 60)`);
+  } else if (!titles[0][1].trim()) errors.push(`${rel}: empty title`);
 
   const desc = html.match(/<meta name="description" content="([^"]*)"/i);
   if (!desc) errors.push(`${rel}: missing meta description`);
-  else if (desc[1].length > 165) errors.push(`${rel}: meta description long (${desc[1].length})`);
+  else if (!is404 && (desc[1].length < 50 || desc[1].length > 165)) {
+    errors.push(`${rel}: meta description length ${desc[1].length} outside 50–165`);
+  }
 
   const h1s = [...html.matchAll(/<h1[^>]*>/gi)];
   if (h1s.length !== 1) errors.push(`${rel}: expected 1 h1, got ${h1s.length}`);
@@ -46,8 +52,20 @@ for (const file of htmlFiles) {
 
   const ld = [...html.matchAll(/<script type="application\/ld\+json">/gi)];
   if (ld.length < 1) errors.push(`${rel}: missing JSON-LD`);
+  for (const m of html.matchAll(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/gi)) {
+    try {
+      JSON.parse(m[1]);
+    } catch (e) {
+      errors.push(`${rel}: invalid JSON-LD (${e.message})`);
+    }
+  }
 
   if (!html.includes('property="og:title"')) errors.push(`${rel}: missing OG tags`);
+  const ogImage = html.match(/property="og:image"\s+content="([^"]*)"/i);
+  if (ogImage && /\/$/.test(ogImage[1])) {
+    errors.push(`${rel}: og:image ends with trailing slash`);
+  }
+  if (/example\.com/i.test(html)) errors.push(`${rel}: contains example.com`);
 }
 
 for (const file of toolPages) {

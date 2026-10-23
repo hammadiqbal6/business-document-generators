@@ -2,13 +2,28 @@
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import Breadcrumbs from '../../components/content/Breadcrumbs.astro';
 import { guides } from '../../data/guides';
+import { breadcrumbJsonLd, collectionPageJsonLd } from '../../lib/seo';
 
-const crumbs = [{ name: 'Home', path: '/' }, { name: 'Guides', path: '/guides/' }];
+const path = '/guides/';
+const crumbs = [{ name: 'Home', path: '/' }, { name: 'Guides', path }];
+const jsonLd = [
+  breadcrumbJsonLd(crumbs),
+  collectionPageJsonLd({
+    name: 'Guides',
+    description:
+      'Original guides on construction estimates, contracts, invoices, consent forms, and more—linked to free generators.',
+    path,
+    items: guides.map((g) => ({ name: g.title, path: `/guides/${g.slug}/` })),
+  }),
+];
 ---
 <BaseLayout
   title="Guides for Business Documents & Contracts"
   description="Original guides on construction estimates, photography contracts, catering quotes, tattoo consent, and rental applications—linked to our free generators."
-  path="/guides/"
+  path={path}
+  jsonLd={jsonLd}
+  ogImagePath="/og/guides.svg"
+  ogImageAlt="DocuForge Tools business document guides"
 >
   <Breadcrumbs items={crumbs} />
   <h1>Guides</h1>

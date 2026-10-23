@@ -2,10 +2,10 @@
 import { defineConfig } from 'astro/config';
 import react from '@astrojs/react';
 import sitemap from '@astrojs/sitemap';
-// Must stay in sync with DEFAULT_SITE_URL in src/config/site.ts
-const siteUrl =
-  process.env.PUBLIC_SITE_URL ||
-  'https://business-document-generators.hammadiqbal117.workers.dev';
+import { DEFAULT_SITE_URL } from './src/config/siteDefaults.mjs';
+
+// Canonical origin: PUBLIC_SITE_URL, else single default (see docs/CUSTOM-DOMAIN.md)
+const siteUrl = process.env.PUBLIC_SITE_URL || DEFAULT_SITE_URL;
 
 export default defineConfig({
   site: siteUrl,
@@ -21,7 +21,8 @@ export default defineConfig({
     }),
   ],
   build: {
-    inlineStylesheets: 'auto',
+    // Inline CSS on tool/hub pages so the head is not 3+ render-blocking stylesheets.
+    inlineStylesheets: 'always',
   },
   vite: {
     build: {

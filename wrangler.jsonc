@@ -1,26 +1,26 @@
+/**
+ * Static assets + run-first Worker for 308 trailing-slash redirects.
+ * Workers Builds: npm run build → npx wrangler deploy && node scripts/indexnow.mjs
+ *
+ * Build-time PUBLIC_* belong in Cloudflare Workers Builds → Variables
+ * (.env.example). Do NOT put PUBLIC_* in top-level wrangler "vars" — that
+ * breaks `npx wrangler preview` unless mirrored under previews.vars, and
+ * still does not bake Astro HTML.
+ */
 {
-  // Pure static-assets Worker — no adapter, no KV/Images bindings.
-  // Name must match the Cloudflare Workers Builds Worker exactly.
+  "$schema": "./node_modules/wrangler/config-schema.json",
   "name": "business-document-generators",
   "compatibility_date": "2026-10-19",
+  // Worker issues 308 trailing-slash redirects before assets
+  "main": "src/worker.ts",
   "assets": {
-    // Astro static build output (`npm run build`)
     "directory": "./dist",
-    // Serve nearest 404.html for missing routes (Astro emits dist/404.html)
+    "binding": "ASSETS",
+    "run_worker_first": true,
     "not_found_handling": "404-page",
-    // Match Astro `trailingSlash: 'always'` (folder index.html → trailing slash)
+    // Matches astro.config trailingSlash: 'always' (slash redirects handled in worker as 308)
     "html_handling": "force-trailing-slash"
   },
-  // Build-time only: Astro inlines PUBLIC_* during `npm run build`.
-  // Set the same keys in Cloudflare Workers Builds → Variables (Production / Preview)
-  // as in `.env.example`. Listed here so deploy config documents the contract;
-  // static assets do not read vars at request time.
-  "vars": {
-    "PUBLIC_SITE_URL": "https://business-document-generators.hammadiqbal117.workers.dev",
-    "PUBLIC_SITE_URL_PAYMENT_FEES": "https://payment-fee-calculators.hammadiqbal117.workers.dev",
-    "PUBLIC_SITE_URL_BUSINESS_DOCS": "https://business-document-generators.hammadiqbal117.workers.dev",
-    "PUBLIC_SITE_URL_HOME_GARDEN": "https://home-garden-calculators.hammadiqbal117.workers.dev",
-    "PUBLIC_SITE_URL_FIBER_ARTS": "https://fiber-arts-calculators.hammadiqbal117.workers.dev",
-    "PUBLIC_SITE_URL_PET": "https://pet-calculators.hammadiqbal117.workers.dev"
-  }
+  // Required by `npx wrangler preview` (non-production Workers Builds command).
+  "previews": {}
 }

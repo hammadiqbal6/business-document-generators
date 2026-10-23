@@ -25,8 +25,12 @@ Static Astro + TypeScript site with React islands for in-browser document genera
 ## Content / SEO / AdSense rules
 
 - Governing playbook: `docs/SEO-PLAYBOOK.md`
-- One primary keyword per URL; answer-first intro; 600+ words on tool pages
-- FAQ on page (no reliance on FAQ rich results)
+- Hard do/don’t + CI: `docs/SEO-GUARDRAILS.md` (also `.cursor/rules/seo-guardrails.mdc`)
+- Custom domain cutover (do not change domain until ready): `docs/CUSTOM-DOMAIN.md`
+- Site origin: **only** `PUBLIC_SITE_URL` / `src/config/siteDefaults.mjs` — canonicals, sitemap, robots, llms, JSON-LD, OG, IndexNow
+- One primary keyword per URL; answer-first intro; 600+ words on tool pages; guides ≥800 (target ~1000+)
+- Tool pages must link topical guides (`src/data/toolGuideMap.ts` + Learn more block)
+- FAQ on page + FAQPage JSON-LD; hubs/guides index need BreadcrumbList + CollectionPage
 - AdSense: `docs/ADSENSE.md` — privacy ad disclosures, ads.txt, CMP for EEA
 
 ## Commands

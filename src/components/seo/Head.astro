@@ -9,14 +9,26 @@ interface Props {
   ogType?: string;
   noindex?: boolean;
   jsonLd?: object[];
+  /** Absolute path to OG image (no trailing slash). Defaults to site og-default. */
+  ogImagePath?: string;
+  ogImageAlt?: string;
 }
 
-const { title, description, path, ogType = 'website', noindex = false, jsonLd = [] } = Astro.props;
+const {
+  title,
+  description,
+  path,
+  ogType = 'website',
+  noindex = false,
+  jsonLd = [],
+  ogImagePath = siteConfig.ogImagePath,
+  ogImageAlt = siteConfig.ogImageAlt,
+} = Astro.props;
 const canonical = absoluteUrl(path);
 const fullTitle = buildPageTitle(title);
 const metaDesc = description;
-const ogImage = absoluteUrl(siteConfig.ogImagePath);
-const ogAlt = siteConfig.ogImageAlt;
+const ogImage = absoluteUrl(ogImagePath);
+const ogAlt = ogImageAlt;
 ---
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />

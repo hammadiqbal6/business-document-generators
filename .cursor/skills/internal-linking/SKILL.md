@@ -4,4 +4,7 @@ description: Run the internal-linking workflow for DocuForge Tools (see docs/SEO
 ---
 # internal-linking
 
-Follow `docs/SEO-PLAYBOOK.md` and run `npm run audit` / `npx lhci autorun` as appropriate. Update `docs/KEYWORD-MAP.md` when adding pages.
+1. Maintain `src/data/toolGuideMap.ts` (tool→guides, guide→guides, hub→guides).
+2. Tool pages: `LearnMoreGuides` block; guides: topic-specific `relatedToolSlugs` (never identical lists) + RelatedGuides.
+3. Strengthen weak tools (tattoo-consent, cleaning-invoice, rental-lease) with multiple inbound guide links.
+4. Follow `docs/SEO-PLAYBOOK.md` / `docs/SEO-GUARDRAILS.md`; run `npm run audit`. Update `docs/KEYWORD-MAP.md`.

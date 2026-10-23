@@ -9,14 +9,16 @@ export function absoluteUrl(path: string): string {
 
 /** Prefer writing titles ≤60 chars at the source. Skip brand suffix when already long. */
 export function buildPageTitle(title: string): string {
+  const hardMax = 60;
+  const clip = (t: string) => (t.length <= hardMax ? t : `${t.slice(0, hardMax - 1).trim()}…`);
   if (title.includes(siteConfig.siteName) || title.includes('DocuForge')) {
-    return title;
+    return clip(title);
   }
   const shortBrand = siteConfig.siteShortName;
   const withShort = `${title} | ${shortBrand}`;
-  if (withShort.length <= 60) return withShort;
-  if (title.length <= 60) return title;
-  return title;
+  if (withShort.length <= hardMax) return withShort;
+  if (title.length <= hardMax) return title;
+  return clip(title);
 }
 
 export function truncate(text: string, max: number): string {
@@ -220,6 +222,34 @@ export function faqPageJsonLd(faqs: FaqItem[]) {
         text: f.answer,
       },
     })),
+  };
+}
+
+/** CollectionPage + ItemList for hubs and guides index. */
+export function collectionPageJsonLd(opts: {
+  name: string;
+  description: string;
+  path: string;
+  items: { name: string; path: string }[];
+}) {
+  const pageUrl = absoluteUrl(opts.path);
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'CollectionPage',
+    '@id': `${pageUrl}#collection`,
+    name: opts.name,
+    description: opts.description,
+    url: pageUrl,
+    isPartOf: { '@id': websiteId() },
+    mainEntity: {
+      '@type': 'ItemList',
+      itemListElement: opts.items.map((item, i) => ({
+        '@type': 'ListItem',
+        position: i + 1,
+        name: item.name,
+        url: absoluteUrl(item.path),
+      })),
+    },
   };
 }
 

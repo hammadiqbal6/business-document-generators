@@ -1,0 +1,55 @@
+---
+import { getGuide } from '../../data/guides';
+import { guidesForTool } from '../../data/toolGuideMap';
+
+interface Props {
+  toolSlug: string;
+  title?: string;
+}
+
+const { toolSlug, title = 'Learn more' } = Astro.props;
+const guides = guidesForTool(toolSlug)
+  .map((slug) => getGuide(slug))
+  .filter(Boolean);
+---
+{guides.length > 0 && (
+  <section class="learn-more-guides" aria-labelledby="learn-more-guides-heading">
+    <h2 id="learn-more-guides-heading">{title}</h2>
+    <p class="learn-more-guides__lead">
+      Practical guides tied to this template—worked examples, checklists, and FAQ.
+    </p>
+    <ul>
+      {guides.map((g) => (
+        <li>
+          <a href={`/guides/${g!.slug}/`}>{g!.title}</a>
+          <span class="learn-more-guides__desc"> — {g!.answerFirst.slice(0, 90)}…</span>
+        </li>
+      ))}
+    </ul>
+  </section>
+)}
+
+<style>
+  .learn-more-guides {
+    margin: 2rem 0 1.5rem;
+    padding: 1.25rem 1.35rem;
+    border-left: 4px solid var(--brand, #0f6b5c);
+    background: var(--surface, #f8faf9);
+  }
+  .learn-more-guides__lead {
+    margin: 0.35rem 0 0.75rem;
+    color: var(--muted, #4a5c56);
+    max-width: 60ch;
+  }
+  .learn-more-guides ul {
+    margin: 0;
+    padding-left: 1.2rem;
+  }
+  .learn-more-guides li {
+    margin: 0.45rem 0;
+  }
+  .learn-more-guides__desc {
+    color: var(--muted, #4a5c56);
+    font-size: 0.95rem;
+  }
+</style>

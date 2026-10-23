@@ -16,6 +16,8 @@ interface Props {
   jsonLd?: object[];
   /** When false, caller supplies WebSite/Organization/Person (e.g. home @graph). */
   includeSiteGraph?: boolean;
+  ogImagePath?: string;
+  ogImageAlt?: string;
 }
 
 const {
@@ -26,6 +28,8 @@ const {
   noindex,
   jsonLd = [],
   includeSiteGraph = true,
+  ogImagePath,
+  ogImageAlt,
 } = Astro.props;
 const allLd = includeSiteGraph
   ? [webSiteJsonLd(), organizationJsonLd(), personJsonLd(), ...jsonLd]
@@ -34,7 +38,16 @@ const allLd = includeSiteGraph
 <!doctype html>
 <html lang="en">
   <head>
-    <Head title={title} description={description} path={path} ogType={ogType} noindex={noindex} jsonLd={allLd} />
+    <Head
+      title={title}
+      description={description}
+      path={path}
+      ogType={ogType}
+      noindex={noindex}
+      jsonLd={allLd}
+      ogImagePath={ogImagePath}
+      ogImageAlt={ogImageAlt}
+    />
     <Analytics />
     {siteConfig.adsEnabled && siteConfig.adsensePublisherId && (
       <script

@@ -2,11 +2,13 @@
  * Sister-site origins for sparse cross-links (About + topical tool pages).
  * Same env var names on all five repos. Fallbacks keep builds green when unset.
  * Origins are normalized without a trailing slash.
+ * This site's own origin default comes from siteDefaults.mjs (not duplicated here).
  */
+import { DEFAULT_SITE_URL } from './siteDefaults.mjs';
 
 const DEFAULTS = {
   paymentFees: 'https://payment-fee-calculators.hammadiqbal117.workers.dev',
-  businessDocs: 'https://business-document-generators.hammadiqbal117.workers.dev',
+  businessDocs: DEFAULT_SITE_URL,
   homeGarden: 'https://home-garden-calculators.hammadiqbal117.workers.dev',
   fiberArts: 'https://fiber-arts-calculators.hammadiqbal117.workers.dev',
   pet: 'https://pet-calculators.hammadiqbal117.workers.dev',
