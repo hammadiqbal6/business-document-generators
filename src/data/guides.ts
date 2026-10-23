@@ -958,7 +958,7 @@ export const guides: Guide[] = [
       },
       {
         "heading": "A simple three-part pattern",
-        "body": "Common web projects use thirty to forty percent to start, thirty to forty percent at a mid milestone, and the balance before final files or go-live. Name each milestone in the statement of work with dates or review windows.\n\nLate-fee or pause-work language should be reviewed by counsel if you enforce it. State whether the deposit is refundable before work starts and non-refundable after a cancellation window."
+        "body": "Common web projects use thirty to forty percent to start, thirty to forty percent at a mid milestone, and the balance before final files or go-live. Name each milestone in the statement of work with dates or review windows.\n\nLate-fee or pause-work language should be reviewed by counsel if you enforce it. State whether the deposit is refundable before work starts and non-refundable after a cancellation window.\n\nPut milestone percentages in the contract body and repeat them in an appendix table so clients see the math without hunting through legalese."
       },
       {
         "heading": "Invoices, receipts, and processor fees",
@@ -1158,7 +1158,7 @@ export const guides: Guide[] = [
       },
       {
         "heading": "Recordkeeping for taxes and disputes",
-        "body": "Store receipts with the same job number as invoices in your folder structure. The IRS expects income records; receipts support cash sales when no invoice preceded payment.\n\nFor chargebacks, the receipt plus signed authorization helps your processor. Voided payments need a new receipt or credit memo note, not a silent delete. When clients pay in foreign currency, show the amount received in the currency you book unless your policy states otherwise."
+        "body": "Store receipts with the same job number as invoices in your folder structure. The IRS expects income records; receipts support cash sales when no invoice preceded payment.\n\nFor chargebacks, the receipt plus signed authorization helps your processor. Voided payments need a new receipt or credit memo note, not a silent delete. When clients pay in foreign currency, show the amount received in the currency you book unless your policy states otherwise.\n\nEmail PDF receipts to clients automatically when your payment tool supports it so both parties have matching copies the same day."
       },
       {
         "heading": "Retail and service hybrids",
@@ -1450,7 +1450,7 @@ export const guides: Guide[] = [
       },
       {
         "heading": "Red flags in client NDAs",
-        "body": "Watch for perpetual confidentiality on information that is not secret, non-competes disguised as NDAs, or one-sided indemnity. Ask to narrow definition to documents marked confidential and project-specific oral disclosures confirmed in email.\n\nIf a client refuses to sign your mutual NDA but demands yours, consider whether the engagement risk is worth it. Store executed NDAs with the project folder and note expiration dates on your calendar for destruction reminders."
+        "body": "Watch for perpetual confidentiality on information that is not secret, non-competes disguised as NDAs, or one-sided indemnity. Ask to narrow definition to documents marked confidential and project-specific oral disclosures confirmed in email.\n\nIf a client refuses to sign your mutual NDA but demands yours, consider whether the engagement risk is worth it. Store executed NDAs with the project folder and note expiration dates on your calendar for destruction reminders.\n\nCompare each client NDA to your last signed version so you notice new non-solicit sentences slipped into revision three."
       },
       {
         "heading": "Investor decks and beta programs",
@@ -2108,7 +2108,7 @@ export const guides: Guide[] = [
       },
       {
         "heading": "Distribution channels",
-        "body": "Print flyers for sign riders and open houses; export a lighter PDF for email so mobile inboxes load quickly. Neighborhood farmers markets and local shops may allow flyer stacks when listings are nearby.\n\nTrack which listing URL the QR code points to and update immediately after price changes. Brokerage brand guidelines may dictate color and logo placement—check before creative layouts."
+        "body": "Print flyers for sign riders and open houses; export a lighter PDF for email so mobile inboxes load quickly. Neighborhood farmers markets and local shops may allow flyer stacks when listings are nearby.\n\nTrack which listing URL the QR code points to and update immediately after price changes. Brokerage brand guidelines may dictate color and logo placement—check before creative layouts.\n\nHand flyers to visitors at sign-in so you capture who attended even when they do not leave an email on the portal."
       },
       {
         "heading": "Luxury and privacy listings",
