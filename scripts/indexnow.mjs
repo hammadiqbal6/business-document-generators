@@ -18,8 +18,9 @@ import { existsSync } from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
+import { DEFAULT_SITE_URL } from '../src/config/siteDefaults.mjs';
+
 const DEFAULT_KEY = '4d6f1ea5473a0968a83c67ceda5a0387';
-const DEFAULT_SITE = 'https://business-document-generators.hammadiqbal117.workers.dev';
 const ENDPOINT = 'https://api.indexnow.org/indexnow';
 const BATCH_SIZE = 10_000;
 
@@ -107,7 +108,7 @@ function resolveSiteOrigin(urlList) {
       /* fall through */
     }
   }
-  return DEFAULT_SITE;
+  return DEFAULT_SITE_URL;
 }
 
 async function postBatch(payload) {

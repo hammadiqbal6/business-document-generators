@@ -2048,7 +2048,7 @@ export const guides: Guide[] = [
       },
       {
         "heading": "Property facts buyers scan first",
-        "body": "Beds, baths, square footage, lot size, year built, garage, and key upgrades in a scannable row. MLS number helps buyers reference online listings.\n\nBe accurate; misstated square footage creates liability. Source facts from MLS or appraisal docs."
+        "body": "Beds, baths, square footage, lot size, year built, garage, and key upgrades in a scannable row. MLS number helps buyers reference online listings.\n\nBe accurate; misstated square footage creates liability. Source facts from MLS or appraisal docs. Round square footage only the way your MLS displays it so flyers match portal search filters."
       },
       {
         "heading": "Body copy and bullets",

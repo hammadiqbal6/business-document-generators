@@ -223,6 +223,34 @@ export function faqPageJsonLd(faqs: FaqItem[]) {
   };
 }
 
+/** CollectionPage + ItemList for hubs and guides index. */
+export function collectionPageJsonLd(opts: {
+  name: string;
+  description: string;
+  path: string;
+  items: { name: string; path: string }[];
+}) {
+  const pageUrl = absoluteUrl(opts.path);
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'CollectionPage',
+    '@id': `${pageUrl}#collection`,
+    name: opts.name,
+    description: opts.description,
+    url: pageUrl,
+    isPartOf: { '@id': websiteId() },
+    mainEntity: {
+      '@type': 'ItemList',
+      itemListElement: opts.items.map((item, i) => ({
+        '@type': 'ListItem',
+        position: i + 1,
+        name: item.name,
+        url: absoluteUrl(item.path),
+      })),
+    },
+  };
+}
+
 export function articleJsonLd(opts: {
   title: string;
   description: string;

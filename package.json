@@ -8,6 +8,7 @@
   },
   "scripts": {
     "dev": "astro dev",
+    "prebuild": "node scripts/generate-og-svg.mjs",
     "build": "astro build",
     "preview": "astro preview",
     "astro": "astro",
@@ -15,6 +16,7 @@
     "test:watch": "vitest",
     "audit": "npm run build && node scripts/audit/run-all.mjs",
     "audit:seo": "node scripts/audit/seo-audit.mjs",
+    "audit:guardrails": "node scripts/audit/seo-guardrails.mjs",
     "audit:adsense": "node scripts/audit/adsense-audit.mjs",
     "audit:budget": "node scripts/audit/budget-audit.mjs",
     "audit:links": "node scripts/audit/link-check.mjs",

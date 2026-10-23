@@ -3,6 +3,9 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 import Breadcrumbs from '../../components/content/Breadcrumbs.astro';
 import { CATEGORY_META, getToolsByCategory } from '../../data/tools';
 import type { ToolCategory } from '../../data/tools/types';
+import { guides } from '../../data/guides';
+import { hubToGuides } from '../../data/toolGuideMap';
+import { breadcrumbJsonLd, collectionPageJsonLd } from '../../lib/seo';
 
 export function getStaticPaths() {
   return (Object.keys(CATEGORY_META) as ToolCategory[]).map((category) => ({
@@ -18,7 +21,7 @@ const hubCopy: Record<
   'estimates-invoices': {
     title: 'Estimate & Invoice Templates – Free PDF/DOCX',
     description:
-      'Free construction estimates, contractor invoices, cleaning and catering quotes, receipts and work orders. Fill in your browser, preview live, export PDF or Word.',
+      'Free construction estimates, contractor invoices, cleaning and catering quotes, receipts and work orders. Fill in-browser and export PDF or Word.',
     intro:
       'Estimates and invoices are the backbone of small-trade cash flow. Use an estimate when you are proposing scope and price before work starts; switch to an invoice when you are billing for completed (or deposit) work. Receipts confirm payment; work orders assign tasks to crew.',
     whenToUse:
@@ -63,11 +66,28 @@ const crumbs = [
   { name: 'Tools', path: '/tools/' },
   { name: meta.name, path },
 ];
+const hubGuideSlugs = hubToGuides[meta.slug] ?? [];
+const hubGuides = hubGuideSlugs
+  .map((slug) => guides.find((g) => g.slug === slug))
+  .filter(Boolean);
+const jsonLd = [
+  breadcrumbJsonLd(crumbs),
+  collectionPageJsonLd({
+    name: meta.name,
+    description: copy.description,
+    path,
+    items: tools.map((t) => ({ name: t.name, path: `/tools/${t.slug}/` })),
+  }),
+];
+const ogImagePath = `/og/hub-${meta.slug}.svg`;
 ---
 <BaseLayout
   title={copy.title}
   description={copy.description}
   path={path}
+  jsonLd={jsonLd}
+  ogImagePath={ogImagePath}
+  ogImageAlt={`${meta.name} templates on DocuForge Tools`}
 >
   <Breadcrumbs items={crumbs} />
   <h1>{meta.name}</h1>
@@ -83,5 +103,18 @@ const crumbs = [
       </a>
     ))}
   </div>
-  <p><a href="/guides/">Read how-to guides →</a></p>
+
+  {hubGuides.length > 0 && (
+    <section aria-labelledby="hub-guides-heading">
+      <h2 id="hub-guides-heading">Guides for this category</h2>
+      <ul>
+        {hubGuides.map((g) => (
+          <li>
+            <a href={`/guides/${g!.slug}/`}>{g!.title}</a>
+          </li>
+        ))}
+      </ul>
+    </section>
+  )}
+  <p><a href="/guides/">All how-to guides →</a></p>
 </BaseLayout>

@@ -1,14 +1,15 @@
 /**
  * SINGLE OWNER CONFIG — prefer env vars (PUBLIC_*) when deploying; this file supplies defaults.
- * Workers Builds should set PUBLIC_* keys (see .env.example); fallbacks match production workers.dev.
+ * Workers Builds should set PUBLIC_* keys (see .env.example). Site origin fallback is
+ * DEFAULT_SITE_URL from ./siteDefaults.mjs only — see docs/CUSTOM-DOMAIN.md.
  *
  * Authorship follows docs/playbook (one-person tool site): named maintainer only,
  * no fabricated reviewers, same Person @id across sibling tool sites.
  */
 import { sisterSites, sisterUrl } from './sisterSites';
+import { DEFAULT_SITE_URL } from './siteDefaults.mjs';
 
-const DEFAULT_SITE_URL =
-  'https://business-document-generators.hammadiqbal117.workers.dev';
+export { DEFAULT_SITE_URL };
 
 /** Stable Person @id shared across all five sibling tool sites. */
 export const CANONICAL_PERSON_URL = 'https://github.com/hammadiqbal6';

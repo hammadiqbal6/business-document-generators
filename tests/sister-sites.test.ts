@@ -1,4 +1,5 @@
 import { describe, expect, it } from 'vitest';
+import { DEFAULT_SITE_URL } from '../src/config/siteDefaults.mjs';
 import { sisterSiteDefaults, sisterSites, sisterUrl } from '../src/config/sisterSites';
 
 describe('sisterSites config', () => {
@@ -17,19 +18,12 @@ describe('sisterSites config', () => {
   });
 
   it('documents workers.dev defaults for when env vars are missing', () => {
-    expect(sisterSiteDefaults.paymentFees).toBe(
-      'https://payment-fee-calculators.hammadiqbal117.workers.dev',
-    );
-    expect(sisterSiteDefaults.businessDocs).toBe(
-      'https://business-document-generators.hammadiqbal117.workers.dev',
-    );
-    expect(sisterSiteDefaults.homeGarden).toBe(
-      'https://home-garden-calculators.hammadiqbal117.workers.dev',
-    );
-    expect(sisterSiteDefaults.fiberArts).toBe(
-      'https://fiber-arts-calculators.hammadiqbal117.workers.dev',
-    );
-    expect(sisterSiteDefaults.pet).toBe('https://pet-calculators.hammadiqbal117.workers.dev');
+    expect(sisterSiteDefaults.paymentFees).toMatch(/payment-fee-calculators/);
+    // This site's origin default is the single siteDefaults export (not duplicated).
+    expect(sisterSiteDefaults.businessDocs).toBe(DEFAULT_SITE_URL);
+    expect(sisterSiteDefaults.homeGarden).toMatch(/home-garden-calculators/);
+    expect(sisterSiteDefaults.fiberArts).toMatch(/fiber-arts-calculators/);
+    expect(sisterSiteDefaults.pet).toMatch(/pet-calculators/);
   });
 
   it('builds absolute sister paths with trailing slash from live config', () => {

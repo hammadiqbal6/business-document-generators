@@ -26,5 +26,17 @@
 | `/guides/invoice-vs-estimate/` | invoice vs estimate | when to use estimate or invoice | differentiates estimate vs invoice tools |
 | `/guides/line-item-totals-explained/` | how line item totals work | estimate tax deposit math | supports all commercial generators |
 | `/guides/freelance-payment-schedule-milestones/` | freelance payment schedule | web design contract milestones | supports freelance contract tool |
+| `/guides/what-to-include-on-a-receipt/` | what to include on a receipt | payment receipt fields | receipt-generator, contractor-invoice |
+| `/guides/cleaning-invoice-rates-line-items/` | cleaning invoice rates | cleaning line items | cleaning-service-invoice |
+| `/guides/nda-basics-for-freelancers/` | NDA basics for freelancers | mutual NDA explained | simple-nda, freelance-web-design-contract |
+| `/guides/work-order-vs-invoice-vs-estimate/` | work order vs invoice vs estimate | job ticket vs quote | work-order, quote-estimate-generator |
+| `/guides/videography-contract-clauses/` | videography contract clauses | video production agreement terms | videography-contract |
+| `/guides/wedding-vendor-contract-checklist/` | wedding vendor contract checklist | event vendor agreement checklist | event-wedding-vendor-contract, catering-quote |
+| `/guides/podcast-script-structure/` | podcast script structure | episode outline segments | podcast-script-template |
+| `/guides/real-estate-flyer-what-to-include/` | real estate flyer what to include | property flyer checklist | real-estate-flyer-template |
 
 Cannibalization rule: head terms like “invoice template” (KD 43) are not targeted; each page keeps a distinct profession or document type. Guides answer “when/why/how”; tools own “free template / generator” intent.
+
+## Tool ↔ guide map
+
+See `src/data/toolGuideMap.ts` — every tool links topical guides; guides use topic-specific `relatedToolSlugs` (not identical lists).
