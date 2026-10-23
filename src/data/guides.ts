@@ -1079,7 +1079,7 @@ export const guides: Guide[] = [
     "slug": "what-to-include-on-a-receipt",
     "title": "What to Include on a Payment Receipt (Small Business)",
     "metaDescription": "Payment receipt essentials: seller info, date, amount, method, and invoice reference. Free receipt generator for service businesses.",
-    "answerFirst": "A clear payment receipt shows who paid whom, when, how much, payment method, and what the payment was for, often with an invoice or estimate number. It confirms money received; it does not replace an invoice that requested payment. Many small businesses only issue receipts when asked—proactive receipts after deposits reduce reimbursement delays for corporate clients.",
+    "answerFirst": "A clear payment receipt shows who paid whom, when, how much, payment method, and what the payment was for, often with an invoice or estimate number. It confirms money received; it does not replace an invoice that requested payment. Many small businesses only issue receipts when asked—proactive receipts after deposits reduce reimbursement delays for corporate clients and keep your books aligned with bank deposits.",
     "publishedAt": "2026-10-21",
     "updatedAt": "2026-10-23",
     "relatedToolSlugs": [
@@ -2030,7 +2030,7 @@ export const guides: Guide[] = [
     "slug": "real-estate-flyer-what-to-include",
     "title": "What to Include on a Real Estate Flyer",
     "metaDescription": "Property flyer essentials: hero photo, price, specs, agent branding, and compliance lines. Free real estate flyer template.",
-    "answerFirst": "A real estate flyer should lead with a strong listing photo, address or neighborhood, price or call for offers, bed-bath-sqft facts, three to five bullet benefits, open house or tour info, and agent contact with brokerage disclaimer required in your market. Buyers glance for seconds at a handout—accurate specs and one clear headline beat dense paragraphs every time.",
+    "answerFirst": "A real estate flyer should lead with a strong listing photo, address or neighborhood, price or call for offers, bed-bath-sqft facts, three to five bullet benefits, open house or tour info, and agent contact with brokerage disclaimer required in your market. Buyers glance for seconds at a handout—accurate specs and one clear headline beat dense paragraphs every time, especially on busy open-house tables.",
     "publishedAt": "2026-10-22",
     "updatedAt": "2026-10-23",
     "relatedToolSlugs": [
