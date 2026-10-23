@@ -1,13 +1,13 @@
 # AdSense readiness evidence
 
-Generated: 2026-10-23T10:08:37.954Z UTC
+Generated: 2026-10-23T11:18:06.318Z UTC
 
 ## Required pages
 
-- [x] **About** — `about/index.html` (523 words rendered)
-- [x] **Contact** — `contact/index.html` (165 words rendered)
-- [x] **Privacy** — `privacy/index.html` (362 words rendered)
-- [x] **Terms** — `terms/index.html` (225 words rendered)
+- [x] **About** — `about/index.html` (527 words rendered)
+- [x] **Contact** — `contact/index.html` (174 words rendered)
+- [x] **Privacy** — `privacy/index.html` (364 words rendered)
+- [x] **Terms** — `terms/index.html` (227 words rendered)
 - [x] **Methodology** — `methodology/index.html` (460 words rendered)
 
 ## Privacy / ads language
@@ -28,7 +28,7 @@ Generated: 2026-10-23T10:08:37.954Z UTC
 
 ## Content depth (sample tool page)
 
-- `tools/construction-estimate-template/index.html`: **1051** words (target ≥600 for tool pages)
+- `tools/construction-estimate-template/index.html`: **1134** words (target ≥600 for tool pages)
 
 ## Navigation
 

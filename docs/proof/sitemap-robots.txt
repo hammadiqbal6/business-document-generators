@@ -1,6 +1,6 @@
-# Sitemap & robots proof — 2026-10-23T10:08:37.907Z
+# Sitemap & robots proof — 2026-10-23T11:18:06.269Z
 
-Built HTML pages (excl. embed): 38
+Built HTML pages (excl. embed): 46
 Sitemap <loc> count: 1
 Match: REVIEW
 
@@ -43,5 +43,5 @@ Sitemap: https://business-document-generators.hammadiqbal117.workers.dev/sitemap
 
 ## Sitemap sample (first 2k chars)
 ```xml
-<?xml version="1.0" encoding="UTF-8"?><sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"><sitemap><loc>https://business-document-generators.hammadiqbal117.workers.dev/sitemap-0.xml</loc><lastmod>2026-10-23T10:08:36.530Z</lastmod></sitemap></sitemapindex>
+<?xml version="1.0" encoding="UTF-8"?><sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"><sitemap><loc>https://business-document-generators.hammadiqbal117.workers.dev/sitemap-0.xml</loc><lastmod>2026-10-23T11:18:04.636Z</lastmod></sitemap></sitemapindex>
 ```

@@ -61,6 +61,20 @@ function wordCount(text) {
   return text ? text.split(/\s+/).filter(Boolean).length : 0;
 }
 
+/** Decode entities so &amp; / &#38; compare equal and lengths match SERP text. */
+function decodeEntities(s) {
+  return s
+    .replace(/&amp;/gi, '&')
+    .replace(/&#38;/g, '&')
+    .replace(/&lt;/gi, '<')
+    .replace(/&gt;/gi, '>')
+    .replace(/&quot;/gi, '"')
+    .replace(/&apos;/gi, "'")
+    .replace(/&#39;/g, "'")
+    .replace(/&#x([0-9a-f]+);/gi, (_, h) => String.fromCharCode(parseInt(h, 16)))
+    .replace(/&#(\d+);/g, (_, n) => String.fromCharCode(Number(n)));
+}
+
 if (!fs.existsSync(dist)) {
   console.error('seo-guardrails: dist/ missing — run npm run build first');
   process.exit(1);
@@ -207,12 +221,42 @@ for (const file of htmlFiles) {
   const h1s = [...html.matchAll(/<h1\b/gi)];
 
   if (!isEmbed && !is404) {
+    const titleText = decodeEntities(title);
+    const descText = decodeEntities(desc);
+
     if (!title) fail(`${rel}: missing title`);
-    else if (title.length > 60) fail(`${rel}: title length ${title.length} > 60`);
+    else if (titleText.length < 25 || titleText.length > 65) {
+      fail(`${rel}: title length ${titleText.length} outside 25–65`);
+    }
 
     if (!desc) fail(`${rel}: missing meta description`);
-    else if (desc.length < 50 || desc.length > 165) {
-      fail(`${rel}: meta description length ${desc.length} outside 50–165`);
+    else if (descText.length < 70 || descText.length > 160) {
+      fail(`${rel}: meta description length ${descText.length} outside 70–160`);
+    }
+
+    const ogTitle = decodeEntities(
+      html.match(/<meta\s+property="og:title"\s+content="([^"]*)"/i)?.[1] ?? '',
+    );
+    const twTitle = decodeEntities(
+      html.match(/<meta\s+name="twitter:title"\s+content="([^"]*)"/i)?.[1] ?? '',
+    );
+    if (ogTitle && ogTitle !== titleText) {
+      fail(`${rel}: og:title !== <title>`);
+    }
+    if (twTitle && twTitle !== titleText) {
+      fail(`${rel}: twitter:title !== <title>`);
+    }
+    const ogDesc = decodeEntities(
+      html.match(/<meta\s+property="og:description"\s+content="([^"]*)"/i)?.[1] ?? '',
+    );
+    const twDesc = decodeEntities(
+      html.match(/<meta\s+name="twitter:description"\s+content="([^"]*)"/i)?.[1] ?? '',
+    );
+    if (ogDesc && descText && ogDesc !== descText) {
+      fail(`${rel}: og:description !== meta description`);
+    }
+    if (twDesc && descText && twDesc !== descText) {
+      fail(`${rel}: twitter:description !== meta description`);
     }
 
     if (!canonical) fail(`${rel}: missing canonical`);

@@ -6,7 +6,8 @@ Static Astro + TypeScript site with React islands for in-browser document genera
 
 ## Architecture
 
-- `src/config/site.ts` — single owner config (domain, brand, AdSense, GA4, verification tokens)
+- `src/config/site.ts` — single owner config (domain, brand, AdSense, GA4, EmailJS, verification tokens)
+- `/contact/` — optional EmailJS form (`PUBLIC_EMAILJS_*`); mailto fallback when unset — `docs/CONTACT-EMAILJS.md`
 - `src/data/tools/` — tool definitions (fields, defaults, SEO content)
 - `src/components/generators/` — `DocumentGenerator` island, preview model, lazy PDF/DOCX export
 - `src/pages/tools/[slug].astro` — tool shell + static educational content

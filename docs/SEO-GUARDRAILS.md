@@ -16,7 +16,7 @@ Hard requirements so builds never ship the indexing / AEO bugs from the Oct 2026
 - [ ] Cache `/_astro/*` as `public, max-age=31536000, immutable`; give favicons/images a sensible `max-age` (e.g. 86400).
 - [ ] Inline critical CSS on tool pages (`astro.config` `inlineStylesheets: 'always'`).
 - [ ] Emit BreadcrumbList + CollectionPage on hubs and `/guides/`.
-- [ ] Keep meta descriptions 50–165 chars; titles ≤60; one H1; self-canonical.
+- [ ] Keep **titles 25–65 chars** (target ~30–60, unique, include brand + topic); **meta descriptions 70–160 chars** (target ~120–160). `og:title` / `twitter:title` and OG/Twitter descriptions must match `<title>` / meta description. One H1; self-canonical.
 - [ ] Homepage: 40–60 word direct-answer intro under H1 (not only brand tagline).
 - [ ] Full `llms.txt` listing every tool and guide with one-liners.
 - [ ] Tool pages link to topical guides (“Learn more”); guides use topic-specific related tools + guide↔guide links.
@@ -61,7 +61,7 @@ Hard requirements so builds never ship the indexing / AEO bugs from the Oct 2026
 | No hardcoded this-site workers.dev outside allowlist | same |
 | Canonical host matches `PUBLIC_SITE_URL` | same |
 | No `og:image` ending in `/` | same |
-| Titles ≤60; meta 50–165; canonical; single H1 | same |
+| Titles 25–65; meta 70–160; og/twitter match title+desc; canonical; single H1 | same |
 | Tool→guide link; guides ≥800 words; pages in sitemap | same |
 | Broken internal links; invalid JSON-LD | same |
 | Inline classic scripts with `import` | same |

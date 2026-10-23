@@ -92,6 +92,9 @@ Defaults live in `src/config/site.ts` (fallback origin is the Workers `workers.d
 | `PUBLIC_SITE_NAME` | **Yes** | `Your Brand Tools` | Titles, header, Organization schema |
 | `PUBLIC_SITE_TAGLINE` | No | Short one-liner | Homepage lead, Organization description |
 | `PUBLIC_CONTACT_EMAIL` | No (default in `site.ts`) | `hammadiqbal117@gmail.com` | Contact page, footer, privacy/terms, schema |
+| `PUBLIC_EMAILJS_SERVICE_ID` | No | _(empty)_ | EmailJS service ID; with template + public key enables `/contact/` form ([CONTACT-EMAILJS.md](./CONTACT-EMAILJS.md)) |
+| `PUBLIC_EMAILJS_TEMPLATE_ID` | No | _(empty)_ | EmailJS template ID |
+| `PUBLIC_EMAILJS_PUBLIC_KEY` | No | _(empty)_ | EmailJS **public** key only — never the private key |
 | `PUBLIC_TWITTER_HANDLE` | No | `yourbrand` (no `@`) | Twitter card meta |
 | `PUBLIC_GA4_MEASUREMENT_ID` | No | `G-XXXXXXXXXX` | Google Analytics 4 script in `BaseLayout.astro` |
 | `PUBLIC_GSC_VERIFICATION` | Recommended | Meta **content** token only | `<meta name="google-site-verification" content="…">` (alias: `PUBLIC_GOOGLE_SITE_VERIFICATION`) |

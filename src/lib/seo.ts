@@ -7,9 +7,13 @@ export function absoluteUrl(path: string): string {
   return `${base}${p}`;
 }
 
-/** Prefer writing titles ≤60 chars at the source. Skip brand suffix when already long. */
+/**
+ * Build the document <title> (also used for og:title / twitter:title).
+ * Prefer ~30–60 chars at the source; CI enforces 25–65 (see docs/SEO-GUARDRAILS.md).
+ * Skip brand suffix when the title already includes the brand.
+ */
 export function buildPageTitle(title: string): string {
-  const hardMax = 60;
+  const hardMax = 65;
   const clip = (t: string) => (t.length <= hardMax ? t : `${t.slice(0, hardMax - 1).trim()}…`);
   if (title.includes(siteConfig.siteName) || title.includes('DocuForge')) {
     return clip(title);

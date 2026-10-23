@@ -2,7 +2,7 @@
 description: On-page SEO rules for tool and guide pages
 globs: src/pages/**/*.astro,src/data/tools/**/*.ts
 ---
-- One H1, unique title ≤60 chars, meta description 50–165 chars, self canonical.
+- One H1, unique title 25–65 chars (target ~30–60), meta description 70–160 chars (target ~120–160), self canonical; keep og/twitter tags in sync.
 - Primary keyword in title/H1; no duplicate intents (see docs/KEYWORD-MAP.md).
 - Breadcrumbs + JSON-LD on every indexable page (CollectionPage on hubs + guides index).
 - Origin from PUBLIC_SITE_URL / siteDefaults only — see docs/SEO-GUARDRAILS.md and docs/CUSTOM-DOMAIN.md.

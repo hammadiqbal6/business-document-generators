@@ -47,5 +47,87 @@
       "in-browser PDF generators",
       "small-business paperwork"
     ]
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Home",
+        "item": "https://business-document-generators.hammadiqbal117.workers.dev/"
+      },
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "name": "Tools",
+        "item": "https://business-document-generators.hammadiqbal117.workers.dev/tools/"
+      },
+      {
+        "@type": "ListItem",
+        "position": 3,
+        "name": "Estimates & Invoices",
+        "item": "https://business-document-generators.hammadiqbal117.workers.dev/hubs/estimates-invoices/"
+      }
+    ]
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "CollectionPage",
+    "@id": "https://business-document-generators.hammadiqbal117.workers.dev/hubs/estimates-invoices/#collection",
+    "name": "Estimates & Invoices",
+    "description": "Free construction estimates, contractor invoices, cleaning and catering quotes, receipts and work orders. Fill in-browser and export PDF or Word.",
+    "url": "https://business-document-generators.hammadiqbal117.workers.dev/hubs/estimates-invoices/",
+    "isPartOf": {
+      "@id": "https://business-document-generators.hammadiqbal117.workers.dev/#website"
+    },
+    "mainEntity": {
+      "@type": "ItemList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Construction Estimate Template",
+          "url": "https://business-document-generators.hammadiqbal117.workers.dev/tools/construction-estimate-template/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Contractor Invoice Generator",
+          "url": "https://business-document-generators.hammadiqbal117.workers.dev/tools/contractor-invoice/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "Cleaning Service Invoice",
+          "url": "https://business-document-generators.hammadiqbal117.workers.dev/tools/cleaning-service-invoice/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 4,
+          "name": "Catering Quote Generator",
+          "url": "https://business-document-generators.hammadiqbal117.workers.dev/tools/catering-quote/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 5,
+          "name": "Work Order Generator",
+          "url": "https://business-document-generators.hammadiqbal117.workers.dev/tools/work-order/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 6,
+          "name": "Receipt Generator",
+          "url": "https://business-document-generators.hammadiqbal117.workers.dev/tools/receipt-generator/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 7,
+          "name": "Quote / Estimate Generator",
+          "url": "https://business-document-generators.hammadiqbal117.workers.dev/tools/quote-estimate-generator/"
+        }
+      ]
+    }
   }
 ]

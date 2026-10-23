@@ -1,19 +1,27 @@
-# npm run audit — 2026-10-23T10:08:32.000Z
+# npm run audit — 2026-10-23T11:17:59.513Z
 
 
 === SEO audit ===
-SEO audit OK (54 HTML files, 17 tool pages)
+SEO audit OK (62 HTML files, 17 tool pages)
+
+=== SEO guardrails ===
+SEO guardrails: {
+  pages: 62,
+  origin: 'https://business-document-generators.hammadiqbal117.workers.dev',
+  errors: 0
+}
+SEO guardrails passed.
 
 === AdSense readiness ===
 AdSense readiness audit OK
 
 === JS budget ===
 index.html: initial JS ~0.0KB gzip
-tools/construction-estimate-template/index.html: initial JS ~1.2KB gzip
+tools/construction-estimate-template/index.html: initial JS ~1.1KB gzip
 Budget audit OK
 
 === Link check ===
-Link check OK (58 internal paths)
+Link check OK (66 internal paths)
 
 All audits passed.
 

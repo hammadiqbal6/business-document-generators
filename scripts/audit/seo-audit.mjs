@@ -21,6 +21,20 @@ walk(dist);
 const errors = [];
 const toolPages = htmlFiles.filter((f) => f.includes(`${path.sep}tools${path.sep}`) && !f.includes('embed'));
 
+/** Decode entities so &amp; / &#38; compare equal and lengths match SERP text. */
+function decodeEntities(s) {
+  return s
+    .replace(/&amp;/gi, '&')
+    .replace(/&#38;/g, '&')
+    .replace(/&lt;/gi, '<')
+    .replace(/&gt;/gi, '>')
+    .replace(/&quot;/gi, '"')
+    .replace(/&apos;/gi, "'")
+    .replace(/&#39;/g, "'")
+    .replace(/&#x([0-9a-f]+);/gi, (_, h) => String.fromCharCode(parseInt(h, 16)))
+    .replace(/&#(\d+);/g, (_, n) => String.fromCharCode(Number(n)));
+}
+
 for (const file of htmlFiles) {
   const rel = path.relative(dist, file);
   if (rel.includes(`${path.sep}embed${path.sep}`)) {
@@ -35,14 +49,33 @@ for (const file of htmlFiles) {
 
   const titles = [...html.matchAll(/<title>([^<]*)<\/title>/gi)];
   if (titles.length !== 1) errors.push(`${rel}: expected 1 title, got ${titles.length}`);
-  else if (!is404 && titles[0][1].length > 60) {
-    errors.push(`${rel}: title too long (${titles[0][1].length}; max 60)`);
-  } else if (!titles[0][1].trim()) errors.push(`${rel}: empty title`);
+  else if (!titles[0][1].trim()) errors.push(`${rel}: empty title`);
+  else if (!is404) {
+    const titleLen = decodeEntities(titles[0][1]).length;
+    if (titleLen < 25 || titleLen > 65) {
+      errors.push(`${rel}: title length ${titleLen} outside 25–65`);
+    }
+  }
 
   const desc = html.match(/<meta name="description" content="([^"]*)"/i);
   if (!desc) errors.push(`${rel}: missing meta description`);
-  else if (!is404 && (desc[1].length < 50 || desc[1].length > 165)) {
-    errors.push(`${rel}: meta description length ${desc[1].length} outside 50–165`);
+  else if (!is404) {
+    const descLen = decodeEntities(desc[1]).length;
+    if (descLen < 70 || descLen > 160) {
+      errors.push(`${rel}: meta description length ${descLen} outside 70–160`);
+    }
+  }
+
+  if (!is404) {
+    const pageTitle = decodeEntities(titles[0]?.[1] ?? '');
+    const ogTitle = decodeEntities(html.match(/property="og:title"\s+content="([^"]*)"/i)?.[1] ?? '');
+    const twTitle = decodeEntities(html.match(/name="twitter:title"\s+content="([^"]*)"/i)?.[1] ?? '');
+    if (pageTitle && ogTitle && ogTitle !== pageTitle) {
+      errors.push(`${rel}: og:title !== <title>`);
+    }
+    if (pageTitle && twTitle && twTitle !== pageTitle) {
+      errors.push(`${rel}: twitter:title !== <title>`);
+    }
   }
 
   const h1s = [...html.matchAll(/<h1[^>]*>/gi)];
