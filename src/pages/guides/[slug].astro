@@ -3,9 +3,11 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 import Breadcrumbs from '../../components/content/Breadcrumbs.astro';
 import AuthorBox from '../../components/content/AuthorBox.astro';
 import RelatedTools from '../../components/content/RelatedTools.astro';
+import RelatedGuides from '../../components/content/RelatedGuides.astro';
 import { guides, getGuide } from '../../data/guides';
 import { getToolBySlug } from '../../data/tools';
-import { articleJsonLd, breadcrumbJsonLd } from '../../lib/seo';
+import { relatedGuidesFor } from '../../data/toolGuideMap';
+import { articleJsonLd, breadcrumbJsonLd, faqPageJsonLd } from '../../lib/seo';
 
 export function getStaticPaths() {
   return guides.map((g) => ({ params: { slug: g.slug }, props: { guide: g } }));
@@ -15,6 +17,15 @@ const { guide } = Astro.props;
 const path = `/guides/${guide.slug}/`;
 const crumbs = [{ name: 'Home', path: '/' }, { name: 'Guides', path: '/guides/' }, { name: guide.title, path }];
 const related = guide.relatedToolSlugs.map((s) => getToolBySlug(s)).filter(Boolean);
+const relatedGuideSlugs = [
+  ...(guide.relatedGuideSlugs ?? []),
+  ...relatedGuidesFor(guide.slug),
+].filter((s, i, arr) => s !== guide.slug && arr.indexOf(s) === i);
+const relatedGuideList = relatedGuideSlugs
+  .map((s) => getGuide(s))
+  .filter(Boolean)
+  .slice(0, 4);
+const faqLd = faqPageJsonLd(guide.faq);
 const jsonLd = [
   breadcrumbJsonLd(crumbs),
   articleJsonLd({
@@ -24,9 +35,20 @@ const jsonLd = [
     publishedAt: guide.publishedAt,
     updatedAt: guide.updatedAt,
   }),
+  ...(faqLd ? [faqLd] : []),
 ];
+const pageTitle =
+  guide.title.length > 60 ? guide.title.slice(0, 57).trim() + '…' : guide.title;
 ---
-<BaseLayout title={guide.title} description={guide.metaDescription} path={path} ogType="article" jsonLd={jsonLd}>
+<BaseLayout
+  title={pageTitle}
+  description={guide.metaDescription}
+  path={path}
+  ogType="article"
+  jsonLd={jsonLd}
+  ogImagePath={`/og/guide-${guide.slug}.svg`}
+  ogImageAlt={guide.title}
+>
   <Breadcrumbs items={crumbs} />
   <article class="prose">
     <h1>{guide.title}</h1>
@@ -36,10 +58,38 @@ const jsonLd = [
       · Published <time datetime={guide.publishedAt}>{guide.publishedAt}</time>
     </p>
     <div class="summary-box"><p>{guide.answerFirst}</p></div>
+    {guide.legalNote && (
+      <p class="legal-note" role="note"><strong>Note:</strong> {guide.legalNote}</p>
+    )}
     {guide.sections.map((s) => (
       <>
         <h2>{s.heading}</h2>
-        <p>{s.body}</p>
+        {s.body.split(/\n\n+/).map((para) => (
+          <p>{para}</p>
+        ))}
+        {s.table && (
+          <div class="table-wrap">
+            {s.table.caption && <p class="table-caption">{s.table.caption}</p>}
+            <table>
+              <thead>
+                <tr>
+                  {s.table.headers.map((h) => (
+                    <th scope="col">{h}</th>
+                  ))}
+                </tr>
+              </thead>
+              <tbody>
+                {s.table.rows.map((row) => (
+                  <tr>
+                    {row.map((cell) => (
+                      <td set:html={cell} />
+                    ))}
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        )}
       </>
     ))}
     <h2>FAQ</h2>
@@ -54,4 +104,39 @@ const jsonLd = [
     <AuthorBox updatedAt={guide.updatedAt} />
   </article>
   <RelatedTools tools={related} title="Try these generators" />
+  <RelatedGuides guides={relatedGuideList as typeof guides} />
 </BaseLayout>
+
+<style>
+  .legal-note {
+    margin: 1rem 0 1.5rem;
+    padding: 0.85rem 1rem;
+    border: 1px solid var(--border, #d8e3de);
+    background: var(--surface, #f8faf9);
+    max-width: 65ch;
+  }
+  .table-wrap {
+    overflow-x: auto;
+    margin: 1rem 0 1.5rem;
+  }
+  .table-caption {
+    font-size: 0.95rem;
+    color: var(--muted, #4a5c56);
+    margin: 0 0 0.35rem;
+  }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.95rem;
+  }
+  th,
+  td {
+    border: 1px solid var(--border, #d8e3de);
+    padding: 0.5rem 0.65rem;
+    text-align: left;
+    vertical-align: top;
+  }
+  th {
+    background: var(--surface, #f8faf9);
+  }
+</style>
