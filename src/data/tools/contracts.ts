@@ -16,7 +16,7 @@ export const photographyContract: ToolDefinition = {
     'wedding photography contract',
     'portrait photography agreement',
   ],
-  title: 'Free Photography Contract Template (Editable PDF)',
+  title: 'Free Photography Contract Template (PDF)',
   metaDescription:
     'Create a photography contract with retainer, deliverables, usage rights and cancellation clauses. Edit every clause, preview live, download PDF or DOCX free.',
   h1: 'Free Photography Contract Template',
