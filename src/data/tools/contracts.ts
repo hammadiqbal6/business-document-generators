@@ -49,7 +49,7 @@ export const photographyContract: ToolDefinition = {
     photographerName: 'Lumen Studio',
     photographerAddress: '450 Gallery Ave, Portland, OR 97209',
     clientName: 'Casey & Morgan Ellis',
-    clientEmail: 'casey@example.com',
+    clientEmail: 'casey@client.invalid',
     eventType: 'Wedding day coverage',
     eventDate: '2026-06-14',
     startTime: '1:00 PM',
@@ -318,7 +318,7 @@ export const eventVendorContract: ToolDefinition = {
   category: 'contracts',
   primaryKeyword: 'wedding vendor contract',
   secondaryKeywords: ['event vendor contract template', 'wedding vendor agreement', 'vendor services contract'],
-  title: 'Event & Wedding Vendor Contract – Free Template',
+  title: 'Wedding Vendor Contract – Free Template',
   metaDescription:
     'Draft an event or wedding vendor contract: date, venue, fee, setup times, cancellation clauses. Editable; PDF/DOCX. Not legal advice.',
   h1: 'Event & Wedding Vendor Contract Template',

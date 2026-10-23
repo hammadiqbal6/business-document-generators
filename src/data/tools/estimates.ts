@@ -13,7 +13,7 @@ export const constructionEstimate: ToolDefinition = {
     'contractor estimate form',
     'building estimate template PDF',
   ],
-  title: 'Free Construction Estimate Template – PDF & DOCX',
+  title: 'Free Construction Estimate Template (PDF)',
   metaDescription:
     'Fill a free construction estimate template with line items, labor, materials and tax, preview it live, then download a PDF or Word file. No signup required.',
   h1: 'Free Construction Estimate Template',
@@ -426,7 +426,7 @@ export const quoteEstimate: ToolDefinition = {
   category: 'estimates-invoices',
   primaryKeyword: 'quote estimate generator',
   secondaryKeywords: ['free estimate generator', 'business quote template', 'service estimate PDF'],
-  title: 'Free Quote & Estimate Template Generator (PDF)',
+  title: 'Free Quote & Estimate Generator (PDF)',
   metaDescription:
     'Generate a professional service quote or estimate with line items, tax and a validity date. Live preview, then download PDF or DOCX—no signup.',
   h1: 'Free Quote & Estimate Template Generator',

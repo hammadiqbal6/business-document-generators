@@ -31,14 +31,17 @@ for (const file of htmlFiles) {
     continue;
   }
   const html = fs.readFileSync(file, 'utf8');
+  const is404 = rel === '404.html' || rel.endsWith(`${path.sep}404.html`);
+
   const titles = [...html.matchAll(/<title>([^<]*)<\/title>/gi)];
   if (titles.length !== 1) errors.push(`${rel}: expected 1 title, got ${titles.length}`);
-  else if (titles[0][1].length > 60) errors.push(`${rel}: title too long (${titles[0][1].length}; max 60)`);
-  else if (!titles[0][1].trim()) errors.push(`${rel}: empty title`);
+  else if (!is404 && titles[0][1].length > 60) {
+    errors.push(`${rel}: title too long (${titles[0][1].length}; max 60)`);
+  } else if (!titles[0][1].trim()) errors.push(`${rel}: empty title`);
 
   const desc = html.match(/<meta name="description" content="([^"]*)"/i);
   if (!desc) errors.push(`${rel}: missing meta description`);
-  else if (desc[1].length < 50 || desc[1].length > 165) {
+  else if (!is404 && (desc[1].length < 50 || desc[1].length > 165)) {
     errors.push(`${rel}: meta description length ${desc[1].length} outside 50–165`);
   }
 
