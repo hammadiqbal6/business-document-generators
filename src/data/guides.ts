@@ -1216,7 +1216,7 @@ export const guides: Guide[] = [
       },
       {
         "question": "Should receipts match invoice numbers?",
-        "answer": "Yes—carry the invoice number on every receipt so partial payments stack cleanly. Mismatched numbers confuse clients running three cards on one remodel."
+        "answer": "Yes—carry the invoice number on every receipt so partial payments stack cleanly. Mismatched numbers confuse clients running three cards on one remodel. Use the same date format as your invoices—ISO yyyy-mm-dd—to avoid timezone confusion on international jobs."
       }
     ]
   },
@@ -2158,7 +2158,7 @@ export const guides: Guide[] = [
       },
       {
         "question": "Should I add a map thumbnail?",
-        "answer": "A simple map or neighborhood inset helps buyers orient when the listing is in an unfamiliar subdivision. Use licensed map tiles or brokerage-approved graphics only."
+        "answer": "A simple map or neighborhood inset helps buyers orient when the listing is in an unfamiliar subdivision. Use licensed map tiles or brokerage-approved graphics only. Keep the map small so property bullets remain the visual focus."
       }
     ]
   }
