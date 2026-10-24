@@ -174,12 +174,16 @@ for (const file of htmlFiles) {
   const isHome = rel === 'index.html';
 
   if (isToolPage) {
-    // Editor must auto-open: data-auto-open="1" and a real input in the answer-first shell or generator.
-    if (!/data-auto-open=["']1["']/.test(html)) {
-      fail(`${rel}: tool page missing data-auto-open="1" (editor must open by default)`);
+    // Answer-first: static form shell with real inputs (no click-only "Open editor" gate).
+    if (!/data-auto-open=["']1["']/.test(html) && !/generator--shell|data-generator-shell/.test(html)) {
+      fail(`${rel}: tool page missing answer-first editor shell (data-auto-open / generator--shell)`);
     }
-    if (/generator-lazy__prompt(?!--loading)/.test(html) && /Open editor/.test(html) && !/data-auto-open=["']1["']/.test(html)) {
-      fail(`${rel}: editor gated behind Open editor button`);
+    if (
+      /Open editor/.test(html) &&
+      !/data-generator-shell|generator--shell|data-shell-field/.test(html) &&
+      !/data-auto-open=["']1["']/.test(html)
+    ) {
+      fail(`${rel}: editor gated behind Open editor button with no static form shell`);
     }
     // First input should exist in static HTML (shell) for answer-first.
     if (!/<input\b|<textarea\b|<select\b/i.test(html)) {

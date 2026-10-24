@@ -66,19 +66,16 @@ for (const vp of viewports) {
     await page.screenshot({ path: shot, fullPage: false });
 
     if (pagePath.includes('/tools/')) {
-      // Auto-open: wait for the live generator (no Open editor click required).
-      const openBtn = page.locator('[data-generator-load]:not([hidden])');
-      if (await openBtn.count()) {
-        await openBtn.click();
-      }
-      await page.waitForSelector('.generator', { timeout: 25000 });
-      const loadingStuck = await page.locator('text=Loading editor').count();
-      if (loadingStuck) errors.push(`${vp.name}${pagePath}: stuck on Loading editor`);
+      // Answer-first: static shell inputs must be usable without a click gate.
+      await page.waitForSelector(
+        '.generator--shell [data-shell-field], .generator input, .generator textarea, .generator select',
+        { timeout: 15000 },
+      );
 
       const answerFirst = await page.evaluate(() => {
         const h1 = document.querySelector('main h1, h1');
         const input = document.querySelector(
-          '.generator input, .generator textarea, .generator select',
+          '.generator--shell [data-shell-field], .generator input, .generator textarea, .generator select',
         );
         if (!h1 || !input) return { ok: false, reason: 'missing h1 or input' };
         const range = document.createRange();
@@ -100,11 +97,22 @@ for (const vp of viewports) {
       }
 
       const fontOk = await page.evaluate(() => {
-        const input = document.querySelector('.generator input, .generator textarea, .generator select');
+        const input = document.querySelector(
+          '.generator--shell [data-shell-field], .generator input, .generator textarea, .generator select',
+        );
         if (!input) return false;
         return parseFloat(getComputedStyle(input).fontSize) >= 16;
       });
       if (!fontOk) errors.push(`${vp.name}${pagePath}: input font < 16px`);
+
+      // Upgrade to full editor and confirm it mounts.
+      const loadBtn = page.locator('[data-generator-load]');
+      if (await loadBtn.count()) {
+        await loadBtn.click();
+      }
+      await page.waitForSelector('.generator:not(.generator--shell)', { timeout: 25000 });
+      const loadingStuck = await page.locator('text=Loading editor').count();
+      if (loadingStuck) errors.push(`${vp.name}${pagePath}: stuck on Loading editor`);
 
       const previewTab = page.locator('.generator__tabs button', { hasText: 'Preview' });
       if (await previewTab.count()) {

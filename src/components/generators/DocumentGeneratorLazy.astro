@@ -1,32 +1,39 @@
 ---
-import type { ToolDefinition } from '../../data/tools/types';
+import type { FieldDef, ToolDefinition } from '../../data/tools/types';
 import './generator.css';
 
 interface Props {
   tool: ToolDefinition;
   embed?: boolean;
-  /** When true (default on tool pages), mount the editor immediately so fields are above the fold. */
+  /**
+   * Answer-first mode (tool pages): render a static form shell with real inputs above the fold.
+   * Heavy React editor loads on first interaction — keeps LCP/CLS/JS budgets green.
+   */
   autoOpen?: boolean;
 }
 
 const { tool, embed = false, autoOpen = false } = Astro.props;
 const toolJson = JSON.stringify(tool);
 
-/** First simple field for a static answer-first shell (visible before React mounts). */
-const shellField = tool.fields.find(
-  (f) =>
-    f.type === 'text' ||
-    f.type === 'email' ||
-    f.type === 'tel' ||
-    f.type === 'number' ||
-    f.type === 'date' ||
-    f.type === 'currency' ||
-    f.type === 'textarea' ||
-    f.type === 'select',
-);
-const shellDefault = shellField ? tool.defaults[shellField.id] : '';
-const shellValue =
-  shellDefault == null || typeof shellDefault === 'object' ? '' : String(shellDefault);
+const simpleTypes = new Set([
+  'text',
+  'email',
+  'tel',
+  'number',
+  'date',
+  'currency',
+  'textarea',
+  'select',
+]);
+
+/** First few simple fields for the static answer-first shell. */
+const shellFields: FieldDef[] = tool.fields.filter((f) => simpleTypes.has(f.type)).slice(0, 4);
+
+function shellValue(field: FieldDef): string {
+  const d = tool.defaults[field.id];
+  if (d == null || typeof d === 'object') return '';
+  return String(d);
+}
 ---
 
 <div
@@ -44,67 +51,75 @@ const shellValue =
       <button type="button" class="btn btn--primary" data-generator-load>Open editor</button>
     </div>
   )}
-  {autoOpen && shellField && (
+  {autoOpen && shellFields.length > 0 && (
     <div class="generator generator--shell" data-generator-shell>
       <div class="generator__form">
         <fieldset class="generator__section">
-          <legend>{shellField.section || 'Details'}</legend>
-          <div class="field">
-            <label for={`shell-${tool.slug}-${shellField.id}`}>
-              {shellField.label}
-              {shellField.required ? ' *' : ''}
-            </label>
-            {shellField.type === 'textarea' ? (
-              <textarea
-                id={`shell-${tool.slug}-${shellField.id}`}
-                name={shellField.id}
-                rows={shellField.rows || 3}
-                required={shellField.required}
-              >{shellValue}</textarea>
-            ) : shellField.type === 'select' ? (
-              <select
-                id={`shell-${tool.slug}-${shellField.id}`}
-                name={shellField.id}
-                required={shellField.required}
-              >
-                {(shellField.options || []).map((o) => (
-                  <option value={o.value} selected={o.value === shellValue}>
-                    {o.label}
-                  </option>
-                ))}
-              </select>
-            ) : (
-              <input
-                id={`shell-${tool.slug}-${shellField.id}`}
-                name={shellField.id}
-                type={
-                  shellField.type === 'currency' || shellField.type === 'number'
-                    ? 'number'
-                    : shellField.type === 'email'
-                      ? 'email'
-                      : shellField.type === 'tel'
-                        ? 'tel'
-                        : shellField.type === 'date'
-                          ? 'date'
-                          : 'text'
-                }
-                value={shellValue}
-                required={shellField.required}
-                inputmode={shellField.inputMode}
-                placeholder={shellField.placeholder}
-              />
-            )}
-          </div>
-          <p class="generator-lazy__shell-hint">Loading the full editor with live preview…</p>
+          <legend>{shellFields[0]?.section || 'Details'}</legend>
+          {shellFields.map((field) => {
+            const id = `shell-${tool.slug}-${field.id}`;
+            const value = shellValue(field);
+            return (
+              <div class="field">
+                <label for={id}>
+                  {field.label}
+                  {field.required ? ' *' : ''}
+                </label>
+                {field.type === 'textarea' ? (
+                  <textarea
+                    id={id}
+                    name={field.id}
+                    rows={field.rows || 3}
+                    required={field.required}
+                    data-shell-field
+                  >{value}</textarea>
+                ) : field.type === 'select' ? (
+                  <select id={id} name={field.id} required={field.required} data-shell-field>
+                    {(field.options || []).map((o) => (
+                      <option value={o.value} selected={o.value === value}>
+                        {o.label}
+                      </option>
+                    ))}
+                  </select>
+                ) : (
+                  <input
+                    id={id}
+                    name={field.id}
+                    type={
+                      field.type === 'currency' || field.type === 'number'
+                        ? 'number'
+                        : field.type === 'email'
+                          ? 'email'
+                          : field.type === 'tel'
+                            ? 'tel'
+                            : field.type === 'date'
+                              ? 'date'
+                              : 'text'
+                    }
+                    value={value}
+                    required={field.required}
+                    inputmode={field.inputMode}
+                    placeholder={field.placeholder}
+                    data-shell-field
+                  />
+                )}
+              </div>
+            );
+          })}
+          <p class="generator-lazy__shell-hint">
+            Start typing to load the full live preview, remaining fields, and PDF/DOCX export.
+          </p>
+          <button type="button" class="btn btn--primary" data-generator-load>
+            Load full editor
+          </button>
         </fieldset>
       </div>
-      <button type="button" class="btn btn--primary" data-generator-load hidden>Open editor</button>
     </div>
   )}
-  {autoOpen && !shellField && (
-    <div class="generator-lazy__prompt generator-lazy__prompt--loading" data-generator-loading>
-      <p>Loading editor…</p>
-      <button type="button" class="btn btn--primary" data-generator-load hidden>Open editor</button>
+  {autoOpen && shellFields.length === 0 && (
+    <div class="generator-lazy__prompt">
+      <p>Load the editor to fill fields and export PDF or DOCX.</p>
+      <button type="button" class="btn btn--primary" data-generator-load>Open editor</button>
     </div>
   )}
   <div class="generator-lazy__mount" hidden></div>
@@ -118,23 +133,17 @@ const shellValue =
     border-radius: 8px;
     background: var(--color-surface, #f6f8fa);
   }
-  .generator-lazy__prompt--loading {
-    min-height: 4.5rem;
-    display: flex;
-    align-items: center;
-  }
   .generator-lazy__prompt p {
     margin: 0 0 0.75rem;
     max-width: 52ch;
   }
-  .generator-lazy__prompt--loading p {
-    margin: 0;
-  }
   .generator--shell {
     margin: 0.5rem 0 1rem;
+    /* Reserve space so upgrading to the React editor does not tank CLS. */
+    min-height: 28rem;
   }
   .generator-lazy__shell-hint {
-    margin: 0.75rem 0 0;
+    margin: 0.75rem 0 0.85rem;
     font-size: 0.9rem;
     color: var(--muted, #4a5c56);
   }
@@ -151,7 +160,6 @@ const shellValue =
     const shell = root.querySelector('[data-generator-shell]');
     const mountEl = root.querySelector('.generator-lazy__mount');
     const embed = root.dataset.embed === '1';
-    const autoOpen = root.dataset.autoOpen === '1';
     if (!mountEl) return;
 
     let started = false;
@@ -162,23 +170,39 @@ const shellValue =
         btn.disabled = true;
         btn.setAttribute('aria-busy', 'true');
         btn.textContent = 'Loading editor…';
-        btn.hidden = false;
       }
       try {
         const tool = JSON.parse(root.dataset.tool || '{}');
+        // Carry shell field values into the React mount via a temporary query-less handoff on the root.
+        const seeded = { ...(tool.defaults || {}) };
+        root.querySelectorAll('[data-shell-field]').forEach((el) => {
+          const name = el.getAttribute('name');
+          if (!name) return;
+          if (el instanceof HTMLInputElement || el instanceof HTMLTextAreaElement || el instanceof HTMLSelectElement) {
+            seeded[name] = el.value;
+          }
+        });
+        tool.defaults = seeded;
         const { mountDocumentGenerator } = await import('../../lib/mountDocumentGenerator.tsx');
+        // Keep shell height until mount paints to limit CLS.
+        const reserved = shell?.getBoundingClientRect().height || 0;
+        if (reserved > 0) {
+          mountEl.style.minHeight = `${Math.ceil(reserved)}px`;
+        }
         prompt?.remove();
         shell?.remove();
         mountEl.hidden = false;
         mountDocumentGenerator(mountEl, tool, embed);
+        requestAnimationFrame(() => {
+          mountEl.style.minHeight = '';
+        });
       } catch (err) {
         console.error(err);
         started = false;
         if (btn) {
           btn.disabled = false;
           btn.removeAttribute('aria-busy');
-          btn.hidden = false;
-          btn.textContent = 'Open editor';
+          btn.textContent = root.dataset.autoOpen === '1' ? 'Load full editor' : 'Open editor';
         }
         const msg = document.createElement('p');
         msg.className = 'generator-lazy__error';
@@ -188,10 +212,17 @@ const shellValue =
       }
     }
 
-    if (autoOpen) {
-      void openEditor();
-    } else if (btn) {
-      btn.addEventListener('click', () => void openEditor(), { once: true });
+    btn?.addEventListener('click', () => void openEditor(), { once: true });
+
+    // Upgrade on first real edit of the answer-first shell (not on initial page load — CWV).
+    if (shell) {
+      const onInteract = () => void openEditor();
+      shell.addEventListener('focusin', onInteract, { once: true });
+      shell.addEventListener(
+        'input',
+        onInteract,
+        { once: true },
+      );
     }
   }
 

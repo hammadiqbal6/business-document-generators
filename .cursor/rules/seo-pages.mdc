@@ -15,7 +15,7 @@ Before adding or substantially rewriting any tool, guide, hub, or landing page:
 
 ## Answer-first (hard)
 
-- **Tools:** H1 → ≤45-word lead → **usable form/editor** (auto-open; no “Open editor” gate) → byline/trust under the tool → supporting content. ≤60 words between H1 and first input. Sample preview collapsed or below the fold.
+- **Tools:** H1 → ≤45-word lead → **usable form shell** with real inputs above the fold (no click-only “Open editor” gate) → byline/trust under the tool → supporting content. ≤60 words between H1 and first input. Heavy React + live preview may load on first edit; keep initial JS/CLS within proof budgets. Sample preview collapsed or below the fold.
 - **Guides:** H1 → answer box (number/verdict in sentence 1) → key takeaways → CTA → byline → body. Legal notes belong at the end of the answer box, not between H1 and answer.
 - **Hubs/home:** short lead, then tool cards immediately (first card above the mobile fold).
 
