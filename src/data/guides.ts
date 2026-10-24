@@ -21,9 +21,9 @@ export interface Guide {
 export const guides: Guide[] = [
   {
     "slug": "construction-estimate-that-wins-jobs",
-    "title": "What to Include in a Construction Estimate + Example",
+    "title": "What to Include in a Construction Estimate",
     "metaDescription": "Checklist of what to include in a construction estimate—scope, line items, tax, deposits, validity—plus a worked example and free template generator.",
-    "answerFirst": "Include at least eight checklist items in a construction estimate: dated header, measurable scope, labor and materials lines, allowances, tax, deposit or draws, validity window, and exclusions. Separate quantities from rates so clients can compare bids, then state how change orders work when site conditions or selections change.",
+    "answerFirst": "Include at least 8 checklist items in a construction estimate: dated header, measurable scope, labor vs materials, allowances, tax, deposit, validity window, and exclusions. Tie every major line to written scope so clients can compare bids and you can defend the number when selections change.",
     "publishedAt": "2026-10-19",
     "updatedAt": "2026-10-23",
     "relatedToolSlugs": [
@@ -137,7 +137,7 @@ export const guides: Guide[] = [
     "slug": "photography-contract-clauses",
     "title": "Photography Contract Clauses Explained (Editable Template)",
     "metaDescription": "Understand retainer, cancellation, copyright, and usage clauses in photography contracts. Not legal advice—use our free editable template as a starting point.",
-    "answerFirst": "Most photography contracts need six core clauses: scope (date, hours, locations), payment and retainer, cancellation, copyright ownership, client usage rights, and liability limits. Edit each clause for your session type and deliverables, then have local counsel review before you sign—this article is not legal advice.",
+    "answerFirst": "Most photography contracts need 6 core clauses: scope (date, hours, locations), payment and retainer, deliverables and timeline, image usage/license, cancellation, and liability limits. Add model releases when recognizable people appear outside the paying client.",
     "publishedAt": "2026-10-19",
     "updatedAt": "2026-10-23",
     "relatedToolSlugs": [
@@ -385,7 +385,7 @@ export const guides: Guide[] = [
     "slug": "tattoo-consent-documentation",
     "title": "Tattoo Consent Forms: What Studios Should Document",
     "metaDescription": "Health acknowledgements, ID verification, design approval, and aftercare on tattoo consent forms. Free template—not legal or medical advice.",
-    "answerFirst": "A complete tattoo consent record usually needs six elements: client identity and age verification, design and placement approval, health and risk acknowledgements, aftercare receipt, signatures with dates, and retention per local body-art rules. Treat each session as its own file—this is not medical or legal advice.",
+    "answerFirst": "A complete tattoo consent record usually needs 6 elements: client identity and age verification, design and placement, risk acknowledgements, aftercare receipt, health disclosures, and signatures—with retention per your state health rules. This is documentation, not legal or medical advice.",
     "publishedAt": "2026-10-19",
     "updatedAt": "2026-10-23",
     "relatedToolSlugs": [
@@ -526,7 +526,7 @@ export const guides: Guide[] = [
     "slug": "rental-application-fair-housing",
     "title": "Rental Applications: Fair Housing and What to Ask",
     "metaDescription": "What belongs on a residential rental application, authorization to verify, and fair housing basics. Free application form generator.",
-    "answerFirst": "Use one fair-housing-safe application for every prospect: contact details, housing and job history, references, and written screening authorization—never questions that target protected characteristics. Apply the same criteria to all applicants, disclose fees where required, and pair approvals with a proper lease.",
+    "answerFirst": "Use 1 fair-housing-safe application for every prospect: the same questions on contact details, housing history, job and income, occupants, and screening authorization. Never add different criteria by protected class; pair screening with HUD fair-housing rules.",
     "publishedAt": "2026-10-19",
     "updatedAt": "2026-10-23",
     "relatedToolSlugs": [
@@ -659,7 +659,7 @@ export const guides: Guide[] = [
     "slug": "invoice-vs-estimate",
     "title": "Invoice vs Estimate: When to Use Each Document",
     "metaDescription": "Learn the difference between an estimate and an invoice, when to send each, and how deposits and change orders fit. Free templates for both.",
-    "answerFirst": "Rule of thumb: an estimate or quote proposes price before work; an invoice requests payment after work or for a deposit due. Use the estimate to win the job, then convert the same line items into an invoice when money is owed so bookkeepers see proposed versus due at a glance.",
+    "answerFirst": "Rule of thumb in 1 line: an estimate or quote proposes price before work; an invoice requests payment for work done or due. Keep both documents with matching line items when you convert an accepted estimate into billing.",
     "publishedAt": "2026-10-20",
     "updatedAt": "2026-10-23",
     "relatedToolSlugs": [
@@ -1079,7 +1079,7 @@ export const guides: Guide[] = [
     "slug": "what-to-include-on-a-receipt",
     "title": "What to Include on a Payment Receipt (Small Business)",
     "metaDescription": "Payment receipt essentials: seller info, date, amount, method, and invoice reference. Free receipt generator for service businesses.",
-    "answerFirst": "Most useful payment receipts include about seven fields: who paid whom, date, unique receipt number, description of goods or services, amount paid, payment method, and remaining balance if partial. A receipt confirms money received; it does not replace the invoice that requested payment.",
+    "answerFirst": "Most useful payment receipts include about 7 fields: who paid whom, date, unique receipt number, amount paid, method, what was purchased, and any tax or tip broken out. A receipt proves payment; an invoice requests it.",
     "publishedAt": "2026-10-21",
     "updatedAt": "2026-10-23",
     "relatedToolSlugs": [
@@ -1508,7 +1508,7 @@ export const guides: Guide[] = [
     "slug": "work-order-vs-invoice-vs-estimate",
     "title": "Work Order vs Invoice vs Estimate: Which to Use",
     "metaDescription": "Compare work orders, estimates, and invoices for service and construction jobs—scope, authorization, and billing in plain English.",
-    "answerFirst": "Use three documents in sequence: an estimate to propose price and scope, a work order to authorize on-site tasks, and an invoice to request payment for completed work. Keep the same line labels across all three so crews, clients, and AP match the job from quote to cash.",
+    "answerFirst": "Use 3 documents in sequence: an estimate to propose price and scope, a work order to assign the job to crew, and an invoice to collect payment. Mixing them in one PDF is how clients dispute what was promised versus what was billed.",
     "publishedAt": "2026-10-21",
     "updatedAt": "2026-10-23",
     "relatedToolSlugs": [
@@ -1620,7 +1620,7 @@ export const guides: Guide[] = [
     "slug": "videography-contract-clauses",
     "title": "Videography Contract Clauses Explained",
     "metaDescription": "Delivery format, music rights, revision rounds, and cancellation in videography contracts. Editable template—not legal advice.",
-    "answerFirst": "Cover at least seven key videography clauses: shoot days, deliverables and formats, revision rounds, music and clearance responsibility, payment schedule, cancellation, and ownership of raw versus finished files. Tailor the set to weddings or commercial work and cap revisions so post stays profitable.",
+    "answerFirst": "Cover at least 7 key videography clauses: shoot days, deliverables and formats, revision rounds, music licensing, raw footage policy, payment schedule, and cancellation. Price raw files and rush edits as add-ons when clients ask.",
     "publishedAt": "2026-10-21",
     "updatedAt": "2026-10-23",
     "relatedToolSlugs": [
@@ -1755,7 +1755,7 @@ export const guides: Guide[] = [
     "slug": "wedding-vendor-contract-checklist",
     "title": "Wedding Vendor Contract Checklist for Couples and Planners",
     "metaDescription": "Dates, deposits, cancellation, insurance, and deliverables to verify in wedding vendor contracts—from catering to photo and video.",
-    "answerFirst": "Before signing, run a seven-point wedding vendor checklist: event date and timeline, deposit and refund rules, final guest counts or deliverables, insurance and venue COI needs, cancellation and force majeure, overtime or meal rules, and who owns creative work afterward. Compare each PDF to the quote you approved.",
+    "answerFirst": "Before signing, run a 7-point wedding vendor checklist: event date and timeline, deposit and balance dates, overtime/travel fees, force majeure, backup vendor, insurance/COI, and cancellation terms. Put numbers in writing—not only in texts.",
     "publishedAt": "2026-10-21",
     "updatedAt": "2026-10-23",
     "relatedToolSlugs": [
@@ -2030,7 +2030,7 @@ export const guides: Guide[] = [
     "slug": "real-estate-flyer-what-to-include",
     "title": "What to Include on a Real Estate Flyer",
     "metaDescription": "Property flyer essentials: hero photo, price, specs, agent branding, and compliance lines. Free real estate flyer template.",
-    "answerFirst": "Put at least eight must-include items on a real estate flyer: strong photo cue, address or neighborhood, price, bed-bath-sqft facts, three to five benefit bullets, open-house or tour info, agent contact with brokerage, and fair-housing or reliability disclaimer required in your market.",
+    "answerFirst": "Put at least 8 must-include items on a real estate flyer: strong photo cue, address or area, price, beds/baths/sq ft, 3–5 highlights, open-house time if any, agent contact, and fair-housing/equal-housing notice. This is marketing—not an MLS sheet.",
     "publishedAt": "2026-10-22",
     "updatedAt": "2026-10-23",
     "relatedToolSlugs": [
