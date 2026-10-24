@@ -1,30 +1,133 @@
 ---
-import type { ToolDefinition } from '../../data/tools/types';
+import type { FieldDef, ToolDefinition } from '../../data/tools/types';
 import './generator.css';
 
 interface Props {
   tool: ToolDefinition;
   embed?: boolean;
+  /**
+   * Answer-first mode (tool pages): render a static form shell with real inputs above the fold.
+   * Heavy React editor loads on first interaction — keeps LCP/CLS/JS budgets green.
+   */
+  autoOpen?: boolean;
 }
 
-const { tool, embed = false } = Astro.props;
+const { tool, embed = false, autoOpen = false } = Astro.props;
 const toolJson = JSON.stringify(tool);
+
+const simpleTypes = new Set([
+  'text',
+  'email',
+  'tel',
+  'number',
+  'date',
+  'currency',
+  'textarea',
+  'select',
+]);
+
+/** First few simple fields for the static answer-first shell. */
+const shellFields: FieldDef[] = tool.fields.filter((f) => simpleTypes.has(f.type)).slice(0, 4);
+
+function shellValue(field: FieldDef): string {
+  const d = tool.defaults[field.id];
+  if (d == null || typeof d === 'object') return '';
+  return String(d);
+}
 ---
 
-<div class="generator-lazy" data-embed={embed ? '1' : '0'} data-tool={toolJson}>
-  <div class="generator-lazy__prompt">
-    <p>
-      Open the editor to fill fields, see a live preview, and export PDF or DOCX. Heavy scripts load only
-      after you click—nothing runs until then.
-    </p>
-    <button type="button" class="btn btn--primary" data-generator-load>Open editor</button>
-  </div>
+<div
+  class="generator-lazy"
+  data-embed={embed ? '1' : '0'}
+  data-auto-open={autoOpen ? '1' : '0'}
+  data-tool={toolJson}
+>
+  {!autoOpen && (
+    <div class="generator-lazy__prompt">
+      <p>
+        Open the editor to fill fields, see a live preview, and export PDF or DOCX. Heavy scripts load only
+        after you click—nothing runs until then.
+      </p>
+      <button type="button" class="btn btn--primary" data-generator-load>Open editor</button>
+    </div>
+  )}
+  {autoOpen && shellFields.length > 0 && (
+    <div class="generator generator--shell" data-generator-shell>
+      <div class="generator__form">
+        <fieldset class="generator__section">
+          <legend>{shellFields[0]?.section || 'Details'}</legend>
+          {shellFields.map((field) => {
+            const id = `shell-${tool.slug}-${field.id}`;
+            const value = shellValue(field);
+            return (
+              <div class="field">
+                <label for={id}>
+                  {field.label}
+                  {field.required ? ' *' : ''}
+                </label>
+                {field.type === 'textarea' ? (
+                  <textarea
+                    id={id}
+                    name={field.id}
+                    rows={field.rows || 3}
+                    required={field.required}
+                    data-shell-field
+                  >{value}</textarea>
+                ) : field.type === 'select' ? (
+                  <select id={id} name={field.id} required={field.required} data-shell-field>
+                    {(field.options || []).map((o) => (
+                      <option value={o.value} selected={o.value === value}>
+                        {o.label}
+                      </option>
+                    ))}
+                  </select>
+                ) : (
+                  <input
+                    id={id}
+                    name={field.id}
+                    type={
+                      field.type === 'currency' || field.type === 'number'
+                        ? 'number'
+                        : field.type === 'email'
+                          ? 'email'
+                          : field.type === 'tel'
+                            ? 'tel'
+                            : field.type === 'date'
+                              ? 'date'
+                              : 'text'
+                    }
+                    value={value}
+                    required={field.required}
+                    inputmode={field.inputMode}
+                    placeholder={field.placeholder}
+                    data-shell-field
+                  />
+                )}
+              </div>
+            );
+          })}
+          <p class="generator-lazy__shell-hint">
+            Start typing to load the full live preview, remaining fields, and PDF/DOCX export.
+          </p>
+          <button type="button" class="btn btn--primary" data-generator-load>
+            Load full editor
+          </button>
+        </fieldset>
+      </div>
+    </div>
+  )}
+  {autoOpen && shellFields.length === 0 && (
+    <div class="generator-lazy__prompt">
+      <p>Load the editor to fill fields and export PDF or DOCX.</p>
+      <button type="button" class="btn btn--primary" data-generator-load>Open editor</button>
+    </div>
+  )}
   <div class="generator-lazy__mount" hidden></div>
 </div>
 
 <style>
   .generator-lazy__prompt {
-    margin: 1.25rem 0;
+    margin: 0.75rem 0 1rem;
     padding: 1rem 1.25rem;
     border: 1px solid var(--color-border, #d8dee4);
     border-radius: 8px;
@@ -33,6 +136,16 @@ const toolJson = JSON.stringify(tool);
   .generator-lazy__prompt p {
     margin: 0 0 0.75rem;
     max-width: 52ch;
+  }
+  .generator--shell {
+    margin: 0.5rem 0 1rem;
+    /* Reserve space so upgrading to the React editor does not tank CLS. */
+    min-height: 28rem;
+  }
+  .generator-lazy__shell-hint {
+    margin: 0.75rem 0 0.85rem;
+    font-size: 0.9rem;
+    color: var(--muted, #4a5c56);
   }
   .generator-lazy__error {
     color: #a12020;
@@ -44,29 +157,53 @@ const toolJson = JSON.stringify(tool);
   function wireLazyGenerator(root) {
     const btn = root.querySelector('[data-generator-load]');
     const prompt = root.querySelector('.generator-lazy__prompt');
+    const shell = root.querySelector('[data-generator-shell]');
     const mountEl = root.querySelector('.generator-lazy__mount');
     const embed = root.dataset.embed === '1';
-    if (!btn || !mountEl) return;
+    if (!mountEl) return;
 
     let started = false;
     async function openEditor() {
       if (started) return;
       started = true;
-      btn.disabled = true;
-      btn.setAttribute('aria-busy', 'true');
-      btn.textContent = 'Loading editor…';
+      if (btn) {
+        btn.disabled = true;
+        btn.setAttribute('aria-busy', 'true');
+        btn.textContent = 'Loading editor…';
+      }
       try {
         const tool = JSON.parse(root.dataset.tool || '{}');
+        // Carry shell field values into the React mount via a temporary query-less handoff on the root.
+        const seeded = { ...(tool.defaults || {}) };
+        root.querySelectorAll('[data-shell-field]').forEach((el) => {
+          const name = el.getAttribute('name');
+          if (!name) return;
+          if (el instanceof HTMLInputElement || el instanceof HTMLTextAreaElement || el instanceof HTMLSelectElement) {
+            seeded[name] = el.value;
+          }
+        });
+        tool.defaults = seeded;
         const { mountDocumentGenerator } = await import('../../lib/mountDocumentGenerator.tsx');
+        // Keep shell height until mount paints to limit CLS.
+        const reserved = shell?.getBoundingClientRect().height || 0;
+        if (reserved > 0) {
+          mountEl.style.minHeight = `${Math.ceil(reserved)}px`;
+        }
         prompt?.remove();
+        shell?.remove();
         mountEl.hidden = false;
         mountDocumentGenerator(mountEl, tool, embed);
+        requestAnimationFrame(() => {
+          mountEl.style.minHeight = '';
+        });
       } catch (err) {
         console.error(err);
         started = false;
-        btn.disabled = false;
-        btn.removeAttribute('aria-busy');
-        btn.textContent = 'Open editor';
+        if (btn) {
+          btn.disabled = false;
+          btn.removeAttribute('aria-busy');
+          btn.textContent = root.dataset.autoOpen === '1' ? 'Load full editor' : 'Open editor';
+        }
         const msg = document.createElement('p');
         msg.className = 'generator-lazy__error';
         msg.setAttribute('role', 'alert');
@@ -75,7 +212,18 @@ const toolJson = JSON.stringify(tool);
       }
     }
 
-    btn.addEventListener('click', () => void openEditor(), { once: true });
+    btn?.addEventListener('click', () => void openEditor(), { once: true });
+
+    // Upgrade on first real edit of the answer-first shell (not on initial page load — CWV).
+    if (shell) {
+      const onInteract = () => void openEditor();
+      shell.addEventListener('focusin', onInteract, { once: true });
+      shell.addEventListener(
+        'input',
+        onInteract,
+        { once: true },
+      );
+    }
   }
 
   document.querySelectorAll('.generator-lazy').forEach(wireLazyGenerator);

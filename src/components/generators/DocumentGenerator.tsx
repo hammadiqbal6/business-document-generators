@@ -516,8 +516,9 @@ function str(v: unknown) {
 }
 
 function PreviewBlock({ block }: { block: ReturnType<typeof buildDocumentBlocks>[number] }) {
-  if (block.type === 'heading') return <h2 className="doc-preview__h">{block.text}</h2>;
-  if (block.type === 'subheading') return <h3 className="doc-preview__h3">{block.text}</h3>;
+  // Use non-heading elements so sample/live preview copy does not pollute page H2/H3 hierarchy.
+  if (block.type === 'heading') return <p className="doc-preview__h">{block.text}</p>;
+  if (block.type === 'subheading') return <p className="doc-preview__h3">{block.text}</p>;
   if (block.type === 'paragraph') return <p className="doc-preview__p">{block.text}</p>;
   if (block.type === 'hr') return <hr />;
   if (block.type === 'kv') {
@@ -564,7 +565,9 @@ function PreviewBlock({ block }: { block: ReturnType<typeof buildDocumentBlocks>
       <div className="doc-preview__clauses">
         {block.clauses?.map((c) => (
           <section key={c.id}>
-            <h4>{c.title}</h4>
+            <p className="doc-preview__clause-title">
+              <strong>{c.title}</strong>
+            </p>
             <p>{c.body}</p>
           </section>
         ))}

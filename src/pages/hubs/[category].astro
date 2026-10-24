@@ -5,7 +5,7 @@ import { CATEGORY_META, getToolsByCategory } from '../../data/tools';
 import type { ToolCategory } from '../../data/tools/types';
 import { guides } from '../../data/guides';
 import { hubToGuides } from '../../data/toolGuideMap';
-import { breadcrumbJsonLd, collectionPageJsonLd } from '../../lib/seo';
+import { breadcrumbJsonLd, collectionPageJsonLd, faqPageJsonLd } from '../../lib/seo';
 
 export function getStaticPaths() {
   return (Object.keys(CATEGORY_META) as ToolCategory[]).map((category) => ({
@@ -16,43 +16,172 @@ export function getStaticPaths() {
 
 const hubCopy: Record<
   ToolCategory,
-  { title: string; description: string; intro: string; whenToUse: string }
+  {
+    title: string;
+    description: string;
+    intro: string;
+    whenToUse: string;
+    whichTable: { headers: string[]; rows: string[][] };
+    faq: { question: string; answer: string }[];
+  }
 > = {
   'estimates-invoices': {
     title: 'Estimate & Invoice Templates – Free PDF/DOCX',
     description:
       'Free construction estimates, contractor invoices, cleaning and catering quotes, receipts and work orders. Fill in-browser and export PDF or Word.',
     intro:
-      'Estimates and invoices are the backbone of small-trade cash flow. Use an estimate when you are proposing scope and price before work starts; switch to an invoice when you are billing for completed (or deposit) work. Receipts confirm payment; work orders assign tasks to crew.',
+      'Use these generators when you need a priced document today: estimates before work, invoices after (or for deposits), quotes for packages, receipts for payment, and work orders for crew tickets—all with live preview and PDF/DOCX export.',
     whenToUse:
       'Pick the construction estimate for remodel bids with allowances, the contractor invoice for progress billing, cleaning or catering tools when line items are service packages, the generic quote generator for mixed scopes, and the receipt or work order when you need a simple confirmation or job ticket.',
+    whichTable: {
+      headers: ['Need', 'Use this tool', 'Why'],
+      rows: [
+        ['Propose price before work', 'Construction estimate / Quote', 'Scope + line items + validity'],
+        ['Bill for work or deposit', 'Contractor / cleaning invoice', 'Totals, tax, balance due'],
+        ['Event food package', 'Catering quote', 'Per-guest math and deposit notes'],
+        ['Proof of payment', 'Receipt generator', 'Amount paid and method'],
+        ['Assign the job to crew', 'Work order', 'Tasks, parts, sign-off'],
+      ],
+    },
+    faq: [
+      {
+        question: 'Should I send an estimate or an invoice first?',
+        answer:
+          'Send an estimate (or quote) before work starts. Switch to an invoice when you are billing a deposit, progress draw, or completed work.',
+      },
+      {
+        question: 'Can I export Excel from these tools?',
+        answer:
+          'Exports are PDF and DOCX today. You can copy line items into a spreadsheet if your client needs Sheets or Excel.',
+      },
+      {
+        question: 'Do these tools store my client data?',
+        answer:
+          'No. Preview and export run in your browser. Optional drafts use localStorage on your device only.',
+      },
+      {
+        question: 'Is a quote the same as an estimate?',
+        answer:
+          'Many trades use the words interchangeably. Use a quote when the price is firmer; use an estimate when scope may still change. State validity either way.',
+      },
+    ],
   },
   contracts: {
     title: 'Contract Templates – Photo, Freelance & NDA',
     description:
       'Editable photography, videography, freelance web design, event vendor contracts and a simple NDA. Preview clauses live and export PDF or DOCX—not legal advice.',
     intro:
-      'Creative and freelance contracts spell out deliverables, payment schedules, usage rights, cancellation, and liability limits. These generators provide editable sample language so you can start a draft quickly. They are not attorney-reviewed and are not a substitute for counsel in your jurisdiction.',
+      'Start a creative or freelance agreement here: deliverables, payment, usage rights, cancellation, and liability sample clauses you can edit—then export PDF or DOCX. Not attorney-reviewed.',
     whenToUse:
       'Use photography or videography contracts when usage rights matter, the freelance web design contract for project milestones and IP, the event/wedding vendor contract for venue dates and force majeure style notes, and the simple NDA when you only need a mutual confidentiality starting point.',
+    whichTable: {
+      headers: ['Situation', 'Use this tool', 'Focus'],
+      rows: [
+        ['Photo shoot or wedding day', 'Photography contract', 'Coverage hours, usage, retainer'],
+        ['Video project', 'Videography contract', 'Revisions, music, raw footage'],
+        ['Website build', 'Web design contract', 'Milestones, IP, content deadlines'],
+        ['Wedding / event vendor', 'Event vendor contract', 'Date, overtime, force majeure'],
+        ['Share confidential info', 'Simple NDA', 'Mutual vs one-way starting point'],
+      ],
+    },
+    faq: [
+      {
+        question: 'Are these contracts legally binding?',
+        answer:
+          'A signed agreement can be binding, but enforceability depends on local law and the facts. These pages provide editable samples only—have a licensed attorney review before you rely on them.',
+      },
+      {
+        question: 'Can I e-sign the PDF?',
+        answer:
+          'Export PDF or DOCX, then use your preferred e-sign tool. This site does not provide built-in e-signature.',
+      },
+      {
+        question: 'Do I still need a lawyer?',
+        answer:
+          'Yes for anything high-stakes, multi-state, or unusual. Generators speed a first draft; counsel validates enforceability.',
+      },
+      {
+        question: 'Is the NDA mutual or one-way?',
+        answer:
+          'The simple NDA generator is a starting point you can edit. Confirm mutual vs one-way language with counsel for your deal.',
+      },
+    ],
   },
   forms: {
     title: 'Client Forms – Consent & Rental Applications',
     description:
       'Fillable tattoo consent forms and rental or lease applications with live preview and PDF export. Educational templates—not medical or legal advice.',
     intro:
-      'Client intake forms capture identity, acknowledgements, and signatures before a service or tenancy begins. Keep copies for your records and follow local licensing, health, or fair-housing rules that apply to your business.',
+      'Capture client acknowledgements and rental screening details with fillable forms you preview live and export as PDF or DOCX—then follow your local health or fair-housing rules.',
     whenToUse:
       'The tattoo consent form is for studio risk acknowledgements and aftercare notes. The rental application gathers employment, income, and household details for screening—pair it with official fair-housing guidance and your local landlord-tenant rules.',
+    whichTable: {
+      headers: ['Need', 'Use this tool', 'Remember'],
+      rows: [
+        ['Studio risk acknowledgement', 'Tattoo consent form', 'Rules vary by state; not medical advice'],
+        ['Screen a prospective tenant', 'Rental application', 'Fair housing + screening authorization'],
+      ],
+    },
+    faq: [
+      {
+        question: 'Is a tattoo consent form legally required?',
+        answer:
+          'Many jurisdictions require informed consent and record retention for body art. Check your state or local health department—not this template alone.',
+      },
+      {
+        question: 'Does a rental application create a lease?',
+        answer:
+          'No. An application requests consideration; a signed lease (or local equivalent) creates tenancy after approval.',
+      },
+      {
+        question: 'Can I store filled forms on this site?',
+        answer:
+          'No. Export PDF/DOCX and keep records in your own compliant system. Optional local drafts stay in your browser only.',
+      },
+      {
+        question: 'Where can I read fair-housing rules?',
+        answer:
+          'Start with HUD Fair Housing materials and our rental fair-housing guide, then confirm state and local requirements.',
+      },
+    ],
   },
   'creative-templates': {
     title: 'Creative Templates – Podcast & Real Estate',
     description:
       'Free podcast episode script planner and real estate flyer layout. Fill fields in your browser, preview the layout, then download PDF or DOCX.',
     intro:
-      'Creative templates help you structure content and marketing collateral without starting from a blank page. Scripts keep interviews on track; flyers present listing facts in a scannable layout for print or social posts.',
+      'Structure a podcast episode or a one-page property flyer without starting from a blank page—fill fields, preview the layout, then download PDF or DOCX.',
     whenToUse:
       'Use the podcast script when you need cold open, segment timings, and CTA placeholders. Use the real estate flyer when you want beds, baths, price, and highlight bullets laid out for a one-page handout.',
+    whichTable: {
+      headers: ['Goal', 'Use this tool', 'Output'],
+      rows: [
+        ['Plan an episode', 'Podcast script', 'Cold open, segments, CTA outline'],
+        ['Market a listing', 'Real estate flyer', 'One-page PDF/DOCX handout'],
+      ],
+    },
+    faq: [
+      {
+        question: 'Should every podcast be fully scripted?',
+        answer:
+          'No. Use full scripts for solo storytelling; use run-of-show outlines for interviews so conversation stays natural.',
+      },
+      {
+        question: 'Is the flyer an MLS sheet?',
+        answer:
+          'No. It is a marketing flyer. Follow brokerage and MLS rules for required disclosures and photo usage.',
+      },
+      {
+        question: 'Can I add my own photos?',
+        answer:
+          'Export and place photos in your design tool or PDF editor. Respect photographer copyright and brokerage branding rules.',
+      },
+      {
+        question: 'Do these tools require an account?',
+        answer:
+          'No signup. Everything runs in your browser with optional local drafts only.',
+      },
+    ],
   },
 };
 
@@ -70,6 +199,7 @@ const hubGuideSlugs = hubToGuides[meta.slug] ?? [];
 const hubGuides = hubGuideSlugs
   .map((slug) => guides.find((g) => g.slug === slug))
   .filter(Boolean);
+const faqLd = faqPageJsonLd(copy.faq);
 const jsonLd = [
   breadcrumbJsonLd(crumbs),
   collectionPageJsonLd({
@@ -78,6 +208,7 @@ const jsonLd = [
     path,
     items: tools.map((t) => ({ name: t.name, path: `/tools/${t.slug}/` })),
   }),
+  ...(faqLd ? [faqLd] : []),
 ];
 const ogImagePath = `/og/hub-${meta.slug}.svg`;
 ---
@@ -91,8 +222,7 @@ const ogImagePath = `/og/hub-${meta.slug}.svg`;
 >
   <Breadcrumbs items={crumbs} />
   <h1>{meta.name}</h1>
-  <p class="lead">{copy.intro}</p>
-  <p>{copy.whenToUse}</p>
+  <p class="lead answer-first">{copy.intro}</p>
 
   <h2>Templates in this category</h2>
   <div class="tool-grid">
@@ -102,6 +232,30 @@ const ogImagePath = `/og/hub-${meta.slug}.svg`;
         <p>{t.answerFirst.slice(0, 120)}…</p>
       </a>
     ))}
+  </div>
+
+  <p>{copy.whenToUse}</p>
+
+  <h2>Which document do I need?</h2>
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr>
+          {copy.whichTable.headers.map((h) => (
+            <th scope="col">{h}</th>
+          ))}
+        </tr>
+      </thead>
+      <tbody>
+        {copy.whichTable.rows.map((row) => (
+          <tr>
+            {row.map((cell) => (
+              <td>{cell}</td>
+            ))}
+          </tr>
+        ))}
+      </tbody>
+    </table>
   </div>
 
   {hubGuides.length > 0 && (
@@ -116,5 +270,38 @@ const ogImagePath = `/og/hub-${meta.slug}.svg`;
       </ul>
     </section>
   )}
+
+  <h2>FAQ</h2>
+  <div class="faq">
+    {copy.faq.map((f) => (
+      <details>
+        <summary>{f.question}</summary>
+        <p>{f.answer}</p>
+      </details>
+    ))}
+  </div>
+
   <p><a href="/guides/">All how-to guides →</a></p>
 </BaseLayout>
+
+<style>
+  .table-wrap {
+    overflow-x: auto;
+    margin: 1rem 0 1.5rem;
+  }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.95rem;
+  }
+  th,
+  td {
+    border: 1px solid var(--border, #d8e3de);
+    padding: 0.5rem 0.65rem;
+    text-align: left;
+    vertical-align: top;
+  }
+  th {
+    background: var(--surface, #f8faf9);
+  }
+</style>

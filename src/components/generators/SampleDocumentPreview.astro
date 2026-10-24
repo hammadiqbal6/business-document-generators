@@ -18,8 +18,8 @@ const blocks = buildDocumentBlocks(tool, tool.defaults);
   </div>
   <div class="doc-preview sample-preview__doc">
     {blocks.map((block) => {
-      if (block.type === 'heading') return <h2 class="doc-preview__h">{block.text}</h2>;
-      if (block.type === 'subheading') return <h3 class="doc-preview__h3">{block.text}</h3>;
+      if (block.type === 'heading') return <p class="doc-preview__h">{block.text}</p>;
+      if (block.type === 'subheading') return <p class="doc-preview__h3">{block.text}</p>;
       if (block.type === 'paragraph') return <p class="doc-preview__p">{block.text}</p>;
       if (block.type === 'hr') return <hr />;
       if (block.type === 'kv') {
@@ -66,7 +66,7 @@ const blocks = buildDocumentBlocks(tool, tool.defaults);
           <div class="doc-preview__clauses">
             {block.clauses?.map((c) => (
               <section>
-                <h4>{c.title}</h4>
+                <p class="doc-preview__clause-title"><strong>{c.title}</strong></p>
                 <p>{c.body}</p>
               </section>
             ))}

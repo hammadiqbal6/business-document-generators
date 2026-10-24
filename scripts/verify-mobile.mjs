@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 /**
- * Headless checks at 360 / 390 / 768: no horizontal overflow, editor opens, inputs ≥16px.
+ * Headless checks at 360 / 390 / 768: no horizontal overflow, editor usable, inputs ≥16px.
  * Usage: node scripts/verify-mobile.mjs [baseUrl]
  */
 import { chromium, devices } from 'playwright';
@@ -53,29 +53,67 @@ for (const vp of viewports) {
       errors.push(`${vp.name}${pagePath}: page overflow ${overflow.scrollWidth}>${overflow.innerWidth} ${JSON.stringify(overflow.offenders)}`);
     }
 
+    const bannerH = await page.evaluate(() => {
+      const el = document.getElementById('cookie-banner');
+      if (!el || el.hidden) return 0;
+      return el.getBoundingClientRect().height;
+    });
+    if (bannerH > 56.5) {
+      errors.push(`${vp.name}${pagePath}: cookie banner height ${bannerH}px > 56px`);
+    }
+
     const shot = path.join(outDir, `fold-${pagePath.replace(/\//g, '_') || 'home'}-${vp.name}.png`);
     await page.screenshot({ path: shot, fullPage: false });
 
     if (pagePath.includes('/tools/')) {
-      const btn = page.locator('[data-generator-load]');
-      await btn.waitFor({ state: 'visible', timeout: 15000 });
-      const box = await btn.boundingBox();
-      if (!box || box.height < 40) {
-        errors.push(`${vp.name}${pagePath}: Open editor tap target too small ${JSON.stringify(box)}`);
+      // Answer-first: static shell inputs must be usable without a click gate.
+      await page.waitForSelector(
+        '.generator--shell [data-shell-field], .generator input, .generator textarea, .generator select',
+        { timeout: 15000 },
+      );
+
+      const answerFirst = await page.evaluate(() => {
+        const h1 = document.querySelector('main h1, h1');
+        const input = document.querySelector(
+          '.generator--shell [data-shell-field], .generator input, .generator textarea, .generator select',
+        );
+        if (!h1 || !input) return { ok: false, reason: 'missing h1 or input' };
+        const range = document.createRange();
+        range.setStartAfter(h1);
+        range.setEndBefore(input);
+        const words = (range.toString() || '').trim().split(/\s+/).filter(Boolean).length;
+        const inputTop = input.getBoundingClientRect().top + window.scrollY;
+        return { ok: true, words, inputTop };
+      });
+      if (!answerFirst.ok) {
+        errors.push(`${vp.name}${pagePath}: ${answerFirst.reason}`);
+      } else {
+        if (answerFirst.words > 60) {
+          errors.push(`${vp.name}${pagePath}: ${answerFirst.words} words before first input (max 60)`);
+        }
+        if (answerFirst.inputTop > 780) {
+          errors.push(`${vp.name}${pagePath}: first input at ${Math.round(answerFirst.inputTop)}px (want ≤780)`);
+        }
       }
-      await btn.click();
-      await page.waitForSelector('.generator', { timeout: 20000 });
-      const loadingStuck = await page.locator('text=Loading editor').count();
-      if (loadingStuck) errors.push(`${vp.name}${pagePath}: stuck on Loading editor`);
 
       const fontOk = await page.evaluate(() => {
-        const input = document.querySelector('.generator input, .generator textarea, .generator select');
+        const input = document.querySelector(
+          '.generator--shell [data-shell-field], .generator input, .generator textarea, .generator select',
+        );
         if (!input) return false;
         return parseFloat(getComputedStyle(input).fontSize) >= 16;
       });
       if (!fontOk) errors.push(`${vp.name}${pagePath}: input font < 16px`);
 
-      // Preview tab reachable on mobile
+      // Upgrade to full editor and confirm it mounts.
+      const loadBtn = page.locator('[data-generator-load]');
+      if (await loadBtn.count()) {
+        await loadBtn.click();
+      }
+      await page.waitForSelector('.generator:not(.generator--shell)', { timeout: 25000 });
+      const loadingStuck = await page.locator('text=Loading editor').count();
+      if (loadingStuck) errors.push(`${vp.name}${pagePath}: stuck on Loading editor`);
+
       const previewTab = page.locator('.generator__tabs button', { hasText: 'Preview' });
       if (await previewTab.count()) {
         await previewTab.click();

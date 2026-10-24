@@ -119,6 +119,16 @@ export const constructionEstimate: ToolDefinition = {
         answer:
           'Follow your jurisdiction’s rules. Many estimates show a single tax rate on taxable subtotal; some materials are tax-exempt for resale—label those clearly.',
       },
+      {
+        question: 'Should I include a contingency line?',
+        answer:
+          'A 5–15% contingency (or a clearly labeled allowance) helps when finishes, concealed conditions, or owner selections are still open. Spell out what triggers using it and how unused contingency is handled.',
+      },
+      {
+        question: 'What should every construction estimate include?',
+        answer:
+          'Job address, dated scope with exclusions, measurable line items (labor vs materials), tax, deposit or draw schedule, validity window, and assumptions about access, permits, and owner-supplied items.',
+      },
     ],
     sources: estimateSources,
   },
@@ -220,6 +230,26 @@ export const contractorInvoice: ToolDefinition = {
         answer:
           'Net 14 or Net 30 are common for residential work; commercial jobs may specify retainage. State late fees only if your agreement allows them.',
       },
+      {
+        question: 'How does progress billing work on a contractor invoice?',
+        answer:
+          'Bill a percentage or completed-phase amount that matches your contract draws—e.g. after demo, rough-in, or substantial completion. Reference the estimate or PO and show prior payments so the balance due is obvious.',
+      },
+      {
+        question: 'Can I charge late fees on unpaid contractor invoices?',
+        answer:
+          'Only if your signed agreement allows a specific rate or fee and local law permits it. Put the late-fee rule on the invoice and the contract; do not invent penalties after the fact.',
+      },
+      {
+        question: 'Do contractor invoices affect 1099 reporting?',
+        answer:
+          'In the U.S., businesses often need your taxpayer ID to issue Form 1099-NEC when they pay $600+ to an unincorporated contractor. Your invoice is a payment record—not a tax form—so keep W-9 and invoice PDFs together for year-end.',
+      },
+      {
+        question: 'What is retainage and how do I show it?',
+        answer:
+          'Retainage is a contract holdback (often 5–10%) until punch-list or final acceptance. Show the earned amount, retainage withheld this period, retainage released, and net amount due so AP can match the contract.',
+      },
     ],
     sources: estimateSources,
   },
@@ -243,7 +273,7 @@ export const cleaningInvoice: ToolDefinition = {
     'A cleaning service invoice spells out the property, service frequency, rooms or square footage, add-ons, rate, tax, and total due. Build one free here with a live preview and PDF or DOCX export; your entries stay on your device.',
   applicationCategory: 'BusinessApplication',
   isLegalAdjacent: false,
-  documentTitle: 'Cleaning Service Document',
+  documentTitle: 'Cleaning Invoice',
   toolVersion: '1.0',
   formulaNote:
     "Line items are summed (quantity × rate). Tax applies to the subtotal. Choose Estimate or Invoice with the document-type field—same math either way.",
@@ -272,7 +302,7 @@ export const cleaningInvoice: ToolDefinition = {
     { id: 'notes', label: 'Notes', type: 'textarea', rows: 2, section: 'Notes' },
   ],
   defaults: {
-    docType: 'Estimate',
+    docType: 'Invoice',
     companyName: 'BrightPath Cleaning',
     companyPhone: '(512) 555-0199',
     companyEmail: 'book@brightpath.example',
@@ -316,6 +346,26 @@ export const cleaningInvoice: ToolDefinition = {
         question: 'Should cleaning estimates include supplies?',
         answer:
           'State whether pricing includes supplies or if the client provides preferred products. Call out eco-friendly product upcharges.',
+      },
+      {
+        question: 'How do cleaning services usually set rates?',
+        answer:
+          'Common approaches are flat per-visit pricing by home size, hourly crew rates, or per-room packages. Deep cleans and first visits often cost more than recurring maintenance cleans—list both so clients are not surprised.',
+      },
+      {
+        question: 'How should recurring cleans appear on an invoice?',
+        answer:
+          'Show frequency (weekly, bi-weekly, monthly), the service date, and the same line labels used on the original quote. Note any skipped visits, holiday fees, or one-time add-ons on separate lines.',
+      },
+      {
+        question: 'Is tipping expected for house cleaners?',
+        answer:
+          'Tips are optional and separate from the invoice total. If your team pools tips, say so on the receipt or booking confirmation; never bury a mandatory “tip” inside a service fee without labeling it clearly.',
+      },
+      {
+        question: 'What should a cleaning invoice include?',
+        answer:
+          'Business name and contact, invoice number and date, client and service address, frequency, scope or rooms cleaned, priced line items, tax if applicable, amount due, and payment instructions.',
       },
     ],
     sources: estimateSources,
@@ -411,6 +461,26 @@ export const cateringQuote: ToolDefinition = {
         answer:
           'Usually not until signed with deposit terms. Convert accepted quotes into a catering agreement covering cancelation and force majeure.',
       },
+      {
+        question: 'What deposit percentage is typical for catering?',
+        answer:
+          'Many caterers take 25–50% to reserve the date, with the balance due about 7–14 days before the event (or on a final guest-count deadline). State the percentage, due dates, and refund rules on the quote.',
+      },
+      {
+        question: 'What is the difference between a service charge and gratuity?',
+        answer:
+          'A service charge is often a house fee that may go to the business; gratuity is typically a tip for staff. Label each clearly, say whether tax applies, and note if the service charge is in lieu of tipping.',
+      },
+      {
+        question: 'When is the final headcount due?',
+        answer:
+          'A common rule is a guaranteed guest count 7–14 days before the event, with billing on that number (or actual attendance if higher). Put the deadline and overage rate on the quote so food and staffing can scale.',
+      },
+      {
+        question: 'Should I use a catering quote or a full contract?',
+        answer:
+          'Use the quote to lock menu, pricing, and deposit math; use a signed catering or event contract for cancellation, force majeure, allergens, and venue rules. Many clients accept the quote, pay the deposit, then sign the agreement.',
+      },
     ],
     sources: estimateSources,
   },
@@ -501,6 +571,26 @@ export const quoteEstimate: ToolDefinition = {
         answer:
           'Yes—reuse the same line items in the contractor invoice or receipt tools once work is accepted or paid.',
       },
+      {
+        question: 'What is the difference between a quote and an estimate?',
+        answer:
+          'Quotes are often firmer fixed offers for a defined scope; estimates signal approximate cost that may change after discovery. Label the document the way your industry expects and state whether totals can move.',
+      },
+      {
+        question: 'Is a quote legally binding?',
+        answer:
+          'It can become binding if it is a clear offer that the client accepts, or if local law treats it that way. Many businesses treat unsigned quotes as proposals and require a signed contract or deposit to lock the job—confirm with counsel for your situation.',
+      },
+      {
+        question: 'How long should a quote stay valid?',
+        answer:
+          'Fourteen to thirty days is common for services; shorter windows help when materials or labor rates change quickly. Put a “valid until” date on every quote and re-quote after it expires.',
+      },
+      {
+        question: 'Do I need a signature for the client to accept a quote?',
+        answer:
+          'A written acceptance (signature, e-sign, or clear email “approved”) plus a deposit is stronger than a verbal yes. Match your acceptance method to how you want the job to become a contract.',
+      },
     ],
     sources: estimateSources,
   },
@@ -583,6 +673,26 @@ export const receiptGenerator: ToolDefinition = {
         question: 'Is this a tax invoice?',
         answer:
           'Receipts prove payment. Some regions require formal tax invoices with registration numbers—add those fields in Notes if your locality requires them.',
+      },
+      {
+        question: 'What should a payment receipt include?',
+        answer:
+          'Unique receipt number, date, business name, payer name, description of goods or services, amount paid, payment method, tax if shown, and remaining balance if the payment was partial.',
+      },
+      {
+        question: 'How is a receipt different from an invoice?',
+        answer:
+          'An invoice requests payment; a receipt confirms payment was received. Issue the invoice first (or with a deposit request), then a receipt when money clears—or a combined “paid invoice” if that is your bookkeeping style.',
+      },
+      {
+        question: 'Are DIY PDF receipts legally valid?',
+        answer:
+          'A clear, accurate receipt is generally useful proof of payment for customers and your books. Tax or consumer rules may require specific fields (registration numbers, itemization)—follow your locality; this tool is not tax advice.',
+      },
+      {
+        question: 'Can I add a paid watermark or use this for thermal printers?',
+        answer:
+          'Export the PDF and add a “Paid” stamp in your PDF viewer or print workflow if you want a watermark. Thermal printers need a narrow layout—use the PDF as a record and reprint on thermal stock from your POS if required.',
       },
     ],
     sources: estimateSources,
@@ -673,6 +783,26 @@ export const workOrder: ToolDefinition = {
         question: 'Is a work order the same as an invoice?',
         answer:
           'No. A work order directs the job; an invoice bills for it afterward. Many shops convert completed work orders into invoices.',
+      },
+      {
+        question: 'Should the technician sign off on the work order?',
+        answer:
+          'Yes—tech sign-off plus customer authorization (when required) creates a clear record of who did the work, what was completed, and any follow-up needed before invoicing.',
+      },
+      {
+        question: 'How should parts and materials appear on a work order?',
+        answer:
+          'List each part with quantity and planned rate or cost, plus labor lines. Note serial numbers or warranty swaps when relevant so the later invoice matches what was installed.',
+      },
+      {
+        question: 'How do I convert a work order into an invoice?',
+        answer:
+          'Copy completed labor and parts lines into your invoice tool, drop unused estimates, add tax and payment terms, and reference the work-order number so AP can match the job ticket.',
+      },
+      {
+        question: 'What fields do crews need on a work order?',
+        answer:
+          'Customer and site address, on-site contact, priority, problem statement, task list, assigned tech, scheduled window, parts/labor lines, and an authorization signature line before overtime starts.',
       },
     ],
     sources: estimateSources,

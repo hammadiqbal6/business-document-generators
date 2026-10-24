@@ -21,15 +21,25 @@ const cats = Object.keys(CATEGORY_META) as ToolCategory[];
   <section class="hero">
     <p class="content-meta" style="margin-bottom:0.35rem;">{siteConfig.siteName}</p>
     <h1>Free invoice, estimate &amp; contract templates</h1>
-    <p class="lead">
-      Create construction estimates, contractor invoices, photography contracts, NDAs, cleaning
-      invoices, catering quotes, consent forms, and more in your browser. Fill the fields, preview
-      the live document, then download PDF or DOCX—no signup and no server-side storage of your form
-      data. Pick a generator below or browse by category.
+    <p class="lead answer-first">
+      Create construction estimates, contractor invoices, photography contracts, NDAs, and more in your
+      browser—then download PDF or DOCX. No signup and no server-side storage. Pick a generator below.
     </p>
     <div class="hero-actions">
       <a href="/tools/">Browse all tools</a>
       <a class="secondary" href="/guides/">Read guides</a>
+    </div>
+  </section>
+
+  <section aria-labelledby="popular-h">
+    <h2 id="popular-h">Popular generators</h2>
+    <div class="tool-grid">
+      {featured.map((t) => (
+        <a class="tool-card" href={`/tools/${t.slug}/`}>
+          <h3>{t.shortName}</h3>
+          <p>{t.answerFirst.slice(0, 110)}…</p>
+        </a>
+      ))}
     </div>
   </section>
 
@@ -48,18 +58,6 @@ const cats = Object.keys(CATEGORY_META) as ToolCategory[];
       Choose a category below, or jump straight to a popular template. Every tool uses the same
       privacy model: validation, preview, and PDF/DOCX export run entirely client-side.
     </p>
-  </section>
-
-  <section>
-    <h2>Popular generators</h2>
-    <div class="tool-grid">
-      {featured.map((t) => (
-        <a class="tool-card" href={`/tools/${t.slug}/`}>
-          <h3>{t.shortName}</h3>
-          <p>{t.answerFirst.slice(0, 110)}…</p>
-        </a>
-      ))}
-    </div>
   </section>
 
   <section>

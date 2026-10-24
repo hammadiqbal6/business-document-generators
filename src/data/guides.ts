@@ -21,9 +21,9 @@ export interface Guide {
 export const guides: Guide[] = [
   {
     "slug": "construction-estimate-that-wins-jobs",
-    "title": "How to Write a Construction Estimate That Wins Jobs",
-    "metaDescription": "Learn what to include in a construction estimate, how to price line items, set validity dates, and avoid disputes—plus a free template generator.",
-    "answerFirst": "A winning construction estimate names the scope in measurable terms, separates labor and materials, shows tax and deposit clearly, and states how long the price holds. Tie every major line item to written scope so clients can compare bids fairly and you can defend the number when site conditions or selections change.",
+    "title": "What to Include in a Construction Estimate",
+    "metaDescription": "Checklist of what to include in a construction estimate—scope, line items, tax, deposits, validity—plus a worked example and free template generator.",
+    "answerFirst": "Include at least 8 checklist items in a construction estimate: dated header, measurable scope, labor vs materials, allowances, tax, deposit, validity window, and exclusions. Tie every major line to written scope so clients can compare bids and you can defend the number when selections change.",
     "publishedAt": "2026-10-19",
     "updatedAt": "2026-10-23",
     "relatedToolSlugs": [
@@ -137,7 +137,7 @@ export const guides: Guide[] = [
     "slug": "photography-contract-clauses",
     "title": "Photography Contract Clauses Explained (Editable Template)",
     "metaDescription": "Understand retainer, cancellation, copyright, and usage clauses in photography contracts. Not legal advice—use our free editable template as a starting point.",
-    "answerFirst": "Photography contracts usually cover scope such as date, hours, and locations, payment and retainer, cancellation, copyright ownership, client usage rights, and liability limits. Edit each clause to match your session type, deliverables, and local law before you sign.",
+    "answerFirst": "Most photography contracts need 6 core clauses: scope (date, hours, locations), payment and retainer, deliverables and timeline, image usage/license, cancellation, and liability limits. Add model releases when recognizable people appear outside the paying client.",
     "publishedAt": "2026-10-19",
     "updatedAt": "2026-10-23",
     "relatedToolSlugs": [
@@ -259,7 +259,7 @@ export const guides: Guide[] = [
     "slug": "catering-quote-deposits",
     "title": "Catering Quotes: Guest Counts, Fees, and Deposits",
     "metaDescription": "Build catering quotes with per-guest pricing, staff fees, service charges, tax, and deposit terms. Free catering quote generator included.",
-    "answerFirst": "Catering quotes should lock event date, guest count assumptions, menu summary, per-guest or package pricing, staff hours, service fee, tax, and deposit percentage with a final head-count deadline. Clear math on overages protects margin when attendance grows.",
+    "answerFirst": "Typical catering deposits are 25–50% to hold the date, with the balance due about 7–14 days before the event once the final guest count locks. Your quote should also list menu, per-guest or package pricing, staff hours, service fee versus gratuity, tax, and overage rules when attendance grows.",
     "publishedAt": "2026-10-19",
     "updatedAt": "2026-10-23",
     "relatedToolSlugs": [
@@ -385,7 +385,7 @@ export const guides: Guide[] = [
     "slug": "tattoo-consent-documentation",
     "title": "Tattoo Consent Forms: What Studios Should Document",
     "metaDescription": "Health acknowledgements, ID verification, design approval, and aftercare on tattoo consent forms. Free template—not legal or medical advice.",
-    "answerFirst": "Tattoo consent forms should record client identity, design approval, placement, risk acknowledgements, aftercare receipt, and signatures. Follow your local body-art regulations and infection-control standards; this article is not medical or legal advice. Treat each session as its own record even when the client is a regular—health answers and design approvals change over time.",
+    "answerFirst": "A complete tattoo consent record usually needs 6 elements: client identity and age verification, design and placement, risk acknowledgements, aftercare receipt, health disclosures, and signatures—with retention per your state health rules. This is documentation, not legal or medical advice.",
     "publishedAt": "2026-10-19",
     "updatedAt": "2026-10-23",
     "relatedToolSlugs": [
@@ -526,7 +526,7 @@ export const guides: Guide[] = [
     "slug": "rental-application-fair-housing",
     "title": "Rental Applications: Fair Housing and What to Ask",
     "metaDescription": "What belongs on a residential rental application, authorization to verify, and fair housing basics. Free application form generator.",
-    "answerFirst": "A rental application collects contact details, housing and employment history, references, and written authorization to verify, without questions that violate fair housing laws. Use the same screening criteria for every applicant and pair approvals with a proper lease.",
+    "answerFirst": "Use 1 fair-housing-safe application for every prospect: the same questions on contact details, housing history, job and income, occupants, and screening authorization. Never add different criteria by protected class; pair screening with HUD fair-housing rules.",
     "publishedAt": "2026-10-19",
     "updatedAt": "2026-10-23",
     "relatedToolSlugs": [
@@ -659,7 +659,7 @@ export const guides: Guide[] = [
     "slug": "invoice-vs-estimate",
     "title": "Invoice vs Estimate: When to Use Each Document",
     "metaDescription": "Learn the difference between an estimate and an invoice, when to send each, and how deposits and change orders fit. Free templates for both.",
-    "answerFirst": "An estimate or quote proposes price and scope before work starts; an invoice bills for work done or a deposit due. Use an estimate to win the job, then convert agreed line items into an invoice when you request payment. Clear document titles help clients, bookkeepers, and lenders understand whether money is proposed or due.",
+    "answerFirst": "Rule of thumb in 1 line: an estimate or quote proposes price before work; an invoice requests payment for work done or due. Keep both documents with matching line items when you convert an accepted estimate into billing.",
     "publishedAt": "2026-10-20",
     "updatedAt": "2026-10-23",
     "relatedToolSlugs": [
@@ -797,7 +797,7 @@ export const guides: Guide[] = [
     "slug": "line-item-totals-explained",
     "title": "How Line-Item Totals Work on Estimates and Invoices",
     "metaDescription": "Plain-English math for quantity × rate, subtotals, tax, deposits and amount due—with a worked example you can recreate in our free generators.",
-    "answerFirst": "Most trade documents price each line as quantity times rate, sum those amounts into a subtotal, apply a tax percentage, then show deposits or amounts already paid. Understanding that chain prevents underbilling when you mix labor hours and lump-sum materials. One wrong quantity field can skew an entire job—check line math before you send any PDF.",
+    "answerFirst": "The standard formula is line amount = quantity × rate; subtotal = sum of lines; tax = subtotal × (tax rate ÷ 100); amount due = total − deposits paid. Check that chain before you send any PDF—one wrong quantity can skew an entire job when labor hours mix with lump-sum materials.",
     "publishedAt": "2026-10-20",
     "updatedAt": "2026-10-23",
     "relatedToolSlugs": [
@@ -936,7 +936,7 @@ export const guides: Guide[] = [
     "slug": "freelance-payment-schedule-milestones",
     "title": "Freelance Payment Schedules: Deposits and Milestones",
     "metaDescription": "How to structure deposits and milestone payments in freelance and web design contracts, plus a free contract template with editable clauses.",
-    "answerFirst": "A clear payment schedule names the deposit to start, amounts tied to milestones such as design approval and launch, and when the final balance is due. Put those numbers in the contract before work begins so invoices are paperwork, not negotiation. When milestones align with deliverables, you spend less time chasing payment after emotionally draining revision rounds.",
+    "answerFirst": "A typical freelance web payment schedule is 30% deposit to start, 40% on design approval, and 30% on launch (or similar milestone splits that sum to 100%). Put those percentages and due triggers in the contract before work begins so each invoice is paperwork, not a new negotiation.",
     "publishedAt": "2026-10-20",
     "updatedAt": "2026-10-23",
     "relatedToolSlugs": [
@@ -1079,7 +1079,7 @@ export const guides: Guide[] = [
     "slug": "what-to-include-on-a-receipt",
     "title": "What to Include on a Payment Receipt (Small Business)",
     "metaDescription": "Payment receipt essentials: seller info, date, amount, method, and invoice reference. Free receipt generator for service businesses.",
-    "answerFirst": "A clear payment receipt shows who paid whom, when, how much, payment method, and what the payment was for, often with an invoice or estimate number. It confirms money received; it does not replace an invoice that requested payment. Many small businesses only issue receipts when asked—proactive receipts after deposits reduce reimbursement delays for corporate clients and keep your books aligned with bank deposits.",
+    "answerFirst": "Most useful payment receipts include about 7 fields: who paid whom, date, unique receipt number, amount paid, method, what was purchased, and any tax or tip broken out. A receipt proves payment; an invoice requests it.",
     "publishedAt": "2026-10-21",
     "updatedAt": "2026-10-23",
     "relatedToolSlugs": [
@@ -1224,7 +1224,7 @@ export const guides: Guide[] = [
     "slug": "cleaning-invoice-rates-line-items",
     "title": "Cleaning Service Invoices: Rates and Line Items",
     "metaDescription": "Price house and commercial cleaning with hourly, flat, and per-room line items. Tax, supplies, and travel on your cleaning service invoice template.",
-    "answerFirst": "Cleaning invoices work best when you separate recurring service, deep-clean extras, supplies, and travel into labeled lines with clear units. Match the quote you gave so clients see the same math on billing day. Consistent line names across quotes and invoices cut billing calls after the first month of service.",
+    "answerFirst": "Price cleaning as separate lines—for example a $165 recurring visit plus add-ons like a $35 fridge clean—so rates, supplies, and travel stay visible. Match invoice labels to the quote, and list frequency (weekly or bi-weekly) so clients see the same math on billing day.",
     "publishedAt": "2026-10-21",
     "updatedAt": "2026-10-23",
     "relatedToolSlugs": [
@@ -1370,7 +1370,7 @@ export const guides: Guide[] = [
     "slug": "nda-basics-for-freelancers",
     "title": "NDA Basics for Freelancers and Contractors",
     "metaDescription": "When freelancers need NDAs, mutual vs one-way terms, and what to define before sharing client work. Free simple NDA template—not legal advice.",
-    "answerFirst": "A non-disclosure agreement limits how parties may use confidential information shared during a project. Freelancers often sign one-way NDAs before receiving brand assets or one-way NDAs from clients, or mutual NDAs when both sides share sensitive data. Read the definition and term sections before you paste a client NDA into your signature tool—those two clauses drive most disputes.",
+    "answerFirst": "Most freelance NDAs should nail four basics first: a clear confidential-information definition, permitted purpose, exclusions (public or independently developed info), and a 2–5 year term (longer for trade secrets). Read those sections before you sign a client NDA—this is not legal advice.",
     "publishedAt": "2026-10-21",
     "updatedAt": "2026-10-23",
     "relatedToolSlugs": [
@@ -1508,7 +1508,7 @@ export const guides: Guide[] = [
     "slug": "work-order-vs-invoice-vs-estimate",
     "title": "Work Order vs Invoice vs Estimate: Which to Use",
     "metaDescription": "Compare work orders, estimates, and invoices for service and construction jobs—scope, authorization, and billing in plain English.",
-    "answerFirst": "Use an estimate to propose price and scope, a work order to authorize specific tasks on site, and an invoice to request payment for completed or approved work. Many jobs use all three in sequence with matching line labels.",
+    "answerFirst": "Use 3 documents in sequence: an estimate to propose price and scope, a work order to assign the job to crew, and an invoice to collect payment. Mixing them in one PDF is how clients dispute what was promised versus what was billed.",
     "publishedAt": "2026-10-21",
     "updatedAt": "2026-10-23",
     "relatedToolSlugs": [
@@ -1620,7 +1620,7 @@ export const guides: Guide[] = [
     "slug": "videography-contract-clauses",
     "title": "Videography Contract Clauses Explained",
     "metaDescription": "Delivery format, music rights, revision rounds, and cancellation in videography contracts. Editable template—not legal advice.",
-    "answerFirst": "Videography contracts should define shoot days and deliverables, editing scope, delivery format and timeline, music and third-party clearance, payment schedule, cancellation, and ownership of raw and finished files. Tailor clauses to weddings, corporate, or commercial work, and spell out revision limits so post-production scope stays profitable.",
+    "answerFirst": "Cover at least 7 key videography clauses: shoot days, deliverables and formats, revision rounds, music licensing, raw footage policy, payment schedule, and cancellation. Price raw files and rush edits as add-ons when clients ask.",
     "publishedAt": "2026-10-21",
     "updatedAt": "2026-10-23",
     "relatedToolSlugs": [
@@ -1755,7 +1755,7 @@ export const guides: Guide[] = [
     "slug": "wedding-vendor-contract-checklist",
     "title": "Wedding Vendor Contract Checklist for Couples and Planners",
     "metaDescription": "Dates, deposits, cancellation, insurance, and deliverables to verify in wedding vendor contracts—from catering to photo and video.",
-    "answerFirst": "Before you sign wedding vendor contracts, verify event date and timeline, deposit and refund rules, final guest counts or deliverables, insurance and venue requirements, cancellation and force majeure, and who owns creative work after the wedding. Compare each signed PDF to the quote you used to choose the vendor so totals and deliverables still match.",
+    "answerFirst": "Before signing, run a 7-point wedding vendor checklist: event date and timeline, deposit and balance dates, overtime/travel fees, force majeure, backup vendor, insurance/COI, and cancellation terms. Put numbers in writing—not only in texts.",
     "publishedAt": "2026-10-21",
     "updatedAt": "2026-10-23",
     "relatedToolSlugs": [
@@ -1814,7 +1814,7 @@ export const guides: Guide[] = [
             [
               "Deliverables",
               "Counts and deadlines listed?",
-              "TBD delivery"
+              "Delivery date blank"
             ],
             [
               "Overtime / overage",
@@ -1894,7 +1894,7 @@ export const guides: Guide[] = [
     "slug": "podcast-script-structure",
     "title": "Podcast Script Structure: Interview, Solo, and Co-Host",
     "metaDescription": "Outline hooks, segments, questions, and outros for podcast episodes. Free podcast script template for your consistent shows.",
-    "answerFirst": "A solid podcast script defines the episode goal, cold open hook, intro, segment blocks with timing, guest questions or talking points, transitions, calls to action, and outro with disclaimer if needed. Scripts keep episodes consistent without sounding over-rehearsed. Producers can spot missing ad reads and weak outros before record day when the template is filled every time.",
+    "answerFirst": "Structure every episode in about eight blocks: goal, cold open hook, intro, timed segment blocks, guest questions or talking points, transitions, CTA or sponsor read, and outro. For a ~30-minute show, assign minutes to each block so producers catch missing ad reads before record day.",
     "publishedAt": "2026-10-22",
     "updatedAt": "2026-10-23",
     "relatedToolSlugs": [
@@ -2030,7 +2030,7 @@ export const guides: Guide[] = [
     "slug": "real-estate-flyer-what-to-include",
     "title": "What to Include on a Real Estate Flyer",
     "metaDescription": "Property flyer essentials: hero photo, price, specs, agent branding, and compliance lines. Free real estate flyer template.",
-    "answerFirst": "A real estate flyer should lead with a strong listing photo, address or neighborhood, price or call for offers, bed-bath-sqft facts, three to five bullet benefits, open house or tour info, and agent contact with brokerage disclaimer required in your market. Buyers glance for seconds at a handout—accurate specs and one clear headline beat dense paragraphs every time, especially on busy open-house tables.",
+    "answerFirst": "Put at least 8 must-include items on a real estate flyer: strong photo cue, address or area, price, beds/baths/sq ft, 3–5 highlights, open-house time if any, agent contact, and fair-housing/equal-housing notice. This is marketing—not an MLS sheet.",
     "publishedAt": "2026-10-22",
     "updatedAt": "2026-10-23",
     "relatedToolSlugs": [

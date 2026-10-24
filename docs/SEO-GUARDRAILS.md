@@ -15,7 +15,8 @@ Hard requirements so builds never ship the indexing / AEO bugs from the Oct 2026
 - [ ] Use run-first `src/worker.ts` for **308** trailing-slash redirects; `FILE_EXT` must allow `{1,16}` (`.webmanifest`).
 - [ ] Cache `/_astro/*` as `public, max-age=31536000, immutable`; give favicons/images a sensible `max-age` (e.g. 86400).
 - [ ] Inline critical CSS on tool pages (`astro.config` `inlineStylesheets: 'always'`).
-- [ ] Emit BreadcrumbList + CollectionPage on hubs and `/guides/`.
+- [ ] Emit BreadcrumbList + CollectionPage on hubs, `/tools/`, and `/guides/`.
+- [ ] Tool pages: editor auto-opens (answer-first); never gate behind “Open editor”; no visible Ahrefs/KD notes.
 - [ ] Keep **titles 25–65 chars** (target ~30–60, unique, include brand + topic); **meta descriptions 70–160 chars** (target ~120–160). `og:title` / `twitter:title` and OG/Twitter descriptions must match `<title>` / meta description. One H1; self-canonical.
 - [ ] Homepage: 40–60 word direct-answer intro under H1 (not only brand tagline).
 - [ ] Full `llms.txt` listing every tool and guide with one-liners.

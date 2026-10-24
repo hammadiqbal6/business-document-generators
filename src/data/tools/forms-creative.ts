@@ -23,8 +23,6 @@ export const tattooConsent: ToolDefinition = {
   isLegalAdjacent: true,
   documentTitle: 'Tattoo Consent & Release',
   toolVersion: '1.0',
-  formulaNote:
-    "No pricing formula. The form records acknowledgements and signatures; follow local body-art rules.",
   fields: [
     { id: 'studioName', label: 'Studio name', type: 'text', required: true, section: 'Studio' },
     { id: 'artistName', label: 'Artist name', type: 'text', required: true, section: 'Studio' },
@@ -102,6 +100,26 @@ export const tattooConsent: ToolDefinition = {
         answer:
           'Only where local law allows tattooing minors—and then typically with parent/guardian consent and ID rules. Default this tool for adults of legal age.',
       },
+      {
+        question: 'Do tattoo consent forms have to meet state or local rules?',
+        answer:
+          'Yes—many health departments set minimum acknowledgements, age verification, and recordkeeping for body-art studios. Adapt this template to your licensing checklist; it is not a substitute for required government forms.',
+      },
+      {
+        question: 'How long should studios keep signed consent forms?',
+        answer:
+          'Follow your local body-art regulations and privacy rules; many studios retain records for several years after the session. Store signed PDFs securely—this site does not keep client forms.',
+      },
+      {
+        question: 'Should aftercare instructions be part of consent?',
+        answer:
+          'Document that aftercare was provided and acknowledged. Separate written aftercare handouts still help clients heal correctly; the consent form proves they received guidance before the session.',
+      },
+      {
+        question: 'What health disclosures belong on a tattoo consent form?',
+        answer:
+          'Ask only what your local rules and safe practice require—typically allergies, skin conditions, medications, pregnancy status where relevant, and blood-borne pathogen acknowledgements—without collecting unnecessary medical detail.',
+      },
     ],
     sources: formSources,
   },
@@ -131,8 +149,6 @@ export const rentalApplication: ToolDefinition = {
   isLegalAdjacent: true,
   documentTitle: 'Residential Rental Application',
   toolVersion: '1.0',
-  formulaNote:
-    "No pricing formula. Screening fields and authorization language are sample templates—not a lease.",
   fields: [
     { id: 'propertyAddress', label: 'Property address', type: 'text', required: true, section: 'Property' },
     { id: 'unit', label: 'Unit #', type: 'text', section: 'Property' },
@@ -209,6 +225,26 @@ export const rentalApplication: ToolDefinition = {
         answer:
           'Often yes with authorization and compliance with credit-reporting and privacy laws. Provide required disclosures for your country/state.',
       },
+      {
+        question: 'How does fair housing affect rental applications?',
+        answer:
+          'Use the same questions and screening criteria for every applicant. Do not ask for or use information to discriminate based on protected characteristics—see HUD fair housing resources for U.S. baseline obligations.',
+      },
+      {
+        question: 'What should a rental application include?',
+        answer:
+          'Applicant contact details, desired unit and move-in, housing history, employment/income, other occupants, pets if relevant, references, and written authorization to verify information as permitted by law.',
+      },
+      {
+        question: 'Are application fees allowed?',
+        answer:
+          'Many places allow reasonable application or screening fees if disclosed and locally regulated. State the amount and what it covers; some jurisdictions cap fees or require refunds when no screening occurs.',
+      },
+      {
+        question: 'How is a rental application different from a lease?',
+        answer:
+          'The application is a screening packet; the lease (or local equivalent) is the binding occupancy agreement after approval. Never treat a signed application alone as permission to move in.',
+      },
     ],
     sources: formSources,
   },
@@ -238,8 +274,6 @@ export const podcastScript: ToolDefinition = {
   isLegalAdjacent: false,
   documentTitle: 'Podcast Episode Script',
   toolVersion: '1.0',
-  formulaNote:
-    "Segment timings are for planning; they do not auto-sum to episode length—check your target runtime manually.",
   fields: [
     { id: 'showName', label: 'Show name', type: 'text', required: true, section: 'Episode' },
     { id: 'episodeNumber', label: 'Episode #', type: 'text', required: true, section: 'Episode' },
@@ -296,6 +330,26 @@ export const podcastScript: ToolDefinition = {
         answer:
           'No. Use full scripts for solo storytelling; use run-of-show outlines for interviews so conversation stays natural.',
       },
+      {
+        question: 'Do I need a word-for-word podcast script?',
+        answer:
+          'Only for tightly produced narrative or ad reads. Most interview shows work better with timed segment cues and question lists so hosts stay present with the guest.',
+      },
+      {
+        question: 'How long should a 30-minute episode script be?',
+        answer:
+          'Plan segments that sum to your target—e.g. 1–2 minutes cold open, short intro, two or three content blocks, CTA, and outro. Leave buffer for laughs, tangents, and midroll ads.',
+      },
+      {
+        question: 'What belongs in a podcast intro?',
+        answer:
+          'Show identity, host/guest names, episode promise, and any required disclosures (sponsorships). Keep housekeeping short so listeners reach the first content beat quickly.',
+      },
+      {
+        question: 'What formats can I export from this template?',
+        answer:
+          'Export PDF or DOCX for the booth, co-host, or producer. The template is a planning document—not a DAW session—so timings are guides you confirm while recording.',
+      },
     ],
     sources: [ftcEndorsements],
   },
@@ -325,8 +379,6 @@ export const realEstateFlyer: ToolDefinition = {
   isLegalAdjacent: false,
   documentTitle: 'Property Flyer',
   toolVersion: '1.0',
-  formulaNote:
-    "Price and property facts are display fields you enter; the flyer does not calculate mortgages or commissions.",
   fields: [
     { id: 'headline', label: 'Headline', type: 'text', required: true, section: 'Listing' },
     { id: 'address', label: 'Property address', type: 'text', required: true, section: 'Listing' },
@@ -384,6 +436,26 @@ export const realEstateFlyer: ToolDefinition = {
         question: 'Can I use this as an official MLS sheet?',
         answer:
           'No. It is a marketing flyer. Follow brokerage and MLS rules for required disclosures and photo usage.',
+      },
+      {
+        question: 'Do I need an Equal Housing / fair housing logo on flyers?',
+        answer:
+          'Many U.S. markets and brokerages expect equal housing opportunity language or logos on advertising. Follow your brokerage policy and local rules; the disclaimer field is a starting point, not legal clearance.',
+      },
+      {
+        question: 'Who owns the listing photos on a flyer?',
+        answer:
+          'Photo rights usually stay with the photographer or listing broker under their agreement. Only use images you are licensed to market; do not pull MLS photos into third-party ads without permission.',
+      },
+      {
+        question: 'What should a real estate flyer include?',
+        answer:
+          'Headline, price, address or neighborhood, beds/baths/sq ft, scannable feature bullets, open-house or tour info, agent contact with brokerage, and required fair-housing or reliability disclaimers for your market.',
+      },
+      {
+        question: 'Can I print this flyer for open houses?',
+        answer:
+          'Yes—export PDF for print or email. Pair it with approved listing photos and verify facts against the MLS before you hand copies to visitors.',
       },
     ],
     sources: [hudFairHousing, copyrightPhotographers],

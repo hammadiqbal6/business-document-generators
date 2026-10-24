@@ -10,10 +10,6 @@ const { tool } = Astro.props;
 const c = tool.content;
 ---
 <article class="prose tool-content">
-  <div class="summary-box">
-    <p>{tool.answerFirst}</p>
-  </div>
-
   <h2>How to use this {tool.shortName.toLowerCase()} generator</h2>
   <ol>
     {c.howToUse.map((step) => <li>{step}</li>)}

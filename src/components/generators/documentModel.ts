@@ -415,8 +415,14 @@ function buildPodcast(values: Record<string, unknown>, blocks: DocBlock[]): DocB
 }
 
 function buildFlyer(values: Record<string, unknown>, blocks: DocBlock[]): DocBlock[] {
-  blocks[0] = { type: 'heading', text: str(values.headline) || 'Property Flyer' };
-  blocks.push({ type: 'subheading', text: str(values.price) });
+  // Keep a stable document title as the preview heading (avoid marketing headline as H2).
+  blocks[0] = { type: 'heading', text: 'Property Flyer' };
+  if (str(values.headline)) {
+    blocks.push({ type: 'paragraph', text: str(values.headline) });
+  }
+  if (str(values.price)) {
+    blocks.push({ type: 'paragraph', text: str(values.price) });
+  }
   blocks.push({
     type: 'kv',
     pairs: [

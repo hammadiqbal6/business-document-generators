@@ -307,6 +307,16 @@ for (const file of htmlFiles) {
     }
   }
 
+  // No keyword-difficulty leaks on public HTML
+  if (/\b(Ahrefs\s+KD|KD\s*[:=]?\s*\d+)\b/i.test(stripTags(html))) {
+    fail(`${rel}: visible Ahrefs/KD keyword-difficulty notes are forbidden`);
+  }
+
+  // /tools/ index needs CollectionPage like hubs
+  if (rel === 'tools/index.html' && !/"@type"\s*:\s*"CollectionPage"/i.test(html)) {
+    fail(`${rel}: missing CollectionPage JSON-LD`);
+  }
+
   // Guides word count
   if (rel.startsWith('guides/') && rel !== 'guides/index.html') {
     const main = html.match(/<main[\s\S]*?<\/main>/i)?.[0] || html;
