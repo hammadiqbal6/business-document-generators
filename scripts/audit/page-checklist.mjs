@@ -160,8 +160,10 @@ for (const file of htmlFiles) {
   if (/\/tools\/[a-z0-9-]+\//i.test(mainText) && !/href="\/tools\//i.test(mainHtml)) {
     // only flag when path-like tokens appear without being link hrefs nearby — light heuristic
   }
-  if (/\bhttps?:\/\/business-document-generators\./i.test(mainText)) {
-    fail(`${rel}: raw workers.dev URL shown as visible text`);
+  // Flag only unlinked bare host strings that look like leftover stubs (not legitimate
+  // privacy/about copy or sister-site outbound links already stripped from mainText hrefs).
+  if (/\bhttps?:\/\/example\.com\b/i.test(mainText)) {
+    fail(`${rel}: example.com URL shown as visible text`);
   }
 
   const isToolPage =

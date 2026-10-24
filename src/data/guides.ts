@@ -1814,7 +1814,7 @@ export const guides: Guide[] = [
             [
               "Deliverables",
               "Counts and deadlines listed?",
-              "TBD delivery"
+              "Delivery date blank"
             ],
             [
               "Overtime / overage",
