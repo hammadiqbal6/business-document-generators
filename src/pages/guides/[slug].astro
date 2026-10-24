@@ -39,6 +39,17 @@ const jsonLd = [
 ];
 const pageTitle =
   guide.title.length > 60 ? guide.title.slice(0, 57).trim() + '…' : guide.title;
+
+/** Pull 3 short takeaway bullets from the first section body when possible. */
+const takeaways = guide.sections
+  .slice(0, 2)
+  .flatMap((s) =>
+    s.body
+      .split(/(?<=\.)\s+/)
+      .map((sentence) => sentence.trim())
+      .filter((sentence) => sentence.length > 40 && sentence.length < 160),
+  )
+  .slice(0, 3);
 ---
 <BaseLayout
   title={pageTitle}
@@ -52,15 +63,32 @@ const pageTitle =
   <Breadcrumbs items={crumbs} />
   <article class="prose">
     <h1>{guide.title}</h1>
+    <div class="summary-box answer-box">
+      <p class="answer-first">{guide.answerFirst}</p>
+      {takeaways.length > 0 && (
+        <>
+          <p class="takeaways-label"><strong>Key takeaways</strong></p>
+          <ul class="takeaways">
+            {takeaways.map((t) => (
+              <li>{t}</li>
+            ))}
+          </ul>
+        </>
+      )}
+      {guide.legalNote && (
+        <p class="legal-note-inline" role="note"><strong>Note:</strong> {guide.legalNote}</p>
+      )}
+    </div>
+    {related[0] && (
+      <p class="guide-cta">
+        <a href={`/tools/${related[0]!.slug}/`}>Try the matching generator →</a>
+      </p>
+    )}
     <p class="content-meta byline">
       Built and maintained by <a href="/about/#maintainer" rel="author">Hammad Iqbal</a>
       · Last reviewed <time datetime={guide.updatedAt}>{guide.updatedAt}</time>
       · Published <time datetime={guide.publishedAt}>{guide.publishedAt}</time>
     </p>
-    <div class="summary-box"><p>{guide.answerFirst}</p></div>
-    {guide.legalNote && (
-      <p class="legal-note" role="note"><strong>Note:</strong> {guide.legalNote}</p>
-    )}
     {guide.sections.map((s) => (
       <>
         <h2>{s.heading}</h2>
@@ -108,12 +136,23 @@ const pageTitle =
 </BaseLayout>
 
 <style>
-  .legal-note {
-    margin: 1rem 0 1.5rem;
-    padding: 0.85rem 1rem;
-    border: 1px solid var(--border, #d8e3de);
-    background: var(--surface, #f8faf9);
-    max-width: 65ch;
+  .answer-box .answer-first {
+    margin: 0 0 0.75rem;
+  }
+  .takeaways-label {
+    margin: 0.5rem 0 0.25rem;
+  }
+  .takeaways {
+    margin: 0 0 0.75rem;
+    padding-left: 1.25rem;
+  }
+  .legal-note-inline {
+    margin: 0.75rem 0 0;
+    font-size: 0.95rem;
+    color: var(--muted, #4a5c56);
+  }
+  .guide-cta {
+    margin: 0.75rem 0 1rem;
   }
   .table-wrap {
     overflow-x: auto;

@@ -26,8 +26,6 @@ export const photographyContract: ToolDefinition = {
   isLegalAdjacent: true,
   documentTitle: 'Photography Services Agreement',
   toolVersion: '1.0',
-  formulaNote:
-    'Fees and retainers are taken from the fields you enter; clause text is included only when its toggle is on. Totals are display values—not legal calculations.',
   fields: [
     { id: 'photographerName', label: 'Photographer / studio', type: 'text', required: true, section: 'Parties' },
     { id: 'photographerAddress', label: 'Photographer address', type: 'textarea', rows: 2, section: 'Parties' },
@@ -139,6 +137,21 @@ export const photographyContract: ToolDefinition = {
         answer:
           'Yes. Use a contractor or second-shooter agreement covering pay, deliverable ownership, and non-solicitation if relevant.',
       },
+      {
+        question: 'What should a photography cancellation clause cover?',
+        answer:
+          'State how much of the retainer is refundable, the notice window (for example 14–30 days), reschedule fees, and what happens if the photographer cancels. Clear cancel language prevents day-of disputes.',
+      },
+      {
+        question: 'Should usage rights and deliverables be separate clauses?',
+        answer:
+          'Yes. Deliverables list counts, formats, and turnaround; usage rights say where the client may publish images. Mixing them makes it hard to price commercial licenses or album add-ons later.',
+      },
+      {
+        question: 'Do I need a model release in addition to the contract?',
+        answer:
+          'Often yes when images will be used in advertising or third-party promotion. The service contract covers the shoot; a model or property release covers publicity use of likeness or locations.',
+      },
     ],
     sources: contractSources,
   },
@@ -164,8 +177,6 @@ export const videographyContract: ToolDefinition = {
   isLegalAdjacent: true,
   documentTitle: 'Videography Services Agreement',
   toolVersion: '1.0',
-  formulaNote:
-    "Project fee and deposit fields are echoed in the preview. Clause toggles control which sample language is included.",
   fields: [
     { id: 'companyName', label: 'Videographer / company', type: 'text', required: true, section: 'Parties' },
     { id: 'clientName', label: 'Client', type: 'text', required: true, section: 'Parties' },
@@ -223,6 +234,26 @@ export const videographyContract: ToolDefinition = {
         answer:
           'Only if priced and licensed. Raw files increase storage and misuse risk; many videographers sell raw as an add-on.',
       },
+      {
+        question: 'How many revision rounds should a videography contract include?',
+        answer:
+          'Two rounds is a common default for branded films and wedding highlights. Spell out what counts as a revision versus a new cut, and set an hourly rate for extra rounds before post begins.',
+      },
+      {
+        question: 'Who is responsible for music licensing?',
+        answer:
+          'State whether the client supplies cleared tracks or the videographer licenses stock/sync music. Unclear music clauses are a frequent source of takedown risk on social platforms.',
+      },
+      {
+        question: 'What cancellation terms are typical for video shoots?',
+        answer:
+          'Many agreements make the deposit non-refundable inside 14 days of the first shoot date, with weather holds for outdoor work. Mirror deposit and cancel math in both the fee and cancellation clauses.',
+      },
+      {
+        question: 'Should delivery format and timeline be in the contract?',
+        answer:
+          'Yes—list resolution (e.g. 4K), file types, transfer method, and delivery window in business days. Vague “when ready” language invites scope creep on rush edits.',
+      },
     ],
     sources: contractSources,
   },
@@ -248,8 +279,6 @@ export const freelanceWebContract: ToolDefinition = {
   isLegalAdjacent: true,
   documentTitle: 'Freelance Web Design Agreement',
   toolVersion: '1.0',
-  formulaNote:
-    "Milestone amounts are listed as you enter them; the generator does not prorate or calculate late fees.",
   fields: [
     { id: 'freelancerName', label: 'Freelancer / studio', type: 'text', required: true, section: 'Parties' },
     { id: 'clientName', label: 'Client', type: 'text', required: true, section: 'Parties' },
@@ -303,6 +332,26 @@ export const freelanceWebContract: ToolDefinition = {
         answer:
           'It depends on jurisdiction and leverage. Many freelancers assign IP on full payment instead. Ask a lawyer which structure fits your location.',
       },
+      {
+        question: 'What milestone schedule works for web design contracts?',
+        answer:
+          'A common pattern is about 30% deposit to start, 40% on design approval, and 30% on launch. Tie each payment to a deliverable so invoices are paperwork, not renegotiation.',
+      },
+      {
+        question: 'How do I limit revision rounds and scope creep?',
+        answer:
+          'Define page count, included revision rounds, and a written change-request process with new estimates before out-of-scope work. Client feedback deadlines (e.g. five business days) keep timelines honest.',
+      },
+      {
+        question: 'When should IP transfer to the client?',
+        answer:
+          'Many freelancers assign rights in final unique deliverables only after full payment, while excluding third-party fonts, libraries, and pre-existing frameworks. State that split clearly in the IP clause.',
+      },
+      {
+        question: 'What client responsibilities belong in the contract?',
+        answer:
+          'Content delivery, timely feedback, hosting or DNS access, and who provides copy or photos. Missing client-duty language is a common cause of “the site is late” disputes.',
+      },
     ],
     sources: contractSources,
   },
@@ -328,8 +377,6 @@ export const eventVendorContract: ToolDefinition = {
   isLegalAdjacent: true,
   documentTitle: 'Event Vendor Services Agreement',
   toolVersion: '1.0',
-  formulaNote:
-    "Package price and deposit % are taken from your inputs. Always confirm venue and force-majeure language with counsel.",
   fields: [
     { id: 'vendorName', label: 'Vendor / business', type: 'text', required: true, section: 'Parties' },
     { id: 'serviceType', label: 'Service type', type: 'text', required: true, section: 'Parties', placeholder: 'e.g. Florist, DJ, Officiant' },
@@ -386,6 +433,26 @@ export const eventVendorContract: ToolDefinition = {
         answer:
           'Many venues require certificates of insurance. Ask the venue early and attach requirements as an exhibit.',
       },
+      {
+        question: 'What should a wedding vendor cancellation clause include?',
+        answer:
+          'Deposit refund rules, notice windows, substitute-vendor duties if the vendor cannot perform, and how reschedules transfer the deposit. Match the clause to the payment schedule on the quote.',
+      },
+      {
+        question: 'How does force majeure usually work for events?',
+        answer:
+          'Sample language often allows one reschedule within a set window (for example 12 months) when a venue cancelation or government order blocks the date, with deposits transferring. Have counsel adapt it for your jurisdiction.',
+      },
+      {
+        question: 'Should setup and teardown times be in the contract?',
+        answer:
+          'Yes—list load-in, service window, and strike deadlines. Venues enforce dock and noise rules; vague “day of” access notes cause overtime and damage-deposit fights.',
+      },
+      {
+        question: 'What inclusions should event vendors spell out?',
+        answer:
+          'Exact deliverables (e.g. bouquet counts, hours of DJ play), what the client must supply (tables, power, meals), overtime fees, and outdoor rain plans when relevant.',
+      },
     ],
     sources: contractSources,
   },
@@ -411,8 +478,6 @@ export const simpleNda: ToolDefinition = {
   isLegalAdjacent: true,
   documentTitle: 'Non-Disclosure Agreement',
   toolVersion: '1.0',
-  formulaNote:
-    "No numeric formula—this generator assembles party names and selected confidentiality clauses into sample language only.",
   fields: [
     { id: 'ndaType', label: 'NDA type', type: 'select', section: 'Type', options: [
       { value: 'Mutual', label: 'Mutual' },
@@ -465,6 +530,26 @@ export const simpleNda: ToolDefinition = {
         question: 'Is a simple NDA enough for investors or employees?',
         answer:
           'Often no. Investors may refuse broad NDAs; employees usually need invention-assignment and confidentiality in employment docs. Seek counsel.',
+      },
+      {
+        question: 'When should I use a mutual vs one-way NDA?',
+        answer:
+          'Use one-way when only one party discloses secrets; use mutual when both sides will share confidential materials (for example a studio and a brand exchanging strategy docs).',
+      },
+      {
+        question: 'How long should NDA confidentiality last?',
+        answer:
+          'Many freelance NDAs use a 2–5 year term after disclosure, with trade secrets protected longer while they remain secrets under applicable law. Eternal terms without exclusions are often hard to negotiate.',
+      },
+      {
+        question: 'What should the confidential-information definition include?',
+        answer:
+          'Non-public business, technical, or financial information that is marked confidential or that a reasonable person would treat as confidential—plus clear exclusions for public, independently developed, or legally required disclosures.',
+      },
+      {
+        question: 'Do I need a return-or-destruction clause?',
+        answer:
+          'It helps at offboarding: on written request, the recipient returns or destroys materials, with ordinary backup copies still subject to the NDA. Pair it with a narrow purpose clause so use stays limited.',
       },
     ],
     sources: contractSources,

@@ -16,6 +16,33 @@ const jsonLd = [
     items: guides.map((g) => ({ name: g.title, path: `/guides/${g.slug}/` })),
   }),
 ];
+
+const groups: { heading: string; match: (slug: string) => boolean }[] = [
+  {
+    heading: 'Estimates, invoices & receipts',
+    match: (s) =>
+      /invoice|estimate|receipt|line-item|work-order|cleaning|catering|construction/.test(s),
+  },
+  {
+    heading: 'Contracts & NDA',
+    match: (s) => /contract|nda|freelance-payment|wedding/.test(s),
+  },
+  {
+    heading: 'Forms & creative',
+    match: (s) => /tattoo|rental|podcast|real-estate|flyer/.test(s),
+  },
+];
+
+const used = new Set<string>();
+const grouped = groups.map((g) => {
+  const items = guides.filter((guide) => g.match(guide.slug) && !used.has(guide.slug));
+  items.forEach((i) => used.add(i.slug));
+  return { heading: g.heading, items };
+});
+const leftover = guides.filter((g) => !used.has(g.slug));
+if (leftover.length) {
+  grouped.push({ heading: 'More guides', items: leftover });
+}
 ---
 <BaseLayout
   title="Guides for Business Documents & Contracts"
@@ -27,13 +54,22 @@ const jsonLd = [
 >
   <Breadcrumbs items={crumbs} />
   <h1>Guides</h1>
-  <p class="lead">Answer-first articles that support our tools and AdSense quality guidelines. Not legal advice where noted.</p>
-  <div class="tool-grid">
-    {guides.map((g) => (
-      <a class="tool-card" href={`/guides/${g.slug}/`}>
-        <h3>{g.title}</h3>
-        <p>{g.metaDescription.slice(0, 110)}…</p>
-      </a>
-    ))}
-  </div>
+  <p class="lead answer-first">
+    Answer-first articles that explain what to include on estimates, contracts, and forms—and link to the matching free generator.
+  </p>
+  {grouped.map((g) =>
+    g.items.length ? (
+      <section>
+        <h2>{g.heading}</h2>
+        <div class="tool-grid">
+          {g.items.map((guide) => (
+            <a class="tool-card" href={`/guides/${guide.slug}/`}>
+              <h3>{guide.title}</h3>
+              <p>{guide.metaDescription.slice(0, 110)}…</p>
+            </a>
+          ))}
+        </div>
+      </section>
+    ) : null,
+  )}
 </BaseLayout>

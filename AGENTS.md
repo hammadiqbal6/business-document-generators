@@ -27,12 +27,16 @@ Static Astro + TypeScript site with React islands for in-browser document genera
 
 - Governing playbook: `docs/SEO-PLAYBOOK.md`
 - Hard do/don’t + CI: `docs/SEO-GUARDRAILS.md` (also `.cursor/rules/seo-guardrails.mdc`)
+- **Research first for every new/reworked page:** `.cursor/rules/seo-pages.mdc` + full checklist `docs/PAGE-CHECKLIST.md`
 - Custom domain cutover (do not change domain until ready): `docs/CUSTOM-DOMAIN.md`
 - Site origin: **only** `PUBLIC_SITE_URL` / `src/config/siteDefaults.mjs` — canonicals, sitemap, robots, llms, JSON-LD, OG, IndexNow
 - One primary keyword per URL; answer-first intro; 600+ words on tool pages; guides ≥800 (target ~1000+)
+- **Answer-first tools:** H1 → short lead → editor open by default (no “Open editor” gate) → byline under tool; ≤60 words before first input; cookie bar ≤56px
+- Never render Ahrefs/KD notes or internal keyword scores on public pages
 - Tool pages must link topical guides (`src/data/toolGuideMap.ts` + Learn more block)
-- FAQ on page + FAQPage JSON-LD; hubs/guides index need BreadcrumbList + CollectionPage
+- FAQ on page + FAQPage JSON-LD; hubs/`/tools/`/`/guides/` need BreadcrumbList + CollectionPage
 - AdSense: `docs/ADSENSE.md` — privacy ad disclosures, ads.txt, CMP for EEA
+- CI page checklist: `npm run audit:pages` (wired into `npm run audit`)
 
 ## Commands
 
@@ -41,7 +45,8 @@ Static Astro + TypeScript site with React islands for in-browser document genera
 | `npm run dev` | Local dev server |
 | `npm run build` | Static `dist/` |
 | `npm test` | Vitest (validation + PDF export) |
-| `npm run audit` | Build + SEO/AdSense/budget/links |
+| `npm run audit` | Build + SEO/guardrails/page-checklist/AdSense/budget/links |
+| `npm run audit:pages` | Per-page checklist only (needs `dist/`) |
 | `npx lhci autorun` | Lighthouse mobile budgets |
 | `npm run proof` | Regenerate committed `docs/proof/` evidence |
 

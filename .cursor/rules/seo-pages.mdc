@@ -1,0 +1,37 @@
+---
+description: Research-first SEO/AEO rules and per-page checklist for every new or reworked page
+globs: src/pages/**/*.{astro,ts,tsx,md,mdx},src/data/**/*.{ts,js},src/components/content/**/*.astro,src/components/generators/**/*.{astro,tsx}
+---
+
+# SEO pages (research first)
+
+Before adding or substantially rewriting any tool, guide, hub, or landing page:
+
+1. Pick **one primary query** and name the intent (do / know / compare / navigate).
+2. Skim the top results and note format gaps (tool-first, table, worked example).
+3. Check `docs/KEYWORD-MAP.md` for cannibalization; extend an existing URL when intent matches.
+4. List 3–6 secondary questions (PAA / related) → H2s and FAQ.
+5. Follow the full checklist in `docs/PAGE-CHECKLIST.md` (copied from the shared audit brief).
+
+## Answer-first (hard)
+
+- **Tools:** H1 → ≤45-word lead → **usable form/editor** (auto-open; no “Open editor” gate) → byline/trust under the tool → supporting content. ≤60 words between H1 and first input. Sample preview collapsed or below the fold.
+- **Guides:** H1 → answer box (number/verdict in sentence 1) → key takeaways → CTA → byline → body. Legal notes belong at the end of the answer box, not between H1 and answer.
+- **Hubs/home:** short lead, then tool cards immediately (first card above the mobile fold).
+
+## Do not ship
+
+- Visible Ahrefs/KD notes or raw keyword labels as card subtitles.
+- Preview marketing copy as page `<h2>`/`<h3>` (use non-heading elements in document previews).
+- “How totals are calculated” on tools with no math (`formulaNote` only when totals exist).
+- Placeholder, lorem, “ad space reserved”, or TODO copy.
+- Duplicate titles/meta; missing canonical/viewport; invalid JSON-LD; pages absent from the sitemap.
+
+## Verify
+
+```bash
+npm test && npm run audit
+# optionally: npx lhci autorun && node scripts/verify-mobile.mjs
+```
+
+CI runs `npm test`, `npm run audit` (includes `audit:pages`), and `npm run proof` on every PR.
