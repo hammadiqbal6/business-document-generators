@@ -89,6 +89,10 @@ Set via `PUBLIC_*` env vars at deploy time:
 
 See **AGENTS.md** and `.cursor/skills/add-new-tool/SKILL.md`.
 
+## UI / UX changes
+
+For any change to how the site looks or behaves, follow **[UI/UX Pro Max](AGENTS.md#uiux-pro-max)** in `AGENTS.md`: read `.cursor/skills/ui-ux-pro-max/SKILL.md` and run `python3 .cursor/skills/ui-ux-pro-max/scripts/search.py "<query>" --domain <domain>` (plus `--design-system` / `--stack astro` when listed in the skill).
+
 ## Proof (SEO, performance, AdSense)
 
 Committed, reproducible evidence lives in **[docs/proof/](docs/proof/)** (Lighthouse HTML/JSON, audits, structured-data extracts, mobile screenshots, bundle sizes).
@@ -99,7 +103,7 @@ npm run proof   # rebuilds dist and regenerates docs/proof/
 
 ## Audits & CI
 
-GitHub Actions runs `npm run proof` and uploads `docs/proof/` as a workflow artifact.
+PR / `main` CI runs a fast safety net only (`npm ci`, `npm run build`, `npm test`). Run `npm run audit`, `npm run proof`, and `npx lhci autorun` locally before opening PRs. The **Full checks** workflow (Actions → workflow_dispatch) still runs Playwright, audits, proof, and Lighthouse on demand.
 
 ## SEO / AdSense / deploy
 

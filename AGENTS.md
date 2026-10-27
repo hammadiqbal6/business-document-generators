@@ -70,3 +70,35 @@ Static Astro + TypeScript site with React islands for in-browser document genera
 ## Cursor skills
 
 See `.cursor/skills/*/SKILL.md` — especially `add-new-tool` and `document-generator-niche`.
+
+## UI/UX Pro Max
+
+Use this skill for **any change to how the site looks or behaves** (layout, components, forms, motion, responsive, a11y).
+
+1. Read `.cursor/skills/ui-ux-pro-max/SKILL.md`.
+2. Search the local design/UX database:
+
+```bash
+python3 .cursor/skills/ui-ux-pro-max/scripts/search.py "<query>" --domain <domain>
+```
+
+Optional flags from the skill (when relevant):
+
+- `--design-system` — product-wide visual direction
+- `--stack astro` (or `react`) — stack-specific implementation guidance
+
+Example (verified):
+
+```bash
+python3 .cursor/skills/ui-ux-pro-max/scripts/search.py "form accessibility contrast focus" --domain ux
+```
+
+Priority checks before shipping UI:
+
+- Contrast ≥ 4.5:1
+- Touch targets ≥ 44×44px
+- Visible focus indicators
+- Form labels + inline errors (not placeholder-only)
+- Dark mode contrast / safe areas where applicable
+- No horizontal scroll
+- Respect `prefers-reduced-motion`
