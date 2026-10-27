@@ -1,17 +1,21 @@
 :root {
+  color-scheme: light dark;
   --brand: #0f6b5c;
   --brand-dark: #0a4a40;
+  --brand-bright: #0f6b5c;
   --accent: #c9a227;
   --ink: #14201c;
   --muted: #4a5c56;
   --border: #d8e3de;
   --border-strong: #b8c9c0;
   --surface: #f8faf9;
+  --surface-2: #ffffff;
   --page: #ffffff;
   --font-sans: system-ui, -apple-system, 'Segoe UI', Roboto, Ubuntu, Cantarell, 'Noto Sans', sans-serif;
   --font-display: Georgia, 'Times New Roman', serif;
   --content-max: 72rem;
   --tap: 48px;
+  --focus-ring: #0f6b5c;
   --color-border: var(--border);
   --color-surface: var(--surface);
 }
@@ -43,7 +47,7 @@ body {
 }
 
 body.has-cookie-banner {
-  padding-bottom: 3.5rem;
+  padding-bottom: 4.5rem;
 }
 
 .site-main {
@@ -106,6 +110,9 @@ input,
 select,
 textarea {
   font-size: max(1rem, 16px);
+  background-color: var(--surface-2);
+  color: var(--ink);
+  border-color: var(--border-strong);
 }
 
 .skip-link {
@@ -134,11 +141,12 @@ textarea {
 .site-header__inner {
   max-width: var(--content-max);
   margin: 0 auto;
-  padding: 0.65rem 1rem;
+  padding: 0.35rem 1rem;
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 0.75rem;
+  min-height: 56px;
 }
 
 .site-logo {
@@ -155,7 +163,8 @@ textarea {
   min-width: var(--tap);
   min-height: var(--tap);
   border: 1px solid var(--border-strong);
-  background: #fff;
+  background: var(--surface-2);
+  color: var(--ink);
   border-radius: 4px;
   font: inherit;
   font-weight: 700;
@@ -167,7 +176,7 @@ textarea {
   left: 0;
   right: 0;
   top: 100%;
-  background: #fff;
+  background: var(--surface-2);
   border-bottom: 1px solid var(--border);
   padding: 0.5rem 1rem 1rem;
 }
@@ -282,7 +291,7 @@ textarea {
   display: block;
   padding: 1rem;
   border: 1px solid var(--border);
-  background: #fff;
+  background: var(--surface-2);
   text-decoration: none;
   color: inherit;
   min-height: var(--tap);
@@ -410,7 +419,7 @@ textarea {
   border: 1px solid var(--border);
   padding: 0.65rem 0.85rem;
   margin-bottom: 0.5rem;
-  background: #fff;
+  background: var(--surface-2);
 }
 
 .faq summary {
@@ -483,7 +492,7 @@ textarea {
 }
 
 .hero-actions a.secondary {
-  background: #fff;
+  background: var(--surface-2);
   color: var(--brand-dark);
   border: 1px solid var(--border-strong);
 }
@@ -493,7 +502,7 @@ textarea {
   padding: 0.65rem 1rem;
   border: 1px solid var(--border-strong);
   border-radius: 4px;
-  background: #fff;
+  background: var(--surface-2);
   color: var(--ink);
   font: inherit;
   font-size: max(1rem, 16px);
@@ -538,19 +547,19 @@ textarea {
   bottom: 0;
   z-index: 80;
   display: flex;
-  flex-wrap: nowrap;
+  flex-wrap: wrap;
   align-items: center;
   gap: 0.5rem 0.75rem;
-  height: 56px;
-  max-height: 56px;
-  padding: 0 0.75rem;
+  min-height: 56px;
+  max-height: none;
+  padding: 0.5rem 0.75rem;
   box-sizing: border-box;
   background: #14201c;
   color: #f4f7f6;
   border-radius: 0;
   box-shadow: 0 -2px 12px rgba(0, 0, 0, 0.16);
-  font-size: 0.85rem;
-  line-height: 1.2;
+  font-size: 0.95rem;
+  line-height: 1.3;
 }
 
 .cookie-banner[hidden] {
@@ -559,11 +568,8 @@ textarea {
 
 .cookie-banner p {
   margin: 0;
-  flex: 1 1 auto;
+  flex: 1 1 12rem;
   min-width: 0;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
 }
 
 .cookie-banner a {
@@ -576,16 +582,26 @@ textarea {
 .cookie-banner__actions {
   display: flex;
   flex-wrap: nowrap;
-  gap: 0.4rem;
+  gap: 0.5rem;
   margin-left: auto;
   flex-shrink: 0;
 }
 
 .cookie-banner .btn {
-  min-height: 40px;
+  min-height: 44px;
   min-width: 44px;
-  padding: 0.35rem 0.85rem;
-  font-size: 0.88rem;
+  padding: 0.5rem 1rem;
+  font-size: 1rem;
+}
+
+.cookie-banner .btn--ghost {
+  background: transparent;
+  border-color: #7a8f88;
+  color: #f4f7f6;
+}
+
+.cookie-banner .btn--ghost:hover {
+  background: rgba(255, 255, 255, 0.08);
 }
 
 .cookie-banner .btn--primary {
@@ -601,7 +617,7 @@ textarea {
 }
 
 :focus-visible {
-  outline: 3px solid var(--brand);
+  outline: 3px solid var(--focus-ring);
   outline-offset: 2px;
 }
 
@@ -611,7 +627,7 @@ textarea {
 .hero-actions a:focus-visible,
 .tool-card:focus-visible,
 summary:focus-visible {
-  outline: 3px solid var(--accent);
+  outline: 3px solid var(--focus-ring);
   outline-offset: 2px;
 }
 
@@ -645,9 +661,13 @@ summary:focus-visible {
     --border: #2a3d38;
     --border-strong: #3d564e;
     --surface: #13201c;
+    --surface-2: #101c19;
     --page: #0c1412;
-    --brand: #3dbaa3;
+    /* Keep primary fill dark so white labels stay ≥4.5:1 (do not lighten under white text). */
+    --brand: #0f6b5c;
+    --brand-bright: #3dbaa3;
     --brand-dark: #7dd4c2;
+    --focus-ring: #3dbaa3;
   }
 
   body {
@@ -656,34 +676,62 @@ summary:focus-visible {
       var(--page);
   }
 
-  .site-header,
+  .site-header {
+    background: rgba(12, 20, 18, 0.96);
+    border-bottom-color: var(--border);
+  }
+
   .site-nav,
+  .site-nav.is-open,
   .tool-card,
   .faq details,
   .btn,
-  .doc-preview,
   .sample-preview,
   .generator__section,
   .line-items__row,
-  .embed-share__code {
-    background: #101c19;
+  .embed-share__code,
+  .nav-toggle {
+    background: var(--surface-2);
     color: var(--ink);
   }
 
-  .site-nav.is-open,
-  .site-header {
-    background: rgba(12, 20, 18, 0.96);
+  /* Paper-like preview stays light for readable document simulation. */
+  .doc-preview {
+    background: #fff;
+    color: #1a1a1a;
   }
 
-  .btn--primary {
-    background: var(--brand);
-    border-color: var(--brand);
-    color: #06201a;
+  .btn:hover {
+    background: #182622;
+  }
+
+  .btn--primary,
+  .hero-actions a:not(.secondary) {
+    background: #0f6b5c;
+    border-color: #0f6b5c;
+    color: #fff;
+  }
+
+  .btn--primary:hover {
+    background: #0a4a40;
+    border-color: #0a4a40;
+    color: #fff;
+  }
+
+  .hero-actions a.secondary {
+    background: var(--surface-2);
+    color: var(--brand-dark);
+    border-color: var(--border-strong);
   }
 
   .cookie-banner {
     background: #0a1210;
-    border: 1px solid var(--border-strong);
+    border-top: 1px solid var(--border-strong);
+    color: #f4f7f6;
+  }
+
+  .cookie-banner a {
+    color: #f0d878;
   }
 
   a {
@@ -691,7 +739,20 @@ summary:focus-visible {
   }
 
   .ad-slot {
-    background: #101c19;
+    background: var(--surface-2);
+  }
+
+  input,
+  select,
+  textarea {
+    background-color: var(--surface);
+    color: var(--ink);
+    border-color: var(--border-strong);
+  }
+
+  .generator__tabs button[aria-selected='true'] {
+    background: #0f6b5c;
+    color: #fff;
   }
 }
 

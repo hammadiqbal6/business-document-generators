@@ -67,6 +67,12 @@ const lead = shortLead(tool.answerFirst, 40);
 
   <DocumentGeneratorLazy tool={tool} autoOpen={true} />
 
+  <nav class="tool-jump" aria-label="On this page">
+    <a href="#tool-editor">Editor</a>
+    <a href="#tool-guide">Guide &amp; FAQ</a>
+    <a href="#embed-h">Embed</a>
+  </nav>
+
   <p class="content-meta byline tool-byline">
     Built and maintained by
     <a href="/about/#maintainer" rel="author">{siteConfig.author.name}</a>
@@ -76,7 +82,9 @@ const lead = shortLead(tool.answerFirst, 40);
 
   <AdSlot slot="tool-mid" minHeight={250} />
 
-  <ToolPageContent tool={tool} />
+  <div id="tool-guide">
+    <ToolPageContent tool={tool} />
+  </div>
 
   <details class="sample-details">
     <summary>Sample filled preview (static)</summary>
@@ -113,6 +121,20 @@ const lead = shortLead(tool.answerFirst, 40);
   .tool-header .lead {
     margin-bottom: 0.5rem;
     max-width: 62ch;
+  }
+  .tool-jump {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.35rem 0.75rem;
+    margin: 0.35rem 0 0.75rem;
+    font-size: 0.92rem;
+  }
+  .tool-jump a {
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+    text-decoration: underline;
+    text-underline-offset: 0.15em;
   }
   .tool-byline {
     margin: 1rem 0 1.25rem;

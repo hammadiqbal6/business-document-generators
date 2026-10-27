@@ -78,7 +78,8 @@ const allLd = includeSiteGraph
         <a href="/cookies/">Privacy</a>
       </p>
       <div class="cookie-banner__actions">
-        <button type="button" class="btn btn--primary" data-cookie-accept>OK</button>
+        <button type="button" class="btn btn--ghost" data-cookie-reject>Reject</button>
+        <button type="button" class="btn btn--primary" data-cookie-accept>Accept</button>
       </div>
     </div>
 
@@ -86,6 +87,10 @@ const allLd = includeSiteGraph
       const KEY = 'docuforge:cookie-ok';
       const banner = document.getElementById('cookie-banner');
       if (banner) {
+        const dismiss = () => {
+          banner.hidden = true;
+          document.body.classList.remove('has-cookie-banner');
+        };
         try {
           if (!localStorage.getItem(KEY)) {
             banner.hidden = false;
@@ -101,11 +106,18 @@ const allLd = includeSiteGraph
           } catch {
             /* ignore */
           }
-          banner.hidden = true;
-          document.body.classList.remove('has-cookie-banner');
+          dismiss();
           const grant = (window as Window & { __docuforgeGrantAnalytics?: () => void })
             .__docuforgeGrantAnalytics;
           grant?.();
+        });
+        banner.querySelector('[data-cookie-reject]')?.addEventListener('click', () => {
+          try {
+            localStorage.setItem(KEY, '0');
+          } catch {
+            /* ignore */
+          }
+          dismiss();
         });
       }
     </script>
