@@ -5,6 +5,10 @@ on:
   push:
     branches: [main]
 
+concurrency:
+  group: ci-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
 # Build-time PUBLIC_* values (same names as Workers Builds / .env.example).
 # Fallbacks in src/config also cover missing vars; CI sets them explicitly for consistency.
 env:
@@ -16,8 +20,10 @@ env:
   PUBLIC_SITE_URL_PET: https://pet-calculators.hammadiqbal117.workers.dev
 
 jobs:
+  # Keep this job id: previously used as a status check name on main.
   build-test-audit-proof:
     runs-on: ubuntu-24.04
+    timeout-minutes: 10
     steps:
       - uses: actions/checkout@v5
       - uses: actions/setup-node@v5
@@ -25,12 +31,5 @@ jobs:
           node-version: '22'
           cache: npm
       - run: npm ci
-      - run: npx playwright install chromium
+      - run: npm run build
       - run: npm test
-      - run: npm run audit
-      - run: npm run proof
-      - uses: actions/upload-artifact@v6
-        if: always()
-        with:
-          name: docs-proof
-          path: docs/proof/

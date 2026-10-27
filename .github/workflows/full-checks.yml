@@ -1,0 +1,40 @@
+name: Full checks
+
+# Manual-only: Playwright, SEO/AdSense/budget/page-checklist audits, proof, Lighthouse.
+# Owner runs these locally before opening PRs; use this workflow when needed in Actions.
+on:
+  workflow_dispatch:
+
+concurrency:
+  group: full-checks-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+env:
+  PUBLIC_SITE_URL: https://business-document-generators.hammadiqbal117.workers.dev
+  PUBLIC_SITE_URL_PAYMENT_FEES: https://payment-fee-calculators.hammadiqbal117.workers.dev
+  PUBLIC_SITE_URL_BUSINESS_DOCS: https://business-document-generators.hammadiqbal117.workers.dev
+  PUBLIC_SITE_URL_HOME_GARDEN: https://home-garden-calculators.hammadiqbal117.workers.dev
+  PUBLIC_SITE_URL_FIBER_ARTS: https://fiber-arts-calculators.hammadiqbal117.workers.dev
+  PUBLIC_SITE_URL_PET: https://pet-calculators.hammadiqbal117.workers.dev
+
+jobs:
+  full-checks:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-node@v5
+        with:
+          node-version: '22'
+          cache: npm
+      - run: npm ci
+      - run: npx playwright install chromium
+      - run: npm test
+      - run: npm run audit
+      - run: npm run proof
+      - run: npm run lhci
+      - uses: actions/upload-artifact@v6
+        if: always()
+        with:
+          name: docs-proof
+          path: docs/proof/
