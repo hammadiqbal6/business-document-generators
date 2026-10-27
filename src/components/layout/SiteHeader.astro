@@ -21,8 +21,22 @@ import { siteConfig } from '../../config/site';
 <script>
   const btn = document.getElementById('nav-toggle');
   const nav = document.getElementById('site-nav');
-  btn?.addEventListener('click', () => {
-    const open = nav?.classList.toggle('is-open');
+
+  function setOpen(open) {
+    if (!btn || !nav) return;
+    nav.classList.toggle('is-open', open);
     btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+  }
+
+  btn?.addEventListener('click', () => {
+    const open = !(btn.getAttribute('aria-expanded') === 'true');
+    setOpen(open);
+  });
+
+  document.addEventListener('keydown', (event) => {
+    if (event.key !== 'Escape') return;
+    if (btn?.getAttribute('aria-expanded') !== 'true') return;
+    setOpen(false);
+    btn.focus();
   });
 </script>
