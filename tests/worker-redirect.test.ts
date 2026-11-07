@@ -1,14 +1,16 @@
 import { describe, expect, it } from 'vitest';
 import {
   DEFAULT_CANONICAL_ORIGIN,
+  DEFAULT_LEGACY_REDIRECT_HOSTS,
   LEGACY_WORKERS_DEV_HOST,
-  isLegacyWorkersDevHost,
+  isLegacyRedirectHost,
   legacyHostRedirectLocation,
   needsTrailingSlashRedirect,
+  parseLegacyRedirectHosts,
   withTrailingSlashPath,
 } from '../src/lib/workerRedirect';
 
-describe('legacy workers.dev → canonical 301', () => {
+describe('legacy host → canonical 301', () => {
   it('redirects the exact legacy host to docuklin.com with path and query', () => {
     const location = legacyHostRedirectLocation(
       `https://${LEGACY_WORKERS_DEV_HOST}/tools/invoice/?a=1`,
@@ -39,7 +41,7 @@ describe('legacy workers.dev → canonical 301', () => {
   it('does not redirect versioned Workers preview hosts', () => {
     const preview = `https://abc123-${LEGACY_WORKERS_DEV_HOST}/tools/`;
     expect(legacyHostRedirectLocation(preview)).toBeNull();
-    expect(isLegacyWorkersDevHost(`abc123-${LEGACY_WORKERS_DEV_HOST}`)).toBe(false);
+    expect(isLegacyRedirectHost(`abc123-${LEGACY_WORKERS_DEV_HOST}`)).toBe(false);
   });
 
   it('does not redirect localhost', () => {
@@ -55,8 +57,24 @@ describe('legacy workers.dev → canonical 301', () => {
     expect(location).toBe('https://example.test/guides/');
   });
 
-  it('defaults canonical origin to docuklin.com', () => {
+  it('accepts a configurable comma-separated legacy host list', () => {
+    const hosts = parseLegacyRedirectHosts(
+      'old.example, business-document-generators.hammadiqbal117.workers.dev',
+    );
+    expect(hosts).toEqual([
+      'old.example',
+      'business-document-generators.hammadiqbal117.workers.dev',
+    ]);
+    expect(
+      legacyHostRedirectLocation('https://old.example/tools/?x=1', undefined, hosts),
+    ).toBe('https://docuklin.com/tools/?x=1');
+  });
+
+  it('defaults canonical origin and legacy list to Docuklin cutover values', () => {
     expect(DEFAULT_CANONICAL_ORIGIN).toBe('https://docuklin.com');
+    expect(DEFAULT_LEGACY_REDIRECT_HOSTS).toContain(
+      'business-document-generators.hammadiqbal117.workers.dev',
+    );
   });
 });
 

@@ -1,4 +1,4 @@
-import { CANONICAL_PERSON_URL, siteConfig } from '../config/site';
+import { siteConfig } from '../config/site';
 import type { FaqItem, ToolDefinition } from '../data/tools/types';
 
 export function absoluteUrl(path: string): string {
@@ -38,9 +38,18 @@ export interface BreadcrumbItem {
   path: string;
 }
 
-const personId = `${CANONICAL_PERSON_URL}#person`;
+const personId = () => `${siteConfig.author.canonicalPersonUrl}#person`;
 const orgId = () => `${absoluteUrl('/')}#organization`;
 const websiteId = () => `${absoluteUrl('/')}#website`;
+
+function organizationLogo() {
+  return {
+    '@type': 'ImageObject',
+    url: absoluteUrl(siteConfig.logoPath),
+    width: 512,
+    height: 512,
+  };
+}
 
 export function breadcrumbJsonLd(items: BreadcrumbItem[]) {
   return {
@@ -59,12 +68,33 @@ export function breadcrumbJsonLd(items: BreadcrumbItem[]) {
 export function personNode() {
   return {
     '@type': 'Person',
-    '@id': personId,
+    '@id': personId(),
     name: siteConfig.author.name,
     url: absoluteUrl('/about/'),
     description: siteConfig.author.shortBio,
     sameAs: [...siteConfig.author.sameAs],
     knowsAbout: [...siteConfig.author.knowsAbout],
+  };
+}
+
+function organizationNode() {
+  return {
+    '@type': 'Organization',
+    '@id': orgId(),
+    name: siteConfig.siteName,
+    alternateName: [siteConfig.siteShortName],
+    url: absoluteUrl('/'),
+    email: siteConfig.contactEmail,
+    logo: organizationLogo(),
+    sameAs: [...siteConfig.organizationSameAs],
+    founder: { '@id': personId() },
+    publishingPrinciples: absoluteUrl('/methodology/'),
+    contactPoint: {
+      '@type': 'ContactPoint',
+      email: siteConfig.contactEmail,
+      contactType: 'customer support',
+      url: absoluteUrl('/contact/'),
+    },
   };
 }
 
@@ -79,31 +109,11 @@ export function homeGraphJsonLd() {
         name: siteConfig.siteName,
         alternateName: [siteConfig.siteShortName],
         url: absoluteUrl('/'),
-        inLanguage: 'en',
+        inLanguage: siteConfig.htmlLang,
         description: siteConfig.tagline,
         publisher: { '@id': orgId() },
       },
-      {
-        '@type': 'Organization',
-        '@id': orgId(),
-        name: siteConfig.siteName,
-        url: absoluteUrl('/'),
-        email: siteConfig.contactEmail,
-        logo: {
-          '@type': 'ImageObject',
-          url: absoluteUrl('/logo-512.png'),
-          width: 512,
-          height: 512,
-        },
-        founder: { '@id': personId },
-        publishingPrinciples: absoluteUrl('/methodology/'),
-        contactPoint: {
-          '@type': 'ContactPoint',
-          email: siteConfig.contactEmail,
-          contactType: 'customer support',
-          url: absoluteUrl('/contact/'),
-        },
-      },
+      organizationNode(),
       personNode(),
     ],
   };
@@ -113,19 +123,7 @@ export function homeGraphJsonLd() {
 export function organizationJsonLd() {
   return {
     '@context': 'https://schema.org',
-    '@type': 'Organization',
-    '@id': orgId(),
-    name: siteConfig.siteName,
-    url: absoluteUrl('/'),
-    email: siteConfig.contactEmail,
-    logo: {
-      '@type': 'ImageObject',
-      url: absoluteUrl('/logo-512.png'),
-      width: 512,
-      height: 512,
-    },
-    founder: { '@id': personId },
-    publishingPrinciples: absoluteUrl('/methodology/'),
+    ...organizationNode(),
   };
 }
 
@@ -138,7 +136,7 @@ export function webSiteJsonLd() {
     alternateName: [siteConfig.siteShortName],
     url: absoluteUrl('/'),
     description: siteConfig.tagline,
-    inLanguage: 'en',
+    inLanguage: siteConfig.htmlLang,
     publisher: { '@id': orgId() },
   };
 }
@@ -186,7 +184,7 @@ export function toolPageGraphJsonLd(tool: ToolDefinition, pageUrl: string) {
         description: tool.metaDescription,
         author: {
           '@type': 'Person',
-          '@id': personId,
+          '@id': personId(),
           name: siteConfig.author.name,
           url: absoluteUrl('/about/'),
         },
@@ -202,7 +200,7 @@ export function toolPageGraphJsonLd(tool: ToolDefinition, pageUrl: string) {
         datePublished: `${tool.publishedAt}T00:00:00+05:00`,
         dateModified: `${tool.updatedAt}T00:00:00+05:00`,
         lastReviewed: tool.updatedAt,
-        author: { '@id': personId },
+        author: { '@id': personId() },
         primaryImageOfPage: {
           '@type': 'ImageObject',
           url: diagram,
@@ -285,12 +283,7 @@ export function articleJsonLd(opts: {
       '@type': 'Organization',
       name: siteConfig.siteName,
       url: absoluteUrl('/'),
-      logo: {
-        '@type': 'ImageObject',
-        url: absoluteUrl('/logo-512.png'),
-        width: 512,
-        height: 512,
-      },
+      logo: organizationLogo(),
     },
     mainEntityOfPage: absoluteUrl(opts.path),
   };

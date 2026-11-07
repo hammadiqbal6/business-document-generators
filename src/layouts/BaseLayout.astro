@@ -36,7 +36,7 @@ const allLd = includeSiteGraph
   : jsonLd;
 ---
 <!doctype html>
-<html lang="en">
+<html lang={siteConfig.htmlLang}>
   <head>
     <Head
       title={title}
@@ -48,6 +48,7 @@ const allLd = includeSiteGraph
       ogImagePath={ogImagePath}
       ogImageAlt={ogImageAlt}
     />
+    <style is:inline set:html={`:root{--brand:${siteConfig.themeColor};--brand-bright:${siteConfig.themeColor};--focus-ring:${siteConfig.themeColor}}`} />
     <Analytics />
     {siteConfig.adsEnabled && siteConfig.adsensePublisherId && (
       <script

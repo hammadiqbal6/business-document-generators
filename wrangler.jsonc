@@ -7,9 +7,9 @@
  * breaks `npx wrangler preview` unless mirrored under previews.vars, and
  * still does not bake Astro HTML.
  *
- * CANONICAL_ORIGIN is a Worker runtime var (not PUBLIC_*): used only for
- * 301s from the exact legacy workers.dev host → custom domain. Override in
- * the Cloudflare dashboard if the apex changes; see docs/CUSTOM-DOMAIN.md.
+ * Worker runtime vars (not PUBLIC_*): CANONICAL_ORIGIN + LEGACY_REDIRECT_HOSTS
+ * for host 301s. Override in the Cloudflare dashboard if the apex or legacy
+ * hosts change; see docs/CONFIGURATION.md and docs/CUSTOM-DOMAIN.md.
  */
 {
   "$schema": "./node_modules/wrangler/config-schema.json",
@@ -18,7 +18,8 @@
   // Worker issues legacy 301 + 308 trailing-slash redirects before assets
   "main": "src/worker.ts",
   "vars": {
-    "CANONICAL_ORIGIN": "https://docuklin.com"
+    "CANONICAL_ORIGIN": "https://docuklin.com",
+    "LEGACY_REDIRECT_HOSTS": "business-document-generators.hammadiqbal117.workers.dev"
   },
   "assets": {
     "directory": "./dist",
@@ -31,7 +32,8 @@
   // Required by `npx wrangler preview` (non-production Workers Builds command).
   "previews": {
     "vars": {
-      "CANONICAL_ORIGIN": "https://docuklin.com"
+      "CANONICAL_ORIGIN": "https://docuklin.com",
+      "LEGACY_REDIRECT_HOSTS": "business-document-generators.hammadiqbal117.workers.dev"
     }
   }
 }

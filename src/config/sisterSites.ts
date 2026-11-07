@@ -4,14 +4,20 @@
  * Origins are normalized without a trailing slash.
  * This site's own origin default comes from siteDefaults.mjs (not duplicated here).
  */
-import { DEFAULT_SITE_URL } from './siteDefaults.mjs';
+import {
+  DEFAULT_SITE_URL,
+  DEFAULT_SISTER_URL_FIBER_ARTS,
+  DEFAULT_SISTER_URL_HOME_GARDEN,
+  DEFAULT_SISTER_URL_PAYMENT_FEES,
+  DEFAULT_SISTER_URL_PET,
+} from './siteDefaults.mjs';
 
 const DEFAULTS = {
-  paymentFees: 'https://payment-fee-calculators.hammadiqbal117.workers.dev',
+  paymentFees: DEFAULT_SISTER_URL_PAYMENT_FEES,
   businessDocs: DEFAULT_SITE_URL,
-  homeGarden: 'https://home-garden-calculators.hammadiqbal117.workers.dev',
-  fiberArts: 'https://fiber-arts-calculators.hammadiqbal117.workers.dev',
-  pet: 'https://pet-calculators.hammadiqbal117.workers.dev',
+  homeGarden: DEFAULT_SISTER_URL_HOME_GARDEN,
+  fiberArts: DEFAULT_SISTER_URL_FIBER_ARTS,
+  pet: DEFAULT_SISTER_URL_PET,
 } as const;
 
 function origin(envValue: string | undefined, fallback: string): string {
@@ -21,7 +27,7 @@ function origin(envValue: string | undefined, fallback: string): string {
 
 /**
  * Read via import.meta.env (Astro/Vite) so values are inlined at build time.
- * Fall back to workers.dev defaults when a variable is missing.
+ * Fall back to siteDefaults when a variable is missing.
  */
 export const sisterSites = {
   paymentFees: origin(import.meta.env.PUBLIC_SITE_URL_PAYMENT_FEES, DEFAULTS.paymentFees),

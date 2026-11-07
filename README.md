@@ -2,6 +2,8 @@
 
 Free **niche business document generators**: fill a form in the browser, live preview, export **PDF** or **DOCX**. Nothing is stored server-side; optional **localStorage** drafts stay on your device.
 
+Brand, domain, and related identity are configured via environment variables — see [`docs/CONFIGURATION.md`](docs/CONFIGURATION.md) and `.env.example`.
+
 ```mermaid
 flowchart LR
   subgraph browser [Browser]
