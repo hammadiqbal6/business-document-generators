@@ -6,6 +6,7 @@
  * Authorship follows docs/playbook (one-person tool site): named maintainer only,
  * no fabricated reviewers, same Person @id across sibling tool sites.
  */
+import { resolveDirectoryBadges } from './directoryBadges';
 import { sisterSites, sisterUrl } from './sisterSites';
 import {
   DEFAULT_AUTHOR_BIO,
@@ -40,6 +41,13 @@ import {
 } from './siteDefaults.mjs';
 
 export { DEFAULT_SITE_URL, applyBrandTemplate, parseList };
+export type { DirectoryBadgeConfig } from './directoryBadges';
+export {
+  FAZIER_DIRECTORY_BADGE,
+  FAZIER_DIRECTORY_BADGES_JSON,
+  parseDirectoryBadgesJson,
+  resolveDirectoryBadges,
+} from './directoryBadges';
 
 const env = import.meta.env;
 
@@ -89,24 +97,14 @@ export const siteConfig = {
   adsenseAutoAds: (env.PUBLIC_ADSENSE_AUTO_ADS || 'false') === 'true',
   /**
    * Directory / launch-board badges in the site footer.
-   * Each entry is gated by its own PUBLIC_*_BADGE_ENABLED flag (default on for Fazier).
-   * Add more badges the same way — keep `id` unique; avoid Astro-reserved prop names like `slot`.
+   * Prefer PUBLIC_DIRECTORY_BADGES (JSON array of {href,img,alt,width?,height?,rel?}).
+   * When unset, fall back to the Fazier badge (PUBLIC_FAZIER_BADGE_ENABLED, default on).
+   * Invalid JSON → warn at build time and render none. Avoid Astro-reserved names like `slot`.
    */
-  directoryBadges: [
-    ...((env.PUBLIC_FAZIER_BADGE_ENABLED || 'true') === 'true'
-      ? [
-          {
-            id: 'fazier',
-            href: 'https://fazier.com',
-            // Official "Featured on Fazier" embed (Fazier launch badge API).
-            src: 'https://fazier.com/api/v1/public/badges/launch_badges.svg?badge_type=featured&theme=light',
-            alt: 'Featured on Fazier',
-            width: 182,
-            height: 43,
-          },
-        ]
-      : []),
-  ],
+  directoryBadges: resolveDirectoryBadges({
+    directoryBadgesJson: env.PUBLIC_DIRECTORY_BADGES,
+    fazierBadgeEnabled: env.PUBLIC_FAZIER_BADGE_ENABLED,
+  }),
   /**
    * Numeric AdSense ad unit IDs for fixed in-page display slots.
    * Shared `display` covers all placements; optional home/tool override.

@@ -1,7 +1,8 @@
 ---
 /**
- * External directory / launch-board badge (e.g. Fazier).
+ * External directory / launch-board badge (e.g. Fazier, TinyLaunch).
  * Do not name a prop `slot` — Astro reserves that for component slots.
+ * Image URL prop is `src` (JSON env field is `img`).
  */
 interface Props {
   href: string;
@@ -9,16 +10,19 @@ interface Props {
   alt: string;
   width: number;
   height: number;
+  /** Optional link rel; omit for a normal followable link. */
+  rel?: string;
   /** Open in a new tab (Fazier's official embed uses target="_blank"). */
   newTab?: boolean;
 }
 
-const { href, src, alt, width, height, newTab = true } = Astro.props;
+const { href, src, alt, width, height, rel, newTab = true } = Astro.props;
 ---
 <a
   class="directory-badge"
   href={href}
   {...(newTab ? { target: '_blank' } : {})}
+  {...(rel ? { rel } : {})}
 >
   <img
     src={src}
