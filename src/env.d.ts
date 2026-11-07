@@ -33,6 +33,12 @@ interface ImportMetaEnv {
   readonly PUBLIC_ADSENSE_PUBLISHER_ID?: string;
   readonly PUBLIC_ADS_ENABLED?: string;
   readonly PUBLIC_ADSENSE_AUTO_ADS?: string;
+  /** Shared numeric AdSense display unit id for in-page AdSlot placements. */
+  readonly PUBLIC_ADSENSE_SLOT_DISPLAY?: string;
+  /** Optional homepage AdSlot unit id (falls back to PUBLIC_ADSENSE_SLOT_DISPLAY). */
+  readonly PUBLIC_ADSENSE_SLOT_HOME?: string;
+  /** Optional tool-page AdSlot unit id (falls back to PUBLIC_ADSENSE_SLOT_DISPLAY). */
+  readonly PUBLIC_ADSENSE_SLOT_TOOL?: string;
   readonly PUBLIC_EMAILJS_SERVICE_ID?: string;
   readonly PUBLIC_EMAILJS_TEMPLATE_ID?: string;
   readonly PUBLIC_EMAILJS_PUBLIC_KEY?: string;

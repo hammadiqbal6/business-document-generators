@@ -1,32 +1,44 @@
 ---
+/**
+ * Fixed in-page AdSense display unit.
+ *
+ * Important: do not name a prop `slot` — Astro reserves `slot` for named
+ * slots, so `<AdSlot slot="…">` never receives the value and the component
+ * is dropped from the default page content.
+ *
+ * Renders only when ads are enabled, a publisher id is set, and a numeric
+ * ad unit id is available for this placement. Otherwise outputs nothing so
+ * Auto ads can still run without empty/broken <ins> tags.
+ */
 import { siteConfig } from '../../config/site';
+import { resolveAdUnitId, type AdPlacement } from '../../lib/adsenseSlots';
 
 interface Props {
-  slot: string;
-  label?: string;
+  /** Logical placement key (home-top | tool-mid). Not an AdSense unit id. */
+  placement: AdPlacement;
   minHeight?: number;
 }
 
-const { slot, label = 'Advertisement', minHeight = 90 } = Astro.props;
-const enabled = siteConfig.adsEnabled && siteConfig.adsensePublisherId;
+const { placement, minHeight = 90 } = Astro.props;
+const adsOn = siteConfig.adsEnabled && Boolean(siteConfig.adsensePublisherId);
+const unitId = adsOn ? resolveAdUnitId(placement, siteConfig.adsenseSlots) : '';
+const show = Boolean(unitId);
 ---
-<div
-  class="ad-slot"
-  data-ad-slot={slot}
-  data-enabled={enabled ? 'true' : 'false'}
-  style={`min-height:${minHeight}px`}
-  aria-hidden={!enabled}
->
-  {enabled ? (
+{show && (
+  <div
+    class="ad-slot ad-slot--live"
+    data-ad-placement={placement}
+    data-enabled="true"
+    style={`min-height:${minHeight}px`}
+  >
     <ins
       class="adsbygoogle"
       style="display:block"
       data-ad-client={siteConfig.adsensePublisherId}
-      data-ad-slot={slot}
+      data-ad-slot={unitId}
       data-ad-format="auto"
       data-full-width-responsive="true"
     />
-  ) : (
-    <span>Ad slot reserved ({slot}) — enable in site config after AdSense approval</span>
-  )}
-</div>
+    <script is:inline>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+  </div>
+)}

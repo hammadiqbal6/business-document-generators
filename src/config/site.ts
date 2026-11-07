@@ -87,6 +87,17 @@ export const siteConfig = {
   adsEnabled: (env.PUBLIC_ADS_ENABLED || 'false') === 'true',
   /** Enable Auto ads (documented in docs/ADSENSE.md). Requires adsEnabled. */
   adsenseAutoAds: (env.PUBLIC_ADSENSE_AUTO_ADS || 'false') === 'true',
+  /**
+   * Numeric AdSense ad unit IDs for fixed in-page display slots.
+   * Shared `display` covers all placements; optional home/tool override.
+   * Non-numeric / empty → AdSlot renders nothing (Auto ads unaffected).
+   */
+  adsenseSlots: {
+    display: (env.PUBLIC_ADSENSE_SLOT_DISPLAY || '').trim(),
+    home: (env.PUBLIC_ADSENSE_SLOT_HOME || '').trim(),
+    tool: (env.PUBLIC_ADSENSE_SLOT_TOOL || '').trim(),
+  },
+
   /** GA4 measurement ID, e.g. G-XXXXXXXXXX. Empty = no GA4 script. */
   ga4MeasurementId: env.PUBLIC_GA4_MEASUREMENT_ID || 'G-HR4DDMD97H',
   /**

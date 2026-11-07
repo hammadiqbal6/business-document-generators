@@ -37,7 +37,16 @@ describe('site origin', () => {
       publicKey: expect.any(String),
     });
   });
+
+  it('exposes AdSense slot id config (empty unless PUBLIC_ADSENSE_SLOT_* set)', () => {
+    expect(siteConfig.adsenseSlots).toEqual({
+      display: expect.any(String),
+      home: expect.any(String),
+      tool: expect.any(String),
+    });
+  });
 });
+
 
 describe('brand defaults (Docuklin live output)', () => {
   it('uses Docuklin identity defaults when PUBLIC_* are unset', () => {
