@@ -52,7 +52,9 @@ Internal identifiers (`docuforge:cookie-ok`, draft keys, `__docuforgeGrantAnalyt
 | `PUBLIC_GSC_VERIFICATION` | _(current GSC token)_ | Search Console meta |
 | `PUBLIC_BING_SITE_VERIFICATION` | _(empty)_ | Bing meta |
 | `PUBLIC_INDEXNOW_KEY` / `INDEXNOW_KEY` | _(current key)_ | IndexNow |
-| `PUBLIC_ADSENSE_*` / `PUBLIC_ADS_ENABLED` | off | Ads |
+| `PUBLIC_ADSENSE_PUBLISHER_ID` / `PUBLIC_ADS_ENABLED` / `PUBLIC_ADSENSE_AUTO_ADS` | off | AdSense script + ads.txt + Auto ads flag |
+| `PUBLIC_ADSENSE_SLOT_DISPLAY` | _(empty)_ | Shared numeric display unit id for fixed `AdSlot` placements |
+| `PUBLIC_ADSENSE_SLOT_HOME` / `PUBLIC_ADSENSE_SLOT_TOOL` | _(empty)_ | Optional per-placement unit ids (else `SLOT_DISPLAY`) |
 
 Templates: `{name}` and `{short}` in `PUBLIC_OG_IMAGE_ALT` / `PUBLIC_OG_IMAGE_FOOTER` expand to the configured site / short name.
 

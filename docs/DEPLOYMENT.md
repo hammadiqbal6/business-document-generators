@@ -101,8 +101,11 @@ Defaults live in `src/config/site.ts` / `siteDefaults.mjs` (fallback origin is `
 | `PUBLIC_BING_SITE_VERIFICATION` | Recommended | Bing meta content | `<meta name="msvalidate.01" content="…">` |
 | `PUBLIC_INDEXNOW_KEY` | Recommended | Random string, e.g. `a1b2c3d4e5` | IndexNow; must match key file (below) |
 | `PUBLIC_ADSENSE_PUBLISHER_ID` | After AdSense approval | `ca-pub-XXXXXXXXXXXXXXXX` | AdSense script + `ads.txt` |
-| `PUBLIC_ADS_ENABLED` | After approval | `true` or `false` | Gates ad slots in `AdSlot.astro` |
+| `PUBLIC_ADS_ENABLED` | After approval | `true` or `false` | Gates AdSense script + fixed slots |
 | `PUBLIC_ADSENSE_AUTO_ADS` | Optional | `true` / `false` | Documented in `docs/ADSENSE.md`; Auto ads |
+| `PUBLIC_ADSENSE_SLOT_DISPLAY` | After creating a Display unit | numeric ad unit id | Shared `data-ad-slot` for in-page `AdSlot` |
+| `PUBLIC_ADSENSE_SLOT_HOME` | Optional | numeric ad unit id | Homepage `AdSlot` override |
+| `PUBLIC_ADSENSE_SLOT_TOOL` | Optional | numeric ad unit id | Tool-page `AdSlot` override |
 
 **Local testing with env vars** (one-off build):
 
@@ -355,7 +358,10 @@ Compare to committed reports in `docs/proof/lighthouse/`. Regenerate proof local
 ```text
 PUBLIC_ADSENSE_PUBLISHER_ID=ca-pub-XXXXXXXXXXXXXXXX
 PUBLIC_ADS_ENABLED=true
+PUBLIC_ADSENSE_SLOT_DISPLAY=XXXXXXXXXX
 ```
+
+Optional per-placement overrides: `PUBLIC_ADSENSE_SLOT_HOME`, `PUBLIC_ADSENSE_SLOT_TOOL`. Without a numeric display (or override) id, fixed `AdSlot` components render nothing.
 
 2. Rebuild so `/ads.txt` picks up the same publisher ID automatically.
 3. Redeploy.
