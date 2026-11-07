@@ -77,7 +77,7 @@ Fix any failures before pushing to `main`.
 
 All owner-specific branding and IDs should be set via **environment variables** at build time. Astro exposes variables prefixed with `PUBLIC_` to the client bundle.
 
-Defaults live in `src/config/site.ts` (fallback origin is the Workers `workers.dev` hostname). **Do not commit real secrets**; set env vars in your host’s dashboard. See `.env.example` for the full list.
+Defaults live in `src/config/site.ts` / `siteDefaults.mjs` (fallback origin is `https://docuklin.com`). **Do not commit real secrets**; set env vars in your host’s dashboard. See `.env.example` for the full list. Legacy workers.dev → custom-domain 301s use Worker var `CANONICAL_ORIGIN` (see `docs/CUSTOM-DOMAIN.md`).
 
 ### Environment variables (complete list)
 
@@ -182,7 +182,7 @@ After connecting the repo in Cloudflare Pages, add a **Custom domain** in the Pa
 1. Cloudflare dashboard → **Rules** → **Redirect Rules** (or Bulk Redirects).
 2. Example: if canonical is apex, redirect `www.yourbrand.com/*` → `https://yourbrand.com/$1` (301).
 
-For **Vercel**, edit `vercel.json` `redirects` and replace `docuforge.example` with your domain.
+For **Vercel**, edit `vercel.json` `redirects` if you change the apex (defaults target `docuklin.com`).
 
 ### HTTPS
 
@@ -247,7 +247,7 @@ Every pull request can get a `*.pages.dev` preview URL. Use it for QA; set `PUBL
 5. **Install Command:** `npm ci`
 6. **Environment Variables:** add all `PUBLIC_*` for Production (and Preview).
 7. Deploy. Attach custom domain under **Settings** → **Domains**.
-8. Update `vercel.json` redirects: replace `docuforge.example` with your apex/www choice.
+8. Update `vercel.json` redirects if the apex/www hostnames change.
 9. Note: `public/_headers` is **not** used by Vercel; add headers in `vercel.json` if needed.
 
 ---
@@ -439,7 +439,7 @@ Also revert the Git commit on `main` if the bad change is in source control.
 | Symptom | Likely cause | Fix |
 |---------|----------------|-----|
 | Build fails on host, works locally | Wrong Node version | Set `NODE_VERSION=22`; use `npm ci` not `npm install` |
-| Canonical URLs still `docuforge.example` | `PUBLIC_SITE_URL` not set at build | Set env var in host; **redeploy** (rebuild required) |
+| Canonical URLs still on workers.dev | `PUBLIC_SITE_URL` not set at build | Set env var in host; **redeploy** (rebuild required) |
 | Sitemap has wrong domain | Same as above | Rebuild with correct `PUBLIC_SITE_URL` |
 | Google verification fails | Meta not in HTML | Set `PUBLIC_GSC_VERIFICATION`, redeploy, view source |
 | PDF export blank / error | Mixed content or blocked JS | Ensure site is HTTPS; check browser console |
@@ -468,7 +468,7 @@ Copy this into your issue tracker and check off on go-live day.
 - [ ] `public/llms.txt` URLs updated (optional)  
 - [ ] IndexNow key file present (`public/4d6f1ea5473a0968a83c67ceda5a0387.txt`); Workers Builds deploy command includes `node scripts/indexnow.mjs` after wrangler deploy  
 
-- [ ] Placeholder `docuforge.example` removed from user-visible copy where needed  
+- [ ] Brand/origin defaults match Docuklin / docuklin.com; legacy workers.dev 301 verified  
 
 ### Hosting
 

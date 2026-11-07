@@ -2,7 +2,7 @@
 
 Hard requirements so builds never ship the indexing / AEO bugs from the Oct 2026 multi-site audit. Enforced by `npm run audit` → `scripts/audit/seo-guardrails.mjs` after `npm run build`.
 
-**Canonical origin:** `PUBLIC_SITE_URL` or `DEFAULT_SITE_URL` in `src/config/siteDefaults.mjs` (currently workers.dev). Cutover: [CUSTOM-DOMAIN.md](./CUSTOM-DOMAIN.md).  
+**Canonical origin:** `PUBLIC_SITE_URL` or `DEFAULT_SITE_URL` in `src/config/siteDefaults.mjs` (https://docuklin.com). Cutover / legacy 301s: [CUSTOM-DOMAIN.md](./CUSTOM-DOMAIN.md).  
 **Governing docs:** [SEO-PLAYBOOK.md](./SEO-PLAYBOOK.md), [SEO-GUIDE.md](./SEO-GUIDE.md), [DEPLOYMENT.md](./DEPLOYMENT.md)
 
 ---
@@ -31,7 +31,7 @@ Hard requirements so builds never ship the indexing / AEO bugs from the Oct 2026
 ### Don’t
 
 - [ ] Don’t implement custom domains in SEO PRs unless asked — document only ([CUSTOM-DOMAIN.md](./CUSTOM-DOMAIN.md)).
-- [ ] Don’t hardcode this site’s workers.dev hostname outside `siteDefaults.mjs` (and env/docs allowlist).
+- [ ] Don’t hardcode this site’s canonical hostname outside `siteDefaults.mjs` / wrangler `CANONICAL_ORIGIN` (and env/docs/tests allowlist).
 - [ ] Don’t use `https://example.com` as a site URL fallback.
 - [ ] Don’t append trailing slashes to file URLs (`og:image`, favicons, IndexNow `.txt`).
 - [ ] Don’t put IndexNow keys only under `public/indexnow/` — IndexNow expects `https://host/<key>.txt`.
@@ -49,7 +49,7 @@ Hard requirements so builds never ship the indexing / AEO bugs from the Oct 2026
 |--------|--------|------|
 | Top-level wrangler `vars` broke `npx wrangler preview` | file-converter-tools | No top-level `vars`; `"previews": {}`; build-time env in dashboard |
 | `og:image` ending in `/` 404 | file-converter-tools | `absoluteUrl` must not force slash on file assets |
-| `example.com` baked into sitemap | file-converter-tools | Default origin = live workers.dev via `siteDefaults.mjs` |
+| `example.com` baked into sitemap | file-converter-tools | Default origin = https://docuklin.com via `siteDefaults.mjs` |
 | Proof single-run LH flake vs LHCI median-of-3 | pet-calculators PR #8 | Proof retries up to 3 and takes median; TBT 200 |
 
 ---
@@ -59,7 +59,7 @@ Hard requirements so builds never ship the indexing / AEO bugs from the Oct 2026
 | Check | Where |
 |-------|--------|
 | No `example.com` in dist SEO surfaces | `seo-guardrails.mjs` |
-| No hardcoded this-site workers.dev outside allowlist | same |
+| No hardcoded canonical host outside allowlist | same |
 | Canonical host matches `PUBLIC_SITE_URL` | same |
 | No `og:image` ending in `/` | same |
 | Titles 25–65; meta 70–160; og/twitter match title+desc; canonical; single H1 | same |

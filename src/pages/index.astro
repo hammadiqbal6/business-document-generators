@@ -16,7 +16,7 @@ const cats = Object.keys(CATEGORY_META) as ToolCategory[];
   includeSiteGraph={false}
   jsonLd={[homeGraphJsonLd()]}
   ogImagePath="/og/home.svg"
-  ogImageAlt="DocuForge Tools — free invoice, estimate, and contract templates"
+  ogImageAlt={`${siteConfig.siteName} — free invoice, estimate, and contract templates`}
 >
   <section class="hero">
     <p class="content-meta" style="margin-bottom:0.35rem;">{siteConfig.siteName}</p>
@@ -48,7 +48,7 @@ const cats = Object.keys(CATEGORY_META) as ToolCategory[];
   <section>
     <h2>What you can create</h2>
     <p>
-      DocuForge Tools focuses on profession-specific paperwork that freelancers and small contractors
+      {siteConfig.siteName} focuses on profession-specific paperwork that freelancers and small contractors
       need every week: construction estimates, contractor invoices, cleaning and catering quotes,
       photography and videography contracts, simple NDAs, tattoo consent forms, rental applications,
       podcast scripts, and real estate flyers. Each page pairs a working generator with original

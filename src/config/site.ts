@@ -7,20 +7,27 @@
  * no fabricated reviewers, same Person @id across sibling tool sites.
  */
 import { sisterSites, sisterUrl } from './sisterSites';
-import { DEFAULT_SITE_URL } from './siteDefaults.mjs';
+import {
+  DEFAULT_SITE_NAME,
+  DEFAULT_SITE_SHORT_NAME,
+  DEFAULT_SITE_URL,
+} from './siteDefaults.mjs';
 
 export { DEFAULT_SITE_URL };
 
 /** Stable Person @id shared across all five sibling tool sites. */
 export const CANONICAL_PERSON_URL = 'https://github.com/hammadiqbal6';
 
+const siteName = import.meta.env.PUBLIC_SITE_NAME || DEFAULT_SITE_NAME;
+const siteShortName = import.meta.env.PUBLIC_SITE_SHORT_NAME || DEFAULT_SITE_SHORT_NAME;
+
 export const siteConfig = {
   /** Public site origin (no trailing slash). Used for canonicals, sitemap, OG, robots, llms. */
   siteUrl: import.meta.env.PUBLIC_SITE_URL || DEFAULT_SITE_URL,
   /** Brand shown in header, titles, schema Organization. */
-  siteName: import.meta.env.PUBLIC_SITE_NAME || 'DocuForge Tools',
-  /** Short name for apple-mobile-web-app-title / manifest. */
-  siteShortName: 'DocuForge',
+  siteName,
+  /** Short name for apple-mobile-web-app-title / manifest / JSON-LD alternateName. */
+  siteShortName,
   /** Short tagline for homepage and Organization description. */
   tagline:
     import.meta.env.PUBLIC_SITE_TAGLINE ||
@@ -88,7 +95,7 @@ export const siteConfig = {
   themeColor: '#0f6b5c',
   /** Default Open Graph image (1200×630 PNG). */
   ogImagePath: '/og-default.png',
-  ogImageAlt: 'DocuForge Tools — free invoice, estimate, and contract templates with PDF export',
+  ogImageAlt: `${siteName} — free invoice, estimate, and contract templates with PDF export`,
 
   /**
    * Sibling tool sites by the same maintainer (listed only on /about/).

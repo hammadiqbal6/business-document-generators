@@ -92,7 +92,7 @@ try {
   configuredHost = '';
 }
 
-// --- This-site workers.dev hostname must not be hardcoded outside allowlist ---
+// --- Canonical site hostname must not be hardcoded outside allowlist ---
 const HOST_RE = new RegExp(
   DEFAULT_SITE_HOST.replace(/\./g, '\\.'),
   'g',
@@ -100,7 +100,9 @@ const HOST_RE = new RegExp(
 const allowHostIn = new Set([
   path.join(root, 'src/config/siteDefaults.mjs'),
   path.join(root, '.env.example'),
+  path.join(root, 'wrangler.jsonc'),
   path.join(root, '.github/workflows/ci.yml'),
+  path.join(root, '.github/workflows/full-checks.yml'),
 ]);
 const sourceFiles = walkFiles(root, (name) =>
   /\.(ts|tsx|astro|mjs|js|cjs|jsonc|md|yml|yaml|example)$/i.test(name),
@@ -108,6 +110,7 @@ const sourceFiles = walkFiles(root, (name) =>
 for (const file of sourceFiles) {
   if (allowHostIn.has(file)) continue;
   if (file.startsWith(path.join(root, 'docs'))) continue;
+  if (file.startsWith(path.join(root, 'tests'))) continue;
   if (file.startsWith(path.join(root, '.lighthouseci'))) continue;
   const text = fs.readFileSync(file, 'utf8');
   if (HOST_RE.test(text)) {
