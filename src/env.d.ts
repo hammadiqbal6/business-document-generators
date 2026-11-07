@@ -33,7 +33,13 @@ interface ImportMetaEnv {
   readonly PUBLIC_ADSENSE_PUBLISHER_ID?: string;
   readonly PUBLIC_ADS_ENABLED?: string;
   readonly PUBLIC_ADSENSE_AUTO_ADS?: string;
-  /** Footer "Featured on Fazier" badge. Default true when unset. */
+  /**
+   * Footer directory badges as a JSON array:
+   * [{"href":"...","img":"...","alt":"...","width":182,"height":43,"rel":"optional"}]
+   * When unset, fall back to Fazier via PUBLIC_FAZIER_BADGE_ENABLED.
+   */
+  readonly PUBLIC_DIRECTORY_BADGES?: string;
+  /** Legacy Fazier-only fallback when PUBLIC_DIRECTORY_BADGES is unset. Default true. */
   readonly PUBLIC_FAZIER_BADGE_ENABLED?: string;
   /** Shared numeric AdSense display unit id for in-page AdSlot placements. */
   readonly PUBLIC_ADSENSE_SLOT_DISPLAY?: string;
