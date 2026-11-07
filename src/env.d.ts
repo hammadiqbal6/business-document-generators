@@ -33,6 +33,8 @@ interface ImportMetaEnv {
   readonly PUBLIC_ADSENSE_PUBLISHER_ID?: string;
   readonly PUBLIC_ADS_ENABLED?: string;
   readonly PUBLIC_ADSENSE_AUTO_ADS?: string;
+  /** Footer "Featured on Fazier" badge. Default true when unset. */
+  readonly PUBLIC_FAZIER_BADGE_ENABLED?: string;
   /** Shared numeric AdSense display unit id for in-page AdSlot placements. */
   readonly PUBLIC_ADSENSE_SLOT_DISPLAY?: string;
   /** Optional homepage AdSlot unit id (falls back to PUBLIC_ADSENSE_SLOT_DISPLAY). */

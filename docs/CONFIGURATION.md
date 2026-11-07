@@ -55,6 +55,7 @@ Internal identifiers (`docuforge:cookie-ok`, draft keys, `__docuforgeGrantAnalyt
 | `PUBLIC_ADSENSE_PUBLISHER_ID` / `PUBLIC_ADS_ENABLED` / `PUBLIC_ADSENSE_AUTO_ADS` | off | AdSense script + ads.txt + Auto ads flag |
 | `PUBLIC_ADSENSE_SLOT_DISPLAY` | _(empty)_ | Shared numeric display unit id for fixed `AdSlot` placements |
 | `PUBLIC_ADSENSE_SLOT_HOME` / `PUBLIC_ADSENSE_SLOT_TOOL` | _(empty)_ | Optional per-placement unit ids (else `SLOT_DISPLAY`) |
+| `PUBLIC_FAZIER_BADGE_ENABLED` | `true` | Footer “Featured on Fazier” badge (set `false` to hide) |
 
 Templates: `{name}` and `{short}` in `PUBLIC_OG_IMAGE_ALT` / `PUBLIC_OG_IMAGE_FOOTER` expand to the configured site / short name.
 

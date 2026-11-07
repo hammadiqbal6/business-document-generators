@@ -1,7 +1,9 @@
 ---
 import { siteConfig } from '../../config/site';
 import { allTools } from '../../data/tools';
+import DirectoryBadge from './DirectoryBadge.astro';
 const year = new Date().getFullYear();
+const directoryBadges = siteConfig.directoryBadges;
 ---
 <footer class="site-footer">
   <div class="site-footer__inner">
@@ -48,5 +50,18 @@ const year = new Date().getFullYear();
       Contract and consent pages are not legal advice.
     </p>
     <p><a href={`mailto:${siteConfig.contactEmail}`}>{siteConfig.contactEmail}</a></p>
+    {directoryBadges.length > 0 && (
+      <div class="footer-badges" aria-label="Directory listings">
+        {directoryBadges.map((badge) => (
+          <DirectoryBadge
+            href={badge.href}
+            src={badge.src}
+            alt={badge.alt}
+            width={badge.width}
+            height={badge.height}
+          />
+        ))}
+      </div>
+    )}
   </div>
 </footer>
