@@ -1,6 +1,6 @@
 {
-  "name": "DocuForge Tools",
-  "short_name": "DocuForge",
+  "name": "Docuklin",
+  "short_name": "Docuklin",
   "description": "Free niche business document generators with PDF export",
   "start_url": "/",
   "display": "standalone",

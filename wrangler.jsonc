@@ -1,18 +1,25 @@
 /**
- * Static assets + run-first Worker for 308 trailing-slash redirects.
- * Workers Builds: npm run build → npx wrangler deploy && node scripts/indexnow.mjs
+ * Static assets + run-first Worker for legacy-host 301s and 308 trailing-slash
+ * redirects. Workers Builds: npm run build → npx wrangler deploy && node scripts/indexnow.mjs
  *
  * Build-time PUBLIC_* belong in Cloudflare Workers Builds → Variables
  * (.env.example). Do NOT put PUBLIC_* in top-level wrangler "vars" — that
  * breaks `npx wrangler preview` unless mirrored under previews.vars, and
  * still does not bake Astro HTML.
+ *
+ * CANONICAL_ORIGIN is a Worker runtime var (not PUBLIC_*): used only for
+ * 301s from the exact legacy workers.dev host → custom domain. Override in
+ * the Cloudflare dashboard if the apex changes; see docs/CUSTOM-DOMAIN.md.
  */
 {
   "$schema": "./node_modules/wrangler/config-schema.json",
   "name": "business-document-generators",
   "compatibility_date": "2026-10-19",
-  // Worker issues 308 trailing-slash redirects before assets
+  // Worker issues legacy 301 + 308 trailing-slash redirects before assets
   "main": "src/worker.ts",
+  "vars": {
+    "CANONICAL_ORIGIN": "https://docuklin.com"
+  },
   "assets": {
     "directory": "./dist",
     "binding": "ASSETS",
@@ -22,5 +29,9 @@
     "html_handling": "force-trailing-slash"
   },
   // Required by `npx wrangler preview` (non-production Workers Builds command).
-  "previews": {}
+  "previews": {
+    "vars": {
+      "CANONICAL_ORIGIN": "https://docuklin.com"
+    }
+  }
 }

@@ -9,8 +9,8 @@ const { serviceId, templateId, publicKey } = siteConfig.emailjs;
 const emailjsReady = Boolean(serviceId && templateId && publicKey);
 ---
 <BaseLayout
-  title="Contact DocuForge Tools – Email and Corrections"
-  description="Contact DocuForge Tools by email for corrections, privacy requests, or feedback on our free document generators and educational business guides."
+  title={`Contact ${siteConfig.siteName} – Email and Corrections`}
+  description={`Contact ${siteConfig.siteName} by email for corrections, privacy requests, or feedback on our free document generators and educational business guides.`}
   path={path}
 >
   <Breadcrumbs items={[{ name: 'Home', path: '/' }, { name: 'Contact', path }]} />

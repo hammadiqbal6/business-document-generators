@@ -3,6 +3,7 @@
 interface ImportMetaEnv {
   readonly PUBLIC_SITE_URL?: string;
   readonly PUBLIC_SITE_NAME?: string;
+  readonly PUBLIC_SITE_SHORT_NAME?: string;
   readonly PUBLIC_SITE_TAGLINE?: string;
   readonly PUBLIC_CONTACT_EMAIL?: string;
   readonly PUBLIC_TWITTER_HANDLE?: string;

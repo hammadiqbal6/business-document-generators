@@ -15,7 +15,10 @@ export function absoluteUrl(path: string): string {
 export function buildPageTitle(title: string): string {
   const hardMax = 65;
   const clip = (t: string) => (t.length <= hardMax ? t : `${t.slice(0, hardMax - 1).trim()}…`);
-  if (title.includes(siteConfig.siteName) || title.includes('DocuForge')) {
+  if (
+    title.includes(siteConfig.siteName) ||
+    title.includes(siteConfig.siteShortName)
+  ) {
     return clip(title);
   }
   const shortBrand = siteConfig.siteShortName;

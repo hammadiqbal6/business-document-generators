@@ -36,7 +36,7 @@ Create a template that uses these placeholders (names must match):
 | `{{reply_to}}` | Email input (set as Reply-To in the EmailJS template UI when possible) |
 | `{{message}}` | Message textarea |
 | `{{page_url}}` | `window.location.href` when sent |
-| `{{site_name}}` | `siteConfig.siteName` (e.g. DocuForge Tools) |
+| `{{site_name}}` | `siteConfig.siteName` (e.g. Docuklin) |
 
 Example template body:
 

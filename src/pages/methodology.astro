@@ -7,8 +7,8 @@ const path = '/methodology/';
 const author = siteConfig.author;
 ---
 <BaseLayout
-  title="Methodology & Correction Log | DocuForge"
-  description="How DocuForge Tools are built: sources policy, what templates leave out, AI disclosure, changelog, and correction log. Maintained by Hammad Iqbal."
+  title={`Methodology & Correction Log | ${siteConfig.siteShortName}`}
+  description={`How ${siteConfig.siteName} tools are built: sources policy, what templates leave out, AI disclosure, changelog, and correction log. Maintained by Hammad Iqbal.`}
   path={path}
 >
   <Breadcrumbs items={[{ name: 'Home', path: '/' }, { name: 'Methodology', path }]} />
@@ -96,7 +96,7 @@ const author = siteConfig.author;
         <tr>
           <td><time datetime="2026-10-20">2026-10-20</time></td>
           <td>
-            Removed anonymous “DocuForge Editorial / Review Team” authorship. Site is maintained by
+            Removed anonymous “Editorial / Review Team” authorship. Site is maintained by
             {author.name} alone; there is no separate reviewer. Added honest About and Methodology pages.
           </td>
         </tr>

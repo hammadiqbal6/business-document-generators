@@ -1,6 +1,7 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import Breadcrumbs from '../../components/content/Breadcrumbs.astro';
+import { siteConfig } from '../../config/site';
 import { CATEGORY_META, getToolsByCategory } from '../../data/tools';
 import type { ToolCategory } from '../../data/tools/types';
 import { guides } from '../../data/guides';
@@ -218,7 +219,7 @@ const ogImagePath = `/og/hub-${meta.slug}.svg`;
   path={path}
   jsonLd={jsonLd}
   ogImagePath={ogImagePath}
-  ogImageAlt={`${meta.name} templates on DocuForge Tools`}
+  ogImageAlt={`${meta.name} templates on ${siteConfig.siteName}`}
 >
   <Breadcrumbs items={crumbs} />
   <h1>{meta.name}</h1>

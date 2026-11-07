@@ -10,6 +10,6 @@
     }
   ],
   "redirects": [
-    { "source": "/:path*", "has": [{ "type": "host", "value": "www.docuforge.example" }], "destination": "https://docuforge.example/:path*", "permanent": true }
+    { "source": "/:path*", "has": [{ "type": "host", "value": "www.docuklin.com" }], "destination": "https://docuklin.com/:path*", "permanent": true }
   ]
 }

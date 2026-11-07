@@ -17,10 +17,11 @@ describe('sisterSites config', () => {
     }
   });
 
-  it('documents workers.dev defaults for when env vars are missing', () => {
+  it('documents fallback origins for when env vars are missing', () => {
     expect(sisterSiteDefaults.paymentFees).toMatch(/payment-fee-calculators/);
     // This site's origin default is the single siteDefaults export (not duplicated).
     expect(sisterSiteDefaults.businessDocs).toBe(DEFAULT_SITE_URL);
+    expect(DEFAULT_SITE_URL).toBe('https://docuklin.com');
     expect(sisterSiteDefaults.homeGarden).toMatch(/home-garden-calculators/);
     expect(sisterSiteDefaults.fiberArts).toMatch(/fiber-arts-calculators/);
     expect(sisterSiteDefaults.pet).toMatch(/pet-calculators/);
