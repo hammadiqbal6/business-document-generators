@@ -7,7 +7,10 @@ This site’s canonical origin is **https://docuklin.com** (brand: **Docuklin**)
 | `PUBLIC_SITE_URL` | Workers Builds / CI / `.env` (preferred) |
 | `DEFAULT_SITE_URL` | `src/config/siteDefaults.mjs` (fallback when env unset) |
 | Astro `site` | `astro.config.mjs` → `process.env.PUBLIC_SITE_URL \|\| DEFAULT_SITE_URL` |
-| Worker `CANONICAL_ORIGIN` | `wrangler.jsonc` `vars` (runtime only; defaults to `https://docuklin.com`) |
+| Worker `CANONICAL_ORIGIN` | `wrangler.jsonc` `vars` (runtime; defaults to `https://docuklin.com`) |
+| Worker `LEGACY_REDIRECT_HOSTS` | `wrangler.jsonc` `vars` (runtime; comma-separated exact Host list) |
+
+Full variable list: [CONFIGURATION.md](./CONFIGURATION.md).
 
 **Do not** hardcode the custom-domain hostname in pages, components, or scripts beyond `siteDefaults.mjs` / wrangler vars. Sister-site origins use their own `PUBLIC_SITE_URL_*` vars (`src/config/sisterSites.ts`).
 
@@ -28,9 +31,12 @@ to the same path + query on `CANONICAL_ORIGIN` (default `https://docuklin.com`),
 | `<version>-business-document-generators.….workers.dev` (previews) | **No** host redirect (local/preview still works) |
 | `localhost` / `127.0.0.1` | **No** host redirect |
 
-Override the target apex without a rebuild of Astro HTML by setting Worker var `CANONICAL_ORIGIN` in `wrangler.jsonc` or the Cloudflare dashboard (must be `https://…` with no trailing slash). Build-time `PUBLIC_*` vars are **not** available to the Worker runtime.
+Override the target apex without a rebuild of Astro HTML by setting Worker vars in `wrangler.jsonc` or the Cloudflare dashboard:
 
-Constant for the legacy host: `LEGACY_WORKERS_DEV_HOST` in `src/config/siteDefaults.mjs`. Unit coverage: `tests/worker-redirect.test.ts`.
+- `CANONICAL_ORIGIN` — `https://…` with no trailing slash  
+- `LEGACY_REDIRECT_HOSTS` — comma-separated exact Host values (default: the workers.dev production hostname)
+
+Build-time `PUBLIC_*` vars are **not** available to the Worker runtime. Defaults live in `src/config/siteDefaults.mjs`. Unit coverage: `tests/worker-redirect.test.ts`.
 
 ---
 

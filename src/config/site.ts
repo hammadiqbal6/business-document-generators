@@ -1,82 +1,114 @@
 /**
  * SINGLE OWNER CONFIG — prefer env vars (PUBLIC_*) when deploying; this file supplies defaults.
- * Workers Builds should set PUBLIC_* keys (see .env.example). Site origin fallback is
- * DEFAULT_SITE_URL from ./siteDefaults.mjs only — see docs/CUSTOM-DOMAIN.md.
+ * Workers Builds should set PUBLIC_* keys (see .env.example + docs/CONFIGURATION.md).
+ * Site origin / brand fallbacks live in ./siteDefaults.mjs only.
  *
  * Authorship follows docs/playbook (one-person tool site): named maintainer only,
  * no fabricated reviewers, same Person @id across sibling tool sites.
  */
 import { sisterSites, sisterUrl } from './sisterSites';
 import {
+  DEFAULT_AUTHOR_BIO,
+  DEFAULT_AUTHOR_EMAIL,
+  DEFAULT_AUTHOR_NAME,
+  DEFAULT_AUTHOR_SAME_AS,
+  DEFAULT_AUTHOR_URL,
+  DEFAULT_BACKGROUND_COLOR,
+  DEFAULT_CONTACT_EMAIL,
+  DEFAULT_COPYRIGHT_OWNER,
+  DEFAULT_HTML_LANG,
+  DEFAULT_LAUNCHED_AT,
+  DEFAULT_LOCALE,
+  DEFAULT_LOGO_PATH,
+  DEFAULT_MANIFEST_DESCRIPTION,
+  DEFAULT_OG_DEFAULT_SUBTITLE,
+  DEFAULT_OG_IMAGE_ALT,
+  DEFAULT_OG_IMAGE_FOOTER,
+  DEFAULT_OG_IMAGE_PATH,
+  DEFAULT_ORG_SAME_AS,
   DEFAULT_SITE_NAME,
   DEFAULT_SITE_SHORT_NAME,
+  DEFAULT_SITE_TAGLINE,
   DEFAULT_SITE_URL,
+  DEFAULT_SISTER_NAME_FIBER_ARTS,
+  DEFAULT_SISTER_NAME_HOME_GARDEN,
+  DEFAULT_SISTER_NAME_PAYMENT_FEES,
+  DEFAULT_SISTER_NAME_PET,
+  DEFAULT_THEME_COLOR,
+  applyBrandTemplate,
+  parseList,
 } from './siteDefaults.mjs';
 
-export { DEFAULT_SITE_URL };
+export { DEFAULT_SITE_URL, applyBrandTemplate, parseList };
 
-/** Stable Person @id shared across all five sibling tool sites. */
-export const CANONICAL_PERSON_URL = 'https://github.com/hammadiqbal6';
+const env = import.meta.env;
 
-const siteName = import.meta.env.PUBLIC_SITE_NAME || DEFAULT_SITE_NAME;
-const siteShortName = import.meta.env.PUBLIC_SITE_SHORT_NAME || DEFAULT_SITE_SHORT_NAME;
+const siteName = env.PUBLIC_SITE_NAME || DEFAULT_SITE_NAME;
+const siteShortName = env.PUBLIC_SITE_SHORT_NAME || DEFAULT_SITE_SHORT_NAME;
+const authorUrl = (env.PUBLIC_AUTHOR_URL || DEFAULT_AUTHOR_URL).replace(/\/$/, '');
+const authorSameAs = parseList(env.PUBLIC_AUTHOR_SAME_AS, DEFAULT_AUTHOR_SAME_AS);
+const orgSameAsRaw = parseList(env.PUBLIC_ORG_SAME_AS, DEFAULT_ORG_SAME_AS);
+const orgSameAs = orgSameAsRaw.length ? orgSameAsRaw : authorSameAs;
+const copyrightOwner =
+  (env.PUBLIC_COPYRIGHT_OWNER || DEFAULT_COPYRIGHT_OWNER).trim() || siteName;
+
+/** Stable Person @id shared across sibling tool sites (overridable). */
+export const CANONICAL_PERSON_URL = authorUrl;
 
 export const siteConfig = {
   /** Public site origin (no trailing slash). Used for canonicals, sitemap, OG, robots, llms. */
-  siteUrl: import.meta.env.PUBLIC_SITE_URL || DEFAULT_SITE_URL,
+  siteUrl: env.PUBLIC_SITE_URL || DEFAULT_SITE_URL,
   /** Brand shown in header, titles, schema Organization. */
   siteName,
   /** Short name for apple-mobile-web-app-title / manifest / JSON-LD alternateName. */
   siteShortName,
   /** Short tagline for homepage and Organization description. */
-  tagline:
-    import.meta.env.PUBLIC_SITE_TAGLINE ||
-    'Free niche business document generators — fill a form, preview live, export PDF or DOCX. Nothing leaves your browser.',
+  tagline: env.PUBLIC_SITE_TAGLINE || DEFAULT_SITE_TAGLINE,
+  /** Manifest / PWA description (shorter than tagline). */
+  manifestDescription: env.PUBLIC_MANIFEST_DESCRIPTION || DEFAULT_MANIFEST_DESCRIPTION,
   /** Contact email for Contact page and schema. */
-  contactEmail: import.meta.env.PUBLIC_CONTACT_EMAIL || 'hammadiqbal117@gmail.com',
+  contactEmail: env.PUBLIC_CONTACT_EMAIL || DEFAULT_CONTACT_EMAIL,
+  /** Footer © line owner. */
+  copyrightOwner,
   /**
    * EmailJS (free plan) — public IDs only. All three required to show the contact form.
    * Private key must never be committed. See docs/CONTACT-EMAILJS.md.
    */
   emailjs: {
-    serviceId: (import.meta.env.PUBLIC_EMAILJS_SERVICE_ID || '').trim(),
-    templateId: (import.meta.env.PUBLIC_EMAILJS_TEMPLATE_ID || '').trim(),
-    publicKey: (import.meta.env.PUBLIC_EMAILJS_PUBLIC_KEY || '').trim(),
+    serviceId: (env.PUBLIC_EMAILJS_SERVICE_ID || '').trim(),
+    templateId: (env.PUBLIC_EMAILJS_TEMPLATE_ID || '').trim(),
+    publicKey: (env.PUBLIC_EMAILJS_PUBLIC_KEY || '').trim(),
   },
   /** Optional Twitter/X handle without @. */
-  twitterHandle: import.meta.env.PUBLIC_TWITTER_HANDLE || '',
+  twitterHandle: env.PUBLIC_TWITTER_HANDLE || '',
   /** Google AdSense publisher ID, e.g. ca-pub-XXXXXXXXXXXXXXXX. Leave empty to disable ads. */
-  adsensePublisherId: import.meta.env.PUBLIC_ADSENSE_PUBLISHER_ID || '',
+  adsensePublisherId: env.PUBLIC_ADSENSE_PUBLISHER_ID || '',
   /** Set true only after AdSense approval and publisher ID is set. */
-  adsEnabled: (import.meta.env.PUBLIC_ADS_ENABLED || 'false') === 'true',
+  adsEnabled: (env.PUBLIC_ADS_ENABLED || 'false') === 'true',
   /** Enable Auto ads (documented in docs/ADSENSE.md). Requires adsEnabled. */
-  adsenseAutoAds: (import.meta.env.PUBLIC_ADSENSE_AUTO_ADS || 'false') === 'true',
+  adsenseAutoAds: (env.PUBLIC_ADSENSE_AUTO_ADS || 'false') === 'true',
   /** GA4 measurement ID, e.g. G-XXXXXXXXXX. Empty = no GA4 script. */
-  ga4MeasurementId: import.meta.env.PUBLIC_GA4_MEASUREMENT_ID || 'G-HR4DDMD97H',
+  ga4MeasurementId: env.PUBLIC_GA4_MEASUREMENT_ID || 'G-HR4DDMD97H',
   /**
    * Google Search Console HTML tag content value (meta name="google-site-verification").
    * Prefer PUBLIC_GSC_VERIFICATION; PUBLIC_GOOGLE_SITE_VERIFICATION kept as a fallback alias.
    */
   googleSiteVerification:
-    import.meta.env.PUBLIC_GSC_VERIFICATION ||
-    import.meta.env.PUBLIC_GOOGLE_SITE_VERIFICATION ||
+    env.PUBLIC_GSC_VERIFICATION ||
+    env.PUBLIC_GOOGLE_SITE_VERIFICATION ||
     '0-q_NxhBgfgCm4WOLfbe9VrHrjbLzaxh8SXsbo2Q-UU',
 
   /** Bing Webmaster Tools meta verification content. */
-  bingSiteVerification: import.meta.env.PUBLIC_BING_SITE_VERIFICATION || '',
+  bingSiteVerification: env.PUBLIC_BING_SITE_VERIFICATION || '',
   /** IndexNow key (also place matching file at /public/{key}.txt). */
-  indexNowKey: import.meta.env.PUBLIC_INDEXNOW_KEY || '4d6f1ea5473a0968a83c67ceda5a0387',
+  indexNowKey: env.PUBLIC_INDEXNOW_KEY || '4d6f1ea5473a0968a83c67ceda5a0387',
 
   author: {
-    name: 'Hammad Iqbal',
-    email: 'hammadiqbal117@gmail.com',
-    /** Honest short bio — no invented credentials. */
-    shortBio:
-      'I build and maintain free in-browser tools. I turn published public sources into practical generators and show which sources each page uses. I am not a lawyer, accountant, or licensed professional advisor.',
-    /** Canonical Person @id (same on all sibling sites). */
-    canonicalPersonUrl: CANONICAL_PERSON_URL,
-    /** Real profile URLs only. */
-    sameAs: [CANONICAL_PERSON_URL] as string[],
+    name: env.PUBLIC_AUTHOR_NAME || DEFAULT_AUTHOR_NAME,
+    email: env.PUBLIC_AUTHOR_EMAIL || DEFAULT_AUTHOR_EMAIL,
+    shortBio: env.PUBLIC_AUTHOR_BIO || DEFAULT_AUTHOR_BIO,
+    canonicalPersonUrl: authorUrl,
+    sameAs: (authorSameAs.length ? authorSameAs : [authorUrl]) as string[],
     knowsAbout: [
       'business document templates',
       'in-browser PDF generators',
@@ -85,17 +117,35 @@ export const siteConfig = {
   },
 
   /** @deprecated use author.name */
-  defaultAuthor: 'Hammad Iqbal',
+  defaultAuthor: env.PUBLIC_AUTHOR_NAME || DEFAULT_AUTHOR_NAME,
 
   /** ISO date used as sitewide "published" baseline when a page omits one. */
-  launchedAt: '2026-10-19',
-  /** Locale for schema and html lang. */
-  locale: 'en_US',
-  /** Theme color for manifest / browser chrome. */
-  themeColor: '#0f6b5c',
-  /** Default Open Graph image (1200×630 PNG). */
-  ogImagePath: '/og-default.png',
-  ogImageAlt: `${siteName} — free invoice, estimate, and contract templates with PDF export`,
+  launchedAt: env.PUBLIC_LAUNCHED_AT || DEFAULT_LAUNCHED_AT,
+  /** Locale for og:locale. */
+  locale: env.PUBLIC_LOCALE || DEFAULT_LOCALE,
+  /** <html lang>. */
+  htmlLang: env.PUBLIC_HTML_LANG || DEFAULT_HTML_LANG,
+  /** Theme color for manifest / browser chrome / CSS --brand. */
+  themeColor: env.PUBLIC_THEME_COLOR || DEFAULT_THEME_COLOR,
+  /** Manifest background_color. */
+  backgroundColor: env.PUBLIC_BACKGROUND_COLOR || DEFAULT_BACKGROUND_COLOR,
+  /** Organization logo path. */
+  logoPath: env.PUBLIC_LOGO_PATH || DEFAULT_LOGO_PATH,
+  /** Organization sameAs profile URLs. */
+  organizationSameAs: orgSameAs as string[],
+  /** Default Open Graph image (1200×630). */
+  ogImagePath: env.PUBLIC_OG_IMAGE_PATH || DEFAULT_OG_IMAGE_PATH,
+  ogImageAlt: applyBrandTemplate(env.PUBLIC_OG_IMAGE_ALT || DEFAULT_OG_IMAGE_ALT, {
+    name: siteName,
+    shortName: siteShortName,
+  }),
+  /** Footer line baked into generated OG SVGs. */
+  ogImageFooter: applyBrandTemplate(
+    env.PUBLIC_OG_IMAGE_FOOTER || DEFAULT_OG_IMAGE_FOOTER,
+    { name: siteName, shortName: siteShortName },
+  ),
+  /** Subtitle on og-default.svg. */
+  ogDefaultSubtitle: env.PUBLIC_OG_DEFAULT_SUBTITLE || DEFAULT_OG_DEFAULT_SUBTITLE,
 
   /**
    * Sibling tool sites by the same maintainer (listed only on /about/).
@@ -103,19 +153,19 @@ export const siteConfig = {
    */
   siblingSites: [
     {
-      name: 'FeeCalc (payment fee calculators)',
+      name: env.PUBLIC_SISTER_NAME_PAYMENT_FEES || DEFAULT_SISTER_NAME_PAYMENT_FEES,
       url: sisterUrl('paymentFees'),
     },
     {
-      name: 'YardCalc (home & garden calculators)',
+      name: env.PUBLIC_SISTER_NAME_HOME_GARDEN || DEFAULT_SISTER_NAME_HOME_GARDEN,
       url: sisterUrl('homeGarden'),
     },
     {
-      name: 'FiberCalc (knitting & crochet calculators)',
+      name: env.PUBLIC_SISTER_NAME_FIBER_ARTS || DEFAULT_SISTER_NAME_FIBER_ARTS,
       url: sisterUrl('fiberArts'),
     },
     {
-      name: 'PetCalc (pet calculators)',
+      name: env.PUBLIC_SISTER_NAME_PET || DEFAULT_SISTER_NAME_PET,
       url: sisterUrl('pet'),
     },
   ],

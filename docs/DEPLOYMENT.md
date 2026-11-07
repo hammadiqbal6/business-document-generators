@@ -77,7 +77,7 @@ Fix any failures before pushing to `main`.
 
 All owner-specific branding and IDs should be set via **environment variables** at build time. Astro exposes variables prefixed with `PUBLIC_` to the client bundle.
 
-Defaults live in `src/config/site.ts` / `siteDefaults.mjs` (fallback origin is `https://docuklin.com`). **Do not commit real secrets**; set env vars in your host’s dashboard. See `.env.example` for the full list. Legacy workers.dev → custom-domain 301s use Worker var `CANONICAL_ORIGIN` (see `docs/CUSTOM-DOMAIN.md`).
+Defaults live in `src/config/site.ts` / `siteDefaults.mjs` (fallback origin is `https://docuklin.com`). **Do not commit real secrets**; set env vars in your host’s dashboard. Full variable table: `docs/CONFIGURATION.md` and `.env.example`. Legacy-host 301s use Worker runtime vars `CANONICAL_ORIGIN` + `LEGACY_REDIRECT_HOSTS` (see `docs/CUSTOM-DOMAIN.md`).
 
 ### Environment variables (complete list)
 
