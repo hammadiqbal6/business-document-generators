@@ -36,7 +36,7 @@ Hard requirements so builds never ship the indexing / AEO bugs from the Oct 2026
 - [ ] Don’t append trailing slashes to file URLs (`og:image`, favicons, IndexNow `.txt`).
 - [ ] Don’t put IndexNow keys only under `public/indexnow/` — IndexNow expects `https://host/<key>.txt`.
 - [ ] Don’t commit `00000000000000000000000000000000.txt` as the live key.
-- [ ] Don’t add wrangler top-level `vars` for `PUBLIC_*` on this Worker — breaks `npx wrangler preview` (file-converter-tools lesson). Always keep `"previews": {}`.
+- [ ] Don’t put `PUBLIC_*` in wrangler top-level `vars` — breaks `npx wrangler preview` (file-converter-tools lesson). Runtime-only vars (`CANONICAL_ORIGIN`, `LEGACY_REDIRECT_HOSTS`) are fine. Always keep `"previews": {}` (with the same runtime vars mirrored under `previews.vars` when needed).
 - [ ] Don’t ship classic inline `<script>` that uses `import` (GA/Analytics lesson on fiber).
 - [ ] Don’t leave tool pages without a guide link, or guides under 800 words.
 - [ ] Don’t serve `/_astro/*` with `max-age=0`.
@@ -47,7 +47,7 @@ Hard requirements so builds never ship the indexing / AEO bugs from the Oct 2026
 
 | Lesson | Source | Rule |
 |--------|--------|------|
-| Top-level wrangler `vars` broke `npx wrangler preview` | file-converter-tools | No top-level `vars`; `"previews": {}`; build-time env in dashboard |
+| Top-level wrangler `PUBLIC_*` vars broke `npx wrangler preview` | file-converter-tools | No `PUBLIC_*` in top-level `vars`; runtime redirect vars OK; `"previews": {}`; build-time env in dashboard |
 | `og:image` ending in `/` 404 | file-converter-tools | `absoluteUrl` must not force slash on file assets |
 | `example.com` baked into sitemap | file-converter-tools | Default origin = https://docuklin.com via `siteDefaults.mjs` |
 | Proof single-run LH flake vs LHCI median-of-3 | pet-calculators PR #8 | Proof retries up to 3 and takes median; TBT 200 |
@@ -68,7 +68,7 @@ Hard requirements so builds never ship the indexing / AEO bugs from the Oct 2026
 | Inline classic scripts with `import` | same |
 | `/_astro/*` immutable header | same |
 | IndexNow placeholder key absent; real key present | same |
-| Worker 308 + FILE_EXT `{1,16}`; no wrangler top-level `vars` | same |
+| Worker 308 + FILE_EXT `{1,16}`; no `PUBLIC_*` in wrangler top-level `vars` | same |
 
 ```bash
 npm run build && npm run audit

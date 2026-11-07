@@ -193,14 +193,22 @@ if (fs.existsSync(wranglerPath)) {
   }
   const stripped = wrangler.replace(/\/\/.*$/gm, '').replace(/\/\*[\s\S]*?\*\//g, '');
   const withoutPreviews = stripped.replace(/"previews"\s*:\s*\{[\s\S]*?\}/, '');
-  if (/"vars"\s*:\s*\{/.test(withoutPreviews)) {
-    fail('wrangler.jsonc has top-level vars — breaks wrangler preview; use Workers Builds env (see docs/SEO-GUARDRAILS.md)');
+  // Runtime Worker vars (CANONICAL_ORIGIN, LEGACY_REDIRECT_HOSTS) are OK.
+  // PUBLIC_* in top-level vars breaks `npx wrangler preview` and does not bake Astro HTML.
+  const topVars = withoutPreviews.match(/"vars"\s*:\s*\{([\s\S]*?)\}/);
+  if (topVars && /\bPUBLIC_[A-Z0-9_]+\b/.test(topVars[1])) {
+    fail(
+      'wrangler.jsonc top-level vars must not include PUBLIC_* — use Workers Builds env (see docs/SEO-GUARDRAILS.md)',
+    );
   }
 }
 
-const workerSrc = fs.readFileSync(path.join(root, 'src/worker.ts'), 'utf8');
+const workerSrc = [
+  fs.readFileSync(path.join(root, 'src/worker.ts'), 'utf8'),
+  fs.readFileSync(path.join(root, 'src/lib/workerRedirect.ts'), 'utf8'),
+].join('\n');
 if (!/\{1,\s*16\}/.test(workerSrc) && !/\{1,16\}/.test(workerSrc)) {
-  fail('src/worker.ts FILE_EXT should allow long extensions ({1,16}) for .webmanifest');
+  fail('Worker FILE_EXT should allow long extensions ({1,16}) for .webmanifest');
 }
 if (!/\b308\b/.test(workerSrc)) {
   fail('src/worker.ts must redirect with 308');

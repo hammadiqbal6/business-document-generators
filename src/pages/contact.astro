@@ -19,6 +19,14 @@ const emailjsReady = Boolean(serviceId && templateId && publicKey);
     This site is maintained by <a href="/about/#maintainer">{siteConfig.author.name}</a>.
     For corrections, broken links, or product feedback, use the form below or email directly—there is no support ticket queue.
   </p>
+  <p>
+    Good messages to send: factual corrections on a guide or tool page (include the URL), broken internal links, accessibility
+    issues, or privacy requests about cookies and analytics. We read mail personally; response time varies.
+  </p>
+  <p>
+    Please do not send confidential client contracts, medical details, or full rental applications for “review.” These tools are
+    educational generators—not a law firm, clinic, or landlord screening service—and we cannot give legal, medical, or housing advice.
+  </p>
 
   {emailjsReady ? (
     <>
@@ -43,10 +51,8 @@ const emailjsReady = Boolean(serviceId && templateId && publicKey);
 
   <p>
     For privacy requests (cookies, analytics), include “Privacy” in the subject line and the page URL you visited.
-    We do not host user-generated documents on our servers, so we typically have no form contents to delete.
-  </p>
-  <p>
-    Please do not send confidential client contracts or personal data for “review”—we cannot provide legal advice.
+    We do not host user-generated documents on our servers, so we typically have no form contents to delete—see the
+    <a href="/privacy/">privacy policy</a> and <a href="/cookies/">cookie notice</a>.
   </p>
 </BaseLayout>
 
