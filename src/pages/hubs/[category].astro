@@ -22,6 +22,10 @@ const hubCopy: Record<
     description: string;
     intro: string;
     whenToUse: string;
+    whatFor: string[];
+    whatToInclude: string[];
+    commonMistakes: string[];
+    workedExample: string;
     whichTable: { headers: string[]; rows: string[][] };
     faq: { question: string; answer: string }[];
   }
@@ -34,6 +38,23 @@ const hubCopy: Record<
       'Use these generators when you need a priced document today: estimates before work, invoices after (or for deposits), quotes for packages, receipts for payment, and work orders for crew tickets—all with live preview and PDF/DOCX export.',
     whenToUse:
       'Pick the construction estimate for remodel bids with allowances, the contractor invoice for progress billing, cleaning or catering tools when line items are service packages, the generic quote generator for mixed scopes, and the receipt or work order when you need a simple confirmation or job ticket.',
+    whatFor: [
+      'An estimate or quote proposes price and scope before work starts so the client can approve (or revise) before you mobilize.',
+      'An invoice requests payment for a deposit, progress draw, or completed work and should match what was previously agreed.',
+      'A receipt confirms money already received; a work order tells the crew what to do on site without doubling as a tax invoice.',
+    ],
+    whatToInclude: [
+      'Parties and contact details, dates, and a clear document number or revision label.',
+      'Line items with units, quantities, and rates—plus tax, deposits, and balance due when you are billing.',
+      'Validity or payment terms, exclusions or allowances, and how change orders will be handled.',
+    ],
+    commonMistakes: [
+      'Sending an invoice before the client accepted an estimate (or sending an estimate that looks like a demand for payment).',
+      'Omitting tax, deposit math, or a due date so the client cannot tell what is still owed.',
+      'Vague line items (“misc labor”) that invite disputes—name rooms, packages, or phases instead.',
+    ],
+    workedExample:
+      'A remodeler sends a construction estimate with allowances for tile, then a contractor invoice for a 30% deposit after acceptance, and later a receipt when the deposit clears. Each document reuses the same party names and job address so the paper trail stays consistent.',
     whichTable: {
       headers: ['Need', 'Use this tool', 'Why'],
       rows: [
@@ -75,6 +96,23 @@ const hubCopy: Record<
       'Start a creative or freelance agreement here: deliverables, payment, usage rights, cancellation, and liability sample clauses you can edit—then export PDF or DOCX. Not attorney-reviewed.',
     whenToUse:
       'Use photography or videography contracts when usage rights matter, the freelance web design contract for project milestones and IP, the event/wedding vendor contract for venue dates and force majeure style notes, and the simple NDA when you only need a mutual confidentiality starting point.',
+    whatFor: [
+      'Service contracts set deliverables, payment schedule, cancellation, and who owns the work product after delivery.',
+      'Creative contracts also need usage or licensing language so clients know how they may publish photos or video.',
+      'An NDA is only about confidentiality—it does not replace a statement of work or payment terms.',
+    ],
+    whatToInclude: [
+      'Legal names of the parties, effective date, and a short project description.',
+      'Fees, deposits, late fees (if any), and what happens if the client cancels.',
+      'Deliverables, revision limits, and intellectual-property or usage rights in plain language you can edit.',
+    ],
+    commonMistakes: [
+      'Leaving usage rights blank on photo or video jobs so both sides assume opposite defaults.',
+      'Using a generic NDA when you actually need a services agreement with payment milestones.',
+      'Treating an exported sample as attorney-reviewed—local law and facts still matter.',
+    ],
+    workedExample:
+      'A photographer fills coverage hours, retainer, and web-vs-print usage in the photography contract, exports PDF, and sends it with the invoice for the retainer. Separately, a freelancer sharing pitch decks may start with the simple NDA before sending a full web-design contract.',
     whichTable: {
       headers: ['Situation', 'Use this tool', 'Focus'],
       rows: [
@@ -116,6 +154,23 @@ const hubCopy: Record<
       'Capture client acknowledgements and rental screening details with fillable forms you preview live and export as PDF or DOCX—then follow your local health or fair-housing rules.',
     whenToUse:
       'The tattoo consent form is for studio risk acknowledgements and aftercare notes. The rental application gathers employment, income, and household details for screening—pair it with official fair-housing guidance and your local landlord-tenant rules.',
+    whatFor: [
+      'Consent forms document that a client received risk and aftercare information before a body-art procedure—rules vary by jurisdiction.',
+      'Rental applications collect screening details so a landlord can evaluate an applicant; they do not create a tenancy by themselves.',
+      'Both are operational records you should store in your own system after export—this site does not keep form submissions.',
+    ],
+    whatToInclude: [
+      'Studio or property identity, client/applicant name, date, and contact details.',
+      'For tattoo consent: procedure description, risk acknowledgements, aftercare notes, and signature lines your local rules require.',
+      'For rental applications: household members, employment/income fields, authorization to screen, and any locally required disclosures.',
+    ],
+    commonMistakes: [
+      'Using one generic consent form without checking state or county body-art requirements.',
+      'Treating a completed rental application as a lease, or collecting screening data without a lawful purpose and fair-housing compliance.',
+      'Leaving filled PDFs only in browser drafts instead of exporting into your retention process.',
+    ],
+    workedExample:
+      'A studio prints a tattoo consent PDF with aftercare notes before a session. Separately, a small landlord exports a rental application, pairs it with their screening criteria checklist, and keeps the file with other applicant records—not on this website.',
     whichTable: {
       headers: ['Need', 'Use this tool', 'Remember'],
       rows: [
@@ -154,6 +209,23 @@ const hubCopy: Record<
       'Structure a podcast episode or a one-page property flyer without starting from a blank page—fill fields, preview the layout, then download PDF or DOCX.',
     whenToUse:
       'Use the podcast script when you need cold open, segment timings, and CTA placeholders. Use the real estate flyer when you want beds, baths, price, and highlight bullets laid out for a one-page handout.',
+    whatFor: [
+      'A podcast script (or run-of-show) keeps openings, segments, and calls-to-action on time so recording stays focused.',
+      'A real estate flyer is a marketing handout for open houses or email—distinct from an MLS sheet or purchase contract.',
+      'Both tools help you draft layout and wording; final brokerage, MLS, or show-notes rules still apply outside this site.',
+    ],
+    whatToInclude: [
+      'Podcast: episode title, cold open, timed segments, guest prompts, and a clear CTA or show-notes list.',
+      'Flyer: headline, price, beds/baths/sq ft, feature bullets, agent contact, and any required brokerage disclosure text.',
+      'Export PDF for sharing or DOCX when you need to keep editing in Word.',
+    ],
+    commonMistakes: [
+      'Over-scripting interview episodes so the conversation never breathes—use a run-of-show instead of a full teleprompter script.',
+      'Shipping a flyer without brokerage or MLS-required disclosures, or using photos without usage rights.',
+      'Treating the flyer generator as a substitute for listing-agreement paperwork.',
+    ],
+    workedExample:
+      'A host fills cold open, three segment prompts, and a newsletter CTA in the podcast script, then exports DOCX into their notes app. An agent fills beds, price, and highlights in the flyer tool, exports PDF for an open-house stack, and adds photos in their design tool afterward.',
     whichTable: {
       headers: ['Goal', 'Use this tool', 'Output'],
       rows: [
@@ -236,6 +308,30 @@ const ogImagePath = `/og/hub-${meta.slug}.svg`;
   </div>
 
   <p>{copy.whenToUse}</p>
+
+  <h2>What these documents are for</h2>
+  <ul>
+    {copy.whatFor.map((item) => (
+      <li>{item}</li>
+    ))}
+  </ul>
+
+  <h2>What to include</h2>
+  <ul>
+    {copy.whatToInclude.map((item) => (
+      <li>{item}</li>
+    ))}
+  </ul>
+
+  <h2>Common mistakes</h2>
+  <ul>
+    {copy.commonMistakes.map((item) => (
+      <li>{item}</li>
+    ))}
+  </ul>
+
+  <h2>Worked example</h2>
+  <p>{copy.workedExample}</p>
 
   <h2>Which document do I need?</h2>
   <div class="table-wrap">

@@ -12,33 +12,75 @@ const path = '/privacy/';
 >
   <Breadcrumbs items={[{ name: 'Home', path: '/' }, { name: 'Privacy', path }]} />
   <h1>Privacy Policy</h1>
-  <p class="content-meta">Last updated: 2026-10-20</p>
+  <p class="content-meta">Last updated: 2026-11-07</p>
   <p>
-    {siteConfig.siteName} (“we”) operates {siteConfig.siteUrl}. This policy explains what we collect when you use our website and tools.
+    {siteConfig.siteName} (“we”) operates {siteConfig.siteUrl}. This policy explains what we collect when you use our website and tools,
+    what we do not collect, and how to contact us about privacy requests.
   </p>
+
   <h2>Document generators (no server storage)</h2>
   <p>
-    Form data you enter in our generators is processed in your browser to render previews and exports. We do not transmit your document contents to our servers. If you click “Save locally,” data is stored in your browser’s localStorage only.
+    Form data you enter in our generators is processed in your browser to render previews and exports. We do not transmit your document
+    contents to our servers for storage or review. If you click “Save locally,” data is stored in your browser’s localStorage only and
+    never leaves your device unless you export or copy it yourself.
   </p>
+  <p>
+    Because we do not host user-generated contracts or filled forms, a typical privacy request will not involve deleting document text
+    from our systems—we usually have none. You can clear local drafts by using each tool’s clear-draft control or by clearing site data
+    in your browser.
+  </p>
+
   <h2>Log data</h2>
   <p>
-    Our hosting provider may log IP addresses, user agents, and requested URLs for security and performance. We use these logs only for operations and abuse prevention.
+    Our hosting provider (Cloudflare) may log IP addresses, user agents, requested URLs, and similar technical data for security,
+    reliability, and abuse prevention. We use these logs for operations—not for building marketing profiles of individuals.
   </p>
+
   <h2>Google Analytics (optional)</h2>
   <p>
-    If enabled, we use Google Analytics 4 to understand aggregate traffic. The GA script loads only after you accept the cookie notice (Consent Mode v2 defaults keep analytics storage denied until then) and is deferred until after page load / idle so it is not render-blocking. You can opt out via browser settings or Google’s tools. Measurement ID is configured in site settings. We may record events such as opening a tool editor, exporting PDF/DOCX, copying an embed snippet, and clicking outbound reference links.
+    If enabled, we use Google Analytics 4 to understand aggregate traffic (for example, which tools are opened). The GA script loads only
+    after you accept the cookie notice (Consent Mode v2 defaults keep analytics storage denied until then) and is deferred until after
+    page load / idle so it is not render-blocking. You can opt out via browser settings or Google’s tools. Measurement ID is configured
+    in site settings. We may record events such as opening a tool editor, exporting PDF/DOCX, copying an embed snippet, and clicking
+    outbound reference links.
   </p>
+
   <h2>Google AdSense and advertising cookies</h2>
   <p>
-    If we display Google AdSense ads, Google and its partners may use cookies to serve ads based on your prior visits to this or other websites. You can opt out of personalized advertising by visiting
+    If we display Google AdSense ads, Google and its partners may use cookies (or similar technologies) to serve ads based on your prior
+    visits to this or other websites. Third-party vendors, including Google, use cookies to serve ads. You can opt out of personalized
+    advertising by visiting
     <a href="https://www.google.com/settings/ads" rel="noopener noreferrer">Google Ads Settings</a> and
     <a href="https://optout.aboutads.info/" rel="noopener noreferrer">aboutads.info</a>.
   </p>
   <p>
-    Users in the EEA, UK, and Switzerland require a Google-certified CMP for personalized ads—see the repository <code>docs/ADSENSE.md</code> before enabling ads on your deployment.
+    Users in the EEA, UK, and Switzerland require a Google-certified consent management platform (CMP) for personalized ads before those
+    ads are enabled for those regions—see <a href="/cookies/">our cookie notice</a> and the repository documentation before turning ads on.
   </p>
+  <p>
+    AdSense is controlled by site configuration (<code>PUBLIC_ADS_ENABLED</code> and a publisher ID). When ads are off, we do not load the
+    AdSense script.
+  </p>
+
+  <h2>Contact form</h2>
+  <p>
+    If the contact form is enabled, messages you send are delivered through our email provider (EmailJS on the free plan uses their
+    servers to route mail). Do not include confidential client contracts or sensitive personal data you would not put in an ordinary email.
+  </p>
+
   <h2>Children</h2>
-  <p>This site is intended for business users and is not directed at children under 13.</p>
+  <p>This site is intended for business users and is not directed at children under 13. We do not knowingly collect personal information from children.</p>
+
+  <h2>Changes</h2>
+  <p>
+    We may update this policy when our tools, hosting, or advertising setup changes. The “Last updated” date at the top reflects the latest
+    revision. Continued use of the site after changes means you have read the updated policy.
+  </p>
+
   <h2>Contact</h2>
-  <p>Privacy questions: <a href={`mailto:${siteConfig.contactEmail}`}>{siteConfig.contactEmail}</a></p>
+  <p>
+    Privacy questions:
+    <a href={`mailto:${siteConfig.contactEmail}`}>{siteConfig.contactEmail}</a>
+    or use the <a href="/contact/">contact page</a> with “Privacy” in the subject line.
+  </p>
 </BaseLayout>

@@ -122,9 +122,9 @@ These ship in the repo with **neutral placeholders**. Replace before or right af
 
 Generated at build from `PUBLIC_SITE_URL` (`src/pages/robots.txt.ts`, `src/pages/llms.txt.ts`). Set the env var in Workers Builds — no manual domain edit in `public/`.
 
-#### `public/ads.txt` (before / after AdSense)
+#### `/ads.txt` (before / after AdSense)
 
-Uncomment and set your publisher ID (must match `PUBLIC_ADSENSE_PUBLISHER_ID`):
+Generated at build from `PUBLIC_ADSENSE_PUBLISHER_ID` (`src/pages/ads.txt.ts`). When the var is empty, the file is a comment placeholder. When set to `ca-pub-…` (or `pub-…`), the build emits:
 
 ```text
 google.com, pub-XXXXXXXXXXXXXXXX, DIRECT, f08c47fec0942fa0
@@ -339,7 +339,7 @@ Compare to committed reports in `docs/proof/lighthouse/`. Regenerate proof local
 
 - About, Contact, Privacy (with ad/cookie disclosures), Terms, Methodology, Cookies  
 - Original long-form content on tool pages  
-- `ads.txt` template in `public/ads.txt`  
+- `/ads.txt` generated from `PUBLIC_ADSENSE_PUBLISHER_ID`  
 - Ad slots **disabled** until you set `PUBLIC_ADS_ENABLED=true`
 
 ### Apply
@@ -357,7 +357,7 @@ PUBLIC_ADSENSE_PUBLISHER_ID=ca-pub-XXXXXXXXXXXXXXXX
 PUBLIC_ADS_ENABLED=true
 ```
 
-2. Update `public/ads.txt` with the same publisher ID (uncomment line).
+2. Rebuild so `/ads.txt` picks up the same publisher ID automatically.
 3. Redeploy.
 4. In AdSense UI, confirm site shows **Ready** and ads serve on a tool page.
 

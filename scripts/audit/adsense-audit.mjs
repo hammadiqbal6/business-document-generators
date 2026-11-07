@@ -27,8 +27,20 @@ if (fs.existsSync(privacyPath)) {
   }
 }
 
-if (!fs.existsSync(path.join(dist, 'ads.txt'))) {
+const adsTxtPath = path.join(dist, 'ads.txt');
+if (!fs.existsSync(adsTxtPath)) {
   errors.push('Missing ads.txt in dist');
+} else {
+  const adsTxt = fs.readFileSync(adsTxtPath, 'utf8');
+  const pub = (process.env.PUBLIC_ADSENSE_PUBLISHER_ID || '').trim();
+  if (pub) {
+    const pubId = pub.startsWith('ca-pub-') ? pub.slice(3) : pub.startsWith('pub-') ? pub : `pub-${pub}`;
+    if (!adsTxt.includes(`google.com, ${pubId}, DIRECT, f08c47fec0942fa0`)) {
+      errors.push('ads.txt missing Google publisher line for PUBLIC_ADSENSE_PUBLISHER_ID');
+    }
+  } else if (!/omitted until approval|PUBLIC_ADSENSE_PUBLISHER_ID/i.test(adsTxt)) {
+    errors.push('ads.txt should keep a comment placeholder when publisher ID is unset');
+  }
 }
 
 const home = path.join(dist, 'index.html');
