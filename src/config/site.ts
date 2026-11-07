@@ -88,6 +88,26 @@ export const siteConfig = {
   /** Enable Auto ads (documented in docs/ADSENSE.md). Requires adsEnabled. */
   adsenseAutoAds: (env.PUBLIC_ADSENSE_AUTO_ADS || 'false') === 'true',
   /**
+   * Directory / launch-board badges in the site footer.
+   * Each entry is gated by its own PUBLIC_*_BADGE_ENABLED flag (default on for Fazier).
+   * Add more badges the same way — keep `id` unique; avoid Astro-reserved prop names like `slot`.
+   */
+  directoryBadges: [
+    ...((env.PUBLIC_FAZIER_BADGE_ENABLED || 'true') === 'true'
+      ? [
+          {
+            id: 'fazier',
+            href: 'https://fazier.com',
+            // Official "Featured on Fazier" embed (Fazier launch badge API).
+            src: 'https://fazier.com/api/v1/public/badges/launch_badges.svg?badge_type=featured&theme=light',
+            alt: 'Featured on Fazier',
+            width: 182,
+            height: 43,
+          },
+        ]
+      : []),
+  ],
+  /**
    * Numeric AdSense ad unit IDs for fixed in-page display slots.
    * Shared `display` covers all placements; optional home/tool override.
    * Non-numeric / empty → AdSlot renders nothing (Auto ads unaffected).

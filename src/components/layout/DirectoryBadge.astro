@@ -1,0 +1,31 @@
+---
+/**
+ * External directory / launch-board badge (e.g. Fazier).
+ * Do not name a prop `slot` — Astro reserves that for component slots.
+ */
+interface Props {
+  href: string;
+  src: string;
+  alt: string;
+  width: number;
+  height: number;
+  /** Open in a new tab (Fazier's official embed uses target="_blank"). */
+  newTab?: boolean;
+}
+
+const { href, src, alt, width, height, newTab = true } = Astro.props;
+---
+<a
+  class="directory-badge"
+  href={href}
+  {...(newTab ? { target: '_blank' } : {})}
+>
+  <img
+    src={src}
+    alt={alt}
+    width={width}
+    height={height}
+    loading="lazy"
+    decoding="async"
+  />
+</a>
