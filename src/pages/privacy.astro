@@ -12,7 +12,7 @@ const path = '/privacy/';
 >
   <Breadcrumbs items={[{ name: 'Home', path: '/' }, { name: 'Privacy', path }]} />
   <h1>Privacy Policy</h1>
-  <p class="content-meta">Last updated: 2026-11-07</p>
+  <p class="content-meta">Last updated: 2026-11-13</p>
   <p>
     {siteConfig.siteName} (“we”) operates {siteConfig.siteUrl}. This policy explains what we collect when you use our website and tools,
     what we do not collect, and how to contact us about privacy requests.
@@ -38,11 +38,12 @@ const path = '/privacy/';
 
   <h2>Google Analytics (optional)</h2>
   <p>
-    If enabled, we use Google Analytics 4 to understand aggregate traffic (for example, which tools are opened). The GA script loads only
-    after you accept the cookie notice (Consent Mode v2 defaults keep analytics storage denied until then) and is deferred until after
-    page load / idle so it is not render-blocking. You can opt out via browser settings or Google’s tools. Measurement ID is configured
-    in site settings. We may record events such as opening a tool editor, exporting PDF/DOCX, copying an embed snippet, and clicking
-    outbound reference links.
+    If enabled, we use Google Analytics 4 to understand aggregate traffic (for example, which tools are opened). Consent Mode v2 keeps
+    analytics and ad-related storage denied by default. In the EEA, UK, and Switzerland those defaults are region-scoped and stay denied
+    until Google’s certified CMP updates consent. Elsewhere, storage stays denied until you Accept the site cookie bar. The GA script is
+    deferred until after page load / idle so it is not render-blocking. You can opt out via browser settings or Google’s tools. Measurement
+    ID is configured in site settings. We may record events such as opening a tool editor, exporting PDF/DOCX, copying an embed snippet,
+    and clicking outbound reference links.
   </p>
 
   <h2>Google AdSense and advertising cookies</h2>
@@ -54,12 +55,14 @@ const path = '/privacy/';
     <a href="https://optout.aboutads.info/" rel="noopener noreferrer">aboutads.info</a>.
   </p>
   <p>
-    Users in the EEA, UK, and Switzerland require a Google-certified consent management platform (CMP) for personalized ads before those
-    ads are enabled for those regions—see <a href="/cookies/">our cookie notice</a> and the repository documentation before turning ads on.
+    For visitors in the EEA, UK, and Switzerland, personalized ads use Google’s certified AdSense GDPR consent message (Privacy &amp;
+    messaging / Funding Choices, IAB Transparency and Consent Framework v2.2), loaded with the AdSense script. That message is the consent
+    UI for those regions; the site’s own cookie bar is not shown there. See <a href="/cookies/">our cookie notice</a> for which tool
+    applies where.
   </p>
   <p>
     AdSense is controlled by site configuration (<code>PUBLIC_ADS_ENABLED</code> and a publisher ID). When ads are off, we do not load the
-    AdSense script.
+    AdSense script (and therefore do not show Google’s CMP message).
   </p>
 
   <h2>Contact form</h2>

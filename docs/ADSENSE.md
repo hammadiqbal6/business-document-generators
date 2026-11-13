@@ -7,7 +7,7 @@
 - [ ] About, Contact, Privacy (with ad cookie disclosures), Terms, Methodology
 - [ ] Working tools—no deceptive UX
 - [ ] `ads.txt` emits your publisher line after you set `PUBLIC_ADSENSE_PUBLISHER_ID` and rebuild
-- [ ] Certified CMP for EEA/UK/CH if serving personalized ads ([Google CMP requirement](https://support.google.com/adsense/answer/13554116))
+- [ ] Google-certified CMP for EEA/UK/CH if serving personalized ads ([Google CMP requirement](https://support.google.com/adsense/answer/13554116)) — this site uses Google’s Privacy & messaging GDPR message (Funding Choices / IAB TCF v2.2); the site cookie bar is suppressed in those regions when ads are on
 
 ## Enable ads in this repo
 

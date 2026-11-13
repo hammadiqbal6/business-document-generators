@@ -25,6 +25,36 @@ if (fs.existsSync(privacyPath)) {
   if (!/aboutads|google\.com\/settings\/ads/i.test(html)) {
     errors.push('Privacy policy missing ad opt-out links');
   }
+  if (!/Funding Choices|TCF|certified.*consent|GDPR consent message/i.test(html)) {
+    errors.push('Privacy policy should describe Google’s certified GDPR CMP / Funding Choices for EEA/UK/CH');
+  }
+}
+
+const cookiesPath = path.join(dist, 'cookies', 'index.html');
+if (fs.existsSync(cookiesPath)) {
+  const html = fs.readFileSync(cookiesPath, 'utf8');
+  if (!/EEA|United Kingdom|Switzerland/i.test(html)) {
+    errors.push('Cookie notice should explain EEA/UK/CH vs other-region consent UI');
+  }
+  if (!/Funding Choices|TCF|certified/i.test(html)) {
+    errors.push('Cookie notice should name Google’s certified CMP / Funding Choices');
+  }
+}
+
+const headersPath = [
+  path.join(dist, '_headers'),
+  path.resolve('public', '_headers'),
+].find((p) => fs.existsSync(p));
+if (headersPath) {
+  const headers = fs.readFileSync(headersPath, 'utf8');
+  const csp = headers.match(/Content-Security-Policy:[^\n]+/)?.[0] || '';
+  if (!/fundingchoicesmessages\.google\.com/.test(csp)) {
+    errors.push('_headers CSP must allow fundingchoicesmessages.google.com');
+  }
+  // Funding Choices needs connect-src as well as script/frame (GDPR message XHR).
+  if (!/connect-src[^;]*fundingchoicesmessages\.google\.com/.test(csp)) {
+    errors.push('_headers connect-src must include fundingchoicesmessages.google.com');
+  }
 }
 
 const adsTxtPath = path.join(dist, 'ads.txt');

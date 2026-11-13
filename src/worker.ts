@@ -3,6 +3,9 @@
  * 1. Hosts in LEGACY_REDIRECT_HOSTS → single-hop 301 to CANONICAL_ORIGIN
  *    (path + query preserved; trailing slash applied in the same response)
  * 2. Otherwise permanent trailing-slash redirects (308)
+ * 3. HTML responses get a tiny geo bootstrap (`window.__docuklinGeo`) from
+ *    `request.cf.country` so the cookie banner can defer to Google’s CMP in
+ *    EEA/UK/CH without a second popup.
  *
  * Built-in assets html_handling uses temporary 307; this worker upgrades slash
  * consolidation to 308. Preview/versioned workers.dev hosts and localhost are
@@ -19,6 +22,8 @@ import {
   needsTrailingSlashRedirect,
   parseLegacyRedirectHosts,
 } from './lib/workerRedirect';
+import { isConsentRegion } from './lib/consentRegions';
+import { injectGeoIntoHtml, isHtmlContentType } from './lib/workerHtml';
 
 export interface Env {
   ASSETS: Fetcher;
@@ -27,6 +32,8 @@ export interface Env {
   /** Comma-separated exact Host values that 301 → CANONICAL_ORIGIN. */
   LEGACY_REDIRECT_HOSTS?: string;
 }
+
+type CfProperties = { country?: string };
 
 export default {
   async fetch(request: Request, env: Env): Promise<Response> {
@@ -54,6 +61,30 @@ export default {
       return Response.redirect(url.toString(), 308);
     }
 
-    return env.ASSETS.fetch(request);
+    const assetResponse = await env.ASSETS.fetch(request);
+    if (request.method === 'HEAD') return assetResponse;
+
+    const contentType = assetResponse.headers.get('content-type');
+    if (!isHtmlContentType(contentType)) return assetResponse;
+
+    const cf = (request as Request & { cf?: CfProperties }).cf;
+    const country = cf?.country || '';
+    const html = await assetResponse.text();
+    const body = injectGeoIntoHtml(html, country);
+
+    const headers = new Headers(assetResponse.headers);
+    if (country) headers.set('X-Docuklin-Country', country);
+    headers.set(
+      'X-Docuklin-Consent-Region',
+      isConsentRegion(country) ? '1' : '0',
+    );
+    // Body length changed after injection.
+    headers.delete('content-length');
+
+    return new Response(body, {
+      status: assetResponse.status,
+      statusText: assetResponse.statusText,
+      headers,
+    });
   },
 };
