@@ -7,8 +7,10 @@ export const toolToGuides: Record<string, string[]> = {
     'construction-estimate-that-wins-jobs',
     'line-item-totals-explained',
     'invoice-vs-estimate',
+    'contractor-invoice-example',
   ],
   'contractor-invoice': [
+    'contractor-invoice-example',
     'invoice-vs-estimate',
     'line-item-totals-explained',
     'what-to-include-on-a-receipt',
@@ -18,6 +20,7 @@ export const toolToGuides: Record<string, string[]> = {
     'freelance-payment-schedule-milestones',
   ],
   'videography-contract': [
+    'wedding-videography-contract',
     'videography-contract-clauses',
     'photography-contract-clauses',
     'wedding-vendor-contract-checklist',
@@ -29,6 +32,7 @@ export const toolToGuides: Record<string, string[]> = {
     'what-to-include-on-a-receipt',
   ],
   'freelance-web-design-contract': [
+    'freelance-web-design-contract-clauses',
     'freelance-payment-schedule-milestones',
     'nda-basics-for-freelancers',
   ],
@@ -38,12 +42,14 @@ export const toolToGuides: Record<string, string[]> = {
     'invoice-vs-estimate',
   ],
   'catering-quote': [
+    'catering-quotation-example',
     'catering-quote-deposits',
     'wedding-vendor-contract-checklist',
     'invoice-vs-estimate',
   ],
   'event-wedding-vendor-contract': [
     'wedding-vendor-contract-checklist',
+    'wedding-videography-contract',
     'catering-quote-deposits',
     'videography-contract-clauses',
   ],
@@ -53,9 +59,11 @@ export const toolToGuides: Record<string, string[]> = {
   ],
   'simple-nda': [
     'nda-basics-for-freelancers',
+    'freelance-web-design-contract-clauses',
     'freelance-payment-schedule-milestones',
   ],
   'work-order': [
+    'how-to-create-a-work-order',
     'work-order-vs-invoice-vs-estimate',
     'invoice-vs-estimate',
     'line-item-totals-explained',
@@ -65,6 +73,7 @@ export const toolToGuides: Record<string, string[]> = {
     'invoice-vs-estimate',
   ],
   'quote-estimate-generator': [
+    'how-to-write-a-business-estimate',
     'invoice-vs-estimate',
     'work-order-vs-invoice-vs-estimate',
     'line-item-totals-explained',
@@ -74,19 +83,20 @@ export const toolToGuides: Record<string, string[]> = {
 /** Guide → related guide slugs (topic clusters, not identical lists). */
 export const guideToGuides: Record<string, string[]> = {
   'construction-estimate-that-wins-jobs': [
+    'how-to-write-a-business-estimate',
     'line-item-totals-explained',
     'invoice-vs-estimate',
-    'work-order-vs-invoice-vs-estimate',
+    'contractor-invoice-example',
   ],
   'photography-contract-clauses': [
     'videography-contract-clauses',
+    'wedding-videography-contract',
     'freelance-payment-schedule-milestones',
-    'nda-basics-for-freelancers',
   ],
   'catering-quote-deposits': [
+    'catering-quotation-example',
     'wedding-vendor-contract-checklist',
     'invoice-vs-estimate',
-    'line-item-totals-explained',
   ],
   'tattoo-consent-documentation': [
     'what-to-include-on-a-receipt',
@@ -97,6 +107,7 @@ export const guideToGuides: Record<string, string[]> = {
     'nda-basics-for-freelancers',
   ],
   'invoice-vs-estimate': [
+    'how-to-write-a-business-estimate',
     'work-order-vs-invoice-vs-estimate',
     'line-item-totals-explained',
     'what-to-include-on-a-receipt',
@@ -107,8 +118,8 @@ export const guideToGuides: Record<string, string[]> = {
     'construction-estimate-that-wins-jobs',
   ],
   'freelance-payment-schedule-milestones': [
+    'freelance-web-design-contract-clauses',
     'nda-basics-for-freelancers',
-    'photography-contract-clauses',
     'invoice-vs-estimate',
   ],
   'what-to-include-on-a-receipt': [
@@ -122,42 +133,77 @@ export const guideToGuides: Record<string, string[]> = {
     'what-to-include-on-a-receipt',
   ],
   'nda-basics-for-freelancers': [
+    'freelance-web-design-contract-clauses',
     'freelance-payment-schedule-milestones',
-    'photography-contract-clauses',
   ],
   'work-order-vs-invoice-vs-estimate': [
+    'how-to-create-a-work-order',
     'invoice-vs-estimate',
-    'line-item-totals-explained',
-    'construction-estimate-that-wins-jobs',
+    'how-to-write-a-business-estimate',
   ],
   'videography-contract-clauses': [
+    'wedding-videography-contract',
     'photography-contract-clauses',
     'wedding-vendor-contract-checklist',
-    'freelance-payment-schedule-milestones',
   ],
   'wedding-vendor-contract-checklist': [
-    'catering-quote-deposits',
+    'wedding-videography-contract',
+    'catering-quotation-example',
     'videography-contract-clauses',
-    'photography-contract-clauses',
   ],
   'podcast-script-structure': ['real-estate-flyer-what-to-include'],
   'real-estate-flyer-what-to-include': ['podcast-script-structure'],
+  'how-to-write-a-business-estimate': [
+    'invoice-vs-estimate',
+    'construction-estimate-that-wins-jobs',
+    'line-item-totals-explained',
+  ],
+  'catering-quotation-example': [
+    'catering-quote-deposits',
+    'wedding-vendor-contract-checklist',
+    'line-item-totals-explained',
+  ],
+  'freelance-web-design-contract-clauses': [
+    'freelance-payment-schedule-milestones',
+    'nda-basics-for-freelancers',
+  ],
+  'how-to-create-a-work-order': [
+    'work-order-vs-invoice-vs-estimate',
+    'invoice-vs-estimate',
+    'contractor-invoice-example',
+  ],
+  'wedding-videography-contract': [
+    'videography-contract-clauses',
+    'wedding-vendor-contract-checklist',
+    'photography-contract-clauses',
+  ],
+  'contractor-invoice-example': [
+    'invoice-vs-estimate',
+    'construction-estimate-that-wins-jobs',
+    'what-to-include-on-a-receipt',
+  ],
 };
 
 /** Hub slug → guide slugs to feature on the hub page. */
 export const hubToGuides: Record<string, string[]> = {
   'estimates-invoices': [
+    'how-to-write-a-business-estimate',
     'invoice-vs-estimate',
     'line-item-totals-explained',
     'construction-estimate-that-wins-jobs',
+    'contractor-invoice-example',
     'what-to-include-on-a-receipt',
     'cleaning-invoice-rates-line-items',
+    'how-to-create-a-work-order',
     'work-order-vs-invoice-vs-estimate',
+    'catering-quotation-example',
     'catering-quote-deposits',
   ],
   contracts: [
+    'freelance-web-design-contract-clauses',
     'photography-contract-clauses',
     'videography-contract-clauses',
+    'wedding-videography-contract',
     'freelance-payment-schedule-milestones',
     'nda-basics-for-freelancers',
     'wedding-vendor-contract-checklist',

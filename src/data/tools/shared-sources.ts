@@ -71,15 +71,27 @@ export const copyrightPhotographers: SourceRef = {
 };
 
 export const ftcSmallBusinessScams: SourceRef = {
-  label: 'FTC — Scams and your small business',
-  url: 'https://www.ftc.gov/business-guidance/resources/scams-your-small-business-guide-business',
-  usedFor: 'contract red flags and avoiding blank or altered agreements',
+  label: 'FTC — Scams and Your Small Business (July 2023 PDF)',
+  url: 'https://search.ftc.gov/system/files/ftc_gov/pdf/908a_scams_and_your_small_business_july_2023_508.pdf',
+  usedFor: 'fake invoices, unordered merchandise, and verifying invoices before you pay',
 };
 
 export const ftcEndorsements: SourceRef = {
-  label: 'FTC — Endorsement guides (what people are asking)',
-  url: 'https://www.ftc.gov/business-guidance/resources/ftcs-endorsement-guides-what-people-are-asking',
-  usedFor: 'sponsor/disclosure expectations for podcast scripts',
+  label: '16 CFR Part 255 — Guides Concerning Use of Endorsements and Testimonials',
+  url: 'https://www.ecfr.gov/current/title-16/part-255',
+  usedFor: 'material-connection disclosures for sponsor reads and podcast endorsements',
+};
+
+export const irsWhatRecords: SourceRef = {
+  label: 'IRS — What kind of records should I keep',
+  url: 'https://www.irs.gov/businesses/small-businesses-self-employed/what-kind-of-records-should-i-keep',
+  usedFor: 'invoices, receipts, and receipt books as support for gross receipts',
+};
+
+export const irsHowLongRecords: SourceRef = {
+  label: 'IRS — How long should I keep records',
+  url: 'https://www.irs.gov/businesses/small-businesses-self-employed/how-long-should-i-keep-records',
+  usedFor: 'general 3-year income-tax retention; 4-year employment-tax records; 6 years if more than 25% of gross income was unreported',
 };
 
 export const cdcInfectionControl: SourceRef = {
@@ -106,7 +118,14 @@ export const hudFairHousing: SourceRef = {
   usedFor: 'fair-housing rules landlords and agents must follow',
 };
 
-export const estimateSources: SourceRef[] = [sbaMarketingSales, sbaBreakEven, irsRecordkeeping, sbaHome];
+export const estimateSources: SourceRef[] = [
+  sbaStayCompliant,
+  sbaBreakEven,
+  irsRecordkeeping,
+  irsWhatRecords,
+  irsHowLongRecords,
+  sbaHome,
+];
 
 export const contractSources: SourceRef[] = [
   liiContract,

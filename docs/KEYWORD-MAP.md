@@ -18,15 +18,15 @@
 | `/tools/work-order/` | work order | work order template, service work order form | long-tail |
 | `/tools/receipt-generator/` | receipt generator | payment receipt template, service receipt PDF | long-tail |
 | `/tools/quote-estimate-generator/` | free estimate generator | estimate generator free, quote estimate generator, business quote template | long-tail |
-| `/guides/construction-estimate-that-wins-jobs/` | how to write a construction estimate | construction estimate example | supports estimate tool |
+| `/guides/construction-estimate-that-wins-jobs/` | how to write a construction estimate | construction quote, construction estimate example | supports estimate tool |
 | `/guides/photography-contract-clauses/` | photography contract clauses | photography contract explained | supports photo contract |
 | `/guides/catering-quote-deposits/` | catering quote deposit | wedding catering pricing | supports catering quote |
 | `/guides/tattoo-consent-documentation/` | tattoo consent form requirements | tattoo waiver explained | supports consent tool |
 | `/guides/rental-application-fair-housing/` | rental application fair housing | what to ask on rental application | supports rental form |
-| `/guides/invoice-vs-estimate/` | invoice vs estimate | when to use estimate or invoice | differentiates estimate vs invoice tools |
-| `/guides/line-item-totals-explained/` | how line item totals work | estimate tax deposit math | supports all commercial generators |
+| `/guides/invoice-vs-estimate/` | invoice vs estimate | quote vs estimate, when to use estimate or invoice | differentiates estimate vs invoice tools |
+| `/guides/line-item-totals-explained/` | what is a line total | line item total, estimate tax deposit math | supports all commercial generators |
 | `/guides/freelance-payment-schedule-milestones/` | freelance payment schedule | web design contract milestones | supports freelance contract tool |
-| `/guides/what-to-include-on-a-receipt/` | how to write a receipt of payment | what to include on a receipt, payment receipt fields | receipt-generator, contractor-invoice |
+| `/guides/what-to-include-on-a-receipt/` | how to write a receipt of payment | payment receipt, PDF receipt | receipt-generator, contractor-invoice |
 | `/guides/cleaning-invoice-rates-line-items/` | cleaning invoice rates | cleaning line items | cleaning-service-invoice |
 | `/guides/nda-basics-for-freelancers/` | NDA basics for freelancers | mutual NDA explained | simple-nda, freelance-web-design-contract |
 | `/guides/work-order-vs-invoice-vs-estimate/` | work order vs invoice vs estimate | job ticket vs quote | work-order, quote-estimate-generator |
@@ -34,6 +34,12 @@
 | `/guides/wedding-vendor-contract-checklist/` | wedding vendor contract checklist | event vendor agreement checklist | event-wedding-vendor-contract, catering-quote |
 | `/guides/podcast-script-structure/` | podcast script structure | episode outline segments | podcast-script-template |
 | `/guides/real-estate-flyer-what-to-include/` | real estate flyer what to include | property flyer checklist | real-estate-flyer-template |
+| `/guides/how-to-write-a-business-estimate/` | how to write a business estimate | quote vs estimate, estimate validity | quote-estimate-generator |
+| `/guides/catering-quotation-example/` | catering quotation example | catering quote sample line items | catering-quote |
+| `/guides/freelance-web-design-contract-clauses/` | freelance web design contract clauses | scope IP revisions handover | freelance-web-design-contract |
+| `/guides/how-to-create-a-work-order/` | how to create a work order | how to write a work order | work-order |
+| `/guides/wedding-videography-contract/` | wedding videography contract | wedding video agreement deliverables | videography-contract |
+| `/guides/contractor-invoice-example/` | contractor invoice example | progress billing invoice | contractor-invoice |
 
 Cannibalization rule: head terms like “invoice template” (KD 43) are not targeted; each page keeps a distinct profession or document type. Guides answer “when/why/how”; tools own “free template / generator” intent.
 
