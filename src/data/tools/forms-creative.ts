@@ -73,12 +73,12 @@ export const tattooConsent: ToolDefinition = {
       },
       {
         heading: 'Hygiene and client education',
-        body: 'Studios should pair consent with sterile technique and clear aftercare. Point clients to reputable infection-control education (for example CDC infection-control resources) and your local body-art regulations.',
+        body: 'Studios should pair consent with sterile technique and clear aftercare. Follow your local health department body-art rules and any OSHA bloodborne-pathogens requirements that apply to your studio. Do not treat a general healthcare infection-control overview as a tattoo regulation.',
       },
     ],
     workedExample: {
       heading: 'Worked example',
-      body: 'The sample form captures a blackwork forearm session with ID verified and aftercare provided, plus editable risk and release acknowledgements the studio can tailor.',
+      body: 'The sample form captures a blackwork forearm session with ID verified and aftercare provided, plus editable risk and release acknowledgements the studio can tailor. Fill this free tattoo consent form template, then export PDF for wet-ink or e-sign.',
     },
     commonMistakes: [
       'Skipping ID verification documentation.',
@@ -87,7 +87,8 @@ export const tattooConsent: ToolDefinition = {
     ],
     tips: [
       'Store signed forms securely per privacy law; this site does not store them.',
-      'Not legal or medical advice—have counsel and your health department review your final form.',
+      'Not legal or medical advice. Have counsel and your health department review your final form.',
+      'Open the tattoo consent documentation guide for studio checklists, then generate the PDF here.',
     ],
     faq: [
       {
@@ -125,7 +126,7 @@ export const tattooConsent: ToolDefinition = {
   },
   relatedSlugs: ['simple-nda', 'photography-contract-template', 'receipt-generator'],
   publishedAt: '2026-10-19',
-  updatedAt: '2026-10-20',
+  updatedAt: '2026-11-13',
 };
 
 export const rentalApplication: ToolDefinition = {
@@ -323,12 +324,21 @@ export const podcastScript: ToolDefinition = {
       body: 'Episode 42 targets 28 minutes with a cold-open hook, three segments, a sponsor CTA, and blank show-notes lines for links—ready to hand a co-host.',
     },
     commonMistakes: ['No timed segments', 'CTA buried after the outro music'],
-    tips: ['Record cold open twice; pick the better energy in edit.'],
+    tips: [
+      'Record cold open twice; pick the better energy in edit.',
+      'Use this free podcast script template before you hit record so timed segments and sponsor reads stay visible.',
+      'Read the podcast script structure guide for a 28-minute interview outline, then export PDF from this page.',
+    ],
     faq: [
       {
         question: 'Should every podcast be fully scripted?',
         answer:
           'No. Use full scripts for solo storytelling; use run-of-show outlines for interviews so conversation stays natural.',
+      },
+      {
+        question: 'What is a podcast script template?',
+        answer:
+          'A podcast script template is a timed rundown for hook, intro, segments or interview questions, any sponsor read, and outro. Fill this free template in your browser and export PDF for the booth.',
       },
       {
         question: 'Do I need a word-for-word podcast script?',
@@ -355,7 +365,7 @@ export const podcastScript: ToolDefinition = {
   },
   relatedSlugs: ['real-estate-flyer-template', 'videography-contract', 'quote-estimate-generator'],
   publishedAt: '2026-10-19',
-  updatedAt: '2026-10-20',
+  updatedAt: '2026-11-13',
 };
 
 export const realEstateFlyer: ToolDefinition = {

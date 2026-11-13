@@ -2,6 +2,8 @@
 /**
  * Post-deploy IndexNow ping.
  * Reads built sitemap(s) from dist/, POSTs URL batches to api.indexnow.org.
+ * New or updated guide/tool URLs are included automatically once they appear
+ * in the Astro sitemap with per-URL lastmod from scripts/lib/content-dates.mjs.
  * Never fails the build/deploy: all errors are caught and the process exits 0.
  *
  * Usage:

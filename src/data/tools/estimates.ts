@@ -10,15 +10,16 @@ export const constructionEstimate: ToolDefinition = {
   primaryKeyword: 'construction estimate template',
   secondaryKeywords: [
     'free construction estimate template',
+    'construction quote generator',
     'contractor estimate form',
     'building estimate template PDF',
   ],
-  title: 'Free Construction Estimate Template (PDF)',
+  title: 'Free Construction Estimate & Quote Template (PDF)',
   metaDescription:
-    'Fill a free construction estimate template with line items, labor, materials and tax, preview it live, then download a PDF or Word file. No signup required.',
-  h1: 'Free Construction Estimate Template',
+    'Fill a free construction estimate or quote template with line items, labor, materials and tax, preview it live, then download PDF or Word. No signup.',
+  h1: 'Free Construction Estimate & Quote Template',
   answerFirst:
-    'A construction estimate template lists project scope, labor and material line items, allowances, tax, and a total so a contractor can present pricing before work starts. Use this free generator to fill those fields in your browser, preview the estimate, and export PDF or DOCX—nothing is uploaded.',
+    'A construction estimate or construction quote lists project scope, labor and material line items, allowances, tax, and a total so you can present pricing before work starts. Use this free generator to fill those fields in your browser, preview the document, and export PDF or DOCX. Nothing is uploaded.',
   applicationCategory: 'BusinessApplication',
   isLegalAdjacent: false,
   documentTitle: 'Construction Estimate',
@@ -75,8 +76,8 @@ export const constructionEstimate: ToolDefinition = {
     ],
     whatToInclude: [
       {
-        heading: 'What every construction estimate should include',
-        body: 'A clear estimate names the parties, job address, date and validity window, numbered line items (labor vs materials where helpful), tax, deposit terms, and written exclusions. Ambiguous “lump sum” lines without scope invite disputes—tie each line to work you described above.',
+        heading: 'What every construction estimate or quote should include',
+        body: 'A clear construction estimate or construction quote names the parties, job address, date and validity window, numbered line items (labor vs materials where helpful), tax, deposit terms, and written exclusions. Ambiguous “lump sum” lines without scope invite disputes. Tie each line to work you described above.',
       },
       {
         heading: 'Allowances and exclusions',
@@ -129,12 +130,17 @@ export const constructionEstimate: ToolDefinition = {
         answer:
           'Job address, dated scope with exclusions, measurable line items (labor vs materials), tax, deposit or draw schedule, validity window, and assumptions about access, permits, and owner-supplied items.',
       },
+      {
+        question: 'What should a construction quote generator include?',
+        answer:
+          'The same fields as a solid construction estimate: parties, job address, measurable scope, line items with units and rates, tax, deposit as your working pattern, a validity date, and exclusions. Whether you label the PDF “quote” or “estimate,” the math and scope clarity matter more than the title.',
+      },
     ],
     sources: estimateSources,
   },
   relatedSlugs: ['contractor-invoice', 'work-order', 'quote-estimate-generator'],
   publishedAt: '2026-10-19',
-  updatedAt: '2026-10-20',
+  updatedAt: '2026-11-13',
 };
 
 export const contractorInvoice: ToolDefinition = {
@@ -340,7 +346,11 @@ export const cleaningInvoice: ToolDefinition = {
       'Not listing exclusions, leading to “I thought windows were included.”',
       'Using one flat rate for vastly different home sizes.',
     ],
-    tips: ['Offer first-clean deep-clean pricing separately from maintenance cleans.'],
+    tips: [
+      'Offer first-clean deep-clean pricing separately from maintenance cleans.',
+      'Use this free cleaning service invoice template to match the same line labels on quote and invoice day.',
+      'Read the cleaning invoice rates guide for move-out and recurring examples, then return here to export PDF.',
+    ],
     faq: [
       {
         question: 'Should cleaning estimates include supplies?',
@@ -372,7 +382,7 @@ export const cleaningInvoice: ToolDefinition = {
   },
   relatedSlugs: ['quote-estimate-generator', 'receipt-generator', 'catering-quote'],
   publishedAt: '2026-10-19',
-  updatedAt: '2026-10-20',
+  updatedAt: '2026-11-13',
 };
 
 export const cateringQuote: ToolDefinition = {
@@ -501,7 +511,7 @@ export const quoteEstimate: ToolDefinition = {
     'Create a free estimate or quote with line items, tax, and a validity date. Live preview in your browser, then download PDF or DOCX—no signup.',
   h1: 'Free Estimate Generator (Quote or Proposal)',
   answerFirst:
-    'Create a free estimate (or quote) in your browser: parties, description, line items, tax, total, and how long the price holds. Preview live, then export PDF or DOCX—nothing is uploaded to a server.',
+    'This free estimate generator fills parties, job description, line items, tax, total, and a validity date in your browser. Label the PDF as a quote or estimate, preview live, then export PDF or DOCX. Nothing is uploaded to a server.',
   applicationCategory: 'BusinessApplication',
   isLegalAdjacent: false,
   documentTitle: 'Quote',
@@ -591,6 +601,16 @@ export const quoteEstimate: ToolDefinition = {
         answer:
           'A written acceptance (signature, e-sign, or clear email “approved”) plus a deposit is stronger than a verbal yes. Match your acceptance method to how you want the job to become a contract.',
       },
+      {
+        question: 'What is a free estimate generator?',
+        answer:
+          'A free estimate generator is a browser form that builds a priced quote or estimate PDF with line items, tax, and a validity date. This tool does that without an account and without uploading your entries to a server.',
+      },
+      {
+        question: 'How do I create an estimate or quote in the browser?',
+        answer:
+          'Choose Quote or Estimate, enter your business and client details, describe the job, add priced line items, set tax and a valid-until date, then preview and export PDF or DOCX. For a full walkthrough, see the how to write a business estimate guide.',
+      },
     ],
     sources: estimateSources,
   },
@@ -664,7 +684,11 @@ export const receiptGenerator: ToolDefinition = {
     whatToInclude: [
       {
         heading: 'How to fill out a receipt of payment',
-        body: 'Record who paid whom, the unique receipt number and date, an invoice or job reference when one exists, a short description of goods/services, tax if shown, amount paid, payment method, and remaining balance if the payment was partial. Those seven fields are what most customer accounting teams expect.',
+        body: 'Record who paid whom, the unique receipt number and date, an invoice or job reference when one exists, a short description of goods/services, tax if shown, amount paid, payment method, and remaining balance if the payment was partial. Those fields are what most customer accounting teams expect on a receipt of payment.',
+      },
+      {
+        heading: 'PDF receipt export',
+        body: 'Export a PDF receipt from this page after you preview the totals. Keep the PDF with the related invoice in your books. The IRS lists receipts and receipt books among supporting documents for gross receipts.',
       },
       {
         heading: 'Partial payments and paid-in-full',
@@ -709,7 +733,17 @@ export const receiptGenerator: ToolDefinition = {
       {
         question: 'Can I add a paid watermark or use this for thermal printers?',
         answer:
-          'Export the PDF and add a “Paid” stamp in your PDF viewer or print workflow if you want a watermark. Thermal printers need a narrow layout—use the PDF as a record and reprint on thermal stock from your POS if required.',
+          'Export the PDF and add a “Paid” stamp in your PDF viewer or print workflow if you want a watermark. Thermal printers need a narrow layout. Use the PDF as a record and reprint on thermal stock from your POS if required.',
+      },
+      {
+        question: 'How do I generate a receipt of payment?',
+        answer:
+          'Enter your business name, the payer, a unique receipt number, the date, what was paid for, amount paid, and payment method. Add an invoice reference when the payment applies to a prior bill. Preview, then export a PDF receipt for your books and the customer.',
+      },
+      {
+        question: 'Can I export a PDF payment receipt?',
+        answer:
+          'Yes. This generator creates a PDF (and DOCX) payment receipt in your browser. File the PDF with the related invoice. The IRS lists receipts among supporting documents for gross receipts.',
       },
     ],
     sources: estimateSources,
