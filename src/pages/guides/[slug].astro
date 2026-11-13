@@ -76,7 +76,9 @@ const pageTitle = guide.title;
     {related[0] && (
       <p class="guide-cta">
         <a href={`/tools/${related[0]!.slug}/`}>
-          Use the free {related[0]!.shortName.toLowerCase()} template to apply this →
+          Open the free {related[0]!.name.toLowerCase().includes('template')
+            ? related[0]!.name
+            : `${related[0]!.name} template`} →
         </a>
       </p>
     )}

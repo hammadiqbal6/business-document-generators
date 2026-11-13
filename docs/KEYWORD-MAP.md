@@ -17,7 +17,7 @@
 | `/tools/simple-nda/` | simple NDA | NDA template free, mutual NDA generator | long-tail |
 | `/tools/work-order/` | work order | work order template, service work order form | long-tail |
 | `/tools/receipt-generator/` | receipt generator | payment receipt template, service receipt PDF | long-tail |
-| `/tools/quote-estimate-generator/` | free estimate generator | estimate generator free, quote estimate generator, business quote template | long-tail |
+| `/tools/quote-estimate-generator/` | free estimate generator | estimate generator free, quote estimate generator, free quote generator | long-tail |
 | `/guides/construction-estimate-that-wins-jobs/` | how to write a construction estimate | construction quote, construction estimate example | supports estimate tool |
 | `/guides/photography-contract-clauses/` | photography contract clauses | photography contract explained | supports photo contract |
 | `/guides/catering-quote-deposits/` | catering quote deposit | wedding catering pricing | supports catering quote |

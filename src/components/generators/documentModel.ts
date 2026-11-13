@@ -138,34 +138,41 @@ function buildCommercialDoc(
   ].filter((p) => p.value);
   blocks.push({ type: 'kv', pairs: companyPairs });
 
+  const metaLabels: Record<string, string> = {
+    estimateNumber: 'Estimate #',
+    invoiceNumber: 'Invoice #',
+    docNumber: 'Document #',
+    quoteNumber: 'Quote #',
+    receiptNumber: 'Receipt #',
+    invoiceRef: 'Invoice / reference #',
+    woNumber: 'Work order #',
+    estimateDate: 'Estimate date',
+    invoiceDate: 'Invoice date',
+    docDate: 'Date',
+    quoteDate: 'Quote date',
+    receiptDate: 'Receipt date',
+    woDate: 'Work order date',
+    dueDate: 'Due date',
+    validUntil: 'Valid until',
+    poNumber: 'PO / job #',
+    priority: 'Priority',
+    frequency: 'Frequency',
+    serviceDate: 'Service date',
+    eventDate: 'Event date',
+    guestCount: 'Guest count',
+    paymentMethod: 'Payment method',
+    amountPaid: 'Amount paid',
+    balanceRemaining: 'Balance remaining',
+  };
   const meta: { label: string; value: string }[] = [];
-  for (const key of [
-    'estimateNumber',
-    'invoiceNumber',
-    'docNumber',
-    'quoteNumber',
-    'receiptNumber',
-    'invoiceRef',
-    'woNumber',
-    'estimateDate',
-    'invoiceDate',
-    'docDate',
-    'quoteDate',
-    'receiptDate',
-    'woDate',
-    'dueDate',
-    'validUntil',
-    'poNumber',
-    'priority',
-    'frequency',
-    'serviceDate',
-    'eventDate',
-    'guestCount',
-    'paymentMethod',
-  ]) {
-    if (values[key] != null && str(values[key])) {
+  for (const key of Object.keys(metaLabels)) {
+    if (values[key] != null && str(values[key]) !== '') {
+      // Amount paid / balance remaining are rendered with currency formatting below for receipts.
+      if (tool.slug === 'receipt-generator' && (key === 'amountPaid' || key === 'balanceRemaining')) {
+        continue;
+      }
       meta.push({
-        label: key.replace(/([A-Z])/g, ' $1').replace(/^./, (c) => c.toUpperCase()),
+        label: metaLabels[key],
         value: str(values[key]),
       });
     }

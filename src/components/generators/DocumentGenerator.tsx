@@ -3,8 +3,13 @@ import type { ClauseItem, FieldDef, LineItem, ToolDefinition } from '../../data/
 import { emptyLineItem } from '../../data/tools/line-item-defaults';
 import { validateForm } from '../../lib/validation';
 import { trackEvent } from '../../lib/analytics';
+import { withTodayDateDefaults } from '../../lib/todayDefaults';
 import { buildDocumentBlocks } from './documentModel';
 import './generator.css';
+
+function freshDefaults(tool: ToolDefinition): Record<string, unknown> {
+  return withTodayDateDefaults(tool.fields, tool.defaults);
+}
 
 interface Props {
   tool: ToolDefinition;
@@ -37,7 +42,7 @@ function deserializeState(raw: string | null): Record<string, unknown> | null {
 }
 
 export default function DocumentGenerator({ tool, embed = false }: Props) {
-  const [values, setValues] = useState<Record<string, unknown>>(() => ({ ...tool.defaults }));
+  const [values, setValues] = useState<Record<string, unknown>>(() => freshDefaults(tool));
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [status, setStatus] = useState('');
   const [exporting, setExporting] = useState<'pdf' | 'docx' | null>(null);
@@ -50,23 +55,26 @@ export default function DocumentGenerator({ tool, embed = false }: Props) {
 
   useEffect(() => {
     if (typeof window === 'undefined') return;
+    const base = freshDefaults(tool);
     const params = new URLSearchParams(window.location.search);
     const fromQuery = deserializeState(params.get('d'));
     if (fromQuery) {
-      setValues({ ...tool.defaults, ...fromQuery });
+      setValues({ ...base, ...fromQuery });
       return;
     }
     try {
       const raw = localStorage.getItem(storageKey(tool.slug));
       if (raw) {
         const parsed = JSON.parse(raw) as Record<string, unknown>;
-        setValues({ ...tool.defaults, ...parsed });
+        setValues({ ...base, ...parsed });
         setStatus('Draft restored from this browser.');
+        return;
       }
     } catch {
       /* ignore */
     }
-  }, [tool.slug, tool.defaults]);
+    setValues(base);
+  }, [tool.slug, tool.defaults, tool.fields]);
 
   const blocks = useMemo(() => buildDocumentBlocks(tool, values), [tool, values]);
 
@@ -103,8 +111,8 @@ export default function DocumentGenerator({ tool, embed = false }: Props) {
 
   function clearLocal() {
     localStorage.removeItem(storageKey(tool.slug));
-    setValues({ ...tool.defaults });
-    setStatus('Draft cleared; sample defaults restored.');
+    setValues(freshDefaults(tool));
+    setStatus('Draft cleared; sample defaults restored with today’s dates.');
   }
 
   function shareUrl() {

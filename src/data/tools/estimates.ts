@@ -501,27 +501,33 @@ export const cateringQuote: ToolDefinition = {
 
 export const quoteEstimate: ToolDefinition = {
   slug: 'quote-estimate-generator',
-  name: 'Quote / Estimate Generator',
-  shortName: 'Quote / Estimate',
+  name: 'Free Estimate Generator',
+  shortName: 'Free Estimate',
   category: 'estimates-invoices',
   primaryKeyword: 'free estimate generator',
-  secondaryKeywords: ['estimate generator free', 'quote estimate generator', 'business quote template', 'service estimate PDF'],
-  title: 'Free Estimate Generator (Quote & PDF)',
+  secondaryKeywords: [
+    'estimate generator free',
+    'quote estimate generator',
+    'business quote template',
+    'service estimate PDF',
+    'free quote generator',
+  ],
+  title: 'Free Estimate Generator – Quote & PDF',
   metaDescription:
-    'Create a free estimate or quote with line items, tax, and a validity date. Live preview in your browser, then download PDF or DOCX—no signup.',
-  h1: 'Free Estimate Generator (Quote or Proposal)',
+    'Use this free estimate generator to price a job with line items, tax, and a validity date. Live preview, then download PDF or DOCX—no signup.',
+  h1: 'Free Estimate Generator',
   answerFirst:
-    'This free estimate generator fills parties, job description, line items, tax, total, and a validity date in your browser. Label the PDF as a quote or estimate, preview live, then export PDF or DOCX. Nothing is uploaded to a server.',
+    'A free estimate generator builds a priced estimate (or quote) in your browser: parties, job description, line items, tax, total, and how long the price holds. Preview live, then export PDF or DOCX. Nothing is uploaded to a server.',
   applicationCategory: 'BusinessApplication',
   isLegalAdjacent: false,
-  documentTitle: 'Quote',
-  toolVersion: '1.0',
+  documentTitle: 'Estimate',
+  toolVersion: '1.1',
   formulaNote:
     "Each line is quantity × rate. Subtotal sums lines; tax = subtotal × (tax rate ÷ 100). Validity date is informational.",
   fields: [
     { id: 'docLabel', label: 'Label', type: 'select', section: 'Document', options: [
-      { value: 'Quote', label: 'Quote' },
       { value: 'Estimate', label: 'Estimate' },
+      { value: 'Quote', label: 'Quote' },
       { value: 'Proposal', label: 'Proposal' },
     ]},
     { id: 'companyName', label: 'Business name', type: 'text', required: true, section: 'Business' },
@@ -539,11 +545,11 @@ export const quoteEstimate: ToolDefinition = {
     { id: 'notes', label: 'Notes', type: 'textarea', rows: 2, section: 'Notes' },
   ],
   defaults: {
-    docLabel: 'Quote',
+    docLabel: 'Estimate',
     companyName: 'Northwind Services',
     companyEmail: 'hello@northwind.example',
     companyPhone: '(312) 555-0108',
-    docNumber: 'Q-901',
+    docNumber: 'E-901',
     docDate: '2026-10-19',
     validUntil: '2026-11-02',
     clientName: 'Taylor Brooks',
@@ -559,22 +565,27 @@ export const quoteEstimate: ToolDefinition = {
   },
   content: {
     howToUse: [
-      'Pick Quote, Estimate, or Proposal.',
-      'Describe the job and add priced lines.',
-      'Set validity and export.',
+      'Choose Estimate or Quote as the document label.',
+      'Enter your business and client details, then describe the job.',
+      'Add priced line items, set tax and a valid-until date, and preview the totals.',
+      'Export PDF or DOCX, or save a draft in this browser with localStorage.',
     ],
     whatToInclude: [
+      {
+        heading: 'What a free estimate generator should fill in',
+        body: 'Parties, a measurable job description, line items with quantity × rate, tax if you collect it, a grand total, and a validity date. Switch the label to Quote when your industry expects that word—the math stays the same.',
+      },
       {
         heading: 'Quote vs estimate',
         body: 'Quotes are often firmer offers; estimates signal approximate cost. Label the document the way your industry expects and say whether totals may change after discovery.',
       },
     ],
     workedExample: {
-      heading: 'Worked example',
-      body: 'Sample quote Q-901 prices a half-day assessment at $450 plus four hours of documentation at $95/hr for a $830 pre-tax total, valid 14 days.',
+      heading: 'Worked example: free estimate generator',
+      body: 'Sample estimate E-901 prices a half-day assessment at $450 plus four hours of documentation at $95/hr for an $830 pre-tax total, valid 14 days. Change the label to Quote if that is what your client expects.',
     },
     commonMistakes: ['No validity date', 'Scope that cannot be measured'],
-    tips: ['Number every quote and archive the exported file.'],
+    tips: ['Number every estimate and archive the exported file.', 'Reuse the same lines later in the contractor invoice tool.'],
     faq: [
       {
         question: 'Can I turn this quote into an invoice later?',
@@ -643,7 +654,13 @@ export const receiptGenerator: ToolDefinition = {
     { id: 'companyAddress', label: 'Address', type: 'textarea', rows: 2, section: 'Business' },
     { id: 'receiptNumber', label: 'Receipt #', type: 'text', required: true, section: 'Receipt' },
     { id: 'receiptDate', label: 'Date', type: 'date', required: true, section: 'Receipt' },
-    { id: 'invoiceRef', label: 'Invoice / reference #', type: 'text', section: 'Receipt' },
+    {
+      id: 'invoiceRef',
+      label: 'Invoice / reference #',
+      type: 'text',
+      section: 'Receipt',
+      help: 'Link this receipt of payment to the invoice or estimate it pays (for example INV-1042).',
+    },
     { id: 'clientName', label: 'Received from', type: 'text', required: true, section: 'Payment' },
     { id: 'paymentMethod', label: 'Payment method', type: 'select', section: 'Payment', options: [
       { value: 'Cash', label: 'Cash' },
@@ -655,7 +672,15 @@ export const receiptGenerator: ToolDefinition = {
     { id: 'lineItems', label: 'Items', type: 'lineItems', required: true, section: 'Items' },
     { id: 'taxRate', label: 'Tax rate (%)', type: 'number', inputMode: 'decimal', min: 0, max: 100, step: 0.01, section: 'Items' },
     { id: 'amountPaid', label: 'Amount paid', type: 'currency', inputMode: 'decimal', min: 0, required: true, section: 'Payment' },
-    { id: 'balanceRemaining', label: 'Balance remaining', type: 'currency', inputMode: 'decimal', min: 0, section: 'Payment' },
+    {
+      id: 'balanceRemaining',
+      label: 'Balance remaining',
+      type: 'currency',
+      inputMode: 'decimal',
+      min: 0,
+      section: 'Payment',
+      help: 'For deposits or partial payments, enter what is still owed. Use 0 when paid in full.',
+    },
     { id: 'notes', label: 'Notes', type: 'textarea', rows: 2, section: 'Notes' },
   ],
   defaults: {
@@ -672,32 +697,36 @@ export const receiptGenerator: ToolDefinition = {
     taxRate: 0,
     amountPaid: 800,
     balanceRemaining: 0,
-    notes: 'Paid in full. Thank you.',
+    notes: 'Paid in full toward invoice INV-1042. Thank you.',
   },
   content: {
     howToUse: [
-      'Enter business name, receipt number, date, and the payer (“received from”).',
-      'Add an invoice/reference number when the payment applies to a prior bill.',
-      'Itemize what was paid for, confirm amount paid and method, and note any remaining balance.',
-      'Preview the receipt, then export PDF or DOCX for your books and the customer.',
+      'Enter your business name, a unique receipt number, and the payment date.',
+      'Add the Invoice / reference # that this receipt of payment applies to (for example INV-1042).',
+      'Name who paid, choose the payment method, and itemize what was covered.',
+      'Enter Amount paid and Balance remaining (0 if paid in full), preview, then export PDF or DOCX.',
     ],
     whatToInclude: [
       {
-        heading: 'How to fill out a receipt of payment',
-        body: 'Record who paid whom, the unique receipt number and date, an invoice or job reference when one exists, a short description of goods/services, tax if shown, amount paid, payment method, and remaining balance if the payment was partial. Those fields are what most customer accounting teams expect on a receipt of payment.',
+        heading: 'How to write a receipt of payment',
+        body: 'Show who paid whom, the date, a unique receipt number, the amount, the payment method, and what it covers. If the payment pays an invoice, fill Invoice / reference # so both documents link. Example: $1,200 by card toward invoice 1047, tax shown on the invoice lines, balance remaining if anything is still owed. Keep a PDF copy with your income records.',
+      },
+      {
+        heading: 'How to fill out a receipt of payment in this form',
+        body: 'Use Business name and Received from for the parties. Receipt # and Date identify the payment event. Invoice / reference # points at the prior bill. Items describe what was paid for. Amount paid is cash received; Balance remaining is what is still due after this payment (use 0 and “paid in full” in Notes when the job is settled).',
       },
       {
         heading: 'PDF receipt export',
-        body: 'Export a PDF receipt from this page after you preview the totals. Keep the PDF with the related invoice in your books. The IRS lists receipts and receipt books among supporting documents for gross receipts.',
+        body: 'Export a PDF receipt after you preview the totals. File it with the related invoice. The IRS lists receipts and receipt books among supporting documents for gross receipts.',
       },
       {
         heading: 'Partial payments and paid-in-full',
-        body: 'When the payer covers only a deposit, put the cash received in Amount paid and the still-owed figure in Balance remaining (and say so in Notes). When the job is settled, set balance remaining to zero and note “paid in full” so the PDF stands alone as proof of payment.',
+        body: 'When the payer covers only a deposit, put cash received in Amount paid and the still-owed figure in Balance remaining (and say so in Notes). When settled, set balance remaining to 0 so the PDF stands alone as proof of payment.',
       },
     ],
     workedExample: {
-      heading: 'Worked example: receipt of payment',
-      body: 'Northwind issues receipt RCPT-551 on 13 Nov 2026 to Taylor Brooks for $800 by card against invoice INV-1042 (October consulting retainer). Line items total $800, tax 0%, amount paid $800, balance remaining $0, notes “Paid in full.” Export the PDF and file it with the invoice for bookkeeping.',
+      heading: 'Worked example: how to fill out a receipt of payment',
+      body: 'Northwind issues receipt RCPT-551 to Taylor Brooks for $800 by card against Invoice / reference # INV-1042 (October consulting retainer). Line items total $800, tax 0%, amount paid $800, balance remaining $0, notes “Paid in full toward invoice INV-1042.” Export the PDF and file it with the invoice. For a $2,000 job with a $500 deposit, amount paid would be $500 and balance remaining $1,500 with the same invoice reference.',
     },
     commonMistakes: [
       'No receipt number',

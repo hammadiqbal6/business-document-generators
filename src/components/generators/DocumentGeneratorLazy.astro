@@ -1,5 +1,6 @@
 ---
 import type { FieldDef, ToolDefinition } from '../../data/tools/types';
+import { withTodayDateDefaults } from '../../lib/todayDefaults';
 import './generator.css';
 
 interface Props {
@@ -13,7 +14,10 @@ interface Props {
 }
 
 const { tool, embed = false, autoOpen = false } = Astro.props;
-const toolJson = JSON.stringify(tool);
+/** Editor/sample dates resolve to today when the island mounts; shell uses the same map. */
+const liveDefaults = withTodayDateDefaults(tool.fields, tool.defaults);
+const toolForClient = { ...tool, defaults: liveDefaults };
+const toolJson = JSON.stringify(toolForClient);
 
 const simpleTypes = new Set([
   'text',
@@ -26,11 +30,42 @@ const simpleTypes = new Set([
   'select',
 ]);
 
-/** First few simple fields for the static answer-first shell. */
-const shellFields: FieldDef[] = tool.fields.filter((f) => simpleTypes.has(f.type)).slice(0, 4);
+/** Prefer receipt invoice ref + balance (and similar money fields) in the above-the-fold shell. */
+const SHELL_PRIORITY: Record<string, string[]> = {
+  'receipt-generator': [
+    'companyName',
+    'receiptNumber',
+    'receiptDate',
+    'invoiceRef',
+    'clientName',
+    'amountPaid',
+    'balanceRemaining',
+  ],
+  'quote-estimate-generator': ['companyName', 'docLabel', 'docNumber', 'docDate', 'validUntil', 'clientName'],
+};
+
+function pickShellFields(t: ToolDefinition): FieldDef[] {
+  const simple = t.fields.filter((f) => simpleTypes.has(f.type));
+  const preferred = SHELL_PRIORITY[t.slug];
+  if (!preferred?.length) return simple.slice(0, 4);
+  const byId = new Map(simple.map((f) => [f.id, f]));
+  const picked: FieldDef[] = [];
+  for (const id of preferred) {
+    const f = byId.get(id);
+    if (f) picked.push(f);
+    if (picked.length >= 5) break;
+  }
+  for (const f of simple) {
+    if (picked.length >= 5) break;
+    if (!picked.some((p) => p.id === f.id)) picked.push(f);
+  }
+  return picked;
+}
+
+const shellFields: FieldDef[] = pickShellFields(tool);
 
 function shellValue(field: FieldDef): string {
-  const d = tool.defaults[field.id];
+  const d = liveDefaults[field.id];
   if (d == null || typeof d === 'object') return '';
   return String(d);
 }
@@ -174,7 +209,7 @@ function shellValue(field: FieldDef): string {
       }
       try {
         const tool = JSON.parse(root.dataset.tool || '{}');
-        // Carry shell field values into the React mount via a temporary query-less handoff on the root.
+        // Carry shell field values into the React mount (defaults already shifted to today).
         const seeded = { ...(tool.defaults || {}) };
         root.querySelectorAll('[data-shell-field]').forEach((el) => {
           const name = el.getAttribute('name');
