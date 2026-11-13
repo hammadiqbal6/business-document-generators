@@ -1,0 +1,16 @@
+---
+description: Consent Mode, regional CMP, and CSP allowlist discipline
+globs: public/_headers,src/components/seo/**,src/layouts/**,src/lib/consentRegions.ts,src/worker.ts,src/pages/privacy.astro,src/pages/cookies.astro
+---
+# Consent and CSP
+
+## Consent
+
+- Consent Mode v2 defaults are **denied** (`ad_storage`, `ad_user_data`, `ad_personalization`, `analytics_storage`) in `Analytics.astro`.
+- EEA / UK (`GB`) / CH: Google AdSense Privacy & messaging (Funding Choices / IAB TCF) is the CMP. Worker sets `window.__docuklinGeo` via `consentRegions.ts`; hide the site cookie bar there when ads are enabled.
+- Other regions: site Accept/Reject banner. Do not invent a second CMP stack.
+
+## CSP (`public/_headers`)
+
+- Keep the allowlist tight. Add hosts only for documented vendor needs + a real console violation.
+- Required today: GA4, AdSense + `fundingchoicesmessages.google.com`, Cloudflare Web Analytics, EmailJS (`api.emailjs.com` + jsDelivr SDK). See comments in `_headers` and `AGENTS.md`.
