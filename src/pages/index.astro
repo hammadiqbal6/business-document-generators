@@ -2,20 +2,20 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import AdSlot from '../components/ads/AdSlot.astro';
 import { siteConfig } from '../config/site';
-import { allTools, CATEGORY_META } from '../data/tools';
+import { CATEGORY_META, getFeaturedTools } from '../data/tools';
 import type { ToolCategory } from '../data/tools/types';
 import { homeGraphJsonLd } from '../lib/seo';
 
-const featured = allTools.slice(0, 6);
+const featured = getFeaturedTools();
 const cats = Object.keys(CATEGORY_META) as ToolCategory[];
 ---
 <BaseLayout
-  title="Free Invoice, Estimate & Contract Templates (PDF/DOCX)"
+  title="Free Invoice, Estimate & Contract Templates"
   description="Fill free estimate, invoice, contract and consent form templates in your browser, preview them live and download PDF or Word. No signup, nothing uploaded."
   path="/"
   includeSiteGraph={false}
   jsonLd={[homeGraphJsonLd()]}
-  ogImagePath="/og/home.svg"
+  ogImagePath="/og/home.png"
   ogImageAlt={`${siteConfig.siteName} — free invoice, estimate, and contract templates`}
 >
   <section class="hero">

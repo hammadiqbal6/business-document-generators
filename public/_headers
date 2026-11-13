@@ -4,12 +4,7 @@
   Referrer-Policy: strict-origin-when-cross-origin
   Permissions-Policy: camera=(), microphone=(), geolocation=()
   Strict-Transport-Security: max-age=31536000; includeSubDomains; preload
-  # No script-src / connect-src CSP here so GA4 (PUBLIC_GA4_MEASUREMENT_ID) and AdSense keep working.
-  # If you add CSP, allow:
-  #   script-src: https://www.googletagmanager.com https://www.google-analytics.com
-  #   (and AdSense hosts when PUBLIC_ADS_ENABLED=true)
-  #   connect-src: 'self' https://api.emailjs.com https://www.google-analytics.com
-  #     (EmailJS form on /contact/ — see docs/CONTACT-EMAILJS.md)
+  Content-Security-Policy: default-src 'self'; base-uri 'self'; object-src 'none'; frame-ancestors 'self'; img-src 'self' data: https: blob:; font-src 'self' data:; style-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://www.google.com; script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://www.google-analytics.com https://www.google.com https://pagead2.googlesyndication.com https://www.googlesyndication.com https://ep2.adtrafficquality.google https://fundingchoicesmessages.google.com https://cdn.jsdelivr.net; connect-src 'self' https://www.google-analytics.com https://region1.google-analytics.com https://www.googletagmanager.com https://api.emailjs.com https://pagead2.googlesyndication.com https://www.google.com https://ep1.adtrafficquality.google https://ep2.adtrafficquality.google; frame-src 'self' https://www.google.com https://googleads.g.doubleclick.net https://tpc.googlesyndication.com https://www.googletagmanager.com; worker-src 'self' blob:
 
 # Hashed Astro build assets — immutable long cache
 /_astro/*
@@ -56,6 +51,15 @@
 
 /llms.txt
   Cache-Control: public, max-age=3600
+
+/llms-full.txt
+  Cache-Control: public, max-age=3600
+
+/.well-known/llms.txt
+  Cache-Control: public, max-age=3600
+
+/.well-known/security.txt
+  Cache-Control: public, max-age=86400
 
 # Embeddable tool widgets must be iframe-able.
 # Workers allow one splat (*) per rule; :slug matches one path segment.

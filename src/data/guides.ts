@@ -14,6 +14,8 @@ export interface Guide {
   relatedToolSlugs: string[];
   relatedGuideSlugs?: string[];
   legalNote?: string;
+  /** Optional HowTo steps when the guide is procedural (must match on-page content). */
+  howTo?: string[];
   sections: GuideSection[];
   faq: { question: string; answer: string }[];
 }
@@ -25,7 +27,7 @@ export const guides: Guide[] = [
     "metaDescription": "Checklist of what to include in a construction estimate—scope, line items, tax, deposits, validity—plus a worked example and free template generator.",
     "answerFirst": "Include at least 8 checklist items in a construction estimate: dated header, measurable scope, labor vs materials, allowances, tax, deposit, validity window, and exclusions. Tie every major line to written scope so clients can compare bids and you can defend the number when selections change.",
     "publishedAt": "2026-10-19",
-    "updatedAt": "2026-10-23",
+    "updatedAt": "2026-11-13",
     "relatedToolSlugs": [
       "construction-estimate-template",
       "contractor-invoice",
@@ -36,17 +38,23 @@ export const guides: Guide[] = [
       "invoice-vs-estimate",
       "work-order-vs-invoice-vs-estimate"
     ],
-    "sections": [
+        "howTo": [
+      "Describe measurable scope before you price the job.",
+      "Structure line items with units, quantities, and rates clients can compare.",
+      "State validity, deposits, exclusions, and change-order rules.",
+      "Present a clear PDF and convert accepted lines into invoices when you bill."
+    ],
+"sections": [
       {
-        "heading": "Start with scope, not price",
+        "heading": "What should you write before you price a construction estimate?",
         "body": "Before you type a dollar amount, describe what you will demolish, install, haul away, protect, and leave behind. List rooms, surfaces, fixtures, and finishes with enough detail that another contractor could price the same job. Vague scopes force clients to guess what is included, and they often choose the lowest number that may omit critical steps.\n\nTie every major line item to a sentence in the scope section. If the estimate says install luxury vinyl plank flooring, the scope should name rooms, square footage source, subfloor prep limits, and whether baseboards are removed and reset. When site conditions are unknown, say so and reserve a line for discovery or a written change-order process."
       },
       {
-        "heading": "Line-item structure clients trust",
+        "heading": "How should construction estimate line items be structured?",
         "body": "Group demolition, materials, labor, equipment, permits, and allowances so the client sees where money goes. Show units on every line: square feet, linear feet, hours, or lump sum when the package is fixed. The U.S. Small Business Administration encourages transparent pricing when small businesses evaluate vendors; clarity reduces haggling on hidden markup.\n\nSeparate labor and materials when tax treatment or client comparison benefits. Call out owner-supplied items, excluded work such as electrical by others, and warranty length. A short assumptions block covering working hours, access, parking, and debris path prevents I thought you included that conversations after demo starts."
       },
       {
-        "heading": "Validity, deposits, and change orders",
+        "heading": "How do validity, deposits, and change orders work on estimates?",
         "body": "State how long the price holds, often fourteen to thirty days on residential remodels and shorter when lumber or steel prices move quickly. Note that concealed conditions, code upgrades, or client selections may require written change orders with revised totals.\n\nPhotograph existing conditions before you price. Document moisture, rot, out-of-level floors, and panel schedules. Deposits tied to material orders should appear on the estimate with the percentage and what triggers the next draw. Pair large jobs with a work order or signed contract that references the estimate line items."
       },
       {
@@ -135,11 +143,11 @@ export const guides: Guide[] = [
   },
   {
     "slug": "photography-contract-clauses",
-    "title": "Photography Contract Clauses Explained (Editable Template)",
+    "title": "Photography Contract Clauses Explained",
     "metaDescription": "Understand retainer, cancellation, copyright, and usage clauses in photography contracts. Not legal advice—use our free editable template as a starting point.",
     "answerFirst": "Most photography contracts need 6 core clauses: scope (date, hours, locations), payment and retainer, deliverables and timeline, image usage/license, cancellation, and liability limits. Add model releases when recognizable people appear outside the paying client.",
     "publishedAt": "2026-10-19",
-    "updatedAt": "2026-10-23",
+    "updatedAt": "2026-11-13",
     "relatedToolSlugs": [
       "photography-contract-template",
       "videography-contract",
@@ -151,13 +159,19 @@ export const guides: Guide[] = [
       "nda-basics-for-freelancers"
     ],
     "legalNote": "This article is not legal advice. Contract requirements vary by state and session type. Use our template as a starting point and have a licensed attorney review your final agreement.",
-    "sections": [
+        "howTo": [
+      "Name the parties, session date, locations, and countable deliverables.",
+      "Spell out retainer, balance due dates, and cancellation terms.",
+      "Define image usage or license rights for the client and photographer.",
+      "Add liability limits and model-release notes when recognizable people appear."
+    ],
+"sections": [
       {
-        "heading": "Parties, scope, and deliverables",
+        "heading": "What parties, scope, and deliverables belong in a photography contract?",
         "body": "Open with who is hiring whom, the event or session date, start time, primary location, and backup weather plan for outdoor work. Define deliverables in countable terms: number of edited images, album pages, or hours of coverage. List what is excluded, such as raw files, rush editing, or travel beyond a stated radius.\n\nSecond shooters, assistants, and studio rental should appear in scope if clients expect them included. If the client receives a gallery link, note how long the gallery stays live and whether downloads are permitted.\n\nCorporate headshot days need a shot list and turnaround for retouching batches. Wedding contracts should name getting-ready coverage end time and reception end time so open-bar overtime is priced before the event."
       },
       {
-        "heading": "Retainer vs balance",
+        "heading": "How should retainer and balance payments be written?",
         "body": "The retainer reserves the date and compensates scheduling risk. State the retainer amount, when it is due, and whether it is applied to the total fee. Spell out when the balance is due, often one to two weeks before a wedding or on delivery day for portraits.\n\nLate payment language can pause editing or withhold gallery access; have an attorney tune enforcement wording. Acceptable payment methods and who pays processor fees belong in the same section so bookkeeping stays simple."
       },
       {
@@ -387,7 +401,7 @@ export const guides: Guide[] = [
     "metaDescription": "Health acknowledgements, ID verification, design approval, and aftercare on tattoo consent forms. Free template—not legal or medical advice.",
     "answerFirst": "A complete tattoo consent record usually needs 6 elements: client identity and age verification, design and placement, risk acknowledgements, aftercare receipt, health disclosures, and signatures—with retention per your state health rules. This is documentation, not legal or medical advice.",
     "publishedAt": "2026-10-19",
-    "updatedAt": "2026-10-23",
+    "updatedAt": "2026-11-13",
     "relatedToolSlugs": [
       "tattoo-consent-form-template",
       "receipt-generator"
@@ -397,21 +411,28 @@ export const guides: Guide[] = [
       "nda-basics-for-freelancers"
     ],
     "legalNote": "This article is not legal or medical advice. Tattoo studios must follow state and local body-art regulations and infection-control standards. Have qualified counsel and your health department requirements guide your actual forms and policies.",
-    "sections": [
+        "howTo": [
+      "Verify government photo ID and record age eligibility per local rules.",
+      "Collect health disclosures (allergies, medications, contraindications).",
+      "Document approved design, placement, size, and any portfolio photo consent.",
+      "Explain risks and provide written aftercare; have the client acknowledge receipt.",
+      "Collect signatures and store the form per your retention policy."
+    ],
+"sections": [
       {
-        "heading": "ID and age verification",
+        "heading": "How should studios verify ID and age on a tattoo consent form?",
         "body": "Document that government photo ID was checked and record the ID type and number where regulations allow. Minors require guardian consent rules per your jurisdiction; many areas prohibit certain placements or require notarized guardian forms.\n\nKeep copies according to local retention rules. Digital storage should be access-controlled because forms contain personal health information.\n\nExpired ID policies should be written: some boards accept only current government ID while others allow grace periods. Photocopy only what regulations permit—full ID images may be restricted in your state."
       },
       {
-        "heading": "Health disclosures and contraindications",
+        "heading": "What health disclosures belong on a tattoo consent form?",
         "body": "Ask about allergies to inks or metals, skin conditions, bleeding disorders, pregnancy or nursing, immunosuppression, and recent sunburn on the site. CDC infection-control resources are useful client-education links for aftercare and studio hygiene expectations.\n\nThe form should state that the client answered truthfully and understands risks including infection, scarring, and allergic reaction. Artists should refuse service when medical risk is unclear and refer clients to a physician when appropriate.\n\nRecent antibiotics, accutane history, and diabetes may affect healing—use yes-no questions with space for medication names rather than open-ended boxes clients skip."
       },
       {
-        "heading": "Design, placement, and photo consent",
+        "heading": "How do you document design, placement, and photo consent?",
         "body": "Attach or reference the approved design, note placement on the body, and record size and color plan. Initials on a printed stencil photo reduce he said she said disputes.\n\nIf you photograph healed work for portfolio use, separate marketing release language from medical consent. Clients may sign both, but the purposes differ."
       },
       {
-        "heading": "Aftercare and follow-up",
+        "heading": "What aftercare acknowledgements should the consent form include?",
         "body": "Check a box that written aftercare instructions were provided in person or digitally. Note recommended healing window and when to return for touch-ups if your shop offers them.\n\nPayment receipts for deposits or sessions can be generated separately so the consent file stays clinical and the receipt stays financial."
       },
       {
@@ -463,7 +484,7 @@ export const guides: Guide[] = [
         }
       },
       {
-        "heading": "Studio workflow and record retention",
+        "heading": "How should studios store and retain signed consent forms?",
         "body": "Build consent into the appointment flow: no stencil until the form is complete. Train front desk staff to spot incomplete health questions rather than rushing walk-ins.\n\nBatch-scan forms nightly if your board allows digital storage. Separate financial receipts from clinical consent files for cleaner audits. When a client returns for cover-up work, open a new consent rather than assuming the old file covers a different design and placement."
       },
       {
@@ -795,25 +816,32 @@ export const guides: Guide[] = [
   },
   {
     "slug": "line-item-totals-explained",
-    "title": "How Line-Item Totals Work on Estimates and Invoices",
+    "title": "How Line-Item Totals Work",
     "metaDescription": "Plain-English math for quantity × rate, subtotals, tax, deposits and amount due—with a worked example you can recreate in our free generators.",
     "answerFirst": "The standard formula is line amount = quantity × rate; subtotal = sum of lines; tax = subtotal × (tax rate ÷ 100); amount due = total − deposits paid. Check that chain before you send any PDF—one wrong quantity can skew an entire job when labor hours mix with lump-sum materials.",
     "publishedAt": "2026-10-20",
-    "updatedAt": "2026-10-23",
+    "updatedAt": "2026-11-13",
     "relatedToolSlugs": [
-      "construction-estimate-template",
-      "contractor-invoice",
       "quote-estimate-generator",
-      "cleaning-service-invoice"
+      "contractor-invoice",
+      "construction-estimate-template",
+      "receipt-generator"
     ],
     "relatedGuideSlugs": [
       "invoice-vs-estimate",
       "cleaning-invoice-rates-line-items",
       "construction-estimate-that-wins-jobs"
     ],
-    "sections": [
+        "howTo": [
+      "Calculate each line as quantity × rate.",
+      "Sum lines into a subtotal.",
+      "Apply tax as subtotal × (tax rate ÷ 100).",
+      "Subtract deposits paid to get amount due.",
+      "Recreate the same math in a free estimate or invoice generator before you send the PDF."
+    ],
+"sections": [
       {
-        "heading": "The core formula",
+        "heading": "What is the core line-item total formula?",
         "body": "Line amount equals quantity multiplied by rate. Subtotal equals the sum of line amounts. Tax equals subtotal times tax rate divided by one hundred when all lines are taxable at one rate. Total equals subtotal plus tax.\n\nDeposit equals total times deposit percent divided by one hundred when you collect an upfront percentage. Amount due on an invoice equals total minus amount already paid.\n\nWhen a line uses lump sum, set quantity to one and put the full price in the rate column so the math chain stays consistent in spreadsheets and generators."
       },
       {
@@ -1077,11 +1105,11 @@ export const guides: Guide[] = [
   },
   {
     "slug": "what-to-include-on-a-receipt",
-    "title": "What to Include on a Payment Receipt (Small Business)",
-    "metaDescription": "Payment receipt essentials: seller info, date, amount, method, and invoice reference. Free receipt generator for service businesses.",
+    "title": "How to Write a Payment Receipt",
+    "metaDescription": "How to write a receipt of payment: seller, date, amount, method, invoice reference, and balance. Free receipt generator for service businesses.",
     "answerFirst": "Most useful payment receipts include about 7 fields: who paid whom, date, unique receipt number, amount paid, method, what was purchased, and any tax or tip broken out. A receipt proves payment; an invoice requests it.",
     "publishedAt": "2026-10-21",
-    "updatedAt": "2026-10-23",
+    "updatedAt": "2026-11-13",
     "relatedToolSlugs": [
       "receipt-generator",
       "contractor-invoice"
@@ -1091,21 +1119,28 @@ export const guides: Guide[] = [
       "line-item-totals-explained",
       "cleaning-invoice-rates-line-items"
     ],
-    "sections": [
+        "howTo": [
+      "Enter your business name and the payer’s name on the receipt.",
+      "Add a unique receipt number, payment date, and invoice or job reference.",
+      "Describe what was paid for and record amount paid plus payment method.",
+      "Note tax if applicable and any remaining balance for partial payments.",
+      "Export the PDF and file it with the related invoice for your books."
+    ],
+"sections": [
       {
-        "heading": "Receipt vs invoice vs estimate",
+        "heading": "How is a receipt different from an invoice or estimate?",
         "body": "An estimate proposes work and price. An invoice requests payment. A receipt proves payment happened. Clients sometimes ask for a receipt after paying an invoice; contractors may issue a receipt for a walk-in deposit before a formal invoice exists.\n\nKeep titles accurate. A PDF labeled invoice that only confirms payment will confuse bookkeeping."
       },
       {
-        "heading": "Seller and buyer identification",
+        "heading": "What seller and buyer details belong on a receipt of payment?",
         "body": "Include your business legal or trade name, address, and contact phone or email. Show client or payer name. For consumer jobs, the job site address may appear in the description field.\n\nIf you are a sole proprietor, your name and EIN or SSN handling follow IRS recordkeeping practices you discuss with your tax preparer; the receipt should still show a professional business identity.\n\nProperty managers paying on behalf of tenants should show both payer name and unit address so ledgers reconcile to the correct lease file."
       },
       {
-        "heading": "Amount, method, and reference numbers",
+        "heading": "How do you fill out amount, method, and invoice references?",
         "body": "State the amount received in dollars and cents, payment method such as check, card, cash, or transfer, and the date paid. Reference the invoice number, estimate number, or contract section the payment applies to.\n\nIf the payment is a partial deposit, say remaining balance per the invoice. If it is final payment, say paid in full."
       },
       {
-        "heading": "Description of goods or services",
+        "heading": "How should you describe goods or services on a receipt?",
         "body": "One or two lines are enough: deposit for kitchen remodel per invoice 1042, or annual maintenance plan renewal. Detailed line items usually stay on the invoice; the receipt summarizes.\n\nFor donations or retail, SKU detail may matter; for services, link to the invoice line items instead of duplicating entire tables.\n\nInclude the service date on the receipt when clients expense multiple visits in one month—finance teams match receipts to calendar months."
       },
       {
@@ -1753,7 +1788,7 @@ export const guides: Guide[] = [
   },
   {
     "slug": "wedding-vendor-contract-checklist",
-    "title": "Wedding Vendor Contract Checklist for Couples and Planners",
+    "title": "Wedding Vendor Contract Checklist",
     "metaDescription": "Dates, deposits, cancellation, insurance, and deliverables to verify in wedding vendor contracts—from catering to photo and video.",
     "answerFirst": "Before signing, run a 7-point wedding vendor checklist: event date and timeline, deposit and balance dates, overtime/travel fees, force majeure, backup vendor, insurance/COI, and cancellation terms. Put numbers in writing—not only in texts.",
     "publishedAt": "2026-10-21",
@@ -1892,11 +1927,11 @@ export const guides: Guide[] = [
   },
   {
     "slug": "podcast-script-structure",
-    "title": "Podcast Script Structure: Interview, Solo, and Co-Host",
+    "title": "Podcast Script Structure (Episode Outline)",
     "metaDescription": "Outline hooks, segments, questions, and outros for podcast episodes. Free podcast script template for your consistent shows.",
     "answerFirst": "Structure every episode in about eight blocks: goal, cold open hook, intro, timed segment blocks, guest questions or talking points, transitions, CTA or sponsor read, and outro. For a ~30-minute show, assign minutes to each block so producers catch missing ad reads before record day.",
     "publishedAt": "2026-10-22",
-    "updatedAt": "2026-10-23",
+    "updatedAt": "2026-11-13",
     "relatedToolSlugs": [
       "podcast-script-template",
       "real-estate-flyer-template"
@@ -1905,21 +1940,27 @@ export const guides: Guide[] = [
       "real-estate-flyer-what-to-include",
       "invoice-vs-estimate"
     ],
-    "sections": [
+        "howTo": [
+      "Write one sentence of episode intent and choose solo, co-host, or interview format.",
+      "Draft a cold open hook and an intro that names the show, episode, and promise.",
+      "Break the episode into timed segment blocks with talking points or questions.",
+      "Add CTA, outro, and any required disclaimer language before recording."
+    ],
+"sections": [
       {
-        "heading": "Start with episode intent",
+        "heading": "How should a podcast episode start?",
         "body": "Write one sentence: after listening, the audience will know or feel X. Pick a primary keyword topic for show notes SEO separately from the script, but let intent guide segment choice.\n\nChoose format: solo teaching, co-host banter, or interview. Length target in minutes keeps rambling in check.\n\nList three listener questions the episode must answer. If you cannot name them, the script will wander. Note whether the episode is evergreen or tied to a news cycle so you know how much date-specific language to include."
       },
       {
-        "heading": "Cold open and intro",
+        "heading": "What belongs in the cold open and intro?",
         "body": "Cold open is thirty to ninety seconds of strongest clip or statement before theme music. Intro names show, episode number, host, guest credentials, and episode promise.\n\nSponsor read may sit pre-roll or mid-roll; mark ad slots in the script so editors find them.\n\nWrite the intro in second person when teaching—listeners should hear what they will gain, not only who the host is. Co-host intros should alternate names each episode so both voices feel equal."
       },
       {
-        "heading": "Segment blocks and pacing",
+        "heading": "How do you structure segment blocks and pacing?",
         "body": "Break content into three to five segments with working titles and minute budgets. Solo shows use bullet talking points; interviews use question blocks with follow-up prompts.\n\nTransitions bridge segments with recap and teaser for what is next. Silence markers help editors place music stings.\n\nIf a segment runs long in rehearsal, cut a bullet rather than speeding up speech—listeners notice rushed audio. Mark optional cuts with brackets so producers can trim without losing the narrative spine."
       },
       {
-        "heading": "CTA, outro, and compliance",
+        "heading": "What belongs in the CTA, outro, and compliance notes?",
         "body": "Calls to action might be newsletter signup, product link, or next episode tease. Outro thanks guest, repeats show name, and gives social handles.\n\nFinancial or health topics may need disclaimers; legal advice shows should state they are not attorneys. Mark disclaimer text verbatim in the script.\n\nRepeat the primary URL twice—once mid-episode and once in the outro—so listeners driving cannot miss the spelling."
       },
       {

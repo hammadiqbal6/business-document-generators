@@ -255,7 +255,7 @@ export const contractorInvoice: ToolDefinition = {
   },
   relatedSlugs: ['construction-estimate-template', 'receipt-generator', 'work-order'],
   publishedAt: '2026-10-19',
-  updatedAt: '2026-10-20',
+  updatedAt: '2026-11-13',
 };
 
 export const cleaningInvoice: ToolDefinition = {
@@ -381,13 +381,13 @@ export const cateringQuote: ToolDefinition = {
   shortName: 'Catering Quote',
   category: 'estimates-invoices',
   primaryKeyword: 'catering quote',
-  secondaryKeywords: ['catering estimate template', 'catering proposal PDF', 'event catering quote'],
+  secondaryKeywords: ['catering quote template', 'catering quotation template', 'catering estimate template', 'event catering quote'],
   title: 'Catering Quote Template – Free Generator',
   metaDescription:
     'Build a catering quote with guest count, menu packages, service fees, and deposit terms. Live preview plus PDF/DOCX export in your browser.',
-  h1: 'Free Catering Quote Generator',
+  h1: 'Free Catering Quote Template Generator',
   answerFirst:
-    'A catering quote lists the event date, guest count, menu package, per-person or package pricing, service/staff fees, tax, gratuity, and deposit. Create one free with this generator, preview it live, and export PDF or DOCX privately in your browser.',
+    'A catering quote template lists event date, guest count, menu package, per-guest pricing, service fees, tax, and a deposit (often 25–50% to hold the date). Create one free here, preview live, and export PDF or DOCX in your browser.',
   applicationCategory: 'BusinessApplication',
   isLegalAdjacent: false,
   documentTitle: 'Catering Quote',
@@ -486,7 +486,7 @@ export const cateringQuote: ToolDefinition = {
   },
   relatedSlugs: ['event-wedding-vendor-contract', 'quote-estimate-generator', 'cleaning-service-invoice'],
   publishedAt: '2026-10-19',
-  updatedAt: '2026-10-20',
+  updatedAt: '2026-11-13',
 };
 
 export const quoteEstimate: ToolDefinition = {
@@ -494,14 +494,14 @@ export const quoteEstimate: ToolDefinition = {
   name: 'Quote / Estimate Generator',
   shortName: 'Quote / Estimate',
   category: 'estimates-invoices',
-  primaryKeyword: 'quote estimate generator',
-  secondaryKeywords: ['free estimate generator', 'business quote template', 'service estimate PDF'],
-  title: 'Free Quote & Estimate Generator (PDF)',
+  primaryKeyword: 'free estimate generator',
+  secondaryKeywords: ['estimate generator free', 'quote estimate generator', 'business quote template', 'service estimate PDF'],
+  title: 'Free Estimate Generator (Quote & PDF)',
   metaDescription:
-    'Generate a professional service quote or estimate with line items, tax and a validity date. Live preview, then download PDF or DOCX—no signup.',
-  h1: 'Free Quote & Estimate Template Generator',
+    'Create a free estimate or quote with line items, tax, and a validity date. Live preview in your browser, then download PDF or DOCX—no signup.',
+  h1: 'Free Estimate Generator (Quote or Proposal)',
   answerFirst:
-    'A quote or estimate presents proposed pricing for goods or services: parties, description, line items, tax, total, and how long the price holds. This free generator builds that document in your browser with live preview and PDF/DOCX export.',
+    'Create a free estimate (or quote) in your browser: parties, description, line items, tax, total, and how long the price holds. Preview live, then export PDF or DOCX—nothing is uploaded to a server.',
   applicationCategory: 'BusinessApplication',
   isLegalAdjacent: false,
   documentTitle: 'Quote',
@@ -596,7 +596,7 @@ export const quoteEstimate: ToolDefinition = {
   },
   relatedSlugs: ['construction-estimate-template', 'contractor-invoice', 'receipt-generator'],
   publishedAt: '2026-10-19',
-  updatedAt: '2026-10-20',
+  updatedAt: '2026-11-13',
 };
 
 export const receiptGenerator: ToolDefinition = {
@@ -605,7 +605,7 @@ export const receiptGenerator: ToolDefinition = {
   shortName: 'Receipt',
   category: 'estimates-invoices',
   primaryKeyword: 'receipt generator',
-  secondaryKeywords: ['free receipt maker', 'payment receipt template', 'service receipt PDF'],
+  secondaryKeywords: ['free receipt maker', 'payment receipt template', 'how to write a receipt of payment', 'service receipt PDF'],
   title: 'Receipt Generator – Free Payment Receipt PDF',
   metaDescription:
     'Create a payment receipt online for cash, card, or transfer. Itemize charges, show amount paid, export PDF/DOCX. Runs entirely in your browser.',
@@ -615,14 +615,15 @@ export const receiptGenerator: ToolDefinition = {
   applicationCategory: 'BusinessApplication',
   isLegalAdjacent: false,
   documentTitle: 'Receipt',
-  toolVersion: '1.0',
+  toolVersion: '1.1',
   formulaNote:
-    "Amount received is what you enter; line items (if any) should match that total for your records.",
+    'Amount received is what you enter; line items (if any) should match that total for your records. Remaining balance is informational.',
   fields: [
     { id: 'companyName', label: 'Business name', type: 'text', required: true, section: 'Business' },
     { id: 'companyAddress', label: 'Address', type: 'textarea', rows: 2, section: 'Business' },
     { id: 'receiptNumber', label: 'Receipt #', type: 'text', required: true, section: 'Receipt' },
     { id: 'receiptDate', label: 'Date', type: 'date', required: true, section: 'Receipt' },
+    { id: 'invoiceRef', label: 'Invoice / reference #', type: 'text', section: 'Receipt' },
     { id: 'clientName', label: 'Received from', type: 'text', required: true, section: 'Payment' },
     { id: 'paymentMethod', label: 'Payment method', type: 'select', section: 'Payment', options: [
       { value: 'Cash', label: 'Cash' },
@@ -634,13 +635,15 @@ export const receiptGenerator: ToolDefinition = {
     { id: 'lineItems', label: 'Items', type: 'lineItems', required: true, section: 'Items' },
     { id: 'taxRate', label: 'Tax rate (%)', type: 'number', inputMode: 'decimal', min: 0, max: 100, step: 0.01, section: 'Items' },
     { id: 'amountPaid', label: 'Amount paid', type: 'currency', inputMode: 'decimal', min: 0, required: true, section: 'Payment' },
+    { id: 'balanceRemaining', label: 'Balance remaining', type: 'currency', inputMode: 'decimal', min: 0, section: 'Payment' },
     { id: 'notes', label: 'Notes', type: 'textarea', rows: 2, section: 'Notes' },
   ],
   defaults: {
     companyName: 'Northwind Services',
     companyAddress: '200 W Madison, Chicago, IL 60606',
     receiptNumber: 'RCPT-551',
-    receiptDate: '2026-10-19',
+    receiptDate: '2026-11-13',
+    invoiceRef: 'INV-1042',
     clientName: 'Taylor Brooks',
     paymentMethod: 'Card',
     lineItems: [
@@ -648,26 +651,40 @@ export const receiptGenerator: ToolDefinition = {
     ],
     taxRate: 0,
     amountPaid: 800,
+    balanceRemaining: 0,
     notes: 'Paid in full. Thank you.',
   },
   content: {
     howToUse: [
-      'Enter business and payer details.',
-      'Itemize what was purchased or paid for.',
-      'Confirm amount paid and method; export.',
+      'Enter business name, receipt number, date, and the payer (“received from”).',
+      'Add an invoice/reference number when the payment applies to a prior bill.',
+      'Itemize what was paid for, confirm amount paid and method, and note any remaining balance.',
+      'Preview the receipt, then export PDF or DOCX for your books and the customer.',
     ],
     whatToInclude: [
       {
-        heading: 'Receipt fields that matter',
-        body: 'Unique receipt number, date, payer name, description of goods/services, tax if applicable, amount paid, method, and remaining balance if partial.',
+        heading: 'How to fill out a receipt of payment',
+        body: 'Record who paid whom, the unique receipt number and date, an invoice or job reference when one exists, a short description of goods/services, tax if shown, amount paid, payment method, and remaining balance if the payment was partial. Those seven fields are what most customer accounting teams expect.',
+      },
+      {
+        heading: 'Partial payments and paid-in-full',
+        body: 'When the payer covers only a deposit, put the cash received in Amount paid and the still-owed figure in Balance remaining (and say so in Notes). When the job is settled, set balance remaining to zero and note “paid in full” so the PDF stands alone as proof of payment.',
       },
     ],
     workedExample: {
-      heading: 'Worked example',
-      body: 'Receipt RCPT-551 records an $800 card payment for an October consulting retainer, marked paid in full.',
+      heading: 'Worked example: receipt of payment',
+      body: 'Northwind issues receipt RCPT-551 on 13 Nov 2026 to Taylor Brooks for $800 by card against invoice INV-1042 (October consulting retainer). Line items total $800, tax 0%, amount paid $800, balance remaining $0, notes “Paid in full.” Export the PDF and file it with the invoice for bookkeeping.',
     },
-    commonMistakes: ['No receipt number', 'Amount paid not matching line totals without explanation'],
-    tips: ['Keep PDF copies for bookkeeping alongside bank deposits.'],
+    commonMistakes: [
+      'No receipt number',
+      'Amount paid not matching line totals without explanation',
+      'Missing invoice reference when the payment is against a prior bill',
+      'Omitting remaining balance on partial deposits',
+    ],
+    tips: [
+      'Keep PDF copies for bookkeeping alongside bank deposits.',
+      'Reuse the same party names and invoice number on the next progress bill so the paper trail stays consistent.',
+    ],
     faq: [
       {
         question: 'Is this a tax invoice?',
@@ -677,7 +694,7 @@ export const receiptGenerator: ToolDefinition = {
       {
         question: 'What should a payment receipt include?',
         answer:
-          'Unique receipt number, date, business name, payer name, description of goods or services, amount paid, payment method, tax if shown, and remaining balance if the payment was partial.',
+          'Unique receipt number, date, business name, payer name, description of goods or services, amount paid, payment method, tax if shown, invoice reference when applicable, and remaining balance if the payment was partial.',
       },
       {
         question: 'How is a receipt different from an invoice?',
@@ -699,7 +716,7 @@ export const receiptGenerator: ToolDefinition = {
   },
   relatedSlugs: ['contractor-invoice', 'quote-estimate-generator', 'work-order'],
   publishedAt: '2026-10-19',
-  updatedAt: '2026-10-20',
+  updatedAt: '2026-11-13',
 };
 
 export const workOrder: ToolDefinition = {

@@ -46,6 +46,25 @@ export function getToolBySlug(slug: string): ToolDefinition | undefined {
   return allTools.find((t) => t.slug === slug);
 }
 
+/**
+ * Explicit featured set for home + footer (includes high-impression quote/receipt tools).
+ * Do not derive from allTools.slice — array order hid money pages from global chrome.
+ */
+export const featuredToolSlugs = [
+  'quote-estimate-generator',
+  'receipt-generator',
+  'construction-estimate-template',
+  'contractor-invoice',
+  'catering-quote',
+  'photography-contract-template',
+] as const;
+
+export function getFeaturedTools(): ToolDefinition[] {
+  return featuredToolSlugs
+    .map((slug) => getToolBySlug(slug))
+    .filter((t): t is ToolDefinition => Boolean(t));
+}
+
 export function getToolsByCategory(category: ToolCategory): ToolDefinition[] {
   return allTools.filter((t) => t.category === category);
 }

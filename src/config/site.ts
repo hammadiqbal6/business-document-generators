@@ -74,8 +74,11 @@ export const siteConfig = {
   tagline: env.PUBLIC_SITE_TAGLINE || DEFAULT_SITE_TAGLINE,
   /** Manifest / PWA description (shorter than tagline). */
   manifestDescription: env.PUBLIC_MANIFEST_DESCRIPTION || DEFAULT_MANIFEST_DESCRIPTION,
-  /** Contact email for Contact page and schema. */
-  contactEmail: env.PUBLIC_CONTACT_EMAIL || DEFAULT_CONTACT_EMAIL,
+  /**
+   * Contact email for Contact page and schema.
+   * Empty string hides mailto lines (never fall back to a personal address).
+   */
+  contactEmail: (env.PUBLIC_CONTACT_EMAIL || DEFAULT_CONTACT_EMAIL).trim(),
   /** Footer © line owner. */
   copyrightOwner,
   /**

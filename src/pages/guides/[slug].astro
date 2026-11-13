@@ -8,7 +8,13 @@ import { siteConfig } from '../../config/site';
 import { guides, getGuide } from '../../data/guides';
 import { getToolBySlug } from '../../data/tools';
 import { relatedGuidesFor } from '../../data/toolGuideMap';
-import { articleJsonLd, breadcrumbJsonLd, faqPageJsonLd } from '../../lib/seo';
+import {
+  absoluteUrl,
+  articleJsonLd,
+  breadcrumbJsonLd,
+  faqPageJsonLd,
+  howToJsonLd,
+} from '../../lib/seo';
 
 export function getStaticPaths() {
   return guides.map((g) => ({ params: { slug: g.slug }, props: { guide: g } }));
@@ -27,6 +33,13 @@ const relatedGuideList = relatedGuideSlugs
   .filter(Boolean)
   .slice(0, 4);
 const faqLd = faqPageJsonLd(guide.faq);
+/** HowTo only when the guide declares steps (must match on-page content). */
+const howToLd = howToJsonLd({
+  name: guide.title,
+  description: guide.metaDescription,
+  url: absoluteUrl(path),
+  steps: guide.howTo ?? [],
+});
 const jsonLd = [
   breadcrumbJsonLd(crumbs),
   articleJsonLd({
@@ -37,9 +50,10 @@ const jsonLd = [
     updatedAt: guide.updatedAt,
   }),
   ...(faqLd ? [faqLd] : []),
+  ...(howToLd ? [howToLd] : []),
 ];
-const pageTitle =
-  guide.title.length > 60 ? guide.title.slice(0, 57).trim() + '…' : guide.title;
+/** Leave room for ` | Docuklin` via buildPageTitle (do not pre-clip away the brand). */
+const pageTitle = guide.title;
 
 /** Pull 3 short takeaway bullets from the first section body when possible. */
 const takeaways = guide.sections
@@ -58,7 +72,7 @@ const takeaways = guide.sections
   path={path}
   ogType="article"
   jsonLd={jsonLd}
-  ogImagePath={`/og/guide-${guide.slug}.svg`}
+  ogImagePath={`/og/guide-${guide.slug}.png`}
   ogImageAlt={guide.title}
 >
   <Breadcrumbs items={crumbs} />
@@ -82,7 +96,9 @@ const takeaways = guide.sections
     </div>
     {related[0] && (
       <p class="guide-cta">
-        <a href={`/tools/${related[0]!.slug}/`}>Try the matching generator →</a>
+        <a href={`/tools/${related[0]!.slug}/`}>
+          Use the free {related[0]!.shortName.toLowerCase()} template to apply this →
+        </a>
       </p>
     )}
     <p class="content-meta byline">
@@ -154,6 +170,14 @@ const takeaways = guide.sections
   }
   .guide-cta {
     margin: 0.75rem 0 1rem;
+    font-size: 1.05rem;
+    font-weight: 600;
+  }
+  .guide-cta a {
+    display: inline-block;
+    min-height: 44px;
+    line-height: 1.3;
+    padding: 0.55rem 0;
   }
   .table-wrap {
     overflow-x: auto;

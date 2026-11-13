@@ -21,7 +21,7 @@
         "@id": "https://business-document-generators.hammadiqbal117.workers.dev/#organization",
         "name": "DocuForge Tools",
         "url": "https://business-document-generators.hammadiqbal117.workers.dev/",
-        "email": "hammadiqbal117@gmail.com",
+        "email": "hello@docuklin.com",
         "logo": {
           "@type": "ImageObject",
           "url": "https://business-document-generators.hammadiqbal117.workers.dev/logo-512.png",
@@ -34,7 +34,7 @@
         "publishingPrinciples": "https://business-document-generators.hammadiqbal117.workers.dev/methodology/",
         "contactPoint": {
           "@type": "ContactPoint",
-          "email": "hammadiqbal117@gmail.com",
+          "email": "hello@docuklin.com",
           "contactType": "customer support",
           "url": "https://business-document-generators.hammadiqbal117.workers.dev/contact/"
         }

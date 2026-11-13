@@ -91,7 +91,7 @@ Defaults live in `src/config/site.ts` / `siteDefaults.mjs` (fallback origin is `
 | `PUBLIC_SITE_URL_PET` | Recommended | `https://pet-calculators…` | Sister-site links |
 | `PUBLIC_SITE_NAME` | **Yes** | `Your Brand Tools` | Titles, header, Organization schema |
 | `PUBLIC_SITE_TAGLINE` | No | Short one-liner | Homepage lead, Organization description |
-| `PUBLIC_CONTACT_EMAIL` | No (default in `site.ts`) | `hammadiqbal117@gmail.com` | Contact page, footer, privacy/terms, schema |
+| `PUBLIC_CONTACT_EMAIL` | No (default in `site.ts`) | `hello@docuklin.com` | Contact page, footer, privacy/terms, schema |
 | `PUBLIC_EMAILJS_SERVICE_ID` | No | _(empty)_ | EmailJS service ID; with template + public key enables `/contact/` form ([CONTACT-EMAILJS.md](./CONTACT-EMAILJS.md)) |
 | `PUBLIC_EMAILJS_TEMPLATE_ID` | No | _(empty)_ | EmailJS template ID |
 | `PUBLIC_EMAILJS_PUBLIC_KEY` | No | _(empty)_ | EmailJS **public** key only — never the private key |
@@ -112,7 +112,7 @@ Defaults live in `src/config/site.ts` / `siteDefaults.mjs` (fallback origin is `
 ```bash
 PUBLIC_SITE_URL=https://tools.yourbrand.com \
 PUBLIC_SITE_NAME="Your Brand Tools" \
-PUBLIC_CONTACT_EMAIL=hammadiqbal117@gmail.com \
+PUBLIC_CONTACT_EMAIL=hello@docuklin.com \
 npm run build
 npm run preview
 ```

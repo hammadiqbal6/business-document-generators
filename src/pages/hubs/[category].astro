@@ -26,7 +26,7 @@ const hubCopy: Record<
     whatToInclude: string[];
     commonMistakes: string[];
     workedExample: string;
-    whichTable: { headers: string[]; rows: string[][] };
+    whichTable: { headers: string[]; rows: { need: string; toolLabel: string; toolSlug: string; why: string }[] };
     faq: { question: string; answer: string }[];
   }
 > = {
@@ -37,7 +37,7 @@ const hubCopy: Record<
     intro:
       'Use these generators when you need a priced document today: estimates before work, invoices after (or for deposits), quotes for packages, receipts for payment, and work orders for crew tickets—all with live preview and PDF/DOCX export.',
     whenToUse:
-      'Pick the construction estimate for remodel bids with allowances, the contractor invoice for progress billing, cleaning or catering tools when line items are service packages, the generic quote generator for mixed scopes, and the receipt or work order when you need a simple confirmation or job ticket.',
+      'Pick the construction estimate for remodel bids with allowances, the free estimate / quote generator for mixed service scopes, the contractor invoice for progress billing, cleaning or catering tools when line items are service packages, and the receipt or work order when you need a simple confirmation or job ticket.',
     whatFor: [
       'An estimate or quote proposes price and scope before work starts so the client can approve (or revise) before you mobilize.',
       'An invoice requests payment for a deposit, progress draw, or completed work and should match what was previously agreed.',
@@ -58,11 +58,12 @@ const hubCopy: Record<
     whichTable: {
       headers: ['Need', 'Use this tool', 'Why'],
       rows: [
-        ['Propose price before work', 'Construction estimate / Quote', 'Scope + line items + validity'],
-        ['Bill for work or deposit', 'Contractor / cleaning invoice', 'Totals, tax, balance due'],
-        ['Event food package', 'Catering quote', 'Per-guest math and deposit notes'],
-        ['Proof of payment', 'Receipt generator', 'Amount paid and method'],
-        ['Assign the job to crew', 'Work order', 'Tasks, parts, sign-off'],
+        { need: 'Propose price before work', toolLabel: 'Construction estimate', toolSlug: 'construction-estimate-template', why: 'Scope + line items + validity' },
+        { need: 'Generic service quote', toolLabel: 'Free estimate / quote generator', toolSlug: 'quote-estimate-generator', why: 'Mixed scopes with validity date' },
+        { need: 'Bill for work or deposit', toolLabel: 'Contractor invoice', toolSlug: 'contractor-invoice', why: 'Totals, tax, balance due' },
+        { need: 'Event food package', toolLabel: 'Catering quote', toolSlug: 'catering-quote', why: 'Per-guest math and deposit notes' },
+        { need: 'Proof of payment', toolLabel: 'Receipt generator', toolSlug: 'receipt-generator', why: 'Amount paid, method, balance' },
+        { need: 'Assign the job to crew', toolLabel: 'Work order', toolSlug: 'work-order', why: 'Tasks, parts, sign-off' },
       ],
     },
     faq: [
@@ -116,11 +117,11 @@ const hubCopy: Record<
     whichTable: {
       headers: ['Situation', 'Use this tool', 'Focus'],
       rows: [
-        ['Photo shoot or wedding day', 'Photography contract', 'Coverage hours, usage, retainer'],
-        ['Video project', 'Videography contract', 'Revisions, music, raw footage'],
-        ['Website build', 'Web design contract', 'Milestones, IP, content deadlines'],
-        ['Wedding / event vendor', 'Event vendor contract', 'Date, overtime, force majeure'],
-        ['Share confidential info', 'Simple NDA', 'Mutual vs one-way starting point'],
+        { need: 'Photo shoot or wedding day', toolLabel: 'Photography contract', toolSlug: 'photography-contract-template', why: 'Coverage hours, usage, retainer' },
+        { need: 'Video project', toolLabel: 'Videography contract', toolSlug: 'videography-contract', why: 'Revisions, music, raw footage' },
+        { need: 'Website build', toolLabel: 'Web design contract', toolSlug: 'freelance-web-design-contract', why: 'Milestones, IP, content deadlines' },
+        { need: 'Wedding / event vendor', toolLabel: 'Event vendor contract', toolSlug: 'event-wedding-vendor-contract', why: 'Date, overtime, force majeure' },
+        { need: 'Share confidential info', toolLabel: 'Simple NDA', toolSlug: 'simple-nda', why: 'Mutual vs one-way starting point' },
       ],
     },
     faq: [
@@ -174,8 +175,8 @@ const hubCopy: Record<
     whichTable: {
       headers: ['Need', 'Use this tool', 'Remember'],
       rows: [
-        ['Studio risk acknowledgement', 'Tattoo consent form', 'Rules vary by state; not medical advice'],
-        ['Screen a prospective tenant', 'Rental application', 'Fair housing + screening authorization'],
+        { need: 'Studio risk acknowledgement', toolLabel: 'Tattoo consent form', toolSlug: 'tattoo-consent-form-template', why: 'Rules vary by state; not medical advice' },
+        { need: 'Screen a prospective tenant', toolLabel: 'Rental application', toolSlug: 'rental-lease-application', why: 'Fair housing + screening authorization' },
       ],
     },
     faq: [
@@ -229,8 +230,8 @@ const hubCopy: Record<
     whichTable: {
       headers: ['Goal', 'Use this tool', 'Output'],
       rows: [
-        ['Plan an episode', 'Podcast script', 'Cold open, segments, CTA outline'],
-        ['Market a listing', 'Real estate flyer', 'One-page PDF/DOCX handout'],
+        { need: 'Plan an episode', toolLabel: 'Podcast script', toolSlug: 'podcast-script-template', why: 'Cold open, segments, CTA outline' },
+        { need: 'Market a listing', toolLabel: 'Real estate flyer', toolSlug: 'real-estate-flyer-template', why: 'One-page PDF/DOCX handout' },
       ],
     },
     faq: [
@@ -283,7 +284,7 @@ const jsonLd = [
   }),
   ...(faqLd ? [faqLd] : []),
 ];
-const ogImagePath = `/og/hub-${meta.slug}.svg`;
+const ogImagePath = `/og/hub-${meta.slug}.png`;
 ---
 <BaseLayout
   title={copy.title}
@@ -297,6 +298,33 @@ const ogImagePath = `/og/hub-${meta.slug}.svg`;
   <h1>{meta.name}</h1>
   <p class="lead answer-first">{copy.intro}</p>
 
+  <h2>When to use which document</h2>
+  <p>{copy.whenToUse}</p>
+
+  <h2>Which document do I need?</h2>
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr>
+          {copy.whichTable.headers.map((h) => (
+            <th scope="col">{h}</th>
+          ))}
+        </tr>
+      </thead>
+      <tbody>
+        {copy.whichTable.rows.map((row) => (
+          <tr>
+            <td>{row.need}</td>
+            <td>
+              <a href={`/tools/${row.toolSlug}/`}>{row.toolLabel}</a>
+            </td>
+            <td>{row.why}</td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
+  </div>
+
   <h2>Templates in this category</h2>
   <div class="tool-grid">
     {tools.map((t) => (
@@ -306,8 +334,6 @@ const ogImagePath = `/og/hub-${meta.slug}.svg`;
       </a>
     ))}
   </div>
-
-  <p>{copy.whenToUse}</p>
 
   <h2>What these documents are for</h2>
   <ul>
@@ -332,28 +358,6 @@ const ogImagePath = `/og/hub-${meta.slug}.svg`;
 
   <h2>Worked example</h2>
   <p>{copy.workedExample}</p>
-
-  <h2>Which document do I need?</h2>
-  <div class="table-wrap">
-    <table>
-      <thead>
-        <tr>
-          {copy.whichTable.headers.map((h) => (
-            <th scope="col">{h}</th>
-          ))}
-        </tr>
-      </thead>
-      <tbody>
-        {copy.whichTable.rows.map((row) => (
-          <tr>
-            {row.map((cell) => (
-              <td>{cell}</td>
-            ))}
-          </tr>
-        ))}
-      </tbody>
-    </table>
-  </div>
 
   {hubGuides.length > 0 && (
     <section aria-labelledby="hub-guides-heading">
