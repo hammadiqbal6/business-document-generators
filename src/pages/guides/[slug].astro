@@ -54,6 +54,22 @@ const jsonLd = [
 ];
 /** Leave room for ` | Docuklin` via buildPageTitle (do not pre-clip away the brand). */
 const pageTitle = guide.title;
+
+function escapeHtml(s: string): string {
+  return s
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;');
+}
+
+/** Turn bare /tools/.../ paths in guide prose into real links (early in-body CTAs). */
+function linkToolPaths(para: string): string {
+  return escapeHtml(para).replace(
+    /\/tools\/[a-z0-9-]+\//g,
+    (path) => `<a href="${path}">${path}</a>`,
+  );
+}
 ---
 <BaseLayout
   title={pageTitle}
@@ -75,22 +91,30 @@ const pageTitle = guide.title;
     </div>
     {related[0] && (
       <p class="guide-cta">
-        <a href={`/tools/${related[0]!.slug}/`}>
-          Open the free {related[0]!.name.toLowerCase().includes('template')
-            ? related[0]!.name
-            : `${related[0]!.name} template`} →
-        </a>
+        Prefer a fillable version? Use the{' '}
+        <a href={`/tools/${related[0]!.slug}/`}>{related[0]!.name}</a>
+        {' '}— it runs in your browser and exports PDF or DOCX.
       </p>
     )}
     <p class="content-meta byline">
       Reviewed by <a href="/about/#maintainer" rel="author">{siteConfig.author.name}</a>
       · Last updated <time datetime={guide.updatedAt}>{guide.updatedAt}</time>
     </p>
+    {guide.howTo && guide.howTo.length > 0 && (
+      <section class="guide-howto" aria-labelledby="guide-howto-heading">
+        <h2 id="guide-howto-heading">What are the steps?</h2>
+        <ol>
+          {guide.howTo.map((step) => (
+            <li>{step}</li>
+          ))}
+        </ol>
+      </section>
+    )}
     {guide.sections.map((s) => (
       <>
         <h2>{s.heading}</h2>
         {s.body.split(/\n\n+/).map((para) => (
-          <p>{para}</p>
+          <p set:html={linkToolPaths(para)} />
         ))}
         {s.table && (
           <div class="table-wrap">
@@ -169,13 +193,21 @@ const pageTitle = guide.title;
   .guide-cta {
     margin: 0.75rem 0 1rem;
     font-size: 1.05rem;
-    font-weight: 600;
   }
   .guide-cta a {
-    display: inline-block;
-    min-height: 44px;
-    line-height: 1.3;
-    padding: 0.55rem 0;
+    display: inline;
+    font-weight: 650;
+    text-underline-offset: 0.15em;
+  }
+  .guide-howto {
+    margin: 0 0 1.5rem;
+  }
+  .guide-howto ol {
+    margin: 0.5rem 0 0;
+    padding-left: 1.35rem;
+  }
+  .guide-howto li {
+    margin: 0.35rem 0;
   }
   .table-wrap {
     overflow-x: auto;

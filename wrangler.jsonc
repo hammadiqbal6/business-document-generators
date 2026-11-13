@@ -35,5 +35,13 @@
       "CANONICAL_ORIGIN": "https://docuklin.com",
       "LEGACY_REDIRECT_HOSTS": "business-document-generators.hammadiqbal117.workers.dev"
     }
+  },
+  // Workers Observability (dashboard toggle was refused by the API; enable via deploy).
+  "observability": {
+    "enabled": true,
+    "logs": {
+      "enabled": true,
+      "invocation_logs": true
+    }
   }
 }
