@@ -1,7 +1,9 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import { siteConfig } from '../config/site';
-import { allTools } from '../data/tools';
+import { getFeaturedTools } from '../data/tools';
+
+const featured = getFeaturedTools();
 ---
 <BaseLayout
   title="Page not found"
@@ -12,7 +14,7 @@ import { allTools } from '../data/tools';
   <h1>Page not found</h1>
   <p>Try one of our document generators:</p>
   <ul>
-    {allTools.slice(0, 8).map((t) => (
+    {featured.map((t) => (
       <li><a href={`/tools/${t.slug}/`}>{t.name}</a></li>
     ))}
   </ul>

@@ -448,8 +448,8 @@ export const guides: Guide[] =
   },
   {
     "slug": "tattoo-consent-documentation",
-    "title": "Tattoo Consent Forms: What Studios Should Document",
-    "metaDescription": "Health acknowledgements, ID verification, design approval, and aftercare on tattoo consent forms. Free template. Not legal or medical advice.",
+    "title": "Tattoo Consent Form Template: What Studios Should Document",
+    "metaDescription": "Free tattoo consent form template checklist: ID, health disclosures, design approval, aftercare, and signatures. Not legal or medical advice.",
     "answerFirst": "A complete tattoo consent record usually needs six elements: client identity and age verification, design and placement, risk acknowledgements, aftercare receipt, health disclosures, and signatures, with retention per your state or local health rules. This is documentation, not legal or medical advice. Start with the free tattoo consent form template, then match your board’s requirements.",
     "publishedAt": "2026-10-19",
     "updatedAt": "2026-11-13",
@@ -2067,8 +2067,8 @@ export const guides: Guide[] =
   },
   {
     "slug": "podcast-script-structure",
-    "title": "Podcast Script Structure (Episode Outline)",
-    "metaDescription": "Outline hooks, segments, questions, CTAs, and outros for podcast episodes. Free podcast script template for consistent shows.",
+    "title": "Podcast Script Template: Episode Outline",
+    "metaDescription": "Use a free podcast script template to outline hooks, segments, questions, CTAs, and outros. Timed example plus IAB-ready sponsor notes.",
     "answerFirst": "Structure every episode in about eight blocks: goal, cold open hook, intro, timed segment blocks, guest questions or talking points, transitions, CTA or sponsor read, and outro. Assign minutes to each block so producers catch missing ad reads before record day. Build the outline in the free podcast script template.",
     "publishedAt": "2026-10-22",
     "updatedAt": "2026-11-13",
