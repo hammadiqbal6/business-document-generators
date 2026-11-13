@@ -76,14 +76,15 @@ Page: {{page_url}}
 
 ## CSP
 
-This site does not set a sitewide `connect-src` CSP today. If you add one in
-`public/_headers` or the Worker, allow:
+Sitewide CSP lives in `public/_headers`. The contact form needs EmailJS in
+`connect-src` (and the jsDelivr SDK in `script-src`):
 
 ```http
-connect-src 'self' https://api.emailjs.com
+script-src ... https://cdn.jsdelivr.net
+connect-src 'self' https://api.emailjs.com ...
 ```
 
-(Also keep any GA4 / AdSense hosts you already need.)
+Keep the existing GA4 / AdSense / Cloudflare Analytics hosts alongside EmailJS.
 
 ## Setup checklist
 
