@@ -120,13 +120,13 @@ export const CATEGORY_META: Record<
     slug: 'estimates-invoices',
     name: 'Estimates & Invoices',
     description:
-      'Construction estimates, contractor invoices, cleaning quotes, catering quotes, receipts, work orders, and general quote generators.',
+      'Construction estimates, change orders, purchase orders, timesheets, contractor invoices, cleaning quotes, catering quotes, receipts, work orders, and general quote generators.',
   },
   contracts: {
     slug: 'contracts',
     name: 'Contracts & Agreements',
     description:
-      'Photography, videography, freelance/web design, event/wedding vendor contracts, and simple NDAs — editable clauses, not legal advice.',
+      'Independent contractor and service agreements, photography, videography, freelance/web design, event/wedding vendor contracts, and simple NDAs — editable clauses, not legal advice.',
   },
   forms: {
     slug: 'forms',

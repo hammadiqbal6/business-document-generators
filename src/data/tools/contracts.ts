@@ -355,7 +355,7 @@ export const freelanceWebContract: ToolDefinition = {
     ],
     sources: contractSources,
   },
-  relatedSlugs: ['simple-nda', 'photography-contract-template', 'quote-estimate-generator'],
+  relatedSlugs: ['independent-contractor-agreement', 'simple-nda', 'service-agreement-template'],
   publishedAt: '2026-10-19',
   updatedAt: '2026-10-20',
 };
@@ -554,7 +554,320 @@ export const simpleNda: ToolDefinition = {
     ],
     sources: contractSources,
   },
-  relatedSlugs: ['freelance-web-design-contract', 'photography-contract-template', 'event-wedding-vendor-contract'],
+  relatedSlugs: [
+    'freelance-web-design-contract',
+    'photography-contract-template',
+    'independent-contractor-agreement',
+  ],
   publishedAt: '2026-10-19',
   updatedAt: '2026-10-20',
+};
+
+export const independentContractorAgreement: ToolDefinition = {
+  slug: 'independent-contractor-agreement',
+  name: 'Independent Contractor Agreement',
+  shortName: 'Contractor Agreement',
+  category: 'contracts',
+  primaryKeyword: 'independent contractor agreement',
+  secondaryKeywords: [
+    'independent contractor agreement template',
+    'contractor agreement form',
+    'freelance contractor contract',
+  ],
+  title: 'Independent Contractor Agreement',
+  metaDescription:
+    'Create an independent contractor agreement with scope, pay, IP, and termination clauses. Edit in your browser, then export PDF or DOCX. Not legal advice.',
+  h1: 'Independent Contractor Agreement Template',
+  answerFirst:
+    'An independent contractor agreement names the parties, describes the work, sets pay and invoices, clarifies who owns deliverables, and states how either side can end the engagement. Customize the editable clauses below, preview the agreement, and export PDF or DOCX. Not legal advice—classification and wording depend on your facts and jurisdiction.',
+  applicationCategory: 'BusinessApplication',
+  isLegalAdjacent: true,
+  documentTitle: 'Independent Contractor Agreement',
+  toolVersion: '1.0',
+  fields: [
+    { id: 'clientName', label: 'Client / hiring company', type: 'text', required: true, section: 'Parties' },
+    { id: 'clientAddress', label: 'Client address', type: 'textarea', rows: 2, section: 'Parties' },
+    { id: 'contractorName', label: 'Contractor name / business', type: 'text', required: true, section: 'Parties' },
+    { id: 'contractorAddress', label: 'Contractor address', type: 'textarea', rows: 2, section: 'Parties' },
+    { id: 'effectiveDate', label: 'Effective date', type: 'date', required: true, section: 'Engagement' },
+    { id: 'projectName', label: 'Project / engagement title', type: 'text', required: true, section: 'Engagement' },
+    { id: 'scope', label: 'Scope of work', type: 'textarea', rows: 4, required: true, section: 'Engagement' },
+    { id: 'fee', label: 'Fee / rate', type: 'currency', inputMode: 'decimal', required: true, section: 'Payment' },
+    { id: 'paySchedule', label: 'Payment schedule', type: 'textarea', rows: 3, required: true, section: 'Payment' },
+    { id: 'expenses', label: 'Expense policy', type: 'textarea', rows: 2, section: 'Payment' },
+    { id: 'termSummary', label: 'Term / end date', type: 'text', section: 'Engagement' },
+    { id: 'governingState', label: 'Governing law (state/country)', type: 'text', section: 'Engagement' },
+    { id: 'clauses', label: 'Clauses', type: 'clauses', section: 'Clauses' },
+  ],
+  defaults: {
+    clientName: 'Pine & Co. Retail',
+    clientAddress: '210 Market Street, Portland, OR 97204',
+    contractorName: 'Rivercode Studio LLC',
+    contractorAddress: '88 Alberta St, Portland, OR 97211',
+    effectiveDate: '2026-11-13',
+    projectName: 'Q1 catalog microsite build',
+    scope:
+      'Design and implement a five-page marketing microsite (home, catalog, about, FAQ, contact), including staging handoff and one hour of CMS training. Excludes ongoing SEO retainers, paid ads setup, and photography.',
+    fee: 4800,
+    paySchedule:
+      '40% ($1,920) due on signing; 40% ($1,920) on design approval; 20% ($960) on launch. Contractor invoices Net 14.',
+    expenses: 'Pre-approved third-party costs (fonts, stock) billed at cost with receipts. Travel not included.',
+    termSummary: 'Through project launch or 90 days from the effective date, whichever comes first, unless extended in writing.',
+    governingState: 'State of Oregon, USA',
+    clauses: [
+      clause(
+        'status',
+        'Independent contractor status',
+        'Contractor is an independent contractor, not an employee, partner, or agent of Client. Contractor controls the means and methods of performing the work, supplies tools unless otherwise agreed, and is responsible for taxes, insurance, and licenses required for the services.',
+      ),
+      clause(
+        'scope',
+        'Scope and change requests',
+        'Services are limited to the scope of work above. Out-of-scope requests require a written change order with revised fees and timeline before work proceeds.',
+      ),
+      clause(
+        'payment',
+        'Fees and invoicing',
+        'Client will pay the fee according to the payment schedule. Late amounts may accrue interest only if stated in a signed writing and allowed by applicable law. Contractor will provide invoices with enough detail for Client accounts payable.',
+      ),
+      clause(
+        'ip',
+        'Work product and intellectual property',
+        'Upon full payment, Contractor assigns to Client rights in final deliverables created uniquely for Client under this agreement, excluding Contractor’s pre-existing tools, templates, libraries, and third-party materials. Third-party licenses remain subject to their terms.',
+      ),
+      clause(
+        'confidential',
+        'Confidentiality',
+        'Each party will protect non-public business information received from the other and use it only to perform this engagement, except for information that is public, independently developed, or required to be disclosed by law.',
+      ),
+      clause(
+        'termination',
+        'Termination',
+        'Either party may terminate for material breach uncured within 10 days after written notice. Client may terminate for convenience with 7 days’ notice and will pay for work satisfactorily completed through the termination date.',
+      ),
+    ],
+  },
+  content: {
+    howToUse: [
+      'Enter client and contractor names, addresses, and the effective date.',
+      'Describe the project scope, fee, and payment schedule in plain language.',
+      'Review and edit the independent-contractor, IP, and termination clauses.',
+      'Export PDF or DOCX and have both parties review with their own counsel before signing.',
+    ],
+    whatToInclude: [
+      {
+        heading: 'What an independent contractor agreement usually covers',
+        body: 'Start with the legal names of both parties, a clear scope, deliverables, deadlines, and how invoices get paid. Add who owns the work product after payment, how confidential information is handled, and how either side can end the job. The IRS explains that worker classification turns on facts such as behavioral control, financial control, and the relationship of the parties—not on the document title alone—so treat this template as discussion language, not a classification stamp.',
+      },
+      {
+        heading: 'Payment, expenses, and records',
+        body: 'Spell out fixed fees versus hourly rates, milestone triggers, Net terms, and whether expenses need pre-approval. Keep signed agreements with invoices and payment records. IRS small-business recordkeeping guidance treats invoices and related papers as support for gross receipts and expenses; retention periods vary with the type of tax record.',
+      },
+      {
+        heading: 'IP, confidentiality, and change orders',
+        body: 'Say when rights in unique deliverables transfer (often after full payment) and what stays with the contractor—frameworks, libraries, and pre-existing templates. Keep confidentiality proportional to what you actually share. Route scope changes through a short written change order so fee and timeline disputes do not start as verbal “quick adds.”',
+      },
+    ],
+    workedExample: {
+      heading: 'Worked example: catalog microsite engagement',
+      body: 'Pine & Co. Retail hires Rivercode Studio LLC for a $4,800 five-page microsite. The sample uses a 40/40/20 invoice schedule, Oregon governing law, assignment of unique deliverables after full payment, and a convenience-termination clause that still pays completed work. Swap the scope and fee for consulting, design, or trade subcontracting—then re-read the classification and tax clauses with counsel.',
+    },
+    commonMistakes: [
+      'Calling someone a contractor while controlling hours, tools, and methods like an employee.',
+      'Leaving IP transfer vague until after launch day.',
+      'Skipping written change orders when the client expands scope mid-project.',
+      'Omitting invoice timing so accounts payable cannot match milestones.',
+    ],
+    tips: [
+      legalNotice,
+      'Pair this agreement with a W-9 (U.S.) collection process when Client will issue Form 1099-NEC.',
+      'If the work is creative or web-related, cross-check milestones against your quote PDF.',
+    ],
+    faq: [
+      {
+        question: 'What is an independent contractor agreement?',
+        answer:
+          'It is a written understanding between a hiring company and a self-employed worker that sets scope, pay, ownership of deliverables, confidentiality, and exit terms. It is not, by itself, proof of contractor status for tax or labor law.',
+      },
+      {
+        question: 'How is an independent contractor different from an employee?',
+        answer:
+          'U.S. tax guidance looks at behavioral control, financial control, and the type of relationship. Employees are typically directed on how to work and receive employment tax withholding; contractors usually control methods, invoice for services, and pay their own self-employment taxes. Facts matter more than labels—see IRS and Cornell LII materials linked in Sources.',
+      },
+      {
+        question: 'How are independent contractors usually paid?',
+        answer:
+          'Common patterns are fixed project fees with milestone invoices, hourly rates with weekly or biweekly invoices, or retainers. State Net terms, expense rules, and what triggers each invoice so payment is paperwork, not renegotiation.',
+      },
+      {
+        question: 'How do you terminate an independent contractor agreement?',
+        answer:
+          'Follow the notice and cure periods in the signed writing. Many forms allow termination for uncured breach and a shorter convenience termination that still pays completed work. Do not invent penalties after the fact.',
+      },
+      {
+        question: 'Is this independent contractor agreement legally binding?',
+        answer:
+          'A signed agreement can be binding if it meets your jurisdiction’s contract requirements, but enforceability and worker classification depend on local law and the real working relationship. This generator is not legal advice and is not a substitute for an attorney.',
+      },
+    ],
+    sources: contractSources,
+  },
+  relatedSlugs: ['freelance-web-design-contract', 'simple-nda', 'service-agreement-template'],
+  publishedAt: '2026-11-13',
+  updatedAt: '2026-11-13',
+};
+
+export const serviceAgreementTemplate: ToolDefinition = {
+  slug: 'service-agreement-template',
+  name: 'Service Agreement Template',
+  shortName: 'Service Agreement',
+  category: 'contracts',
+  primaryKeyword: 'service agreement template',
+  secondaryKeywords: [
+    'service agreement form',
+    'service contract template',
+    'business service agreement',
+  ],
+  title: 'Service Agreement Template (Free)',
+  metaDescription:
+    'Draft a service agreement with parties, scope, fees, term, and editable clauses. Preview live and download PDF or DOCX. Not legal advice.',
+  h1: 'Free Service Agreement Template',
+  answerFirst:
+    'A service agreement template sets who is hiring whom, what services are included, how fees and invoices work, how long the term runs, and what happens if either party ends early. Fill the fields, edit clauses, and export PDF or DOCX in your browser. Not legal advice.',
+  applicationCategory: 'BusinessApplication',
+  isLegalAdjacent: true,
+  documentTitle: 'Service Agreement',
+  toolVersion: '1.0',
+  fields: [
+    { id: 'providerName', label: 'Service provider', type: 'text', required: true, section: 'Parties' },
+    { id: 'providerAddress', label: 'Provider address', type: 'textarea', rows: 2, section: 'Parties' },
+    { id: 'clientName', label: 'Client', type: 'text', required: true, section: 'Parties' },
+    { id: 'clientAddress', label: 'Client address', type: 'textarea', rows: 2, section: 'Parties' },
+    { id: 'effectiveDate', label: 'Effective date', type: 'date', required: true, section: 'Services' },
+    { id: 'serviceType', label: 'Service type', type: 'text', required: true, section: 'Services' },
+    { id: 'scope', label: 'Services / scope', type: 'textarea', rows: 4, required: true, section: 'Services' },
+    { id: 'serviceLocation', label: 'Service location', type: 'text', section: 'Services' },
+    { id: 'fee', label: 'Fee', type: 'currency', inputMode: 'decimal', required: true, section: 'Fees' },
+    { id: 'deposit', label: 'Deposit', type: 'currency', inputMode: 'decimal', section: 'Fees' },
+    { id: 'billingTerms', label: 'Billing terms', type: 'textarea', rows: 3, required: true, section: 'Fees' },
+    { id: 'termSummary', label: 'Term / renewal', type: 'textarea', rows: 2, section: 'Term' },
+    { id: 'governingState', label: 'Governing law', type: 'text', section: 'Term' },
+    { id: 'clauses', label: 'Clauses', type: 'clauses', section: 'Clauses' },
+  ],
+  defaults: {
+    providerName: 'ClearPath Facilities LLC',
+    providerAddress: '55 Harbor Ave, Seattle, WA 98104',
+    clientName: 'North Shore Wellness LLC',
+    clientAddress: '900 Cascade Blvd, Seattle, WA 98109',
+    effectiveDate: '2026-11-13',
+    serviceType: 'Monthly facilities maintenance',
+    scope:
+      'Scheduled monthly walkthrough, filter changes on HVAC units listed in Exhibit A, lightbulb and ballast replacements in common areas, and written punch-list after each visit. Excludes major repairs, roofing, and after-hours emergency response unless separately quoted.',
+    serviceLocation: 'North Shore Wellness clinic – Cascade Blvd',
+    fee: 1200,
+    deposit: 0,
+    billingTerms: 'Flat $1,200 per month, invoiced on the 1st, Net 15. Materials under $75 included; larger parts billed at cost with prior email approval.',
+    termSummary: 'Initial term 12 months; then month-to-month until either party gives 30 days’ written notice.',
+    governingState: 'State of Washington, USA',
+    clauses: [
+      clause(
+        'services',
+        'Services',
+        'Provider will perform the services described in the scope above in a professional manner. Services outside that scope require a written change order or separate quote.',
+      ),
+      clause(
+        'fees',
+        'Fees and payment',
+        'Client will pay fees and approved expenses according to the billing terms. Provider may pause non-critical work if invoices remain unpaid beyond the stated Net period after written notice.',
+      ),
+      clause(
+        'access',
+        'Access and client duties',
+        'Client will provide reasonable site access, keys or codes, and a point of contact. Delays caused by denied access may shift the schedule without penalty to Provider.',
+      ),
+      clause(
+        'warranty',
+        'Limited warranty',
+        'Provider will re-perform defective services reported within 30 days of the visit at no extra labor charge when the defect stems from Provider workmanship. Parts warranties follow the manufacturer.',
+      ),
+      clause(
+        'liability',
+        'Limitation of liability',
+        'Except where prohibited by law, Provider’s total liability under this agreement is limited to fees paid for the three months preceding the claim. Neither party is liable for indirect or consequential damages.',
+      ),
+      clause(
+        'termination',
+        'Term and termination',
+        'The term summary above controls renewal and notice. Either party may terminate for material breach uncured within 15 days after written notice.',
+      ),
+    ],
+  },
+  content: {
+    howToUse: [
+      'Name the provider and client, then the service type and location.',
+      'Write a measurable scope and billing terms (flat, hourly, or retainer).',
+      'Edit warranty, access, and termination clauses to match how you actually work.',
+      'Export PDF/DOCX for both parties to review—this is not legal advice.',
+    ],
+    whatToInclude: [
+      {
+        heading: 'What a service agreement should include',
+        body: 'Identify the parties, effective date, service description, location, fees, invoice timing, term or renewal, and exit notice. Add access duties, warranty limits, and how change orders work. Cornell LII’s contract overview still centers offer, acceptance, and consideration—your PDF should make those elements obvious in plain language rather than hiding them in jargon.',
+      },
+      {
+        heading: 'Service agreement vs niche contracts',
+        body: 'Use this general service agreement when the work is ongoing maintenance, consulting, or multi-visit services that do not already fit a specialized Docuklin template (photography, videography, wedding vendor, or web design). If the relationship is clearly a project freelance build with IP handoff, prefer the freelance web design contract or independent contractor agreement instead.',
+      },
+      {
+        heading: 'Deposits, renewals, and proof',
+        body: 'If you take a deposit, say whether it applies to the first invoice or is refundable. For renewals, state notice windows in calendar days. Keep signed PDFs with invoices; IRS recordkeeping pages list invoices and related papers among records that support business income and expenses.',
+      },
+    ],
+    workedExample: {
+      heading: 'Worked example: monthly facilities service',
+      body: 'ClearPath Facilities bills North Shore Wellness $1,200 per month for scheduled HVAC filter changes and common-area lighting, with materials under $75 included and larger parts pre-approved by email. The sample runs 12 months, then month-to-month with 30 days’ notice. Replace the scope lines for IT support, landscaping, or coaching retainers.',
+    },
+    commonMistakes: [
+      'Vague scopes like “general maintenance” with no visit list.',
+      'No Net terms or late-invoice pause language.',
+      'Warranty promises that outrun what manufacturers cover on parts.',
+      'Treating this educational template as attorney-reviewed counsel.',
+    ],
+    tips: [
+      legalNotice,
+      'Attach an exhibit for equipment lists or SLAs instead of stuffing them into one paragraph.',
+      'If you need contractor vs employee language, start from the independent contractor agreement.',
+    ],
+    faq: [
+      {
+        question: 'What should a service agreement include?',
+        answer:
+          'Parties, effective date, detailed services, fees and invoice timing, term or renewal, client access duties, warranty or re-performance limits, change-order rules, and termination notice. Add governing law only after counsel confirms it fits your situation.',
+      },
+      {
+        question: 'Is a service agreement the same as an SLA?',
+        answer:
+          'Not exactly. A service-level agreement usually adds measurable uptime or response targets. This template focuses on commercial terms for performing services; you can attach SLA metrics as an exhibit when needed.',
+      },
+      {
+        question: 'Do I need a deposit on a service agreement?',
+        answer:
+          'Only if your cash-flow or scheduling risk requires it. State the amount, when it is due, and whether it credits the first invoice. Recurring monthly services often skip deposits and use Net terms instead.',
+      },
+      {
+        question: 'Can I use this for freelance or contractor work?',
+        answer:
+          'You can adapt it, but if classification, IP assignment, or 1099 issues are central, use the independent contractor agreement or freelance web design contract templates, which emphasize those clauses.',
+      },
+      {
+        question: 'Is this service agreement template legal advice?',
+        answer:
+          'No. It produces editable sample language for discussion. Laws and enforceability vary. Have an attorney licensed in your jurisdiction review before you rely on it.',
+      },
+    ],
+    sources: contractSources,
+  },
+  relatedSlugs: ['independent-contractor-agreement', 'freelance-web-design-contract', 'quote-estimate-generator'],
+  publishedAt: '2026-11-13',
+  updatedAt: '2026-11-13',
 };

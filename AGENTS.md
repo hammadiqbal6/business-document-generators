@@ -2,7 +2,7 @@
 
 ## 1. Project overview
 
-- **What:** Privacy-first niche business document generators (idea #20) at [docuklin.com](https://docuklin.com) — fill a form in the browser, preview, export PDF/DOCX. No server-side storage of user form data.
+- **What:** Privacy-first niche business document generators (idea #20) for Docuklin — fill a form in the browser, preview, export PDF/DOCX. No server-side storage of user form data. Canonical origin comes from `PUBLIC_SITE_URL` / `siteDefaults.mjs` only.
 - **Stack:** Astro 5 + TypeScript, React islands for the editor, Vitest, Cloudflare Worker (`src/worker.ts`) serving static `dist/` assets (`wrangler.jsonc`).
 - **Deploy:** Merge to `main` auto-deploys via Cloudflare Workers Builds (`npm run build` → `npx wrangler deploy && node scripts/indexnow.mjs`). Details: `docs/DEPLOYMENT.md`.
 
