@@ -1,131 +1,119 @@
 # AGENTS.md — Docuklin
 
-## Overview
+## 1. Project overview
 
-Static Astro + TypeScript site with React islands for in-browser document generators. Privacy-first: no server-side storage of user form data. Target niche: **idea #20 — niche business document generators** (see `docs/ideas/README.md`).
+- **What:** Privacy-first niche business document generators (idea #20) at [docuklin.com](https://docuklin.com) — fill a form in the browser, preview, export PDF/DOCX. No server-side storage of user form data.
+- **Stack:** Astro 5 + TypeScript, React islands for the editor, Vitest, Cloudflare Worker (`src/worker.ts`) serving static `dist/` assets (`wrangler.jsonc`).
+- **Deploy:** Merge to `main` auto-deploys via Cloudflare Workers Builds (`npm run build` → `npx wrangler deploy && node scripts/indexnow.mjs`). Details: `docs/DEPLOYMENT.md`.
 
-## Architecture
+## 2. Repo map
 
-- `src/config/site.ts` + `siteDefaults.mjs` — single owner config (domain, brand, AdSense, GA4, EmailJS, verification tokens); see `docs/CONFIGURATION.md`
-- `/contact/` — optional EmailJS form (`PUBLIC_EMAILJS_*`); mailto fallback when unset — `docs/CONTACT-EMAILJS.md`
-- `src/data/tools/` — tool definitions (fields, defaults, SEO content)
-- `src/components/generators/` — `DocumentGenerator` island, preview model, lazy PDF/DOCX export
-- `src/pages/tools/[slug].astro` — tool shell + static educational content
-- `src/data/guides.ts` — guide articles; `src/pages/guides/[slug].astro` renders them
-- `scripts/audit/` — SEO, AdSense, budget, link checks (`npm run audit`)
-- `lighthouserc.cjs` — mobile Lighthouse CI budgets
+| Path | Role |
+|------|------|
+| `src/config/site.ts`, `siteDefaults.mjs` | Brand, domain, AdSense/GA4/EmailJS — see `docs/CONFIGURATION.md` |
+| `src/data/tools/` | Tool definitions (`estimates.ts`, `contracts.ts`, `forms-creative.ts`, `shared-sources.ts`, `index.ts`) |
+| `src/data/guides.ts` | Guide articles |
+| `src/data/toolGuideMap.ts` | Tool ↔ guide links |
+| `src/components/generators/` | `DocumentGenerator`, `documentModel.ts`, lazy shell |
+| `src/pages/tools/[slug].astro`, `guides/[slug].astro` | Tool/guide page shells + JSON-LD |
+| `src/pages/llms.txt.ts`, `llms-full.txt.ts`, `.well-known/llms.txt.ts` | AI crawler indexes (well-known → 301) |
+| `src/lib/seo.ts` | `buildPageTitle`, JSON-LD helpers |
+| `src/lib/consentRegions.ts`, `src/worker.ts` | EEA/UK/CH geo bootstrap for CMP |
+| `src/components/seo/Analytics.astro` | Consent Mode v2 + GA4 |
+| `public/_headers` | CSP + security headers |
+| `scripts/lib/content-dates.mjs` | Sitemap `lastmod` from real `updatedAt` |
+| `scripts/generate-og-svg.mjs` | OG SVG → PNG (`prebuild`) |
+| `scripts/indexnow.mjs` | Post-deploy IndexNow ping |
+| `scripts/audit/` | SEO / pages / AdSense / budget / links |
+| `docs/` | DEPLOYMENT, SEO-PLAYBOOK, SEO-GUARDRAILS, PAGE-CHECKLIST, ADSENSE, KEYWORD-MAP |
+| `.cursor/skills/`, `.cursor/rules/` | Agent skills and always-on rules |
 
-## Agent workflow (standing)
+## 3. Commands
 
-- **One focused PR per concern.** Do not mix content, CMP/consent, generator UX, and docs into one branch.
-- Branch from latest `main`: `cursor/<descriptive-name>-1fce`. Open the PR; do not merge unless asked.
-- Prefer the skills under `.cursor/skills/` over reinventing checklists.
+```bash
+npm ci                 # install
+npm run dev            # local Astro server
+npm test               # Vitest
+npm run audit          # build + full SEO/AdSense/budget/link audits
+npm run build          # static dist/ (runs OG prebuild)
+npm run indexnow       # ping IndexNow from dist sitemap (after deploy)
+npx lhci autorun       # mobile Lighthouse budgets (when UI/perf changes)
+```
 
-## Standing rules (learned)
+Shortcut: `npm run check` → `test` + `audit`.
 
-### Content voice
+## 4. Content rules
 
-- Write like a careful human editor: concrete, specific, scannable. No AI filler.
-- **Banned (non-exhaustive):** “in today’s digital landscape”, “delve into”, “leverage”, “unlock the power”, “comprehensive guide to”, “whether you’re a … or a …”, “it’s important to note that”, “navigate the complexities”, “furthermore/moreover” stacks, “in conclusion”.
-- **No invented stats.** Every number, rate, deadline, or legal claim needs a primary source URL. Prefer IRS, SBA, FTC, HUD, Cornell LII, Copyright Office, OSHA, CDC over blogs.
-- Guides: visible **Sources** list (`guide.sources`) + byline `Reviewed by Hammad Iqbal · Last updated <date>` (see `src/pages/guides/[slug].astro`).
-- Contracts / NDA / consent / rental / health-adjacent: `legalNote` + “not legal advice” (and medical where relevant). Tools: `isLegalAdjacent: true` when applicable.
+- **Voice:** Careful human editor — concrete, specific, scannable. Not AI-sounding.
+- **Banned filler (examples):** “in today’s digital landscape”, “delve into”, “leverage”, “unlock the power”, “comprehensive guide to”, “whether you’re a … or a …”, “it’s important to note that”, “navigate the complexities”, stacked “furthermore/moreover”, empty “in conclusion”.
+- **Sourcing:** No invented stats. Every number, rate, deadline, or legal claim needs a primary URL (IRS, SBA, FTC, HUD, Cornell LII, Copyright Office, OSHA, CDC preferred).
+- **Guides structure:** H1 → answer-first (~40–60 words, answer in sentence 1) → primary tool CTA above the fold → byline `Reviewed by Hammad Iqbal · Last updated` → body with question H2s → worked example → FAQ → **Sources** list.
+- **Tools structure:** H1 → short lead → usable form shell (real inputs, no “Open editor” gate) → byline → how-to / what to include / worked example / FAQ / sources.
+- **Legal:** Contracts, NDA, consent, rental, health-adjacent → guide `legalNote` + tool `isLegalAdjacent: true` + visible “not legal advice” (and medical where relevant). Never claim attorney review.
+- Full page checklist: `docs/PAGE-CHECKLIST.md`. Rule: `.cursor/rules/content-quality.mdc`.
 
-### Guide structure
+## 5. SEO / AEO rules
 
-- H1 → answer-first box (**~40–60 words**, sourced verdict in sentence 1) → **primary tool CTA above the fold** → byline → body.
-- H2s as real search questions (PAA / GSC). Include a worked example + table when useful. FAQ 4–6 items that match visible Q&A.
-- Guide CTA / body should use the same **template** naming as the matching tool when that is the ranking query (e.g. “podcast script template”).
-- Full checklist: `docs/PAGE-CHECKLIST.md`. Skill: `add-a-new-guide`, `refresh-an-existing-guide`.
+- One primary keyword per URL; map in `docs/KEYWORD-MAP.md`. Research first: `.cursor/rules/seo-pages.mdc`.
+- **Titles:** Pass through `buildPageTitle()` (`src/lib/seo.ts`); leave room for ` | Docuklin`; aim ≤60 chars at source (CI 25–65). Do not strip the brand.
+- **Schema:** FAQPage only for visible FAQs. HowTo only from on-page steps (`tool.content.howToUse` / `guide.howTo`). Guides also get Article. Tools get WebApplication/SoftwareApplication.
+- **Featured tools:** `featuredToolSlugs` / `getFeaturedTools()` in `src/data/tools/index.ts` — never `allTools.slice(0, N)`.
+- **Sitemap lastmod:** From real `updatedAt` via `scripts/lib/content-dates.mjs` + `astro.config.mjs`. Never set lastmod to “now”.
+- **IndexNow:** After production deploy (`npm run indexnow` / Workers Builds deploy command).
+- **llms:** Keep `llms.txt` / `llms-full.txt` question maps in sync when adding intent pages; `/.well-known/llms.txt` redirects to `/llms.txt`.
+- **OG images:** PNG only (`/og/guide-*.png`, `/og/tool-*.png`). Generated in `prebuild`; do not point social tags at SVG.
+- Origin for canonicals/sitemap/robots/llms/JSON-LD/OG: **only** `PUBLIC_SITE_URL` / `siteDefaults.mjs`.
 
-### Schema & titles
-
-- Guides: `Article` + `FAQPage` (+ `HowTo` **only** when `guide.howTo` matches on-page steps).
-- Tools: `WebApplication`/`SoftwareApplication` + `FAQPage` + `HowTo` from `tool.content.howToUse` (see `src/pages/tools/[slug].astro`).
-- Titles go through `buildPageTitle()` in `src/lib/seo.ts` — leave room for ` | Docuklin`; aim ≤60 chars at the source (CI 25–65). Do not pre-strip the brand.
-
-### Featured tools, sitemap, IndexNow, llms, OG
-
-- Home/footer/404 featured list = **`featuredToolSlugs` / `getFeaturedTools()`** in `src/data/tools/index.ts`. Never `allTools.slice(0, N)` — array order hid quote/receipt.
-- Sitemap `lastmod` comes from real `updatedAt` via `scripts/lib/content-dates.mjs` + `astro.config.mjs` serialize. **Never** set lastmod to “now”.
-- After publish/deploy: `npm run indexnow` (or `deploy:indexnow`). See `scripts/indexnow.mjs`.
-- `llms.txt` / `llms-full.txt` are generated from `src/pages/llms.txt.ts` and `llms-full.txt.ts` (tools/guides auto-list). Keep the **question map** in those files in sync when adding intent-heavy pages. `/.well-known/llms.txt` 301s to `/llms.txt`.
-- Page `og:image` must be **PNG** (`/og/guide-*.png`, `/og/tool-*.png`). `prebuild` runs `scripts/generate-og-svg.mjs` (SVG source + PNG rasterize). Do not ship SVG-only OG URLs.
+## 6. Security & consent
 
 ### CSP (`public/_headers`)
 
-Keep the allowlist tight. Widen only for a live CSP console violation + vendor docs. Required hosts today:
+Keep the allowlist tight. Widen only for a live console violation + vendor docs.
 
 | Purpose | Hosts (why) |
 |---------|-------------|
 | GA4 | `googletagmanager.com`, `google-analytics.com`, `*.google-analytics.com`, `*.analytics.google.com` |
 | AdSense + Funding Choices CMP | `pagead2.googlesyndication.com`, `googlesyndication.com`, `fundingchoicesmessages.google.com`, `*.adtrafficquality.google`, DoubleClick frames |
 | Cloudflare Web Analytics | `static.cloudflareinsights.com`, `cloudflareinsights.com` |
-| EmailJS contact | `api.emailjs.com`, `cdn.jsdelivr.net` (SDK) |
+| EmailJS | `api.emailjs.com`, `cdn.jsdelivr.net` (SDK) |
 
 ### Consent
 
-- Consent Mode v2: **denied by default** (`ad_storage`, `ad_user_data`, `ad_personalization`, `analytics_storage`) in `src/components/seo/Analytics.astro`.
-- **EEA / UK (`GB`) / CH:** Google AdSense Privacy & messaging (Funding Choices / IAB TCF v2.2) is the CMP. Worker injects `window.__docuklinGeo` (`src/lib/consentRegions.ts`); site cookie bar is suppressed there when ads are on.
-- **Elsewhere:** site Accept/Reject cookie banner. See `docs/ADSENSE.md`, `docs/DEPLOYMENT.md`.
+- Consent Mode v2: **denied by default** (`ad_storage`, `ad_user_data`, `ad_personalization`, `analytics_storage`) in `Analytics.astro`.
+- **EEA / UK (`GB`) / CH:** Google AdSense Privacy & messaging (Funding Choices / IAB TCF v2.2) is the CMP. Worker injects `window.__docuklinGeo` (`consentRegions.ts`); site cookie bar suppressed there when ads are on.
+- **Elsewhere:** site Accept/Reject cookie banner.
+- See `docs/ADSENSE.md`, `docs/DEPLOYMENT.md`, `.cursor/rules/consent-and-csp.mdc`.
 
-## Add a new tool / guide
+## 7. Adding pages / tools
 
-Use skills (do not skip files):
+Follow the skill — do not skip files:
 
 | Task | Skill |
 |------|--------|
-| New generator | `.cursor/skills/add-a-new-generator-tool/SKILL.md` |
+| New generator tool | `.cursor/skills/add-a-new-generator-tool/SKILL.md` |
 | New guide | `.cursor/skills/add-a-new-guide/SKILL.md` |
-| Refresh guide | `.cursor/skills/refresh-an-existing-guide/SKILL.md` |
+| Refresh existing guide | `.cursor/skills/refresh-an-existing-guide/SKILL.md` |
 | Pre-merge gate | `.cursor/skills/pre-merge-seo-aeo-checklist/SKILL.md` |
+| Legal-adjacent niche | `.cursor/skills/document-generator-niche/SKILL.md` |
+| UI/look/behavior change | `.cursor/skills/ui-ux-pro-max/SKILL.md` |
 
-Also: `document-generator-niche`, `ui-ux-pro-max` when UI changes.
+## 8. Workflow
 
-## Content / SEO / AdSense pointers
+- **One agent / one concern per repo stream:** separate focused PRs (content ≠ CMP ≠ generator UX ≠ docs). Do not mix.
+- Branch from latest `main`: `cursor/<descriptive-name>-1fce`. Open the PR; do not merge unless asked.
+- Prefer `.cursor/skills/` over reinventing process. Always-on: `.cursor/rules/agent-workflow.mdc`.
+- **Pre-merge:** `npm test && npm run audit` (see `pre-merge-seo-aeo-checklist`). UI/perf → also `npx lhci autorun` when relevant.
+- Optional subagents: `.cursor/agents/` (`seo-auditor`, `content-writer`, `adsense-reviewer`, `performance-auditor`, `document-fact-checker`).
 
-- Playbook: `docs/SEO-PLAYBOOK.md` · Guardrails: `docs/SEO-GUARDRAILS.md` · `.cursor/rules/seo-*.mdc`
-- Research first: `.cursor/rules/seo-pages.mdc` + `docs/PAGE-CHECKLIST.md`
-- Origin: **only** `PUBLIC_SITE_URL` / `siteDefaults.mjs`
-- Answer-first tools: H1 → short lead → static form shell with real inputs (no “Open editor” gate) → byline under tool
-- Never render Ahrefs/KD notes on public pages
+## 9. Don'ts
 
-## Commands
-
-| Command | Purpose |
-|---------|---------|
-| `npm run dev` | Local dev server |
-| `npm run build` | Static `dist/` (runs OG prebuild) |
-| `npm test` | Vitest |
-| `npm run audit` | Build + SEO/guardrails/page-checklist/AdSense/budget/links |
-| `npm run audit:pages` | Per-page checklist only (needs `dist/`) |
-| `npx lhci autorun` | Lighthouse mobile budgets |
-| `npm run indexnow` | Ping IndexNow from built sitemap |
-| `npm run proof` | Regenerate committed `docs/proof/` evidence |
-
-## Definition of done
-
-- Tools work end-to-end (preview, PDF, DOCX, localStorage) when changed
-- Audits + tests green; Lighthouse mobile ≥ 95 when UI/perf touched
-- Separate PR ready for review (scores / screenshots when relevant)
-
-## Subagents (`.cursor/agents/`)
-
-| Agent | Role |
-|-------|------|
-| seo-auditor | `npm run audit`, KEYWORD-MAP, schema |
-| content-writer | guides + tool prose |
-| adsense-reviewer | privacy/ads.txt/CMP checklist |
-| performance-auditor | Lighthouse + JS budgets |
-| link-builder-researcher | outreach ideas in SEO-GUIDE |
-| document-fact-checker | legal-adjacent disclaimers, sources |
-
-## UI/UX Pro Max
-
-For **any** look/behavior change: read `.cursor/skills/ui-ux-pro-max/SKILL.md`, then:
-
-```bash
-python3 .cursor/skills/ui-ux-pro-max/scripts/search.py "<query>" --domain <domain>
-```
-
-Priority: contrast ≥ 4.5:1, touch ≥ 44×44, visible focus, labeled fields, no horizontal scroll, `prefers-reduced-motion`.
+- Don’t invent stats, legal requirements, or attorney-reviewed claims.
+- Don’t ship AI filler voice or banned phrases above.
+- Don’t use `allTools.slice` for home/footer/404 featured lists.
+- Don’t set sitemap `lastmod` to “now”; don’t skip bumping real `updatedAt` on edits.
+- Don’t point `og:image` at SVG; don’t leave new pages out of KEYWORD-MAP / toolGuideMap / llms question maps.
+- Don’t emit HowTo/FAQPage JSON-LD without matching on-page content.
+- Don’t loosen CSP broadly; don’t add a second CMP in EEA/UK/CH alongside Funding Choices.
+- Don’t render Ahrefs/KD scores or internal keyword notes on public pages.
+- Don’t use an “Open editor” click gate; don’t cover the tool with a tall cookie bar (>56px).
+- Don’t merge unrelated workstreams into one PR; don’t merge without green `npm test` + `npm run audit`.
