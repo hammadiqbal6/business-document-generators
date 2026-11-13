@@ -27,8 +27,8 @@ export const DEFAULT_SITE_TAGLINE =
 export const DEFAULT_MANIFEST_DESCRIPTION =
   'Free niche business document generators with PDF export';
 
-/** Public contact email (footer, Contact, schema). */
-export const DEFAULT_CONTACT_EMAIL = 'hammadiqbal117@gmail.com';
+/** Public contact email (footer, Contact, schema). Domain address only — never a personal mailbox. */
+export const DEFAULT_CONTACT_EMAIL = 'hello@docuklin.com';
 
 /** Named maintainer (About, bylines, Person schema). */
 export const DEFAULT_AUTHOR_NAME = 'Hammad Iqbal';

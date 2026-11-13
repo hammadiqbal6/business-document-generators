@@ -12,7 +12,7 @@ const gaId = siteConfig.ga4MeasurementId;
       }
       window.gtag = gtag;
 
-      // Consent Mode v2 defaults — denied until the user accepts the cookie bar.
+      // Consent Mode v2: load the tag with storage denied, then update on Accept.
       gtag('consent', 'default', {
         ad_storage: 'denied',
         ad_user_data: 'denied',
@@ -26,7 +26,7 @@ const gaId = siteConfig.ga4MeasurementId;
       var CONSENT_KEY = 'docuforge:cookie-ok';
       var loaded = false;
 
-      function loadGa() {
+      function loadGaTag() {
         if (loaded || !gaId) return;
         loaded = true;
         var s = document.createElement('script');
@@ -43,13 +43,30 @@ const gaId = siteConfig.ga4MeasurementId;
         gtag('consent', 'update', {
           analytics_storage: 'granted',
         });
-        loadGa();
+        loadGaTag();
       }
 
-      function scheduleLoad() {
+      function denyAnalytics() {
+        gtag('consent', 'update', {
+          analytics_storage: 'denied',
+          ad_storage: 'denied',
+          ad_user_data: 'denied',
+          ad_personalization: 'denied',
+        });
+      }
+
+      // Always load the tag (with default denied) so Consent Mode can operate.
+      // Events queue in dataLayer; storage stays off until the user accepts.
+      function scheduleTagLoad() {
         var run = function () {
+          loadGaTag();
           try {
-            if (localStorage.getItem(CONSENT_KEY) === '1') grantAnalytics();
+            var v = localStorage.getItem(CONSENT_KEY);
+            if (v === '1') {
+              gtag('consent', 'update', { analytics_storage: 'granted' });
+            } else if (v === '0') {
+              denyAnalytics();
+            }
           } catch (e) {
             /* ignore */
           }
@@ -57,16 +74,15 @@ const gaId = siteConfig.ga4MeasurementId;
         if ('requestIdleCallback' in window) {
           requestIdleCallback(run, { timeout: 4000 });
         } else {
-          setTimeout(run, 2000);
+          setTimeout(run, 1500);
         }
       }
 
-      // If consent already given, defer GA until idle / after load.
-      // Otherwise wait for first interaction after accept (banner handles grant).
-      if (document.readyState === 'complete') scheduleLoad();
-      else window.addEventListener('load', scheduleLoad, { once: true });
+      if (document.readyState === 'complete') scheduleTagLoad();
+      else window.addEventListener('load', scheduleTagLoad, { once: true });
 
       window.__docuforgeGrantAnalytics = grantAnalytics;
+      window.__docuforgeDenyAnalytics = denyAnalytics;
 
       // Outbound reference clicks (sources / references)
       document.addEventListener(

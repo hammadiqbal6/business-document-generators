@@ -145,6 +145,7 @@ function buildCommercialDoc(
     'docNumber',
     'quoteNumber',
     'receiptNumber',
+    'invoiceRef',
     'woNumber',
     'estimateDate',
     'invoiceDate',
@@ -220,6 +221,16 @@ function buildCommercialDoc(
       type: 'paragraph',
       text: `Amount paid (${str(values.paymentMethod) || 'payment'}): ${money(values.amountPaid)}`,
     });
+    if (values.balanceRemaining != null && str(values.balanceRemaining) !== '') {
+      const bal = Number(values.balanceRemaining);
+      blocks.push({
+        type: 'paragraph',
+        text:
+          bal > 0
+            ? `Balance remaining: ${money(values.balanceRemaining)}`
+            : 'Balance remaining: $0.00 (paid in full)',
+      });
+    }
   }
 
   return blocks;

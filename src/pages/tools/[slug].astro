@@ -15,6 +15,7 @@ import {
   absoluteUrl,
   breadcrumbJsonLd,
   faqPageJsonLd,
+  howToJsonLd,
   toolPageGraphJsonLd,
 } from '../../lib/seo';
 
@@ -33,14 +34,21 @@ const crumbs = [
   { name: tool.shortName, path: pagePath },
 ];
 const faqLd = faqPageJsonLd(tool.content.faq);
+const howToLd = howToJsonLd({
+  name: `How to use the ${tool.shortName} generator`,
+  description: tool.metaDescription,
+  url: pageUrl,
+  steps: tool.content.howToUse,
+});
 const jsonLd = [
   breadcrumbJsonLd(crumbs),
   toolPageGraphJsonLd(tool, pageUrl),
   ...(faqLd ? [faqLd] : []),
+  ...(howToLd ? [howToLd] : []),
 ];
 const related = getRelatedTools(tool);
 const previewImage = `/images/tools/${tool.slug}.svg`;
-const ogImagePath = `/og/tool-${tool.slug}.svg`;
+const ogImagePath = `/og/tool-${tool.slug}.png`;
 
 /** Short answer-first lead (≤45 words) so the first form input stays above the mobile fold. */
 function shortLead(text: string, maxWords = 40): string {

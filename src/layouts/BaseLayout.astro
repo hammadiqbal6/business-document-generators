@@ -119,6 +119,9 @@ const allLd = includeSiteGraph
             /* ignore */
           }
           dismiss();
+          const deny = (window as Window & { __docuforgeDenyAnalytics?: () => void })
+            .__docuforgeDenyAnalytics;
+          deny?.();
         });
       }
     </script>

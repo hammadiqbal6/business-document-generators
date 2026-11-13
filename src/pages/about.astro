@@ -7,10 +7,11 @@ import { profilePageJsonLd } from '../lib/seo';
 const path = '/about/';
 const crumbs = [{ name: 'Home', path: '/' }, { name: 'About', path }];
 const author = siteConfig.author;
+const aboutUpdatedAt = '2026-11-13';
 const jsonLd = [
   profilePageJsonLd({
     dateCreated: `${siteConfig.launchedAt}T00:00:00+05:00`,
-    dateModified: '2026-10-20T00:00:00+05:00',
+    dateModified: `${aboutUpdatedAt}T00:00:00+05:00`,
   }),
 ];
 ---

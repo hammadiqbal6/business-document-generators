@@ -17,7 +17,7 @@
 | `/tools/simple-nda/` | simple NDA | NDA template free, mutual NDA generator | long-tail |
 | `/tools/work-order/` | work order | work order template, service work order form | long-tail |
 | `/tools/receipt-generator/` | receipt generator | payment receipt template, service receipt PDF | long-tail |
-| `/tools/quote-estimate-generator/` | quote estimate generator | business quote template, service estimate PDF | long-tail |
+| `/tools/quote-estimate-generator/` | free estimate generator | estimate generator free, quote estimate generator, business quote template | long-tail |
 | `/guides/construction-estimate-that-wins-jobs/` | how to write a construction estimate | construction estimate example | supports estimate tool |
 | `/guides/photography-contract-clauses/` | photography contract clauses | photography contract explained | supports photo contract |
 | `/guides/catering-quote-deposits/` | catering quote deposit | wedding catering pricing | supports catering quote |
@@ -26,7 +26,7 @@
 | `/guides/invoice-vs-estimate/` | invoice vs estimate | when to use estimate or invoice | differentiates estimate vs invoice tools |
 | `/guides/line-item-totals-explained/` | how line item totals work | estimate tax deposit math | supports all commercial generators |
 | `/guides/freelance-payment-schedule-milestones/` | freelance payment schedule | web design contract milestones | supports freelance contract tool |
-| `/guides/what-to-include-on-a-receipt/` | what to include on a receipt | payment receipt fields | receipt-generator, contractor-invoice |
+| `/guides/what-to-include-on-a-receipt/` | how to write a receipt of payment | what to include on a receipt, payment receipt fields | receipt-generator, contractor-invoice |
 | `/guides/cleaning-invoice-rates-line-items/` | cleaning invoice rates | cleaning line items | cleaning-service-invoice |
 | `/guides/nda-basics-for-freelancers/` | NDA basics for freelancers | mutual NDA explained | simple-nda, freelance-web-design-contract |
 | `/guides/work-order-vs-invoice-vs-estimate/` | work order vs invoice vs estimate | job ticket vs quote | work-order, quote-estimate-generator |

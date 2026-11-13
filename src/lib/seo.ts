@@ -22,9 +22,14 @@ export function buildPageTitle(title: string): string {
     return clip(title);
   }
   const shortBrand = siteConfig.siteShortName;
-  const withShort = `${title} | ${shortBrand}`;
+  const suffix = ` | ${shortBrand}`;
+  const withShort = `${title}${suffix}`;
   if (withShort.length <= hardMax) return withShort;
-  if (title.length <= hardMax) return title;
+  // Reserve space for the brand suffix instead of shipping an unbranded title.
+  const room = hardMax - suffix.length;
+  if (room >= 25) {
+    return `${title.slice(0, room - 1).trim()}…${suffix}`;
+  }
   return clip(title);
 }
 
@@ -78,20 +83,21 @@ export function personNode() {
 }
 
 function organizationNode() {
+  const email = siteConfig.contactEmail || undefined;
   return {
     '@type': 'Organization',
     '@id': orgId(),
     name: siteConfig.siteName,
     alternateName: [siteConfig.siteShortName],
     url: absoluteUrl('/'),
-    email: siteConfig.contactEmail,
+    ...(email ? { email } : {}),
     logo: organizationLogo(),
     sameAs: [...siteConfig.organizationSameAs],
     founder: { '@id': personId() },
     publishingPrinciples: absoluteUrl('/methodology/'),
     contactPoint: {
       '@type': 'ContactPoint',
-      email: siteConfig.contactEmail,
+      ...(email ? { email } : {}),
       contactType: 'customer support',
       url: absoluteUrl('/contact/'),
     },
@@ -149,15 +155,39 @@ export function personJsonLd() {
 }
 
 export function profilePageJsonLd(opts?: { dateCreated?: string; dateModified?: string }) {
+  const launched = `${siteConfig.launchedAt}T00:00:00+05:00`;
   return {
     '@context': 'https://schema.org',
     '@type': 'ProfilePage',
-    dateCreated: opts?.dateCreated || `${siteConfig.launchedAt}T00:00:00+05:00`,
-    dateModified: opts?.dateModified || '2026-10-20T00:00:00+05:00',
+    dateCreated: opts?.dateCreated || launched,
+    dateModified: opts?.dateModified || launched,
     mainEntity: {
       ...personNode(),
       // No image — no real headshot available; Google says omit rather than use a placeholder.
     },
+  };
+}
+
+/** HowTo JSON-LD from numbered steps already shown on the page. */
+export function howToJsonLd(opts: {
+  name: string;
+  description?: string;
+  url: string;
+  steps: string[];
+}) {
+  if (!opts.steps.length) return null;
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'HowTo',
+    name: opts.name,
+    description: opts.description,
+    url: opts.url,
+    step: opts.steps.map((text, i) => ({
+      '@type': 'HowToStep',
+      position: i + 1,
+      name: `Step ${i + 1}`,
+      text,
+    })),
   };
 }
 

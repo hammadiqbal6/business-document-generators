@@ -1,9 +1,11 @@
 ---
 import { siteConfig } from '../../config/site';
-import { allTools } from '../../data/tools';
+import { allTools, getFeaturedTools } from '../../data/tools';
 import DirectoryBadge from './DirectoryBadge.astro';
 const year = new Date().getFullYear();
 const directoryBadges = siteConfig.directoryBadges;
+const featured = getFeaturedTools();
+const contactEmail = siteConfig.contactEmail;
 ---
 <footer class="site-footer">
   <div class="site-footer__inner">
@@ -11,7 +13,7 @@ const directoryBadges = siteConfig.directoryBadges;
       <div>
         <h2>Tools</h2>
         <ul>
-          {allTools.slice(0, 6).map((t) => (
+          {featured.map((t) => (
             <li><a href={`/tools/${t.slug}/`}>{t.shortName}</a></li>
           ))}
           <li><a href="/tools/">All {allTools.length} tools →</a></li>
@@ -49,7 +51,9 @@ const directoryBadges = siteConfig.directoryBadges;
       © {year} {siteConfig.copyrightOwner}. Free tools run in your browser; we do not store your form data on our servers.
       Contract and consent pages are not legal advice.
     </p>
-    <p><a href={`mailto:${siteConfig.contactEmail}`}>{siteConfig.contactEmail}</a></p>
+    {contactEmail && (
+      <p><a href={`mailto:${contactEmail}`}>{contactEmail}</a></p>
+    )}
     {directoryBadges.length > 0 && (
       <div class="footer-badges" aria-label="Directory listings">
         {directoryBadges.map((badge) => (

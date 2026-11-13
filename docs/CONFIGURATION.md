@@ -22,7 +22,7 @@ Internal identifiers (`docuforge:cookie-ok`, draft keys, `__docuforgeGrantAnalyt
 | `PUBLIC_SITE_SHORT_NAME` | `Docuklin` | `apple-mobile-web-app-title`, manifest `short_name`, JSON-LD `alternateName` |
 | `PUBLIC_SITE_TAGLINE` | Free niche business document generators — … | Organization / WebSite description |
 | `PUBLIC_MANIFEST_DESCRIPTION` | Free niche business document generators with PDF export | `site.webmanifest` `description` |
-| `PUBLIC_CONTACT_EMAIL` | `hammadiqbal117@gmail.com` | Contact, footer, Organization email |
+| `PUBLIC_CONTACT_EMAIL` | `hello@docuklin.com` | Contact, footer, Organization email |
 | `PUBLIC_COPYRIGHT_OWNER` | _(empty → site name)_ | Footer `©` owner |
 | `PUBLIC_AUTHOR_NAME` | `Hammad Iqbal` | Bylines, About, Person schema |
 | `PUBLIC_AUTHOR_EMAIL` | same as contact | Person schema email |

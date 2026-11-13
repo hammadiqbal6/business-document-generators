@@ -3,9 +3,11 @@ import { defineConfig } from 'astro/config';
 import react from '@astrojs/react';
 import sitemap from '@astrojs/sitemap';
 import { DEFAULT_SITE_URL } from './src/config/siteDefaults.mjs';
+import { buildPathLastmodMap } from './scripts/lib/content-dates.mjs';
 
 // Canonical origin: PUBLIC_SITE_URL, else single default (see docs/CUSTOM-DOMAIN.md)
 const siteUrl = process.env.PUBLIC_SITE_URL || DEFAULT_SITE_URL;
+const pathLastmod = buildPathLastmodMap();
 
 export default defineConfig({
   site: siteUrl,
@@ -15,7 +17,16 @@ export default defineConfig({
     sitemap({
       filter: (page) => !page.includes('/embed/'),
       serialize(item) {
-        item.lastmod = new Date().toISOString();
+        // Prefer real content dates; omit lastmod when we have no reliable source.
+        try {
+          const u = new URL(item.url);
+          const path = u.pathname.endsWith('/') ? u.pathname : `${u.pathname}/`;
+          const lastmod = pathLastmod.get(path);
+          if (lastmod) item.lastmod = lastmod;
+          else delete item.lastmod;
+        } catch {
+          delete item.lastmod;
+        }
         return item;
       },
     }),

@@ -237,9 +237,68 @@ fs.writeFileSync(
 fs.writeFileSync(path.join(root, 'public/og-default.svg'), defaultOgSvg());
 writeWebManifest();
 
+const svgFiles = fs.readdirSync(outDir).filter((f) => f.endsWith('.svg'));
+const defaultPng = path.join(root, 'public/og-default.png');
+
+/**
+ * Rasterize each SVG to a 1200×630 PNG for og:image / twitter:image.
+ * Uses Playwright when Chromium is available; otherwise copies og-default.png
+ * so page references to /og/*.png never 404.
+ */
+async function rasterizeOgPngs() {
+  let browser;
+  try {
+    const { chromium } = await import('playwright');
+    browser = await chromium.launch({ headless: true });
+    const page = await browser.newPage({
+      viewport: { width: 1200, height: 630 },
+      deviceScaleFactor: 1,
+    });
+    for (const file of svgFiles) {
+      const svgPath = path.join(outDir, file);
+      const pngPath = path.join(outDir, file.replace(/\.svg$/, '.png'));
+      const fileUrl = `file://${svgPath}`;
+      await page.goto(fileUrl, { waitUntil: 'load', timeout: 15000 });
+      await page.setViewportSize({ width: 1200, height: 630 });
+      await page.screenshot({ path: pngPath, type: 'png', clip: { x: 0, y: 0, width: 1200, height: 630 } });
+    }
+    // Keep default PNG in sync with default SVG when possible.
+    const defaultSvg = path.join(root, 'public/og-default.svg');
+    if (fs.existsSync(defaultSvg)) {
+      await page.goto(`file://${defaultSvg}`, { waitUntil: 'load', timeout: 15000 });
+      await page.screenshot({
+        path: defaultPng,
+        type: 'png',
+        clip: { x: 0, y: 0, width: 1200, height: 630 },
+      });
+    }
+    console.log(`OG PNGs: rasterized ${svgFiles.length} cards with Playwright`);
+  } catch (err) {
+    console.warn(
+      `OG PNG rasterize skipped (${err?.message || err}); keeping existing PNGs or copying og-default.png.`,
+    );
+    if (!fs.existsSync(defaultPng)) {
+      throw new Error('public/og-default.png is required when Playwright rasterization is unavailable');
+    }
+    let copied = 0;
+    let kept = 0;
+    for (const file of svgFiles) {
+      const pngPath = path.join(outDir, file.replace(/\.svg$/, '.png'));
+      if (fs.existsSync(pngPath)) {
+        kept += 1;
+        continue;
+      }
+      fs.copyFileSync(defaultPng, pngPath);
+      copied += 1;
+    }
+    console.log(`OG PNGs: kept ${kept} existing, copied default for ${copied}`);
+  } finally {
+    if (browser) await browser.close();
+  }
+}
+
 console.log(
   `OG SVGs: ${toolPairs.length} tools, ${guidePairs.length} guides, ${hubs.length} hubs → ${outDir} (${siteName})`,
 );
-console.log(
-  'Note: if public/og-default.svg brand text changed, re-rasterize public/og-default.png (Playwright screenshot of the SVG).',
-);
+
+await rasterizeOgPngs();
