@@ -29,7 +29,7 @@ Enforced in CI by `npm run audit:pages` (`scripts/audit/page-checklist.mjs`).
 - [ ] Meta description 70–155 characters (CI allows 70–160), unique, answer or benefit, no stuffing.
 - [ ] Canonical absolute, self-referencing, https, trailing slash matching sitemap.
 - [ ] Robots: index,follow for real pages; noindex for embed/print/thin utility. Never Disallow a page you rely on noindex for.
-- [ ] Open Graph and Twitter: title, description, url, 1200×630 image (not SVG preferred for social; site may use SVG OG), alt text.
+- [ ] Open Graph and Twitter: title, description, url, 1200×630 **PNG** (`/og/*.png` from `scripts/generate-og-svg.mjs`; do not point social tags at SVG), alt text.
 - [ ] `<html lang>` and viewport set.
 
 ## 4. Schema (JSON-LD)

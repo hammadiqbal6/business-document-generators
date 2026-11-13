@@ -1,6 +1,12 @@
 ---
-description: Content quality and E-E-A-T
-globs: src/data/**/*.ts,src/pages/**/*.astro
+description: Content voice, sourcing, and E-E-A-T for tools and guides
+globs: src/data/**/*.ts,src/pages/**/*.astro,src/components/content/**/*.astro
 ---
-- Tool pages need answer-first paragraph, how-to, worked example, FAQ, sources, author box.
-- No lorem ipsum, TODOs, or thin duplicate pages.
+# Content quality
+
+- Human voice: concrete, specific, scannable. No AI filler.
+- Banned filler (examples): “in today’s digital landscape”, “delve into”, “leverage”, “unlock the power”, “comprehensive guide to”, “whether you’re a … or a …”, “it’s important to note that”, “navigate the complexities”, stacked “furthermore/moreover”, empty “in conclusion”.
+- No invented stats, rates, deadlines, or legal claims. Every number needs a primary source URL (IRS, SBA, FTC, HUD, Cornell LII, Copyright Office, OSHA, CDC preferred).
+- Guides: `answerFirst` ~40–60 words with the answer in sentence 1; `sources[]` rendered as Sources; byline “Reviewed by Hammad Iqbal · Last updated”; question-form H2s; worked example; FAQ matching visible Q&A.
+- Tool pages: answer-first lead, howToUse, whatToInclude, workedExample, FAQ, sources, author/byline. No lorem, TODOs, or thin duplicates.
+- Contract / consent / rental / health-adjacent: `legalNote` (guides) and `isLegalAdjacent` (tools); never claim attorney review.

@@ -1,0 +1,9 @@
+---
+description: How agents should open work on this repo (separate PRs, skills)
+alwaysApply: true
+---
+# Agent workflow
+
+- One concern per PR (content ≠ CMP ≠ generator UX ≠ docs). Branch from latest `main` as `cursor/<name>-1fce`. Open PR; do not merge unless asked.
+- Follow `AGENTS.md` standing rules and the matching skill under `.cursor/skills/` before inventing a new process.
+- Pre-merge gate: `npm test && npm run audit` (see `pre-merge-seo-aeo-checklist`).
