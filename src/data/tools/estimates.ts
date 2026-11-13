@@ -138,7 +138,7 @@ export const constructionEstimate: ToolDefinition = {
     ],
     sources: estimateSources,
   },
-  relatedSlugs: ['contractor-invoice', 'work-order', 'quote-estimate-generator'],
+  relatedSlugs: ['contractor-invoice', 'work-order', 'change-order-template'],
   publishedAt: '2026-10-19',
   updatedAt: '2026-11-13',
 };
@@ -259,7 +259,7 @@ export const contractorInvoice: ToolDefinition = {
     ],
     sources: estimateSources,
   },
-  relatedSlugs: ['construction-estimate-template', 'receipt-generator', 'work-order'],
+  relatedSlugs: ['construction-estimate-template', 'change-order-template', 'purchase-order-template'],
   publishedAt: '2026-10-19',
   updatedAt: '2026-11-13',
 };
@@ -887,7 +887,408 @@ export const workOrder: ToolDefinition = {
     ],
     sources: estimateSources,
   },
-  relatedSlugs: ['construction-estimate-template', 'contractor-invoice', 'receipt-generator'],
+  relatedSlugs: [
+    'construction-estimate-template',
+    'purchase-order-template',
+    'change-order-template',
+  ],
   publishedAt: '2026-10-19',
   updatedAt: '2026-10-20',
+};
+
+export const timesheetTemplate: ToolDefinition = {
+  slug: 'timesheet-template',
+  name: 'Timesheet Template',
+  shortName: 'Timesheet',
+  category: 'estimates-invoices',
+  primaryKeyword: 'timesheet template',
+  secondaryKeywords: [
+    'timesheet generator',
+    'weekly timesheet template',
+    'employee timesheet PDF',
+  ],
+  title: 'Free Timesheet Template (PDF)',
+  metaDescription:
+    'Fill a free timesheet template with hours by day, hourly rate, and totals. Preview live, then download PDF or DOCX—nothing uploads to a server.',
+  h1: 'Free Timesheet Template',
+  answerFirst:
+    'A timesheet template records who worked, which days, how many hours, the hourly rate, and the period total so payroll or client billing can match time to money. Enter hours by day below, review the live total, and export PDF or DOCX in your browser.',
+  applicationCategory: 'BusinessApplication',
+  isLegalAdjacent: false,
+  documentTitle: 'Timesheet',
+  toolVersion: '1.0',
+  formulaNote:
+    'Hours total = sum of daily hour quantities. Amount = hours total × hourly rate (or per-line rate × hours when rates differ by day). Tax is not applied on this timesheet; move approved hours to an invoice if you bill clients.',
+  fields: [
+    { id: 'companyName', label: 'Company', type: 'text', required: true, section: 'Business' },
+    { id: 'companyAddress', label: 'Company address', type: 'textarea', rows: 2, section: 'Business' },
+    { id: 'employeeName', label: 'Worker / employee name', type: 'text', required: true, section: 'Worker' },
+    { id: 'employeeRole', label: 'Role / department', type: 'text', section: 'Worker' },
+    { id: 'periodStart', label: 'Period start', type: 'date', required: true, section: 'Period' },
+    { id: 'periodEnd', label: 'Period end', type: 'date', required: true, section: 'Period' },
+    { id: 'hourlyRate', label: 'Default hourly rate', type: 'currency', inputMode: 'decimal', min: 0, section: 'Period' },
+    {
+      id: 'lineItems',
+      label: 'Hours by day',
+      type: 'lineItems',
+      required: true,
+      section: 'Hours',
+      help: 'Use description for the date/day, quantity for hours, unit “hr”, and rate for the hourly pay or bill rate.',
+    },
+    { id: 'notes', label: 'Notes / project codes', type: 'textarea', rows: 2, section: 'Notes' },
+    { id: 'approverName', label: 'Approver name', type: 'text', section: 'Approval' },
+  ],
+  defaults: {
+    companyName: 'Summit Build Co.',
+    companyAddress: '120 Industrial Way\nDenver, CO 80216',
+    employeeName: 'M. Ortiz',
+    employeeRole: 'Carpenter – Crew A',
+    periodStart: '2026-11-09',
+    periodEnd: '2026-11-15',
+    hourlyRate: 42,
+    lineItems: [
+      { description: 'Mon 2026-11-09 — site framing', quantity: 8, unit: 'hr', rate: 42 },
+      { description: 'Tue 2026-11-10 — site framing', quantity: 8, unit: 'hr', rate: 42 },
+      { description: 'Wed 2026-11-11 — material run + install', quantity: 7.5, unit: 'hr', rate: 42 },
+      { description: 'Thu 2026-11-12 — punch list', quantity: 8, unit: 'hr', rate: 42 },
+      { description: 'Fri 2026-11-13 — punch list', quantity: 6, unit: 'hr', rate: 42 },
+    ],
+    notes: 'Job CE-2026-014 kitchen remodel. Lunch unpaid; OT not applicable this week.',
+    approverName: 'A. Nguyen, Superintendent',
+  },
+  content: {
+    howToUse: [
+      'Enter the company, worker name, and pay period start/end dates.',
+      'Add one line per day (or shift) with hours in quantity and the hourly rate.',
+      'Review the hours total and dollar total in the live preview.',
+      'Export PDF/DOCX for payroll or client billing, or save a draft in this browser.',
+    ],
+    whatToInclude: [
+      {
+        heading: 'What belongs on a timesheet',
+        body: 'Name the worker, the pay or billing period, each day worked with hours, and the rate used for that time. Add job or project codes in the description or notes so the sheet ties back to an estimate, work order, or invoice. An approver line helps when a supervisor must sign before payroll runs.',
+      },
+      {
+        heading: 'Hours, rates, and totals',
+        body: 'Put hours in the quantity column and the hourly rate in the rate column so each line amount is hours × rate. Summing those lines gives the period total. This template does not invent overtime multipliers—if your policy pays time-and-a-half after a threshold, add a separate OT line with the OT rate rather than burying the math.',
+      },
+      {
+        heading: 'Timesheets next to invoices and work orders',
+        body: 'Field crews often log hours on a timesheet, then office staff copy billable lines onto a contractor invoice or mark a work order complete. Keep the same job number across estimate, timesheet, and invoice so accounts payable can match the file. IRS recordkeeping guidance lists documents that support income and expenses; approved timesheets help explain labor costs when you need them.',
+      },
+    ],
+    workedExample: {
+      heading: 'Worked example: five-day crew timesheet',
+      body: 'M. Ortiz logs 8 + 8 + 7.5 + 8 + 6 = 37.5 hours at $42/hr for job CE-2026-014. Line amounts sum to $1,575 before any payroll taxes or burden. Change a day’s hours and the preview recalculates immediately.',
+    },
+    commonMistakes: [
+      'One lump “40 hours” line with no daily detail when the client or payroll needs day-level proof.',
+      'Mixing bill rates and pay rates on the same sheet without labeling which is which.',
+      'Forgetting the period end date so sheets overlap pay cycles.',
+      'Skipping supervisor approval on client-billable T&M jobs.',
+    ],
+    tips: [
+      'Use the same job number as your construction estimate or work order.',
+      'Export PDF for the worker file and keep a DOCX if payroll edits descriptions.',
+    ],
+    faq: [
+      {
+        question: 'What is a timesheet?',
+        answer:
+          'A timesheet is a record of hours worked by day (or shift) for a stated period, often with a rate and approval signature so payroll or client billing can verify time.',
+      },
+      {
+        question: 'How do you calculate a timesheet total?',
+        answer:
+          'Add the hours for each day, then multiply by the hourly rate—or sum each line’s hours × rate when rates differ. This generator shows both the hour total and the dollar total from your lines.',
+      },
+      {
+        question: 'How do I create a weekly timesheet?',
+        answer:
+          'Set the period start and end (often Monday–Sunday), add one line per workday with hours and rate, note the job code, and have a supervisor approve before you export the PDF.',
+      },
+      {
+        question: 'Should overtime be a separate line?',
+        answer:
+          'Yes when your policy uses a different OT rate. Keep regular hours on their lines and add OT hours at the OT rate so the math stays auditable.',
+      },
+      {
+        question: 'Is a timesheet the same as an invoice?',
+        answer:
+          'No. A timesheet proves time; an invoice bills for it. Many contractors copy approved hours into a contractor invoice after the period closes.',
+      },
+    ],
+    sources: estimateSources,
+  },
+  relatedSlugs: ['contractor-invoice', 'work-order', 'receipt-generator'],
+  publishedAt: '2026-11-13',
+  updatedAt: '2026-11-13',
+};
+
+export const purchaseOrderTemplate: ToolDefinition = {
+  slug: 'purchase-order-template',
+  name: 'Purchase Order Template',
+  shortName: 'Purchase Order',
+  category: 'estimates-invoices',
+  primaryKeyword: 'purchase order template',
+  secondaryKeywords: [
+    'purchase order form',
+    'PO template free',
+    'business purchase order PDF',
+  ],
+  title: 'Purchase Order Template (Free)',
+  metaDescription:
+    'Create a purchase order with PO number, vendor, ship-to address, line items, and totals. Live preview plus free PDF or DOCX export.',
+  h1: 'Free Purchase Order Template',
+  answerFirst:
+    'A purchase order (PO) tells a vendor what to supply: PO number, dates, bill-to and ship-to addresses, line items with quantities and rates, tax, and a total. Fill this template in your browser, preview the PO, and download PDF or DOCX without uploading data.',
+  applicationCategory: 'BusinessApplication',
+  isLegalAdjacent: false,
+  documentTitle: 'Purchase Order',
+  toolVersion: '1.0',
+  formulaNote:
+    'Line amount = quantity × rate. Subtotal = sum of line amounts. Tax = subtotal × (tax rate ÷ 100). Total = subtotal + tax.',
+  fields: [
+    { id: 'companyName', label: 'Buyer company', type: 'text', required: true, section: 'Buyer' },
+    { id: 'companyAddress', label: 'Bill-to address', type: 'textarea', rows: 2, section: 'Buyer' },
+    { id: 'companyPhone', label: 'Phone', type: 'tel', section: 'Buyer' },
+    { id: 'companyEmail', label: 'Email', type: 'email', section: 'Buyer' },
+    { id: 'poNumber', label: 'PO number', type: 'text', required: true, section: 'Order' },
+    { id: 'poDate', label: 'PO date', type: 'date', required: true, section: 'Order' },
+    { id: 'neededBy', label: 'Need-by date', type: 'date', section: 'Order' },
+    { id: 'vendorName', label: 'Vendor', type: 'text', required: true, section: 'Vendor' },
+    { id: 'vendorAddress', label: 'Vendor address', type: 'textarea', rows: 2, section: 'Vendor' },
+    { id: 'shipToName', label: 'Ship-to name', type: 'text', required: true, section: 'Ship-to' },
+    { id: 'shipToAddress', label: 'Ship-to address', type: 'textarea', rows: 3, required: true, section: 'Ship-to' },
+    { id: 'lineItems', label: 'Line items', type: 'lineItems', required: true, section: 'Items' },
+    { id: 'taxRate', label: 'Tax rate (%)', type: 'number', inputMode: 'decimal', min: 0, max: 100, step: 0.01, section: 'Items' },
+    { id: 'paymentInstructions', label: 'Payment / shipping terms', type: 'textarea', rows: 2, section: 'Terms' },
+    { id: 'notes', label: 'Notes', type: 'textarea', rows: 2, section: 'Terms' },
+  ],
+  defaults: {
+    companyName: 'Summit Build Co.',
+    companyAddress: '120 Industrial Way\nDenver, CO 80216',
+    companyPhone: '(303) 555-0142',
+    companyEmail: 'purchasing@summitbuild.example',
+    poNumber: 'PO-2026-441',
+    poDate: '2026-11-13',
+    neededBy: '2026-11-20',
+    vendorName: 'Front Range Millwork Supply',
+    vendorAddress: '400 Lumber Yard Rd, Aurora, CO 80011',
+    shipToName: 'Summit Build Co. – Job CE-2026-014',
+    shipToAddress: '88 Cedar Lane, Denver, CO 80220\nAttn: M. Ortiz / Crew A',
+    lineItems: [
+      { description: 'Soft-close cabinet hinges (pair)', quantity: 24, unit: 'ea', rate: 8.5 },
+      { description: '3/4" plywood sheet (4x8)', quantity: 10, unit: 'ea', rate: 62 },
+      { description: 'Delivery to job site', quantity: 1, unit: 'ls', rate: 95 },
+    ],
+    taxRate: 8.31,
+    paymentInstructions: 'Net 30 from invoice. Reference PO-2026-441 on packing slip and invoice.',
+    notes: 'Call superintendent 30 minutes before delivery. Forklift not on site—tailgate delivery OK.',
+  },
+  content: {
+    howToUse: [
+      'Enter buyer details, PO number, and date.',
+      'Add vendor and ship-to addresses (they often differ from bill-to).',
+      'List quantities, units, and rates; set tax if it applies.',
+      'Export PDF/DOCX and send the PO to the vendor before goods ship.',
+    ],
+    whatToInclude: [
+      {
+        heading: 'Purchase order fields vendors need',
+        body: 'A usable PO has a unique number, date, buyer bill-to, vendor name, ship-to address, line items with quantities and prices, tax treatment, and payment or shipping terms. Job-site ship-to lines should name the superintendent or receiving contact so trucks are not turned away.',
+      },
+      {
+        heading: 'PO vs invoice vs work order',
+        body: 'A purchase order is the buyer’s offer to buy; the vendor’s invoice bills for what shipped; a work order directs crews to perform labor. Earlier Docuklin research and the work-order guide treat those as three different documents—keep the PO number on the packing slip and the later invoice so receiving can three-way match.',
+      },
+      {
+        heading: 'Totals and records',
+        body: 'Line amount equals quantity × rate; tax usually applies to the taxable subtotal. Keep issued POs with receiving notes and vendor invoices. IRS small-business recordkeeping materials highlight invoices and related papers as support for purchases and expenses.',
+      },
+    ],
+    workedExample: {
+      heading: 'Worked example: millwork PO to a job site',
+      body: 'PO-2026-441 orders 24 hinge pairs, 10 plywood sheets, and delivery to 88 Cedar Lane for kitchen remodel CE-2026-014. Subtotal is calculated from the lines, 8.31% tax is applied, and Net 30 terms reference the same PO number the vendor must print on the invoice.',
+    },
+    commonMistakes: [
+      'Shipping to the office bill-to when materials must land on the job site.',
+      'Reusing PO numbers across jobs.',
+      'Omitting the need-by date on long-lead items.',
+      'No instruction to put the PO number on the vendor invoice.',
+    ],
+    tips: [
+      'Match PO numbers into your contractor invoice “PO / job #” field when billing owners for reimbursable materials.',
+      'If quantities change after issue, send a revised PO or a short change note—do not silently alter receiving copies.',
+    ],
+    faq: [
+      {
+        question: 'What is a purchase order?',
+        answer:
+          'A purchase order is a buyer-issued document that authorizes a vendor to supply listed goods or services at stated quantities and prices, usually with bill-to and ship-to details.',
+      },
+      {
+        question: 'Is a purchase order the same as a work order?',
+        answer:
+          'No. A PO buys materials or services from a vendor; a work order assigns labor tasks to a crew. Some shops reference both numbers on the same job file.',
+      },
+      {
+        question: 'What should every purchase order include?',
+        answer:
+          'Unique PO number, date, buyer and vendor, ship-to address, line items with qty/price, tax if applicable, and payment or shipping terms—plus a note to reference the PO on invoices.',
+      },
+      {
+        question: 'Do I need tax on a purchase order?',
+        answer:
+          'Follow your jurisdiction and whether the purchase is taxable. Many POs show an estimated tax rate; the vendor invoice may adjust based on actual tax rules.',
+      },
+      {
+        question: 'Can I edit a purchase order after sending it?',
+        answer:
+          'Issue a revised PO with the same number and a revision note, or a new PO that supersedes the old one. Tell the vendor which document is active so receiving is not stuck with two totals.',
+      },
+    ],
+    sources: estimateSources,
+  },
+  relatedSlugs: ['work-order', 'contractor-invoice', 'quote-estimate-generator'],
+  publishedAt: '2026-11-13',
+  updatedAt: '2026-11-13',
+};
+
+export const changeOrderTemplate: ToolDefinition = {
+  slug: 'change-order-template',
+  name: 'Change Order Template',
+  shortName: 'Change Order',
+  category: 'estimates-invoices',
+  primaryKeyword: 'change order template',
+  secondaryKeywords: [
+    'construction change order template',
+    'change order form',
+    'contract change order PDF',
+  ],
+  title: 'Change Order Template (Free)',
+  metaDescription:
+    'Document a construction change order with original contract reference, change description, cost and time impact, and signature lines. Export PDF/DOCX free.',
+  h1: 'Free Change Order Template',
+  answerFirst:
+    'A change order records a written change to an existing contract or estimate: the original reference, what is changing, the cost impact, any schedule impact, and signatures from both parties. Fill this template, preview it, and export PDF or DOCX before the extra work starts.',
+  applicationCategory: 'BusinessApplication',
+  isLegalAdjacent: false,
+  documentTitle: 'Change Order',
+  toolVersion: '1.0',
+  formulaNote:
+    'Optional line items use quantity × rate. Cost impact fields should match the sum of added (or credited) lines when you price the change that way.',
+  fields: [
+    { id: 'companyName', label: 'Contractor / company', type: 'text', required: true, section: 'Parties' },
+    { id: 'companyAddress', label: 'Company address', type: 'textarea', rows: 2, section: 'Parties' },
+    { id: 'clientName', label: 'Client / owner', type: 'text', required: true, section: 'Parties' },
+    { id: 'clientAddress', label: 'Project address', type: 'textarea', rows: 2, section: 'Parties' },
+    { id: 'coNumber', label: 'Change order #', type: 'text', required: true, section: 'Reference' },
+    { id: 'coDate', label: 'Change order date', type: 'date', required: true, section: 'Reference' },
+    { id: 'originalContractRef', label: 'Original contract / estimate #', type: 'text', required: true, section: 'Reference' },
+    { id: 'originalContractDate', label: 'Original contract date', type: 'date', section: 'Reference' },
+    { id: 'projectName', label: 'Project name', type: 'text', required: true, section: 'Change' },
+    { id: 'changeDescription', label: 'Description of change', type: 'textarea', rows: 4, required: true, section: 'Change' },
+    { id: 'reason', label: 'Reason / discovery', type: 'textarea', rows: 2, section: 'Change' },
+    { id: 'costImpact', label: 'Cost impact (+/−)', type: 'currency', inputMode: 'decimal', required: true, section: 'Impact' },
+    { id: 'scheduleDays', label: 'Schedule impact (days)', type: 'number', inputMode: 'numeric', section: 'Impact' },
+    { id: 'revisedTotal', label: 'Revised contract total', type: 'currency', inputMode: 'decimal', section: 'Impact' },
+    { id: 'lineItems', label: 'Price breakdown (optional)', type: 'lineItems', section: 'Impact' },
+    { id: 'notes', label: 'Notes / exclusions', type: 'textarea', rows: 2, section: 'Impact' },
+    { id: 'contractorSigner', label: 'Contractor signer name', type: 'text', section: 'Signatures' },
+    { id: 'clientSigner', label: 'Client signer name', type: 'text', section: 'Signatures' },
+  ],
+  defaults: {
+    companyName: 'Summit Build Co.',
+    companyAddress: '120 Industrial Way\nDenver, CO 80216',
+    clientName: 'Jordan Lee',
+    clientAddress: '88 Cedar Lane, Denver, CO 80220',
+    coNumber: 'CO-03',
+    coDate: '2026-11-13',
+    originalContractRef: 'CE-2026-014 / Contract 2026-10-19',
+    originalContractDate: '2026-10-19',
+    projectName: 'Kitchen remodel – cabinets & flooring',
+    changeDescription:
+      'Replace damaged subfloor in the pantry (approx. 32 sq ft) discovered after vinyl removal; install matching LVP; haul debris. Work was not in the original scope exclusions for unknown substrate conditions beyond the $400 allowance.',
+    reason: 'Concealed water damage under existing vinyl; photo log attached to job file.',
+    costImpact: 980,
+    scheduleDays: 2,
+    revisedTotal: 0,
+    lineItems: [
+      { description: 'Subfloor repair labor', quantity: 6, unit: 'hr', rate: 75 },
+      { description: 'Plywood & fasteners', quantity: 1, unit: 'ls', rate: 180 },
+      { description: 'LVP materials (pantry)', quantity: 32, unit: 'sq ft', rate: 3.25 },
+      { description: 'Haul-off & disposal', quantity: 1, unit: 'ls', rate: 120 },
+    ],
+    notes: 'Allowance of $400 on original estimate is exhausted; this CO is additive. No plumbing changes included.',
+    contractorSigner: 'A. Nguyen, Summit Build Co.',
+    clientSigner: 'Jordan Lee',
+  },
+  content: {
+    howToUse: [
+      'Reference the original estimate or contract number and project name.',
+      'Describe the change and why it appeared (discovery, owner request, code).',
+      'Enter cost impact, schedule days, and optional priced line items.',
+      'Export PDF/DOCX and collect contractor and client signatures before starting the extra work.',
+    ],
+    whatToInclude: [
+      {
+        heading: 'Why change orders sit next to construction estimates',
+        body: 'Estimates and contracts describe the work you priced. When conditions differ—rot, owner upgrades, or code corrections—a change order documents the new scope, money, and time so the job file stays aligned. Link CO numbers back to the construction estimate and later contractor invoices.',
+      },
+      {
+        heading: 'Cost, time, and signatures',
+        body: 'State the dollar impact as a positive add or a credit, the calendar days added to substantial completion, and whether a prior allowance is exhausted. Signature lines for contractor and client (or owner’s rep) show authorization before crews order materials. Optional line items make the cost impact auditable.',
+      },
+      {
+        heading: 'Change order vs work order',
+        body: 'A change order amends the commercial deal; a work order tells the crew what to do on site. Issue the signed change order first when price or time shifts, then update the work order tasks. Autocomplete noise often mixes “change order” with software UI phrases—this template is the construction document, not an Outlook or QuickBooks menu label.',
+      },
+    ],
+    workedExample: {
+      heading: 'Worked example: pantry subfloor change order',
+      body: 'CO-03 adds $980 and two schedule days after vinyl removal revealed damaged pantry subfloor on kitchen remodel CE-2026-014. Labor, plywood, LVP, and haul-off lines support the cost impact, and both parties sign before repair starts. The original $400 substrate allowance is noted as exhausted.',
+    },
+    commonMistakes: [
+      'Starting extra work on a verbal OK with no signed CO.',
+      'Omitting schedule impact when material lead times slip.',
+      'Forgetting to reference the original estimate or contract number.',
+      'Cost impact that does not match the priced breakdown lines.',
+    ],
+    tips: [
+      'Photo the condition before covering it up; note the photo log in the reason field.',
+      'After signature, update the next progress invoice to include the CO number.',
+    ],
+    faq: [
+      {
+        question: 'What is a construction change order?',
+        answer:
+          'It is a written amendment to an existing construction contract or accepted estimate that describes new or changed work, the price adjustment, and any change to the schedule, with authorization signatures.',
+      },
+      {
+        question: 'When should I issue a change order?',
+        answer:
+          'Before performing work that was not in the original scope or that exceeds a stated allowance—especially after concealed conditions, owner upgrades, or code-driven revisions.',
+      },
+      {
+        question: 'Is a change order the same as a work order?',
+        answer:
+          'No. Change orders amend price and scope on the contract; work orders direct field labor. Many jobs need both: a signed CO, then an updated work order for the crew.',
+      },
+      {
+        question: 'How do I show cost and time impact?',
+        answer:
+          'Enter the net dollar change, days added (or zero), and optional line items that sum to the cost impact. State whether prior allowances apply.',
+      },
+      {
+        question: 'Do both parties need to sign?',
+        answer:
+          'Yes whenever you expect the change to be enforceable as part of the deal. Unsigned “field tickets” often turn into payment disputes at the end of the job.',
+      },
+    ],
+    sources: estimateSources,
+  },
+  relatedSlugs: ['construction-estimate-template', 'contractor-invoice', 'work-order'],
+  publishedAt: '2026-11-13',
+  updatedAt: '2026-11-13',
 };

@@ -37,6 +37,11 @@ export const GET: APIRoute = () => {
     `- Wedding videography contract? → ${origin}/guides/wedding-videography-contract/`,
     `- How do you write a podcast script? → ${origin}/guides/podcast-script-structure/`,
     `- How do you make a real estate flyer? → ${origin}/guides/real-estate-flyer-what-to-include/`,
+    `- What is an independent contractor agreement? → ${origin}/tools/independent-contractor-agreement/`,
+    `- How do you create a timesheet? → ${origin}/tools/timesheet-template/`,
+    `- What should a service agreement include? → ${origin}/tools/service-agreement-template/`,
+    `- Is a purchase order the same as a work order? → ${origin}/tools/purchase-order-template/`,
+    `- What is a construction change order? → ${origin}/tools/change-order-template/`,
   ];
 
   const citedFigures = [

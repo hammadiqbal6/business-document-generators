@@ -19,7 +19,7 @@ flowchart LR
   Form --> DOCX
 ```
 
-## Tools (16)
+## Tools (21)
 
 | Tool | Path |
 |------|------|
@@ -39,6 +39,11 @@ flowchart LR
 | Work order | `/tools/work-order/` |
 | Receipt generator | `/tools/receipt-generator/` |
 | Quote / estimate | `/tools/quote-estimate-generator/` |
+| Independent contractor agreement | `/tools/independent-contractor-agreement/` |
+| Timesheet template | `/tools/timesheet-template/` |
+| Service agreement | `/tools/service-agreement-template/` |
+| Purchase order | `/tools/purchase-order-template/` |
+| Change order | `/tools/change-order-template/` |
 
 Hubs: `/hubs/estimates-invoices/`, `/hubs/contracts/`, `/hubs/forms/`, `/hubs/creative-templates/`
 

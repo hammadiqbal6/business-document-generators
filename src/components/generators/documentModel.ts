@@ -48,6 +48,12 @@ export function buildDocumentBlocks(
     case 'receipt-generator':
     case 'work-order':
       return buildCommercialDoc(tool, values, blocks);
+    case 'purchase-order-template':
+      return buildPurchaseOrder(values, blocks);
+    case 'timesheet-template':
+      return buildTimesheet(values, blocks);
+    case 'change-order-template':
+      return buildChangeOrder(values, blocks);
     case 'photography-contract-template':
       return buildPhotoContract(values, blocks);
     case 'videography-contract':
@@ -56,6 +62,10 @@ export function buildDocumentBlocks(
       return buildWebContract(values, blocks);
     case 'event-wedding-vendor-contract':
       return buildEventContract(values, blocks);
+    case 'independent-contractor-agreement':
+      return buildIndependentContractor(values, blocks);
+    case 'service-agreement-template':
+      return buildServiceAgreement(values, blocks);
     case 'simple-nda':
       return buildNda(values, blocks);
     case 'tattoo-consent-form-template':
@@ -240,6 +250,212 @@ function buildCommercialDoc(
     }
   }
 
+  return blocks;
+}
+
+function buildPurchaseOrder(values: Record<string, unknown>, blocks: DocBlock[]): DocBlock[] {
+  blocks[0] = { type: 'heading', text: 'Purchase Order' };
+  blocks.push({
+    type: 'kv',
+    pairs: [
+      { label: 'Buyer', value: str(values.companyName) },
+      { label: 'Bill-to', value: str(values.companyAddress) },
+      { label: 'Phone', value: str(values.companyPhone) },
+      { label: 'Email', value: str(values.companyEmail) },
+      { label: 'PO #', value: str(values.poNumber) },
+      { label: 'PO date', value: str(values.poDate) },
+      { label: 'Need by', value: str(values.neededBy) },
+    ].filter((p) => p.value),
+  });
+  blocks.push({
+    type: 'kv',
+    pairs: [
+      { label: 'Vendor', value: str(values.vendorName) },
+      { label: 'Vendor address', value: str(values.vendorAddress) },
+    ].filter((p) => p.value),
+  });
+  blocks.push({
+    type: 'kv',
+    pairs: [
+      { label: 'Ship to', value: str(values.shipToName) },
+      { label: 'Ship-to address', value: str(values.shipToAddress) },
+    ].filter((p) => p.value),
+  });
+  const lineItems = items(values);
+  if (lineItems.length) {
+    blocks.push({ type: 'subheading', text: 'Line items' });
+    blocks.push(lineTable(lineItems));
+    blocks.push(totalsBlock(lineItems, Number(values.taxRate) || 0));
+  }
+  if (str(values.paymentInstructions)) {
+    blocks.push({ type: 'paragraph', text: `Payment / shipping terms: ${str(values.paymentInstructions)}` });
+  }
+  if (str(values.notes)) {
+    blocks.push({ type: 'paragraph', text: `Notes: ${str(values.notes)}` });
+  }
+  return blocks;
+}
+
+function buildTimesheet(values: Record<string, unknown>, blocks: DocBlock[]): DocBlock[] {
+  blocks[0] = { type: 'heading', text: 'Timesheet' };
+  blocks.push({
+    type: 'kv',
+    pairs: [
+      { label: 'Company', value: str(values.companyName) },
+      { label: 'Address', value: str(values.companyAddress) },
+      { label: 'Worker', value: str(values.employeeName) },
+      { label: 'Role', value: str(values.employeeRole) },
+      { label: 'Period start', value: str(values.periodStart) },
+      { label: 'Period end', value: str(values.periodEnd) },
+      { label: 'Default rate', value: values.hourlyRate != null && str(values.hourlyRate) !== '' ? money(values.hourlyRate) : '' },
+    ].filter((p) => p.value),
+  });
+  const lineItems = items(values);
+  if (lineItems.length) {
+    const hoursTotal = lineItems.reduce((sum, i) => sum + (Number(i.quantity) || 0), 0);
+    blocks.push({ type: 'subheading', text: 'Hours by day' });
+    blocks.push(lineTable(lineItems));
+    blocks.push({
+      type: 'totals',
+      totals: [
+        { label: 'Hours total', value: String(Math.round(hoursTotal * 100) / 100) },
+        { label: 'Amount', value: money(sumLineItems(lineItems)), emphasize: true },
+      ],
+    });
+  }
+  if (str(values.notes)) {
+    blocks.push({ type: 'paragraph', text: `Notes: ${str(values.notes)}` });
+  }
+  if (str(values.approverName)) {
+    blocks.push({
+      type: 'paragraph',
+      text: `Approver: ${str(values.approverName)} __________________ Date ______`,
+    });
+  }
+  return blocks;
+}
+
+function buildChangeOrder(values: Record<string, unknown>, blocks: DocBlock[]): DocBlock[] {
+  blocks[0] = { type: 'heading', text: 'Change Order' };
+  blocks.push({
+    type: 'kv',
+    pairs: [
+      { label: 'Contractor', value: str(values.companyName) },
+      { label: 'Address', value: str(values.companyAddress) },
+      { label: 'Client', value: str(values.clientName) },
+      { label: 'Project address', value: str(values.clientAddress) },
+      { label: 'Change order #', value: str(values.coNumber) },
+      { label: 'Date', value: str(values.coDate) },
+      { label: 'Original contract / estimate #', value: str(values.originalContractRef) },
+      { label: 'Original contract date', value: str(values.originalContractDate) },
+    ].filter((p) => p.value),
+  });
+  if (str(values.projectName)) {
+    blocks.push({ type: 'subheading', text: str(values.projectName) });
+  }
+  if (str(values.changeDescription)) {
+    blocks.push({ type: 'paragraph', text: `Description of change: ${str(values.changeDescription)}` });
+  }
+  if (str(values.reason)) {
+    blocks.push({ type: 'paragraph', text: `Reason: ${str(values.reason)}` });
+  }
+  blocks.push({
+    type: 'kv',
+    pairs: [
+      { label: 'Cost impact', value: money(values.costImpact) },
+      {
+        label: 'Schedule impact (days)',
+        value: values.scheduleDays != null && str(values.scheduleDays) !== '' ? str(values.scheduleDays) : '',
+      },
+      {
+        label: 'Revised contract total',
+        value:
+          values.revisedTotal != null && Number(values.revisedTotal) !== 0
+            ? money(values.revisedTotal)
+            : '',
+      },
+    ].filter((p) => p.value),
+  });
+  const lineItems = items(values);
+  if (lineItems.length) {
+    blocks.push({ type: 'subheading', text: 'Price breakdown' });
+    blocks.push(lineTable(lineItems));
+    blocks.push(totalsBlock(lineItems, 0));
+  }
+  if (str(values.notes)) {
+    blocks.push({ type: 'paragraph', text: `Notes: ${str(values.notes)}` });
+  }
+  blocks.push({ type: 'hr' });
+  blocks.push({
+    type: 'paragraph',
+    text: `Contractor: ${str(values.contractorSigner) || '__________________'}  Signature __________________ Date ______`,
+  });
+  blocks.push({
+    type: 'paragraph',
+    text: `Client: ${str(values.clientSigner) || '__________________'}  Signature __________________ Date ______`,
+  });
+  return blocks;
+}
+
+function buildIndependentContractor(values: Record<string, unknown>, blocks: DocBlock[]): DocBlock[] {
+  blocks.push({
+    type: 'kv',
+    pairs: [
+      { label: 'Client', value: str(values.clientName) },
+      { label: 'Client address', value: str(values.clientAddress) },
+      { label: 'Contractor', value: str(values.contractorName) },
+      { label: 'Contractor address', value: str(values.contractorAddress) },
+      { label: 'Effective date', value: str(values.effectiveDate) },
+      { label: 'Project', value: str(values.projectName) },
+      { label: 'Fee', value: money(values.fee) },
+      { label: 'Term', value: str(values.termSummary) },
+      { label: 'Governing law', value: str(values.governingState) },
+    ].filter((p) => p.value),
+  });
+  if (str(values.scope)) blocks.push({ type: 'paragraph', text: `Scope: ${str(values.scope)}` });
+  if (str(values.paySchedule)) {
+    blocks.push({ type: 'paragraph', text: `Payment schedule: ${str(values.paySchedule)}` });
+  }
+  if (str(values.expenses)) {
+    blocks.push({ type: 'paragraph', text: `Expenses: ${str(values.expenses)}` });
+  }
+  blocks.push({ type: 'hr' });
+  blocks.push({ type: 'clauses', clauses: enabledClauses(values) });
+  blocks.push({
+    type: 'paragraph',
+    text: 'Signature blocks: Client __________________ Date ______   Contractor __________________ Date ______',
+  });
+  return blocks;
+}
+
+function buildServiceAgreement(values: Record<string, unknown>, blocks: DocBlock[]): DocBlock[] {
+  blocks.push({
+    type: 'kv',
+    pairs: [
+      { label: 'Provider', value: str(values.providerName) },
+      { label: 'Provider address', value: str(values.providerAddress) },
+      { label: 'Client', value: str(values.clientName) },
+      { label: 'Client address', value: str(values.clientAddress) },
+      { label: 'Effective date', value: str(values.effectiveDate) },
+      { label: 'Service type', value: str(values.serviceType) },
+      { label: 'Location', value: str(values.serviceLocation) },
+      { label: 'Fee', value: money(values.fee) },
+      { label: 'Deposit', value: values.deposit != null && Number(values.deposit) !== 0 ? money(values.deposit) : '' },
+      { label: 'Governing law', value: str(values.governingState) },
+    ].filter((p) => p.value),
+  });
+  if (str(values.scope)) blocks.push({ type: 'paragraph', text: `Services: ${str(values.scope)}` });
+  if (str(values.billingTerms)) {
+    blocks.push({ type: 'paragraph', text: `Billing terms: ${str(values.billingTerms)}` });
+  }
+  if (str(values.termSummary)) {
+    blocks.push({ type: 'paragraph', text: `Term: ${str(values.termSummary)}` });
+  }
+  blocks.push({ type: 'clauses', clauses: enabledClauses(values) });
+  blocks.push({
+    type: 'paragraph',
+    text: 'Signature blocks: Provider __________________ Date ______   Client __________________ Date ______',
+  });
   return blocks;
 }
 

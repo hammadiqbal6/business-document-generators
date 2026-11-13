@@ -16,7 +16,7 @@ export function addDaysIso(isoDate: string, days: number): string {
 }
 
 /** Dates that should stay as sample identity/history, not “today”. */
-const PRESERVE_DATE_IDS = new Set(['clientDob']);
+const PRESERVE_DATE_IDS = new Set(['clientDob', 'originalContractDate']);
 
 /**
  * Shift sample document dates to today when opening the editor so demos are not stuck on a hard-coded day.
@@ -43,6 +43,18 @@ export function withTodayDateDefaults(
     }
     if (id === 'scheduledDate') {
       out[id] = addDaysIso(today, 2);
+      continue;
+    }
+    if (id === 'neededBy') {
+      out[id] = addDaysIso(today, 7);
+      continue;
+    }
+    if (id === 'periodStart') {
+      out[id] = addDaysIso(today, -4);
+      continue;
+    }
+    if (id === 'periodEnd') {
+      out[id] = today;
       continue;
     }
     // Primary document / event dates → today

@@ -78,6 +78,31 @@ export const toolToGuides: Record<string, string[]> = {
     'work-order-vs-invoice-vs-estimate',
     'line-item-totals-explained',
   ],
+  'independent-contractor-agreement': [
+    'freelance-payment-schedule-milestones',
+    'nda-basics-for-freelancers',
+    'freelance-web-design-contract-clauses',
+  ],
+  'timesheet-template': [
+    'line-item-totals-explained',
+    'contractor-invoice-example',
+    'what-to-include-on-a-receipt',
+  ],
+  'service-agreement-template': [
+    'freelance-payment-schedule-milestones',
+    'freelance-web-design-contract-clauses',
+    'invoice-vs-estimate',
+  ],
+  'purchase-order-template': [
+    'work-order-vs-invoice-vs-estimate',
+    'invoice-vs-estimate',
+    'line-item-totals-explained',
+  ],
+  'change-order-template': [
+    'construction-estimate-that-wins-jobs',
+    'work-order-vs-invoice-vs-estimate',
+    'invoice-vs-estimate',
+  ],
 };
 
 /** Guide → related guide slugs (topic clusters, not identical lists). */

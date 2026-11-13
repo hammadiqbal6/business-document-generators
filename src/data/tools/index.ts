@@ -2,17 +2,22 @@ import type { ToolCategory, ToolDefinition } from './types';
 import { CATEGORY_META } from './types';
 import {
   cateringQuote,
+  changeOrderTemplate,
   cleaningInvoice,
   constructionEstimate,
   contractorInvoice,
+  purchaseOrderTemplate,
   quoteEstimate,
   receiptGenerator,
+  timesheetTemplate,
   workOrder,
 } from './estimates';
 import {
   eventVendorContract,
   freelanceWebContract,
+  independentContractorAgreement,
   photographyContract,
+  serviceAgreementTemplate,
   simpleNda,
   videographyContract,
 } from './contracts';
@@ -40,6 +45,11 @@ export const allTools: ToolDefinition[] = [
   workOrder,
   receiptGenerator,
   quoteEstimate,
+  independentContractorAgreement,
+  timesheetTemplate,
+  serviceAgreementTemplate,
+  purchaseOrderTemplate,
+  changeOrderTemplate,
 ];
 
 export function getToolBySlug(slug: string): ToolDefinition | undefined {
