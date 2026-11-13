@@ -1,10 +1,12 @@
 ---
 import { siteConfig } from '../../config/site';
+import { CONSENT_MODE_REGIONS } from '../../lib/consentRegions';
 
 const gaId = siteConfig.ga4MeasurementId;
+const consentRegions = [...CONSENT_MODE_REGIONS];
 ---
 {gaId && (
-  <script is:inline define:vars={{ gaId }}>
+  <script is:inline define:vars={{ gaId, consentRegions }}>
     (function () {
       window.dataLayer = window.dataLayer || [];
       function gtag() {
@@ -12,7 +14,17 @@ const gaId = siteConfig.ga4MeasurementId;
       }
       window.gtag = gtag;
 
-      // Consent Mode v2: load the tag with storage denied, then update on Accept.
+      // Consent Mode v2 — region-scoped defaults for EEA/UK/CH (Google CMP / Funding Choices
+      // updates these via TCF). Longer wait_for_update so the certified message can settle.
+      gtag('consent', 'default', {
+        ad_storage: 'denied',
+        ad_user_data: 'denied',
+        ad_personalization: 'denied',
+        analytics_storage: 'denied',
+        wait_for_update: 2000,
+        region: consentRegions,
+      });
+      // Everywhere else: same denied defaults until the site cookie banner Accept (unchanged UX).
       gtag('consent', 'default', {
         ad_storage: 'denied',
         ad_user_data: 'denied',
@@ -56,11 +68,17 @@ const gaId = siteConfig.ga4MeasurementId;
       }
 
       // Always load the tag (with default denied) so Consent Mode can operate.
-      // Events queue in dataLayer; storage stays off until the user accepts.
+      // Events queue in dataLayer; storage stays off until the user accepts
+      // (site banner outside EEA/UK/CH, or Google CMP inside those regions).
       function scheduleTagLoad() {
         var run = function () {
           loadGaTag();
           try {
+            var geo = window.__docuklinGeo;
+            if (geo && geo.consentRegion) {
+              // Leave Consent Mode at region denied defaults; Google’s CMP updates via TCF.
+              return;
+            }
             var v = localStorage.getItem(CONSENT_KEY);
             if (v === '1') {
               gtag('consent', 'update', { analytics_storage: 'granted' });

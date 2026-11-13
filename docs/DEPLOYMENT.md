@@ -369,12 +369,17 @@ Optional per-placement overrides: `PUBLIC_ADSENSE_SLOT_HOME`, `PUBLIC_ADSENSE_SL
 
 ### Consent / CMP (EEA, UK, Switzerland)
 
-For **personalized** ads in those regions you need a **Google-certified CMP** integrated with IAB TCF. Until CMP is configured:
+For **personalized** ads in those regions you need a **Google-certified CMP** integrated with IAB TCF.
 
-- Keep `PUBLIC_ADS_ENABLED=false` in EU-facing tests, or  
-- Use a CMP vendor (Google lists certified partners in AdSense help) and follow their Astro/embed instructions.
+This site is wired for **Google’s certified AdSense GDPR consent message** (Privacy & messaging → Funding Choices via `adsbygoogle.js`, IAB TCF v2.2, CMP ID 300):
 
-Document your CMP choice in your Privacy policy when enabled.
+1. Publish the European regulations message in AdSense → Privacy & messaging for `docuklin.com`.
+2. Keep `PUBLIC_ADS_ENABLED=true` and a publisher ID so `adsbygoogle.js` loads (that script hosts Funding Choices).
+3. The Worker injects `window.__docuklinGeo` from Cloudflare `request.cf.country`. In EEA/UK/CH the site cookie bar stays hidden so visitors see only Google’s message. Elsewhere the existing Accept/Reject bar is unchanged.
+4. Consent Mode v2 uses region-scoped denied defaults for those countries (`src/components/seo/Analytics.astro`); Google’s CMP updates consent via TCF.
+5. CSP in `public/_headers` allows `fundingchoicesmessages.google.com` for script, frame, and connect.
+
+Document the CMP choice on `/privacy/` and `/cookies/` (already described).
 
 ### Ad placement without hurting CLS
 

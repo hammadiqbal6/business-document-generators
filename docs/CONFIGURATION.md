@@ -9,7 +9,7 @@ Brand and site-identity values are driven by **environment variables** with Docu
 
 Do **not** put `PUBLIC_*` in top-level wrangler `vars` (breaks `npx wrangler preview` and does not bake Astro HTML). See `wrangler.jsonc` comments.
 
-Internal identifiers (`docuforge:cookie-ok`, draft keys, `__docuforgeGrantAnalytics`) are **not** configurable—renaming them would re-prompt consent or drop drafts.
+Internal identifiers (`docuforge:cookie-ok`, draft keys, `__docuforgeGrantAnalytics`, `__docuklinGeo`) are **not** configurable—renaming them would re-prompt consent, drop drafts, or break EEA/UK/CH CMP routing.
 
 ---
 
