@@ -448,7 +448,7 @@ export const guides: Guide[] =
   },
   {
     "slug": "tattoo-consent-documentation",
-    "title": "Tattoo Consent Form Template: What Studios Should Document",
+    "title": "Tattoo Consent Form: What Studios Should Document",
     "metaDescription": "Free tattoo consent form template checklist: ID, health disclosures, design approval, aftercare, and signatures. Not legal or medical advice.",
     "answerFirst": "A complete tattoo consent record usually needs six elements: client identity and age verification, design and placement, risk acknowledgements, aftercare receipt, health disclosures, and signatures, with retention per your state or local health rules. This is documentation, not legal or medical advice. Start with the free tattoo consent form template, then match your board’s requirements.",
     "publishedAt": "2026-10-19",

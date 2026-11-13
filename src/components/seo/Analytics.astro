@@ -24,7 +24,7 @@ const consentRegions = [...CONSENT_MODE_REGIONS];
         wait_for_update: 2000,
         region: consentRegions,
       });
-      // Everywhere else: same denied defaults until the site cookie banner Accept (unchanged UX).
+      // Everywhere else: same denied defaults until the site cookie banner Accept.
       gtag('consent', 'default', {
         ad_storage: 'denied',
         ad_user_data: 'denied',
@@ -37,17 +37,32 @@ const consentRegions = [...CONSENT_MODE_REGIONS];
 
       var CONSENT_KEY = 'docuforge:cookie-ok';
       var loaded = false;
+      var configured = false;
 
       function loadGaTag() {
-        if (loaded || !gaId) return;
-        loaded = true;
-        var s = document.createElement('script');
-        s.async = true;
-        s.src = 'https://www.googletagmanager.com/gtag/js?id=' + gaId;
-        document.head.appendChild(s);
-        gtag('config', gaId, {
-          anonymize_ip: true,
-          send_page_view: true,
+        if (!gaId) return;
+        if (!loaded) {
+          loaded = true;
+          var s = document.createElement('script');
+          s.async = true;
+          s.src = 'https://www.googletagmanager.com/gtag/js?id=' + gaId;
+          document.head.appendChild(s);
+        }
+        if (!configured) {
+          configured = true;
+          gtag('config', gaId, {
+            anonymize_ip: true,
+            send_page_view: true,
+          });
+        }
+      }
+
+      function sendPageView() {
+        if (typeof window.gtag !== 'function') return;
+        gtag('event', 'page_view', {
+          page_location: location.href,
+          page_path: location.pathname + location.search,
+          page_title: document.title,
         });
       }
 
@@ -55,7 +70,12 @@ const consentRegions = [...CONSENT_MODE_REGIONS];
         gtag('consent', 'update', {
           analytics_storage: 'granted',
         });
-        loadGaTag();
+        if (configured) {
+          // Tag already configured under denied consent — fire the page view now.
+          sendPageView();
+        } else {
+          loadGaTag();
+        }
       }
 
       function denyAnalytics() {
@@ -67,24 +87,28 @@ const consentRegions = [...CONSENT_MODE_REGIONS];
         });
       }
 
-      // Always load the tag (with default denied) so Consent Mode can operate.
-      // Events queue in dataLayer; storage stays off until the user accepts
-      // (site banner outside EEA/UK/CH, or Google CMP inside those regions).
+      /**
+       * Load gating:
+       * - EEA/UK/CH: load with denied defaults so Consent Mode + Google CMP (TCF) can operate.
+       * - Elsewhere: load only after Accept (or a prior Accept in localStorage). Grant BEFORE
+       *   the first config so the initial page_view is not dropped under denied storage.
+       */
       function scheduleTagLoad() {
         var run = function () {
-          loadGaTag();
           try {
             var geo = window.__docuklinGeo;
             if (geo && geo.consentRegion) {
-              // Leave Consent Mode at region denied defaults; Google’s CMP updates via TCF.
+              loadGaTag();
               return;
             }
             var v = localStorage.getItem(CONSENT_KEY);
             if (v === '1') {
               gtag('consent', 'update', { analytics_storage: 'granted' });
+              loadGaTag();
             } else if (v === '0') {
               denyAnalytics();
             }
+            // No preference yet: wait for Accept / Reject. Do not load gtag.js.
           } catch (e) {
             /* ignore */
           }

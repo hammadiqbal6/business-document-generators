@@ -40,10 +40,10 @@ const path = '/privacy/';
   <p>
     If enabled, we use Google Analytics 4 to understand aggregate traffic (for example, which tools are opened). Consent Mode v2 keeps
     analytics and ad-related storage denied by default. In the EEA, UK, and Switzerland those defaults are region-scoped and stay denied
-    until Google’s certified CMP updates consent. Elsewhere, storage stays denied until you Accept the site cookie bar. The GA script is
-    deferred until after page load / idle so it is not render-blocking. You can opt out via browser settings or Google’s tools. Measurement
-    ID is configured in site settings. We may record events such as opening a tool editor, exporting PDF/DOCX, copying an embed snippet,
-    and clicking outbound reference links.
+    until Google’s certified CMP updates consent; the GA script may load there with storage denied so Consent Mode can operate. Elsewhere,
+    the GA script loads only after you Accept the site cookie bar (or on later visits if you already accepted), and then a page view is
+    sent. You can opt out via browser settings or Google’s tools. Measurement ID is configured in site settings. We may record events such
+    as opening a tool editor, exporting PDF/DOCX, copying an embed snippet, and clicking outbound reference links.
   </p>
 
   <h2>Google AdSense and advertising cookies</h2>

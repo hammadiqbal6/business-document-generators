@@ -38,18 +38,18 @@ const path = '/cookies/';
 
   <h2>Analytics and Consent Mode</h2>
   <p>
-    If Google Analytics (GA4) is configured, the tag loads with Google Consent Mode v2. For EEA/UK/CH we set
-    region-scoped defaults that deny <code>analytics_storage</code>, <code>ad_storage</code>,
-    <code>ad_user_data</code>, and <code>ad_personalization</code> until Google’s CMP updates consent. Outside
-    those regions, the same storage types stay denied until you Accept on the site cookie bar. The GA script is
-    deferred until after page load / idle so it is not render-blocking.
+    If Google Analytics (GA4) is configured, Consent Mode v2 defaults deny <code>analytics_storage</code>,
+    <code>ad_storage</code>, <code>ad_user_data</code>, and <code>ad_personalization</code>. For EEA/UK/CH those
+    defaults are region-scoped and stay denied until Google’s CMP updates consent; the GA script may load there
+    with storage denied so Consent Mode can operate. Outside those regions, the GA script loads only after you
+    Accept the site cookie bar (or on later visits if you already accepted), and then a page view is sent.
   </p>
   <p>
     Outside EEA/UK/CH, choosing <strong>Accept</strong> stores <code>docuforge:cookie-ok=1</code> in
-    localStorage and updates Consent Mode to grant <code>analytics_storage</code>. Choosing
-    <strong>Reject</strong> stores <code>docuforge:cookie-ok=0</code> and keeps storage denied. Clearing site
-    data shows the bar again. That localStorage key is an internal preference flag, not a third-party tracking
-    cookie.
+    localStorage, grants <code>analytics_storage</code>, loads the GA script if needed, and sends a page view.
+    Choosing <strong>Reject</strong> stores <code>docuforge:cookie-ok=0</code> and keeps storage denied without
+    loading the tag. Clearing site data shows the bar again. That localStorage key is an internal preference
+    flag, not a third-party tracking cookie.
   </p>
 
   <h2>Advertising</h2>
