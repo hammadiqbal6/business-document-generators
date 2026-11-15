@@ -4,6 +4,7 @@ import { emptyLineItem } from '../../data/tools/line-item-defaults';
 import { validateForm } from '../../lib/validation';
 import { trackEvent } from '../../lib/analytics';
 import { withTodayDateDefaults } from '../../lib/todayDefaults';
+import { toolDisclaimerBanner } from '../../lib/disclaimers';
 import { buildDocumentBlocks } from './documentModel';
 import './generator.css';
 
@@ -174,11 +175,13 @@ export default function DocumentGenerator({ tool, embed = false }: Props) {
     window.print();
   }
 
+  const disclaimer = toolDisclaimerBanner(tool);
+
   return (
     <div className={`generator ${embed ? 'generator--embed' : ''}`}>
-      {tool.isLegalAdjacent && (
+      {disclaimer && (
         <p className="generator__legal" role="note">
-          Not legal advice. Editable sample language only—not a substitute for an attorney. For consent/health forms, also not medical advice; follow local licensing rules.
+          {disclaimer}
         </p>
       )}
 

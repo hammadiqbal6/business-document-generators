@@ -36,9 +36,12 @@ export const DEFAULT_AUTHOR_NAME = 'Hammad Iqbal';
 /** Maintainer email (Person schema); usually same as contact. */
 export const DEFAULT_AUTHOR_EMAIL = DEFAULT_CONTACT_EMAIL;
 
-/** Honest short bio for Person / About. */
+/**
+ * Honest short bio for Person / About.
+ * Owner: override with PUBLIC_AUTHOR_BIO for a longer personal bio (no invented credentials).
+ */
 export const DEFAULT_AUTHOR_BIO =
-  'I build and maintain free in-browser tools. I turn published public sources into practical generators and show which sources each page uses. I am not a lawyer, accountant, or licensed professional advisor.';
+  'Builds and maintains free in-browser document tools from published public sources, with citations on each page. Not a lawyer, accountant, or licensed professional advisor.';
 
 /** Primary profile URL (Person @id / sameAs). */
 export const DEFAULT_AUTHOR_URL = 'https://github.com/hammadiqbal6';

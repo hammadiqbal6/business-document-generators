@@ -5,6 +5,8 @@ globs: src/pages/**/*.{astro,ts,tsx,md,mdx},src/data/**/*.{ts,js},src/components
 
 # SEO pages (research first)
 
+Before rediscovering indexing / Bing / GSC status, read **SEO state (as of 2026-11-15)** in `AGENTS.md`.
+
 Before adding or substantially rewriting any tool, guide, hub, or landing page:
 
 1. Pick **one primary query** and name the intent (do / know / compare / navigate).

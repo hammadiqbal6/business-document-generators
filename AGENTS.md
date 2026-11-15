@@ -1,10 +1,43 @@
 # AGENTS.md — Docuklin
 
+Standing instructions for agents. Read **SEO state** before rediscovering indexing, Bing/GSC, or re-litigating settled audit findings. `.cursor/rules/` points here.
+
 ## 1. Project overview
 
 - **What:** Privacy-first niche business document generators (idea #20) for Docuklin — fill a form in the browser, preview, export PDF/DOCX. No server-side storage of user form data. Canonical origin comes from `PUBLIC_SITE_URL` / `siteDefaults.mjs` only.
 - **Stack:** Astro 5 + TypeScript, React islands for the editor, Vitest, Cloudflare Worker (`src/worker.ts`) serving static `dist/` assets (`wrangler.jsonc`).
 - **Deploy:** Merge to `main` auto-deploys via Cloudflare Workers Builds (`npm run build` → `npx wrangler deploy && node scripts/indexnow.mjs`). Details: `docs/DEPLOYMENT.md`.
+
+## SEO state (as of 2026-11-15)
+
+Snapshot so agents do not re-probe settled SEO work. Owner-reported console facts are marked; paths below are verified in-repo.
+
+### Done
+
+- **IndexNow (active — do not add a second submitter).** Bing Webmaster showed IndexNow active with ~350 URLs submitted on 2026-11-13 from source **Self** (owner). Mechanism in this repo:
+  - Key file: `public/4d6f1ea5473a0968a83c67ceda5a0387.txt` (contents = key; also `siteConfig.indexNowKey` / `PUBLIC_INDEXNOW_KEY`).
+  - Ping: `scripts/indexnow.mjs` — reads `dist/sitemap-index.xml` (+ child sitemaps), POSTs batches to `https://api.indexnow.org/indexnow`, always exits 0 (`INDEXNOW_DISABLE=1` to skip; `--dry-run` supported).
+  - How it runs: Workers Builds deploy command `npx wrangler deploy && node scripts/indexnow.mjs` (see `wrangler.jsonc` header + `docs/DEPLOYMENT.md`). npm: `npm run indexnow` / `npm run deploy:indexnow`. Not wired into `npm run build`. Current sitemap is ~56 URLs; Bing’s ~350 count is cumulative Self submissions across deploys, not a second pipeline.
+- **Bing Webmaster Tools:** verified; sitemap `https://docuklin.com/sitemap-index.xml` submitted (owner).
+- **Google Search Console:** verified (meta token in `siteConfig.googleSiteVerification`); **43 pages indexed**; impressions started **2026-11-08** (owner).
+- **jev-seo audit → PR #30** (merged): titles ≤60 with brand via `buildPageTitle()`, expanded `/contact/`, tool JSON-LD `@graph` uses `@id` refs (no duplicate Person/Org blobs), `/.well-known/llms.txt` serves the same plain text as `/llms.txt` (`src/pages/.well-known/llms.txt.ts` — not an Astro API 301). **Known false alarms — do not “fix” again:** R23 cannibalization (guide/tool pairs follow `docs/KEYWORD-MAP.md`); trailing-slash R08/R25/R44 (Worker 308 + `trailingSlash: 'always'`); R19/R20/R55 heuristics.
+- **PR #31** (merged): GSC-impression content — wedding vendor contract checklist; receipt generator + receipt guide (cross-linked); quote/estimate long-tails (“free instant quote”, construction); catering quote samples with illustrative per-head pricing.
+- **This PR (#32):** embed credit `Powered by Docuklin` with `rel="nofollow"` (keep nofollow); factual About/trust page; “not legal or tax advice” on invoice/receipt tools + guides (`src/lib/disclaimers.ts`).
+- **`/tools/<slug>/embed/`** pages are intentionally `noindex, follow` (`src/pages/tools/[slug]/embed.astro`); audits enforce this.
+- **Contact:** `hello@docuklin.com` (`DEFAULT_CONTACT_EMAIL`); forwarded via Cloudflare Email Routing (owner).
+
+### Policy / don’t do
+
+- `llms.txt` / `llms-full.txt` do **not** help Google ranking; keep them for AI crawlers only.
+- Don’t rely on FAQ schema for rich results (still emit FAQPage only when FAQs are visible on-page).
+- No thin programmatic variant pages.
+- No invented experts, credentials, headshots, or statistics.
+- Don’t chase the head term **“estimate generator free”** (secondary/long-tail only in `docs/KEYWORD-MAP.md`).
+
+### Open / off-page (not code)
+
+- Directory submissions; Fazier listing already wired (`src/config/directoryBadges.ts`, footer badge).
+- Featured/MentionMatch journalist requests, Product Hunt launch, and editorial backlinks — site has essentially none yet; Thread Reader App unroll link is minor.
 
 ## 2. Repo map
 
