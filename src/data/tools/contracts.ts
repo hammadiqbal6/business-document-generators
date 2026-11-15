@@ -418,15 +418,22 @@ export const eventVendorContract: ToolDefinition = {
     whatToInclude: [
       {
         heading: 'Wedding vendor must-haves',
-        body: 'Hard date, rain plan if outdoor, overtime fees, meal provision for vendors, insurance requirements, and who provides tables/power/linens.',
+        body: 'Hard date, rain plan if outdoor, overtime fees, meal provision for vendors, insurance requirements, and who provides tables/power/linens. Run the seven-point review in /guides/wedding-vendor-contract-checklist/ before you pay any deposit.',
+      },
+      {
+        heading: 'Match the contract to the quote and deposit receipt',
+        body: 'Compare hours, fees, and deposit dollars to the vendor quote before signing. Catering price math belongs in /tools/catering-quote/. When the deposit clears, issue a payment receipt from /tools/receipt-generator/ and keep the field list in /guides/what-to-include-on-a-receipt/.',
       },
     ],
     workedExample: {
       heading: 'Worked example',
-      body: 'A $2,100 floral package with $700 deposit and explicit setup window shows how to prevent day-of access disputes.',
+      body: 'A $2,100 floral package with $700 deposit and explicit setup window shows how to prevent day-of access disputes. After the deposit clears, send receipt RCPT-style PDF referencing this contract so refund fights have a paper trail.',
     },
     commonMistakes: ['No strike/teardown responsibility', 'Vague “full service” inclusions'],
-    tips: [legalNotice],
+    tips: [
+      legalNotice,
+      'Store the signed PDF beside the quote and deposit receipt in one event folder.',
+    ],
     faq: [
       {
         question: 'Do vendors need venue COIs?',
@@ -436,7 +443,7 @@ export const eventVendorContract: ToolDefinition = {
       {
         question: 'What should a wedding vendor cancellation clause include?',
         answer:
-          'Deposit refund rules, notice windows, substitute-vendor duties if the vendor cannot perform, and how reschedules transfer the deposit. Match the clause to the payment schedule on the quote.',
+          'Deposit refund rules, notice windows, substitute-vendor duties if the vendor cannot perform, and how reschedules transfer the deposit. Match the clause to the payment schedule on the quote. Full review checklist: /guides/wedding-vendor-contract-checklist/.',
       },
       {
         question: 'How does force majeure usually work for events?',
@@ -456,9 +463,9 @@ export const eventVendorContract: ToolDefinition = {
     ],
     sources: contractSources,
   },
-  relatedSlugs: ['photography-contract-template', 'catering-quote', 'videography-contract'],
+  relatedSlugs: ['photography-contract-template', 'catering-quote', 'receipt-generator'],
   publishedAt: '2026-10-19',
-  updatedAt: '2026-10-20',
+  updatedAt: '2026-11-15',
 };
 
 export const simpleNda: ToolDefinition = {

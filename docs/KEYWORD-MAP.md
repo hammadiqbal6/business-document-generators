@@ -16,8 +16,8 @@
 | `/tools/rental-lease-application/` | rental application form | lease application template, tenant application PDF | long-tail |
 | `/tools/simple-nda/` | simple NDA | NDA template free, mutual NDA generator | long-tail |
 | `/tools/work-order/` | work order | work order template, service work order form | long-tail |
-| `/tools/receipt-generator/` | receipt generator | payment receipt template, service receipt PDF | long-tail |
-| `/tools/quote-estimate-generator/` | free estimate generator | estimate generator free, quote estimate generator, free quote generator | long-tail |
+| `/tools/receipt-generator/` | receipt generator | payment receipt template, service receipt PDF, PDF receipt generator | long-tail |
+| `/tools/quote-estimate-generator/` | free estimate generator | estimate generator free, free instant quote, quote estimate generator, free quote generator; light construction quote generator (deep remodel bids → construction-estimate-template) | long-tail |
 | `/tools/independent-contractor-agreement/` | independent contractor agreement | independent contractor agreement template, contractor agreement form | long-tail |
 | `/tools/timesheet-template/` | timesheet template | timesheet generator, weekly timesheet PDF | long-tail |
 | `/tools/service-agreement-template/` | service agreement template | service contract template, business service agreement | long-tail |

@@ -63,12 +63,11 @@ function escapeHtml(s: string): string {
     .replace(/"/g, '&quot;');
 }
 
-/** Turn bare /tools/.../ paths in guide prose into real links (early in-body CTAs). */
+/** Turn bare /tools/.../ and /guides/.../ paths in guide prose into real links. */
 function linkToolPaths(para: string): string {
-  return escapeHtml(para).replace(
-    /\/tools\/[a-z0-9-]+\//g,
-    (path) => `<a href="${path}">${path}</a>`,
-  );
+  return escapeHtml(para)
+    .replace(/\/tools\/[a-z0-9-]+\//g, (path) => `<a href="${path}">${path}</a>`)
+    .replace(/\/guides\/[a-z0-9-]+\//g, (path) => `<a href="${path}">${path}</a>`);
 }
 ---
 <BaseLayout
@@ -146,7 +145,7 @@ function linkToolPaths(para: string): string {
       {guide.faq.map((f) => (
         <details>
           <summary>{f.question}</summary>
-          <p>{f.answer}</p>
+          <p set:html={linkToolPaths(f.answer)} />
         </details>
       ))}
     </div>

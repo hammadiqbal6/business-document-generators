@@ -1192,10 +1192,11 @@ export const guides: Guide[] =
     "metaDescription": "How to write a receipt of payment: who paid whom, date, amount, method, invoice reference, and balance. Free PDF receipt generator for services.",
     "answerFirst": "Show who paid whom, the date, a unique receipt number, the amount, the payment method, and what it covers. If it pays an invoice, add that invoice number. Example: $1,200 by card toward invoice 1047, tax shown separately. Keep a copy. This guide covers a payment receipt for goods or services, not a monthly rent receipt.",
     "publishedAt": "2026-10-21",
-    "updatedAt": "2026-11-13",
+    "updatedAt": "2026-11-15",
     "relatedToolSlugs": [
       "receipt-generator",
-      "contractor-invoice"
+      "contractor-invoice",
+      "quote-estimate-generator"
     ],
     "relatedGuideSlugs": [
       "invoice-vs-estimate",
@@ -1306,12 +1307,20 @@ export const guides: Guide[] =
       {
         "heading": "What about chargebacks, refunds, and cash controls?",
         "body": "When a card payment is reversed, issue a receipt or credit note showing the reversal amount and date. Link it to the original receipt number. Partial refunds for unused retainers should say which invoice line was credited so the client's books stay balanced.\n\nCash receipts should name the employee who accepted payment when your policy requires dual control. For check payments, note check number so duplicate deposit errors are easy to trace in bank feeds. Voided payments need a new receipt or credit memo note, not a silent delete."
+      },
+      {
+        "heading": "When should you issue a receipt after an estimate or catering deposit?",
+        "body": "Send the receipt the same day the deposit clears. Reference the estimate, quote, or invoice number the payment applies to, and show any remaining balance. Build the PDF in /tools/receipt-generator/ so numbering stays consistent.\n\nIf the deposit came from a free estimate or quote created in /tools/quote-estimate-generator/, put that document number in the invoice reference field. Catering deposits from /tools/catering-quote/ should cite the catering quote number and whether the deposit is refundable. Couples comparing vendor contracts can store each deposit receipt beside the signed PDF using /guides/wedding-vendor-contract-checklist/."
+      },
+      {
+        "heading": "How do payment methods change what you record?",
+        "body": "Card payments: note the processor confirmation or last four digits when available so chargebacks are easy to match. Bank transfers: include the transfer date and any reference the client put in the memo line. Checks: record the check number and the bank deposit date if it differs from the day you received the check.\n\nCash: name who accepted the payment when your policy requires it, and avoid leaving cash receipts without a serial number. Whatever the method, the amount on the receipt should match what hit the bank or processor, not a rounded guess from a text message."
       }
     ],
     "faq": [
       {
         "question": "Do I need a receipt if I sent an invoice?",
-        "answer": "Yes when clients want proof of payment for reimbursement or taxes. Mark the invoice paid in your books and still issue a receipt if they ask. Corporate card programs often reject reimbursements without a receipt even when the invoice was already approved."
+        "answer": "Yes when clients want proof of payment for reimbursement or taxes. Mark the invoice paid in your books and still issue a receipt if they ask. Corporate card programs often reject reimbursements without a receipt even when the invoice was already approved. Generate the PDF in /tools/receipt-generator/."
       },
       {
         "question": "Should receipts show tax?",
@@ -1344,6 +1353,14 @@ export const guides: Guide[] =
       {
         "question": "Should receipts match invoice numbers?",
         "answer": "Yes. Carry the invoice number on every receipt so partial payments stack cleanly. Use the same date format as your invoices."
+      },
+      {
+        "question": "Should a catering or wedding deposit get its own receipt?",
+        "answer": "Yes. Reference the catering quote or vendor contract number, state whether the deposit is refundable, and file the PDF with the signed agreement. Build the catering quote in /tools/catering-quote/ and review vendor terms with /guides/wedding-vendor-contract-checklist/."
+      },
+      {
+        "question": "Can I receipt a deposit from a free estimate before I invoice?",
+        "answer": "Yes. Put the estimate or quote number in the reference field, show amount paid and remaining balance, then issue progress invoices later that cite the same job number. Start the estimate in /tools/quote-estimate-generator/ if you still need a priced PDF."
       }
     ]
   },
@@ -1925,17 +1942,19 @@ export const guides: Guide[] =
     "metaDescription": "Dates, deposits, cancellation, insurance, and deliverables to verify in wedding vendor contracts for catering, photo, video, and entertainment.",
     "answerFirst": "Before signing, run a seven-point wedding vendor checklist: event date and timeline, deposit and balance dates, overtime and travel fees, force majeure, backup vendor language, insurance or COI, and cancellation terms. Put numbers in writing, not only in texts. Compare clauses in the free event wedding vendor contract template.",
     "publishedAt": "2026-10-22",
-    "updatedAt": "2026-11-13",
+    "updatedAt": "2026-11-15",
     "relatedToolSlugs": [
       "event-wedding-vendor-contract",
       "catering-quote",
       "photography-contract-template",
-      "videography-contract"
+      "videography-contract",
+      "receipt-generator"
     ],
     "relatedGuideSlugs": [
       "catering-quote-deposits",
       "videography-contract-clauses",
-      "photography-contract-clauses"
+      "photography-contract-clauses",
+      "what-to-include-on-a-receipt"
     ],
     "legalNote": "This article is not legal advice. Wedding contracts are governed by state consumer and contract law. Consult an attorney for high-value disputes or non-refundable deposit questions in your state.",
     "howTo": [
@@ -2028,16 +2047,24 @@ export const guides: Guide[] =
       {
         "heading": "How should planners track deposits and timelines?",
         "body": "Load deposit due dates, insurance deadlines, and final head counts into a master calendar shared with the couple. Forty-five days out, reconfirm arrival windows with photographer, caterer, and venue. Compare force majeure language across vendors so postponement fees are not contradictory. Keep a single folder of executed contracts accessible offline on wedding day.\n\nFlorist contracts should list delivery window, setup labor, vase ownership, and who breaks down arches after photos. Planner agreements clarify day-of authority: can they approve overtime with the DJ on your behalf? Catering gratuity lines differ from DJ tips. Read whether a service charge is distributed to staff or retained by the company. Vendor meals during long receptions should appear in catering head counts so your team is fed without surprise per-plate charges.\n\nReady to compare the next PDF? Open /tools/event-wedding-vendor-contract/, run the seven-point checklist, and only then send the deposit."
+      },
+      {
+        "heading": "How do you match each vendor quote to the signed contract?",
+        "body": "Before you pay, open the quote and the contract side by side. Matching lines should agree on hours, guest guarantee, deliverable counts, overtime rates, and deposit dollars. If the contract is silent where the quote had a number, ask for a written amendment before money moves.\n\nCatering quotes belong in /tools/catering-quote/ so per-guest math and service fees stay explicit; deposit timing detail is in /guides/catering-quote-deposits/. Photography and videography clause deep-dives live in /guides/photography-contract-clauses/ and /guides/videography-contract-clauses/. When a deposit clears, issue a payment receipt from /tools/receipt-generator/ and keep the field list from /guides/what-to-include-on-a-receipt/ so refund fights later have a paper trail."
+      },
+      {
+        "heading": "What florist, DJ, and planner rows often get skipped?",
+        "body": "Florist: delivery window, setup labor included or not, vase and arch ownership, breakdown crew, and substitution rules if flowers are out of season. DJ or band: overtime after the package end time, meal breaks, emcee duties, and whether song requests are guaranteed. Planner: decision authority on overtime, vendor meal counts, and who holds the master timeline on the day.\n\nAdd those rows to the printable table above when those vendors are booked. A missing overtime line on entertainment is one of the most common day-of invoice surprises."
       }
     ],
     "faq": [
       {
         "question": "Should all vendors use the same contract template?",
-        "answer": "No. Each service has different deliverables. Use a master checklist instead of one generic PDF for everyone. The event wedding vendor contract generator helps compare clauses side by side without forcing identical terms."
+        "answer": "No. Each service has different deliverables. Use a master checklist instead of one generic PDF for everyone. The event wedding vendor contract generator at /tools/event-wedding-vendor-contract/ helps compare clauses side by side without forcing identical terms."
       },
       {
         "question": "When should deposits be paid?",
-        "answer": "Popular vendors book years out. Pay retainer when you accept terms. Stagger deposits so cash flow is manageable. Calendar every due date the day you sign. Treat deposit percents as each vendor’s working pattern, not a universal rule."
+        "answer": "Popular vendors book years out. Pay retainer when you accept terms. Stagger deposits so cash flow is manageable. Calendar every due date the day you sign. Treat deposit percents as each vendor’s working pattern, not a universal rule. Issue a receipt from /tools/receipt-generator/ when each deposit clears."
       },
       {
         "question": "What if we postpone the wedding?",
@@ -2061,7 +2088,15 @@ export const guides: Guide[] =
       },
       {
         "question": "Should we keep vendor quotes with contracts?",
-        "answer": "Store the quote PDF beside each signed contract in one folder. When an invoice arrives, compare line totals to the quote before you authorize payment."
+        "answer": "Store the quote PDF beside each signed contract in one folder. When an invoice arrives, compare line totals to the quote before you authorize payment. Catering quotes can be rebuilt in /tools/catering-quote/ if the vendor only sent a vague email total."
+      },
+      {
+        "question": "What should a catering vendor contract include beyond the quote?",
+        "answer": "Guest guarantee deadline, overage rate, service charge versus gratuity, allergens, cancellation, and venue rules. Price math stays on the quote; risk language belongs in the signed agreement. See /guides/catering-quote-deposits/ for deposit timing patterns."
+      },
+      {
+        "question": "Do we need a receipt for every wedding vendor deposit?",
+        "answer": "Yes when you want proof of payment and a clear refund trail. Reference the contract or quote number and keep the PDF with the signed agreement. Field checklist: /guides/what-to-include-on-a-receipt/."
       }
     ]
   },

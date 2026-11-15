@@ -391,19 +391,25 @@ export const cateringQuote: ToolDefinition = {
   shortName: 'Catering Quote',
   category: 'estimates-invoices',
   primaryKeyword: 'catering quote',
-  secondaryKeywords: ['catering quote template', 'catering quotation template', 'catering estimate template', 'event catering quote'],
+  secondaryKeywords: [
+    'catering quote template',
+    'catering quotation template',
+    'catering estimate template',
+    'event catering quote',
+    'per guest catering quote',
+  ],
   title: 'Catering Quote Template – Free Generator',
   metaDescription:
     'Build a catering quote with guest count, menu packages, service fees, and deposit terms. Live preview plus PDF/DOCX export in your browser.',
   h1: 'Free Catering Quote Template Generator',
   answerFirst:
-    'A catering quote template lists event date, guest count, menu package, per-guest pricing, service fees, tax, and a deposit (often 25–50% to hold the date). Create one free here, preview live, and export PDF or DOCX in your browser.',
+    'A catering quote lists event date, guest count, menu, per-guest or package pricing, staff or delivery fees, service charge versus gratuity, tax, and deposit terms. Fill those fields here, preview live, and export PDF or DOCX in your browser. Deposit percents in the sample are a working pattern for that job, not an official rule.',
   applicationCategory: 'BusinessApplication',
   isLegalAdjacent: false,
   documentTitle: 'Catering Quote',
-  toolVersion: '1.0',
+  toolVersion: '1.1',
   formulaNote:
-    "Per-guest or package lines use quantity × rate. Staff and fees are additional lines. Tax and deposit % apply to the computed total.",
+    'Per-guest or package lines use quantity × rate. Staff and fees are additional lines. Service fee % applies to the food subtotal in the sample math; tax and deposit % apply to the computed totals you configure.',
   fields: [
     { id: 'companyName', label: 'Caterer name', type: 'text', required: true, section: 'Business' },
     { id: 'companyPhone', label: 'Phone', type: 'tel', section: 'Business' },
@@ -446,35 +452,54 @@ export const cateringQuote: ToolDefinition = {
   },
   content: {
     howToUse: [
-      'Enter event logistics and guest count.',
-      'Summarize the menu and dietary notes.',
-      'Price packages, staff, and fees; export.',
+      'Enter caterer details, quote number, client, event date, venue, and guest count.',
+      'Summarize the menu, service style, and dietary notes.',
+      'Add per-guest or package lines, staff, delivery, service fee, tax, and deposit percent.',
+      'Preview the totals, export PDF or DOCX, then file the quote with your event folder.',
     ],
     whatToInclude: [
       {
-        heading: 'Catering quote checklist',
-        body: 'Include guest count assumptions, service style (buffet vs plated), dietary accommodations, staff hours, rentals if any, service fee vs gratuity, tax, tasting policy, and cancellation/deposit rules.',
+        heading: 'What to include on a catering quote',
+        body: 'Name the event, date, service window, venue, and guaranteed guest count. State buffet versus plated (or stations), menu package, dietary accommodations, and who provides linens, dinnerware, and bar. Price food as per-guest or package lines, then add staff hours, delivery or setup, rentals, service charge versus gratuity, tax, overage rules, tasting policy, and deposit or cancellation notes.\n\nClients compare caterers on that package, not on a single per-guest number alone. After acceptance, pair the quote with a signed vendor agreement when cancellation and insurance language matter—start from /tools/event-wedding-vendor-contract/ and review /guides/wedding-vendor-contract-checklist/.',
+      },
+      {
+        heading: 'Illustrative per-head pricing examples',
+        body: 'The dollar figures below are illustrative working examples for teaching the math in this generator. They are not market surveys, official rates, or recommended prices. Set your own rates from labor, food cost, and margin.\n\nCorporate buffet lunch (illustrative): 60 guests × $28 per guest = $1,680 food. Add three staff for four hours at $45/hour = $540, plus $125 delivery. An 18% service fee on the food line and local tax on taxable items, then a 40% deposit on the grand total, match the sample defaults above.\n\nWedding plated dinner (illustrative): 120 guests × $65 per guest = $7,800 food. Children’s meals at a lower per-guest rate, cake-cutting as a flat add-on, and bar as a separate package keep the PDF readable. Put the final-count deadline and overage rate in Notes so the kitchen can scale.',
+      },
+      {
+        heading: 'Sample catering quote layout',
+        body: 'A readable sample quote usually has four blocks: event header (client, date, venue, guarantee), menu summary with dietary counts, priced lines (food, labor, delivery), and fees (service charge, tax, deposit). Keep service charge and gratuity on separate lines with short definitions.\n\nFor a longer walkthrough with a full corporate lunch quotation you can copy line by line, see /guides/catering-quotation-example/. Deposit timing patterns live in /guides/catering-quote-deposits/. When a deposit clears, issue a payment receipt from /tools/receipt-generator/ and keep the field list in /guides/what-to-include-on-a-receipt/.',
+      },
+      {
+        heading: 'Service fee, tax, and deposit notes',
+        body: 'Label administrative or service fees separately from voluntary gratuity, and apply tax only to taxable subtotals under local rules. Ask your accountant which lines are taxable. Deposit size is a working pattern for that job—state the percent, due date, and refund rule on the PDF rather than in a text thread.',
       },
     ],
     workedExample: {
-      heading: 'Worked example',
-      body: '60 guests × $28 = $1,680 food, plus staff and delivery. An 18% service fee and 10.25% tax apply to the taxable base; a 40% deposit is calculated from the grand total.',
+      heading: 'Worked example: corporate lunch quote (illustrative)',
+      body: 'Hearth & Table Catering issues quote CQ-226 for Alex Chen’s company autumn lunch on 12 Nov at Pier 56. Guest count 60. Menu: buffet herb chicken, roasted vegetables, grain salad, rolls, cookies; water and iced tea; six vegetarian and two gluten-free plated meals.\n\nIllustrative math (not a rate recommendation): food 60 × $28 = $1,680; staff 3 × 4 hrs × $45 = $540; delivery $125. Service fee 18% on the food line; tax at the local rate you confirm; deposit 40% of the grand total to hold the date, with final count due seven days prior. Enter the same lines in this generator, preview, and export. After the deposit clears, send a receipt from /tools/receipt-generator/.',
     },
     commonMistakes: [
       'Forgetting overtime staff rates for late events.',
       'Not locking a final guest-count deadline.',
+      'Mixing service charge and gratuity on one unlabeled line.',
+      'Leaving children’s meals, cake cutting, or bar packages off the PDF.',
     ],
-    tips: ['Separate food, labor, and rentals so clients can trim scope cleanly.'],
+    tips: [
+      'Separate food, labor, and rentals so clients can trim scope cleanly.',
+      'Store the accepted quote beside the signed vendor contract and deposit receipt.',
+      'Re-quote after the validity window if food or labor costs change.',
+    ],
     faq: [
       {
         question: 'Is a catering quote a contract?',
         answer:
-          'Usually not until signed with deposit terms. Convert accepted quotes into a catering agreement covering cancelation and force majeure.',
+          'Usually not until the client accepts and pays a deposit under clear terms. Convert accepted quotes into a catering or event agreement covering cancellation and force majeure—see /tools/event-wedding-vendor-contract/.',
       },
       {
-        question: 'What deposit percentage is typical for catering?',
+        question: 'What deposit percentage should I put on a catering quote?',
         answer:
-          'Many caterers take 25–50% to reserve the date, with the balance due about 7–14 days before the event (or on a final guest-count deadline). State the percentage, due dates, and refund rules on the quote.',
+          'There is no official federal percentage. Many caterers use a working pattern such as 25–50% to reserve the date, with the balance due about 7–14 days before the event or on the final guest-count deadline. State the percentage, due dates, and refund rules on the quote. Deeper deposit language is in /guides/catering-quote-deposits/.',
       },
       {
         question: 'What is the difference between a service charge and gratuity?',
@@ -484,19 +509,34 @@ export const cateringQuote: ToolDefinition = {
       {
         question: 'When is the final headcount due?',
         answer:
-          'A common rule is a guaranteed guest count 7–14 days before the event, with billing on that number (or actual attendance if higher). Put the deadline and overage rate on the quote so food and staffing can scale.',
+          'A common working pattern is a guaranteed guest count 7–14 days before the event, with billing on that number (or actual attendance if higher). Put the deadline and overage rate on the quote so food and staffing can scale.',
       },
       {
         question: 'Should I use a catering quote or a full contract?',
         answer:
-          'Use the quote to lock menu, pricing, and deposit math; use a signed catering or event contract for cancellation, force majeure, allergens, and venue rules. Many clients accept the quote, pay the deposit, then sign the agreement.',
+          'Use the quote to lock menu, pricing, and deposit math; use a signed catering or event contract for cancellation, force majeure, allergens, and venue rules. Couples comparing multiple vendors can run /guides/wedding-vendor-contract-checklist/ before paying.',
+      },
+      {
+        question: 'How do I show per-guest pricing on a catering quote?',
+        answer:
+          'Add a line with unit “guest,” quantity equal to the guarantee, and your per-guest rate. Keep children’s meals, staff meals, and bar packages on separate lines so the client can trim without rewriting the whole PDF.',
+      },
+      {
+        question: 'Where can I see a full sample catering quotation?',
+        answer:
+          'Open /guides/catering-quotation-example/ for a line-by-line corporate lunch sample, then recreate the fields in this generator and export PDF or DOCX.',
+      },
+      {
+        question: 'What should I send after the client pays the catering deposit?',
+        answer:
+          'Issue a payment receipt from /tools/receipt-generator/ that references the quote number and deposit amount. Field checklist: /guides/what-to-include-on-a-receipt/.',
       },
     ],
     sources: estimateSources,
   },
-  relatedSlugs: ['event-wedding-vendor-contract', 'quote-estimate-generator', 'cleaning-service-invoice'],
+  relatedSlugs: ['event-wedding-vendor-contract', 'receipt-generator', 'quote-estimate-generator'],
   publishedAt: '2026-10-19',
-  updatedAt: '2026-11-13',
+  updatedAt: '2026-11-15',
 };
 
 export const quoteEstimate: ToolDefinition = {
@@ -511,19 +551,21 @@ export const quoteEstimate: ToolDefinition = {
     'business quote template',
     'service estimate PDF',
     'free quote generator',
+    'free instant quote',
+    'construction quote generator',
   ],
   title: 'Free Estimate Generator – Quote & PDF',
   metaDescription:
-    'Use this free estimate generator to price a job with line items, tax, and a validity date. Live preview, then download PDF or DOCX—no signup.',
+    'Free estimate generator for instant quotes: line items, tax, validity date, live preview, PDF/DOCX. No signup. Works for services and light construction quotes.',
   h1: 'Free Estimate Generator',
   answerFirst:
-    'A free estimate generator builds a priced estimate (or quote) in your browser: parties, job description, line items, tax, total, and how long the price holds. Preview live, then export PDF or DOCX. Nothing is uploaded to a server.',
+    'A free estimate generator builds a priced estimate or quote in your browser: parties, job description, line items, tax, total, and how long the price holds. Preview live for an instant quote PDF, then export DOCX if needed. Nothing is uploaded to a server.',
   applicationCategory: 'BusinessApplication',
   isLegalAdjacent: false,
   documentTitle: 'Estimate',
-  toolVersion: '1.1',
+  toolVersion: '1.2',
   formulaNote:
-    "Each line is quantity × rate. Subtotal sums lines; tax = subtotal × (tax rate ÷ 100). Validity date is informational.",
+    'Each line is quantity × rate. Subtotal sums lines; tax = subtotal × (tax rate ÷ 100). Validity date is informational.',
   fields: [
     { id: 'docLabel', label: 'Label', type: 'select', section: 'Document', options: [
       { value: 'Estimate', label: 'Estimate' },
@@ -568,34 +610,50 @@ export const quoteEstimate: ToolDefinition = {
       'Choose Estimate or Quote as the document label.',
       'Enter your business and client details, then describe the job.',
       'Add priced line items, set tax and a valid-until date, and preview the totals.',
-      'Export PDF or DOCX, or save a draft in this browser with localStorage.',
+      'Export PDF or DOCX for an instant quote the client can sign or reply to, or save a draft in this browser with localStorage.',
     ],
     whatToInclude: [
       {
         heading: 'What a free estimate generator should fill in',
-        body: 'Parties, a measurable job description, line items with quantity × rate, tax if you collect it, a grand total, and a validity date. Switch the label to Quote when your industry expects that word—the math stays the same.',
+        body: 'Parties, a measurable job description, line items with quantity × rate, tax if you collect it, a grand total, and a validity date. Switch the label to Quote when your industry expects that word—the math stays the same. Walk through the full process in /guides/how-to-write-a-business-estimate/.',
       },
       {
-        heading: 'Quote vs estimate',
-        body: 'Quotes are often firmer offers; estimates signal approximate cost. Label the document the way your industry expects and say whether totals may change after discovery.',
+        heading: 'Free instant quote in the browser',
+        body: 'This page is built for a free instant quote without signup: fill the form, watch the live preview update, and export PDF or DOCX before you leave the tab. Entries stay in your browser; optional drafts use localStorage on your device only.\n\nUse a short validity window when materials or labor rates move quickly. Number every quote and archive the PDF so you can compare what the client accepted later on the invoice.',
+      },
+      {
+        heading: 'Construction quote generator (when to use this vs the trade template)',
+        body: 'You can use this free estimate generator as a lightweight construction quote generator for punch-list work, small repairs, or a single-trade scope with clear units and rates. Label the document Quote, list labor and materials on separate lines, add tax and a valid-until date, and note exclusions in Notes.\n\nFor full remodel bids with allowances, alternate pricing, and change-order habits, use the dedicated construction estimate template at /tools/construction-estimate-template/ and the walkthrough in /guides/construction-estimate-that-wins-jobs/. That keeps deep construction intent on the construction URL and keeps this page focused on fast, general estimates.',
+      },
+      {
+        heading: 'Industry variants that reuse the same form',
+        body: 'Consulting and IT: fixed assessment day plus hourly documentation, as in the sample defaults. Landscaping or handyman: units such as sq ft, hour, or lump sum with a site-visit exclusion. Cleaning: flat visit plus add-on lines—when you bill after the visit, switch to /tools/cleaning-service-invoice/. Catering events belong in /tools/catering-quote/ so guest count and service fee fields stay filled.\n\nQuote vs estimate wording: quotes are often firmer offers; estimates signal approximate cost. Say whether totals may change after discovery. After acceptance, reuse lines in /tools/contractor-invoice/ and send a payment receipt from /tools/receipt-generator/.',
       },
     ],
     workedExample: {
-      heading: 'Worked example: free estimate generator',
-      body: 'Sample estimate E-901 prices a half-day assessment at $450 plus four hours of documentation at $95/hr for an $830 pre-tax total, valid 14 days. Change the label to Quote if that is what your client expects.',
+      heading: 'Worked example: free instant quote',
+      body: 'Sample estimate E-901 prices a half-day assessment at $450 plus four hours of documentation at $95/hr for an $830 pre-tax total, valid 14 days. Change the label to Quote for a free instant quote PDF the client can approve by email.\n\nIllustrative light construction variant (not a rate recommendation): fence repair with 16 linear feet of board replacement at your unit rate, two hours labor, haul-away as a lump sum, tax if you collect it, and a seven-day validity window. For multi-room remodel packages with allowances, switch to /tools/construction-estimate-template/.',
     },
-    commonMistakes: ['No validity date', 'Scope that cannot be measured'],
-    tips: ['Number every estimate and archive the exported file.', 'Reuse the same lines later in the contractor invoice tool.'],
+    commonMistakes: [
+      'No validity date',
+      'Scope that cannot be measured',
+      'Mixing catering or full remodel fields into a general estimate instead of the niche tool',
+    ],
+    tips: [
+      'Number every estimate and archive the exported file.',
+      'Reuse the same lines later in /tools/contractor-invoice/.',
+      'When the client pays a deposit, issue a receipt from /tools/receipt-generator/.',
+    ],
     faq: [
       {
         question: 'Can I turn this quote into an invoice later?',
         answer:
-          'Yes—reuse the same line items in the contractor invoice or receipt tools once work is accepted or paid.',
+          'Yes—reuse the same line items in /tools/contractor-invoice/ or /tools/receipt-generator/ once work is accepted or paid.',
       },
       {
         question: 'What is the difference between a quote and an estimate?',
         answer:
-          'Quotes are often firmer fixed offers for a defined scope; estimates signal approximate cost that may change after discovery. Label the document the way your industry expects and state whether totals can move.',
+          'Quotes are often firmer fixed offers for a defined scope; estimates signal approximate cost that may change after discovery. Label the document the way your industry expects and state whether totals can move. See /guides/invoice-vs-estimate/.',
       },
       {
         question: 'Is a quote legally binding?',
@@ -605,7 +663,7 @@ export const quoteEstimate: ToolDefinition = {
       {
         question: 'How long should a quote stay valid?',
         answer:
-          'Fourteen to thirty days is common for services; shorter windows help when materials or labor rates change quickly. Put a “valid until” date on every quote and re-quote after it expires.',
+          'Fourteen to thirty days is a common working pattern for services; shorter windows help when materials or labor rates change quickly. Put a valid-until date on every quote and re-quote after it expires.',
       },
       {
         question: 'Do I need a signature for the client to accept a quote?',
@@ -618,16 +676,26 @@ export const quoteEstimate: ToolDefinition = {
           'A free estimate generator is a browser form that builds a priced quote or estimate PDF with line items, tax, and a validity date. This tool does that without an account and without uploading your entries to a server.',
       },
       {
+        question: 'How do I create a free instant quote?',
+        answer:
+          'Choose Quote, enter parties and job scope, add priced line items, set tax and a valid-until date, preview the live totals, then export PDF. That is a free instant quote you can email the same day—no signup.',
+      },
+      {
+        question: 'Can I use this as a construction quote generator?',
+        answer:
+          'Yes for light or single-trade scopes with clear units. For full construction estimates with allowances and change-order workflows, use /tools/construction-estimate-template/ so those fields stay purpose-built.',
+      },
+      {
         question: 'How do I create an estimate or quote in the browser?',
         answer:
-          'Choose Quote or Estimate, enter your business and client details, describe the job, add priced line items, set tax and a valid-until date, then preview and export PDF or DOCX. For a full walkthrough, see the how to write a business estimate guide.',
+          'Choose Quote or Estimate, enter your business and client details, describe the job, add priced line items, set tax and a valid-until date, then preview and export PDF or DOCX. Full walkthrough: /guides/how-to-write-a-business-estimate/.',
       },
     ],
     sources: estimateSources,
   },
   relatedSlugs: ['construction-estimate-template', 'contractor-invoice', 'receipt-generator'],
   publishedAt: '2026-10-19',
-  updatedAt: '2026-11-13',
+  updatedAt: '2026-11-15',
 };
 
 export const receiptGenerator: ToolDefinition = {
@@ -636,17 +704,23 @@ export const receiptGenerator: ToolDefinition = {
   shortName: 'Receipt',
   category: 'estimates-invoices',
   primaryKeyword: 'receipt generator',
-  secondaryKeywords: ['free receipt maker', 'payment receipt template', 'how to write a receipt of payment', 'service receipt PDF'],
+  secondaryKeywords: [
+    'free receipt maker',
+    'payment receipt template',
+    'how to write a receipt of payment',
+    'service receipt PDF',
+    'PDF receipt generator',
+  ],
   title: 'Receipt Generator – Free Payment Receipt PDF',
   metaDescription:
     'Create a payment receipt online for cash, card, or transfer. Itemize charges, show amount paid, export PDF/DOCX. Runs entirely in your browser.',
   h1: 'Free Receipt Generator',
   answerFirst:
-    'A payment receipt confirms who paid whom, when, how much, for what, and by which method. Generate a clean receipt here, preview it live, and download PDF or DOCX without sending data to a server.',
+    'A payment receipt confirms who paid whom, when, how much, for what, and by which method. Generate a clean receipt here, preview it live, and download PDF or DOCX without sending data to a server. Pair it with the field checklist in the payment receipt guide.',
   applicationCategory: 'BusinessApplication',
   isLegalAdjacent: false,
   documentTitle: 'Receipt',
-  toolVersion: '1.1',
+  toolVersion: '1.2',
   formulaNote:
     'Amount received is what you enter; line items (if any) should match that total for your records. Remaining balance is informational.',
   fields: [
@@ -709,24 +783,24 @@ export const receiptGenerator: ToolDefinition = {
     whatToInclude: [
       {
         heading: 'How to write a receipt of payment',
-        body: 'Show who paid whom, the date, a unique receipt number, the amount, the payment method, and what it covers. If the payment pays an invoice, fill Invoice / reference # so both documents link. Example: $1,200 by card toward invoice 1047, tax shown on the invoice lines, balance remaining if anything is still owed. Keep a PDF copy with your income records.',
+        body: 'Show who paid whom, the date, a unique receipt number, the amount, the payment method, and what it covers. If the payment pays an invoice, fill Invoice / reference # so both documents link. Example: $1,200 by card toward invoice 1047, tax shown on the invoice lines, balance remaining if anything is still owed.\n\nKeep a PDF copy with your income records. The IRS lists receipts and receipt books among supporting documents for gross receipts. For the longer field-by-field walkthrough, see /guides/what-to-include-on-a-receipt/.',
       },
       {
         heading: 'How to fill out a receipt of payment in this form',
-        body: 'Use Business name and Received from for the parties. Receipt # and Date identify the payment event. Invoice / reference # points at the prior bill. Items describe what was paid for. Amount paid is cash received; Balance remaining is what is still due after this payment (use 0 and “paid in full” in Notes when the job is settled).',
+        body: 'Use Business name and Received from for the parties. Receipt # and Date identify the payment event. Invoice / reference # points at the prior bill or estimate. Items describe what was paid for. Amount paid is cash received; Balance remaining is what is still due after this payment (use 0 and “paid in full” in Notes when the job is settled).',
       },
       {
-        heading: 'PDF receipt export',
-        body: 'Export a PDF receipt after you preview the totals. File it with the related invoice. The IRS lists receipts and receipt books among supporting documents for gross receipts.',
+        heading: 'Deposits from estimates, invoices, and catering quotes',
+        body: 'When a client pays a deposit on an accepted estimate from /tools/quote-estimate-generator/ or a contractor invoice from /tools/contractor-invoice/, put the quote or invoice number in Invoice / reference # and the still-owed balance in Balance remaining.\n\nCatering deposits from /tools/catering-quote/ should reference the catering quote number the same way. Wedding planners comparing vendor PDFs can keep deposit receipts beside contracts using /guides/wedding-vendor-contract-checklist/.',
       },
       {
         heading: 'Partial payments and paid-in-full',
-        body: 'When the payer covers only a deposit, put cash received in Amount paid and the still-owed figure in Balance remaining (and say so in Notes). When settled, set balance remaining to 0 so the PDF stands alone as proof of payment.',
+        body: 'When the payer covers only a deposit, put cash received in Amount paid and the still-owed figure in Balance remaining (and say so in Notes). When settled, set balance remaining to 0 so the PDF stands alone as proof of payment. Issue the receipt the same day money clears so client expense reports match the bank date.',
       },
     ],
     workedExample: {
       heading: 'Worked example: how to fill out a receipt of payment',
-      body: 'Northwind issues receipt RCPT-551 to Taylor Brooks for $800 by card against Invoice / reference # INV-1042 (October consulting retainer). Line items total $800, tax 0%, amount paid $800, balance remaining $0, notes “Paid in full toward invoice INV-1042.” Export the PDF and file it with the invoice. For a $2,000 job with a $500 deposit, amount paid would be $500 and balance remaining $1,500 with the same invoice reference.',
+      body: 'Northwind issues receipt RCPT-551 to Taylor Brooks for $800 by card against Invoice / reference # INV-1042 (October consulting retainer). Line items total $800, tax 0%, amount paid $800, balance remaining $0, notes “Paid in full toward invoice INV-1042.” Export the PDF and file it with the invoice.\n\nFor a $2,000 job with a $500 deposit, amount paid would be $500 and balance remaining $1,500 with the same invoice reference. After the final payment, issue a second receipt (or a paid-in-full note) so both payments have serial numbers. More examples: /guides/what-to-include-on-a-receipt/.',
     },
     commonMistakes: [
       'No receipt number',
@@ -737,6 +811,7 @@ export const receiptGenerator: ToolDefinition = {
     tips: [
       'Keep PDF copies for bookkeeping alongside bank deposits.',
       'Reuse the same party names and invoice number on the next progress bill so the paper trail stays consistent.',
+      'Read the companion guide at /guides/what-to-include-on-a-receipt/ before you train staff on defaults.',
     ],
     faq: [
       {
@@ -747,12 +822,12 @@ export const receiptGenerator: ToolDefinition = {
       {
         question: 'What should a payment receipt include?',
         answer:
-          'Unique receipt number, date, business name, payer name, description of goods or services, amount paid, payment method, tax if shown, invoice reference when applicable, and remaining balance if the payment was partial.',
+          'Unique receipt number, date, business name, payer name, description of goods or services, amount paid, payment method, tax if shown, invoice reference when applicable, and remaining balance if the payment was partial. Full checklist: /guides/what-to-include-on-a-receipt/.',
       },
       {
         question: 'How is a receipt different from an invoice?',
         answer:
-          'An invoice requests payment; a receipt confirms payment was received. Issue the invoice first (or with a deposit request), then a receipt when money clears—or a combined “paid invoice” if that is your bookkeeping style.',
+          'An invoice requests payment; a receipt confirms payment was received. Issue the invoice first (or with a deposit request), then a receipt when money clears. See /guides/invoice-vs-estimate/ for how estimates fit the same job.',
       },
       {
         question: 'Are DIY PDF receipts legally valid?',
@@ -774,12 +849,17 @@ export const receiptGenerator: ToolDefinition = {
         answer:
           'Yes. This generator creates a PDF (and DOCX) payment receipt in your browser. File the PDF with the related invoice. The IRS lists receipts among supporting documents for gross receipts.',
       },
+      {
+        question: 'Should wedding or catering deposits get a receipt?',
+        answer:
+          'Yes. Reference the catering quote or vendor contract number, state whether the deposit is refundable, and keep the PDF with the signed agreement. Couples reviewing vendors can follow /guides/wedding-vendor-contract-checklist/; build the catering PDF in /tools/catering-quote/.',
+      },
     ],
     sources: estimateSources,
   },
-  relatedSlugs: ['contractor-invoice', 'quote-estimate-generator', 'work-order'],
+  relatedSlugs: ['contractor-invoice', 'quote-estimate-generator', 'catering-quote'],
   publishedAt: '2026-10-19',
-  updatedAt: '2026-11-13',
+  updatedAt: '2026-11-15',
 };
 
 export const workOrder: ToolDefinition = {
