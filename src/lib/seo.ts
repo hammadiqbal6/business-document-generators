@@ -194,6 +194,8 @@ export function howToJsonLd(opts: {
 export function toolPageGraphJsonLd(tool: ToolDefinition, pageUrl: string) {
   const citations = tool.content.sources.map((s) => s.url);
   const diagram = absoluteUrl(`/images/tools/${tool.slug}.svg`);
+  // One WebApplication + one WebPage. Author/publisher are @id refs only —
+  // Person/Organization nodes come from BaseLayout (avoid duplicate types).
   return {
     '@context': 'https://schema.org',
     '@graph': [
@@ -212,12 +214,7 @@ export function toolPageGraphJsonLd(tool: ToolDefinition, pageUrl: string) {
           priceCurrency: 'USD',
         },
         description: tool.metaDescription,
-        author: {
-          '@type': 'Person',
-          '@id': personId(),
-          name: siteConfig.author.name,
-          url: absoluteUrl('/about/'),
-        },
+        author: { '@id': personId() },
         publisher: { '@id': orgId() },
       },
       {
@@ -239,7 +236,6 @@ export function toolPageGraphJsonLd(tool: ToolDefinition, pageUrl: string) {
         },
         citation: citations,
       },
-      personNode(),
     ],
   };
 }

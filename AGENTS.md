@@ -16,7 +16,7 @@
 | `src/data/toolGuideMap.ts` | Tool ↔ guide links |
 | `src/components/generators/` | `DocumentGenerator`, `documentModel.ts`, lazy shell |
 | `src/pages/tools/[slug].astro`, `guides/[slug].astro` | Tool/guide page shells + JSON-LD |
-| `src/pages/llms.txt.ts`, `llms-full.txt.ts`, `.well-known/llms.txt.ts` | AI crawler indexes (well-known → 301) |
+| `src/pages/llms.txt.ts`, `llms-full.txt.ts`, `.well-known/llms.txt.ts` | AI crawler indexes (well-known serves same plain text) |
 | `src/lib/seo.ts` | `buildPageTitle`, JSON-LD helpers |
 | `src/lib/consentRegions.ts`, `src/worker.ts` | EEA/UK/CH geo bootstrap for CMP |
 | `src/components/seo/Analytics.astro` | Consent Mode v2 + GA4 |
@@ -60,7 +60,7 @@ Shortcut: `npm run check` → `test` + `audit`.
 - **Featured tools:** `featuredToolSlugs` / `getFeaturedTools()` in `src/data/tools/index.ts` — never `allTools.slice(0, N)`.
 - **Sitemap lastmod:** From real `updatedAt` via `scripts/lib/content-dates.mjs` + `astro.config.mjs`. Never set lastmod to “now”.
 - **IndexNow:** After production deploy (`npm run indexnow` / Workers Builds deploy command).
-- **llms:** Keep `llms.txt` / `llms-full.txt` question maps in sync when adding intent pages; `/.well-known/llms.txt` redirects to `/llms.txt`.
+- **llms:** Keep `llms.txt` / `llms-full.txt` question maps in sync when adding intent pages; `/.well-known/llms.txt` serves the same plain-text body as `/llms.txt` (do not use an Astro API 301 — static builds turn those into HTML meta-refresh).
 - **OG images:** PNG only (`/og/guide-*.png`, `/og/tool-*.png`). Generated in `prebuild`; do not point social tags at SVG.
 - Origin for canonicals/sitemap/robots/llms/JSON-LD/OG: **only** `PUBLIC_SITE_URL` / `siteDefaults.mjs`.
 

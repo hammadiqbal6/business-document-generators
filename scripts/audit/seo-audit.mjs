@@ -99,6 +99,33 @@ for (const file of htmlFiles) {
     errors.push(`${rel}: og:image ends with trailing slash`);
   }
   if (/example\.com/i.test(html)) errors.push(`${rel}: contains example.com`);
+
+  // Top-level schema types (each @graph node + each root object) must not repeat
+  // WebApplication / WebPage on the same page.
+  const topTypes = [];
+  for (const m of html.matchAll(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/gi)) {
+    try {
+      const data = JSON.parse(m[1]);
+      const nodes = Array.isArray(data)
+        ? data
+        : data?.['@graph']
+          ? data['@graph']
+          : data
+            ? [data]
+            : [];
+      for (const node of nodes) {
+        const t = node?.['@type'];
+        if (typeof t === 'string') topTypes.push(t);
+        else if (Array.isArray(t)) topTypes.push(...t.filter((x) => typeof x === 'string'));
+      }
+    } catch {
+      /* parse errors already recorded above */
+    }
+  }
+  for (const type of ['WebApplication', 'WebPage']) {
+    const n = topTypes.filter((t) => t === type).length;
+    if (n > 1) errors.push(`${rel}: duplicate ${type} JSON-LD (${n} top-level)`);
+  }
 }
 
 for (const file of toolPages) {
@@ -117,6 +144,23 @@ if (!robots.includes('Sitemap:')) errors.push('robots.txt missing Sitemap');
 const sitemapExists =
   fs.existsSync(path.join(dist, 'sitemap-index.xml')) || fs.existsSync(path.join(dist, 'sitemap-0.xml'));
 if (!sitemapExists) errors.push('sitemap not found in dist');
+
+function assertPlainLlms(relPath) {
+  const full = path.join(dist, relPath);
+  if (!fs.existsSync(full)) {
+    errors.push(`${relPath}: missing`);
+    return;
+  }
+  const body = fs.readFileSync(full, 'utf8');
+  if (/<!doctype html|<meta\s+http-equiv=["']refresh/i.test(body)) {
+    errors.push(`${relPath}: expected plain-text llms.txt, got HTML meta-refresh`);
+  }
+  if (!body.startsWith('# ') && !body.startsWith('#')) {
+    errors.push(`${relPath}: expected markdown-style plain-text llms index`);
+  }
+}
+assertPlainLlms('llms.txt');
+assertPlainLlms(path.join('.well-known', 'llms.txt'));
 
 if (errors.length) {
   console.error('SEO audit errors:\n' + errors.map((e) => ` - ${e}`).join('\n'));

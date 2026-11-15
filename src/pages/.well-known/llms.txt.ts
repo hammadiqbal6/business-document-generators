@@ -1,14 +1,10 @@
 import type { APIRoute } from 'astro';
-import { siteConfig } from '../../config/site';
+import { llmsTxtResponse } from '../../lib/llmsTxt';
 
-/** Alias for crawlers that look under /.well-known/llms.txt */
-export const GET: APIRoute = () => {
-  const origin = siteConfig.siteUrl.replace(/\/$/, '');
-  return new Response(null, {
-    status: 301,
-    headers: {
-      Location: `${origin}/llms.txt`,
-      'Cache-Control': 'public, max-age=3600',
-    },
-  });
-};
+/**
+ * Same plain-text body as `/llms.txt`.
+ * Astro’s static adapter turns API `301` responses into HTML meta-refresh files,
+ * which then ship as `text/plain` because of the `.txt` extension — useless for
+ * crawlers. Serve the real index here instead of a faux redirect.
+ */
+export const GET: APIRoute = () => llmsTxtResponse();

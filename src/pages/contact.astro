@@ -17,16 +17,50 @@ const contactEmail = siteConfig.contactEmail;
   <Breadcrumbs items={[{ name: 'Home', path: '/' }, { name: 'Contact', path }]} />
   <h1>Contact</h1>
   <p class="lead">
-    This site is maintained by <a href="/about/#maintainer">{siteConfig.author.name}</a>.
-    For corrections, broken links, or product feedback, use the form below{contactEmail ? ' or email directly' : ''}—there is no support ticket queue.
+    Email {siteConfig.siteName} for factual corrections, broken links, accessibility issues, or
+    privacy questions. This site is maintained by
+    <a href="/about/#maintainer">{siteConfig.author.name}</a>
+    —there is no ticket queue or live chat.
+  </p>
+
+  <h2>What to write</h2>
+  <p>
+    Useful messages name the page URL, what looks wrong, and (for corrections) a primary source that
+    shows the right information. I read mail personally. Response time varies with volume; confirmed
+    content fixes are recorded in the
+    <a href="/methodology/#corrections">methodology correction log</a>.
+  </p>
+  <ul>
+    <li>
+      <strong>Factual corrections</strong> on a guide or tool (formula, cited claim, outdated link).
+      Include the URL and the source you checked.
+    </li>
+    <li>
+      <strong>Broken internal links</strong>, missing images, or layout that blocks the form on a
+      specific device/browser.
+    </li>
+    <li>
+      <strong>Accessibility</strong> issues (keyboard traps, unlabeled controls, contrast) with the
+      page and steps to reproduce.
+    </li>
+    <li>
+      <strong>Privacy</strong> requests about cookies or analytics—put “Privacy” in the subject and
+      the page URL you visited. See the
+      <a href="/privacy/">privacy policy</a> and <a href="/cookies/">cookie notice</a>.
+    </li>
+  </ul>
+
+  <h2>What not to send</h2>
+  <p>
+    Please do not send confidential client contracts, medical details, full rental applications, or
+    “please review my filled PDF” requests. These tools are educational generators—not a law firm,
+    clinic, landlord screening service, or document-review desk—and we cannot give legal, medical,
+    tax, or housing advice.
   </p>
   <p>
-    Good messages to send: factual corrections on a guide or tool page (include the URL), broken internal links, accessibility
-    issues, or privacy requests about cookies and analytics. We read mail personally; response time varies.
-  </p>
-  <p>
-    Please do not send confidential client contracts, medical details, or full rental applications for “review.” These tools are
-    educational generators—not a law firm, clinic, or landlord screening service—and we cannot give legal, medical, or housing advice.
+    Form inputs stay in your browser when you use a generator. We do not host user-generated
+    documents on our servers, so a privacy request usually has no filled form contents for us to
+    delete. Optional drafts use localStorage on your device only.
   </p>
 
   {emailjsReady ? (
@@ -58,16 +92,62 @@ const contactEmail = siteConfig.contactEmail;
     </p>
   )}
 
+  <h2>Before you email</h2>
+  <ul>
+    <li>
+      Browse <a href="/tools/">tools</a> and <a href="/guides/">guides</a> for the document type you
+      need—many “how do I fill X?” questions are answered on the matching guide.
+    </li>
+    <li>
+      Read <a href="/methodology/">how pages are sourced and corrected</a> if you are reporting a
+      citation or formula issue.
+    </li>
+    <li>
+      For AdSense or cookie consent in the EEA/UK/Switzerland, use the Google-funded CMP controls on
+      the page when ads are enabled; the site cookie bar is suppressed in those regions.
+    </li>
+  </ul>
+
+  <h2>Response expectations</h2>
   <p>
-    For privacy requests (cookies, analytics), include “Privacy” in the subject line and the page URL you visited.
-    We do not host user-generated documents on our servers, so we typically have no form contents to delete—see the
-    <a href="/privacy/">privacy policy</a> and <a href="/cookies/">cookie notice</a>.
+    I aim to acknowledge clear correction reports. I may not reply to sales pitches, guest-post
+    offers, or requests for custom legal drafting. If your message is a privacy request, say so in
+    the subject line so it is not treated as general feedback.
   </p>
+
+  <h2>Quick answers</h2>
+  <dl class="contact-faq">
+    <dt>Can you fill or review my contract for me?</dt>
+    <dd>
+      No. Use the matching generator under <a href="/tools/">Tools</a>, edit the clauses yourself,
+      and have a licensed professional review anything you rely on.
+    </dd>
+    <dt>Do you store the documents I generate?</dt>
+    <dd>
+      No. Preview and export run in your browser. Optional drafts stay in localStorage on your
+      device. See the <a href="/privacy/">privacy policy</a>.
+    </dd>
+    <dt>Where should partnership or advertising inquiries go?</dt>
+    <dd>
+      Use the same email{contactEmail ? ` (${contactEmail})` : ''} with a clear subject. Unsolicited
+      guest posts and link schemes are ignored.
+    </dd>
+  </dl>
 </BaseLayout>
 
 <style>
   .contact-form-heading {
     font-size: 1.15rem;
     margin: 1.25rem 0 0.5rem;
+  }
+  .contact-faq {
+    margin: 0.75rem 0 0;
+  }
+  .contact-faq dt {
+    font-weight: 600;
+    margin-top: 0.85rem;
+  }
+  .contact-faq dd {
+    margin: 0.25rem 0 0;
   }
 </style>
