@@ -755,7 +755,8 @@ export const guides: Guide[] =
     "metaDescription": "Learn the difference between an estimate and an invoice, when to send each, and how deposits and change orders fit. Free templates for both.",
     "answerFirst": "An estimate or quote proposes price before work. An invoice requests payment for work done or due. Keep both documents with matching line items when you convert an accepted estimate into billing. Use separate templates so clients and your books never confuse an offer with a demand for payment.",
     "publishedAt": "2026-10-20",
-    "updatedAt": "2026-11-13",
+    "updatedAt": "2026-11-15",
+    "legalNote": "This article is not legal or tax advice. Recordkeeping and tax rules vary by jurisdiction. Confirm requirements with a qualified professional for your situation.",
     "relatedToolSlugs": [
       "quote-estimate-generator",
       "construction-estimate-template",
@@ -1193,6 +1194,7 @@ export const guides: Guide[] =
     "answerFirst": "Show who paid whom, the date, a unique receipt number, the amount, the payment method, and what it covers. If it pays an invoice, add that invoice number. Example: $1,200 by card toward invoice 1047, tax shown separately. Keep a copy. This guide covers a payment receipt for goods or services, not a monthly rent receipt.",
     "publishedAt": "2026-10-21",
     "updatedAt": "2026-11-15",
+    "legalNote": "This article is not legal or tax advice. Recordkeeping and tax rules vary by jurisdiction. Confirm requirements with a qualified professional for your situation.",
     "relatedToolSlugs": [
       "receipt-generator",
       "contractor-invoice",
@@ -1370,7 +1372,8 @@ export const guides: Guide[] =
     "metaDescription": "Build a cleaning invoice with clear rates and line items. See a move-out deep-clean example and export PDFs with the free cleaning invoice tool.",
     "answerFirst": "Price cleaning as separate lines so the visit rate, add-ons, supplies, and travel stay visible. Match invoice labels to the quote, and list frequency (weekly or biweekly) so clients see the same math on billing day. Your rates are your own. There is no federal standard price list for house cleaning.",
     "publishedAt": "2026-10-21",
-    "updatedAt": "2026-11-13",
+    "updatedAt": "2026-11-15",
+    "legalNote": "This article is not legal or tax advice. Recordkeeping and tax rules vary by jurisdiction. Confirm requirements with a qualified professional for your situation.",
     "relatedToolSlugs": [
       "cleaning-service-invoice",
       "quote-estimate-generator",
@@ -1659,7 +1662,8 @@ export const guides: Guide[] =
     "metaDescription": "Compare work orders, estimates, and invoices for service jobs. Learn the handoff sequence, when each document applies, and how to keep job files tidy.",
     "answerFirst": "Use three documents in sequence: an estimate to propose price and scope, a work order to assign the job to the crew, and an invoice to collect payment. Mixing them on one PDF is how clients dispute what was promised versus what was billed. For step-by-step field fields, see the forthcoming guide at /guides/how-to-create-a-work-order/.",
     "publishedAt": "2026-10-21",
-    "updatedAt": "2026-11-13",
+    "updatedAt": "2026-11-15",
+    "legalNote": "This article is not legal or tax advice. Recordkeeping and tax rules vary by jurisdiction. Confirm requirements with a qualified professional for your situation.",
     "relatedToolSlugs": [
       "work-order",
       "quote-estimate-generator",
@@ -3092,7 +3096,8 @@ export const guides: Guide[] =
     "metaDescription": "Progress billing contractor invoice example: accepted estimate lines, $1,000 deposit subtracted, $4,250 due in 15 days. Free invoice tool.",
     "answerFirst": "A progress contractor invoice repeats accepted estimate lines for work due now, subtracts deposits already paid, and shows balance due with a clear due date. In the sample below, invoice 220 subtracts a $1,000 deposit and leaves $4,250 due in 15 days. Build the same PDF in the contractor invoice tool.",
     "publishedAt": "2026-11-13",
-    "updatedAt": "2026-11-13",
+    "updatedAt": "2026-11-15",
+    "legalNote": "This article is not legal or tax advice. Recordkeeping and tax rules vary by jurisdiction. Confirm requirements with a qualified professional for your situation.",
     "relatedToolSlugs": [
       "contractor-invoice",
       "construction-estimate-template",

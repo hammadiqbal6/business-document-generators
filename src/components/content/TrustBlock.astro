@@ -1,6 +1,7 @@
 ---
 import type { ToolDefinition } from '../../data/tools/types';
 import { siteConfig } from '../../config/site';
+import { toolTrustDisclaimer } from '../../lib/disclaimers';
 
 interface Props {
   tool: ToolDefinition;
@@ -10,6 +11,7 @@ const { tool } = Astro.props;
 const author = siteConfig.author;
 const version = tool.toolVersion || '1.0';
 const reviewed = tool.updatedAt;
+const disclaimer = toolTrustDisclaimer(tool);
 
 function formatDate(iso: string) {
   const d = new Date(`${iso}T12:00:00Z`);
@@ -44,9 +46,7 @@ function formatDate(iso: string) {
   </ol>
 
   <p class="disclaimer">
-    {tool.isLegalAdjacent
-      ? 'Editable sample language only — not legal advice. Laws vary by state and country; have a licensed attorney review before you rely on any clause.'
-      : 'Estimates and templates only. Confirm tax rates, payment terms, and local requirements for your job.'}
+    {disclaimer}
     {' '}Not affiliated with the organizations cited above.
     Found an error? <a href="/contact/">Tell me</a>.
   </p>

@@ -3,5 +3,6 @@ description: Legal and consent disclaimers
 globs: src/data/tools/contracts.ts,src/data/tools/forms-creative.ts,src/data/guides.ts,src/components/generators/**
 ---
 - Contract/consent/rental/health-adjacent tools: `isLegalAdjacent: true` + visible not-legal-advice notice in the generator.
-- Matching guides: set `legalNote` (not legal advice; medical where relevant). Keep it in the answer box, not between H1 and answer.
+- Invoice / receipt tools: short “not legal or tax advice” banner via `src/lib/disclaimers.ts` (do not set `isLegalAdjacent` just for billing docs).
+- Matching guides: set `legalNote` (not legal advice; tax for invoice/receipt; medical where relevant). Keep it in the answer box, not between H1 and answer.
 - Do not present generated docs as attorney-reviewed. Do not invent jurisdiction-specific requirements without a source.

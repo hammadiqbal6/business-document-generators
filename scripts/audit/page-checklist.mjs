@@ -174,6 +174,16 @@ for (const file of htmlFiles) {
   const isHome = rel === 'index.html';
 
   if (isToolPage) {
+    if (!/Embed this tool/i.test(html)) {
+      fail(`${rel}: missing visible “Embed this tool” section`);
+    }
+    // Snippet lives in a textarea, so quotes are often HTML-escaped as &quot;.
+    const hasNofollowCredit =
+      /Powered by[\s\S]{0,200}?rel=(?:["']|&quot;)nofollow(?:["']|&quot;)/i.test(html) ||
+      /rel=(?:["']|&quot;)nofollow(?:["']|&quot;)[\s\S]{0,200}?Powered by/i.test(html);
+    if (!hasNofollowCredit) {
+      fail(`${rel}: embed snippet must include branded Powered by credit with rel="nofollow"`);
+    }
     // Answer-first: static form shell with real inputs (no click-only "Open editor" gate).
     if (!/data-auto-open=["']1["']/.test(html) && !/generator--shell|data-generator-shell/.test(html)) {
       fail(`${rel}: tool page missing answer-first editor shell (data-auto-open / generator--shell)`);

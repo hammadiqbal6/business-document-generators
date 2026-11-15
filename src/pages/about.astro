@@ -7,7 +7,7 @@ import { profilePageJsonLd } from '../lib/seo';
 const path = '/about/';
 const crumbs = [{ name: 'Home', path: '/' }, { name: 'About', path }];
 const author = siteConfig.author;
-const aboutUpdatedAt = '2026-11-13';
+const aboutUpdatedAt = '2026-11-15';
 const jsonLd = [
   profilePageJsonLd({
     dateCreated: `${siteConfig.launchedAt}T00:00:00+05:00`,
@@ -17,67 +17,62 @@ const jsonLd = [
 ---
 <BaseLayout
   title={`About ${siteConfig.siteName} – Free Document Generators`}
-  description={`About ${siteConfig.siteName}: free browser-based business document generators built and maintained by ${siteConfig.author.name}. Who we are, sources we cite, and clear limits.`}
+  description={`About ${siteConfig.siteName}: who builds these free browser-based business document generators, how the templates are made, and clear limits. Contact ${siteConfig.contactEmail}.`}
   path={path}
   jsonLd={jsonLd}
 >
   <Breadcrumbs items={crumbs} />
   <h1>About {siteConfig.siteName}</h1>
   <p class="lead">
-    {siteConfig.siteName} is a free set of business document generators—estimates, invoices,
-    contracts, consent forms, and creative templates—built and maintained by one person: me,
-    {author.name}.
+    {siteConfig.siteName} is a free set of niche business document generators—estimates, invoices,
+    contracts, consent forms, and creative templates. Fill a form in the browser, preview the
+    document, and export PDF or DOCX. Form inputs stay on your device.
+  </p>
+  <p class="content-meta byline">
+    Last updated <time datetime={aboutUpdatedAt}>{aboutUpdatedAt}</time>
   </p>
 
-  <h2>Why I built it</h2>
+  <h2 id="maintainer">Who builds this site</h2>
   <p>
-    I kept needing profession-specific paperwork (a construction estimate with allowances, a
-    photography contract with usage rights, a cleaning invoice with rooms and frequency) and found
-    either blank PDFs with no guidance, or template mills that hid the clauses behind a signup wall.
-    I wanted fillable tools that run in the browser, show a live preview, export PDF or DOCX, and
-    cite the public sources behind the educational copy—without uploading anyone’s client data.
-  </p>
-
-  <h2 id="maintainer">Who I am</h2>
-  <p>
-    {author.shortBio} This site isn’t a law firm, accounting practice, or licensed advisory service.
-    What I do is turn published, authoritative sources (IRS, SBA, Cornell LII, HUD, CDC overviews,
-    U.S. Copyright Office) into tools that are easy to use, and show exactly which sources each
-    tool uses.
+    {siteConfig.siteName} is built and maintained by {author.name}. It is a one-person project, not a
+    law firm, accounting practice, or licensed advisory service.
   </p>
   <p>
-    Find me on
+    Contact: <a href={`mailto:${siteConfig.contactEmail}`}>{siteConfig.contactEmail}</a>
+    · Profiles:
     <a href={author.canonicalPersonUrl} rel="noopener noreferrer">GitHub</a>
-    · Email <a href={`mailto:${author.email}`}>{author.email}</a>.
   </p>
+  {/* Owner: set PUBLIC_AUTHOR_BIO in Workers Builds / .env to replace the short bio below. */}
+  <p id="personal-bio">{author.shortBio}</p>
   <p>
-    There is no photo here on purpose. Google’s guidance says not to invent headshots or credentials;
-    I’d rather leave the image out than fake one.
+    There is no headshot here on purpose. This page does not invent credentials, expert titles, or
+    stock photos.
   </p>
 
-  <h2>How the tools are made</h2>
+  <h2>How the templates are made</h2>
   <p>
-    Every tool lists how totals are calculated (when applicable) and its sources at the bottom of
-    the page. Sources are official pages (IRS, SBA, Cornell LII Wex/CFR, HUD, CDC, Copyright Office,
-    FTC) that I have checked. Each page shows the date I last reviewed it against those sources.
-    Full details: <a href="/methodology/">Methodology</a>.
+    Each tool is a fillable form with a live preview and PDF/DOCX export. Educational copy cites
+    public primary sources (for example IRS, SBA, Cornell LII, HUD, CDC, U.S. Copyright Office, FTC)
+    listed at the bottom of the page. When a page shows a last-reviewed date, that is the day the
+    maintainer last checked the copy against those sources—not a claim that the law is unchanged
+    forever. Full process: <a href="/methodology/">Methodology</a>.
   </p>
 
-  <h2>What this site doesn’t do</h2>
+  <h2>What this site does not do</h2>
   <ul>
-    <li>It doesn’t give legal, tax, or medical advice. Contract and consent pages are editable samples.</li>
+    <li>It does not give legal, tax, or medical advice. Contract, invoice, and receipt pages are editable samples and bookkeeping aids.</li>
     <li>Your form inputs stay in your browser. Optional drafts use localStorage on your device. Analytics cookies are described on the <a href="/cookies/">cookie notice</a>.</li>
-    <li>It isn’t affiliated with the IRS, SBA, HUD, CDC, FTC, or any brand named in examples.</li>
+    <li>It is not affiliated with the IRS, SBA, HUD, CDC, FTC, or any brand named in examples.</li>
   </ul>
 
   <h2>How the site is funded</h2>
   <p>
     The site is free. Google Analytics is configured for aggregate traffic. Google AdSense may be
-    enabled later (currently off unless the publisher flag is set). There are no affiliate links today.
+    enabled when the publisher flag is set. There are no affiliate links today.
   </p>
 
-  <h2>Other free tool sites I maintain</h2>
-  <p>Same maintainer, different niches—listed here only, not in every footer:</p>
+  <h2>Other free tool sites by the same maintainer</h2>
+  <p>Listed here only, not in every footer:</p>
   <ul>
     {siteConfig.siblingSites.map((s) => (
       <li><a href={s.url} rel="noopener noreferrer">{s.name}</a></li>

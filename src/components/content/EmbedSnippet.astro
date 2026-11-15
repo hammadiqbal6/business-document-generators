@@ -10,15 +10,16 @@ interface Props {
 const { tool } = Astro.props;
 const pageUrl = absoluteUrl(`/tools/${tool.slug}/`);
 const embedUrl = absoluteUrl(`/tools/${tool.slug}/embed/`);
+/** Branded credit with rel="nofollow" — keyword-rich followed widget links are a link-scheme risk. */
 const snippet = `<iframe src="${embedUrl}" title="${tool.name}" width="100%" height="720" loading="lazy" style="border:0;max-width:100%;"></iframe>
-<p>Tool by <a href="${pageUrl}">${siteConfig.siteName}</a></p>`;
+<p>Powered by <a href="${pageUrl}" rel="nofollow">${siteConfig.siteName}</a></p>`;
 ---
 
 <section class="embed-share" aria-labelledby="embed-h">
   <h2 id="embed-h">Embed this tool</h2>
   <p>
-    Copy the snippet below to add a lightweight iframe to your site. Please keep the attribution
-    link so visitors can open the full tool page.
+    Copy the snippet below to add a lightweight iframe to your site. Please keep the branded
+    “Powered by” attribution link so visitors can open the full tool page.
   </p>
   <label class="sr-only" for={`embed-snippet-${tool.slug}`}>Embed HTML snippet</label>
   <textarea
