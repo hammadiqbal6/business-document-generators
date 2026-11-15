@@ -8,6 +8,21 @@ interface Props {
 
 const { tool } = Astro.props;
 const c = tool.content;
+
+function escapeHtml(s: string): string {
+  return s
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;');
+}
+
+/** Link bare /tools/.../ and /guides/.../ paths in tool SEO copy. */
+function linkInternalPaths(para: string): string {
+  return escapeHtml(para)
+    .replace(/\/tools\/[a-z0-9-]+\//g, (path) => `<a href="${path}">${path}</a>`)
+    .replace(/\/guides\/[a-z0-9-]+\//g, (path) => `<a href="${path}">${path}</a>`);
+}
 ---
 <article class="prose tool-content">
   <h2>How to use this {tool.shortName.toLowerCase()} generator</h2>
@@ -18,18 +33,22 @@ const c = tool.content;
   {c.whatToInclude.map((section) => (
     <>
       <h2>{section.heading}</h2>
-      <p>{section.body}</p>
+      {section.body.split(/\n\n+/).map((para) => (
+        <p set:html={linkInternalPaths(para)} />
+      ))}
     </>
   ))}
 
   <h2>{c.workedExample.heading}</h2>
-  <p>{c.workedExample.body}</p>
+  {c.workedExample.body.split(/\n\n+/).map((para) => (
+    <p set:html={linkInternalPaths(para)} />
+  ))}
 
   {c.tips.length > 0 && (
     <>
       <h2>Tips</h2>
       <ul>
-        {c.tips.map((t) => <li>{t}</li>)}
+        {c.tips.map((t) => <li set:html={linkInternalPaths(t)} />)}
       </ul>
     </>
   )}
@@ -44,7 +63,7 @@ const c = tool.content;
     {c.faq.map((item) => (
       <details>
         <summary>{item.question}</summary>
-        <p>{item.answer}</p>
+        <p set:html={linkInternalPaths(item.answer)} />
       </details>
     ))}
   </div>

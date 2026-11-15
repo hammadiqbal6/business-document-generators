@@ -71,12 +71,14 @@ export const toolToGuides: Record<string, string[]> = {
   'receipt-generator': [
     'what-to-include-on-a-receipt',
     'invoice-vs-estimate',
+    'wedding-vendor-contract-checklist',
   ],
   'quote-estimate-generator': [
     'how-to-write-a-business-estimate',
     'invoice-vs-estimate',
     'work-order-vs-invoice-vs-estimate',
     'line-item-totals-explained',
+    'construction-estimate-that-wins-jobs',
   ],
   'independent-contractor-agreement': [
     'freelance-payment-schedule-milestones',
@@ -151,6 +153,7 @@ export const guideToGuides: Record<string, string[]> = {
     'invoice-vs-estimate',
     'line-item-totals-explained',
     'cleaning-invoice-rates-line-items',
+    'wedding-vendor-contract-checklist',
   ],
   'cleaning-invoice-rates-line-items': [
     'line-item-totals-explained',
@@ -175,6 +178,7 @@ export const guideToGuides: Record<string, string[]> = {
     'wedding-videography-contract',
     'catering-quotation-example',
     'videography-contract-clauses',
+    'what-to-include-on-a-receipt',
   ],
   'podcast-script-structure': ['real-estate-flyer-what-to-include'],
   'real-estate-flyer-what-to-include': ['podcast-script-structure'],
