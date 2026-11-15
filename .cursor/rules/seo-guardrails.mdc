@@ -10,7 +10,7 @@ globs:
 
 # SEO guardrails
 
-Follow `docs/SEO-GUARDRAILS.md` and `docs/CUSTOM-DOMAIN.md`.
+Follow `docs/SEO-GUARDRAILS.md` and `docs/CUSTOM-DOMAIN.md`. Site SEO status and “don’t re-fix” notes: **SEO state (as of 2026-11-15)** in `AGENTS.md` (IndexNow already live — do not add a second submitter).
 
 - Site origin: `PUBLIC_SITE_URL` or `DEFAULT_SITE_URL` in `src/config/siteDefaults.mjs` only — never hardcode this site’s workers.dev hostname elsewhere.
 - Trailing slash: run-first `src/worker.ts` returns **308**; `FILE_EXT` `{1,16}` for `.webmanifest`.
