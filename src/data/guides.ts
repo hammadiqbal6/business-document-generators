@@ -32,11 +32,11 @@ export const guides: Guide[] =
 [
   {
     "slug": "construction-estimate-that-wins-jobs",
-    "title": "How to Write a Construction Estimate That Wins Jobs",
+    "title": "How to Write a Construction Estimate",
     "metaDescription": "Write a clear construction quote or estimate with scope, line items, tax, deposit, and validity. Bathroom example plus free construction estimate template.",
     "answerFirst": "A winning construction estimate names the job, spells out measurable scope, prices labor and materials on separate lines, lists tax and deposit, and ends with a validity date plus exclusions. Clients compare construction quotes on clarity first. Use the same line structure later when you bill with a contractor invoice.",
     "publishedAt": "2026-10-19",
-    "updatedAt": "2026-11-13",
+    "updatedAt": "2026-11-15",
     "relatedToolSlugs": [
       "construction-estimate-template",
       "contractor-invoice",
@@ -448,11 +448,11 @@ export const guides: Guide[] =
   },
   {
     "slug": "tattoo-consent-documentation",
-    "title": "Tattoo Consent Form: What Studios Should Document",
+    "title": "Tattoo Consent Form: Studio Checklist",
     "metaDescription": "Free tattoo consent form template checklist: ID, health disclosures, design approval, aftercare, and signatures. Not legal or medical advice.",
     "answerFirst": "A complete tattoo consent record usually needs six elements: client identity and age verification, design and placement, risk acknowledgements, aftercare receipt, health disclosures, and signatures, with retention per your state or local health rules. This is documentation, not legal or medical advice. Start with the free tattoo consent form template, then match your board’s requirements.",
     "publishedAt": "2026-10-19",
-    "updatedAt": "2026-11-13",
+    "updatedAt": "2026-11-15",
     "relatedToolSlugs": [
       "tattoo-consent-form-template",
       "receipt-generator"
@@ -1038,11 +1038,11 @@ export const guides: Guide[] =
   },
   {
     "slug": "freelance-payment-schedule-milestones",
-    "title": "Freelance Payment Schedules: Deposits and Milestones",
+    "title": "Freelance Payment Schedules & Milestones",
     "metaDescription": "Build a freelance payment schedule with deposits and milestones. See a $6,000 site example and put the same splits in a free web design contract.",
     "answerFirst": "Write the deposit and each milestone percent in the contract before work starts, with a clear trigger for when each payment is due. One working schedule for a fixed web project is 30% to start, 40% on design approval, and 30% on launch. Those percents are a pattern for that job, not an official rule. Match every invoice to the signed schedule.",
     "publishedAt": "2026-10-21",
-    "updatedAt": "2026-11-13",
+    "updatedAt": "2026-11-15",
     "relatedToolSlugs": [
       "freelance-web-design-contract",
       "contractor-invoice",

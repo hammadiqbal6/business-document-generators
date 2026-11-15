@@ -26,7 +26,7 @@ Use this instead of inventing a new outline. Companion: `refresh-an-existing-gui
    - `publishedAt` / `updatedAt` as real `YYYY-MM-DD` (drives sitemap lastmod)
 2. Wire `src/data/toolGuideMap.ts` (tool → guide and reverse where needed).
 3. Row in `docs/KEYWORD-MAP.md`.
-4. If the intent is question-heavy, add a line to the question map in `src/pages/llms.txt.ts` (and keep `llms-full.txt.ts` coherent). `/.well-known/llms.txt` redirects — no duplicate body.
+4. If the intent is question-heavy, add a line to the question map in `src/lib/llmsTxt.ts` (and keep `llms-full.txt.ts` coherent). `/.well-known/llms.txt` reuses the same plain-text body — do not add a separate redirect.
 5. Titles: leave room for `buildPageTitle()` brand suffix; aim ≤60 chars.
 6. OG: after build, confirm `/og/guide-<slug>.png` (from `scripts/generate-og-svg.mjs` prebuild). Pages reference **PNG**, not SVG.
 

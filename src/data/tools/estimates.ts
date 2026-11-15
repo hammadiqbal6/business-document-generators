@@ -14,7 +14,7 @@ export const constructionEstimate: ToolDefinition = {
     'contractor estimate form',
     'building estimate template PDF',
   ],
-  title: 'Free Construction Estimate & Quote Template (PDF)',
+  title: 'Free Construction Estimate Template (PDF)',
   metaDescription:
     'Fill a free construction estimate or quote template with line items, labor, materials and tax, preview it live, then download PDF or Word. No signup.',
   h1: 'Free Construction Estimate & Quote Template',
@@ -140,7 +140,7 @@ export const constructionEstimate: ToolDefinition = {
   },
   relatedSlugs: ['contractor-invoice', 'work-order', 'change-order-template'],
   publishedAt: '2026-10-19',
-  updatedAt: '2026-11-13',
+  updatedAt: '2026-11-15',
 };
 
 export const contractorInvoice: ToolDefinition = {
