@@ -15,6 +15,9 @@
   "$schema": "./node_modules/wrangler/config-schema.json",
   "name": "business-document-generators",
   "compatibility_date": "2026-10-19",
+  // Custom domain only (matches sister home-garden / YardTally). Keep LEGACY_REDIRECT_HOSTS
+  // + worker host-301 logic so re-enabling workers.dev still single-hops to CANONICAL_ORIGIN.
+  "workers_dev": false,
   // Worker issues legacy 301 + 308 trailing-slash redirects before assets
   "main": "src/worker.ts",
   "vars": {

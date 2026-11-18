@@ -1,6 +1,18 @@
-# Sitemap alias (tools that request /sitemap.xml)
+# Sitemap aliases (tools that request /sitemap.xml or WordPress-style /sitemap_index.xml)
 /sitemap.xml /sitemap-index.xml 301
+/sitemap_index.xml /sitemap-index.xml 301
 
 # Authors → About (one author URL per site)
 /authors /about/ 301
 /authors/ /about/ 301
+
+# Legacy / guessed invoice URLs → canonical contractor invoice tool
+# (not /hubs/estimates-invoices/: real visits want a usable invoice form)
+/tools/invoice /tools/contractor-invoice/ 301
+/tools/invoice/ /tools/contractor-invoice/ 301
+/tools/invoice-generator /tools/contractor-invoice/ 301
+/tools/invoice-generator/ /tools/contractor-invoice/ 301
+
+# Common privacy policy alias
+/privacy-policy /privacy/ 301
+/privacy-policy/ /privacy/ 301

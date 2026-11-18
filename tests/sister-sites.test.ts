@@ -22,7 +22,7 @@ describe('sisterSites config', () => {
     // This site's origin default is the single siteDefaults export (not duplicated).
     expect(sisterSiteDefaults.businessDocs).toBe(DEFAULT_SITE_URL);
     expect(DEFAULT_SITE_URL).toBe('https://docuklin.com');
-    expect(sisterSiteDefaults.homeGarden).toMatch(/home-garden-calculators/);
+    expect(sisterSiteDefaults.homeGarden).toBe('https://getyardtally.com');
     expect(sisterSiteDefaults.fiberArts).toMatch(/fiber-arts-calculators/);
     expect(sisterSiteDefaults.pet).toMatch(/pet-calculators/);
   });

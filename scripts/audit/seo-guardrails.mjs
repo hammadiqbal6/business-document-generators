@@ -112,6 +112,11 @@ for (const file of sourceFiles) {
   if (file.startsWith(path.join(root, 'docs'))) continue;
   if (file.startsWith(path.join(root, 'tests'))) continue;
   if (file.startsWith(path.join(root, '.lighthouseci'))) continue;
+  if (file.startsWith(path.join(root, '.cursor'))) continue;
+  if (file.startsWith(path.join(root, '.playwright-mcp'))) continue;
+  // Standing agent/README notes may name the live origin; not runtime SEO surfaces.
+  const base = path.basename(file);
+  if (base === 'AGENTS.md' || base === 'CLAUDE.md' || base === 'README.md') continue;
   const text = fs.readFileSync(file, 'utf8');
   if (HOST_RE.test(text)) {
     fail(
@@ -174,6 +179,15 @@ const redirects = readIfExists('_redirects') || '';
 if (!/\/sitemap\.xml\s+\/sitemap-index\.xml\s+301\b/.test(redirects)) {
   fail('dist/_redirects missing `/sitemap.xml` → `/sitemap-index.xml` 301');
 }
+if (!/\/sitemap_index\.xml\s+\/sitemap-index\.xml\s+301\b/.test(redirects)) {
+  fail('dist/_redirects missing `/sitemap_index.xml` → `/sitemap-index.xml` 301');
+}
+if (!/\/tools\/invoice\/?\s+\/tools\/contractor-invoice\/\s+301\b/.test(redirects)) {
+  fail('dist/_redirects missing `/tools/invoice/` → `/tools/contractor-invoice/` 301');
+}
+if (!/\/privacy-policy\/?\s+\/privacy\/\s+301\b/.test(redirects)) {
+  fail('dist/_redirects missing `/privacy-policy/` → `/privacy/` 301');
+}
 
 // wrangler: worker 308 + previews, no top-level vars
 const wranglerPath = path.join(root, 'wrangler.jsonc');
@@ -190,6 +204,9 @@ if (fs.existsSync(wranglerPath)) {
   }
   if (!/"run_worker_first"\s*:\s*true/.test(wrangler)) {
     fail('wrangler.jsonc missing assets.run_worker_first: true');
+  }
+  if (!/"workers_dev"\s*:\s*false/.test(wrangler)) {
+    fail('wrangler.jsonc missing workers_dev: false (custom domain only)');
   }
   const stripped = wrangler.replace(/\/\/.*$/gm, '').replace(/\/\*[\s\S]*?\*\//g, '');
   const withoutPreviews = stripped.replace(/"previews"\s*:\s*\{[\s\S]*?\}/, '');
