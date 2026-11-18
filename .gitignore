@@ -23,3 +23,9 @@ pnpm-debug.log*
 # jetbrains setting folder
 .idea/
 tmp/
+
+# Playwright MCP local capture artifacts
+.playwright-mcp/
+
+# Wrangler local state
+.wrangler/

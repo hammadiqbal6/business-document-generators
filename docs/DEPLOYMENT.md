@@ -86,7 +86,7 @@ Defaults live in `src/config/site.ts` / `siteDefaults.mjs` (fallback origin is `
 | `PUBLIC_SITE_URL` | **Yes** | `https://tools.yourbrand.com` | Canonical URLs, sitemap, Open Graph, JSON-LD |
 | `PUBLIC_SITE_URL_PAYMENT_FEES` | Recommended | `https://payment-fee-calculators…` (or custom domain) | Sister-site links (`src/config/sisterSites.ts`) |
 | `PUBLIC_SITE_URL_BUSINESS_DOCS` | Recommended | `https://business-document-generators…` | Sister-site links (this site’s origin for the other four repos) |
-| `PUBLIC_SITE_URL_HOME_GARDEN` | Recommended | `https://home-garden-calculators…` | Sister-site links |
+| `PUBLIC_SITE_URL_HOME_GARDEN` | Recommended | `https://getyardtally.com` | Sister-site links |
 | `PUBLIC_SITE_URL_FIBER_ARTS` | Recommended | `https://fiber-arts-calculators…` | Sister-site links |
 | `PUBLIC_SITE_URL_PET` | Recommended | `https://pet-calculators…` | Sister-site links |
 | `PUBLIC_SITE_NAME` | **Yes** | `Your Brand Tools` | Titles, header, Organization schema |

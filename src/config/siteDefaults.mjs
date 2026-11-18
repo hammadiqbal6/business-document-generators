@@ -106,15 +106,14 @@ export const LEGACY_WORKERS_DEV_HOST = DEFAULT_LEGACY_REDIRECT_HOSTS.split(',')[
 /** Sister-site origin fallbacks (no trailing slash). */
 export const DEFAULT_SISTER_URL_PAYMENT_FEES =
   'https://payment-fee-calculators.hammadiqbal117.workers.dev';
-export const DEFAULT_SISTER_URL_HOME_GARDEN =
-  'https://home-garden-calculators.hammadiqbal117.workers.dev';
+export const DEFAULT_SISTER_URL_HOME_GARDEN = 'https://getyardtally.com';
 export const DEFAULT_SISTER_URL_FIBER_ARTS =
   'https://fiber-arts-calculators.hammadiqbal117.workers.dev';
 export const DEFAULT_SISTER_URL_PET = 'https://pet-calculators.hammadiqbal117.workers.dev';
 
 /** Sister-site display names (About list). */
 export const DEFAULT_SISTER_NAME_PAYMENT_FEES = 'FeeCalc (payment fee calculators)';
-export const DEFAULT_SISTER_NAME_HOME_GARDEN = 'YardCalc (home & garden calculators)';
+export const DEFAULT_SISTER_NAME_HOME_GARDEN = 'YardTally (home & garden calculators)';
 export const DEFAULT_SISTER_NAME_FIBER_ARTS = 'FiberCalc (knitting & crochet calculators)';
 export const DEFAULT_SISTER_NAME_PET = 'PetCalc (pet calculators)';
 

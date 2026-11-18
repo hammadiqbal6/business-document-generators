@@ -43,10 +43,10 @@ Internal identifiers (`docuforge:cookie-ok`, draft keys, `__docuforgeGrantAnalyt
 | `PUBLIC_TWITTER_HANDLE` | _(empty)_ | `twitter:site` (omit when empty) |
 | `PUBLIC_SITE_URL_PAYMENT_FEES` | payment-fee-calculators…workers.dev | Sister origin |
 | `PUBLIC_SITE_URL_BUSINESS_DOCS` | `https://docuklin.com` | This site as seen by sisters |
-| `PUBLIC_SITE_URL_HOME_GARDEN` | home-garden-calculators…workers.dev | Sister origin |
+| `PUBLIC_SITE_URL_HOME_GARDEN` | `https://getyardtally.com` | Sister origin |
 | `PUBLIC_SITE_URL_FIBER_ARTS` | fiber-arts-calculators…workers.dev | Sister origin |
 | `PUBLIC_SITE_URL_PET` | pet-calculators…workers.dev | Sister origin |
-| `PUBLIC_SISTER_NAME_*` | FeeCalc / YardCalc / FiberCalc / PetCalc labels | About sibling display names |
+| `PUBLIC_SISTER_NAME_*` | FeeCalc / YardTally / FiberCalc / PetCalc labels | About sibling display names |
 | `PUBLIC_EMAILJS_*` | _(empty)_ | Contact form (see `docs/CONTACT-EMAILJS.md`) |
 | `PUBLIC_GA4_MEASUREMENT_ID` | `G-HR4DDMD97H` | Analytics |
 | `PUBLIC_GSC_VERIFICATION` | _(current GSC token)_ | Search Console meta |

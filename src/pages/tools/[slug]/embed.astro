@@ -26,17 +26,12 @@ const canonical = absoluteUrl(`/tools/${tool.slug}/`);
     {siteConfig.googleSiteVerification && (
       <meta name="google-site-verification" content={siteConfig.googleSiteVerification} />
     )}
-    {siteConfig.ga4MeasurementId && (
-      <>
-        <script async src={`https://www.googletagmanager.com/gtag/js?id=${siteConfig.ga4MeasurementId}`}></script>
-        <script is:inline define:vars={{ id: siteConfig.ga4MeasurementId }}>
-          window.dataLayer = window.dataLayer || [];
-          function gtag(){dataLayer.push(arguments);}
-          gtag('js', new Date());
-          gtag('config', id, { anonymize_ip: true });
-        </script>
-      </>
-    )}
+    {/*
+      No GA4/gtag on embeds. The previous ungated snippet loaded gtag.js without Consent Mode,
+      and scanners harvested identifiers from that script (e.g. gtag.config, gtm.videoCurrentTime)
+      as relative URLs under /tools/<slug>/embed/, producing 404 noise. Parent tool pages keep
+      consent-gated Analytics.astro; trackEvent() no-ops here when window.gtag is absent.
+    */}
   </head>
   <body style="margin:0;padding:0.5rem;font-family:system-ui,sans-serif;">
     <h1 class="sr-only">{tool.h1}</h1>

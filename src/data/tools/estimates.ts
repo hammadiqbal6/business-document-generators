@@ -14,9 +14,9 @@ export const constructionEstimate: ToolDefinition = {
     'contractor estimate form',
     'building estimate template PDF',
   ],
-  title: 'Free Construction Estimate Template (PDF)',
+  title: 'Free Construction Estimate Template',
   metaDescription:
-    'Fill a free construction estimate or quote template with line items, labor, materials and tax, preview it live, then download PDF or Word. No signup.',
+    'Free contractor estimate generator for remodel bids: scope, labor, materials, tax, and deposit. Live preview, then download PDF or DOCX—no signup.',
   h1: 'Free Construction Estimate & Quote Template',
   answerFirst:
     'A construction estimate or construction quote lists project scope, labor and material line items, allowances, tax, and a total so you can present pricing before work starts. Use this free generator to fill those fields in your browser, preview the document, and export PDF or DOCX. Nothing is uploaded.',
@@ -97,13 +97,29 @@ export const constructionEstimate: ToolDefinition = {
     tips: [
       'Separate labor and materials when clients compare bids.',
       'Photograph existing conditions and attach notes before you price.',
-      'Match estimate numbers to invoices for the same job.',
+      'After acceptance, bill draws with the free invoice generator for contractors at /tools/contractor-invoice/.',
+      'For a lighter service quote without remodel allowances, use the free quote generator at /tools/quote-estimate-generator/.',
     ],
     faq: [
       {
-        question: 'Is a construction estimate legally binding?',
+        question: 'What should every construction estimate include?',
         answer:
-          'Often an estimate is an invitation to agree on price, not a contract—unless your wording or local law treats it as an offer you both accept. Pair accepted estimates with a signed contract or work order.',
+          'Job address, dated scope with exclusions, measurable line items (labor vs materials), tax, deposit or draw schedule, validity window, and assumptions about access, permits, and owner-supplied items.',
+      },
+      {
+        question: 'Is this a free contractor estimate generator?',
+        answer:
+          'Yes. Fill the construction estimate template in your browser, preview live, and download PDF or DOCX with no account. For faster mixed-service quotes without remodel allowances, use /tools/quote-estimate-generator/.',
+      },
+      {
+        question: 'Quote vs estimate vs invoice on a remodel?',
+        answer:
+          'Use this estimate (or quote) before work. Switch to /tools/contractor-invoice/ when you bill a deposit or progress draw. A receipt confirms money already received. See /guides/invoice-vs-estimate/.',
+      },
+      {
+        question: 'Can I download a construction estimate PDF?',
+        answer:
+          'Yes. Export PDF or DOCX from the live preview. Keep the PDF with the job file so later invoices can reuse the same line labels.',
       },
       {
         question: 'How long should an estimate stay valid?',
@@ -111,36 +127,16 @@ export const constructionEstimate: ToolDefinition = {
           'Many contractors use 14–30 days. Material-heavy jobs may need shorter windows when lumber or appliance prices move quickly.',
       },
       {
-        question: 'What is the difference between an estimate and a bid?',
+        question: 'Is a construction estimate legally binding?',
         answer:
-          'An estimate is typically a professional opinion of cost; a bid is often a firm offer in a competitive process. Confirm how your client uses the terms.',
-      },
-      {
-        question: 'Do I need to include tax on every line?',
-        answer:
-          'Follow your jurisdiction’s rules. Many estimates show a single tax rate on taxable subtotal; some materials are tax-exempt for resale—label those clearly.',
-      },
-      {
-        question: 'Should I include a contingency line?',
-        answer:
-          'A 5–15% contingency (or a clearly labeled allowance) helps when finishes, concealed conditions, or owner selections are still open. Spell out what triggers using it and how unused contingency is handled.',
-      },
-      {
-        question: 'What should every construction estimate include?',
-        answer:
-          'Job address, dated scope with exclusions, measurable line items (labor vs materials), tax, deposit or draw schedule, validity window, and assumptions about access, permits, and owner-supplied items.',
-      },
-      {
-        question: 'What should a construction quote generator include?',
-        answer:
-          'The same fields as a solid construction estimate: parties, job address, measurable scope, line items with units and rates, tax, deposit as your working pattern, a validity date, and exclusions. Whether you label the PDF “quote” or “estimate,” the math and scope clarity matter more than the title.',
+          'Often an estimate is an invitation to agree on price, not a contract—unless your wording or local law treats it as an offer you both accept. Pair accepted estimates with a signed contract or work order.',
       },
     ],
     sources: estimateSources,
   },
-  relatedSlugs: ['contractor-invoice', 'work-order', 'change-order-template'],
+  relatedSlugs: ['contractor-invoice', 'quote-estimate-generator', 'change-order-template'],
   publishedAt: '2026-10-19',
-  updatedAt: '2026-11-15',
+  updatedAt: '2026-11-18',
 };
 
 export const contractorInvoice: ToolDefinition = {
@@ -149,11 +145,16 @@ export const contractorInvoice: ToolDefinition = {
   shortName: 'Contractor Invoice',
   category: 'estimates-invoices',
   primaryKeyword: 'contractor invoice',
-  secondaryKeywords: ['contractor invoice template', 'construction invoice PDF', 'free contractor invoice'],
-  title: 'Free Contractor Invoice Template & Generator',
+  secondaryKeywords: [
+    'contractor invoice template',
+    'construction invoice PDF',
+    'free contractor invoice',
+    'free invoice generator for contractors',
+  ],
+  title: 'Free Invoice Generator for Contractors',
   metaDescription:
-    'Make a contractor invoice online with line items, tax, deposits and payment terms. Live preview, then download a PDF or DOCX. Free, no account needed.',
-  h1: 'Free Contractor Invoice Template',
+    'Free invoice generator for contractors: line items, tax, deposits, balance due, and payment terms. Live preview, then download PDF or DOCX—no signup.',
+  h1: 'Free Invoice Generator for Contractors',
   answerFirst:
     'A contractor invoice bills for completed or progress-billed work: invoice number, dates, client, line items, tax, amount due, and payment instructions. Generate yours here in the browser, preview it live, and download PDF or DOCX without uploading data.',
   applicationCategory: 'BusinessApplication',
@@ -224,17 +225,29 @@ export const contractorInvoice: ToolDefinition = {
     tips: [
       'Keep invoice numbers sequential and year-prefixed.',
       'Send PDF plus a plain-text payment reminder.',
+      'Price the job first with the free quote generator at /tools/quote-estimate-generator/ or the construction estimate template at /tools/construction-estimate-template/.',
+      'When a deposit clears, issue a payment receipt from /tools/receipt-generator/.',
     ],
     faq: [
       {
-        question: 'When should a contractor send an invoice?',
+        question: 'Is this a free invoice generator for contractors?',
         answer:
-          'Follow the payment schedule in your contract—deposit, progress, or final. Send promptly after each milestone so cash flow stays predictable.',
+          'Yes. Fill line items, tax, deposits, and payment terms in your browser, preview live, and download PDF or DOCX with no account. Entries stay on your device.',
       },
       {
-        question: 'What payment terms are common?',
+        question: 'What should a contractor invoice include?',
         answer:
-          'Net 14 or Net 30 are common for residential work; commercial jobs may specify retainage. State late fees only if your agreement allows them.',
+          'Unique invoice number, dates, bill-to, line items with quantity × rate, tax, amount already paid, balance due, payment instructions, and a reference to the estimate or PO when you have one.',
+      },
+      {
+        question: 'Quote vs estimate vs invoice—which do I send?',
+        answer:
+          'Send a quote or estimate before work (see /tools/quote-estimate-generator/). Switch to this contractor invoice when you bill a deposit, progress draw, or completed work. A receipt confirms money already received.',
+      },
+      {
+        question: 'Can I download a contractor invoice PDF?',
+        answer:
+          'Yes. Export PDF or DOCX from the live preview. Keep the PDF with the estimate so accounts payable can match line labels.',
       },
       {
         question: 'How does progress billing work on a contractor invoice?',
@@ -242,26 +255,16 @@ export const contractorInvoice: ToolDefinition = {
           'Bill a percentage or completed-phase amount that matches your contract draws—e.g. after demo, rough-in, or substantial completion. Reference the estimate or PO and show prior payments so the balance due is obvious.',
       },
       {
-        question: 'Can I charge late fees on unpaid contractor invoices?',
+        question: 'When should a contractor send an invoice?',
         answer:
-          'Only if your signed agreement allows a specific rate or fee and local law permits it. Put the late-fee rule on the invoice and the contract; do not invent penalties after the fact.',
-      },
-      {
-        question: 'Do contractor invoices affect 1099 reporting?',
-        answer:
-          'In the U.S., businesses often need your taxpayer ID to issue Form 1099-NEC when they pay $600+ to an unincorporated contractor. Your invoice is a payment record—not a tax form—so keep W-9 and invoice PDFs together for year-end.',
-      },
-      {
-        question: 'What is retainage and how do I show it?',
-        answer:
-          'Retainage is a contract holdback (often 5–10%) until punch-list or final acceptance. Show the earned amount, retainage withheld this period, retainage released, and net amount due so AP can match the contract.',
+          'Follow the payment schedule in your contract—deposit, progress, or final. Send promptly after each milestone so cash flow stays predictable.',
       },
     ],
     sources: estimateSources,
   },
-  relatedSlugs: ['construction-estimate-template', 'change-order-template', 'purchase-order-template'],
+  relatedSlugs: ['quote-estimate-generator', 'construction-estimate-template', 'receipt-generator'],
   publishedAt: '2026-10-19',
-  updatedAt: '2026-11-13',
+  updatedAt: '2026-11-18',
 };
 
 export const cleaningInvoice: ToolDefinition = {
@@ -554,12 +557,12 @@ export const quoteEstimate: ToolDefinition = {
     'free instant quote',
     'construction quote generator',
   ],
-  title: 'Free Estimate Generator – Quote & PDF',
+  title: 'Free Quote & Estimate Generator',
   metaDescription:
-    'Free estimate generator for instant quotes: line items, tax, validity date, live preview, PDF/DOCX. No signup. Works for services and light construction quotes.',
-  h1: 'Free Estimate Generator',
+    'Free quote generator and estimate template: line items, tax, validity date, live preview, PDF/DOCX. No signup. Works for services and light contractor quotes.',
+  h1: 'Free Quote & Estimate Generator',
   answerFirst:
-    'A free estimate generator builds a priced estimate or quote in your browser: parties, job description, line items, tax, total, and how long the price holds. Preview live for an instant quote PDF, then export DOCX if needed. Nothing is uploaded to a server.',
+    'A free quote and estimate generator builds a priced document in your browser: parties, job description, line items, tax, total, and how long the price holds. Preview live for an instant quote PDF, then export DOCX if needed. Nothing is uploaded to a server.',
   applicationCategory: 'BusinessApplication',
   isLegalAdjacent: false,
   documentTitle: 'Estimate',
@@ -641,61 +644,47 @@ export const quoteEstimate: ToolDefinition = {
     ],
     tips: [
       'Number every estimate and archive the exported file.',
-      'Reuse the same lines later in /tools/contractor-invoice/.',
-      'When the client pays a deposit, issue a receipt from /tools/receipt-generator/.',
+      'Reuse accepted lines in the free invoice generator for contractors at /tools/contractor-invoice/.',
+      'When the client pays a deposit, issue a payment receipt from /tools/receipt-generator/.',
+      'For full remodel bids with allowances, switch to the construction estimate template at /tools/construction-estimate-template/.',
     ],
     faq: [
       {
+        question: 'What should I include in a quote or estimate?',
+        answer:
+          'Parties, a measurable job description, line items with quantity × rate, tax if you collect it, a grand total, and a valid-until date. Say whether prices can change after discovery. Full walkthrough: /guides/how-to-write-a-business-estimate/.',
+      },
+      {
+        question: 'What is the difference between a quote, estimate, and invoice?',
+        answer:
+          'Quotes and estimates propose price before work; quotes are often firmer. An invoice requests payment after acceptance or completed work—reuse lines in /tools/contractor-invoice/. See /guides/invoice-vs-estimate/.',
+      },
+      {
+        question: 'Is this free quote generator really free with no signup?',
+        answer:
+          'Yes. Fill the form, preview live, and export PDF or DOCX with no account. Optional drafts use localStorage on your device only; nothing is uploaded to a server.',
+      },
+      {
+        question: 'Can I download a quote or estimate as a PDF?',
+        answer:
+          'Yes. Export PDF or DOCX from the live preview for an instant quote you can email the same day. Archive the PDF so the later invoice matches what the client accepted.',
+      },
+      {
         question: 'Can I turn this quote into an invoice later?',
         answer:
-          'Yes—reuse the same line items in /tools/contractor-invoice/ or /tools/receipt-generator/ once work is accepted or paid.',
+          'Yes—reuse the same line items in the free invoice generator for contractors at /tools/contractor-invoice/, or confirm payment with /tools/receipt-generator/.',
       },
       {
-        question: 'What is the difference between a quote and an estimate?',
+        question: 'Can I use this as a contractor estimate generator?',
         answer:
-          'Quotes are often firmer fixed offers for a defined scope; estimates signal approximate cost that may change after discovery. Label the document the way your industry expects and state whether totals can move. See /guides/invoice-vs-estimate/.',
-      },
-      {
-        question: 'Is a quote legally binding?',
-        answer:
-          'It can become binding if it is a clear offer that the client accepts, or if local law treats it that way. Many businesses treat unsigned quotes as proposals and require a signed contract or deposit to lock the job—confirm with counsel for your situation.',
-      },
-      {
-        question: 'How long should a quote stay valid?',
-        answer:
-          'Fourteen to thirty days is a common working pattern for services; shorter windows help when materials or labor rates change quickly. Put a valid-until date on every quote and re-quote after it expires.',
-      },
-      {
-        question: 'Do I need a signature for the client to accept a quote?',
-        answer:
-          'A written acceptance (signature, e-sign, or clear email “approved”) plus a deposit is stronger than a verbal yes. Match your acceptance method to how you want the job to become a contract.',
-      },
-      {
-        question: 'What is a free estimate generator?',
-        answer:
-          'A free estimate generator is a browser form that builds a priced quote or estimate PDF with line items, tax, and a validity date. This tool does that without an account and without uploading your entries to a server.',
-      },
-      {
-        question: 'How do I create a free instant quote?',
-        answer:
-          'Choose Quote, enter parties and job scope, add priced line items, set tax and a valid-until date, preview the live totals, then export PDF. That is a free instant quote you can email the same day—no signup.',
-      },
-      {
-        question: 'Can I use this as a construction quote generator?',
-        answer:
-          'Yes for light or single-trade scopes with clear units. For full construction estimates with allowances and change-order workflows, use /tools/construction-estimate-template/ so those fields stay purpose-built.',
-      },
-      {
-        question: 'How do I create an estimate or quote in the browser?',
-        answer:
-          'Choose Quote or Estimate, enter your business and client details, describe the job, add priced line items, set tax and a valid-until date, then preview and export PDF or DOCX. Full walkthrough: /guides/how-to-write-a-business-estimate/.',
+          'Yes for light or single-trade scopes with clear units. For full remodel bids with allowances and change-order workflows, use /tools/construction-estimate-template/.',
       },
     ],
     sources: estimateSources,
   },
-  relatedSlugs: ['construction-estimate-template', 'contractor-invoice', 'receipt-generator'],
+  relatedSlugs: ['contractor-invoice', 'construction-estimate-template', 'receipt-generator'],
   publishedAt: '2026-10-19',
-  updatedAt: '2026-11-15',
+  updatedAt: '2026-11-18',
 };
 
 export const receiptGenerator: ToolDefinition = {
@@ -711,9 +700,9 @@ export const receiptGenerator: ToolDefinition = {
     'service receipt PDF',
     'PDF receipt generator',
   ],
-  title: 'Receipt Generator – Free Payment Receipt PDF',
+  title: 'Free Receipt Generator – Payment PDF',
   metaDescription:
-    'Create a payment receipt online for cash, card, or transfer. Itemize charges, show amount paid, export PDF/DOCX. Runs entirely in your browser.',
+    'Free receipt generator for cash, card, or transfer payments. Itemize charges, show amount paid and balance, then download PDF or DOCX—no signup.',
   h1: 'Free Receipt Generator',
   answerFirst:
     'A payment receipt confirms who paid whom, when, how much, for what, and by which method. Generate a clean receipt here, preview it live, and download PDF or DOCX without sending data to a server. Pair it with the field checklist in the payment receipt guide.',
@@ -810,56 +799,46 @@ export const receiptGenerator: ToolDefinition = {
     ],
     tips: [
       'Keep PDF copies for bookkeeping alongside bank deposits.',
-      'Reuse the same party names and invoice number on the next progress bill so the paper trail stays consistent.',
+      'Link deposits to the free quote generator at /tools/quote-estimate-generator/ or the free invoice generator for contractors at /tools/contractor-invoice/.',
       'Read the companion guide at /guides/what-to-include-on-a-receipt/ before you train staff on defaults.',
     ],
     faq: [
-      {
-        question: 'Is this a tax invoice?',
-        answer:
-          'Receipts prove payment. Some regions require formal tax invoices with registration numbers—add those fields in Notes if your locality requires them.',
-      },
       {
         question: 'What should a payment receipt include?',
         answer:
           'Unique receipt number, date, business name, payer name, description of goods or services, amount paid, payment method, tax if shown, invoice reference when applicable, and remaining balance if the payment was partial. Full checklist: /guides/what-to-include-on-a-receipt/.',
       },
       {
-        question: 'How is a receipt different from an invoice?',
+        question: 'Is this receipt generator free with no signup?',
         answer:
-          'An invoice requests payment; a receipt confirms payment was received. Issue the invoice first (or with a deposit request), then a receipt when money clears. See /guides/invoice-vs-estimate/ for how estimates fit the same job.',
+          'Yes. Build the receipt in your browser, preview live, and download PDF or DOCX with no account. Optional drafts stay in localStorage on your device.',
       },
       {
-        question: 'Are DIY PDF receipts legally valid?',
+        question: 'Can I download a PDF payment receipt?',
         answer:
-          'A clear, accurate receipt is generally useful proof of payment for customers and your books. Tax or consumer rules may require specific fields (registration numbers, itemization)—follow your locality; this tool is not tax advice.',
+          'Yes. Export PDF or DOCX from the live preview and file it with the related invoice. The IRS lists receipts among supporting documents for gross receipts.',
       },
       {
-        question: 'Can I add a paid watermark or use this for thermal printers?',
+        question: 'How is a receipt different from an invoice or estimate?',
         answer:
-          'Export the PDF and add a “Paid” stamp in your PDF viewer or print workflow if you want a watermark. Thermal printers need a narrow layout. Use the PDF as a record and reprint on thermal stock from your POS if required.',
+          'An estimate or quote proposes price; an invoice requests payment; a receipt confirms money was received. Price with /tools/quote-estimate-generator/, bill with /tools/contractor-invoice/, then receipt here.',
       },
       {
         question: 'How do I generate a receipt of payment?',
         answer:
-          'Enter your business name, the payer, a unique receipt number, the date, what was paid for, amount paid, and payment method. Add an invoice reference when the payment applies to a prior bill. Preview, then export a PDF receipt for your books and the customer.',
-      },
-      {
-        question: 'Can I export a PDF payment receipt?',
-        answer:
-          'Yes. This generator creates a PDF (and DOCX) payment receipt in your browser. File the PDF with the related invoice. The IRS lists receipts among supporting documents for gross receipts.',
+          'Enter your business name, the payer, a unique receipt number, the date, what was paid for, amount paid, and payment method. Add an invoice reference when the payment applies to a prior bill. Preview, then export PDF.',
       },
       {
         question: 'Should wedding or catering deposits get a receipt?',
         answer:
-          'Yes. Reference the catering quote or vendor contract number, state whether the deposit is refundable, and keep the PDF with the signed agreement. Couples reviewing vendors can follow /guides/wedding-vendor-contract-checklist/; build the catering PDF in /tools/catering-quote/.',
+          'Yes. Reference the catering quote or vendor contract number, state whether the deposit is refundable, and keep the PDF with the signed agreement. Build the catering PDF in /tools/catering-quote/.',
       },
     ],
     sources: estimateSources,
   },
   relatedSlugs: ['contractor-invoice', 'quote-estimate-generator', 'catering-quote'],
   publishedAt: '2026-10-19',
-  updatedAt: '2026-11-15',
+  updatedAt: '2026-11-18',
 };
 
 export const workOrder: ToolDefinition = {

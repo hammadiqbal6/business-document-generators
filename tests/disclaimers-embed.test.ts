@@ -56,6 +56,13 @@ describe('embed attribution', () => {
     expect(src).toMatch(/Powered by \{siteConfig\.siteName\}/);
   });
 
+  it('does not load ungated gtag/GA4 on embed pages', () => {
+    const src = readFileSync(resolve('src/pages/tools/[slug]/embed.astro'), 'utf8');
+    expect(src).not.toMatch(/googletagmanager\.com/);
+    expect(src).not.toMatch(/gtag\s*\(/);
+    expect(src).not.toMatch(/ga4MeasurementId/);
+  });
+
   it('uses hello@docuklin.com as contact', () => {
     expect(siteConfig.contactEmail).toBe('hello@docuklin.com');
   });
