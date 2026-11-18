@@ -1,5 +1,7 @@
 ---
 import type { ToolDefinition } from '../../data/tools/types';
+import { getToolBySlug } from '../../data/tools';
+import { guides } from '../../data/guides';
 import TrustBlock from './TrustBlock.astro';
 
 interface Props {
@@ -17,11 +19,19 @@ function escapeHtml(s: string): string {
     .replace(/"/g, '&quot;');
 }
 
-/** Link bare /tools/.../ and /guides/.../ paths in tool SEO copy. */
+/** Link bare /tools/.../ and /guides/.../ paths with descriptive anchor text. */
 function linkInternalPaths(para: string): string {
   return escapeHtml(para)
-    .replace(/\/tools\/[a-z0-9-]+\//g, (path) => `<a href="${path}">${path}</a>`)
-    .replace(/\/guides\/[a-z0-9-]+\//g, (path) => `<a href="${path}">${path}</a>`);
+    .replace(/\/tools\/([a-z0-9-]+)\//g, (path, slug: string) => {
+      const t = getToolBySlug(slug);
+      const label = t?.name || path;
+      return `<a href="${path}">${escapeHtml(label)}</a>`;
+    })
+    .replace(/\/guides\/([a-z0-9-]+)\//g, (path, slug: string) => {
+      const g = guides.find((item) => item.slug === slug);
+      const label = g?.title || path;
+      return `<a href="${path}">${escapeHtml(label)}</a>`;
+    });
 }
 ---
 <article class="prose tool-content">

@@ -3,7 +3,7 @@
 | URL | Primary keyword | Secondary cluster | Ahrefs evidence |
 |-----|---------------|-------------------|-----------------|
 | `/tools/construction-estimate-template/` | construction estimate template | contractor estimate form, building estimate PDF | 1,200/mo, KD 2 |
-| `/tools/contractor-invoice/` | contractor invoice | construction invoice template, contractor invoice PDF | long-tail B2B |
+| `/tools/contractor-invoice/` | contractor invoice | free invoice generator for contractors, construction invoice template, contractor invoice PDF | long-tail B2B |
 | `/tools/photography-contract-template/` | photography contract template | wedding photography contract, photographer agreement | 1,100/mo, KD 6 |
 | `/tools/videography-contract/` | videography contract | video production agreement, wedding videography contract | profession long-tail |
 | `/tools/podcast-script-template/` | podcast script template | podcast episode outline, interview podcast script | 600/mo, KD 1 |

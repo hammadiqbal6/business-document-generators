@@ -13,7 +13,9 @@ const { tools, title = 'Related tools' } = Astro.props;
     <h2 id="related-tools-heading">{title}</h2>
     <ul>
       {tools.map((t) => (
-        <li><a href={`/tools/${t.slug}/`}>{t.name}</a></li>
+        <li>
+          <a href={`/tools/${t.slug}/`}>{t.name} (free PDF)</a>
+        </li>
       ))}
     </ul>
   </section>

@@ -35,9 +35,9 @@ const hubCopy: Record<
     description:
       'Free construction estimates, contractor invoices, cleaning and catering quotes, receipts and work orders. Fill in-browser and export PDF or Word.',
     intro:
-      'Use these generators when you need a priced document today: estimates before work, invoices after (or for deposits), quotes for packages, receipts for payment, and work orders for crew tickets—all with live preview and PDF/DOCX export.',
+      'Use these generators when you need a priced document today: a free quote or estimate before work, a free invoice generator for contractors after acceptance (or for deposits), receipts for payment, and work orders for crew tickets—all with live preview and PDF/DOCX export.',
     whenToUse:
-      'Pick the construction estimate for remodel bids with allowances, the free estimate / quote generator for mixed service scopes, the contractor invoice for progress billing, cleaning or catering tools when line items are service packages, and the receipt or work order when you need a simple confirmation or job ticket.',
+      'Pick the free quote & estimate generator for mixed service scopes, the construction estimate template for remodel bids with allowances, the free invoice generator for contractors for progress billing, cleaning or catering tools when line items are service packages, and the receipt or work order when you need a simple confirmation or job ticket.',
     whatFor: [
       'An estimate or quote proposes price and scope before work starts so the client can approve (or revise) before you mobilize.',
       'An invoice requests payment for a deposit, progress draw, or completed work and should match what was previously agreed.',
@@ -58,11 +58,11 @@ const hubCopy: Record<
     whichTable: {
       headers: ['Need', 'Use this tool', 'Why'],
       rows: [
-        { need: 'Propose price before work', toolLabel: 'Construction estimate', toolSlug: 'construction-estimate-template', why: 'Scope + line items + validity' },
-        { need: 'Generic service quote', toolLabel: 'Free estimate / quote generator', toolSlug: 'quote-estimate-generator', why: 'Mixed scopes with validity date' },
-        { need: 'Bill for work or deposit', toolLabel: 'Contractor invoice', toolSlug: 'contractor-invoice', why: 'Totals, tax, balance due' },
+        { need: 'Free instant quote / estimate', toolLabel: 'Free quote & estimate generator', toolSlug: 'quote-estimate-generator', why: 'Mixed scopes with validity date' },
+        { need: 'Remodel bid with allowances', toolLabel: 'Free construction estimate template', toolSlug: 'construction-estimate-template', why: 'Scope + labor/materials + deposit' },
+        { need: 'Bill for work or deposit', toolLabel: 'Free invoice generator for contractors', toolSlug: 'contractor-invoice', why: 'Totals, tax, balance due' },
         { need: 'Event food package', toolLabel: 'Catering quote', toolSlug: 'catering-quote', why: 'Per-guest math and deposit notes' },
-        { need: 'Proof of payment', toolLabel: 'Receipt generator', toolSlug: 'receipt-generator', why: 'Amount paid, method, balance' },
+        { need: 'Proof of payment', toolLabel: 'Free receipt generator', toolSlug: 'receipt-generator', why: 'Amount paid, method, balance' },
         { need: 'Assign the job to crew', toolLabel: 'Work order', toolSlug: 'work-order', why: 'Tasks, parts, sign-off' },
       ],
     },
@@ -70,12 +70,12 @@ const hubCopy: Record<
       {
         question: 'Should I send an estimate or an invoice first?',
         answer:
-          'Send an estimate (or quote) before work starts. Switch to an invoice when you are billing a deposit, progress draw, or completed work.',
+          'Send a free quote or estimate before work starts. Switch to the free invoice generator for contractors when you are billing a deposit, progress draw, or completed work.',
       },
       {
-        question: 'Can I export Excel from these tools?',
+        question: 'Where do I start for a free quote generator?',
         answer:
-          'Exports are PDF and DOCX today. You can copy line items into a spreadsheet if your client needs Sheets or Excel.',
+          'Use the free quote & estimate generator for mixed service scopes. For remodel bids with allowances, use the construction estimate template instead.',
       },
       {
         question: 'Do these tools store my client data?',
