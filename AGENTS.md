@@ -1,6 +1,6 @@
 # AGENTS.md — Docuklin
 
-Standing instructions for agents. Read **SEO state** before rediscovering indexing, Bing/GSC, or re-litigating settled audit findings. `.cursor/rules/` points here.
+Standing instructions for agents. Read **[`docs/GROWTH-STATUS.md`](docs/GROWTH-STATUS.md)** before planning growth, SEO, or content work (live metrics + Done / In progress / Pending queue). Update that file in the **same PR** when an item is completed, started, or added. Also read **SEO state** below before rediscovering indexing, Bing/GSC, or re-litigating settled audit findings. `.cursor/rules/` points here.
 
 ## 1. Project overview
 
@@ -10,7 +10,7 @@ Standing instructions for agents. Read **SEO state** before rediscovering indexi
 
 ## SEO state (as of 2026-11-15)
 
-Snapshot so agents do not re-probe settled SEO work. Owner-reported console facts are marked; paths below are verified in-repo.
+Snapshot of settled technical SEO so agents do not re-probe finished wiring or false alarms. **Current metrics and the growth/SEO work queue live in [`docs/GROWTH-STATUS.md`](docs/GROWTH-STATUS.md)** — read and update that file for planning; keep this section for IndexNow / jev-seo / policy “don’t re-fix” notes. Owner-reported console facts below are marked; paths are verified in-repo.
 
 ### Done
 
@@ -58,7 +58,7 @@ Snapshot so agents do not re-probe settled SEO work. Owner-reported console fact
 | `scripts/generate-og-svg.mjs` | OG SVG → PNG (`prebuild`) |
 | `scripts/indexnow.mjs` | Post-deploy IndexNow ping |
 | `scripts/audit/` | SEO / pages / AdSense / budget / links |
-| `docs/` | DEPLOYMENT, SEO-PLAYBOOK, SEO-GUARDRAILS, PAGE-CHECKLIST, ADSENSE, KEYWORD-MAP |
+| `docs/` | GROWTH-STATUS (living SEO/growth queue), DEPLOYMENT, SEO-PLAYBOOK, SEO-GUARDRAILS, PAGE-CHECKLIST, ADSENSE, KEYWORD-MAP |
 | `.cursor/skills/`, `.cursor/rules/` | Agent skills and always-on rules |
 
 ## 3. Commands
@@ -135,6 +135,7 @@ Follow the skill — do not skip files:
 - **One agent / one concern per repo stream:** separate focused PRs (content ≠ CMP ≠ generator UX ≠ docs). Do not mix.
 - Branch from latest `main`: `cursor/<descriptive-name>-1fce`. Open the PR; do not merge unless asked.
 - Prefer `.cursor/skills/` over reinventing process. Always-on: `.cursor/rules/agent-workflow.mdc`.
+- **Growth / SEO / content planning:** read `docs/GROWTH-STATUS.md` first; update it in the same PR when queue items change.
 - **Pre-merge:** `npm test && npm run audit` (see `pre-merge-seo-aeo-checklist`). UI/perf → also `npx lhci autorun` when relevant.
 - Optional subagents: `.cursor/agents/` (`seo-auditor`, `content-writer`, `adsense-reviewer`, `performance-auditor`, `document-fact-checker`).
 
