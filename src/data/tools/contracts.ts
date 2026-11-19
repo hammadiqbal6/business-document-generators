@@ -1,6 +1,6 @@
 import type { ToolDefinition } from './types';
 import { clause } from './line-item-defaults';
-import { contractSources } from './shared-sources';
+import { contractSources, lienWaiverSources } from './shared-sources';
 
 const legalNotice =
   'This generator produces editable sample language for discussion. It is not legal advice, not a law-firm product, and not a substitute for an attorney licensed in your jurisdiction. Laws vary by location and situation.';
@@ -877,4 +877,243 @@ export const serviceAgreementTemplate: ToolDefinition = {
   relatedSlugs: ['independent-contractor-agreement', 'freelance-web-design-contract', 'quote-estimate-generator'],
   publishedAt: '2026-11-13',
   updatedAt: '2026-11-13',
+};
+
+export const lienWaiverGenerator: ToolDefinition = {
+  slug: 'lien-waiver-generator',
+  name: 'Lien Waiver Generator',
+  shortName: 'Lien Waiver',
+  category: 'contracts',
+  primaryKeyword: 'lien waiver generator',
+  secondaryKeywords: [
+    'lien waiver template',
+    'conditional lien waiver',
+    'unconditional lien waiver',
+    'progress payment waiver',
+    'final lien waiver form',
+  ],
+  title: 'Lien Waiver Generator (Free)',
+  metaDescription:
+    'Free lien waiver: conditional or unconditional, progress or final. Export PDF/DOCX. Not legal advice—use your state’s statutory form when required.',
+  h1: 'Free Lien Waiver Generator',
+  answerFirst:
+    'A lien waiver releases mechanic’s lien rights for named work. Conditional forms take effect when payment clears; unconditional forms take effect when you sign. Choose progress or final, fill the fields, export PDF or DOCX. State-neutral sample—use your state’s statutory form when required. Not legal advice.',
+  applicationCategory: 'BusinessApplication',
+  isLegalAdjacent: true,
+  documentTitle: 'Waiver and Release of Lien',
+  toolVersion: '1.0',
+  fields: [
+    {
+      id: 'waiverCondition',
+      label: 'Condition',
+      type: 'select',
+      required: true,
+      section: 'Waiver type',
+      help: 'Conditional = effective when payment clears. Unconditional = effective when signed (use only after you have been paid).',
+      options: [
+        { value: 'Conditional', label: 'Conditional (effective on payment)' },
+        { value: 'Unconditional', label: 'Unconditional (effective on signing)' },
+      ],
+    },
+    {
+      id: 'waiverStage',
+      label: 'Progress or final',
+      type: 'select',
+      required: true,
+      section: 'Waiver type',
+      help: 'Progress covers work through a date (retainage and later work stay open). Final covers the whole job.',
+      options: [
+        { value: 'Progress', label: 'Progress / partial payment' },
+        { value: 'Final', label: 'Final payment' },
+      ],
+    },
+    { id: 'claimantName', label: 'Claimant (you / company waiving)', type: 'text', required: true, section: 'Parties' },
+    { id: 'claimantAddress', label: 'Claimant address', type: 'textarea', rows: 2, section: 'Parties' },
+    { id: 'customerName', label: 'Customer (who you contracted with)', type: 'text', required: true, section: 'Parties' },
+    { id: 'ownerName', label: 'Property owner', type: 'text', section: 'Parties' },
+    { id: 'projectName', label: 'Project / job name', type: 'text', required: true, section: 'Job' },
+    { id: 'jobAddress', label: 'Job site address', type: 'textarea', rows: 2, required: true, section: 'Job' },
+    { id: 'jobNumber', label: 'Job / PO number', type: 'text', section: 'Job' },
+    { id: 'waiverDate', label: 'Waiver date', type: 'date', required: true, section: 'Payment' },
+    {
+      id: 'throughDate',
+      label: 'Through date (progress only)',
+      type: 'date',
+      section: 'Payment',
+      help: 'Progress waivers release rights for labor/materials furnished through this date.',
+    },
+    {
+      id: 'paymentAmount',
+      label: 'Payment amount',
+      type: 'currency',
+      inputMode: 'decimal',
+      required: true,
+      section: 'Payment',
+    },
+    {
+      id: 'checkInfo',
+      label: 'Check / payment reference',
+      type: 'text',
+      section: 'Payment',
+      help: 'For conditional waivers: bank, check number, or ACH reference the release is tied to.',
+      placeholder: 'e.g. Check 4481 drawn on First National Bank',
+    },
+    {
+      id: 'exceptions',
+      label: 'Exceptions (retainage, disputed extras, unpaid CO)',
+      type: 'textarea',
+      rows: 3,
+      section: 'Release',
+      help: 'List amounts or items that stay outside this waiver. Leave blank only if nothing is reserved.',
+    },
+    {
+      id: 'workDescription',
+      label: 'Work / materials covered',
+      type: 'textarea',
+      rows: 3,
+      required: true,
+      section: 'Release',
+    },
+    {
+      id: 'extraNotes',
+      label: 'Notes (optional)',
+      type: 'textarea',
+      rows: 2,
+      section: 'Release',
+    },
+    { id: 'signerName', label: 'Signer name / title', type: 'text', required: true, section: 'Signatures' },
+    {
+      id: 'clauses',
+      label: 'Release language (editable)',
+      type: 'clauses',
+      section: 'Release language',
+    },
+  ],
+  defaults: {
+    waiverCondition: 'Conditional',
+    waiverStage: 'Progress',
+    claimantName: 'Summit Build Co.',
+    claimantAddress: '120 Industrial Way\nDenver, CO 80216',
+    customerName: 'Northline Construction LLC',
+    ownerName: 'Jordan Lee',
+    projectName: 'Kitchen remodel – cabinets & flooring',
+    jobAddress: '88 Cedar Lane, Denver, CO 80220',
+    jobNumber: 'JOB-441 / CE-2026-014',
+    waiverDate: '2026-11-19',
+    throughDate: '2026-11-15',
+    paymentAmount: 12500,
+    checkInfo: 'Check 4481 drawn on First National Bank (to be paid)',
+    exceptions:
+      'Retainage of $1,875 held under the subcontract. Unpaid change order CO-03 ($980) for pantry subfloor repair remains open.',
+    workDescription:
+      'Cabinet set, LVP install in kitchen and hall, and related labor and materials furnished through the through date under the Summit Build subcontract with Northline.',
+    extraNotes:
+      'State-neutral draft for discussion. If this job is in a state with statutory waiver forms, replace this PDF with that form before signing.',
+    signerName: 'A. Nguyen, Project Manager, Summit Build Co.',
+    clauses: [
+      clause(
+        'notice',
+        'Statutory-form notice',
+        'This is a state-neutral sample for discussion only. It is not legal advice and is not a substitute for any waiver-and-release form your state statute requires. Several states publish mandatory wording; using a non-statutory form can make the release unenforceable or leave lien rights intact. Confirm the required form with counsel or your state before you sign or rely on this document.',
+      ),
+      clause(
+        'release',
+        'Release of lien and payment claims',
+        'Subject to the condition type and payment amount stated above, Claimant waives and releases mechanic’s lien, stop-payment-notice, and payment-bond rights for labor, services, equipment, and materials furnished to the Customer for the Project as described, through the through date (for progress waivers) or for the entire job (for final waivers), except items listed under Exceptions.',
+      ),
+      clause(
+        'condition',
+        'When this waiver becomes effective',
+        'If Conditional: this waiver is effective only when Claimant receives the stated payment in good funds from the financial institution or payor identified in the payment reference. If Unconditional: Claimant represents that the stated payment has already been received, and this waiver is effective upon signing even if that representation is wrong—do not sign an unconditional form before payment clears.',
+      ),
+      clause(
+        'downstream',
+        'Downstream payment warranty',
+        'Claimant warrants that it has paid, or will promptly pay from the funds received, its laborers, subcontractors, and suppliers for the work covered by this waiver, up to the through date or final payment as applicable.',
+      ),
+    ],
+  },
+  content: {
+    howToUse: [
+      'Choose conditional or unconditional, then progress or final.',
+      'Name the claimant, customer, owner, job address, and payment amount.',
+      'For progress waivers, set the through date and list retainage or unpaid extras as exceptions.',
+      'Edit the release clauses if needed, preview, export PDF or DOCX, and replace with your state’s statutory form when the law requires one.',
+    ],
+    whatToInclude: [
+      {
+        heading: 'What is a construction lien waiver?',
+        body: 'A mechanic’s lien is a statutory security interest that can attach to improved property when unpaid labor or materials went into the job. Cornell LII’s Wex entry on mechanic’s liens is a plain starting definition. Owners, lenders, and GCs ask for a written waiver so they can pay a draw without wondering if a sub will later record a lien for that same slice of work. The waiver is the paper trail for that trade-off—not a substitute for getting paid.',
+      },
+      {
+        heading: 'Conditional vs unconditional, progress vs final',
+        body: 'Think of two switches. Conditional means the release wakes up when the check clears; unconditional means it wakes up when you sign. Progress means you are releasing through a calendar date and keeping retainage, later work, and listed exceptions alive; final means you are closing the job. The risky combo is an unconditional form handed over for a check that has not cleared yet. If the check bounces, the rights may already be gone. Some states publish exact statutory wording for each of the four combinations—California Civil Code § 8132 and Arizona Revised Statutes § 33-1008 are examples, not a national form.',
+      },
+      {
+        heading: 'Fields that keep payment disputes down',
+        body: 'Match the payment amount to the invoice or pay app you are releasing. Put the through date on progress forms. Spell out exceptions: retainage, disputed extras, unsigned change orders. Name the customer you contracted with separately from the property owner when those are different entities. Keep the signed PDF with the matching invoice and deposit proof in the job file.',
+      },
+      {
+        heading: 'Which waiver type fits this pay app?',
+        body: '| Situation | Condition | Stage |\n| --- | --- | --- |\n| Pay app submitted, check not cleared | Conditional | Progress |\n| Progress check already cleared | Unconditional | Progress |\n| Final payment pending | Conditional | Final |\n| Final payment cleared, closeout packet | Unconditional | Final |',
+      },
+    ],
+    workedExample: {
+      heading: 'Worked example: conditional progress waiver on a kitchen remodel',
+      body: 'Summit Build is a cabinet and flooring sub on JOB-441 for Northline Construction at 88 Cedar Lane. Northline’s November pay app will send $12,500 once the lender funds. Summit fills a conditional progress waiver through 2026-11-15, lists $1,875 retainage and unpaid CO-03 ($980 pantry subfloor) as exceptions, and ties the release to check 4481. They export PDF, send it with the pay app, and refuse to swap in an unconditional form until the deposit shows. After the check clears, the GC may ask for an unconditional progress copy for the lender file—that is a second document, dated after payment.',
+    },
+    commonMistakes: [
+      'Signing an unconditional waiver before the check clears.',
+      'Using a final waiver when punch list, retainage, or open change orders remain.',
+      'Omitting exceptions so retainage gets released by accident.',
+      'Ignoring a state statutory form and assuming a generic PDF will hold up.',
+      'Mismatched payment amount vs the invoice or pay-app line you are releasing.',
+    ],
+    tips: [
+      legalNotice,
+      'If your state posts a statutory waiver, paste job fields into that form instead of relying on this sample.',
+      'Pair progress waivers with the matching contractor invoice number so AP can reconcile the draw.',
+      'Photo or PDF-stamp the cleared check or ACH confirmation before you sign an unconditional form.',
+    ],
+    faq: [
+      {
+        question: 'What is the difference between a conditional and unconditional lien waiver?',
+        answer:
+          'A conditional waiver becomes effective when the stated payment is actually received in good funds. An unconditional waiver becomes effective when you sign, so use it only after payment has cleared. Do not treat them as interchangeable.',
+      },
+      {
+        question: 'When should I use a progress waiver vs a final waiver?',
+        answer:
+          'Use a progress (partial) waiver for an interim draw through a stated date, and keep retainage and later work outside the release unless you list them as exceptions. Use a final waiver only when you are closing out the job and releasing remaining rights for that contract.',
+      },
+      {
+        question: 'Is this lien waiver generator valid in every state?',
+        answer:
+          'No. This is a state-neutral educational template. Some states require specific statutory wording; a non-matching form can fail. Check your state’s construction-lien statutes or ask counsel before you sign or rely on the PDF.',
+      },
+      {
+        question: 'Should I sign an unconditional waiver before I get paid?',
+        answer:
+          'No. Unconditional forms are for after payment clears. If a GC or owner pushes for unconditional language before the check arrives, stick to a conditional form tied to that payment reference.',
+      },
+      {
+        question: 'What belongs in the exceptions section?',
+        answer:
+          'Retainage still held, disputed extras, unpaid executed change orders, and any labor or materials furnished after the through date. If you leave exceptions blank, readers will assume you released those items too.',
+      },
+      {
+        question: 'Is this form legal advice?',
+        answer:
+          'No. It produces editable sample language for discussion. Lien rights and waiver rules are state-specific. Have an attorney licensed where the job sits review before you rely on any waiver.',
+      },
+    ],
+    sources: lienWaiverSources,
+  },
+  relatedSlugs: [
+    'change-order-template',
+    'contractor-invoice',
+    'construction-estimate-template',
+  ],
+  publishedAt: '2026-11-19',
+  updatedAt: '2026-11-19',
 };

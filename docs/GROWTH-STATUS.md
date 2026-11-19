@@ -29,7 +29,8 @@ As of **2026-11-17** (owner-reported GSC/GA4 window) unless noted.
 
 In-repo and confirmed off-repo completions.
 
-- **2026-11-19 — PR #35 (this PR):**
+- **2026-11-19 — Lien waiver generator (this PR):** `/tools/lien-waiver-generator/` — conditional/unconditional × progress/final fillable waiver with PDF/DOCX export; state-neutral sample + clear “not legal advice / check your state’s statutory form” notice; wired into contracts hub table, KEYWORD-MAP, llms question map, related construction tools, Vitest.
+- **2026-11-19 — PR #35:**
   - Homepage links every tool via all-templates-by-category (`getToolsByCategory` / `CATEGORY_META`; featured still `getFeaturedTools()`).
   - Hub “which document” tables completed for estimates-invoices + contracts (timesheet / PO / change-order stay on estimates-invoices per tool categories — not forms/contracts).
   - Homepage title/H1 + site tagline/`llms.txt` intro aligned to contractor & freelancer document templates (avoid head “invoice”).
@@ -51,8 +52,8 @@ In-repo and confirmed off-repo completions.
 
 | Bucket | What’s in it |
 |--------|----------------|
-| Sitemap / indexable | All ~56 sitemap URLs on `https://docuklin.com…/` with trailing slash, self-canonical, `index,follow`, matching `og:url`; all 21 tools included with `lastmod` |
-| Intentional noindex | `/tools/<slug>/embed/` (21) + `/404/` — meta robots + `X-Robots-Tag`; **not** in sitemap. Matches GSC “Excluded by noindex” for crawled embeds/404 |
+| Sitemap / indexable | Sitemap URLs on `https://docuklin.com…/` with trailing slash, self-canonical, `index,follow`, matching `og:url`; all tools included with `lastmod` (lien waiver added this PR) |
+| Intentional noindex | `/tools/<slug>/embed/` + `/404/` — meta robots + `X-Robots-Tag`; **not** in sitemap. Matches GSC “Excluded by noindex” for crawled embeds/404 |
 | Redirects (final 200 only in sitemap/links) | `/tools/invoice[/]`, `/tools/invoice-generator[/]` → contractor invoice; `/privacy-policy[/]` → `/privacy/`; `/sitemap.xml` & `/sitemap_index.xml` → `/sitemap-index.xml`; `/authors[/]` → `/about/`; Worker trailing-slash 308 |
 
 ---
@@ -61,17 +62,18 @@ In-repo and confirmed off-repo completions.
 
 Prioritized open work. Owner-confirmed gaps preferred over guesses.
 
-1. **GSC after deploy of PR #35:** ping IndexNow; URL Inspection → Request indexing for previously weak / “Discovered – not indexed” tool URLs; confirm the 5 noindex exclusions are embeds/404 only (intentional).
-2. **Bing Webmaster verification** — currently **unset** (owner); set `PUBLIC_BING_SITE_VERIFICATION` / console verification when ready.
-3. **Author / `sameAs` env vars** — currently **unset** (owner); wire when profiles are public and stable.
-4. **Backlinks** — site still has essentially none beyond minor directory/unroll mentions; outreach remains open.
-5. **Reddit risk / pause promo:** account ~1 day old, **1 karma**; site-wide filter removed several posts/comments. **Pause promo / launch posts.** Build karma with plain non-link comments before any further r/SideProject (or similar) launch post. Earlier (~2026-11-18) r/SideProject Docuklin launch from `u/ihammadiqbal117` shows **[ Removed by Reddit on account of violating the content policy ]** — **not reposted**.
-6. **GA4 Consent Mode v2** cookieless pings so traffic is measured without waiting on Accept.
-7. **Uneed re-review** — reply to decline email with re-positioned listing (pending owner).
-8. **TinyLaunch resubmit** after YardTally launch **2026-12-07**.
-9. **AdSense** — keep publishing; status **Getting ready**; expect review ~3–4 weeks.
-10. **Weekly GSC check** — record deltas in Baseline (do not invent numbers).
-11. **Directory submissions / blogger embed outreach / related tool variants** — ongoing off-page; record confirmed listings when known.
+1. **Construction lien waiver basics guide** (listed in `docs/SEO-GUIDE.md` content calendar) — pair with `/tools/lien-waiver-generator/` when written; tool currently links estimate/invoice/work-order guides only.
+2. **GSC after deploy of PR #35:** ping IndexNow; URL Inspection → Request indexing for previously weak / “Discovered – not indexed” tool URLs; confirm the 5 noindex exclusions are embeds/404 only (intentional). After this lien-waiver PR deploys, IndexNow + Inspect the new tool URL.
+3. **Bing Webmaster verification** — currently **unset** (owner); set `PUBLIC_BING_SITE_VERIFICATION` / console verification when ready.
+4. **Author / `sameAs` env vars** — currently **unset** (owner); wire when profiles are public and stable.
+5. **Backlinks** — site still has essentially none beyond minor directory/unroll mentions; outreach remains open.
+6. **Reddit risk / pause promo:** account ~1 day old, **1 karma**; site-wide filter removed several posts/comments. **Pause promo / launch posts.** Build karma with plain non-link comments before any further r/SideProject (or similar) launch post. Earlier (~2026-11-18) r/SideProject Docuklin launch from `u/ihammadiqbal117` shows **[ Removed by Reddit on account of violating the content policy ]** — **not reposted**.
+7. **GA4 Consent Mode v2** cookieless pings so traffic is measured without waiting on Accept.
+8. **Uneed re-review** — reply to decline email with re-positioned listing (pending owner).
+9. **TinyLaunch resubmit** after YardTally launch **2026-12-07**.
+10. **AdSense** — keep publishing; status **Getting ready**; expect review ~3–4 weeks.
+11. **Weekly GSC check** — record deltas in Baseline (do not invent numbers).
+12. **Directory submissions / blogger embed outreach / related tool variants** — ongoing off-page; record confirmed listings when known.
 
 ---
 
@@ -79,7 +81,7 @@ Prioritized open work. Owner-confirmed gaps preferred over guesses.
 
 - **AdSense review** — **Getting ready** (Nov 2026).
 - **Uneed re-review** — pending owner reply to decline email.
-- No other in-repo SEO/growth code work beyond shipping PR #35.
+- No other in-repo SEO/growth code work beyond the lien-waiver tool PR and shipped PR #35.
 
 ---
 

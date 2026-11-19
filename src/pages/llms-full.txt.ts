@@ -78,6 +78,7 @@ export const GET: APIRoute = () => {
     `- What should a service agreement include? → ${origin}/tools/service-agreement-template/`,
     `- Is a purchase order the same as a work order? → ${origin}/tools/purchase-order-template/ and ${origin}/guides/work-order-vs-invoice-vs-estimate/`,
     `- What is a construction change order? Change order vs work order? → ${origin}/tools/change-order-template/`,
+    `- What is a lien waiver? Conditional vs unconditional / progress vs final? → ${origin}/tools/lien-waiver-generator/ (state-neutral sample; check statutory forms; not legal advice)`,
   ];
 
   const citedFigures = [

@@ -68,6 +68,8 @@ export function buildDocumentBlocks(
       return buildServiceAgreement(values, blocks);
     case 'simple-nda':
       return buildNda(values, blocks);
+    case 'lien-waiver-generator':
+      return buildLienWaiver(values, blocks);
     case 'tattoo-consent-form-template':
       return buildTattoo(values, blocks);
     case 'rental-lease-application':
@@ -562,6 +564,72 @@ function buildNda(values: Record<string, unknown>, blocks: DocBlock[]): DocBlock
   });
   blocks.push({ type: 'paragraph', text: `Purpose: ${str(values.purpose)}` });
   blocks.push({ type: 'clauses', clauses: enabledClauses(values) });
+  return blocks;
+}
+
+function buildLienWaiver(values: Record<string, unknown>, blocks: DocBlock[]): DocBlock[] {
+  const condition = str(values.waiverCondition) || 'Conditional';
+  const stage = str(values.waiverStage) || 'Progress';
+  const heading =
+    stage === 'Final'
+      ? `${condition} Waiver and Release on Final Payment`
+      : `${condition} Waiver and Release on Progress Payment`;
+  blocks[0] = { type: 'heading', text: heading };
+
+  blocks.push({
+    type: 'paragraph',
+    text: 'NOTICE: State-neutral sample only. Not legal advice. If your state requires a statutory waiver-and-release form, use that form instead of this document.',
+  });
+
+  blocks.push({
+    type: 'kv',
+    pairs: [
+      { label: 'Condition', value: condition },
+      { label: 'Stage', value: stage },
+      { label: 'Claimant', value: str(values.claimantName) },
+      { label: 'Claimant address', value: str(values.claimantAddress) },
+      { label: 'Customer (contracted with)', value: str(values.customerName) },
+      { label: 'Property owner', value: str(values.ownerName) },
+      { label: 'Project', value: str(values.projectName) },
+      { label: 'Job site', value: str(values.jobAddress) },
+      { label: 'Job / PO #', value: str(values.jobNumber) },
+      { label: 'Waiver date', value: str(values.waiverDate) },
+      {
+        label: 'Through date',
+        value: stage === 'Progress' ? str(values.throughDate) : '',
+      },
+      { label: 'Payment amount', value: money(values.paymentAmount) },
+      { label: 'Payment reference', value: str(values.checkInfo) },
+    ].filter((p) => p.value),
+  });
+
+  if (str(values.workDescription)) {
+    blocks.push({
+      type: 'paragraph',
+      text: `Work / materials covered: ${str(values.workDescription)}`,
+    });
+  }
+  if (str(values.exceptions)) {
+    blocks.push({
+      type: 'paragraph',
+      text: `Exceptions (not waived): ${str(values.exceptions)}`,
+    });
+  } else {
+    blocks.push({
+      type: 'paragraph',
+      text: 'Exceptions (not waived): None stated.',
+    });
+  }
+  if (str(values.extraNotes)) {
+    blocks.push({ type: 'paragraph', text: `Notes: ${str(values.extraNotes)}` });
+  }
+
+  blocks.push({ type: 'hr' });
+  blocks.push({ type: 'clauses', clauses: enabledClauses(values) });
+  blocks.push({
+    type: 'paragraph',
+    text: `Claimant signer: ${str(values.signerName) || '__________________'}  Signature __________________ Date ______`,
+  });
   return blocks;
 }
 

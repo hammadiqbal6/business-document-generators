@@ -22,6 +22,25 @@ export const liiContract: SourceRef = {
   usedFor: 'basic elements of an enforceable agreement (offer, acceptance, consideration)',
 };
 
+export const liiMechanicsLien: SourceRef = {
+  label: "Cornell LII Wex — Mechanic's lien",
+  url: 'https://www.law.cornell.edu/wex/mechanic%27s_lien',
+  usedFor: "plain-language definition of mechanic's / construction liens that waivers release",
+};
+
+/** Example of a state that publishes statutory waiver-and-release forms (not universal). */
+export const caCivCode8132: SourceRef = {
+  label: 'California Civil Code § 8132 — Conditional waiver on progress payment',
+  url: 'https://leginfo.legislature.ca.gov/faces/codes_displaySection.xhtml?lawCode=CIV&sectionNum=8132.',
+  usedFor: 'example that some states prescribe statutory lien-waiver wording; check your state',
+};
+
+export const azLienWaiver: SourceRef = {
+  label: 'Arizona Revised Statutes § 33-1008 — Waiver of lien',
+  url: 'https://www.azleg.gov/ars/33/01008.htm',
+  usedFor: 'example statutory conditional/unconditional progress and final waiver forms',
+};
+
 export const liiIndependentContractor: SourceRef = {
   label: 'Cornell LII Wex — Independent contractor',
   url: 'https://www.law.cornell.edu/wex/independent_contractor',
@@ -136,6 +155,14 @@ export const contractSources: SourceRef[] = [
   sbaLaunch,
   sbaStayCompliant,
   copyrightPhotographers,
+];
+
+export const lienWaiverSources: SourceRef[] = [
+  liiMechanicsLien,
+  caCivCode8132,
+  azLienWaiver,
+  sbaStayCompliant,
+  liiContract,
 ];
 
 export const formSources: SourceRef[] = [

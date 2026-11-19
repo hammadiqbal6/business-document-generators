@@ -41,6 +41,8 @@ export function buildLlmsTxtBody(): string {
     `- What should a service agreement include? → ${origin}/tools/service-agreement-template/`,
     `- Is a purchase order the same as a work order? → ${origin}/tools/purchase-order-template/`,
     `- What is a construction change order? → ${origin}/tools/change-order-template/`,
+    `- What is a lien waiver? → ${origin}/tools/lien-waiver-generator/`,
+    `- Conditional vs unconditional lien waiver? → ${origin}/tools/lien-waiver-generator/`,
     `- How do you write a free instant quote? → ${origin}/tools/quote-estimate-generator/`,
     `- What belongs on a catering quote? → ${origin}/tools/catering-quote/`,
     `- Wedding vendor contract checklist? → ${origin}/guides/wedding-vendor-contract-checklist/`,
