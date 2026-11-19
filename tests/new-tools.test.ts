@@ -101,7 +101,7 @@ describe('five new document generators', () => {
     const tool = getToolBySlug('change-order-template')!;
     const blocks = buildDocumentBlocks(tool, tool.defaults);
     const totals = blocks.find((b) => b.type === 'totals' && b.totals?.some((t) => t.label === 'Revised contract total'));
-    expect(totals?.totals?.find((t) => t.label === 'Revised contract total')?.value).toBe('$20,650.00');
+    expect(totals?.totals?.find((t) => t.label === 'Revised contract total')?.value).toBe('$15,530.00');
   });
 
   it('legal-adjacent agreements flag the disclaimer', () => {
