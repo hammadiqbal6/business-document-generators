@@ -43,9 +43,17 @@ export function buildLlmsTxtBody(): string {
     `- Is a purchase order the same as a work order? → ${origin}/tools/purchase-order-template/`,
     `- What is a construction change order? → ${origin}/tools/change-order-template/`,
     `- What is a lien waiver? Conditional vs unconditional? Partial vs final? → ${origin}/tools/lien-waiver-generator/`,
+    `- How do you calculate an invoice late fee? → ${origin}/tools/invoice-late-fee-calculator/`,
     `- How do you write a free instant quote? → ${origin}/tools/quote-estimate-generator/`,
     `- What belongs on a catering quote? → ${origin}/tools/catering-quote/`,
+    `- How do you write a roofing estimate? → ${origin}/tools/roofing-estimate/`,
+    `- How do you write a painting estimate? → ${origin}/tools/painting-estimate/`,
     `- Wedding vendor contract checklist? → ${origin}/guides/wedding-vendor-contract-checklist/`,
+    `- What are invoice payment terms (Net 30, Net 15, EOM)? → ${origin}/guides/invoice-payment-terms/`,
+    `- What is a construction change order? → ${origin}/guides/what-is-a-change-order/`,
+    `- Work order vs purchase order vs invoice? → ${origin}/guides/work-order-vs-purchase-order-vs-invoice/`,
+    `- What should a freelance contract include? → ${origin}/guides/freelance-contract-what-to-include/`,
+    `- How do you create a contractor estimate? → ${origin}/guides/how-to-create-a-contractor-estimate/`,
   ];
 
   const citedFigures = [

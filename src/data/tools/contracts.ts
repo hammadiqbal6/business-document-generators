@@ -1072,10 +1072,10 @@ export const lienWaiverGenerator: ToolDefinition = {
     sources: lienWaiverSources,
   },
   relatedSlugs: [
+    'progress-invoice',
     'change-order-template',
     'contractor-invoice',
     'construction-estimate-template',
-    'work-order',
   ],
   publishedAt: '2026-11-19',
   updatedAt: '2026-11-19',

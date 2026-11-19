@@ -29,3 +29,5 @@ tmp/
 
 # Wrangler local state
 .wrangler/
+scripts/audit/ai-style-report.json
+.worktrees/

@@ -22,11 +22,13 @@ const groups: { heading: string; match: (slug: string) => boolean }[] = [
   {
     heading: 'Estimates, invoices & receipts',
     match: (s) =>
-      /invoice|estimate|receipt|line-item|work-order|cleaning|catering|construction/.test(s),
+      /invoice|estimate|receipt|line-item|work-order|purchase-order|change-order|payment-terms|cleaning|catering|construction/.test(
+        s,
+      ),
   },
   {
     heading: 'Contracts & NDA',
-    match: (s) => /contract|nda|freelance-payment|wedding/.test(s),
+    match: (s) => /contract|nda|freelance-payment|freelance-contract|wedding/.test(s),
   },
   {
     heading: 'Forms & creative',

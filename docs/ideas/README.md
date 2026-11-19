@@ -34,5 +34,7 @@ Source files: `ideas.csv`, `MORE-IDEAS.md`, `../MARKET-RESEARCH.md`.
 - Model release (photography)  
 - Catering BEO (banquet event order)  
 - DJ / band performance contract  
-- Handyman estimate preset  
+- Handyman estimate preset
+- ~~Roofing estimate preset~~ (shipped: `/tools/roofing-estimate/`)
+- ~~Painting estimate preset~~ (shipped: `/tools/painting-estimate/`)
 - Notary acknowledgment block (jurisdiction-specific, legal review required)

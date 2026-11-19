@@ -10,7 +10,21 @@ export async function exportDocx(filename: string, blocks: DocBlock[]): Promise<
   const children: InstanceType<typeof Paragraph | typeof Table>[] = [];
 
   for (const block of blocks) {
-    if (block.type === 'heading' && block.text) {
+    if (block.type === 'image' && block.src) {
+      // DOCX embedding of data-URL logos is out of scope; HTML preview + PDF cover branding.
+      children.push(
+        new Paragraph({
+          children: [
+            new TextRun({
+              text: '(Logo shown in on-screen preview / PDF when supported.)',
+              italics: true,
+              size: 18,
+            }),
+          ],
+          spacing: { after: 120 },
+        }),
+      );
+    } else if (block.type === 'heading' && block.text) {
       children.push(
         new Paragraph({
           text: block.text,

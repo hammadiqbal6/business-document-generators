@@ -134,7 +134,13 @@ export const constructionEstimate: ToolDefinition = {
     ],
     sources: estimateSources,
   },
-  relatedSlugs: ['contractor-invoice', 'quote-estimate-generator', 'change-order-template'],
+  relatedSlugs: [
+    'contractor-invoice',
+    'quote-estimate-generator',
+    'change-order-template',
+    'roofing-estimate',
+    'painting-estimate',
+  ],
   publishedAt: '2026-10-19',
   updatedAt: '2026-11-18',
 };
@@ -263,7 +269,13 @@ export const contractorInvoice: ToolDefinition = {
     ],
     sources: estimateSources,
   },
-  relatedSlugs: ['progress-invoice', 'quote-estimate-generator', 'construction-estimate-template', 'receipt-generator'],
+  relatedSlugs: [
+    'progress-invoice',
+    'invoice-late-fee-calculator',
+    'quote-estimate-generator',
+    'construction-estimate-template',
+    'receipt-generator',
+  ],
   publishedAt: '2026-10-19',
   updatedAt: '2026-11-18',
 };
@@ -384,7 +396,12 @@ export const cleaningInvoice: ToolDefinition = {
     ],
     sources: estimateSources,
   },
-  relatedSlugs: ['quote-estimate-generator', 'receipt-generator', 'catering-quote'],
+  relatedSlugs: [
+    'invoice-late-fee-calculator',
+    'quote-estimate-generator',
+    'receipt-generator',
+    'catering-quote',
+  ],
   publishedAt: '2026-10-19',
   updatedAt: '2026-11-13',
 };
@@ -567,7 +584,7 @@ export const quoteEstimate: ToolDefinition = {
   applicationCategory: 'BusinessApplication',
   isLegalAdjacent: false,
   documentTitle: 'Estimate',
-  toolVersion: '1.2',
+  toolVersion: '1.3',
   formulaNote:
     'Each line is quantity × rate. Subtotal sums lines; tax = subtotal × (tax rate ÷ 100). Validity date is informational.',
   fields: [
@@ -576,12 +593,19 @@ export const quoteEstimate: ToolDefinition = {
       { value: 'Quote', label: 'Quote' },
       { value: 'Proposal', label: 'Proposal' },
     ]},
+    {
+      id: 'companyLogo',
+      label: 'Logo (optional)',
+      type: 'logo',
+      section: 'Business',
+      help: 'Stays in this browser only as a data URL (localStorage). Shown in the live preview; PDF includes it when the image format is supported. Never uploaded to a server.',
+    },
     { id: 'companyName', label: 'Business name', type: 'text', required: true, section: 'Business' },
     { id: 'companyEmail', label: 'Email', type: 'email', section: 'Business' },
     { id: 'companyPhone', label: 'Phone', type: 'tel', section: 'Business' },
     { id: 'docNumber', label: 'Number', type: 'text', required: true, section: 'Document' },
     { id: 'docDate', label: 'Date', type: 'date', required: true, section: 'Document' },
-    { id: 'validUntil', label: 'Valid until', type: 'date', section: 'Document' },
+    { id: 'validUntil', label: 'Valid until', type: 'date', section: 'Document', help: 'Expiry date shown on the estimate (how long the price holds).' },
     { id: 'clientName', label: 'Client', type: 'text', required: true, section: 'Client' },
     { id: 'clientEmail', label: 'Client email', type: 'email', section: 'Client' },
     { id: 'projectTitle', label: 'Project / job title', type: 'text', required: true, section: 'Details' },
@@ -592,6 +616,7 @@ export const quoteEstimate: ToolDefinition = {
   ],
   defaults: {
     docLabel: 'Estimate',
+    companyLogo: '',
     companyName: 'Northwind Services',
     companyEmail: 'hello@northwind.example',
     companyPhone: '(312) 555-0108',
@@ -612,18 +637,26 @@ export const quoteEstimate: ToolDefinition = {
   content: {
     howToUse: [
       'Choose Estimate or Quote as the document label.',
-      'Enter your business and client details, then describe the job.',
-      'Add priced line items, set tax and a valid-until date, and preview the totals.',
-      'Export PDF or DOCX for an instant quote the client can sign or reply to, or save a draft in this browser with localStorage.',
+      'Optionally add a logo (stays in this browser only), then enter business and client details and describe the job.',
+      'Add priced line items, set tax and a valid-until (expiry) date, and preview the totals.',
+      'Export PDF or DOCX, save a draft in localStorage, or use Convert to invoice to carry line items into the contractor invoice tool.',
     ],
     whatToInclude: [
       {
         heading: 'What a free estimate generator should fill in',
-        body: 'Parties, a measurable job description, line items with quantity × rate, tax if you collect it, a grand total, and a validity date. Switch the label to Quote when your industry expects that word—the math stays the same. Walk through the full process in /guides/how-to-write-a-business-estimate/.',
+        body: 'Parties, a measurable job description, line items with quantity × rate, tax if you collect it, a grand total, and a validity (expiry) date. Optional logo brands the preview locally. Switch the label to Quote when your industry expects that word—the math stays the same. Walk through the full process in /guides/how-to-write-a-business-estimate/.',
       },
       {
         heading: 'Free instant quote in the browser',
-        body: 'This page is built for a free instant quote without signup: fill the form, watch the live preview update, and export PDF or DOCX before you leave the tab. Entries stay in your browser; optional drafts use localStorage on your device only.\n\nUse a short validity window when materials or labor rates move quickly. Number every quote and archive the PDF so you can compare what the client accepted later on the invoice.',
+        body: 'This page is built for a free instant quote without signup: fill the form, watch the live preview update, and export PDF or DOCX before you leave the tab. Entries stay in your browser; optional drafts and logos use localStorage on your device only.\n\nUse a short validity window when materials or labor rates move quickly. Number every quote and archive the PDF so you can compare what the client accepted later on the invoice.',
+      },
+      {
+        heading: 'Can an estimate be used as an invoice?',
+        body: 'No. An estimate or quote proposes price before work; it is not a request for payment. After the client accepts, create a separate invoice (use Convert to invoice on this page, or open /tools/contractor-invoice/) that references the estimate number. Full comparison: /guides/invoice-vs-estimate/.',
+      },
+      {
+        heading: 'Convert to invoice (browser handoff)',
+        body: 'Convert to invoice copies company, client, line items, and tax into the contractor invoice tool via localStorage on this device, then opens /tools/contractor-invoice/?from=estimate#handoff. Nothing is uploaded. Adjust invoice number, due date, and payment instructions before you export.',
       },
       {
         heading: 'Construction quote generator (when to use this vs the trade template)',
@@ -640,12 +673,13 @@ export const quoteEstimate: ToolDefinition = {
     },
     commonMistakes: [
       'No validity date',
+      'Treating an estimate PDF as an invoice instead of issuing a separate invoice',
       'Scope that cannot be measured',
       'Mixing catering or full remodel fields into a general estimate instead of the niche tool',
     ],
     tips: [
       'Number every estimate and archive the exported file.',
-      'Reuse accepted lines in the free invoice generator for contractors at /tools/contractor-invoice/.',
+      'After acceptance, use Convert to invoice (or open /tools/contractor-invoice/) so line items match what the client approved.',
       'When the client pays a deposit, issue a payment receipt from /tools/receipt-generator/.',
       'For full remodel bids with allowances, switch to the construction estimate template at /tools/construction-estimate-template/.',
     ],
@@ -656,6 +690,11 @@ export const quoteEstimate: ToolDefinition = {
           'Parties, a measurable job description, line items with quantity × rate, tax if you collect it, a grand total, and a valid-until date. Say whether prices can change after discovery. Full walkthrough: /guides/how-to-write-a-business-estimate/.',
       },
       {
+        question: 'Can an estimate be used as an invoice?',
+        answer:
+          'No. An estimate proposes price; it does not request payment. Issue a separate invoice after acceptance—use Convert to invoice on this page or /tools/contractor-invoice/, and keep the estimate number as a reference. See /guides/invoice-vs-estimate/.',
+      },
+      {
         question: 'What is the difference between a quote, estimate, and invoice?',
         answer:
           'Quotes and estimates propose price before work; quotes are often firmer. An invoice requests payment after acceptance or completed work—reuse lines in /tools/contractor-invoice/. See /guides/invoice-vs-estimate/.',
@@ -663,29 +702,35 @@ export const quoteEstimate: ToolDefinition = {
       {
         question: 'Is this free quote generator really free with no signup?',
         answer:
-          'Yes. Fill the form, preview live, and export PDF or DOCX with no account. Optional drafts use localStorage on your device only; nothing is uploaded to a server.',
+          'Yes. Fill the form, preview live, and export PDF or DOCX with no account. Optional drafts and logos use localStorage on your device only; nothing is uploaded to a server.',
       },
       {
         question: 'Can I download a quote or estimate as a PDF?',
         answer:
-          'Yes. Export PDF or DOCX from the live preview for an instant quote you can email the same day. Archive the PDF so the later invoice matches what the client accepted.',
+          'Yes. Export PDF or DOCX from the live preview for an instant quote you can email the same day. Archive the PDF so the later invoice matches what the client accepted. Logos appear in the HTML preview; PDF includes PNG/JPEG when supported.',
       },
       {
         question: 'Can I turn this quote into an invoice later?',
         answer:
-          'Yes—reuse the same line items in the free invoice generator for contractors at /tools/contractor-invoice/, or confirm payment with /tools/receipt-generator/.',
+          'Yes—use Convert to invoice to copy line items, company, and client into /tools/contractor-invoice/ via localStorage on this device (see ?from=estimate#handoff), or confirm payment with /tools/receipt-generator/.',
       },
       {
         question: 'Can I use this as a contractor estimate generator?',
         answer:
-          'Yes for light or single-trade scopes with clear units. For full remodel bids with allowances and change-order workflows, use /tools/construction-estimate-template/.',
+          'Yes for light or single-trade scopes with clear units. For full remodel bids with allowances and change-order workflows, use /tools/construction-estimate-template/. For roofing or painting line defaults, use /tools/roofing-estimate/ or /tools/painting-estimate/.',
       },
     ],
     sources: estimateSources,
   },
-  relatedSlugs: ['contractor-invoice', 'construction-estimate-template', 'receipt-generator'],
+  relatedSlugs: [
+    'contractor-invoice',
+    'construction-estimate-template',
+    'roofing-estimate',
+    'painting-estimate',
+    'receipt-generator',
+  ],
   publishedAt: '2026-10-19',
-  updatedAt: '2026-11-18',
+  updatedAt: '2026-11-19',
 };
 
 export const receiptGenerator: ToolDefinition = {
@@ -837,7 +882,12 @@ export const receiptGenerator: ToolDefinition = {
     ],
     sources: estimateSources,
   },
-  relatedSlugs: ['contractor-invoice', 'quote-estimate-generator', 'catering-quote'],
+  relatedSlugs: [
+    'contractor-invoice',
+    'invoice-late-fee-calculator',
+    'quote-estimate-generator',
+    'catering-quote',
+  ],
   publishedAt: '2026-10-19',
   updatedAt: '2026-11-18',
 };
@@ -1250,6 +1300,8 @@ export const changeOrderTemplate: ToolDefinition = {
     { id: 'projectName', label: 'Project name', type: 'text', required: true, section: 'Change' },
     { id: 'changeDescription', label: 'Description of change', type: 'textarea', rows: 4, required: true, section: 'Change' },
     { id: 'reason', label: 'Reason / discovery', type: 'textarea', rows: 2, section: 'Change' },
+    { id: 'originalAmount', label: 'Original contract amount', type: 'currency', inputMode: 'decimal', required: true, section: 'Impact' },
+    { id: 'priorChangeOrdersTotal', label: 'Prior change orders total', type: 'currency', inputMode: 'decimal', section: 'Impact' },
     { id: 'costImpact', label: 'Cost impact (+/−)', type: 'currency', inputMode: 'decimal', required: true, section: 'Impact' },
     { id: 'scheduleDays', label: 'Schedule impact (days)', type: 'number', inputMode: 'numeric', section: 'Impact' },
     { id: 'revisedTotal', label: 'Revised contract total', type: 'currency', inputMode: 'decimal', section: 'Impact' },
@@ -1271,6 +1323,8 @@ export const changeOrderTemplate: ToolDefinition = {
     changeDescription:
       'Replace damaged subfloor in the pantry (approx. 32 sq ft) discovered after vinyl removal; install matching LVP; haul debris. Work was not in the original scope exclusions for unknown substrate conditions beyond the $400 allowance.',
     reason: 'Concealed water damage under existing vinyl; photo log attached to job file.',
+    originalAmount: 12400,
+    priorChangeOrdersTotal: 2150,
     costImpact: 980,
     scheduleDays: 2,
     revisedTotal: 0,
@@ -1356,7 +1410,7 @@ export const changeOrderTemplate: ToolDefinition = {
     'lien-waiver-generator',
   ],
   publishedAt: '2026-11-13',
-  updatedAt: '2026-11-13',
+  updatedAt: '2026-11-19',
 };
 
 export const progressInvoice: ToolDefinition = {
@@ -1566,7 +1620,504 @@ export const progressInvoice: ToolDefinition = {
     ],
     sources: estimateSources,
   },
-  relatedSlugs: ['contractor-invoice', 'change-order-template', 'construction-estimate-template', 'receipt-generator'],
+  relatedSlugs: [
+    'contractor-invoice',
+    'change-order-template',
+    'lien-waiver-generator',
+    'construction-estimate-template',
+  ],
+  publishedAt: '2026-11-19',
+  updatedAt: '2026-11-19',
+};
+
+export const invoiceLateFeeCalculator: ToolDefinition = {
+  slug: 'invoice-late-fee-calculator',
+  name: 'Invoice Late Fee Calculator',
+  shortName: 'Late Fee Calculator',
+  category: 'estimates-invoices',
+  primaryKeyword: 'invoice late fee calculator',
+  secondaryKeywords: [
+    'late fee calculator invoice',
+    'invoice overdue fee',
+    'late payment fee calculator',
+    'invoice interest calculator',
+  ],
+  title: 'Invoice Late Fee Calculator',
+  metaDescription:
+    'Calculate invoice late fees from amount, due date, payment date, and flat, monthly %, or daily annual rate—with grace days, copy-ready wording, and PDF export.',
+  h1: 'Invoice Late Fee Calculator',
+  answerFirst:
+    'Enter the unpaid amount, due date, payment date (or today), fee type, and optional grace days. Get days late, the fee, the new total, and copy-ready reminder wording. Caps vary by state and country—this is math, not legal advice.',
+  applicationCategory: 'BusinessApplication',
+  isLegalAdjacent: false,
+  documentTitle: 'Late Fee Calculation',
+  toolVersion: '1.0',
+  formulaNote:
+    'Days past due = calendar days from due date to payment date. Chargeable days = max(0, days past due − grace). Flat fee applies once when chargeable days > 0. Monthly % = amount × (rate ÷ 100) × (chargeable days ÷ 30). Annual daily = amount × (annual % ÷ 100 ÷ 365) × chargeable days. Results round to cents.',
+  fields: [
+    { id: 'companyName', label: 'Your business name', type: 'text', section: 'Parties' },
+    { id: 'clientName', label: 'Client name', type: 'text', section: 'Parties' },
+    { id: 'invoiceNumber', label: 'Invoice #', type: 'text', section: 'Invoice' },
+    {
+      id: 'invoiceAmount',
+      label: 'Invoice amount due',
+      type: 'currency',
+      inputMode: 'decimal',
+      required: true,
+      min: 0,
+      section: 'Invoice',
+      help: 'Unpaid balance before any late fee.',
+    },
+    {
+      id: 'invoiceDueDate',
+      label: 'Due date',
+      type: 'date',
+      required: true,
+      section: 'Invoice',
+    },
+    {
+      id: 'paymentDate',
+      label: 'Payment date (or today)',
+      type: 'date',
+      required: true,
+      section: 'Invoice',
+      help: 'Use today’s date to see what is owed if they paid right now.',
+    },
+    {
+      id: 'gracePeriodDays',
+      label: 'Grace period (days)',
+      type: 'number',
+      inputMode: 'numeric',
+      min: 0,
+      max: 365,
+      step: 1,
+      section: 'Fee terms',
+      help: 'Days after the due date before a fee starts. 0 means fees start the day after due.',
+    },
+    {
+      id: 'feeType',
+      label: 'Fee type',
+      type: 'select',
+      required: true,
+      section: 'Fee terms',
+      options: [
+        { value: 'flat', label: 'Flat fee' },
+        { value: 'monthly_percent', label: '% per month (prorated)' },
+        { value: 'annual_daily', label: 'Annual rate → daily' },
+      ],
+    },
+    {
+      id: 'flatFeeAmount',
+      label: 'Flat fee amount',
+      type: 'currency',
+      inputMode: 'decimal',
+      min: 0,
+      section: 'Fee terms',
+      help: 'Used when fee type is Flat fee.',
+    },
+    {
+      id: 'monthlyPercent',
+      label: 'Monthly rate (%)',
+      type: 'number',
+      inputMode: 'decimal',
+      min: 0,
+      max: 100,
+      step: 0.01,
+      section: 'Fee terms',
+      help: 'Used when fee type is % per month. Prorated by chargeable days ÷ 30.',
+    },
+    {
+      id: 'annualPercent',
+      label: 'Annual rate (%)',
+      type: 'number',
+      inputMode: 'decimal',
+      min: 0,
+      max: 100,
+      step: 0.01,
+      section: 'Fee terms',
+      help: 'Used when fee type is Annual rate → daily (÷ 365 × chargeable days).',
+    },
+    {
+      id: 'notes',
+      label: 'Internal notes',
+      type: 'textarea',
+      rows: 2,
+      section: 'Notes',
+      help: 'Optional—stays on the exported summary for your file.',
+    },
+  ],
+  defaults: {
+    companyName: 'Summit Build Co.',
+    clientName: 'Jordan Lee',
+    invoiceNumber: 'INV-2026-088',
+    invoiceAmount: 4250,
+    invoiceDueDate: '2026-10-01',
+    paymentDate: '2026-11-13',
+    gracePeriodDays: 5,
+    feeType: 'monthly_percent',
+    flatFeeAmount: 50,
+    monthlyPercent: 1.5,
+    annualPercent: 18,
+    notes: 'Sample only—confirm the fee matches the signed terms before you bill it.',
+  },
+  content: {
+    howToUse: [
+      'Enter the unpaid invoice amount, due date, and payment date (or today’s date).',
+      'Set any grace period your contract allows, then pick flat fee, monthly %, or annual→daily.',
+      'Fill the matching rate or flat amount; leave unused rate fields alone.',
+      'Copy the suggested late-fee line or reminder from the preview, or export PDF/DOCX for your file.',
+    ],
+    whatToInclude: [
+      {
+        heading: 'What this calculator outputs',
+        body: 'You get calendar days past due, chargeable days after grace, the fee in dollars, and the new total (original amount + fee). The preview also drafts a one-line late-fee charge and a short payment reminder you can paste into email or onto a revised invoice from /tools/contractor-invoice/ or /tools/cleaning-service-invoice/.',
+      },
+      {
+        heading: 'Pick a fee method that matches your contract',
+        body: 'Flat fees are simple—“$50 after net 15”—and easy for clients to understand. A monthly percent fits many service agreements; this tool prorates by chargeable days ÷ 30 so a partial month is not billed as a full month. An annual rate converted daily suits interest-style clauses: annual % ÷ 100 ÷ 365 × chargeable days. Use the same method that already appears in your signed terms; do not invent a harsher rule after the fact.',
+      },
+      {
+        heading: 'Grace periods and legal caps',
+        body: 'A grace period is calendar days after the due date before chargeable days start. Caps, notice rules, and whether late fees are enforceable vary by state and country—and consumer jobs can differ from B2B. This page does arithmetic only. It is not legal or tax advice. If you are unsure whether your rate is allowed, ask a licensed attorney or accountant where you operate before you send the reminder.',
+      },
+    ],
+    workedExample: {
+      heading: 'Worked example: 1.5% per month after a 5-day grace',
+      body: 'INV-2026-088 still shows $4,250 due. Due date 2026-10-01; payment date 2026-11-13 = 43 days past due. With a 5-day grace, chargeable days = 38. At 1.5% per month prorated: $4,250 × 0.015 × (38 ÷ 30) = $80.75. New total = $4,330.75. Paste the preview’s late-fee line onto a revised contractor invoice, or send the reminder text first and keep the receipt tool ready when payment clears.',
+    },
+    commonMistakes: [
+      'Charging a fee that was never in the estimate, contract, or invoice terms.',
+      'Counting grace days wrong—or applying a full month when your terms say prorate.',
+      'Skipping the original invoice number so AP cannot match the balance.',
+      'Treating this calculator’s output as a legal opinion on usury or consumer-credit caps.',
+    ],
+    tips: [
+      'Put the late-fee rule on the original invoice so the reminder is not a surprise.',
+      'After they pay, issue a receipt from /tools/receipt-generator/ that references the same invoice number.',
+      'Keep the calculation PDF with the invoice in your records—IRS guidance expects documents that support gross receipts.',
+    ],
+    faq: [
+      {
+        question: 'How do you calculate an invoice late fee?',
+        answer:
+          'Measure calendar days from the due date to the payment date (or today). Subtract any grace days. Then apply your agreed method: a flat dollar amount, a monthly percent prorated by chargeable days ÷ 30, or an annual percent converted to a daily rate × chargeable days. This tool does that math and rounds to cents.',
+      },
+      {
+        question: 'What is a grace period on an overdue invoice?',
+        answer:
+          'Grace is the number of days after the due date before a late fee starts. If the due date was the 1st and grace is 5, chargeable days begin on the 7th. Set grace to 0 if your terms start fees the day after due.',
+      },
+      {
+        question: 'Flat fee vs monthly percent vs annual daily—which should I use?',
+        answer:
+          'Use whatever your signed terms already say. Flat fees are predictable. Monthly percent scales with the balance and, here, prorates partial months. Annual→daily mirrors interest-style wording. Switching methods after the invoice went out invites disputes.',
+      },
+      {
+        question: 'Are late fees legal? What caps apply?',
+        answer:
+          'It depends on where you and the client are, the contract language, and whether the job is consumer or commercial. Some places cap fees or require clear disclosure. This calculator does not check caps and is not legal advice—confirm local rules before you bill a fee.',
+      },
+      {
+        question: 'Can I add the fee to my contractor or cleaning invoice?',
+        answer:
+          'Yes. Copy the suggested late-fee line into notes or as its own line item on /tools/contractor-invoice/ or /tools/cleaning-service-invoice/, keep the same invoice number (or issue a clearly labeled revision), and export a fresh PDF.',
+      },
+      {
+        question: 'Does this store my client data?',
+        answer:
+          'No. Calculation, preview, and export run in your browser. Optional drafts use localStorage on your device only.',
+      },
+    ],
+    sources: estimateSources,
+  },
+  relatedSlugs: ['contractor-invoice', 'cleaning-service-invoice', 'receipt-generator'],
+  publishedAt: '2026-11-19',
+  updatedAt: '2026-11-19',
+};
+
+/** Trade preset of the construction estimate fields — roofing defaults only. */
+export const roofingEstimate: ToolDefinition = {
+  slug: 'roofing-estimate',
+  name: 'Roofing Estimate Template',
+  shortName: 'Roofing Estimate',
+  category: 'estimates-invoices',
+  primaryKeyword: 'roofing estimate template',
+  secondaryKeywords: [
+    'roofing estimate',
+    'roof replacement estimate',
+    'roofing quote template',
+    'shingle roof estimate PDF',
+  ],
+  title: 'Free Roofing Estimate Template',
+  metaDescription:
+    'Free roofing estimate template with tear-off, underlayment, shingles per square, flashing, and disposal. Live preview, then PDF or DOCX—no signup.',
+  h1: 'Free Roofing Estimate Template',
+  answerFirst:
+    'A roofing estimate prices a reroof or repair by the square: tear-off, underlayment, shingles, flashing, disposal, and any decking allowance. Fill those lines here, preview the totals, and export PDF or DOCX in your browser. Sample rates are illustrative—use your supplier quotes.',
+  applicationCategory: 'BusinessApplication',
+  isLegalAdjacent: false,
+  documentTitle: 'Roofing Estimate',
+  toolVersion: '1.0',
+  formulaNote:
+    'Line-item amount = quantity × rate. Subtotal = sum of line amounts. Tax = subtotal × (tax rate ÷ 100). Deposit = total × (deposit % ÷ 100). One roofing square = 100 sq ft of roof surface.',
+  fields: [
+    { id: 'companyName', label: 'Company name', type: 'text', required: true, section: 'Your business' },
+    { id: 'companyAddress', label: 'Company address', type: 'textarea', rows: 2, section: 'Your business' },
+    { id: 'companyPhone', label: 'Phone', type: 'tel', section: 'Your business' },
+    { id: 'companyEmail', label: 'Email', type: 'email', section: 'Your business' },
+    { id: 'estimateNumber', label: 'Estimate #', type: 'text', required: true, section: 'Estimate details' },
+    { id: 'estimateDate', label: 'Date', type: 'date', required: true, section: 'Estimate details' },
+    { id: 'validUntil', label: 'Valid until', type: 'date', section: 'Estimate details' },
+    { id: 'clientName', label: 'Client name', type: 'text', required: true, section: 'Client' },
+    { id: 'clientAddress', label: 'Job / client address', type: 'textarea', rows: 2, section: 'Client' },
+    { id: 'projectName', label: 'Project name', type: 'text', required: true, section: 'Project' },
+    { id: 'scope', label: 'Scope of work', type: 'textarea', rows: 4, required: true, section: 'Project' },
+    { id: 'lineItems', label: 'Line items', type: 'lineItems', required: true, section: 'Pricing' },
+    { id: 'taxRate', label: 'Tax rate (%)', type: 'number', inputMode: 'decimal', min: 0, max: 100, step: 0.01, section: 'Pricing' },
+    { id: 'depositPercent', label: 'Deposit required (%)', type: 'number', inputMode: 'decimal', min: 0, max: 100, section: 'Pricing' },
+    { id: 'notes', label: 'Notes / exclusions', type: 'textarea', rows: 3, section: 'Notes' },
+  ],
+  defaults: {
+    companyName: 'RidgeLine Roofing',
+    companyAddress: '450 Commerce Blvd\nFort Collins, CO 80525',
+    companyPhone: '(970) 555-0164',
+    companyEmail: 'bids@ridgeline.example',
+    estimateNumber: 'RF-2026-031',
+    estimateDate: '2026-11-19',
+    validUntil: '2026-12-03',
+    clientName: 'Morgan Ellis',
+    clientAddress: '19 Willow Court, Fort Collins, CO 80521',
+    projectName: 'Full reroof – architectural shingles',
+    scope:
+      'Remove one layer of asphalt shingles to the deck on the main house (approx. 24 squares measured). Inspect decking; replace damaged sheets at the unit price below. Install synthetic underlayment, ice-and-water shield at eaves and valleys, new drip edge and step flashing, architectural shingles with ridge vent, and magnetic nail sweep of the yard. Gutters not included.',
+    lineItems: [
+      { description: 'Tear-off, 1 layer, haul-off & disposal', quantity: 24, unit: 'sq', rate: 95 },
+      { description: 'Synthetic underlayment + ice & water (eaves/valleys)', quantity: 24, unit: 'sq', rate: 55 },
+      { description: 'Architectural shingles installed (incl. waste)', quantity: 26, unit: 'sq', rate: 385 },
+      { description: 'Drip edge & step flashing', quantity: 210, unit: 'ln ft', rate: 4.5 },
+      { description: 'Dumpster / disposal fee', quantity: 1, unit: 'ls', rate: 450 },
+      { description: 'Decking replacement allowance (OSB sheets)', quantity: 4, unit: 'ea', rate: 85 },
+    ],
+    taxRate: 7.55,
+    depositPercent: 30,
+    notes:
+      'Rates are sample figures for this PDF—replace with your supplier quotes. Extra decking beyond the 4-sheet allowance billed at the unit price after tear-off photos. Excludes gutters, skylights, chimney rebuild, and permit fees paid by owner.',
+  },
+  content: {
+    howToUse: [
+      'Enter your company and the homeowner’s job address, then name the roof project.',
+      'Write scope: layers to remove, product line, ventilation, and what is excluded.',
+      'Price tear-off, underlayment, shingles by the square, flashing, disposal, and decking allowance.',
+      'Set tax and deposit, preview totals, then export PDF or DOCX.',
+    ],
+    whatToInclude: [
+      {
+        heading: 'What belongs on a roofing estimate',
+        body: 'Start with roof size in squares (100 sq ft each), pitch notes, and how many layers come off. Separate tear-off and disposal from the new roof so a lay-over bid does not look cheaper for the wrong reason. Name the shingle line and color, underlayment, ice-and-water locations, drip edge, flashing, and ridge vent. Put rotten decking on a per-sheet unit price—you will not see every soft spot until the shingles are gone.\n\nState cleanup (magnetic nail sweep), warranty length for materials and workmanship, and whether gutters or skylights are in or out. Validity matters when asphalt and labor move; two weeks is a common working window on material-heavy reroofs, not a rule.',
+      },
+      {
+        heading: 'Squares, waste, and allowances',
+        body: 'Measure planes, adjust for pitch, then add waste for hips, valleys, and cuts. Many crews show field shingles a little higher than measured squares so the waste is visible on the PDF. Keep the decking allowance small and honest; photograph bad sheets before you cover them and bill extras with a change order when the count climbs.\n\nFor a general remodel layout with allowances outside roofing, use /tools/construction-estimate-template/. After the homeowner accepts, bill the deposit on /tools/contractor-invoice/.',
+      },
+    ],
+    workedExample: {
+      heading: 'Worked example: 24-square asphalt reroof (illustrative)',
+      body: 'RidgeLine Roofing prices Morgan Ellis’s main-house reroof at about 24 measured squares. Sample math only: tear-off 24 × $95, underlayment 24 × $55, shingles with waste 26 × $385, flashing 210 ln ft × $4.50, dumpster $450, and four OSB sheets at $85. Tax at a local rate you confirm; 30% deposit on the grand total to order materials. Swap every rate for your yard quotes before you send the PDF.',
+    },
+    commonMistakes: [
+      'Bundling tear-off into the shingle line so the client cannot compare bids.',
+      'Skipping a decking unit price, then arguing about rotten sheets mid-job.',
+      'Forgetting waste on cut-up roofs and running short on bundles.',
+      'Leaving gutters or chimney flashing ambiguous in the scope.',
+    ],
+    tips: [
+      'Photo the existing roof and attic ventilation before you price.',
+      'Match line labels on the later contractor invoice so AP can follow the job.',
+      'When scope shifts after tear-off, use /tools/change-order-template/ before ordering extras.',
+    ],
+    faq: [
+      {
+        question: 'What should a roofing estimate include?',
+        answer:
+          'Job address, roof size in squares, layers to remove, product names, line items for tear-off, underlayment, shingles, flashing, disposal, decking unit price, tax, deposit, validity date, cleanup, and clear exclusions.',
+      },
+      {
+        question: 'How big is a roofing square?',
+        answer:
+          'One square is 100 square feet of roof surface. Price materials and tear-off by the square so homeowners can compare bids on the same unit.',
+      },
+      {
+        question: 'Should tear-off be a separate line?',
+        answer:
+          'Yes. Tear-off cost depends on layers, pitch, and dump fees. A separate line shows why a full tear-off differs from a lay-over quote.',
+      },
+      {
+        question: 'How do I handle rotten decking on the estimate?',
+        answer:
+          'Include a small sheet allowance and a per-sheet unit price. After tear-off, photo extras and bill them on a signed change order before you cover the roof.',
+      },
+      {
+        question: 'Is this roofing estimate template free?',
+        answer:
+          'Yes. Edit in the browser, preview live, and download PDF or DOCX with no account. Entries stay on your device.',
+      },
+      {
+        question: 'Roofing estimate vs construction estimate?',
+        answer:
+          'Use this page for reroof and roof-repair bids with squares and flashing lines. For kitchen or bath remodels with mixed trades, start at /tools/construction-estimate-template/.',
+      },
+    ],
+    sources: estimateSources,
+  },
+  relatedSlugs: [
+    'construction-estimate-template',
+    'contractor-invoice',
+    'change-order-template',
+    'painting-estimate',
+  ],
+  publishedAt: '2026-11-19',
+  updatedAt: '2026-11-19',
+};
+
+/** Trade preset of the construction estimate fields — painting defaults only. */
+export const paintingEstimate: ToolDefinition = {
+  slug: 'painting-estimate',
+  name: 'Painting Estimate Template',
+  shortName: 'Painting Estimate',
+  category: 'estimates-invoices',
+  primaryKeyword: 'painting estimate template',
+  secondaryKeywords: [
+    'painting estimate',
+    'house painting quote',
+    'interior painting estimate',
+    'painter estimate PDF',
+  ],
+  title: 'Free Painting Estimate Template',
+  metaDescription:
+    'Free painting estimate template with prep, primer, finish coats, rooms or sq ft, and materials. Live preview, then PDF or DOCX—no signup.',
+  h1: 'Free Painting Estimate Template',
+  answerFirst:
+    'A painting estimate lists prep, primer, finish coats, rooms or square footage, and materials so the client sees what is in the price. Build yours here with a live preview and PDF or DOCX export. Sample rates teach the math—swap in your labor and paint costs.',
+  applicationCategory: 'BusinessApplication',
+  isLegalAdjacent: false,
+  documentTitle: 'Painting Estimate',
+  toolVersion: '1.0',
+  formulaNote:
+    'Line-item amount = quantity × rate. Subtotal = sum of line amounts. Tax = subtotal × (tax rate ÷ 100). Deposit = total × (deposit % ÷ 100).',
+  fields: [
+    { id: 'companyName', label: 'Company name', type: 'text', required: true, section: 'Your business' },
+    { id: 'companyAddress', label: 'Company address', type: 'textarea', rows: 2, section: 'Your business' },
+    { id: 'companyPhone', label: 'Phone', type: 'tel', section: 'Your business' },
+    { id: 'companyEmail', label: 'Email', type: 'email', section: 'Your business' },
+    { id: 'estimateNumber', label: 'Estimate #', type: 'text', required: true, section: 'Estimate details' },
+    { id: 'estimateDate', label: 'Date', type: 'date', required: true, section: 'Estimate details' },
+    { id: 'validUntil', label: 'Valid until', type: 'date', section: 'Estimate details' },
+    { id: 'clientName', label: 'Client name', type: 'text', required: true, section: 'Client' },
+    { id: 'clientAddress', label: 'Job / client address', type: 'textarea', rows: 2, section: 'Client' },
+    { id: 'projectName', label: 'Project name', type: 'text', required: true, section: 'Project' },
+    { id: 'scope', label: 'Scope of work', type: 'textarea', rows: 4, required: true, section: 'Project' },
+    { id: 'lineItems', label: 'Line items', type: 'lineItems', required: true, section: 'Pricing' },
+    { id: 'taxRate', label: 'Tax rate (%)', type: 'number', inputMode: 'decimal', min: 0, max: 100, step: 0.01, section: 'Pricing' },
+    { id: 'depositPercent', label: 'Deposit required (%)', type: 'number', inputMode: 'decimal', min: 0, max: 100, section: 'Pricing' },
+    { id: 'notes', label: 'Notes / exclusions', type: 'textarea', rows: 3, section: 'Notes' },
+  ],
+  defaults: {
+    companyName: 'ClearCoat Painting',
+    companyAddress: '88 Depot Street\nBoise, ID 83702',
+    companyPhone: '(208) 555-0133',
+    companyEmail: 'jobs@clearcoat.example',
+    estimateNumber: 'PT-2026-118',
+    estimateDate: '2026-11-19',
+    validUntil: '2026-12-10',
+    clientName: 'Taylor Brooks',
+    clientAddress: '412 Maple Ave, Boise, ID 83706',
+    projectName: 'Interior repaint – living, hall, 2 bedrooms',
+    scope:
+      'Prep walls and trim in living room, hallway, and two bedrooms (approx. 1,100 sq ft wall area). Patch nail holes and hairline cracks, caulk trim gaps, sand glossy spots, spot-prime patches, then one full primer coat on repaired areas and two finish coats of eggshell latex on walls. Semi-gloss on trim and doors in those rooms. Move light furniture; client clears closets and small items. Ceilings, kitchen, and baths not included.',
+    lineItems: [
+      { description: 'Surface prep (patch, caulk, sand, mask)', quantity: 1, unit: 'ls', rate: 480 },
+      { description: 'Primer – patched & bare areas', quantity: 1, unit: 'ls', rate: 220 },
+      { description: 'Wall finish – 2 coats eggshell (labor)', quantity: 1100, unit: 'sq ft', rate: 1.15 },
+      { description: 'Trim & doors – 2 coats semi-gloss (labor)', quantity: 4, unit: 'room', rate: 175 },
+      { description: 'Paint & supplies (client-approved colors)', quantity: 1, unit: 'ls', rate: 390 },
+    ],
+    taxRate: 6,
+    depositPercent: 25,
+    notes:
+      'Sample rates for the template only—replace with your crew and material costs. Color changes after the first coat may need an extra finish coat billed separately. Excludes ceilings, cabinets, wallpaper removal, and exterior work.',
+  },
+  content: {
+    howToUse: [
+      'Fill company and client details, then name the rooms or elevation you are painting.',
+      'Spell out prep, primer, coat count, sheen, and what the client must clear.',
+      'Add line items for prep, primer, finish labor (sq ft or rooms), and materials.',
+      'Set tax and deposit, check the preview, and export PDF or DOCX.',
+    ],
+    whatToInclude: [
+      {
+        heading: 'What a painting estimate should spell out',
+        body: 'Name every room or exterior elevation. Say how much prep is included—patch size limits, caulk, sanding, masking—and whether primer is full-field or spot only. State coat count and sheen for walls versus trim. Clients fight over “I thought the ceiling was in” more than they fight over the gallon price.\n\nMaterials can sit on their own line when the client picks the brand, or fold into a package rate when you supply a standard line. Note furniture moving, protection of floors, and drying time between coats if the house will be occupied.',
+      },
+      {
+        heading: 'Sq ft vs per-room pricing',
+        body: 'Wall square footage works when openings are simple and rooms are similar. Per-room packages read cleaner on small interiors with lots of doors and trim. Either way, keep prep and materials visible so a low labor number is not hiding a thin scope.\n\nFor mixed remodel bids that include paint as one trade among many, the construction estimate template at /tools/construction-estimate-template/ may fit better. Bill accepted painting work on /tools/contractor-invoice/.',
+      },
+    ],
+    workedExample: {
+      heading: 'Worked example: four-room interior (illustrative)',
+      body: 'ClearCoat Painting quotes Taylor Brooks for living, hall, and two bedrooms—about 1,100 sq ft of wall. Sample math: prep lump sum $480, primer $220, wall labor 1,100 × $1.15, trim four rooms × $175, materials $390. Tax at the local rate you use; 25% deposit to schedule the crew. Change every figure to your own costs before you send it.',
+    },
+    commonMistakes: [
+      'Writing “paint house” without rooms, sheen, or coat count.',
+      'Omitting prep limits, then eating large patch work for free.',
+      'Forgetting trim and doors when the client expected them.',
+      'No note on color changes after the first coat.',
+    ],
+    tips: [
+      'Walk the job with a moisture meter on suspect exterior trim before you lock a price.',
+      'Take before photos of existing damage so punch-list debates stay fair.',
+      'If the client adds a room mid-job, use /tools/change-order-template/ instead of a verbal yes.',
+    ],
+    faq: [
+      {
+        question: 'What should a painting estimate include?',
+        answer:
+          'Rooms or elevations, prep limits, primer scope, coat count and sheen, labor lines (sq ft or rooms), materials, tax, deposit, validity date, and exclusions such as ceilings or cabinets.',
+      },
+      {
+        question: 'Do I price paint jobs by the room or by square foot?',
+        answer:
+          'Both work. Use sq ft when wall area is easy to measure; use per-room packages when trim and doors dominate. Show prep and materials either way so the scope stays clear.',
+      },
+      {
+        question: 'Should primer be a separate line?',
+        answer:
+          'Often yes on repaints with patches or stain-blocking needs. Spot primer on repairs can be a smaller lump sum; full-field primer on new drywall deserves its own line.',
+      },
+      {
+        question: 'Is this painting estimate template free?',
+        answer:
+          'Yes. Fill it in the browser, preview live, and download PDF or DOCX with no signup. Nothing uploads to our servers.',
+      },
+      {
+        question: 'How long should a painting estimate stay valid?',
+        answer:
+          'Many painters use two to four weeks. Shorten the window when paint or labor costs are moving, and put the calendar date on the PDF.',
+      },
+      {
+        question: 'Painting estimate vs general quote generator?',
+        answer:
+          'This preset ships with prep, primer, and coat-oriented defaults. For mixed non-paint services, use /tools/quote-estimate-generator/; for multi-trade remodels, use /tools/construction-estimate-template/.',
+      },
+    ],
+    sources: estimateSources,
+  },
+  relatedSlugs: [
+    'construction-estimate-template',
+    'quote-estimate-generator',
+    'contractor-invoice',
+    'roofing-estimate',
+  ],
   publishedAt: '2026-11-19',
   updatedAt: '2026-11-19',
 };

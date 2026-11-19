@@ -26,6 +26,9 @@
 | `/tools/purchase-order-template/` | purchase order template | purchase order form, PO template free | long-tail |
 | `/tools/change-order-template/` | change order template | construction change order template, change order form | long-tail |
 | `/tools/lien-waiver-generator/` | lien waiver generator | lien waiver template, conditional lien waiver, unconditional lien waiver, partial lien waiver, final lien waiver | long-tail |
+| `/tools/invoice-late-fee-calculator/` | invoice late fee calculator | late fee calculator invoice, invoice overdue fee, late payment fee calculator | long-tail |
+| `/tools/roofing-estimate/` | roofing estimate template | roofing estimate, roof replacement estimate, shingle roof quote | trade preset of construction estimate |
+| `/tools/painting-estimate/` | painting estimate template | painting estimate, house painting quote, interior painting estimate | trade preset of construction estimate |
 | `/guides/construction-estimate-that-wins-jobs/` | how to write a construction estimate | construction quote, construction estimate example | supports estimate tool |
 | `/guides/photography-contract-clauses/` | photography contract clauses | photography contract explained | supports photo contract |
 | `/guides/catering-quote-deposits/` | catering quote deposit | wedding catering pricing | supports catering quote |
@@ -48,6 +51,11 @@
 | `/guides/how-to-create-a-work-order/` | how to create a work order | how to write a work order | work-order |
 | `/guides/wedding-videography-contract/` | wedding videography contract | wedding video agreement deliverables | videography-contract |
 | `/guides/contractor-invoice-example/` | contractor invoice example | progress billing example, contractor draw sample | contractor-invoice, progress-invoice |
+| `/guides/invoice-payment-terms/` | invoice payment terms | Net 30, Net 15, EOM, due on receipt | contractor-invoice |
+| `/guides/what-is-a-change-order/` | what is a change order | who prepares change order, RFI vs change order | change-order-template |
+| `/guides/work-order-vs-purchase-order-vs-invoice/` | work order vs purchase order vs invoice | PO vs work order, work order vs invoice | work-order, purchase-order-template |
+| `/guides/freelance-contract-what-to-include/` | what should a freelance contract include | can I write my own freelance contract | freelance-web-design-contract |
+| `/guides/how-to-create-a-contractor-estimate/` | how to create a contractor estimate | free estimate template Word Google Docs | construction-estimate-template, quote-estimate-generator |
 
 Cannibalization rule: head terms like “invoice template” (KD 43) are not targeted; each page keeps a distinct profession or document type. Guides answer “when/why/how”; tools own “free template / generator” intent.
 

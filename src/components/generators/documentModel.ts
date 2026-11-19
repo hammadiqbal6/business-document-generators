@@ -1,8 +1,16 @@
 import type { ClauseItem, LineItem, ToolDefinition } from '../../data/tools/types';
+import {
+  buildLateFeeLine,
+  buildLateFeeReminder,
+  calculateLateFee,
+  type LateFeeType,
+} from '../../lib/lateFee';
 import { formatMoney, lineItemTotal, sumLineItems } from '../../lib/money';
 
 export interface DocBlock {
-  type: 'heading' | 'subheading' | 'kv' | 'paragraph' | 'table' | 'clauses' | 'hr' | 'totals';
+  type: 'heading' | 'subheading' | 'kv' | 'paragraph' | 'table' | 'clauses' | 'hr' | 'totals' | 'image';
+  /** Data URL for logo (client-side only). */
+  src?: string;
   text?: string;
   pairs?: { label: string; value: string }[];
   rows?: string[][];
@@ -72,6 +80,39 @@ export function computeProgressBilling(values: Record<string, unknown>): {
   };
 }
 
+/** Running contract total for change orders: original + prior COs + this CO impact. */
+export function computeChangeOrderRevisedTotal(
+  originalAmount: number,
+  priorChangeOrdersTotal: number,
+  costImpact: number,
+): number {
+  const original = Number(originalAmount) || 0;
+  const prior = Number(priorChangeOrdersTotal) || 0;
+  const impact = Number(costImpact) || 0;
+  return Math.round((original + prior + impact) * 100) / 100;
+}
+
+export function changeOrderRunningTotals(values: Record<string, unknown>): {
+  originalAmount: number;
+  priorChangeOrdersTotal: number;
+  costImpact: number;
+  revisedTotal: number;
+} {
+  const originalAmount = Number(values.originalAmount) || 0;
+  const priorChangeOrdersTotal = Number(values.priorChangeOrdersTotal) || 0;
+  const costImpact = Number(values.costImpact) || 0;
+  return {
+    originalAmount,
+    priorChangeOrdersTotal,
+    costImpact,
+    revisedTotal: computeChangeOrderRevisedTotal(
+      originalAmount,
+      priorChangeOrdersTotal,
+      costImpact,
+    ),
+  };
+}
+
 export function buildDocumentBlocks(
   tool: ToolDefinition,
   values: Record<string, unknown>,
@@ -82,6 +123,8 @@ export function buildDocumentBlocks(
 
   switch (tool.slug) {
     case 'construction-estimate-template':
+    case 'roofing-estimate':
+    case 'painting-estimate':
     case 'contractor-invoice':
     case 'cleaning-service-invoice':
     case 'catering-quote':
@@ -97,6 +140,8 @@ export function buildDocumentBlocks(
       return buildTimesheet(values, blocks);
     case 'change-order-template':
       return buildChangeOrder(values, blocks);
+    case 'invoice-late-fee-calculator':
+      return buildLateFeeDoc(values, blocks);
     case 'photography-contract-template':
       return buildPhotoContract(values, blocks);
     case 'videography-contract':
@@ -184,6 +229,12 @@ function buildCommercialDoc(
     str(values.docLabel) ||
     tool.documentTitle;
   blocks[0] = { type: 'heading', text: label };
+
+  const logoSrc = str(values.companyLogo);
+  if (logoSrc.startsWith('data:image/')) {
+    // Insert above the title so preview / PDF can brand the document locally.
+    blocks.unshift({ type: 'image', src: logoSrc, text: 'Company logo' });
+  }
 
   const companyPairs = [
     { label: 'From', value: str(values.companyName) },
@@ -377,6 +428,85 @@ function buildProgressInvoice(values: Record<string, unknown>, blocks: DocBlock[
   return blocks;
 }
 
+function buildLateFeeDoc(values: Record<string, unknown>, blocks: DocBlock[]): DocBlock[] {
+  blocks[0] = { type: 'heading', text: 'Late Fee Calculation' };
+
+  const invoiceAmount = Number(values.invoiceAmount) || 0;
+  const feeTypeRaw = str(values.feeType) || 'flat';
+  const feeType: LateFeeType =
+    feeTypeRaw === 'monthly_percent' || feeTypeRaw === 'annual_daily' || feeTypeRaw === 'flat'
+      ? feeTypeRaw
+      : 'flat';
+
+  const result = calculateLateFee({
+    invoiceAmount,
+    dueDate: str(values.invoiceDueDate),
+    paymentDate: str(values.paymentDate),
+    gracePeriodDays: Number(values.gracePeriodDays) || 0,
+    feeType,
+    flatFeeAmount: Number(values.flatFeeAmount) || 0,
+    monthlyPercent: Number(values.monthlyPercent) || 0,
+    annualPercent: Number(values.annualPercent) || 0,
+  });
+
+  const wordingCtx = {
+    companyName: str(values.companyName),
+    clientName: str(values.clientName),
+    invoiceNumber: str(values.invoiceNumber),
+    invoiceAmount,
+    dueDate: str(values.invoiceDueDate),
+    paymentDate: str(values.paymentDate),
+    result,
+  };
+
+  blocks.push({
+    type: 'kv',
+    pairs: [
+      { label: 'From', value: str(values.companyName) },
+      { label: 'Client', value: str(values.clientName) },
+      { label: 'Invoice #', value: str(values.invoiceNumber) },
+      { label: 'Invoice amount', value: money(invoiceAmount) },
+      { label: 'Due date', value: str(values.invoiceDueDate) },
+      { label: 'Payment date', value: str(values.paymentDate) },
+      {
+        label: 'Grace period',
+        value:
+          values.gracePeriodDays != null && str(values.gracePeriodDays) !== ''
+            ? `${Number(values.gracePeriodDays) || 0} day(s)`
+            : '',
+      },
+      { label: 'Fee method', value: result.feeMethodLabel },
+    ].filter((p) => p.value),
+  });
+
+  blocks.push({
+    type: 'totals',
+    totals: [
+      { label: 'Days past due', value: String(result.daysPastDue) },
+      { label: 'Chargeable days (after grace)', value: String(result.chargeableDays) },
+      { label: 'Late fee', value: money(result.fee) },
+      { label: 'New total due', value: money(result.newTotal), emphasize: true },
+    ],
+  });
+
+  blocks.push({ type: 'subheading', text: 'Suggested late-fee line' });
+  blocks.push({ type: 'paragraph', text: buildLateFeeLine(wordingCtx) });
+
+  blocks.push({ type: 'subheading', text: 'Suggested payment reminder' });
+  blocks.push({ type: 'paragraph', text: buildLateFeeReminder(wordingCtx) });
+
+  blocks.push({
+    type: 'paragraph',
+    text: 'Not legal or tax advice. Late-fee caps and notice rules vary by state and country—confirm your contract and local law before billing a fee.',
+  });
+
+  if (str(values.notes)) {
+    blocks.push({ type: 'paragraph', text: `Notes: ${str(values.notes)}` });
+  }
+
+  return blocks;
+}
+
 function buildPurchaseOrder(values: Record<string, unknown>, blocks: DocBlock[]): DocBlock[] {
   blocks[0] = { type: 'heading', text: 'Purchase Order' };
   blocks.push({
@@ -483,23 +613,32 @@ function buildChangeOrder(values: Record<string, unknown>, blocks: DocBlock[]): 
   if (str(values.reason)) {
     blocks.push({ type: 'paragraph', text: `Reason: ${str(values.reason)}` });
   }
+
+  const running = changeOrderRunningTotals(values);
+  const scheduleDays =
+    values.scheduleDays != null && str(values.scheduleDays) !== ''
+      ? str(values.scheduleDays)
+      : '0';
+
+  blocks.push({ type: 'subheading', text: 'Contract total' });
   blocks.push({
-    type: 'kv',
-    pairs: [
-      { label: 'Cost impact', value: money(values.costImpact) },
-      {
-        label: 'Schedule impact (days)',
-        value: values.scheduleDays != null && str(values.scheduleDays) !== '' ? str(values.scheduleDays) : '',
-      },
+    type: 'totals',
+    totals: [
+      { label: 'Original contract amount', value: money(running.originalAmount) },
+      { label: 'Prior change orders', value: money(running.priorChangeOrdersTotal) },
+      { label: 'This change order (cost impact)', value: money(running.costImpact) },
       {
         label: 'Revised contract total',
-        value:
-          values.revisedTotal != null && Number(values.revisedTotal) !== 0
-            ? money(values.revisedTotal)
-            : '',
+        value: money(running.revisedTotal),
+        emphasize: true,
       },
-    ].filter((p) => p.value),
+    ],
   });
+  blocks.push({
+    type: 'kv',
+    pairs: [{ label: 'Schedule impact (days)', value: scheduleDays }],
+  });
+
   const lineItems = items(values);
   if (lineItems.length) {
     blocks.push({ type: 'subheading', text: 'Price breakdown' });
@@ -510,16 +649,18 @@ function buildChangeOrder(values: Record<string, unknown>, blocks: DocBlock[]): 
     blocks.push({ type: 'paragraph', text: `Notes: ${str(values.notes)}` });
   }
   blocks.push({ type: 'hr' });
+  blocks.push({ type: 'subheading', text: 'Authorization signatures' });
   blocks.push({
     type: 'paragraph',
     text: `Contractor: ${str(values.contractorSigner) || '__________________'}  Signature __________________ Date ______`,
   });
   blocks.push({
     type: 'paragraph',
-    text: `Client: ${str(values.clientSigner) || '__________________'}  Signature __________________ Date ______`,
+    text: `Client / owner: ${str(values.clientSigner) || '__________________'}  Signature __________________ Date ______`,
   });
   return blocks;
 }
+
 
 function buildIndependentContractor(values: Record<string, unknown>, blocks: DocBlock[]): DocBlock[] {
   blocks.push({

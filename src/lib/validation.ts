@@ -24,6 +24,7 @@ export function validateForm(
       }
       if (field.type === 'clauses') continue;
       if (field.type === 'checkbox') continue;
+      if (field.type === 'logo') continue;
       if (raw === undefined || raw === null || String(raw).trim() === '') {
         errors.push({ fieldId: field.id, message: `${field.label} is required.` });
       }
