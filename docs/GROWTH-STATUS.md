@@ -29,6 +29,9 @@ As of **2026-11-17** (owner-reported GSC/GA4 window) unless noted.
 
 In-repo and confirmed off-repo completions.
 
+- **2026-11-19 — Change order template upgrade (this PR):**
+  - Running contract total on `/tools/change-order-template/`: original + prior COs + this CO → revised total.
+  - Schedule impact days; contractor + client signatures; FAQ polish; Vitest for running-total math.
 - **2026-11-19 — Lien waiver generator (this PR):** `/tools/lien-waiver-generator/` — conditional/unconditional × partial/final fill-in form, live preview, PDF/DOCX export, plain-English “state forms vary / not legal advice” notice, FAQ; registered in `allTools`, contracts hub which-document table, KEYWORD-MAP, `toolGuideMap`, `llms.txt` / `llms-full.txt` question maps, change-order related tools; Vitest coverage in `tests/lien-waiver.test.ts`.
 - **2026-11-19 — Progress invoice generator (this PR):**
   - New tool `/tools/progress-invoice/`: contract value, percent or amount complete this period, previously billed, retainage %, amount due this period, balance to finish; live preview + PDF/DOCX.

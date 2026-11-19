@@ -1,5 +1,9 @@
 import { describe, expect, it } from 'vitest';
-import { buildDocumentBlocks } from '../src/components/generators/documentModel';
+import {
+  buildDocumentBlocks,
+  changeOrderRunningTotals,
+  computeChangeOrderRevisedTotal,
+} from '../src/components/generators/documentModel';
 import { getToolBySlug, allTools } from '../src/data/tools';
 import { guidesForTool } from '../src/data/toolGuideMap';
 import { validateForm } from '../src/lib/validation';
@@ -60,12 +64,44 @@ describe('five new document generators', () => {
     expect(text).toMatch(/Ship to/i);
   });
 
-  it('change order references original contract and signature lines', () => {
+  it('change order references original contract, schedule days, and both signatures', () => {
     const tool = getToolBySlug('change-order-template')!;
-    const text = JSON.stringify(buildDocumentBlocks(tool, tool.defaults));
+    const blocks = buildDocumentBlocks(tool, tool.defaults);
+    const text = JSON.stringify(blocks);
     expect(text).toContain('CE-2026-014');
+    expect(text).toMatch(/Schedule impact \(days\)/i);
+    expect(text).toContain('"2"');
+    expect(text).toMatch(/Original contract amount/i);
+    expect(text).toMatch(/Prior change orders/i);
+    expect(text).toMatch(/Revised contract total/i);
+    expect(text).toMatch(/Contractor:/i);
+    expect(text).toMatch(/Client \/ owner:/i);
     expect(text).toMatch(/Signature/i);
-    expect(text).toMatch(/Cost impact/i);
+  });
+
+  it('change order running total math: original + prior COs + this CO', () => {
+    expect(computeChangeOrderRevisedTotal(18420, 1250, 980)).toBe(20650);
+    expect(computeChangeOrderRevisedTotal(10000, 0, -500)).toBe(9500);
+    expect(computeChangeOrderRevisedTotal(0, 0, 0)).toBe(0);
+    // cents rounding
+    expect(computeChangeOrderRevisedTotal(100.105, 0.1, 0.1)).toBe(100.31);
+
+    const fromValues = changeOrderRunningTotals({
+      originalAmount: 18420,
+      priorChangeOrdersTotal: 1250,
+      costImpact: 980,
+    });
+    expect(fromValues).toEqual({
+      originalAmount: 18420,
+      priorChangeOrdersTotal: 1250,
+      costImpact: 980,
+      revisedTotal: 20650,
+    });
+
+    const tool = getToolBySlug('change-order-template')!;
+    const blocks = buildDocumentBlocks(tool, tool.defaults);
+    const totals = blocks.find((b) => b.type === 'totals' && b.totals?.some((t) => t.label === 'Revised contract total'));
+    expect(totals?.totals?.find((t) => t.label === 'Revised contract total')?.value).toBe('$20,650.00');
   });
 
   it('legal-adjacent agreements flag the disclaimer', () => {
