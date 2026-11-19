@@ -38,26 +38,26 @@ In-repo and confirmed off-repo completions.
 
 | Guide slug | Words | Sent. std | Contr/1k | HF AI% | Heuristic |
 |------------|------:|----------:|---------:|-------:|-----------|
-| `construction-estimate-that-wins-jobs` | 1860 | 7.6 | 14.5 | 0.0% | PASS |
-| `photography-contract-clauses` | 1828 | 7.5 | 14.8 | 0.0% | PASS |
-| `catering-quote-deposits` | 2071 | 7.5 | 11.1 | 0.1% | PASS |
+| `construction-estimate-that-wins-jobs` | 1853 | 7.5 | 14.6 | 0.0% | PASS |
+| `photography-contract-clauses` | 1822 | 7.2 | 14.8 | 0.0% | PASS |
+| `catering-quote-deposits` | 2070 | 7.5 | 11.1 | 0.1% | PASS |
 | `tattoo-consent-documentation` | 2003 | 7.1 | 14.0 | 0.0% | PASS |
 | `rental-application-fair-housing` | 1886 | 7.2 | 13.3 | 0.0% | PASS |
 | `invoice-vs-estimate` | 1870 | 7.2 | 14.4 | 0.0% | PASS |
 | `line-item-totals-explained` | 2253 | 8.6 | 14.2 | 0.1% | PASS |
 | `freelance-payment-schedule-milestones` | 2157 | 8.9 | 13.9 | 17.9% | PASS |
 | `what-to-include-on-a-receipt` | 2925 | 8.9 | 13.3 | 0.0% | PASS |
-| `cleaning-invoice-rates-line-items` | 2206 | 8.6 | 15.0 | 0.0% | PASS |
+| `cleaning-invoice-rates-line-items` | 2209 | 8.5 | 14.9 | 0.0% | PASS |
 | `nda-basics-for-freelancers` | 2156 | 8.7 | 17.2 | 0.0% | PASS |
 | `work-order-vs-invoice-vs-estimate` | 2012 | 6.6 | 15.4 | 0.0% | PASS |
 | `videography-contract-clauses` | 2128 | 8.8 | 13.6 | 0.0% | PASS |
 | `wedding-vendor-contract-checklist` | 2254 | 6.7 | 16.9 | 0.0% | PASS |
 | `podcast-script-structure` | 2007 | 8.5 | 12.0 | 0.3% | PASS |
 | `real-estate-flyer-what-to-include` | 2147 | 9.0 | 14.0 | 9.1% | PASS |
-| `how-to-write-a-business-estimate` | 1938 | 7.2 | 12.9 | 0.0% | PASS |
+| `how-to-write-a-business-estimate` | 1928 | 7.1 | 13.0 | 0.0% | PASS |
 | `catering-quotation-example` | 1732 | 7.7 | 14.4 | 0.0% | PASS |
 | `freelance-web-design-contract-clauses` | 1622 | 7.3 | 19.7 | 0.0% | PASS |
-| `how-to-create-a-work-order` | 1612 | 8.0 | 15.5 | 0.0% | PASS |
+| `how-to-create-a-work-order` | 1598 | 7.8 | 15.6 | 0.0% | PASS |
 | `wedding-videography-contract` | 1738 | 7.3 | 19.0 | 8.4% | PASS |
 | `contractor-invoice-example` | 1585 | 7.6 | 18.3 | 0.0% | PASS |
 
