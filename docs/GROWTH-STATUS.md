@@ -48,6 +48,39 @@ In-repo and confirmed off-repo completions.
   - Parallel `build` + `test` jobs; setup-node npm cache kept; Astro/Vite cache; `npm ci --prefer-offline --no-audit --fund=false`; concurrency cancel-in-progress kept.
   - Docs-only path filter skips heavy jobs; required check id `build-test-audit-proof` still reports green.
   - Full checks: Playwright **Chromium-only** + browser cache; root `.npmrc` + DEPLOYMENT/wrangler install notes for Workers Builds.
+- **2026-11-19 — humanize existing guides (this PR):**
+  - Rewrote all **22** existing guides in `src/data/guides.ts` for practitioner peer voice (`docs/WRITING-GUIDE.md`); kept slugs, title keywords, relatedToolSlugs/relatedGuideSlugs, sources URLs, schema fields.
+  - Added `scripts/audit/ai-style-check.mjs` (banned phrases, em-dash density, sentence-length variance, contractions) and wired it into `npm run audit` / `npm run audit:ai-style`.
+  - Optional local HF detectors: `openai-community/roberta-base-openai-detector` and `Hello-SimpleAI/chatgpt-detector-roberta` (via `scripts/audit/hf-ai-detect.py`); all 22 guides **&lt;30%** AI probability on both.
+  - Did **not** add the five new PAA article slugs (owned by PR #46).
+  - Per-guide score table (heuristic + OpenAI-detector AI%):
+| Guide slug | Words | Sent. std | Contr/1k | HF AI% | Heuristic |
+|------------|------:|----------:|---------:|-------:|-----------|
+| `construction-estimate-that-wins-jobs` | 1853 | 7.5 | 14.6 | 0.0% | PASS |
+| `photography-contract-clauses` | 1822 | 7.2 | 14.8 | 0.0% | PASS |
+| `catering-quote-deposits` | 2070 | 7.5 | 11.1 | 0.1% | PASS |
+| `tattoo-consent-documentation` | 2003 | 7.1 | 14.0 | 0.0% | PASS |
+| `rental-application-fair-housing` | 1886 | 7.2 | 13.3 | 0.0% | PASS |
+| `invoice-vs-estimate` | 1870 | 7.2 | 14.4 | 0.0% | PASS |
+| `line-item-totals-explained` | 2253 | 8.6 | 14.2 | 0.1% | PASS |
+| `freelance-payment-schedule-milestones` | 2157 | 8.9 | 13.9 | 17.9% | PASS |
+| `what-to-include-on-a-receipt` | 2925 | 8.9 | 13.3 | 0.0% | PASS |
+| `cleaning-invoice-rates-line-items` | 2209 | 8.5 | 14.9 | 0.0% | PASS |
+| `nda-basics-for-freelancers` | 2156 | 8.7 | 17.2 | 0.0% | PASS |
+| `work-order-vs-invoice-vs-estimate` | 2012 | 6.6 | 15.4 | 0.0% | PASS |
+| `videography-contract-clauses` | 2128 | 8.8 | 13.6 | 0.0% | PASS |
+| `wedding-vendor-contract-checklist` | 2254 | 6.7 | 16.9 | 0.0% | PASS |
+| `podcast-script-structure` | 2007 | 8.5 | 12.0 | 0.3% | PASS |
+| `real-estate-flyer-what-to-include` | 2147 | 9.0 | 14.0 | 9.1% | PASS |
+| `how-to-write-a-business-estimate` | 1928 | 7.1 | 13.0 | 0.0% | PASS |
+| `catering-quotation-example` | 1732 | 7.7 | 14.4 | 0.0% | PASS |
+| `freelance-web-design-contract-clauses` | 1622 | 7.3 | 19.7 | 0.0% | PASS |
+| `how-to-create-a-work-order` | 1598 | 7.8 | 15.6 | 0.0% | PASS |
+| `wedding-videography-contract` | 1738 | 7.3 | 19.0 | 8.4% | PASS |
+| `contractor-invoice-example` | 1585 | 7.6 | 18.3 | 0.0% | PASS |
+- **2026-11-19 — Lien waiver generator (PR #38, on main):** `/tools/lien-waiver-generator/` — conditional/unconditional × partial/final fill-in form, live preview, PDF/DOCX, state-forms-vary disclaimer; Vitest coverage.
+- **2026-11-19 — Progress invoice generator (PR #43, on main):** `/tools/progress-invoice/` contract draws + retainage; wired into hubs, KEYWORD-MAP, llms maps.
+- **2026-11-19 — CI / Cloudflare build speedup (PR #36, on main):** parallel build+test, caches, docs-only path skip, Playwright Chromium-only; baseline wall ~**33–47s**.
 - **2026-11-19 — PR #35:**
 - **2026-11-19 — Invoice late fee calculator (PR #37):**
   - New tool `/tools/invoice-late-fee-calculator/`: invoice amount, due date, payment date (or today), fee type (flat / % per month prorated / annual→daily), optional grace period.
@@ -111,6 +144,10 @@ Prioritized open work. Owner-confirmed gaps preferred over guesses.
 2. **Construction lien waiver basics guide** (listed in `docs/SEO-GUIDE.md` content calendar) — still open; tool currently Learn-mores to estimate/invoice/work-order guides until that article ships.
 3. **GSC after deploy:** ping IndexNow; URL Inspection → Request indexing for `/tools/progress-invoice/` and any previously weak / “Discovered – not indexed” tool URLs; confirm noindex exclusions are embeds/404 only (intentional).
 4. **CI timings:** record after timings vs baseline (~33–47s); if Workers Builds dashboard has a custom Install command, set `npm ci --prefer-offline --no-audit --fund=false` (`.npmrc` alone may be enough).
+1. **Five new PAA article slugs** — PR #46 (not this humanize-guides change); estimate/change-order upgrades in #47/#48.
+2. **GSC after deploy of PR #35 + lien waiver + progress invoice:** ping IndexNow; URL Inspection → Request indexing for weak / “Discovered – not indexed” tool URLs and `/tools/lien-waiver-generator/`, `/tools/progress-invoice/`; confirm noindex exclusions are embeds/404 only (intentional).
+3. **Construction lien waiver basics guide** (listed in `docs/SEO-GUIDE.md` content calendar) — still open; tool currently Learn-mores to estimate/invoice/work-order guides until that article ships.
+4. **CI timings:** record after timings vs baseline (~33–47s); if Workers Builds dashboard has a custom Install command, set `npm ci --prefer-offline --no-audit --fund=false`.
 5. **Bing Webmaster verification** — currently **unset** (owner); set `PUBLIC_BING_SITE_VERIFICATION` / console verification when ready.
 6. **Author / `sameAs` env vars** — currently **unset** (owner); wire when profiles are public and stable.
 7. **Backlinks** — site still has essentially none beyond minor directory/unroll mentions; outreach remains open.
@@ -167,6 +204,8 @@ Prioritized open work. Owner-confirmed gaps preferred over guesses.
 - **Estimate generator + change-order upgrades** — PRs #48 / #47 (this stream).
 - New tools (lien waiver #38, late fee #37, roofing/painting #41; progress invoice #43 merged) — **owned by dedicated agents**.
 - No other in-repo SEO/growth code work beyond the lien waiver and progress invoice tool PRs.
+- **This PR (#50):** humanize existing guides + AI-style audit gate.
+- **Open content/upgrade PRs (separate):** #46 PAA articles; #47 change-order upgrades; #48 estimate upgrades.
 - CI speedup already on main — measure after timings when convenient.
 - Parallel agent PRs may still be open for other tools/content; this PR only ships the invoice late fee calculator.
 - No other in-repo SEO/growth code work beyond shipping the roofing/painting estimate presets PR (after PR #35).
