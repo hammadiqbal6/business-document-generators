@@ -2,6 +2,11 @@
  * Static assets + run-first Worker for legacy-host 301s and 308 trailing-slash
  * redirects. Workers Builds: npm run build → npx wrangler deploy && node scripts/indexnow.mjs
  *
+ * Faster builds (dashboard, not this file): enable Build cache (npm `.npm` +
+ * Astro `node_modules/.astro`) and set Build watch path excludes for docs-only
+ * pushes (`docs/*`, `.cursor/*`, `AGENTS.md`, `README.md`). See docs/DEPLOYMENT.md.
+ * Repo `.npmrc` sets prefer-offline / no-audit / no-fund for install noise.
+ *
  * Build-time PUBLIC_* belong in Cloudflare Workers Builds → Variables
  * (.env.example). Do NOT put PUBLIC_* in top-level wrangler "vars" — that
  * breaks `npx wrangler preview` unless mirrored under previews.vars, and

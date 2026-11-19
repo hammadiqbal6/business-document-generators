@@ -18,6 +18,8 @@ env:
   PUBLIC_SITE_URL_HOME_GARDEN: https://getyardtally.com
   PUBLIC_SITE_URL_FIBER_ARTS: https://fiber-arts-calculators.hammadiqbal117.workers.dev
   PUBLIC_SITE_URL_PET: https://pet-calculators.hammadiqbal117.workers.dev
+  # proof / audit already get a fresh dist from the parallel build step below.
+  PROOF_SKIP_BUILD: '1'
 
 jobs:
   full-checks:
@@ -25,16 +27,74 @@ jobs:
     timeout-minutes: 45
     steps:
       - uses: actions/checkout@v5
+
       - uses: actions/setup-node@v5
         with:
           node-version: '22'
           cache: npm
-      - run: npm ci
-      - run: npx playwright install chromium
-      - run: npm test
-      - run: npm run audit
-      - run: npm run proof
-      - run: npm run lhci
+
+      - name: Cache node_modules
+        id: nm
+        uses: actions/cache@v4
+        with:
+          path: node_modules
+          key: node-modules-${{ runner.os }}-node22-${{ hashFiles('package-lock.json') }}
+
+      - name: Cache Playwright browsers
+        id: playwright
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/ms-playwright
+          key: playwright-${{ runner.os }}-${{ hashFiles('package-lock.json') }}
+
+      - name: Install dependencies
+        if: steps.nm.outputs.cache-hit != 'true'
+        run: npm ci --prefer-offline --no-audit --no-fund
+
+      # After install — npm ci would delete node_modules/.astro if restored earlier.
+      - name: Cache Astro build output
+        uses: actions/cache@v4
+        with:
+          path: |
+            node_modules/.astro
+            .astro
+          key: astro-${{ runner.os }}-${{ hashFiles('package-lock.json') }}-${{ hashFiles('astro.config.*', 'src/**/*', 'public/**/*', 'scripts/generate-og-svg.mjs', 'scripts/lib/**/*') }}
+          restore-keys: |
+            astro-${{ runner.os }}-${{ hashFiles('package-lock.json') }}-
+
+      - name: Install Playwright Chromium
+        if: steps.playwright.outputs.cache-hit != 'true'
+        run: npx playwright install --with-deps chromium
+
+      - name: Install Playwright system deps (cache hit)
+        if: steps.playwright.outputs.cache-hit == 'true'
+        run: npx playwright install-deps chromium
+
+      # One Astro build only. proof reuses dist/ (PROOF_SKIP_BUILD) then writes audit/test artifacts;
+      # lhci also reads the same dist/ (no second npm run build / npm run audit).
+      - name: Build and test (parallel)
+        run: |
+          set +e
+          npm run build &
+          build_pid=$!
+          npm test &
+          test_pid=$!
+          wait $build_pid
+          build_status=$?
+          wait $test_pid
+          test_status=$?
+          set -e
+          if [[ $build_status -ne 0 || $test_status -ne 0 ]]; then
+            echo "::error::build exit=${build_status} test exit=${test_status}"
+            exit 1
+          fi
+
+      - name: Proof artifacts
+        run: npm run proof
+
+      - name: Lighthouse CI
+        run: npm run lhci
+
       - uses: actions/upload-artifact@v6
         if: always()
         with:

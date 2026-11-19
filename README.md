@@ -112,7 +112,11 @@ npm run proof   # rebuilds dist and regenerates docs/proof/
 
 ## Audits & CI
 
-PR / `main` CI runs a fast safety net only (`npm ci`, `npm run build`, `npm test`). Run `npm run audit`, `npm run proof`, and `npx lhci autorun` locally before opening PRs. The **Full checks** workflow (Actions → workflow_dispatch) still runs Playwright, audits, proof, and Lighthouse on demand.
+PR / `main` CI job id **`build-test-audit-proof`** (required check name unchanged) runs `npm ci --prefer-offline --no-audit --no-fund` (skipped on warm `node_modules` cache), then **`npm run build` ‖ `npm test` in parallel**, with Astro/`node_modules/.astro` cache. Docs-only / `.cursor`-only PRs skip install/build/test but still report that job green. Concurrency cancels superseded runs on the same ref.
+
+Run `npm run audit`, `npm run proof`, and `npx lhci autorun` locally before opening PRs. The **Full checks** workflow (Actions → workflow_dispatch) caches Playwright browsers, builds once, then proof (`PROOF_SKIP_BUILD`) + LHCI against the same `dist/`.
+
+Cloudflare Workers Builds: enable **Build cache** and exclude docs/agent paths from watch paths (see `docs/DEPLOYMENT.md`).
 
 ## SEO / AdSense / deploy
 
@@ -130,6 +134,7 @@ Short mirror of [`docs/GROWTH-STATUS.md`](docs/GROWTH-STATUS.md). **Every PR mus
 
 ### Done (as of 2026-11-19)
 
+- **CI / Cloudflare build speed:** job `build-test-audit-proof` kept; `node_modules` + Astro caches; parallel build‖test; docs-only path skip; `.npmrc` prefer-offline; full-checks Playwright cache + single build; DEPLOYMENT notes for Workers Build cache + watch-path excludes (this PR).
 - Homepage links all 21 tools by category; hubs’ which-document tables complete; home title/H1/tagline target contractor & freelancer templates (PR #35).
 - Indexing audit in CI (`npm run audit:indexing`): sitemap URLs self-canonical + not noindex; embed/`/404/` intentional noindex + `X-Robots-Tag`; internal links avoid redirect sources.
 - IndexNow + GSC property verification in place; AdSense application **Getting ready**.
@@ -139,6 +144,7 @@ Short mirror of [`docs/GROWTH-STATUS.md`](docs/GROWTH-STATUS.md). **Every PR mus
 
 ### Remaining
 
+- **Owner (Cloudflare dashboard):** confirm Build cache enabled; set watch-path excludes for `docs/*`, `.cursor/*`, `AGENTS.md`, `README.md`, `.github/*`.
 - Validate GSC indexing after PR #35 deploy (IndexNow + URL Inspection); expect embed/404 noindex exclusions to stay.
 - Bing verification **unset**; author/`sameAs` env vars **unset**; editorial backlinks still needed.
 - Pause Reddit promo/launch posts until karma recovers; r/SideProject launch was removed and not reposted.

@@ -23,15 +23,97 @@ env:
 
 jobs:
   # Keep this job id: previously used as a status check name on main.
+  # No separate lint/typecheck scripts exist in package.json; build ‖ test cover the PR gate.
   build-test-audit-proof:
     runs-on: ubuntu-24.04
     timeout-minutes: 10
     steps:
       - uses: actions/checkout@v5
+        with:
+          fetch-depth: 0
+
+      # Docs / agent-notes / proof-artifact-only PRs skip install/build/test.
+      # Job id stays build-test-audit-proof so required checks remain green.
+      - uses: dorny/paths-filter@v3
+        id: filter
+        if: github.event_name == 'pull_request'
+        with:
+          filters: |
+            heavy:
+              - 'src/**'
+              - 'public/**'
+              - 'scripts/**'
+              - 'package.json'
+              - 'package-lock.json'
+              - 'astro.config.*'
+              - 'tsconfig*.json'
+              - 'vitest.config.*'
+              - 'lighthouserc.*'
+              - 'wrangler.*'
+              - '.npmrc'
+              - '.github/workflows/**'
+
+      - name: Decide whether to run heavy checks
+        id: gate
+        run: |
+          if [[ "${{ github.event_name }}" != "pull_request" ]]; then
+            echo "run=true" >> "$GITHUB_OUTPUT"
+          elif [[ "${{ steps.filter.outputs.heavy }}" == "true" ]]; then
+            echo "run=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "run=false" >> "$GITHUB_OUTPUT"
+          fi
+
       - uses: actions/setup-node@v5
+        if: steps.gate.outputs.run == 'true'
         with:
           node-version: '22'
           cache: npm
-      - run: npm ci
-      - run: npm run build
-      - run: npm test
+
+      # Skip npm ci when lockfile matches a prior warm cache (npm ci always wipes node_modules).
+      - name: Cache node_modules
+        if: steps.gate.outputs.run == 'true'
+        id: nm
+        uses: actions/cache@v4
+        with:
+          path: node_modules
+          key: node-modules-${{ runner.os }}-node22-${{ hashFiles('package-lock.json') }}
+
+      - name: Install dependencies
+        if: steps.gate.outputs.run == 'true' && steps.nm.outputs.cache-hit != 'true'
+        run: npm ci --prefer-offline --no-audit --no-fund
+
+      # After install — npm ci would delete node_modules/.astro if restored earlier.
+      - name: Cache Astro build output
+        if: steps.gate.outputs.run == 'true'
+        uses: actions/cache@v4
+        with:
+          path: |
+            node_modules/.astro
+            .astro
+          key: astro-${{ runner.os }}-${{ hashFiles('package-lock.json') }}-${{ hashFiles('astro.config.*', 'src/**/*', 'public/**/*', 'scripts/generate-og-svg.mjs', 'scripts/lib/**/*') }}
+          restore-keys: |
+            astro-${{ runner.os }}-${{ hashFiles('package-lock.json') }}-
+
+      # Vitest does not need dist/; overlap build and test wall time.
+      - name: Build and test (parallel)
+        if: steps.gate.outputs.run == 'true'
+        run: |
+          set +e
+          npm run build &
+          build_pid=$!
+          npm test &
+          test_pid=$!
+          wait $build_pid
+          build_status=$?
+          wait $test_pid
+          test_status=$?
+          set -e
+          if [[ $build_status -ne 0 || $test_status -ne 0 ]]; then
+            echo "::error::build exit=${build_status} test exit=${test_status}"
+            exit 1
+          fi
+
+      - name: Docs-only change — heavy checks skipped
+        if: steps.gate.outputs.run != 'true'
+        run: echo "No src/public/scripts/config/workflow changes; skipping install/build/test. Required check name unchanged."

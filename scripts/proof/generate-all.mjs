@@ -133,11 +133,20 @@ async function main() {
   const pkg = JSON.parse(fs.readFileSync(path.join(root, 'package.json'), 'utf8'));
   const lhVersion = run('npx', ['lighthouse', '--version']).stdout.trim();
 
-  console.log('=== proof: build ===');
-  const build = run('npm', ['run', 'build']);
-  if (build.status !== 0) {
-    console.error(build.stdout + build.stderr);
-    process.exit(1);
+  const skipBuild = process.env.PROOF_SKIP_BUILD === '1' || process.env.PROOF_SKIP_BUILD === 'true';
+  if (skipBuild) {
+    if (!fs.existsSync(dist)) {
+      console.error('PROOF_SKIP_BUILD set but dist/ is missing; run npm run build first');
+      process.exit(1);
+    }
+    console.log('=== proof: build skipped (PROOF_SKIP_BUILD, reusing dist/) ===');
+  } else {
+    console.log('=== proof: build ===');
+    const build = run('npm', ['run', 'build']);
+    if (build.status !== 0) {
+      console.error(build.stdout + build.stderr);
+      process.exit(1);
+    }
   }
 
   // Clear generated proof dirs but keep committed verification screenshots (e.g. mobile-seo/).

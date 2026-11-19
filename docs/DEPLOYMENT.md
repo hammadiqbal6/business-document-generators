@@ -62,6 +62,18 @@ npx wrangler deploy && node scripts/indexnow.mjs
 
 Or equivalently: `npm run deploy:indexnow` (requires `dist/` already built by the build step). Do **not** run IndexNow inside `npm run build`.
 
+**Workers Builds speed (dashboard):**
+
+| Setting | Recommended |
+|---------|-------------|
+| **Build command** | `npm run build` |
+| **Deploy command** | `npx wrangler deploy && node scripts/indexnow.mjs` |
+| **Build cache** | **Enable** (Settings → Build → Build cache). Caches npm `.npm` + Astro `node_modules/.astro` automatically. |
+| **Build watch path excludes** | `docs/*`, `.cursor/*`, `AGENTS.md`, `README.md`, `.github/*` so docs-only / agent-notes pushes skip a production deploy. Keep includes as `[*]` (or omit). |
+| **Node** | `NODE_VERSION=22` (or engines `>=20`) |
+
+Repo `.npmrc` sets `prefer-offline=true`, `audit=false`, `fund=false` so Workers Builds installs stay quiet and reuse the cached npm store.
+
 **Before first production deploy**, run:
 
 ```bash
@@ -247,7 +259,7 @@ Every pull request can get a `*.pages.dev` preview URL. Use it for QA; set `PUBL
 2. **Framework Preset:** Astro (auto-detected) or Other.
 3. **Build Command:** `npm run build`
 4. **Output Directory:** `dist`
-5. **Install Command:** `npm ci`
+5. **Install Command:** `npm ci --prefer-offline --no-audit --no-fund` (or rely on repo `.npmrc`)
 6. **Environment Variables:** add all `PUBLIC_*` for Production (and Preview).
 7. Deploy. Attach custom domain under **Settings** → **Domains**.
 8. Update `vercel.json` redirects if the apex/www hostnames change.
@@ -449,7 +461,8 @@ Also revert the Git commit on `main` if the bad change is in source control.
 
 | Symptom | Likely cause | Fix |
 |---------|----------------|-----|
-| Build fails on host, works locally | Wrong Node version | Set `NODE_VERSION=22`; use `npm ci` not `npm install` |
+| Build fails on host, works locally | Wrong Node version | Set `NODE_VERSION=22`; use `npm ci` (repo `.npmrc` already sets prefer-offline / no-audit / no-fund) |
+| Cloudflare build slow / rebuilds on docs-only | Build cache off or watch paths too broad | Enable Build cache; exclude `docs/*`, `.cursor/*`, `AGENTS.md`, `README.md`, `.github/*` |
 | Canonical URLs still on workers.dev | `PUBLIC_SITE_URL` not set at build | Set env var in host; **redeploy** (rebuild required) |
 | Sitemap has wrong domain | Same as above | Rebuild with correct `PUBLIC_SITE_URL` |
 | Google verification fails | Meta not in HTML | Set `PUBLIC_GSC_VERIFICATION`, redeploy, view source |
