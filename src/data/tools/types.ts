@@ -126,7 +126,7 @@ export const CATEGORY_META: Record<
     slug: 'contracts',
     name: 'Contracts & Agreements',
     description:
-      'Independent contractor and service agreements, photography, videography, freelance/web design, event/wedding vendor contracts, and simple NDAs — editable clauses, not legal advice.',
+      'Independent contractor and service agreements, photography, videography, freelance/web design, event/wedding vendor contracts, simple NDAs, and construction lien waivers — editable samples, not legal advice.',
   },
   forms: {
     slug: 'forms',

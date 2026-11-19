@@ -17,6 +17,7 @@ import {
   eventVendorContract,
   freelanceWebContract,
   independentContractorAgreement,
+  lienWaiverGenerator,
   photographyContract,
   serviceAgreementTemplate,
   simpleNda,
@@ -51,6 +52,7 @@ export const allTools: ToolDefinition[] = [
   serviceAgreementTemplate,
   purchaseOrderTemplate,
   changeOrderTemplate,
+  lienWaiverGenerator,
   progressInvoice,
 ];
 

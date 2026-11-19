@@ -1348,7 +1348,13 @@ export const changeOrderTemplate: ToolDefinition = {
     ],
     sources: estimateSources,
   },
-  relatedSlugs: ['construction-estimate-template', 'contractor-invoice', 'progress-invoice', 'work-order'],
+  relatedSlugs: [
+    'construction-estimate-template',
+    'contractor-invoice',
+    'progress-invoice',
+    'work-order',
+    'lien-waiver-generator',
+  ],
   publishedAt: '2026-11-13',
   updatedAt: '2026-11-13',
 };

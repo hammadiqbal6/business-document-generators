@@ -127,6 +127,19 @@ export const estimateSources: SourceRef[] = [
   sbaHome,
 ];
 
+export const liiMechanicsLien: SourceRef = {
+  label: 'Cornell LII Wex — Mechanic’s lien',
+  url: 'https://www.law.cornell.edu/wex/mechanic%27s_lien',
+  usedFor: 'plain-language definition of a mechanic’s lien as a statutory payment security interest',
+};
+
+export const cslbLienWaiverForms: SourceRef = {
+  label: 'California CSLB — Conditional and unconditional waiver and release forms',
+  url: 'https://www.cslb.ca.gov/consumers/legal_issues_for_consumers/mechanics_lien/Conditional_And_Unconditional_Waiver_Release_Form.aspx',
+  usedFor:
+    'example of a state that publishes prescribed progress/final and conditional/unconditional waiver forms; shows why state forms vary',
+};
+
 export const contractSources: SourceRef[] = [
   liiContract,
   irsIndependentContractor,
@@ -136,6 +149,16 @@ export const contractSources: SourceRef[] = [
   sbaLaunch,
   sbaStayCompliant,
   copyrightPhotographers,
+];
+
+/** Lien waiver tools: mechanics-lien context + statutory-form example + recordkeeping. */
+export const lienWaiverSources: SourceRef[] = [
+  liiMechanicsLien,
+  cslbLienWaiverForms,
+  liiContract,
+  sbaStayCompliant,
+  irsRecordkeeping,
+  irsWhatRecords,
 ];
 
 export const formSources: SourceRef[] = [

@@ -57,6 +57,11 @@ export function withTodayDateDefaults(
       out[id] = today;
       continue;
     }
+    if (id === 'throughDate') {
+      // Partial lien waivers: cover work through a recent pay-period end, not “today”.
+      out[id] = addDaysIso(today, -4);
+      continue;
+    }
     // Primary document / event dates → today
     out[id] = today;
   }
