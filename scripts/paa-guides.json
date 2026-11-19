@@ -1,0 +1,659 @@
+[
+  {
+    "slug": "invoice-payment-terms",
+    "title": "Invoice Payment Terms: Net 30, Net 15, EOM",
+    "metaDescription": "Net 30, Net 15, Net 14, EOM, and due on receipt explained for contractor invoices. How to write terms, set due dates, and keep payment records.",
+    "answerFirst": "Invoice payment terms tell the client when money is due after the invoice date. Net 30 means pay within thirty days; Net 15 or Net 14 within fifteen or fourteen; EOM ties due date to month-end; due on receipt asks for payment when they get the PDF. Print the phrase and a calendar due date on every contractor invoice.",
+    "publishedAt": "2026-11-19",
+    "updatedAt": "2026-11-19",
+    "relatedToolSlugs": [
+      "contractor-invoice",
+      "receipt-generator",
+      "quote-estimate-generator"
+    ],
+    "relatedGuideSlugs": [
+      "contractor-invoice-example",
+      "invoice-vs-estimate",
+      "what-to-include-on-a-receipt"
+    ],
+    "legalNote": "This article is not legal or tax advice. Payment terms, late fees, and recordkeeping rules vary by jurisdiction and contract. Confirm requirements with a qualified professional for your situation.",
+    "howTo": [
+      "Pick a term that matches cash flow and the client's AP cycle (Net 15, Net 30, EOM, or due on receipt).",
+      "Put the term phrase and a calendar due date on the invoice header next to the invoice date.",
+      "State where to send payment and what the balance covers (progress draw, deposit, final).",
+      "When payment clears, issue a receipt and file both PDFs with the job records."
+    ],
+    "sources": [
+      {
+        "label": "IRS — What kind of records should I keep",
+        "url": "https://www.irs.gov/businesses/small-businesses-self-employed/what-kind-of-records-should-i-keep",
+        "usedFor": "Keeping invoices and payment records that support gross receipts"
+      },
+      {
+        "label": "IRS — How long should I keep records",
+        "url": "https://www.irs.gov/businesses/small-businesses-self-employed/how-long-should-i-keep-records",
+        "usedFor": "Retention timing for business records tied to returns"
+      },
+      {
+        "label": "SBA — Stay legally compliant",
+        "url": "https://www.sba.gov/business-guide/manage-your-business/stay-legally-compliant",
+        "usedFor": "Small-business compliance habits that include clear written terms and records"
+      },
+      {
+        "label": "Cornell LII — Contract",
+        "url": "https://www.law.cornell.edu/wex/contract",
+        "usedFor": "Offer, acceptance, and consideration basics when payment terms sit inside a contract"
+      }
+    ],
+    "sections": [
+      {
+        "heading": "What do Net 30 and Net 15 mean on an invoice?",
+        "body": "Net 30 means the full balance is due thirty calendar days after the invoice date. Net 15 shortens that window to fifteen days. Net 14 shows up when a shop wants money inside two weeks and does not want to type Net 15. The number is days from the invoice date unless your contract says otherwise.\n\nI'd put the due date next to the Net phrase so AP does not guess. Example: invoice dated March 1 with Net 15 should show Due: March 16 (or the next business day if you choose that habit). Commercial clients often prefer Net 30 because their pay runs sit on a monthly cycle. Smaller remodels and service calls often clear faster on Net 15.\n\nNone of these labels is a federal rule. They are trade shorthand you put in writing. Cornell Law School's Legal Information Institute explains that a contract is a promise the law will enforce through offer, acceptance, and consideration. Payment timing belongs in that written stack so both sides know when money moves."
+      },
+      {
+        "heading": "What does EOM mean for invoice payment terms?",
+        "body": "EOM means end of month. Used alone, it usually means payment is due by the last day of the month that contains the invoice date. Some offices write Net 10 EOM or 10 EOM to mean ten days after month-end. Spell out which version you mean on the PDF.\n\nExample: an invoice dated April 12 marked EOM is due April 30 in the simple reading. The same invoice marked Net 10 EOM would be due May 10. Ambiguous EOM is a classic AP delay. I write the calendar date in the due-date field and keep EOM in the terms line as a backup label.\n\nEOM helps when you send several invoices in one month and want one payday. It hurts when the invoice lands on the 28th and the client already closed the month's pay run. If that happens a lot, switch that account to Net 30 from invoice date so the clock starts clean."
+      },
+      {
+        "heading": "When should you use due on receipt?",
+        "body": "Due on receipt means pay when you get this invoice. It is the tightest common term. Use it for materials already purchased, emergency service, or clients who asked for COD-style billing. Still print a calendar due date equal to the invoice date so software and reminders have a hard field.\n\nSome clients treat due on receipt as \"we'll pay this week.\" Others treat it as a suggestion. If you need the money before you order cabinets, collect a deposit on the estimate or first invoice and state that materials do not ship until funds clear. Pair the invoice with clear payment instructions (ACH, card link, check address).\n\nAfter the money posts, send a receipt from /tools/receipt-generator/ so the invoice asked for payment and the receipt proves it arrived. For how invoices differ from estimates in the first place, see /guides/invoice-vs-estimate/."
+      },
+      {
+        "heading": "How do you write payment terms on a contractor invoice?",
+        "body": "Put three things in the header block: invoice date, payment terms phrase, and calendar due date. Then add payment instructions in plain language. Example header lines: Invoice date 2026-11-19 · Terms: Net 15 · Due: 2026-12-04 · Pay by ACH to the account on file.\n\nMatch the terms to whatever the signed estimate or contract already promised. Changing Net 30 to due on receipt on the final invoice without a conversation is how disputes start. If the job used progress billing, say which draw this invoice covers and subtract deposits already paid the way /guides/contractor-invoice-example/ walks through.\n\nDraft the PDF in /tools/contractor-invoice/ so quantity times rate, tax, amount paid, and balance due stay consistent. Keep the document titled Invoice. The SBA points small businesses toward staying legally compliant as they operate; clear written payment terms and retained copies support that habit without replacing licenses or insurance your state requires."
+      },
+      {
+        "heading": "How do Net 14, Net 15, and Net 30 compare in practice?",
+        "body": "Use this table when you set a default for a new client. The rows are working patterns, not official rates from the IRS or SBA. Pick what matches your cash cycle and the client's AP rules, then put the calendar due date on every PDF.",
+        "table": {
+          "caption": "Common invoice payment terms",
+          "headers": [
+            "Term",
+            "Usual meaning",
+            "When shops use it"
+          ],
+          "rows": [
+            [
+              "Due on receipt",
+              "Pay when the invoice arrives",
+              "Materials COD, emergency service"
+            ],
+            [
+              "Net 14 / Net 15",
+              "Due 14 or 15 days after invoice date",
+              "Smaller jobs, faster cash needs"
+            ],
+            [
+              "Net 30",
+              "Due 30 days after invoice date",
+              "Commercial AP cycles"
+            ],
+            [
+              "EOM",
+              "Due by month-end (confirm wording)",
+              "Multiple invoices in one month"
+            ],
+            [
+              "Net 10 EOM",
+              "Often 10 days after month-end",
+              "Accounts that batch month-end pay"
+            ]
+          ]
+        }
+      },
+      {
+        "heading": "Worked example: Net 15 progress invoice on a bath remodel",
+        "body": "Example only: a bath remodel has an accepted estimate. On November 19 you send invoice 441 for the tile labor draw. Terms: Net 15. Invoice date November 19. Due date December 4. Line items mirror the estimate's tile labor and thinset lines. A one thousand dollar deposit already paid shows as amount paid. Balance due is whatever remains after tax on that draw.\n\nYou email the PDF and paste the same due date into your reminder tool. On December 2 AP asks if Net 15 includes weekends. You point to the calendar due date on the PDF. Payment hits on December 3. You send a receipt the same day and file invoice, receipt, and estimate together.\n\nThe IRS page on what kind of records to keep points small businesses to documents that support income. Progress invoices and deposit proofs belong in that file. IRS guidance on how long to keep records helps you plan retention with your tax pro rather than inventing a homemade shred date."
+      },
+      {
+        "heading": "What if the client pays late?",
+        "body": "Start with a polite reminder that quotes the invoice number and due date. Many late payments are AP backlog, not refusal. If your contract allows a late fee, point to that clause; do not invent a fee on the fly. Keep every reminder in writing.\n\nStop new work if the contract lets you pause for nonpayment and the risk is real. Issue a statement that lists open invoices instead of resending five separate PDFs without a total. When partial payment arrives, apply it on the next invoice or a credit memo so the balance stays clear.\n\nPayment terms do not replace a contract. They sit inside one. If the relationship is only a verbal yes, tighten the paperwork before the next phase. For field crews who need a job ticket separate from billing, keep the work order out of the invoice PDF so AP still sees a clean payment request."
+      }
+    ],
+    "faq": [
+      {
+        "question": "Is Net 30 thirty business days or calendar days?",
+        "answer": "Unless your contract says business days, Net 30 usually means thirty calendar days from the invoice date. Print a calendar due date so nobody has to count. If you only count business days, write that in the terms line."
+      },
+      {
+        "question": "Can I put Net 15 on the invoice if the estimate said Net 30?",
+        "answer": "Not without agreement. Match the invoice to the signed estimate or contract. If cash needs change, revise terms in writing before you bill the next draw."
+      },
+      {
+        "question": "Does due on receipt mean they must pay the same day?",
+        "answer": "It asks for payment when they receive the invoice. Put the invoice date as the due date and state payment methods. Some clients still batch pay; deposits and COD language help when you cannot float materials."
+      },
+      {
+        "question": "Where should payment terms appear on the PDF?",
+        "answer": "In the header next to invoice date and due date, plus a short payment-instructions block. Build that layout in /tools/contractor-invoice/ so the fields stay consistent across jobs."
+      },
+      {
+        "question": "Do I need a receipt if the invoice says paid?",
+        "answer": "A receipt is clearer for the payer's records. After funds clear, send a receipt from /tools/receipt-generator/ and keep it with the invoice. See /guides/what-to-include-on-a-receipt/ for the fields that matter."
+      }
+    ]
+  },
+  {
+    "slug": "what-is-a-change-order",
+    "title": "What Is a Change Order? (Construction)",
+    "metaDescription": "A construction change order documents scope, price, and schedule changes after the estimate or contract. What to include, who prepares it, RFI vs CO.",
+    "answerFirst": "A construction change order is a written update that changes scope, price, or schedule after the original estimate or contract was accepted. It lists what is added or removed, the dollar effect, and any time impact, then gets signed before the crew builds the new work. This guide covers jobsite change orders, not bank or loan change-order paperwork.",
+    "publishedAt": "2026-11-19",
+    "updatedAt": "2026-11-19",
+    "relatedToolSlugs": [
+      "change-order-template",
+      "construction-estimate-template",
+      "contractor-invoice",
+      "work-order"
+    ],
+    "relatedGuideSlugs": [
+      "construction-estimate-that-wins-jobs",
+      "contractor-invoice-example",
+      "invoice-vs-estimate",
+      "work-order-vs-invoice-vs-estimate"
+    ],
+    "legalNote": "This article is not legal advice. Change-order rules depend on your contract, project type, and jurisdiction. Use templates as a starting point and have a licensed attorney review high-stakes wording.",
+    "howTo": [
+      "Describe the change in plain language and tie it to the original estimate or contract section.",
+      "Price added and deleted work on clear lines; state schedule impact or \"no time change.\"",
+      "Get written approval before ordering materials or starting the new scope.",
+      "Update the work order for the crew and bill approved lines on the next contractor invoice."
+    ],
+    "sources": [
+      {
+        "label": "Cornell LII — Contract",
+        "url": "https://www.law.cornell.edu/wex/contract",
+        "usedFor": "Offer, acceptance, and consideration when a change modifies an existing agreement"
+      },
+      {
+        "label": "SBA — Stay legally compliant",
+        "url": "https://www.sba.gov/business-guide/manage-your-business/stay-legally-compliant",
+        "usedFor": "Compliance habits around clear written terms and business records"
+      },
+      {
+        "label": "IRS — What kind of records should I keep",
+        "url": "https://www.irs.gov/businesses/small-businesses-self-employed/what-kind-of-records-should-i-keep",
+        "usedFor": "Keeping job documentation that supports income and expenses"
+      }
+    ],
+    "sections": [
+      {
+        "heading": "What is a change order in construction?",
+        "body": "On a construction job, a change order is the paper trail for work that was not in the accepted estimate or contract. Maybe the owner upgrades tile. Maybe demo exposes rotten subfloor. Maybe the city inspector requires an extra outlet. The change order names the change, prices it, notes schedule impact, and collects a signature before you build.\n\nThis article is about those jobsite documents. It is not about bank change orders, lender draw revisions, or mortgage paperwork. If your lender asks for a bank form, that is a separate process from the contractor-client change order you use in the field.\n\nDraft the PDF in /tools/change-order-template/ so the job name, original contract reference, and dollar delta sit in one place. Keep the original construction estimate nearby; /tools/construction-estimate-template/ is where the baseline scope usually lives."
+      },
+      {
+        "heading": "Who prepares a construction change order?",
+        "body": "Usually the contractor or GC prepares the change order because they know labor, materials, and schedule. On larger commercial jobs an owner, architect, or CM may issue a proposed change and ask the contractor to price it. Either way, someone has to write numbers and someone with authority has to approve them.\n\nI prefer the party doing the work to draft the first version. They see the site. They know lead times. The owner still owns the yes or no. If a sub finds the issue, the sub prices their piece, the GC rolls it up, and the owner signs the package that hits the prime contract.\n\nDo not let a text message stand in for the PDF when money moves. Texts are fine for \"please send a CO for the niche.\" The signed change order is what billing and the crew should trust."
+      },
+      {
+        "heading": "What should a change order include?",
+        "body": "Include project name and address, owner and contractor names, change-order number, date, reference to the original estimate or contract, a plain-language description of added and deleted work, priced line items, tax if it applies, the net change to the contract sum, schedule impact, and signature blocks.\n\nPhotos help. Example: before you open the wall, shoot the rot you found. Attach or reference those photos in the description so nobody argues later about why framing labor appeared. State assumptions (work during normal hours, owner-selected finish already chosen) the same way you would on an estimate.\n\nAfter approval, push the new tasks to a work order at /tools/work-order/ so the crew does not invent scope on site. When you bill, put approved change-order lines on the contractor invoice at /tools/contractor-invoice/ with the CO number in the description."
+      },
+      {
+        "heading": "What is the difference between an RFI and a change order?",
+        "body": "An RFI (request for information) asks a question. A change order changes the deal. RFIs clarify drawings, specs, or field conditions. They do not, by themselves, add money or days. If the answer to an RFI expands scope, that is when you write a change order.\n\nExample: RFI asks whether the niche gets marble or porcelain. The answer \"marble, owner upgrade\" triggers a priced change order for material and labor difference. The RFI file explains why. The change order moves the contract sum.\n\nMixing the two labels confuses owners and architects. Keep RFI numbers in your log. Cross-reference the RFI number on the change order when the change grew out of that question. Cornell LII's contract overview is useful background: you are modifying an existing set of promises, not just chatting about tile."
+      },
+      {
+        "heading": "Do contractors charge for change orders?",
+        "body": "Contractors typically charge for added work and credit deleted work. Whether there is markup, how overhead is handled, and whether small changes are absorbed depends on the contract and the shop's policy. There is no single official rate I can quote from the IRS or SBA, so do not treat any percentage you hear on a jobsite as a rule.\n\nWrite your markup or fee structure into the prime contract or estimate terms before the job starts. On the change order, show labor, materials, and any fee as separate lines when the client wants transparency. For no-cost clarifications that do not change price or time, you can still issue a $0 change order so the scope record stays clean.\n\nOwners sometimes ask for free extras because \"you're already here.\" That is a business decision, not a legal requirement. If you gift small items, note them as no-cost on the CO so the gift does not silently become expected scope next week."
+      },
+      {
+        "heading": "Worked example: subfloor repair after bath demo",
+        "body": "Example job: a bath remodel estimate assumed sound subfloor. Demo shows a four-foot soft section. The PM photographs the area, pauses tile, and drafts change order CO-03. Description: remove and replace damaged subfloor in the shower zone; add blocking for the new niche; haul debris. Lines list labor hours, plywood sheets, fasteners, and haul-off. Schedule note: two additional working days before waterproofing.\n\nThe owner signs CO-03 the same afternoon. The office updates the work order for the carpentry crew. Later, invoice 228 bills CO-03 lines with the change-order number in each description and subtracts the deposit already applied to the base job. Every PDF sits in the job folder with the original estimate.\n\nThe IRS expects records that support income and expenses. Change orders explain why the final billed amount differs from the first estimate. That paper trail matters when a client or a tax question lands months later."
+      },
+      {
+        "heading": "How do change orders connect to estimates and invoices?",
+        "body": "The estimate or contract sets the baseline. The change order adjusts it. The invoice collects payment for approved baseline draws plus approved changes. Skip the middle document and you bill mystery lines. Skip the invoice and you did free work with excellent paperwork.\n\nFor writing a clear baseline, see /guides/construction-estimate-that-wins-jobs/. For progress billing habits, see /guides/contractor-invoice-example/. For how estimates and invoices differ, see /guides/invoice-vs-estimate/.\n\nA short office rule that works: no materials ordered for a change until CO is signed; no crew hours on the change until the work order lists it; no billing for the change until the invoice cites the CO number.",
+        "table": {
+          "caption": "Change order fields that prevent disputes",
+          "headers": [
+            "Field",
+            "Why it matters",
+            "Common miss"
+          ],
+          "rows": [
+            [
+              "CO number",
+              "Ties billing and files together",
+              "Unnumbered email approvals"
+            ],
+            [
+              "Scope narrative",
+              "Defines added and deleted work",
+              "One vague sentence"
+            ],
+            [
+              "Priced lines",
+              "Shows labor and materials",
+              "Lump sum with no backup"
+            ],
+            [
+              "Schedule impact",
+              "Sets new completion expectations",
+              "Silent time slips"
+            ],
+            [
+              "Signatures",
+              "Shows acceptance before build",
+              "Start work on a text yes"
+            ]
+          ]
+        }
+      }
+    ],
+    "faq": [
+      {
+        "question": "Is a text message enough to approve a change?",
+        "answer": "It is risky. Use a signed change order PDF that states scope, price, and time. Texts can start the conversation; they should not be the only record when money and schedule move."
+      },
+      {
+        "question": "Can a change order reduce the contract price?",
+        "answer": "Yes. Deleted work should show as credits. The net change can be positive, negative, or zero. Keep the math visible so both sides see what left the scope."
+      },
+      {
+        "question": "Does this guide cover bank change orders?",
+        "answer": "No. This page is about construction jobsite change orders between contractor and client. Lender or bank change-order forms are a separate process."
+      },
+      {
+        "question": "Should change-order work appear on the work order?",
+        "answer": "Yes. After approval, update /tools/work-order/ so the crew builds the new scope. Billing still happens on the invoice, not on the work order alone."
+      },
+      {
+        "question": "When do I invoice a change order?",
+        "answer": "After written approval, on the next progress invoice or a standalone invoice that cites the CO number. Build it in /tools/contractor-invoice/ with lines that match the signed change order."
+      }
+    ]
+  },
+  {
+    "slug": "work-order-vs-purchase-order-vs-invoice",
+    "title": "Work Order vs Purchase Order vs Invoice",
+    "metaDescription": "Compare work orders, purchase orders, and invoices: who issues each, when to use them, and how PO numbers flow into contractor billing paperwork.",
+    "answerFirst": "A purchase order is the buyer's authorization to buy. A work order assigns your crew to perform the job. An invoice is your request for payment. Keep the three separate so procurement, field ops, and accounts payable each get the document they need. This compare is about PO versus work order versus invoice, not the estimate handoff covered elsewhere.",
+    "publishedAt": "2026-11-19",
+    "updatedAt": "2026-11-19",
+    "relatedToolSlugs": [
+      "work-order",
+      "purchase-order-template",
+      "contractor-invoice",
+      "quote-estimate-generator"
+    ],
+    "relatedGuideSlugs": [
+      "work-order-vs-invoice-vs-estimate",
+      "how-to-create-a-work-order",
+      "invoice-vs-estimate",
+      "contractor-invoice-example"
+    ],
+    "legalNote": "This article is not legal or tax advice. Whether a PO or work order creates binding obligations depends on wording and jurisdiction. Confirm with a qualified professional for high-value purchases or jobs.",
+    "howTo": [
+      "Receive or issue a purchase order that authorizes spend and lists PO number, vendor, and items or services.",
+      "Open a work order for the crew that references the PO or estimate and lists tasks, parts, and access notes.",
+      "After work or delivery, send an invoice that repeats the PO number and matches approved lines.",
+      "File PO, work order, invoice, and receipt together for AP and job cost."
+    ],
+    "sources": [
+      {
+        "label": "IRS — What kind of records should I keep",
+        "url": "https://www.irs.gov/businesses/small-businesses-self-employed/what-kind-of-records-should-i-keep",
+        "usedFor": "Keeping purchasing and billing records that support income and expenses"
+      },
+      {
+        "label": "IRS — How long should I keep records",
+        "url": "https://www.irs.gov/businesses/small-businesses-self-employed/how-long-should-i-keep-records",
+        "usedFor": "Retention timing for business records"
+      },
+      {
+        "label": "Cornell LII — Contract",
+        "url": "https://www.law.cornell.edu/wex/contract",
+        "usedFor": "When written authorizations may form part of an enforceable agreement"
+      },
+      {
+        "label": "SBA — Stay legally compliant",
+        "url": "https://www.sba.gov/business-guide/manage-your-business/stay-legally-compliant",
+        "usedFor": "Compliance habits for clear business paperwork"
+      }
+    ],
+    "sections": [
+      {
+        "heading": "What is a purchase order compared to a work order?",
+        "body": "A purchase order (PO) comes from the buyer. It tells a vendor what to supply, at what price, and under which PO number. A work order comes from the service provider's office (or a facilities team) and tells technicians what to do on site. One authorizes spend. The other assigns labor.\n\nFacilities managers issue both. They send your company a PO so AP can pay you later, and they open an internal work order in their CMMS for the visit. Your shop may also open its own work order for the crew. Do not merge those into one confused PDF.\n\nBuild buyer-facing POs in /tools/purchase-order-template/ when you are the purchaser. Build crew tickets in /tools/work-order/. If you need the estimate-to-work-order-to-invoice sequence without PO talk, that lives at /guides/work-order-vs-invoice-vs-estimate/."
+      },
+      {
+        "heading": "How does an invoice differ from a purchase order?",
+        "body": "A purchase order authorizes a future purchase. An invoice asks for payment after goods ship or services are due. AP matches them: the invoice should cite the PO number, quantities, and rates the buyer already approved. Mismatched descriptions are a top reason invoices sit unpaid.\n\nI still see contractors email an estimate labeled as an invoice and wonder why corporate AP ignores it. Estimates propose. POs authorize. Invoices collect. Receipts confirm. Keep the titles honest.\n\nWhen the job started with a quote, send the estimate from /tools/quote-estimate-generator/, wait for a PO or signed acceptance, perform the work, then bill with /tools/contractor-invoice/ that prints the PO number in the header."
+      },
+      {
+        "heading": "Who issues each document?",
+        "body": "Buyers issue purchase orders. Service companies issue work orders to their crews (property teams also issue work orders to vendors). Sellers issue invoices. Receipts usually come from the seller after payment posts.\n\nIf you are a GC buying lumber, you issue the PO to the supplier. If you are a plumber hired by a property manager, you receive their PO and you still create an internal work order for your tech. At the end you invoice the property manager with their PO number on it.\n\nCornell LII explains contracts as enforceable promises. A detailed PO that the vendor accepts can sit inside that story. A bare internal task list often does not. When dollars are large, get counsel on your standard PO and MSA language rather than guessing from labels alone.",
+        "table": {
+          "caption": "PO vs work order vs invoice",
+          "headers": [
+            "Document",
+            "Usually issued by",
+            "Primary job"
+          ],
+          "rows": [
+            [
+              "Purchase order",
+              "Buyer / AP",
+              "Authorize spend and vendor scope"
+            ],
+            [
+              "Work order",
+              "Ops / dispatch / facilities",
+              "Assign tasks, parts, and access"
+            ],
+            [
+              "Invoice",
+              "Seller / contractor",
+              "Request payment"
+            ],
+            [
+              "Estimate / quote",
+              "Seller",
+              "Propose price before authorization"
+            ]
+          ]
+        }
+      },
+      {
+        "heading": "What happens if work starts without a PO?",
+        "body": "On commercial accounts, work without a PO is how invoices get rejected. Some owners will still pay. Many will not until a PO is created after the fact, which can take weeks. Ask for the PO number before you mobilize when the client's rules require one.\n\nEmergency repairs are the exception everyone argues about. If you must start for safety, document the verbal authorization, follow up for a PO the same day, and reference that timeline on the invoice. Do not rely on memory six weeks later.\n\nResidential jobs often skip formal POs and rely on signed estimates instead. That is fine. Do not force PO language onto a homeowner who never uses it. Use the document the client actually understands."
+      },
+      {
+        "heading": "Worked example: filter change with PO 7781",
+        "body": "Example: a property manager emails PO 7781 for quarterly filter changes on twelve rooftop units at ninety-five dollars each plus a filters lump sum that matches your earlier estimate. Your office opens work order WO-904 with the unit list, roof access notes, and a field that stores PO 7781.\n\nThe tech completes eleven units; unit twelve is offline for a remodel. You invoice eleven units and filters, print PO 7781 on the invoice header, and note unit twelve skipped per client instruction. AP matches invoice to PO and pays. You send a receipt and close WO-904.\n\nThat is the triangle: PO authorizes, work order directs, invoice collects. The IRS pages on what records to keep and how long to keep them are why the folder holds all three PDFs instead of only the paid invoice."
+      },
+      {
+        "heading": "How should offices train staff on the three documents?",
+        "body": "Teach a one-line test. If the question is \"are we allowed to buy or sell this?\" think PO. If the question is \"what should the tech do Tuesday?\" think work order. If the question is \"please pay us\" think invoice.\n\nPut PO numbers on work orders and invoices. Put work-order numbers on invoices when the client requires them. Never ask AP to dig through a CMMS export to find what you are billing.\n\nFor building the work-order fields themselves, see /guides/how-to-create-a-work-order/. For progress invoice layout, see /guides/contractor-invoice-example/. The SBA's stay-legally-compliant guidance is a reminder that tidy records are part of running the business, not busywork."
+      }
+    ],
+    "faq": [
+      {
+        "question": "Is a purchase order the same as a work order?",
+        "answer": "No. A PO authorizes a purchase from the buyer's side. A work order assigns tasks to the people doing the work. Commercial jobs often need both."
+      },
+      {
+        "question": "Should my invoice include the PO number?",
+        "answer": "Yes whenever the client issued a PO. AP uses that number to match and approve payment. Put it in the invoice header in /tools/contractor-invoice/."
+      },
+      {
+        "question": "Can a work order replace an invoice?",
+        "answer": "No. Crews need work orders. Accounts payable needs invoices with due dates, tax, and balances. Using one PDF for both slows payment."
+      },
+      {
+        "question": "Do I need a PO for every residential job?",
+        "answer": "Usually not. Homeowners more often sign an estimate. Use a PO when the buyer is a company or property team that requires one."
+      },
+      {
+        "question": "Where does the estimate fit?",
+        "answer": "The estimate proposes price before the PO or acceptance. See /guides/invoice-vs-estimate/ and /guides/work-order-vs-invoice-vs-estimate/ for the selling-side handoff."
+      }
+    ]
+  },
+  {
+    "slug": "freelance-contract-what-to-include",
+    "title": "What Should a Freelance Contract Include?",
+    "metaDescription": "Freelance contract checklist: parties, scope, pay, IP, revisions, termination, and classification notes. Templates plus IRS contractor resources.",
+    "answerFirst": "A freelance contract should name the parties, define the scope, set fees and invoice timing, state who owns the work product, cover revisions and kill fees, and explain how either side can end the job. Add confidentiality when needed. Templates help you draft; they are not a substitute for advice on your facts.",
+    "publishedAt": "2026-11-19",
+    "updatedAt": "2026-11-19",
+    "relatedToolSlugs": [
+      "freelance-web-design-contract",
+      "independent-contractor-agreement",
+      "service-agreement-template",
+      "simple-nda"
+    ],
+    "relatedGuideSlugs": [
+      "freelance-web-design-contract-clauses",
+      "nda-basics-for-freelancers",
+      "freelance-payment-schedule-milestones",
+      "invoice-vs-estimate"
+    ],
+    "legalNote": "This article is not legal or tax advice. Contract enforceability, worker classification, and tax filing depend on your facts and jurisdiction. Templates are starting points only. Have a licensed attorney review agreements that matter, and confirm tax treatment with a qualified tax professional.",
+    "howTo": [
+      "List legal names, addresses, and whether you are contracting as an individual or entity.",
+      "Attach or write a scope with deliverables, timeline, and revision limits.",
+      "Set fees, deposit or milestone schedule, invoice terms, and late-payment handling.",
+      "State IP ownership, confidentiality, termination, and independent-contractor status in plain language.",
+      "Review with counsel when the fee, IP, or risk is material; then sign before work starts."
+    ],
+    "sources": [
+      {
+        "label": "IRS — Independent contractor defined",
+        "url": "https://www.irs.gov/businesses/small-businesses-self-employed/independent-contractor-defined",
+        "usedFor": "Employee vs independent contractor framing"
+      },
+      {
+        "label": "IRS — Self-employment tax",
+        "url": "https://www.irs.gov/businesses/small-businesses-self-employed/self-employment-tax-social-security-and-medicare-taxes",
+        "usedFor": "Self-employment tax basics for people who work for themselves"
+      },
+      {
+        "label": "Cornell LII — Contract",
+        "url": "https://www.law.cornell.edu/wex/contract",
+        "usedFor": "Elements of an enforceable agreement"
+      },
+      {
+        "label": "Cornell LII — Independent contractor",
+        "url": "https://www.law.cornell.edu/wex/independent_contractor",
+        "usedFor": "Plain-language contractor vs employee distinction"
+      },
+      {
+        "label": "SBA — Stay legally compliant",
+        "url": "https://www.sba.gov/business-guide/manage-your-business/stay-legally-compliant",
+        "usedFor": "Small-business compliance starting point"
+      }
+    ],
+    "sections": [
+      {
+        "heading": "What clauses belong in a freelance contract?",
+        "body": "Start with parties, effective date, and a clear scope. Add payment amount, schedule, and invoice rules. Cover intellectual property, confidentiality, revision rounds, client responsibilities (content, logins, feedback speed), termination, and what happens to fees if the project dies midstream.\n\nI'd rather see a slightly longer scope appendix than a vague one-pager that says \"website project.\" Vague scope is how unpaid revision wars start. Example: \"Five-page marketing site, desktop and mobile layouts, two revision rounds on homepage, stock photos supplied by client\" beats \"build a site.\"\n\nDraft specialized web work in /tools/freelance-web-design-contract/. For a general contractor relationship with classification language up front, start from /tools/independent-contractor-agreement/. Ongoing services that are not a single build may fit /tools/service-agreement-template/ better."
+      },
+      {
+        "heading": "Can you write your own freelance contract?",
+        "body": "Yes, many freelancers draft their own agreements or adapt a template. Writing your own does not make the document attorney-reviewed. Cornell LII's contract overview still applies: offer, acceptance, and consideration have to be present, and local law still controls enforceability.\n\nUse a template when the job is familiar and the fee is modest. Pay a lawyer when IP assignment, work-for-hire language, noncompetes, or six-figure fees enter the chat. I keep a base template and only customize scope, fee, and dates for repeat clients.\n\nDo not copy a random contract from a forum and assume it fits your state. Clauses that sound tough can be unenforceable or worse. The SBA's stay-legally-compliant materials are a starting point for business hygiene, not a substitute for counsel."
+      },
+      {
+        "heading": "How is a 1099 different from a freelance contract?",
+        "body": "A Form 1099 (often 1099-NEC for nonemployee compensation) is an information return about payments already made. A freelance contract is the agreement that governs the work before and during the job. One is tax paperwork after the fact. The other sets expectations up front.\n\nClients sometimes say \"we'll 1099 you\" as if that replaces a contract. It does not. You still want scope, pay, and IP in writing. The 1099 also does not decide classification by itself; facts about control and relationship matter more than the form label.\n\nIRS materials on independent contractors explain the employee-versus-contractor framing. Cornell LII's independent contractor page is a plain-language companion. If classification is unclear, get advice before you sign something that calls you a contractor while treating you like staff."
+      },
+      {
+        "heading": "What should freelancers know about self-employment tax?",
+        "body": "If you work for yourself as a sole proprietor or independent contractor, you may owe self-employment tax on net earnings in addition to income tax. The IRS self-employment tax page explains that this covers Social Security and Medicare for people who work for themselves, figured on Schedule SE when rules require it.\n\nI am not going to restate rates or thresholds here as if they never change. Read the current IRS page and talk to a tax pro about estimated payments. Your contract should still say you are responsible for your own taxes when that matches the relationship, but a clause cannot override how the IRS looks at the facts.\n\nKeep invoices and payment records. They support Schedule C income and help you reconcile what clients report. Pair contracts with clean billing habits from /guides/freelance-payment-schedule-milestones/ when the project pays in stages."
+      },
+      {
+        "heading": "Which Docuklin templates map to common freelance needs?",
+        "body": "Use this table as a routing guide, not a legal opinion. Pick the tool that matches the relationship, then customize scope and fees before anyone starts work.",
+        "table": {
+          "caption": "Freelance paperwork routing",
+          "headers": [
+            "Need",
+            "Start with",
+            "Notes"
+          ],
+          "rows": [
+            [
+              "Website or design build",
+              "/tools/freelance-web-design-contract/",
+              "Scope, IP, revisions emphasized"
+            ],
+            [
+              "General contractor engagement",
+              "/tools/independent-contractor-agreement/",
+              "Classification and pay clauses"
+            ],
+            [
+              "Ongoing services",
+              "/tools/service-agreement-template/",
+              "Retainer or multi-visit work"
+            ],
+            [
+              "Confidentiality only",
+              "/tools/simple-nda/",
+              "Pair with a main services contract"
+            ]
+          ]
+        }
+      },
+      {
+        "heading": "Worked example: brand site with a kill fee",
+        "body": "Example only: Maya is hired to design a five-page brand site for eight thousand dollars. The contract lists parties, a scope appendix, a forty percent deposit, two milestone invoices, two revision rounds on key pages, client-provided copy deadlines, and IP transfer on final payment. If the client cancels after wireframes, a kill fee equal to the deposit plus work completed is due.\n\nMid-project the client asks for a shop section. That is out of scope. Maya issues a short change addendum with a new fee instead of absorbing it. She also has the client sign a simple NDA from /tools/simple-nda/ because early logo concepts are confidential.\n\nWhen the final invoice clears, IP transfers per the clause and Maya files the signed contract with the invoices. For clause-level web-design detail, see /guides/freelance-web-design-contract-clauses/. For NDA basics, see /guides/nda-basics-for-freelancers/."
+      },
+      {
+        "heading": "What belongs in payment and termination sections?",
+        "body": "Payment sections should state currency, total fee or rate, deposit, milestones, invoice timing, and late-payment consequences you actually enforce. Termination sections should say who can end the agreement, how much notice, what fees are due for work completed, and what happens to files and accounts.\n\nSkip revenge clauses you will never use. Clear math beats dramatic language. If you bill Net 15, say so and use matching invoices later. If the client must pay a kill fee, define the trigger events.\n\nOral \"we'll figure it out\" endings are how portfolios and login access get stuck. Write the exit while everyone is still friendly."
+      }
+    ],
+    "faq": [
+      {
+        "question": "Do I need a lawyer for every freelance contract?",
+        "answer": "Not for every small job, but you should get counsel for unfamiliar IP terms, high fees, or classification risk. Templates speed drafting; they are not attorney review."
+      },
+      {
+        "question": "Is a 1099 the same as a contract?",
+        "answer": "No. A 1099 reports payments. A contract sets scope, pay, and IP before and during the work. You usually want both habits: a signed agreement and proper tax forms when required."
+      },
+      {
+        "question": "Can a contract alone prove I am an independent contractor?",
+        "answer": "No. The IRS looks at behavioral control, financial control, and the type of relationship. Labels help but facts control. See the IRS independent contractor page linked in Sources."
+      },
+      {
+        "question": "Should I use an NDA and a services contract?",
+        "answer": "Often yes when you share confidential brand assets or business data. Use /tools/simple-nda/ alongside the main agreement rather than relying on a one-line privacy promise."
+      },
+      {
+        "question": "Where do invoices fit after the contract is signed?",
+        "answer": "Invoice per the payment schedule in the contract. Keep line descriptions aligned with milestones. See /guides/invoice-vs-estimate/ if clients confuse offers with payment requests."
+      }
+    ]
+  },
+  {
+    "slug": "how-to-create-a-contractor-estimate",
+    "title": "How to Create a Contractor Estimate",
+    "metaDescription": "Create a contractor estimate step by step: scope, line items, tax, deposit, validity, and PDF export. Free template plus Word and Google Docs tips.",
+    "answerFirst": "To create a contractor estimate, label the PDF as an estimate, name the client and job, write measurable scope, price labor and materials on clear lines, show tax and deposit, and add a validity date plus exclusions. Export a PDF you can revise without silent edits. A dedicated template beats a blank Word file for consistent math.",
+    "publishedAt": "2026-11-19",
+    "updatedAt": "2026-11-19",
+    "relatedToolSlugs": [
+      "construction-estimate-template",
+      "quote-estimate-generator",
+      "contractor-invoice",
+      "change-order-template"
+    ],
+    "relatedGuideSlugs": [
+      "construction-estimate-that-wins-jobs",
+      "how-to-write-a-business-estimate",
+      "invoice-vs-estimate",
+      "what-is-a-change-order"
+    ],
+    "legalNote": "This article is not legal or tax advice. Pricing, deposits, and contract rules vary by jurisdiction. Confirm tax treatment and contract language with qualified professionals.",
+    "howTo": [
+      "Walk the job and write scope before you open a pricing sheet.",
+      "Enter line items with quantities, units, and rates in an estimate template.",
+      "Add tax, deposit terms as your working pattern, validity date, and exclusions.",
+      "Send a PDF, store a copy, and convert accepted lines to invoices later.",
+      "When scope changes after acceptance, issue a change order instead of editing the old estimate quietly."
+    ],
+    "sources": [
+      {
+        "label": "IRS — What kind of records should I keep",
+        "url": "https://www.irs.gov/businesses/small-businesses-self-employed/what-kind-of-records-should-i-keep",
+        "usedFor": "Keeping estimates and job records that support income and expenses"
+      },
+      {
+        "label": "SBA — Stay legally compliant",
+        "url": "https://www.sba.gov/business-guide/manage-your-business/stay-legally-compliant",
+        "usedFor": "Clear written pricing and records as a compliance habit"
+      },
+      {
+        "label": "Cornell LII — Contract",
+        "url": "https://www.law.cornell.edu/wex/contract",
+        "usedFor": "Offer and acceptance when an estimate may become binding"
+      }
+    ],
+    "sections": [
+      {
+        "heading": "How do you create a contractor estimate step by step?",
+        "body": "Walk the site or review the plans first. Write what you will build, protect, haul away, and exclude. Then open a pricing tool and enter lines with quantity, unit, and rate. Add tax per your rules, state deposit terms as a working pattern for that job, print a validity date, and export a PDF.\n\nThat sequence matters more than fancy formatting. Scope before rates. Rates before tax. Validity before you hit send. Clients compare clarity as much as the bottom line.\n\nUse /tools/construction-estimate-template/ for trade jobs with rooms and allowances. Use /tools/quote-estimate-generator/ when the work is a simpler service package. After acceptance, bill matching lines with /tools/contractor-invoice/."
+      },
+      {
+        "heading": "Can you create a contractor estimate in Word or Google Docs?",
+        "body": "Yes. Plenty of contractors still build estimates in Word or Google Docs. Create a header with Estimate as the title, client block, scope paragraphs, a table for line items, and a footer for validity and exclusions. Watch the math. Spreadsheet mistakes hide easily in a text table.\n\nIf you stay in Docs, keep a separate sheet for quantity times rate and paste totals carefully. Lock a PDF before you email it so versions do not drift. Name files with job and date so Estimate_v3 is not a mystery.\n\nA dedicated generator reduces arithmetic errors and keeps deposits and tax fields in the same place every time. I still draft scope notes in a doc on site, then transfer numbers into the template back at the truck. Blank pages are fine for notes. They are a weak billing system."
+      },
+      {
+        "heading": "What makes a contractor estimate different from a general business estimate?",
+        "body": "Contractor estimates usually carry site addresses, trade breakdowns, allowances, exclusions for work by others, and change-order paths. A general business estimate for consulting or landscaping services may skip demolition lines and permit notes. Both need scope, price, and validity. The construction packet is just denser.\n\nIf you want persuasion tips and bathroom-level narrative detail, see /guides/construction-estimate-that-wins-jobs/. If you price non-construction services, see /guides/how-to-write-a-business-estimate/. This page stays on the create-and-export workflow contractors repeat every week.\n\nDo not chase a one-line lump sum to look cheaper. Separating demo, rough-in, finish, and allowances helps homeowners compare bids fairly and helps you defend the number when selections change."
+      },
+      {
+        "heading": "What should every contractor estimate PDF include?",
+        "body": "Include document title (Estimate or Quote), date, your business identity, client name, job address, scope narrative, line items, tax, deposit terms, validity date, exclusions, and how to accept. Optional but useful: drawing or plan references, allowance amounts, and a sentence on how change orders work.\n\nExample exclusion line: \"Electrical by others; painting of adjacent rooms excluded; haul-off limited to construction debris from this scope.\" Example validity line: \"Prices hold until 2026-12-15 unless withdrawn earlier in writing.\"\n\nCornell LII's contract basics remind you that an estimate is often the written offer. Acceptance might be a signature or a deposit under clear terms. Until that yes is clear, treat the PDF as an offer that can expire.",
+        "table": {
+          "caption": "Contractor estimate build checklist",
+          "headers": [
+            "Step",
+            "Output",
+            "Tool tip"
+          ],
+          "rows": [
+            [
+              "1. Scope",
+              "Rooms, trades, exclusions",
+              "Notes from site walk"
+            ],
+            [
+              "2. Lines",
+              "Qty, unit, rate",
+              "/tools/construction-estimate-template/"
+            ],
+            [
+              "3. Money fields",
+              "Tax, deposit, total",
+              "Match your accountant's tax split"
+            ],
+            [
+              "4. Timing",
+              "Validity date",
+              "Calendar date, not open-ended"
+            ],
+            [
+              "5. Send",
+              "PDF + saved copy",
+              "Job folder with photos"
+            ]
+          ]
+        }
+      },
+      {
+        "heading": "Worked example: hallway flooring estimate",
+        "body": "Example: you measure a hallway at eighty square feet of luxury vinyl plank. Scope covers tear-out of sheet vinyl, skim coat up to a stated thickness, install of owner-selected LVP, and haul-off. Baseboards are excluded; the painter will handle them.\n\nSample lines you might enter: tear-out and haul-off lump sum two hundred twenty dollars; skim and prep four hours at a stated labor rate; LVP material eighty square feet plus waste from your supplier quote; install labor at your square-foot rate. Add tax on taxable lines. One schedule you might use in this example is a thirty percent deposit to order material. Validity ends on a printed calendar date. Unknown subfloor repairs will need a change order.\n\nEnter the same structure in the construction estimate template so the PDF matches the walkthrough. When the client accepts and later asks for stair nosing, use /tools/change-order-template/ instead of editing the original estimate in place. For why that matters, see /guides/what-is-a-change-order/."
+      },
+      {
+        "heading": "What do you do after the client accepts the estimate?",
+        "body": "Save the signed PDF. Collect the deposit on a contractor invoice that references the estimate number. Open a work order for the crew if your shop uses one. Keep supplier quotes in the same folder. The IRS expects records that support income and expenses; the accepted estimate is part of that story.\n\nIf scope changes, issue a change order. If you are ready to bill a progress draw, copy only the lines due now onto the invoice. Do not rename the estimate PDF to Invoice. Document type matters to AP and to your own books. See /guides/invoice-vs-estimate/ for that handoff.\n\nThe SBA's compliance guidance is a useful nudge to keep licenses, insurance, and written terms in order while you chase the next bid. Clear estimates will not replace those requirements, but messy ones create avoidable fights."
+      }
+    ],
+    "faq": [
+      {
+        "question": "Is a Google Docs estimate okay to send?",
+        "answer": "Yes if the math is correct and you export a dated PDF. Many shops still outgrow Docs because line-item errors and version chaos cost more time than a template."
+      },
+      {
+        "question": "Should the estimate show a deposit?",
+        "answer": "State deposit terms as your working pattern for that job, not as a universal rule. Show the amount or percent, when it is due, and what it reserves. Collect it later on an invoice."
+      },
+      {
+        "question": "How is this different from the construction estimate guide?",
+        "answer": "That guide focuses on writing a bid that wins on clarity. This page focuses on the create-and-export workflow, including Word or Google Docs alternatives and the path into invoices and change orders."
+      },
+      {
+        "question": "What if material prices change before acceptance?",
+        "answer": "Keep a short validity date and revise the estimate with a new version if costs move. After acceptance, use a change order for new scope instead of silent edits."
+      },
+      {
+        "question": "Which tool should I open first?",
+        "answer": "Start with /tools/construction-estimate-template/ for contractor trade jobs. Use /tools/quote-estimate-generator/ for simpler packages. Bill accepted work in /tools/contractor-invoice/."
+      }
+    ]
+  }
+]
