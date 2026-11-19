@@ -43,6 +43,7 @@ export function buildLlmsTxtBody(): string {
     `- Is a purchase order the same as a work order? → ${origin}/tools/purchase-order-template/`,
     `- What is a construction change order? → ${origin}/tools/change-order-template/`,
     `- What is a lien waiver? Conditional vs unconditional? Partial vs final? → ${origin}/tools/lien-waiver-generator/`,
+    `- How do you calculate an invoice late fee? → ${origin}/tools/invoice-late-fee-calculator/`,
     `- How do you write a free instant quote? → ${origin}/tools/quote-estimate-generator/`,
     `- What belongs on a catering quote? → ${origin}/tools/catering-quote/`,
     `- Wedding vendor contract checklist? → ${origin}/guides/wedding-vendor-contract-checklist/`,

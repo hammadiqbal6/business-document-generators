@@ -39,6 +39,11 @@ In-repo and confirmed off-repo completions.
   - Docs-only path filter skips heavy jobs; required check id `build-test-audit-proof` still reports green.
   - Full checks: Playwright **Chromium-only** + browser cache; root `.npmrc` + DEPLOYMENT/wrangler install notes for Workers Builds.
 - **2026-11-19 — PR #35:**
+- **2026-11-19 — Invoice late fee calculator (PR #37):**
+  - New tool `/tools/invoice-late-fee-calculator/`: invoice amount, due date, payment date (or today), fee type (flat / % per month prorated / annual→daily), optional grace period.
+  - Outputs days past due, chargeable days, fee, new total, plus suggested late-fee line and payment-reminder wording (PDF/DOCX export).
+  - Wired into `allTools`, estimates-invoices hub which-document table, related links on contractor/cleaning invoice + receipt tools, `KEYWORD-MAP`, `toolGuideMap`, `llms.txt` / `llms-full.txt` question maps. Not added to `featuredToolSlugs`.
+  - Disclaimer: not legal/tax advice; caps vary by state/country (invoice/receipt banner via slug).
   - Homepage links every tool via all-templates-by-category (`getToolsByCategory` / `CATEGORY_META`; featured still `getFeaturedTools()`).
   - Hub “which document” tables completed for estimates-invoices + contracts (timesheet / PO / change-order stay on estimates-invoices per tool categories — not forms/contracts).
   - Homepage title/H1 + site tagline/`llms.txt` intro aligned to contractor & freelancer document templates (avoid head “invoice”).
@@ -62,6 +67,7 @@ In-repo and confirmed off-repo completions.
 |--------|----------------|
 | Sitemap / indexable | All sitemap URLs on `https://docuklin.com…/` with trailing slash, self-canonical, `index,follow`, matching `og:url`; all tools included with `lastmod` (23 tools after lien waiver + progress invoice) |
 | Intentional noindex | `/tools/<slug>/embed/` (one per tool) + `/404/` — meta robots + `X-Robots-Tag`; **not** in sitemap. Matches GSC “Excluded by noindex” for crawled embeds/404 |
+| Sitemap / indexable | Sitemap URLs on `https://docuklin.com…/` with trailing slash, self-canonical, `index,follow`, matching `og:url`; all tools (22 including late-fee calculator) included with `lastmod` |
 | Redirects (final 200 only in sitemap/links) | `/tools/invoice[/]`, `/tools/invoice-generator[/]` → contractor invoice; `/privacy-policy[/]` → `/privacy/`; `/sitemap.xml` & `/sitemap_index.xml` → `/sitemap-index.xml`; `/authors[/]` → `/about/`; Worker trailing-slash 308 |
 
 ---
@@ -84,6 +90,18 @@ Prioritized open work. Owner-confirmed gaps preferred over guesses.
 12. **AdSense** — keep publishing; status **Getting ready**; expect review ~3–4 weeks.
 13. **Weekly GSC check** — record deltas in Baseline (do not invent numbers).
 14. **Directory submissions / blogger embed outreach / related tool variants** — ongoing off-page (progress invoice tool shipped in-repo); record confirmed listings when known.
+1. **GSC after deploy of this PR + PR #35:** ping IndexNow; URL Inspection → Request indexing for `/tools/invoice-late-fee-calculator/` and previously weak / “Discovered – not indexed” tool URLs; confirm noindex exclusions are embeds/404 only (intentional).
+2. **Bing Webmaster verification** — currently **unset** (owner); set `PUBLIC_BING_SITE_VERIFICATION` / console verification when ready.
+3. **Author / `sameAs` env vars** — currently **unset** (owner); wire when profiles are public and stable.
+4. **Backlinks** — site still has essentially none beyond minor directory/unroll mentions; outreach remains open.
+5. **Reddit risk / pause promo:** account ~1 day old, **1 karma**; site-wide filter removed several posts/comments. **Pause promo / launch posts.** Build karma with plain non-link comments before any further r/SideProject (or similar) launch post. Earlier (~2026-11-18) r/SideProject Docuklin launch from `u/ihammadiqbal117` shows **[ Removed by Reddit on account of violating the content policy ]** — **not reposted**.
+6. **GA4 Consent Mode v2** cookieless pings so traffic is measured without waiting on Accept.
+7. **Uneed re-review** — reply to decline email with re-positioned listing (pending owner).
+8. **TinyLaunch resubmit** after YardTally launch **2026-12-07**.
+9. **AdSense** — keep publishing; status **Getting ready**; expect review ~3–4 weeks.
+10. **Weekly GSC check** — record deltas in Baseline (do not invent numbers).
+11. **Directory submissions / blogger embed outreach / related tool variants** — ongoing off-page; record confirmed listings when known.
+12. **Other parallel agents’ tools/guides** — may still be in flight; keep this queue accurate when those PRs land (do not invent Done items).
 
 ---
 
@@ -93,6 +111,7 @@ Prioritized open work. Owner-confirmed gaps preferred over guesses.
 - **Uneed re-review** — pending owner reply to decline email.
 - No other in-repo SEO/growth code work beyond the lien waiver and progress invoice tool PRs.
 - CI speedup already on main — measure after timings when convenient.
+- Parallel agent PRs may still be open for other tools/content; this PR only ships the invoice late fee calculator.
 
 ---
 

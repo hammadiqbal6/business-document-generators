@@ -41,6 +41,15 @@ export function withTodayDateDefaults(
       out[id] = addDaysIso(today, 14);
       continue;
     }
+    // Late-fee demos need a past due date and “payment as of today”.
+    if (id === 'invoiceDueDate') {
+      out[id] = addDaysIso(today, -43);
+      continue;
+    }
+    if (id === 'paymentDate') {
+      out[id] = today;
+      continue;
+    }
     if (id === 'scheduledDate') {
       out[id] = addDaysIso(today, 2);
       continue;

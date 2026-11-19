@@ -7,6 +7,7 @@ import {
   constructionEstimate,
   contractorInvoice,
   progressInvoice,
+  invoiceLateFeeCalculator,
   purchaseOrderTemplate,
   quoteEstimate,
   receiptGenerator,
@@ -54,6 +55,7 @@ export const allTools: ToolDefinition[] = [
   changeOrderTemplate,
   lienWaiverGenerator,
   progressInvoice,
+  invoiceLateFeeCalculator,
 ];
 
 export function getToolBySlug(slug: string): ToolDefinition | undefined {
