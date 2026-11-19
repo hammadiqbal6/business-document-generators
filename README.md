@@ -117,11 +117,34 @@ PR / `main` CI runs a fast safety net only (`npm ci`, `npm run build`, `npm test
 ## SEO / AdSense / deploy
 
 - **[docs/DEPLOYMENT.md](docs/DEPLOYMENT.md)** — full step-by-step: DNS, Cloudflare Workers Builds (`wrangler.jsonc`), env vars (see `.env.example`), GSC, AdSense, launch checklist
+- **[docs/GROWTH-STATUS.md](docs/GROWTH-STATUS.md)** — living Done / Remaining queue + GSC/GA4 baseline (update in every PR)
 - [docs/SEO-GUIDE.md](docs/SEO-GUIDE.md)
 - [docs/ADSENSE.md](docs/ADSENSE.md)
 - [docs/SEO-PLAYBOOK.md](docs/SEO-PLAYBOOK.md)
 - [docs/KEYWORD-MAP.md](docs/KEYWORD-MAP.md)
 - [docs/ideas/README.md](docs/ideas/README.md) — all 23 research ideas (#20 built here)
+
+## Done / Remaining (growth & SEO)
+
+Short mirror of [`docs/GROWTH-STATUS.md`](docs/GROWTH-STATUS.md). **Every PR must refresh both files** (see `AGENTS.md`). Do not invent metrics.
+
+### Done (as of 2026-11-19)
+
+- Homepage links all 21 tools by category; hubs’ which-document tables complete; home title/H1/tagline target contractor & freelancer templates (PR #35).
+- Indexing audit in CI (`npm run audit:indexing`): sitemap URLs self-canonical + not noindex; embed/`/404/` intentional noindex + `X-Robots-Tag`; internal links avoid redirect sources.
+- IndexNow + GSC property verification in place; AdSense application **Getting ready**.
+- TinyLaunch badge removed from Workers Builds `PUBLIC_DIRECTORY_BADGES` (2026-11-19). TinyLaunch rejected **2026-11-08** (one product at a time); retry after YardTally **2026-12-07**.
+- Uneed declined 2026-11-18 (saturated); listing re-positioned; re-review pending owner email reply.
+- Reddit: several 2026-11-18/19 comments posted; multiple **Removed by Reddit** (new account / low karma). Details + permalinks in GROWTH-STATUS.
+
+### Remaining
+
+- Validate GSC indexing after PR #35 deploy (IndexNow + URL Inspection); expect embed/404 noindex exclusions to stay.
+- Bing verification **unset**; author/`sameAs` env vars **unset**; editorial backlinks still needed.
+- Pause Reddit promo/launch posts until karma recovers; r/SideProject launch was removed and not reposted.
+- GA4 Consent Mode cookieless measurement; AdSense approval; Uneed re-review; TinyLaunch resubmit after 2026-12-07.
+
+GSC 28d → 2026-11-17 (owner): **0** clicks, **486** impressions, avg position **58.9**, **54** indexed / **7** not. GA4: **3** users (28d).
 
 ## Research in repo
 

@@ -34,6 +34,8 @@ node scripts/verify-mobile.mjs
 - [ ] OG references `.png`; llms question map updated for new intents
 - [ ] CSP/`_headers` not loosened casually; consent region behavior unchanged unless intentional
 - [ ] Separate PR scope (do not mix unrelated workstreams)
+- [ ] `README.md` + `docs/GROWTH-STATUS.md` Done/Remaining updated in this PR
+- [ ] `npm run audit:indexing` green (sitemap URLs self-canonical, not noindex)
 
 ## After merge/deploy
 

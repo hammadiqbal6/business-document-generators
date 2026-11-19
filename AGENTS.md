@@ -1,6 +1,6 @@
 # AGENTS.md — Docuklin
 
-Standing instructions for agents. Read **[`docs/GROWTH-STATUS.md`](docs/GROWTH-STATUS.md)** before planning growth, SEO, or content work (live metrics + Done / In progress / Pending queue). Update that file in the **same PR** when an item is completed, started, or added. Also read **SEO state** below before rediscovering indexing, Bing/GSC, or re-litigating settled audit findings. `.cursor/rules/` points here.
+Standing instructions for agents. Read **[`docs/GROWTH-STATUS.md`](docs/GROWTH-STATUS.md)** before planning growth, SEO, or content work (live metrics + Done / Remaining queue). **Mandatory on every change/PR:** update **[`README.md`](README.md)** and **[`docs/GROWTH-STATUS.md`](docs/GROWTH-STATUS.md)** in the **same PR** with what was done and what remains (clear **Done** / **Remaining** sections). Do not invent metrics. Also read **SEO state** below before rediscovering indexing, Bing/GSC, or re-litigating settled audit findings. `.cursor/rules/` points here.
 
 ## 1. Project overview
 
@@ -135,8 +135,9 @@ Follow the skill — do not skip files:
 - **One agent / one concern per repo stream:** separate focused PRs (content ≠ CMP ≠ generator UX ≠ docs). Do not mix.
 - Branch from latest `main`: `cursor/<descriptive-name>-1fce`. Open the PR; do not merge unless asked.
 - Prefer `.cursor/skills/` over reinventing process. Always-on: `.cursor/rules/agent-workflow.mdc`.
-- **Growth / SEO / content planning:** read `docs/GROWTH-STATUS.md` first; update it in the same PR when queue items change.
-- **Pre-merge:** `npm test && npm run audit` (see `pre-merge-seo-aeo-checklist`). UI/perf → also `npx lhci autorun` when relevant.
+- **Done / Remaining docs (mandatory every PR):** update `README.md` and `docs/GROWTH-STATUS.md` in the same PR with what changed and what is still open. Use explicit **Done** and **Remaining** sections; never invent stats, console screenshots, or off-repo actions.
+- **Growth / SEO / content planning:** read `docs/GROWTH-STATUS.md` first; keep its queue accurate when items start or finish.
+- **Pre-merge:** `npm test && npm run audit` (see `pre-merge-seo-aeo-checklist`). UI/perf → also `npx lhci autorun` when relevant. Indexing gate: `npm run audit:indexing` (wired into `npm run audit`).
 - Optional subagents: `.cursor/agents/` (`seo-auditor`, `content-writer`, `adsense-reviewer`, `performance-auditor`, `document-fact-checker`).
 
 ## 9. Don'ts

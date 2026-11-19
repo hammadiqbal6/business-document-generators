@@ -21,7 +21,7 @@ export const DEFAULT_SITE_SHORT_NAME = 'Docuklin';
 
 /** Homepage / Organization description. */
 export const DEFAULT_SITE_TAGLINE =
-  'Free niche business document generators — fill a form, preview live, export PDF or DOCX. Nothing leaves your browser.';
+  'Free contractor and freelancer document templates — fill a form, preview live, export PDF or DOCX. Nothing leaves your browser.';
 
 /** Shorter description for site.webmanifest. */
 export const DEFAULT_MANIFEST_DESCRIPTION =

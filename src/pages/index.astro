@@ -2,7 +2,7 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import AdSlot from '../components/ads/AdSlot.astro';
 import { siteConfig } from '../config/site';
-import { CATEGORY_META, getFeaturedTools } from '../data/tools';
+import { CATEGORY_META, getFeaturedTools, getToolsByCategory } from '../data/tools';
 import type { ToolCategory } from '../data/tools/types';
 import { homeGraphJsonLd } from '../lib/seo';
 
@@ -10,17 +10,17 @@ const featured = getFeaturedTools();
 const cats = Object.keys(CATEGORY_META) as ToolCategory[];
 ---
 <BaseLayout
-  title="Free Invoice, Estimate & Contract PDFs"
-  description="Fill free estimate, invoice, contract and consent form templates in your browser, preview them live and download PDF or Word. No signup, nothing uploaded."
+  title="Free Contractor & Freelancer Document Templates"
+  description="Fill free estimate, contract, consent, and invoice templates in your browser, preview them live and download PDF or Word. No signup, nothing uploaded."
   path="/"
   includeSiteGraph={false}
   jsonLd={[homeGraphJsonLd()]}
   ogImagePath="/og/home.png"
-  ogImageAlt={`${siteConfig.siteName} — free invoice, estimate, and contract templates`}
+  ogImageAlt={`${siteConfig.siteName} — free contractor and freelancer document templates`}
 >
   <section class="hero">
     <p class="content-meta" style="margin-bottom:0.35rem;">{siteConfig.siteName}</p>
-    <h1>Free invoice, estimate &amp; contract templates</h1>
+    <h1>Free contractor &amp; freelancer document templates</h1>
     <p class="lead answer-first">
       Create construction estimates, contractor invoices, photography contracts, NDAs, and more in your
       browser—then download PDF or DOCX. No signup and no server-side storage. Pick a generator below.
@@ -44,6 +44,32 @@ const cats = Object.keys(CATEGORY_META) as ToolCategory[];
   </section>
 
   <AdSlot placement="home-top" minHeight={90} />
+
+  <section aria-labelledby="all-tools-h">
+    <h2 id="all-tools-h">All templates by category</h2>
+    <p>
+      Every generator on {siteConfig.siteName} is listed below. Featured cards above are a shortlist;
+      open a hub for category guidance, or jump straight to a template.
+    </p>
+    {cats.map((c) => {
+      const m = CATEGORY_META[c];
+      const tools = getToolsByCategory(c);
+      return (
+        <div class="home-cat-block">
+          <h3>
+            <a href={`/hubs/${m.slug}/`}>{m.name}</a>
+          </h3>
+          <ul class="tool-link-list">
+            {tools.map((t) => (
+              <li>
+                <a href={`/tools/${t.slug}/`}>{t.shortName}</a>
+              </li>
+            ))}
+          </ul>
+        </div>
+      );
+    })}
+  </section>
 
   <section>
     <h2>What you can create</h2>

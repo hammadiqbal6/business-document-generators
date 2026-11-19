@@ -35,9 +35,9 @@ const hubCopy: Record<
     description:
       'Free construction estimates, contractor invoices, cleaning and catering quotes, receipts and work orders. Fill in-browser and export PDF or Word.',
     intro:
-      'Use these generators when you need a priced document today: a free quote or estimate before work, a free invoice generator for contractors after acceptance (or for deposits), receipts for payment, and work orders for crew tickets—all with live preview and PDF/DOCX export.',
+      'Use these generators when you need a priced document today: a free quote or estimate before work, a free invoice generator for contractors after acceptance (or for deposits), change orders mid-job, purchase orders for materials, timesheets for labor hours, receipts for payment, and work orders for crew tickets—all with live preview and PDF/DOCX export.',
     whenToUse:
-      'Pick the free quote & estimate generator for mixed service scopes, the construction estimate template for remodel bids with allowances, the free invoice generator for contractors for progress billing, cleaning or catering tools when line items are service packages, and the receipt or work order when you need a simple confirmation or job ticket.',
+      'Pick the free quote & estimate generator for mixed service scopes, the construction estimate template for remodel bids with allowances, the change-order template when scope shifts after approval, the purchase-order template when buying materials, the timesheet when tracking hours, the free invoice generator for contractors for progress billing, cleaning or catering tools when line items are service packages, and the receipt or work order when you need a simple confirmation or job ticket.',
     whatFor: [
       'An estimate or quote proposes price and scope before work starts so the client can approve (or revise) before you mobilize.',
       'An invoice requests payment for a deposit, progress draw, or completed work and should match what was previously agreed.',
@@ -60,7 +60,11 @@ const hubCopy: Record<
       rows: [
         { need: 'Free instant quote / estimate', toolLabel: 'Free quote & estimate generator', toolSlug: 'quote-estimate-generator', why: 'Mixed scopes with validity date' },
         { need: 'Remodel bid with allowances', toolLabel: 'Free construction estimate template', toolSlug: 'construction-estimate-template', why: 'Scope + labor/materials + deposit' },
+        { need: 'Scope change after approval', toolLabel: 'Change order template', toolSlug: 'change-order-template', why: 'Delta price, revised timeline' },
+        { need: 'Buy materials / supplies', toolLabel: 'Purchase order template', toolSlug: 'purchase-order-template', why: 'Vendor PO with quantities' },
+        { need: 'Track labor hours', toolLabel: 'Timesheet template', toolSlug: 'timesheet-template', why: 'Daily/weekly hours PDF' },
         { need: 'Bill for work or deposit', toolLabel: 'Free invoice generator for contractors', toolSlug: 'contractor-invoice', why: 'Totals, tax, balance due' },
+        { need: 'House cleaning invoice', toolLabel: 'Cleaning service invoice', toolSlug: 'cleaning-service-invoice', why: 'Room/package line items' },
         { need: 'Event food package', toolLabel: 'Catering quote', toolSlug: 'catering-quote', why: 'Per-guest math and deposit notes' },
         { need: 'Proof of payment', toolLabel: 'Free receipt generator', toolSlug: 'receipt-generator', why: 'Amount paid, method, balance' },
         { need: 'Assign the job to crew', toolLabel: 'Work order', toolSlug: 'work-order', why: 'Tasks, parts, sign-off' },
@@ -92,11 +96,11 @@ const hubCopy: Record<
   contracts: {
     title: 'Contract Templates – Photo, Freelance & NDA',
     description:
-      'Editable photography, videography, freelance web design, event vendor contracts and a simple NDA. Preview clauses live and export PDF or DOCX—not legal advice.',
+      'Editable photo, video, freelance, event vendor, contractor and service agreements plus a simple NDA. Preview live; export PDF or DOCX—not legal advice.',
     intro:
-      'Start a creative or freelance agreement here: deliverables, payment, usage rights, cancellation, and liability sample clauses you can edit—then export PDF or DOCX. Not attorney-reviewed.',
+      'Start a creative, freelance, or contractor agreement here: deliverables, payment, usage rights, cancellation, and liability sample clauses you can edit—then export PDF or DOCX. Not attorney-reviewed.',
     whenToUse:
-      'Use photography or videography contracts when usage rights matter, the freelance web design contract for project milestones and IP, the event/wedding vendor contract for venue dates and force majeure style notes, and the simple NDA when you only need a mutual confidentiality starting point.',
+      'Use photography or videography contracts when usage rights matter, the freelance web design contract for project milestones and IP, the event/wedding vendor contract for venue dates and force majeure style notes, the independent contractor agreement or service agreement for broader B2B scopes, and the simple NDA when you only need a mutual confidentiality starting point.',
     whatFor: [
       'Service contracts set deliverables, payment schedule, cancellation, and who owns the work product after delivery.',
       'Creative contracts also need usage or licensing language so clients know how they may publish photos or video.',
@@ -121,6 +125,8 @@ const hubCopy: Record<
         { need: 'Video project', toolLabel: 'Videography contract', toolSlug: 'videography-contract', why: 'Revisions, music, raw footage' },
         { need: 'Website build', toolLabel: 'Web design contract', toolSlug: 'freelance-web-design-contract', why: 'Milestones, IP, content deadlines' },
         { need: 'Wedding / event vendor', toolLabel: 'Event vendor contract', toolSlug: 'event-wedding-vendor-contract', why: 'Date, overtime, force majeure' },
+        { need: 'Hire a 1099 contractor', toolLabel: 'Independent contractor agreement', toolSlug: 'independent-contractor-agreement', why: 'Scope, payment, IP starting point' },
+        { need: 'Ongoing services retainer', toolLabel: 'Service agreement template', toolSlug: 'service-agreement-template', why: 'Term, fees, termination' },
         { need: 'Share confidential info', toolLabel: 'Simple NDA', toolSlug: 'simple-nda', why: 'Mutual vs one-way starting point' },
       ],
     },
@@ -152,7 +158,7 @@ const hubCopy: Record<
     description:
       'Fillable tattoo consent forms and rental or lease applications with live preview and PDF export. Educational templates—not medical or legal advice.',
     intro:
-      'Capture client acknowledgements and rental screening details with fillable forms you preview live and export as PDF or DOCX—then follow your local health or fair-housing rules.',
+      'Capture client acknowledgements and rental screening details with fillable forms you preview live and export as PDF or DOCX—then follow your local health or fair-housing rules. Timesheets and purchase orders live under Estimates & Invoices, not this forms hub.',
     whenToUse:
       'The tattoo consent form is for studio risk acknowledgements and aftercare notes. The rental application gathers employment, income, and household details for screening—pair it with official fair-housing guidance and your local landlord-tenant rules.',
     whatFor: [

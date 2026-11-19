@@ -5,6 +5,7 @@ const steps = [
   ['SEO audit', 'scripts/audit/seo-audit.mjs'],
   ['SEO guardrails', 'scripts/audit/seo-guardrails.mjs'],
   ['Page checklist', 'scripts/audit/page-checklist.mjs'],
+  ['Indexing (sitemap self-canonical)', 'scripts/audit/indexing-audit.mjs'],
   ['AdSense readiness', 'scripts/audit/adsense-audit.mjs'],
   ['JS budget', 'scripts/audit/budget-audit.mjs'],
   ['Link check', 'scripts/audit/link-check.mjs'],
