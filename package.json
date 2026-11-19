@@ -19,6 +19,7 @@
     "audit:guardrails": "node scripts/audit/seo-guardrails.mjs",
     "audit:pages": "node scripts/audit/page-checklist.mjs",
     "audit:indexing": "node scripts/audit/indexing-audit.mjs",
+    "audit:ai-style": "node scripts/audit/ai-style-check.mjs",
     "audit:adsense": "node scripts/audit/adsense-audit.mjs",
     "audit:budget": "node scripts/audit/budget-audit.mjs",
     "audit:links": "node scripts/audit/link-check.mjs",

@@ -80,7 +80,8 @@ npm run preview
 | Script | Description |
 |--------|-------------|
 | `npm test` | Vitest — form validation + PDF export |
-| `npm run audit` | SEO, AdSense readiness, JS budget, internal links |
+| `npm run audit` | SEO, AI-style guides check, AdSense readiness, JS budget, internal links |
+| `npm run audit:ai-style` | Heuristic human-voice check for guides |
 | `npm run check` | test + audit |
 | `npx lhci autorun` | Lighthouse mobile (after build) |
 
@@ -132,10 +133,10 @@ Short mirror of [`docs/GROWTH-STATUS.md`](docs/GROWTH-STATUS.md). **Every PR mus
 
 ### Done (as of 2026-11-19)
 
-- **Lien waiver generator** (`/tools/lien-waiver-generator/`): conditional/unconditional × partial/final fill-in form, live preview, PDF/DOCX, state-forms-vary disclaimer, FAQ; wired into contracts hub, KEYWORD-MAP, llms question maps, related tools (this PR).
-- Homepage links tools by category; hubs’ which-document tables complete; home title/H1/tagline target contractor & freelancer templates (PR #35).
-- **Progress invoice generator** (`/tools/progress-invoice/`): contract value, percent or amount complete, previously billed, retainage %, amount due, balance to finish; PDF/DOCX (this PR).
-- **CI / Workers Builds speedup (merged to main):** parallel build+test, npm/Astro caches, faster `npm ci`, docs-only path skip with required-check gate, Playwright Chromium cache on Full checks; root `.npmrc` for Cloudflare install.
+- **Humanize existing guides (this PR):** rewrote all **22** existing guides to practitioner peer voice; added `docs/WRITING-GUIDE.md` + `scripts/audit/ai-style-check.mjs` (in `npm run audit`). HF detectors: all guides **&lt;30%** AI prob. Score table in `docs/GROWTH-STATUS.md`.
+- **Lien waiver generator** (`/tools/lien-waiver-generator/`): conditional/unconditional × partial/final fill-in form, live preview, PDF/DOCX (PR #38, on main).
+- **Progress invoice generator** (`/tools/progress-invoice/`): contract value, percent or amount complete, previously billed, retainage %, amount due, balance to finish; PDF/DOCX (PR #43, on main).
+- **CI / Workers Builds speedup (merged):** parallel build+test, npm/Astro caches, faster `npm ci`, docs-only path skip, Playwright Chromium cache (PR #36).
 - Homepage links all tools by category; hubs’ which-document tables complete; home title/H1/tagline target contractor & freelancer templates (PR #35).
 - Indexing audit in CI (`npm run audit:indexing`): sitemap URLs self-canonical + not noindex; embed/`/404/` intentional noindex + `X-Robots-Tag`; internal links avoid redirect sources.
 - IndexNow + GSC property verification in place; AdSense application **Getting ready**.
@@ -145,9 +146,9 @@ Short mirror of [`docs/GROWTH-STATUS.md`](docs/GROWTH-STATUS.md). **Every PR mus
 
 ### Remaining
 
-- Dedicated “construction lien waiver basics” guide (SEO-GUIDE calendar) still open; tool currently Learn-mores to estimate/invoice/work-order guides.
-- Validate GSC indexing after PR #35 deploy (IndexNow + URL Inspection); expect embed/404 noindex exclusions to stay. After this tool ships, ping IndexNow and request indexing for `/tools/lien-waiver-generator/`.
-- Validate GSC indexing after deploy (IndexNow + URL Inspection for new `/tools/progress-invoice/`); expect embed/404 noindex exclusions to stay.
+- Five new PAA article slugs (separate PR #46); estimate/change-order upgrade PRs (#47/#48) still open.
+- Dedicated “construction lien waiver basics” guide (SEO-GUIDE calendar) still open.
+- Validate GSC indexing after deploys (IndexNow + URL Inspection for `/tools/lien-waiver-generator/`, `/tools/progress-invoice/`); expect embed/404 noindex exclusions to stay.
 - Confirm CI wall-clock vs baseline (~33–47s); set Workers Builds **Install command** to flagged `npm ci` if the dashboard override ignores `.npmrc`.
 - Bing verification **unset**; author/`sameAs` env vars **unset**; editorial backlinks still needed.
 - Pause Reddit promo/launch posts until karma recovers; r/SideProject launch was removed and not reposted.
