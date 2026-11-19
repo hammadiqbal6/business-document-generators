@@ -584,7 +584,7 @@ export const quoteEstimate: ToolDefinition = {
   applicationCategory: 'BusinessApplication',
   isLegalAdjacent: false,
   documentTitle: 'Estimate',
-  toolVersion: '1.2',
+  toolVersion: '1.3',
   formulaNote:
     'Each line is quantity × rate. Subtotal sums lines; tax = subtotal × (tax rate ÷ 100). Validity date is informational.',
   fields: [
@@ -593,12 +593,19 @@ export const quoteEstimate: ToolDefinition = {
       { value: 'Quote', label: 'Quote' },
       { value: 'Proposal', label: 'Proposal' },
     ]},
+    {
+      id: 'companyLogo',
+      label: 'Logo (optional)',
+      type: 'logo',
+      section: 'Business',
+      help: 'Stays in this browser only as a data URL (localStorage). Shown in the live preview; PDF includes it when the image format is supported. Never uploaded to a server.',
+    },
     { id: 'companyName', label: 'Business name', type: 'text', required: true, section: 'Business' },
     { id: 'companyEmail', label: 'Email', type: 'email', section: 'Business' },
     { id: 'companyPhone', label: 'Phone', type: 'tel', section: 'Business' },
     { id: 'docNumber', label: 'Number', type: 'text', required: true, section: 'Document' },
     { id: 'docDate', label: 'Date', type: 'date', required: true, section: 'Document' },
-    { id: 'validUntil', label: 'Valid until', type: 'date', section: 'Document' },
+    { id: 'validUntil', label: 'Valid until', type: 'date', section: 'Document', help: 'Expiry date shown on the estimate (how long the price holds).' },
     { id: 'clientName', label: 'Client', type: 'text', required: true, section: 'Client' },
     { id: 'clientEmail', label: 'Client email', type: 'email', section: 'Client' },
     { id: 'projectTitle', label: 'Project / job title', type: 'text', required: true, section: 'Details' },
@@ -609,6 +616,7 @@ export const quoteEstimate: ToolDefinition = {
   ],
   defaults: {
     docLabel: 'Estimate',
+    companyLogo: '',
     companyName: 'Northwind Services',
     companyEmail: 'hello@northwind.example',
     companyPhone: '(312) 555-0108',
@@ -629,18 +637,26 @@ export const quoteEstimate: ToolDefinition = {
   content: {
     howToUse: [
       'Choose Estimate or Quote as the document label.',
-      'Enter your business and client details, then describe the job.',
-      'Add priced line items, set tax and a valid-until date, and preview the totals.',
-      'Export PDF or DOCX for an instant quote the client can sign or reply to, or save a draft in this browser with localStorage.',
+      'Optionally add a logo (stays in this browser only), then enter business and client details and describe the job.',
+      'Add priced line items, set tax and a valid-until (expiry) date, and preview the totals.',
+      'Export PDF or DOCX, save a draft in localStorage, or use Convert to invoice to carry line items into the contractor invoice tool.',
     ],
     whatToInclude: [
       {
         heading: 'What a free estimate generator should fill in',
-        body: 'Parties, a measurable job description, line items with quantity × rate, tax if you collect it, a grand total, and a validity date. Switch the label to Quote when your industry expects that word—the math stays the same. Walk through the full process in /guides/how-to-write-a-business-estimate/.',
+        body: 'Parties, a measurable job description, line items with quantity × rate, tax if you collect it, a grand total, and a validity (expiry) date. Optional logo brands the preview locally. Switch the label to Quote when your industry expects that word—the math stays the same. Walk through the full process in /guides/how-to-write-a-business-estimate/.',
       },
       {
         heading: 'Free instant quote in the browser',
-        body: 'This page is built for a free instant quote without signup: fill the form, watch the live preview update, and export PDF or DOCX before you leave the tab. Entries stay in your browser; optional drafts use localStorage on your device only.\n\nUse a short validity window when materials or labor rates move quickly. Number every quote and archive the PDF so you can compare what the client accepted later on the invoice.',
+        body: 'This page is built for a free instant quote without signup: fill the form, watch the live preview update, and export PDF or DOCX before you leave the tab. Entries stay in your browser; optional drafts and logos use localStorage on your device only.\n\nUse a short validity window when materials or labor rates move quickly. Number every quote and archive the PDF so you can compare what the client accepted later on the invoice.',
+      },
+      {
+        heading: 'Can an estimate be used as an invoice?',
+        body: 'No. An estimate or quote proposes price before work; it is not a request for payment. After the client accepts, create a separate invoice (use Convert to invoice on this page, or open /tools/contractor-invoice/) that references the estimate number. Full comparison: /guides/invoice-vs-estimate/.',
+      },
+      {
+        heading: 'Convert to invoice (browser handoff)',
+        body: 'Convert to invoice copies company, client, line items, and tax into the contractor invoice tool via localStorage on this device, then opens /tools/contractor-invoice/?from=estimate#handoff. Nothing is uploaded. Adjust invoice number, due date, and payment instructions before you export.',
       },
       {
         heading: 'Construction quote generator (when to use this vs the trade template)',
@@ -657,12 +673,13 @@ export const quoteEstimate: ToolDefinition = {
     },
     commonMistakes: [
       'No validity date',
+      'Treating an estimate PDF as an invoice instead of issuing a separate invoice',
       'Scope that cannot be measured',
       'Mixing catering or full remodel fields into a general estimate instead of the niche tool',
     ],
     tips: [
       'Number every estimate and archive the exported file.',
-      'Reuse accepted lines in the free invoice generator for contractors at /tools/contractor-invoice/.',
+      'After acceptance, use Convert to invoice (or open /tools/contractor-invoice/) so line items match what the client approved.',
       'When the client pays a deposit, issue a payment receipt from /tools/receipt-generator/.',
       'For full remodel bids with allowances, switch to the construction estimate template at /tools/construction-estimate-template/.',
     ],
@@ -673,6 +690,11 @@ export const quoteEstimate: ToolDefinition = {
           'Parties, a measurable job description, line items with quantity × rate, tax if you collect it, a grand total, and a valid-until date. Say whether prices can change after discovery. Full walkthrough: /guides/how-to-write-a-business-estimate/.',
       },
       {
+        question: 'Can an estimate be used as an invoice?',
+        answer:
+          'No. An estimate proposes price; it does not request payment. Issue a separate invoice after acceptance—use Convert to invoice on this page or /tools/contractor-invoice/, and keep the estimate number as a reference. See /guides/invoice-vs-estimate/.',
+      },
+      {
         question: 'What is the difference between a quote, estimate, and invoice?',
         answer:
           'Quotes and estimates propose price before work; quotes are often firmer. An invoice requests payment after acceptance or completed work—reuse lines in /tools/contractor-invoice/. See /guides/invoice-vs-estimate/.',
@@ -680,17 +702,17 @@ export const quoteEstimate: ToolDefinition = {
       {
         question: 'Is this free quote generator really free with no signup?',
         answer:
-          'Yes. Fill the form, preview live, and export PDF or DOCX with no account. Optional drafts use localStorage on your device only; nothing is uploaded to a server.',
+          'Yes. Fill the form, preview live, and export PDF or DOCX with no account. Optional drafts and logos use localStorage on your device only; nothing is uploaded to a server.',
       },
       {
         question: 'Can I download a quote or estimate as a PDF?',
         answer:
-          'Yes. Export PDF or DOCX from the live preview for an instant quote you can email the same day. Archive the PDF so the later invoice matches what the client accepted.',
+          'Yes. Export PDF or DOCX from the live preview for an instant quote you can email the same day. Archive the PDF so the later invoice matches what the client accepted. Logos appear in the HTML preview; PDF includes PNG/JPEG when supported.',
       },
       {
         question: 'Can I turn this quote into an invoice later?',
         answer:
-          'Yes—reuse the same line items in the free invoice generator for contractors at /tools/contractor-invoice/, or confirm payment with /tools/receipt-generator/.',
+          'Yes—use Convert to invoice to copy line items, company, and client into /tools/contractor-invoice/ via localStorage on this device (see ?from=estimate#handoff), or confirm payment with /tools/receipt-generator/.',
       },
       {
         question: 'Can I use this as a contractor estimate generator?',
@@ -708,7 +730,7 @@ export const quoteEstimate: ToolDefinition = {
     'receipt-generator',
   ],
   publishedAt: '2026-10-19',
-  updatedAt: '2026-11-18',
+  updatedAt: '2026-11-19',
 };
 
 export const receiptGenerator: ToolDefinition = {

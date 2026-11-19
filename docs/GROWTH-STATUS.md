@@ -35,6 +35,8 @@ In-repo and confirmed off-repo completions.
 - **2026-11-19 — Change order template upgrade (this PR):**
   - Running contract total on `/tools/change-order-template/`: original + prior COs + this CO → revised total.
   - Schedule impact days; contractor + client signatures; FAQ polish; Vitest for running-total math.
+- **2026-11-19 — quote-estimate-generator upgrades (this PR):**
+  - Local logo (data URL / localStorage); valid-until; convert-to-invoice handoff; FAQ estimate≠invoice.
 - **2026-11-19 — Lien waiver generator (this PR):** `/tools/lien-waiver-generator/` — conditional/unconditional × partial/final fill-in form, live preview, PDF/DOCX export, plain-English “state forms vary / not legal advice” notice, FAQ; registered in `allTools`, contracts hub which-document table, KEYWORD-MAP, `toolGuideMap`, `llms.txt` / `llms-full.txt` question maps, change-order related tools; Vitest coverage in `tests/lien-waiver.test.ts`.
 - **2026-11-19 — Progress invoice generator (this PR):**
 - **2026-11-19 — Lien waiver generator (this PR #38):** `/tools/lien-waiver-generator/` — conditional/unconditional × partial/final fill-in form, live preview, PDF/DOCX export, plain-English “state forms vary / not legal advice” notice, FAQ; registered in `allTools`, contracts hub which-document table, KEYWORD-MAP, `toolGuideMap`, `llms.txt` / `llms-full.txt` question maps, change-order related tools; Vitest coverage in `tests/lien-waiver.test.ts`.

@@ -8,7 +8,9 @@ import {
 import { formatMoney, lineItemTotal, sumLineItems } from '../../lib/money';
 
 export interface DocBlock {
-  type: 'heading' | 'subheading' | 'kv' | 'paragraph' | 'table' | 'clauses' | 'hr' | 'totals';
+  type: 'heading' | 'subheading' | 'kv' | 'paragraph' | 'table' | 'clauses' | 'hr' | 'totals' | 'image';
+  /** Data URL for logo (client-side only). */
+  src?: string;
   text?: string;
   pairs?: { label: string; value: string }[];
   rows?: string[][];
@@ -227,6 +229,12 @@ function buildCommercialDoc(
     str(values.docLabel) ||
     tool.documentTitle;
   blocks[0] = { type: 'heading', text: label };
+
+  const logoSrc = str(values.companyLogo);
+  if (logoSrc.startsWith('data:image/')) {
+    // Insert above the title so preview / PDF can brand the document locally.
+    blocks.unshift({ type: 'image', src: logoSrc, text: 'Company logo' });
+  }
 
   const companyPairs = [
     { label: 'From', value: str(values.companyName) },
