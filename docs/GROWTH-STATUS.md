@@ -29,6 +29,9 @@ As of **2026-11-17** (owner-reported GSC/GA4 window) unless noted.
 
 In-repo and confirmed off-repo completions.
 
+- **2026-11-19 — PAA question guides (this PR):** five AlsoAsked-based articles — invoice payment terms; what is a change order; work order vs PO vs invoice; freelance contract what to include; how to create a contractor estimate. Wired into `KEYWORD-MAP`, `toolGuideMap`, llms question maps. Added `docs/WRITING-GUIDE.md`, AGENTS.md human-writing rule, and `scripts/audit/ai-style-check.mjs` (in `npm run audit`). Heuristic style check: all five new guides **OK** (see PR detector table). HF classifier not available in CI image (no torch).
+- **2026-11-19 — Progress invoice generator (PR #43 merged):** `/tools/progress-invoice/` with retainage math; hub/KEYWORD-MAP/llms wiring (dedicated agent).
+- **2026-11-19 — CI / Cloudflare build speedup (PR #36 merged):**
 - **2026-11-19 — Lien waiver generator (this PR):** `/tools/lien-waiver-generator/` — conditional/unconditional × partial/final fill-in form, live preview, PDF/DOCX export, plain-English “state forms vary / not legal advice” notice, FAQ; registered in `allTools`, contracts hub which-document table, KEYWORD-MAP, `toolGuideMap`, `llms.txt` / `llms-full.txt` question maps, change-order related tools; Vitest coverage in `tests/lien-waiver.test.ts`.
 - **2026-11-19 — Progress invoice generator (this PR):**
   - New tool `/tools/progress-invoice/`: contract value, percent or amount complete this period, previously billed, retainage %, amount due this period, balance to finish; live preview + PDF/DOCX.
@@ -81,6 +84,21 @@ In-repo and confirmed off-repo completions.
 
 Prioritized open work. Owner-confirmed gaps preferred over guesses.
 
+1. **Human rewrite of legacy guides** + HF detector scores &lt;30% AI; flip `ai-style-check` to `--strict-all` when done (separate PR).
+2. **Estimate generator upgrades** (logo upload, expiry, convert-to-invoice) — separate PR (#48).
+3. **Change order upgrades** (running contract total) — separate PR (#47).
+4. **GSC after deploy:** ping IndexNow; URL Inspection for new guide URLs and `/tools/progress-invoice/`; confirm embed/404 noindex exclusions stay intentional.
+5. **CI timings:** record after timings vs baseline; if Workers Builds has a custom Install command, set `npm ci --prefer-offline --no-audit --fund=false`.
+6. **Bing Webmaster verification** — currently **unset** (owner); set `PUBLIC_BING_SITE_VERIFICATION` / console verification when ready.
+7. **Author / `sameAs` env vars** — currently **unset** (owner); wire when profiles are public and stable.
+8. **Backlinks** — site still has essentially none beyond minor directory/unroll mentions; outreach remains open.
+9. **Reddit risk / pause promo:** account ~1 day old, **1 karma**; site-wide filter removed several posts/comments. **Pause promo / launch posts.** Build karma with plain non-link comments before any further r/SideProject (or similar) launch post. Earlier (~2026-11-18) r/SideProject Docuklin launch from `u/ihammadiqbal117` shows **[ Removed by Reddit on account of violating the content policy ]** — **not reposted**.
+10. **GA4 Consent Mode v2** cookieless pings so traffic is measured without waiting on Accept.
+11. **Uneed re-review** — reply to decline email with re-positioned listing (pending owner).
+12. **TinyLaunch resubmit** after YardTally launch **2026-12-07**.
+13. **AdSense** — keep publishing; status **Getting ready**; expect review ~3–4 weeks.
+14. **Weekly GSC check** — record deltas in Baseline (do not invent numbers).
+15. **Directory submissions / blogger embed outreach / related tool variants** — ongoing off-page; record confirmed listings when known.
 1. **GSC after deploy of PR #35 + lien waiver:** ping IndexNow; URL Inspection → Request indexing for previously weak / “Discovered – not indexed” tool URLs and `/tools/lien-waiver-generator/`; confirm noindex exclusions are embeds/404 only (intentional).
 2. **Construction lien waiver basics guide** (listed in `docs/SEO-GUIDE.md` content calendar) — still open; tool currently Learn-mores to estimate/invoice/work-order guides until that article ships.
 3. **GSC after deploy:** ping IndexNow; URL Inspection → Request indexing for `/tools/progress-invoice/` and any previously weak / “Discovered – not indexed” tool URLs; confirm noindex exclusions are embeds/404 only (intentional).
@@ -126,6 +144,9 @@ Prioritized open work. Owner-confirmed gaps preferred over guesses.
 
 - **AdSense review** — **Getting ready** (Nov 2026).
 - **Uneed re-review** — pending owner reply to decline email.
+- **Legacy guide human-rewrite + detector loop** — separate PR (this stream).
+- **Estimate generator + change-order upgrades** — PRs #48 / #47 (this stream).
+- New tools (lien waiver #38, late fee #37, roofing/painting #41; progress invoice #43 merged) — **owned by dedicated agents**.
 - No other in-repo SEO/growth code work beyond the lien waiver and progress invoice tool PRs.
 - CI speedup already on main — measure after timings when convenient.
 - Parallel agent PRs may still be open for other tools/content; this PR only ships the invoice late fee calculator.

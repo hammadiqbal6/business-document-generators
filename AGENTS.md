@@ -77,8 +77,9 @@ Shortcut: `npm run check` → `test` + `audit`.
 
 ## 4. Content rules
 
+- **Human writing (mandatory):** Follow **[`docs/WRITING-GUIDE.md`](docs/WRITING-GUIDE.md)** for every new or rewritten guide/article and long-form tool copy. Practitioner voice, bursty sentences, contractions, concrete examples. Target AI-detector probability **&lt;30%** on each detector used; run `node scripts/audit/ai-style-check.mjs` (wired into `npm run audit`) and record scores in the PR + `docs/GROWTH-STATUS.md`.
 - **Voice:** Careful human editor — concrete, specific, scannable. Not AI-sounding.
-- **Banned filler (examples):** “in today’s digital landscape”, “delve into”, “leverage”, “unlock the power”, “comprehensive guide to”, “whether you’re a … or a …”, “it’s important to note that”, “navigate the complexities”, stacked “furthermore/moreover”, empty “in conclusion”.
+- **Banned filler (examples):** “in today’s digital landscape”, “delve into”, “leverage”, “unlock the power”, “comprehensive guide to”, “whether you’re a … or a …”, “it’s important to note that”, “navigate the complexities”, stacked “furthermore/moreover”, empty “in conclusion”. See the full ban list in `docs/WRITING-GUIDE.md`.
 - **Sourcing:** No invented stats. Every number, rate, deadline, or legal claim needs a primary URL (IRS, SBA, FTC, HUD, Cornell LII, Copyright Office, OSHA, CDC preferred).
 - **Guides structure:** H1 → answer-first (~40–60 words, answer in sentence 1) → primary tool CTA above the fold → byline `Reviewed by Hammad Iqbal · Last updated` → body with question H2s → worked example → FAQ → **Sources** list.
 - **Tools structure:** H1 → short lead → usable form shell (real inputs, no “Open editor” gate) → byline → how-to / what to include / worked example / FAQ / sources.

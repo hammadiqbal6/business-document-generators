@@ -49,6 +49,11 @@ export function buildLlmsTxtBody(): string {
     `- How do you write a roofing estimate? → ${origin}/tools/roofing-estimate/`,
     `- How do you write a painting estimate? → ${origin}/tools/painting-estimate/`,
     `- Wedding vendor contract checklist? → ${origin}/guides/wedding-vendor-contract-checklist/`,
+    `- What are invoice payment terms (Net 30, Net 15, EOM)? → ${origin}/guides/invoice-payment-terms/`,
+    `- What is a construction change order? → ${origin}/guides/what-is-a-change-order/`,
+    `- Work order vs purchase order vs invoice? → ${origin}/guides/work-order-vs-purchase-order-vs-invoice/`,
+    `- What should a freelance contract include? → ${origin}/guides/freelance-contract-what-to-include/`,
+    `- How do you create a contractor estimate? → ${origin}/guides/how-to-create-a-contractor-estimate/`,
   ];
 
   const citedFigures = [

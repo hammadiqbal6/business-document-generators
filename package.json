@@ -27,7 +27,9 @@
     "proof": "node scripts/proof/generate-all.mjs",
     "deploy": "npx wrangler deploy",
     "indexnow": "node scripts/indexnow.mjs",
-    "deploy:indexnow": "npm run deploy && node scripts/indexnow.mjs"
+    "deploy:indexnow": "npm run deploy && node scripts/indexnow.mjs",
+    "audit:ai-style": "node scripts/audit/ai-style-check.mjs",
+    "audit:ai-detector": "node scripts/audit/ai-detector.mjs"
   },
   "dependencies": {
     "@astrojs/react": "^4.4.2",
