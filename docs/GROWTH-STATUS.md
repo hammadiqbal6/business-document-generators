@@ -29,7 +29,12 @@ As of **2026-11-17** (owner-reported GSC/GA4 window) unless noted.
 
 In-repo and confirmed off-repo completions.
 
-- **2026-11-19 — PR #35 (this PR):**
+- **2026-11-19 — CI / Cloudflare build speedup (this PR):**
+  - Baseline (recent successful `CI` workflow): wall ~**33–47s**; job ~**29–41s**; steps ~`npm ci` **12–18s**, `build` **5–7s**, `test` **3–5s** (e.g. run `44535495168` on main: 33s / 29s job).
+  - Parallel `build` + `test` jobs; setup-node npm cache kept; Astro/Vite cache; `npm ci --prefer-offline --no-audit --fund=false`; concurrency cancel-in-progress kept.
+  - Docs-only path filter skips heavy jobs; required check id `build-test-audit-proof` still reports green.
+  - Full checks: Playwright **Chromium-only** + browser cache; root `.npmrc` + DEPLOYMENT/wrangler install notes for Workers Builds.
+- **2026-11-19 — PR #35:**
   - Homepage links every tool via all-templates-by-category (`getToolsByCategory` / `CATEGORY_META`; featured still `getFeaturedTools()`).
   - Hub “which document” tables completed for estimates-invoices + contracts (timesheet / PO / change-order stay on estimates-invoices per tool categories — not forms/contracts).
   - Homepage title/H1 + site tagline/`llms.txt` intro aligned to contractor & freelancer document templates (avoid head “invoice”).
@@ -61,17 +66,18 @@ In-repo and confirmed off-repo completions.
 
 Prioritized open work. Owner-confirmed gaps preferred over guesses.
 
-1. **GSC after deploy of PR #35:** ping IndexNow; URL Inspection → Request indexing for previously weak / “Discovered – not indexed” tool URLs; confirm the 5 noindex exclusions are embeds/404 only (intentional).
-2. **Bing Webmaster verification** — currently **unset** (owner); set `PUBLIC_BING_SITE_VERIFICATION` / console verification when ready.
-3. **Author / `sameAs` env vars** — currently **unset** (owner); wire when profiles are public and stable.
-4. **Backlinks** — site still has essentially none beyond minor directory/unroll mentions; outreach remains open.
-5. **Reddit risk / pause promo:** account ~1 day old, **1 karma**; site-wide filter removed several posts/comments. **Pause promo / launch posts.** Build karma with plain non-link comments before any further r/SideProject (or similar) launch post. Earlier (~2026-11-18) r/SideProject Docuklin launch from `u/ihammadiqbal117` shows **[ Removed by Reddit on account of violating the content policy ]** — **not reposted**.
-6. **GA4 Consent Mode v2** cookieless pings so traffic is measured without waiting on Accept.
-7. **Uneed re-review** — reply to decline email with re-positioned listing (pending owner).
-8. **TinyLaunch resubmit** after YardTally launch **2026-12-07**.
-9. **AdSense** — keep publishing; status **Getting ready**; expect review ~3–4 weeks.
-10. **Weekly GSC check** — record deltas in Baseline (do not invent numbers).
-11. **Directory submissions / blogger embed outreach / related tool variants** — ongoing off-page; record confirmed listings when known.
+1. **CI after this PR:** record after timings from the PR’s green `CI` run vs baseline above; if Workers Builds dashboard has a custom Install command, set `npm ci --prefer-offline --no-audit --fund=false` (`.npmrc` alone may be enough).
+2. **GSC after deploy of PR #35:** ping IndexNow; URL Inspection → Request indexing for previously weak / “Discovered – not indexed” tool URLs; confirm the 5 noindex exclusions are embeds/404 only (intentional).
+3. **Bing Webmaster verification** — currently **unset** (owner); set `PUBLIC_BING_SITE_VERIFICATION` / console verification when ready.
+4. **Author / `sameAs` env vars** — currently **unset** (owner); wire when profiles are public and stable.
+5. **Backlinks** — site still has essentially none beyond minor directory/unroll mentions; outreach remains open.
+6. **Reddit risk / pause promo:** account ~1 day old, **1 karma**; site-wide filter removed several posts/comments. **Pause promo / launch posts.** Build karma with plain non-link comments before any further r/SideProject (or similar) launch post. Earlier (~2026-11-18) r/SideProject Docuklin launch from `u/ihammadiqbal117` shows **[ Removed by Reddit on account of violating the content policy ]** — **not reposted**.
+7. **GA4 Consent Mode v2** cookieless pings so traffic is measured without waiting on Accept.
+8. **Uneed re-review** — reply to decline email with re-positioned listing (pending owner).
+9. **TinyLaunch resubmit** after YardTally launch **2026-12-07**.
+10. **AdSense** — keep publishing; status **Getting ready**; expect review ~3–4 weeks.
+11. **Weekly GSC check** — record deltas in Baseline (do not invent numbers).
+12. **Directory submissions / blogger embed outreach / related tool variants** — ongoing off-page; record confirmed listings when known.
 
 ---
 
@@ -79,7 +85,7 @@ Prioritized open work. Owner-confirmed gaps preferred over guesses.
 
 - **AdSense review** — **Getting ready** (Nov 2026).
 - **Uneed re-review** — pending owner reply to decline email.
-- No other in-repo SEO/growth code work beyond shipping PR #35.
+- **CI speedup PR** — open for review; measure after timings on green Actions run.
 
 ---
 

@@ -36,8 +36,10 @@ npm -v
 ```bash
 git clone https://github.com/hammadiqbal6/business-document-generators.git
 cd business-document-generators
-npm ci
+npm ci --prefer-offline --no-audit --fund=false
 ```
+
+Root `.npmrc` sets `audit=false` / `fund=false` so plain `npm ci` is already quiet/fast in Cloudflare Workers Builds. Prefer the flagged form when the dashboard has an explicit **Install command**.
 
 ### Local commands (use before every deploy)
 
@@ -247,7 +249,7 @@ Every pull request can get a `*.pages.dev` preview URL. Use it for QA; set `PUBL
 2. **Framework Preset:** Astro (auto-detected) or Other.
 3. **Build Command:** `npm run build`
 4. **Output Directory:** `dist`
-5. **Install Command:** `npm ci`
+5. **Install Command:** `npm ci --prefer-offline --no-audit --fund=false`
 6. **Environment Variables:** add all `PUBLIC_*` for Production (and Preview).
 7. Deploy. Attach custom domain under **Settings** → **Domains**.
 8. Update `vercel.json` redirects if the apex/www hostnames change.
@@ -449,7 +451,7 @@ Also revert the Git commit on `main` if the bad change is in source control.
 
 | Symptom | Likely cause | Fix |
 |---------|----------------|-----|
-| Build fails on host, works locally | Wrong Node version | Set `NODE_VERSION=22`; use `npm ci` not `npm install` |
+| Build fails on host, works locally | Wrong Node version | Set `NODE_VERSION=22`; use `npm ci --prefer-offline --no-audit --fund=false` not `npm install` |
 | Canonical URLs still on workers.dev | `PUBLIC_SITE_URL` not set at build | Set env var in host; **redeploy** (rebuild required) |
 | Sitemap has wrong domain | Same as above | Rebuild with correct `PUBLIC_SITE_URL` |
 | Google verification fails | Meta not in HTML | Set `PUBLIC_GSC_VERIFICATION`, redeploy, view source |

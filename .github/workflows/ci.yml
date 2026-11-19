@@ -20,10 +20,51 @@ env:
   PUBLIC_SITE_URL_HOME_GARDEN: https://getyardtally.com
   PUBLIC_SITE_URL_FIBER_ARTS: https://fiber-arts-calculators.hammadiqbal117.workers.dev
   PUBLIC_SITE_URL_PET: https://pet-calculators.hammadiqbal117.workers.dev
+  NPM_CONFIG_PREFER_OFFLINE: 'true'
 
 jobs:
-  # Keep this job id: previously used as a status check name on main.
-  build-test-audit-proof:
+  # Path filter: docs / agent-notes / markdown-only changes skip heavy work.
+  # The required gate job below still reports success so merges are not blocked.
+  changes:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    outputs:
+      code: ${{ steps.filter.outputs.code }}
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          fetch-depth: 0
+      - id: filter
+        name: Detect code-affecting paths
+        shell: bash
+        run: |
+          set -euo pipefail
+          if [[ "${{ github.event_name }}" == "pull_request" ]]; then
+            BASE="${{ github.event.pull_request.base.sha }}"
+          else
+            BASE="${{ github.event.before }}"
+            if [[ -z "${BASE}" || "${BASE}" =~ ^0+$ ]]; then
+              echo "code=true" >> "$GITHUB_OUTPUT"
+              echo "No usable base SHA; treating as code change."
+              exit 0
+            fi
+          fi
+          mapfile -t files < <(git diff --name-only "$BASE" "${{ github.sha }}" || true)
+          code=false
+          for f in "${files[@]}"; do
+            case "$f" in
+              src/*|public/*|scripts/*|tests/*|package.json|package-lock.json|astro.config.mjs|tsconfig.json|vitest.config.ts|wrangler.jsonc|lighthouserc.cjs|.npmrc|.github/workflows/*)
+                code=true
+                break
+                ;;
+            esac
+          done
+          echo "code=${code}" >> "$GITHUB_OUTPUT"
+          echo "files=${#files[@]} code=${code}"
+
+  build:
+    needs: changes
+    if: needs.changes.outputs.code == 'true'
     runs-on: ubuntu-24.04
     timeout-minutes: 10
     steps:
@@ -32,6 +73,53 @@ jobs:
         with:
           node-version: '22'
           cache: npm
-      - run: npm ci
+      - name: Cache Astro / Vite build caches
+        uses: actions/cache@v4
+        with:
+          path: |
+            .astro
+            node_modules/.vite
+            node_modules/.astro
+          key: astro-vite-${{ runner.os }}-${{ hashFiles('package-lock.json') }}
+          restore-keys: |
+            astro-vite-${{ runner.os }}-
+      - run: npm ci --prefer-offline --no-audit --fund=false
       - run: npm run build
+
+  test:
+    needs: changes
+    if: needs.changes.outputs.code == 'true'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-node@v5
+        with:
+          node-version: '22'
+          cache: npm
+      - run: npm ci --prefer-offline --no-audit --fund=false
       - run: npm test
+
+  # Keep this job id: previously used as a status check name on main.
+  # Always runs so docs-only PRs still get a green required check.
+  build-test-audit-proof:
+    needs: [changes, build, test]
+    if: always() && !cancelled()
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    steps:
+      - name: Require path filter
+        if: needs.changes.result != 'success'
+        run: |
+          echo "changes job result=${{ needs.changes.result }}"
+          exit 1
+      - name: Docs-only — heavy CI skipped
+        if: needs.changes.result == 'success' && needs.changes.outputs.code != 'true'
+        run: echo "No code-affecting paths changed; build/test skipped."
+      - name: Require build + test
+        if: needs.changes.result == 'success' && needs.changes.outputs.code == 'true'
+        run: |
+          set -euo pipefail
+          echo "build=${{ needs.build.result }} test=${{ needs.test.result }}"
+          test "${{ needs.build.result }}" = "success"
+          test "${{ needs.test.result }}" = "success"
