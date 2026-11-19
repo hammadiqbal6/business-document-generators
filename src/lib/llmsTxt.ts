@@ -46,6 +46,8 @@ export function buildLlmsTxtBody(): string {
     `- How do you calculate an invoice late fee? → ${origin}/tools/invoice-late-fee-calculator/`,
     `- How do you write a free instant quote? → ${origin}/tools/quote-estimate-generator/`,
     `- What belongs on a catering quote? → ${origin}/tools/catering-quote/`,
+    `- How do you write a roofing estimate? → ${origin}/tools/roofing-estimate/`,
+    `- How do you write a painting estimate? → ${origin}/tools/painting-estimate/`,
     `- Wedding vendor contract checklist? → ${origin}/guides/wedding-vendor-contract-checklist/`,
   ];
 

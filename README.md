@@ -20,10 +20,13 @@ flowchart LR
 ```
 
 ## Tools (22)
+## Tools (23)
 
 | Tool | Path |
 |------|------|
 | Construction estimate | `/tools/construction-estimate-template/` |
+| Roofing estimate | `/tools/roofing-estimate/` |
+| Painting estimate | `/tools/painting-estimate/` |
 | Contractor invoice | `/tools/contractor-invoice/` |
 | Progress invoice | `/tools/progress-invoice/` |
 | Invoice late fee calculator | `/tools/invoice-late-fee-calculator/` |
@@ -139,6 +142,7 @@ Short mirror of [`docs/GROWTH-STATUS.md`](docs/GROWTH-STATUS.md). **Every PR mus
 - **CI / Workers Builds speedup (merged to main):** parallel build+test, npm/Astro caches, faster `npm ci`, docs-only path skip with required-check gate, Playwright Chromium cache on Full checks; root `.npmrc` for Cloudflare install.
 - Homepage links all tools by category; hubs’ which-document tables complete; home title/H1/tagline target contractor & freelancer templates (PR #35).
 - **Invoice late fee calculator** (`/tools/invoice-late-fee-calculator/`): flat / monthly % / annual→daily fees, grace days, days late + new total, copy-ready late-fee line and reminder; linked from contractor/cleaning invoice tools and estimates-invoices hub (PR #37).
+- **Roofing + painting estimate presets** (`/tools/roofing-estimate/`, `/tools/painting-estimate/`): trade-specific defaults on the shared commercial estimate preview (no DocumentGenerator fork); hub table + KEYWORD-MAP + llms question map + Vitest (this PR).
 - Indexing audit in CI (`npm run audit:indexing`): sitemap URLs self-canonical + not noindex; embed/`/404/` intentional noindex + `X-Robots-Tag`; internal links avoid redirect sources.
 - IndexNow + GSC property verification in place; AdSense application **Getting ready**.
 - TinyLaunch badge removed from Workers Builds `PUBLIC_DIRECTORY_BADGES` (2026-11-19). TinyLaunch rejected **2026-11-08** (one product at a time); retry after YardTally **2026-12-07**.
@@ -152,11 +156,14 @@ Short mirror of [`docs/GROWTH-STATUS.md`](docs/GROWTH-STATUS.md). **Every PR mus
 - Validate GSC indexing after deploy (IndexNow + URL Inspection for new `/tools/progress-invoice/`); expect embed/404 noindex exclusions to stay.
 - Confirm CI wall-clock vs baseline (~33–47s); set Workers Builds **Install command** to flagged `npm ci` if the dashboard override ignores `.npmrc`.
 - Validate GSC indexing after late-fee calculator + PR #35 deploy (IndexNow + URL Inspection); expect embed/404 noindex exclusions to stay.
+- After merge/deploy of roofing + painting estimate presets: IndexNow ping; GSC URL Inspection for the two new tool URLs.
+- Validate GSC indexing after PR #35 deploy (IndexNow + URL Inspection); expect embed/404 noindex exclusions to stay.
 - Bing verification **unset**; author/`sameAs` env vars **unset**; editorial backlinks still needed.
 - Pause Reddit promo/launch posts until karma recovers; r/SideProject launch was removed and not reposted.
 - GA4 Consent Mode cookieless measurement; AdSense approval; Uneed re-review; TinyLaunch resubmit after 2026-12-07.
 - Related tool variants / directory submissions — ongoing off-page (progress invoice shipped; other niches still open).
 - Other parallel tool/guide PRs may still be open—do not invent their Done items here.
+- Related tool variants / directory submissions / blogger embed outreach — ongoing off-page.
 
 GSC 28d → 2026-11-17 (owner): **0** clicks, **486** impressions, avg position **58.9**, **54** indexed / **7** not. GA4: **3** users (28d).
 

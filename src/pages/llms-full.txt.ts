@@ -81,6 +81,8 @@ export const GET: APIRoute = () => {
     `- What is a construction change order? Change order vs work order? → ${origin}/tools/change-order-template/`,
     `- What is a lien waiver? Conditional vs unconditional? Partial vs final? → ${origin}/tools/lien-waiver-generator/ (state forms vary; not legal advice)`,
     `- How do you calculate an invoice late fee (flat, monthly %, or annual daily)? → ${origin}/tools/invoice-late-fee-calculator/`,
+    `- How do you write a roofing estimate (tear-off, squares, flashing)? → ${origin}/tools/roofing-estimate/`,
+    `- How do you write a painting estimate (prep, primer, coats)? → ${origin}/tools/painting-estimate/`,
   ];
 
   const citedFigures = [

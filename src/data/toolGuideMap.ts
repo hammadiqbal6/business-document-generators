@@ -123,6 +123,18 @@ export const toolToGuides: Record<string, string[]> = {
     'what-to-include-on-a-receipt',
     'line-item-totals-explained',
   ],
+  'roofing-estimate': [
+    'construction-estimate-that-wins-jobs',
+    'line-item-totals-explained',
+    'invoice-vs-estimate',
+    'how-to-write-a-business-estimate',
+  ],
+  'painting-estimate': [
+    'how-to-write-a-business-estimate',
+    'line-item-totals-explained',
+    'invoice-vs-estimate',
+    'construction-estimate-that-wins-jobs',
+  ],
 };
 
 /** Guide → related guide slugs (topic clusters, not identical lists). */
