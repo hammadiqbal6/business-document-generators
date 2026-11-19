@@ -27,7 +27,7 @@ As of **2026-11-18** (owner-reported unless noted).
 
 ## Done (dated)
 
-- **2026-11-19 — SEO quick wins (this PR):** homepage links every tool via all-templates-by-category (`getToolsByCategory` / `CATEGORY_META`, featured set still `getFeaturedTools()`); hub “which document” tables completed for estimates-invoices + contracts (timesheet/PO/change-order stay on estimates-invoices per tool categories—not forms/contracts); homepage title/H1 + site tagline/llms intro aligned to contractor & freelancer document templates (avoid head “invoice”).
+- **2026-11-19 — PR #35:** homepage links every tool via all-templates-by-category (`getToolsByCategory` / `CATEGORY_META`, featured set still `getFeaturedTools()`); hub “which document” tables completed for estimates-invoices + contracts (timesheet/PO/change-order stay on estimates-invoices per tool categories—not forms/contracts); homepage title/H1 + site tagline/llms intro aligned to contractor & freelancer document templates (avoid head “invoice”).
 - **2026-11-18 — PR #33 merged:** redirects `/tools/invoice/` and `/tools/invoice-generator/` → `/tools/contractor-invoice/`, `/sitemap_index.xml`, `/privacy-policy/`; `/favicon.png`; fixed embed GTM/gtag beacon 404s; `workers_dev` disabled; stale `siteDefaults` updated.
 - **2026-11-18 — PR #33 also:** SEO for GSC-impression tool pages (quote/estimate generator, contractor invoice, receipt, construction estimate): stronger titles/metas, FAQs + FAQPage JSON-LD, internal links.
 - **Nov 2026 — Google AdSense:** application submitted; status **Getting ready**.
