@@ -1594,7 +1594,12 @@ export const progressInvoice: ToolDefinition = {
     ],
     sources: estimateSources,
   },
-  relatedSlugs: ['contractor-invoice', 'change-order-template', 'construction-estimate-template', 'receipt-generator'],
+  relatedSlugs: [
+    'contractor-invoice',
+    'change-order-template',
+    'lien-waiver-generator',
+    'construction-estimate-template',
+  ],
   publishedAt: '2026-11-19',
   updatedAt: '2026-11-19',
 };

@@ -34,6 +34,8 @@ In-repo and confirmed off-repo completions.
 - **2026-11-19 — CI / Cloudflare build speedup (PR #36 merged):**
 - **2026-11-19 — Lien waiver generator (this PR):** `/tools/lien-waiver-generator/` — conditional/unconditional × partial/final fill-in form, live preview, PDF/DOCX export, plain-English “state forms vary / not legal advice” notice, FAQ; registered in `allTools`, contracts hub which-document table, KEYWORD-MAP, `toolGuideMap`, `llms.txt` / `llms-full.txt` question maps, change-order related tools; Vitest coverage in `tests/lien-waiver.test.ts`.
 - **2026-11-19 — Progress invoice generator (this PR):**
+- **2026-11-19 — Lien waiver generator (this PR #38):** `/tools/lien-waiver-generator/` — conditional/unconditional × partial/final fill-in form, live preview, PDF/DOCX export, plain-English “state forms vary / not legal advice” notice, FAQ; registered in `allTools`, contracts hub which-document table, KEYWORD-MAP, `toolGuideMap`, `llms.txt` / `llms-full.txt` question maps, change-order related tools; Vitest coverage in `tests/lien-waiver.test.ts`.
+- **2026-11-19 — Progress invoice generator (PR #43, on main):**
   - New tool `/tools/progress-invoice/`: contract value, percent or amount complete this period, previously billed, retainage %, amount due this period, balance to finish; live preview + PDF/DOCX.
   - Wired into `allTools`, estimates-invoices hub which-document table, KEYWORD-MAP, `toolGuideMap`, `llms.txt` / `llms-full.txt` question maps; related from contractor invoice / change order; Vitest coverage for billing math.
 - **2026-11-19 — CI / Cloudflare build speedup (merged to main):**
@@ -100,6 +102,7 @@ Prioritized open work. Owner-confirmed gaps preferred over guesses.
 14. **Weekly GSC check** — record deltas in Baseline (do not invent numbers).
 15. **Directory submissions / blogger embed outreach / related tool variants** — ongoing off-page; record confirmed listings when known.
 1. **GSC after deploy of PR #35 + lien waiver:** ping IndexNow; URL Inspection → Request indexing for previously weak / “Discovered – not indexed” tool URLs and `/tools/lien-waiver-generator/`; confirm noindex exclusions are embeds/404 only (intentional).
+1. **GSC after deploy:** ping IndexNow; URL Inspection → Request indexing for `/tools/lien-waiver-generator/`, `/tools/progress-invoice/`, and previously weak / “Discovered – not indexed” tool URLs; confirm noindex exclusions are embeds/404 only (intentional).
 2. **Construction lien waiver basics guide** (listed in `docs/SEO-GUIDE.md` content calendar) — still open; tool currently Learn-mores to estimate/invoice/work-order guides until that article ships.
 3. **GSC after deploy:** ping IndexNow; URL Inspection → Request indexing for `/tools/progress-invoice/` and any previously weak / “Discovered – not indexed” tool URLs; confirm noindex exclusions are embeds/404 only (intentional).
 4. **CI timings:** record after timings vs baseline (~33–47s); if Workers Builds dashboard has a custom Install command, set `npm ci --prefer-offline --no-audit --fund=false` (`.npmrc` alone may be enough).
@@ -137,6 +140,17 @@ Prioritized open work. Owner-confirmed gaps preferred over guesses.
 10. **AdSense** — keep publishing; status **Getting ready**; expect review ~3–4 weeks.
 11. **Weekly GSC check** — record deltas in Baseline (do not invent numbers).
 12. **Directory submissions / blogger embed outreach / related tool variants** — ongoing off-page; record confirmed listings when known.
+3. **CI timings:** record after timings vs baseline (~33–47s); if Workers Builds dashboard has a custom Install command, set `npm ci --prefer-offline --no-audit --fund=false` (`.npmrc` alone may be enough).
+4. **Bing Webmaster verification** — currently **unset** (owner); set `PUBLIC_BING_SITE_VERIFICATION` / console verification when ready.
+5. **Author / `sameAs` env vars** — currently **unset** (owner); wire when profiles are public and stable.
+6. **Backlinks** — site still has essentially none beyond minor directory/unroll mentions; outreach remains open.
+7. **Reddit risk / pause promo:** account ~1 day old, **1 karma**; site-wide filter removed several posts/comments. **Pause promo / launch posts.** Build karma with plain non-link comments before any further r/SideProject (or similar) launch post. Earlier (~2026-11-18) r/SideProject Docuklin launch from `u/ihammadiqbal117` shows **[ Removed by Reddit on account of violating the content policy ]** — **not reposted**.
+8. **GA4 Consent Mode v2** cookieless pings so traffic is measured without waiting on Accept.
+9. **Uneed re-review** — reply to decline email with re-positioned listing (pending owner).
+10. **TinyLaunch resubmit** after YardTally launch **2026-12-07**.
+11. **AdSense** — keep publishing; status **Getting ready**; expect review ~3–4 weeks.
+12. **Weekly GSC check** — record deltas in Baseline (do not invent numbers).
+13. **Directory submissions / blogger embed outreach / related tool variants** — ongoing off-page; record confirmed listings when known.
 
 ---
 
@@ -165,9 +179,9 @@ Prioritized open work. Owner-confirmed gaps preferred over guesses.
 | 2026-11-19 | Reddit Net 30 / freelance Word contract comments | Posted; Net 30 removed by Reddit; freelance visible at check |
 | 2026-11-18 | Reddit Itemizing estimates comment | Posted; later **Removed by Reddit** |
 | ~2026-11-18 | r/SideProject Docuklin launch | **Removed by Reddit** (content policy); not reposted |
-| Ongoing | Pause Reddit promo; karma via non-link comments | Remaining #5 |
-| Console | Bing verification / author sameAs | Unset (Remaining #2–#3) |
-| Console | GSC indexing validation after PR #35 deploy | Remaining #1 |
+| Ongoing | Pause Reddit promo; karma via non-link comments | Remaining #7 |
+| Console | Bing verification / author sameAs | Unset (Remaining #4–#5) |
+| Console | GSC indexing validation after new tool deploys | Remaining #1 |
 
 ---
 
