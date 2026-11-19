@@ -1,4 +1,9 @@
 import type { ClauseItem, LineItem, ToolDefinition } from '../../data/tools/types';
+import {
+  buildLateFeeReminder,
+  calculateLateFee,
+  type LateFeeRatePeriod,
+} from '../../lib/lateFee';
 import { formatMoney, lineItemTotal, sumLineItems } from '../../lib/money';
 
 export interface DocBlock {
@@ -54,6 +59,8 @@ export function buildDocumentBlocks(
       return buildTimesheet(values, blocks);
     case 'change-order-template':
       return buildChangeOrder(values, blocks);
+    case 'invoice-late-fee-calculator':
+      return buildLateFeeSummary(values, blocks);
     case 'photography-contract-template':
       return buildPhotoContract(values, blocks);
     case 'videography-contract':
@@ -332,6 +339,92 @@ function buildTimesheet(values: Record<string, unknown>, blocks: DocBlock[]): Do
       text: `Approver: ${str(values.approverName)} __________________ Date ______`,
     });
   }
+  return blocks;
+}
+
+function buildLateFeeSummary(values: Record<string, unknown>, blocks: DocBlock[]): DocBlock[] {
+  blocks[0] = { type: 'heading', text: 'Late fee summary' };
+  const amount = Number(values.invoiceAmount) || 0;
+  const dueDate = str(values.invoiceDueDate);
+  const paymentDate = str(values.paymentDate);
+  const ratePeriod = (str(values.ratePeriod) === 'annual' ? 'annual' : 'monthly') as LateFeeRatePeriod;
+  const result = calculateLateFee({
+    invoiceAmount: amount,
+    dueDate,
+    paymentDate,
+    gracePeriodDays: Number(values.gracePeriodDays) || 0,
+    flatFee: Number(values.flatFee) || 0,
+    interestRate: Number(values.interestRate) || 0,
+    ratePeriod,
+  });
+
+  blocks.push({
+    type: 'kv',
+    pairs: [
+      { label: 'From', value: str(values.companyName) },
+      { label: 'Client', value: str(values.clientName) },
+      { label: 'Invoice #', value: str(values.invoiceNumber) },
+      { label: 'Invoice amount', value: money(amount) },
+      { label: 'Due date', value: dueDate },
+      { label: 'Payment / as-of date', value: paymentDate },
+      { label: 'Grace period (days)', value: str(values.gracePeriodDays ?? 0) },
+      {
+        label: 'Interest rate',
+        value:
+          result.interestRate > 0
+            ? `${result.interestRate}% ${result.ratePeriod}`
+            : 'None',
+      },
+      {
+        label: 'Flat late fee (terms)',
+        value: Number(values.flatFee) > 0 ? money(values.flatFee) : 'None',
+      },
+    ].filter((p) => p.value),
+  });
+
+  blocks.push({
+    type: 'totals',
+    totals: [
+      { label: 'Days late', value: String(result.daysLate) },
+      { label: 'Chargeable days (after grace)', value: String(result.chargeableDays) },
+      { label: 'Flat fee applied', value: money(result.flatFeeApplied) },
+      { label: 'Simple interest', value: money(result.interestAmount) },
+      { label: 'Late fee total', value: money(result.lateFeeTotal), emphasize: true },
+      { label: 'Total due', value: money(result.totalDue), emphasize: true },
+    ],
+  });
+
+  if (result.withinGrace) {
+    blocks.push({
+      type: 'paragraph',
+      text: 'Still inside the grace period — no late fee is applied yet.',
+    });
+  } else if (result.daysLate <= 0) {
+    blocks.push({
+      type: 'paragraph',
+      text: 'Not past due on the payment / as-of date entered.',
+    });
+  }
+
+  const includeReminder =
+    values.includeReminder === true ||
+    values.includeReminder === 'true' ||
+    values.includeReminder === 1;
+  if (includeReminder) {
+    const reminder = buildLateFeeReminder({
+      companyName: str(values.companyName),
+      clientName: str(values.clientName),
+      invoiceNumber: str(values.invoiceNumber),
+      invoiceAmount: amount,
+      dueDate,
+      paymentDate,
+      result,
+      paymentInstructions: str(values.paymentInstructions),
+    });
+    blocks.push({ type: 'subheading', text: 'Reminder wording (copy/paste)' });
+    blocks.push({ type: 'paragraph', text: reminder });
+  }
+
   return blocks;
 }
 

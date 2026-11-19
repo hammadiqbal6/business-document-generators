@@ -118,6 +118,20 @@ export const hudFairHousing: SourceRef = {
   usedFor: 'fair-housing rules landlords and agents must follow',
 };
 
+/** Wisconsin DFI — late charge vs finance charge (consumer open accounts). */
+export const wiDfiLateCharge: SourceRef = {
+  label: 'Wisconsin DFI — Open accounts: late charge or finance charge',
+  url: 'https://dfi.wi.gov/Pages/ConsumerServices/WisconsinConsumerAct/LateChargeFinanceCharge.aspx',
+  usedFor: 'late fees generally need a prior agreement; consumer late-charge caps differ from finance charges',
+};
+
+/** NY DFS banking interpretation — late charges vs usury interest. */
+export const nyDfsLateCharge: SourceRef = {
+  label: 'NY DFS — Banking interpretation on late charges (Mar 22, 2000)',
+  url: 'https://www.dfs.ny.gov/legal/interpret/lo000322.htm',
+  usedFor: 'example that late charges may be treated differently from loan interest; rules still vary by state',
+};
+
 export const estimateSources: SourceRef[] = [
   sbaStayCompliant,
   sbaBreakEven,
@@ -125,6 +139,14 @@ export const estimateSources: SourceRef[] = [
   irsWhatRecords,
   irsHowLongRecords,
   sbaHome,
+];
+
+export const lateFeeSources: SourceRef[] = [
+  wiDfiLateCharge,
+  nyDfsLateCharge,
+  irsRecordkeeping,
+  irsWhatRecords,
+  sbaStayCompliant,
 ];
 
 export const contractSources: SourceRef[] = [

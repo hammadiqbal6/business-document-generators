@@ -57,6 +57,11 @@ export function withTodayDateDefaults(
       out[id] = today;
       continue;
     }
+    if (id === 'invoiceDueDate') {
+      // Late-fee demos need a past due date relative to “today”.
+      out[id] = addDaysIso(today, -35);
+      continue;
+    }
     // Primary document / event dates → today
     out[id] = today;
   }

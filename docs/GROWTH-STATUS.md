@@ -29,7 +29,10 @@ As of **2026-11-17** (owner-reported GSC/GA4 window) unless noted.
 
 In-repo and confirmed off-repo completions.
 
-- **2026-11-19 — CI / Cloudflare build speedup (this PR):**
+- **2026-11-19 — Invoice late fee calculator (this PR):**
+  - New tool `/tools/invoice-late-fee-calculator/`: invoice amount, due date, payment/as-of date, flat fee and/or monthly or annual simple interest, grace period; shows late fee + total due and optional ready-to-copy reminder wording.
+  - Linked from contractor invoice + cleaning invoice `relatedSlugs`, estimates-invoices hub “which document” table, KEYWORD-MAP, llms question maps, and Vitest coverage for the fee math.
+- **2026-11-19 — CI / Cloudflare build speedup:**
   - Baseline (recent successful `CI` workflow): wall ~**33–47s**; job ~**29–41s**; steps ~`npm ci` **12–18s**, `build` **5–7s**, `test` **3–5s** (e.g. run `44535495168` on main: 33s / 29s job).
   - Parallel `build` + `test` jobs; setup-node npm cache kept; Astro/Vite cache; `npm ci --prefer-offline --no-audit --fund=false`; concurrency cancel-in-progress kept.
   - Docs-only path filter skips heavy jobs; required check id `build-test-audit-proof` still reports green.
@@ -56,8 +59,8 @@ In-repo and confirmed off-repo completions.
 
 | Bucket | What’s in it |
 |--------|----------------|
-| Sitemap / indexable | All ~56 sitemap URLs on `https://docuklin.com…/` with trailing slash, self-canonical, `index,follow`, matching `og:url`; all 21 tools included with `lastmod` |
-| Intentional noindex | `/tools/<slug>/embed/` (21) + `/404/` — meta robots + `X-Robots-Tag`; **not** in sitemap. Matches GSC “Excluded by noindex” for crawled embeds/404 |
+| Sitemap / indexable | Sitemap URLs on `https://docuklin.com…/` with trailing slash, self-canonical, `index,follow`, matching `og:url`; all tools (including late-fee calculator) included with `lastmod` |
+| Intentional noindex | `/tools/<slug>/embed/` + `/404/` — meta robots + `X-Robots-Tag`; **not** in sitemap. Matches GSC “Excluded by noindex” for crawled embeds/404 |
 | Redirects (final 200 only in sitemap/links) | `/tools/invoice[/]`, `/tools/invoice-generator[/]` → contractor invoice; `/privacy-policy[/]` → `/privacy/`; `/sitemap.xml` & `/sitemap_index.xml` → `/sitemap-index.xml`; `/authors[/]` → `/about/`; Worker trailing-slash 308 |
 
 ---
@@ -66,8 +69,8 @@ In-repo and confirmed off-repo completions.
 
 Prioritized open work. Owner-confirmed gaps preferred over guesses.
 
-1. **CI after this PR:** record after timings from the PR’s green `CI` run vs baseline above; if Workers Builds dashboard has a custom Install command, set `npm ci --prefer-offline --no-audit --fund=false` (`.npmrc` alone may be enough).
-2. **GSC after deploy of PR #35:** ping IndexNow; URL Inspection → Request indexing for previously weak / “Discovered – not indexed” tool URLs; confirm the 5 noindex exclusions are embeds/404 only (intentional).
+1. **CI after speedup merge:** record after timings from a green `CI` run vs baseline above; if Workers Builds dashboard has a custom Install command, set `npm ci --prefer-offline --no-audit --fund=false` (`.npmrc` alone may be enough).
+2. **GSC after deploy of PR #35 + late-fee tool:** ping IndexNow; URL Inspection → Request indexing for previously weak / “Discovered – not indexed” tool URLs and `/tools/invoice-late-fee-calculator/`; confirm the noindex exclusions are embeds/404 only (intentional).
 3. **Bing Webmaster verification** — currently **unset** (owner); set `PUBLIC_BING_SITE_VERIFICATION` / console verification when ready.
 4. **Author / `sameAs` env vars** — currently **unset** (owner); wire when profiles are public and stable.
 5. **Backlinks** — site still has essentially none beyond minor directory/unroll mentions; outreach remains open.
@@ -85,7 +88,8 @@ Prioritized open work. Owner-confirmed gaps preferred over guesses.
 
 - **AdSense review** — **Getting ready** (Nov 2026).
 - **Uneed re-review** — pending owner reply to decline email.
-- **CI speedup PR** — open for review; measure after timings on green Actions run.
+- **Late-fee calculator PR** — open for review (this PR).
+- **CI speedup** — measure after timings on green Actions runs vs baseline.
 
 ---
 

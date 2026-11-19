@@ -1,6 +1,6 @@
 import type { ToolDefinition } from './types';
 import { clause } from './line-item-defaults';
-import { estimateSources } from './shared-sources';
+import { estimateSources, lateFeeSources } from './shared-sources';
 
 export const constructionEstimate: ToolDefinition = {
   slug: 'construction-estimate-template',
@@ -262,7 +262,7 @@ export const contractorInvoice: ToolDefinition = {
     ],
     sources: estimateSources,
   },
-  relatedSlugs: ['quote-estimate-generator', 'construction-estimate-template', 'receipt-generator'],
+  relatedSlugs: ['quote-estimate-generator', 'invoice-late-fee-calculator', 'receipt-generator'],
   publishedAt: '2026-10-19',
   updatedAt: '2026-11-18',
 };
@@ -383,7 +383,7 @@ export const cleaningInvoice: ToolDefinition = {
     ],
     sources: estimateSources,
   },
-  relatedSlugs: ['quote-estimate-generator', 'receipt-generator', 'catering-quote'],
+  relatedSlugs: ['quote-estimate-generator', 'receipt-generator', 'invoice-late-fee-calculator'],
   publishedAt: '2026-10-19',
   updatedAt: '2026-11-13',
 };
@@ -1350,4 +1350,193 @@ export const changeOrderTemplate: ToolDefinition = {
   relatedSlugs: ['construction-estimate-template', 'contractor-invoice', 'work-order'],
   publishedAt: '2026-11-13',
   updatedAt: '2026-11-13',
+};
+
+export const invoiceLateFeeCalculator: ToolDefinition = {
+  slug: 'invoice-late-fee-calculator',
+  name: 'Invoice Late Fee Calculator',
+  shortName: 'Late Fee Calculator',
+  category: 'estimates-invoices',
+  primaryKeyword: 'invoice late fee calculator',
+  secondaryKeywords: [
+    'late payment interest calculator',
+    'invoice late fee formula',
+    'overdue invoice interest',
+    'past due invoice calculator',
+  ],
+  title: 'Invoice Late Fee Calculator',
+  metaDescription:
+    'Calculate invoice late fees with a flat charge and/or simple monthly or annual interest, grace days, and a ready-to-copy past-due reminder. Free, in-browser.',
+  h1: 'Invoice Late Fee Calculator',
+  answerFirst:
+    'Enter the invoice amount, due date, and payment (or as-of) date, plus any flat fee, monthly or annual simple-interest rate, and grace days. You get the late fee, total due, and optional reminder wording to copy.',
+  applicationCategory: 'BusinessApplication',
+  isLegalAdjacent: false,
+  documentTitle: 'Late fee summary',
+  toolVersion: '1.0',
+  formulaNote:
+    'Days late = payment date − due date. Chargeable days = max(0, days late − grace days). Flat fee applies once when chargeable days > 0. Simple interest = amount × (rate ÷ 100) × (chargeable days ÷ 30) for monthly rates, or ÷ 365 for annual. Total due = invoice amount + flat fee + interest. Not a jurisdiction-specific legal rate.',
+  fields: [
+    { id: 'companyName', label: 'Your business name', type: 'text', section: 'Parties' },
+    { id: 'clientName', label: 'Client name', type: 'text', section: 'Parties' },
+    { id: 'invoiceNumber', label: 'Invoice #', type: 'text', section: 'Invoice' },
+    {
+      id: 'invoiceAmount',
+      label: 'Invoice amount due',
+      type: 'currency',
+      inputMode: 'decimal',
+      min: 0,
+      required: true,
+      section: 'Invoice',
+    },
+    {
+      id: 'invoiceDueDate',
+      label: 'Due date',
+      type: 'date',
+      required: true,
+      section: 'Invoice',
+      help: 'Original due date on the invoice or contract.',
+    },
+    {
+      id: 'paymentDate',
+      label: 'Payment / as-of date',
+      type: 'date',
+      required: true,
+      section: 'Invoice',
+      help: 'Date paid, or today if you are sending a past-due notice.',
+    },
+    {
+      id: 'gracePeriodDays',
+      label: 'Grace period (days)',
+      type: 'number',
+      inputMode: 'numeric',
+      min: 0,
+      max: 365,
+      step: 1,
+      section: 'Fee terms',
+      help: 'Days after the due date before fees start. Use 0 if fees begin the day after due.',
+    },
+    {
+      id: 'flatFee',
+      label: 'Flat late fee',
+      type: 'currency',
+      inputMode: 'decimal',
+      min: 0,
+      section: 'Fee terms',
+      help: 'One-time fee once the grace period ends. Leave 0 to skip.',
+    },
+    {
+      id: 'interestRate',
+      label: 'Interest rate (%)',
+      type: 'number',
+      inputMode: 'decimal',
+      min: 0,
+      max: 100,
+      step: 0.01,
+      section: 'Fee terms',
+      help: 'Simple interest only. Match the rate you already disclosed in your terms.',
+    },
+    {
+      id: 'ratePeriod',
+      label: 'Rate period',
+      type: 'select',
+      section: 'Fee terms',
+      options: [
+        { value: 'monthly', label: 'Monthly (%)' },
+        { value: 'annual', label: 'Annual (%)' },
+      ],
+    },
+    {
+      id: 'includeReminder',
+      label: 'Include reminder wording in preview',
+      type: 'checkbox',
+      section: 'Reminder',
+      defaultValue: true,
+    },
+    {
+      id: 'paymentInstructions',
+      label: 'Payment instructions (optional)',
+      type: 'textarea',
+      rows: 2,
+      section: 'Reminder',
+    },
+  ],
+  defaults: {
+    companyName: 'Summit Build Co.',
+    clientName: 'Jordan Lee',
+    invoiceNumber: 'INV-2026-088',
+    invoiceAmount: 2500,
+    invoiceDueDate: '2026-10-01',
+    paymentDate: '2026-11-05',
+    gracePeriodDays: 5,
+    flatFee: 25,
+    interestRate: 1.5,
+    ratePeriod: 'monthly',
+    includeReminder: true,
+    paymentInstructions: 'ACH to Summit Build Co. or check payable to Summit Build Co.',
+  },
+  content: {
+    howToUse: [
+      'Enter the unpaid invoice amount, due date, and the payment or as-of date.',
+      'Set grace days, then a flat fee and/or a monthly or annual simple-interest rate from your terms.',
+      'Read the fee and total due in the live preview; copy the reminder text if you need an email.',
+      'Export PDF or DOCX if you want a file for your records.',
+    ],
+    whatToInclude: [
+      {
+        heading: 'What the calculator needs',
+        body: 'You need the balance that was actually overdue, the original due date, and the day you are measuring from. Pull the flat fee and percent from the contract or invoice terms the client already agreed to—not a rate you invent after the fact. If your terms only allow a flat fee, leave the interest rate at 0.',
+      },
+      {
+        heading: 'Flat fee vs simple interest',
+        body: 'A flat fee is a one-time add-on after grace. Simple interest grows with chargeable days: monthly rates use day/30; annual rates use day/365. This tool does not compound. It also does not check whether your state caps consumer or commercial late charges—that is on you and your counsel.',
+      },
+    ],
+    workedExample: {
+      heading: 'Worked example: $2,500 invoice, 1.5% monthly + $25 flat',
+      body: 'INV-2026-088 is $2,500, due 2026-10-01, measured on 2026-11-05. That is 35 days late. With a 5-day grace, 30 days are chargeable. Flat fee $25 + simple interest $2,500 × 1.5% × (30 ÷ 30) = $37.50. Late charges total $62.50; amount now due is $2,562.50. Change the sample numbers in the form to match your job.',
+    },
+    commonMistakes: [
+      'Charging a rate that never appeared on the invoice or signed terms.',
+      'Counting grace days twice, or starting interest on the due date when terms say “after Net 30.”',
+      'Using compound interest when the contract only allows simple interest (or a flat fee).',
+      'Sending a harsh collection tone before confirming the invoice was received and the amount is right.',
+    ],
+    tips: [
+      'I keep late-fee language on the estimate and the invoice so nobody is surprised at day 40.',
+      'If a client usually pays but is one week late, a short call often beats a formal notice.',
+      'Log the notice date with the invoice PDF—IRS recordkeeping guidance treats invoices and related papers as support for gross receipts.',
+    ],
+    faq: [
+      {
+        question: 'How do you calculate a late fee on an invoice?',
+        answer:
+          'Take days past the due date, subtract any grace period, then apply the flat fee and/or simple interest your terms allow. This calculator does that math and shows the total due.',
+      },
+      {
+        question: 'Is late fee interest the same as a finance charge?',
+        answer:
+          'Not always. Some states treat a one-time late charge differently from revolving finance charges. Wisconsin’s DFI, for example, explains that distinction for consumer open accounts. Check the rule that applies to your deal.',
+      },
+      {
+        question: 'Can I charge any late fee I want?',
+        answer:
+          'No. You generally need clear prior agreement, and states can cap or recharacterize fees. New York DFS materials discuss how late charges can differ from usury interest—still not a free pass. This page is a math helper, not legal advice.',
+      },
+      {
+        question: 'What is a grace period on an invoice?',
+        answer:
+          'Extra days after the due date before fees start. If due is the 1st and grace is 5 days, fees begin after the 6th. Set grace to 0 if your terms start the next calendar day.',
+      },
+      {
+        question: 'Does this create a new invoice?',
+        answer:
+          'No. It produces a fee summary and optional reminder wording. To bill the original work, use the contractor invoice or cleaning invoice generators, then come back here if payment is late.',
+      },
+    ],
+    sources: lateFeeSources,
+  },
+  relatedSlugs: ['contractor-invoice', 'cleaning-service-invoice', 'receipt-generator'],
+  publishedAt: '2026-11-19',
+  updatedAt: '2026-11-19',
 };

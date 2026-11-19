@@ -2,7 +2,10 @@ import type { ToolDefinition } from '../data/tools/types';
 
 /** Invoice / receipt tools sit next to tax and payment rules — show a short YMYL disclaimer. */
 export function isInvoiceOrReceiptTool(tool: Pick<ToolDefinition, 'slug' | 'name'>): boolean {
-  return /invoice|receipt/i.test(tool.slug) || /invoice|receipt/i.test(tool.name);
+  return (
+    /invoice|receipt|late-fee/i.test(tool.slug) ||
+    /invoice|receipt|late fee/i.test(tool.name)
+  );
 }
 
 export function toolDisclaimerBanner(tool: Pick<ToolDefinition, 'slug' | 'name' | 'isLegalAdjacent'>): string | null {
