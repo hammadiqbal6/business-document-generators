@@ -24,6 +24,7 @@
 | `/tools/service-agreement-template/` | service agreement template | service contract template, business service agreement | long-tail |
 | `/tools/purchase-order-template/` | purchase order template | purchase order form, PO template free | long-tail |
 | `/tools/change-order-template/` | change order template | construction change order template, change order form | long-tail |
+| `/tools/late-fee-calculator/` | late fee calculator | invoice late fee calculator, late payment fee calculator, late fee notice template | long-tail |
 | `/guides/construction-estimate-that-wins-jobs/` | how to write a construction estimate | construction quote, construction estimate example | supports estimate tool |
 | `/guides/photography-contract-clauses/` | photography contract clauses | photography contract explained | supports photo contract |
 | `/guides/catering-quote-deposits/` | catering quote deposit | wedding catering pricing | supports catering quote |

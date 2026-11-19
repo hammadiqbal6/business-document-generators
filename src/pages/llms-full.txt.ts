@@ -78,6 +78,7 @@ export const GET: APIRoute = () => {
     `- What should a service agreement include? → ${origin}/tools/service-agreement-template/`,
     `- Is a purchase order the same as a work order? → ${origin}/tools/purchase-order-template/ and ${origin}/guides/work-order-vs-invoice-vs-estimate/`,
     `- What is a construction change order? Change order vs work order? → ${origin}/tools/change-order-template/`,
+    `- How do you calculate an invoice late fee? Late fee notice PDF? → ${origin}/tools/late-fee-calculator/`,
   ];
 
   const citedFigures = [

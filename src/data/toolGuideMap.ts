@@ -105,6 +105,11 @@ export const toolToGuides: Record<string, string[]> = {
     'work-order-vs-invoice-vs-estimate',
     'invoice-vs-estimate',
   ],
+  'late-fee-calculator': [
+    'contractor-invoice-example',
+    'what-to-include-on-a-receipt',
+    'invoice-vs-estimate',
+  ],
 };
 
 /** Guide → related guide slugs (topic clusters, not identical lists). */

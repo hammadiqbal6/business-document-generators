@@ -1,4 +1,5 @@
 import type { ClauseItem, LineItem, ToolDefinition } from '../../data/tools/types';
+import { calculateLateFee, parseLateFeeMode } from '../../lib/lateFee';
 import { formatMoney, lineItemTotal, sumLineItems } from '../../lib/money';
 
 export interface DocBlock {
@@ -52,6 +53,8 @@ export function buildDocumentBlocks(
       return buildPurchaseOrder(values, blocks);
     case 'timesheet-template':
       return buildTimesheet(values, blocks);
+    case 'late-fee-calculator':
+      return buildLateFeeNotice(values, blocks);
     case 'change-order-template':
       return buildChangeOrder(values, blocks);
     case 'photography-contract-template':
@@ -250,6 +253,81 @@ function buildCommercialDoc(
     }
   }
 
+  return blocks;
+}
+
+function buildLateFeeNotice(values: Record<string, unknown>, blocks: DocBlock[]): DocBlock[] {
+  const feeMode = parseLateFeeMode(values.feeMode);
+  const result = calculateLateFee({
+    principal: Number(values.principal) || 0,
+    feeMode,
+    monthlyPercent: Number(values.monthlyPercent) || 0,
+    flatFee: Number(values.flatFee) || 0,
+    daysLate: Number(values.daysLate) || 0,
+    gracePeriodDays: Number(values.gracePeriodDays) || 0,
+  });
+
+  blocks[0] = { type: 'heading', text: 'Late Fee Notice' };
+  blocks.push({
+    type: 'kv',
+    pairs: [
+      { label: 'From', value: str(values.companyName) },
+      { label: 'Address', value: str(values.companyAddress) },
+      { label: 'Email', value: str(values.companyEmail) },
+      { label: 'Notice #', value: str(values.noticeNumber) },
+      { label: 'Notice date', value: str(values.noticeDate) },
+      { label: 'Original invoice #', value: str(values.invoiceRef) },
+      { label: 'Original due date', value: str(values.originalDueDate) },
+    ].filter((p) => p.value),
+  });
+  blocks.push({
+    type: 'kv',
+    pairs: [
+      { label: 'Bill to', value: str(values.clientName) },
+      { label: 'Client address', value: str(values.clientAddress) },
+    ].filter((p) => p.value),
+  });
+
+  const feeBasis =
+    feeMode === 'flat'
+      ? `Flat fee ${money(values.flatFee)} (once after grace)`
+      : `${str(values.monthlyPercent) || '0'}% per month, prorated by chargeable days ÷ 30`;
+
+  blocks.push({
+    type: 'kv',
+    pairs: [
+      { label: 'Principal (unpaid)', value: money(values.principal) },
+      { label: 'Fee type', value: feeMode === 'flat' ? 'Flat fee' : '% per month' },
+      { label: 'Fee basis', value: feeBasis },
+      { label: 'Days late', value: str(values.daysLate) },
+      { label: 'Grace period (days)', value: str(values.gracePeriodDays ?? 0) },
+      { label: 'Chargeable days', value: String(result.chargeableDays) },
+    ],
+  });
+
+  blocks.push({
+    type: 'totals',
+    totals: [
+      { label: 'Principal', value: money(values.principal) },
+      { label: 'Late fee', value: money(result.fee) },
+      { label: 'Total due', value: money(result.totalDue), emphasize: true },
+    ],
+  });
+
+  blocks.push({
+    type: 'paragraph',
+    text: 'Legal caps on late fees and interest vary by state and industry. This notice applies the fee math above only; it does not claim any jurisdiction-specific maximum. Not legal advice.',
+  });
+
+  if (str(values.paymentInstructions)) {
+    blocks.push({
+      type: 'paragraph',
+      text: `Payment instructions: ${str(values.paymentInstructions)}`,
+    });
+  }
+  if (str(values.notes)) {
+    blocks.push({ type: 'paragraph', text: `Notes: ${str(values.notes)}` });
+  }
   return blocks;
 }
 

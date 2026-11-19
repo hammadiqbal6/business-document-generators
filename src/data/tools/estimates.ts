@@ -262,7 +262,12 @@ export const contractorInvoice: ToolDefinition = {
     ],
     sources: estimateSources,
   },
-  relatedSlugs: ['quote-estimate-generator', 'construction-estimate-template', 'receipt-generator'],
+  relatedSlugs: [
+    'quote-estimate-generator',
+    'construction-estimate-template',
+    'receipt-generator',
+    'late-fee-calculator',
+  ],
   publishedAt: '2026-10-19',
   updatedAt: '2026-11-18',
 };
@@ -1350,4 +1355,210 @@ export const changeOrderTemplate: ToolDefinition = {
   relatedSlugs: ['construction-estimate-template', 'contractor-invoice', 'work-order'],
   publishedAt: '2026-11-13',
   updatedAt: '2026-11-13',
+};
+
+export const lateFeeCalculator: ToolDefinition = {
+  slug: 'late-fee-calculator',
+  name: 'Late Fee Calculator',
+  shortName: 'Late Fee Calculator',
+  category: 'estimates-invoices',
+  primaryKeyword: 'late fee calculator',
+  secondaryKeywords: [
+    'invoice late fee calculator',
+    'late payment fee calculator',
+    'overdue invoice late fee',
+    'late fee notice template',
+  ],
+  title: 'Late Fee Calculator – Notice PDF',
+  metaDescription:
+    'Calculate an invoice late fee from principal, monthly % or flat fee, days late, and grace. Preview fee + total due; export a late-fee notice PDF or DOCX.',
+  h1: 'Late Fee Calculator',
+  answerFirst:
+    'Enter the unpaid principal, choose a monthly percent or flat fee, and add days late plus any grace period. This calculator shows the fee and total due, then builds a late-fee notice you can export as PDF or DOCX. Legal caps vary by state—this tool claims none. Not legal advice.',
+  applicationCategory: 'BusinessApplication',
+  isLegalAdjacent: true,
+  documentTitle: 'Late Fee Notice',
+  toolVersion: '1.0',
+  formulaNote:
+    'Chargeable days = max(0, days late − grace period). Monthly %: fee = principal × (monthly % ÷ 100) × (chargeable days ÷ 30). Flat: fee = flat amount when chargeable days > 0, else $0. Total due = principal + fee. Rounded to cents. Legal caps vary by state; this calculator applies none.',
+  fields: [
+    { id: 'companyName', label: 'From (business)', type: 'text', required: true, section: 'Parties' },
+    { id: 'companyAddress', label: 'Business address', type: 'textarea', rows: 2, section: 'Parties' },
+    { id: 'companyEmail', label: 'Email', type: 'email', section: 'Parties' },
+    { id: 'clientName', label: 'Bill to', type: 'text', required: true, section: 'Parties' },
+    { id: 'clientAddress', label: 'Client address', type: 'textarea', rows: 2, section: 'Parties' },
+    { id: 'noticeNumber', label: 'Notice #', type: 'text', required: true, section: 'Invoice reference' },
+    { id: 'noticeDate', label: 'Notice date', type: 'date', required: true, section: 'Invoice reference' },
+    {
+      id: 'invoiceRef',
+      label: 'Original invoice #',
+      type: 'text',
+      required: true,
+      section: 'Invoice reference',
+      help: 'Reference the unpaid invoice this late fee applies to.',
+    },
+    { id: 'originalDueDate', label: 'Original due date', type: 'date', section: 'Invoice reference' },
+    {
+      id: 'principal',
+      label: 'Principal (amount unpaid)',
+      type: 'currency',
+      inputMode: 'decimal',
+      min: 0,
+      required: true,
+      section: 'Late fee inputs',
+    },
+    {
+      id: 'feeMode',
+      label: 'Fee type',
+      type: 'select',
+      required: true,
+      section: 'Late fee inputs',
+      options: [
+        { value: 'monthlyPercent', label: '% per month (prorated by days ÷ 30)' },
+        { value: 'flat', label: 'Flat fee (once after grace)' },
+      ],
+    },
+    {
+      id: 'monthlyPercent',
+      label: 'Percent per month (%)',
+      type: 'number',
+      inputMode: 'decimal',
+      min: 0,
+      max: 100,
+      step: 0.01,
+      section: 'Late fee inputs',
+      help: 'Used when fee type is % per month. Example: 1.5 means 1.5% of principal per 30 chargeable days.',
+    },
+    {
+      id: 'flatFee',
+      label: 'Flat late fee',
+      type: 'currency',
+      inputMode: 'decimal',
+      min: 0,
+      section: 'Late fee inputs',
+      help: 'Used when fee type is flat. Applied once if chargeable days > 0.',
+    },
+    {
+      id: 'daysLate',
+      label: 'Days late',
+      type: 'number',
+      inputMode: 'numeric',
+      min: 0,
+      required: true,
+      section: 'Late fee inputs',
+    },
+    {
+      id: 'gracePeriodDays',
+      label: 'Grace period (days)',
+      type: 'number',
+      inputMode: 'numeric',
+      min: 0,
+      section: 'Late fee inputs',
+      help: 'Days after the due date before a late fee starts. Chargeable days = days late − grace.',
+    },
+    {
+      id: 'paymentInstructions',
+      label: 'Payment instructions',
+      type: 'textarea',
+      rows: 3,
+      section: 'Notice text',
+    },
+    {
+      id: 'notes',
+      label: 'Notes',
+      type: 'textarea',
+      rows: 3,
+      section: 'Notice text',
+      help: 'Optional reminder of contracted late-fee terms. Do not invent legal caps.',
+    },
+  ],
+  defaults: {
+    companyName: 'Summit Build Co.',
+    companyAddress: '120 Industrial Way\nDenver, CO 80216',
+    companyEmail: 'billing@summitbuild.example',
+    clientName: 'Jordan Lee',
+    clientAddress: '88 Cedar Lane, Denver, CO 80220',
+    noticeNumber: 'LFN-2026-012',
+    noticeDate: '2026-11-19',
+    invoiceRef: 'INV-2026-088',
+    originalDueDate: '2026-11-02',
+    principal: 4215.0,
+    feeMode: 'monthlyPercent',
+    monthlyPercent: 1.5,
+    flatFee: 35,
+    daysLate: 17,
+    gracePeriodDays: 5,
+    paymentInstructions:
+      'Pay the total due by ACH or check payable to Summit Build Co. Reference INV-2026-088 and LFN-2026-012.',
+    notes:
+      'Late fee uses the 1.5% per month rate stated on the original invoice after a 5-day grace period. Legal caps vary by state; confirm your terms and local rules before collecting.',
+  },
+  content: {
+    howToUse: [
+      'Enter your business, the client, and the unpaid invoice number.',
+      'Set principal (amount still unpaid), fee type (% per month or flat), days late, and grace period.',
+      'Review the live preview for chargeable days, late fee, and total due.',
+      'Export a late-fee notice as PDF or DOCX, or save a draft in this browser.',
+    ],
+    whatToInclude: [
+      {
+        heading: 'What a late-fee notice should show',
+        body: 'Name both parties, the original invoice number and due date, the unpaid principal, how the fee is calculated (monthly percent or flat), days late, grace period, the resulting fee, and the new total due. Point the client to payment instructions that match the invoice.\n\nPair this notice with the contractor invoice at /tools/contractor-invoice/ and the progress-billing walkthrough at /guides/contractor-invoice-example/.',
+      },
+      {
+        heading: 'Monthly percent vs flat fee',
+        body: 'A monthly percent prorates by chargeable days ÷ 30 (for example 1.5% per month on $4,215 with 12 chargeable days). A flat fee applies once when chargeable days are greater than zero. Use the rate or amount you already disclosed on the invoice or contract—do not invent a new penalty after the fact.',
+      },
+      {
+        heading: 'Legal caps vary by state',
+        body: 'States and industries can limit late fees, interest, or collection practices. This calculator does not apply or claim any jurisdiction-specific cap. Confirm your contract language and local rules with a qualified professional. SBA stay-compliant guidance is a starting point for small-business compliance research, not a substitute for counsel.',
+      },
+    ],
+    workedExample: {
+      heading: 'Worked example: 1.5% per month after grace',
+      body: 'INV-2026-088 left $4,215 unpaid. The invoice was 17 days late with a 5-day grace period, so chargeable days = 12. At 1.5% per month: fee = 4215 × 0.015 × (12 ÷ 30) = $25.29. Total due = $4,240.29. Notice LFN-2026-012 exports those figures with payment instructions.',
+    },
+    commonMistakes: [
+      'Charging a late fee that was never stated on the invoice or contract.',
+      'Counting grace days as chargeable days.',
+      'Claiming a statewide “maximum late fee” without a primary legal source.',
+      'Omitting the original invoice number so AP cannot match the notice.',
+    ],
+    tips: [
+      'Disclose late-fee terms on the original invoice before money is late.',
+      'Rebuild the unpaid balance from /tools/contractor-invoice/ so principal matches AP records.',
+      'When payment clears, issue a receipt from /tools/receipt-generator/.',
+    ],
+    faq: [
+      {
+        question: 'How does this late fee calculator work?',
+        answer:
+          'Chargeable days = max(0, days late − grace period). For % per month, fee = principal × (rate ÷ 100) × (chargeable days ÷ 30). For a flat fee, the flat amount applies once when chargeable days > 0. Total due = principal + fee.',
+      },
+      {
+        question: 'What is a grace period on a late fee?',
+        answer:
+          'Grace period days are subtracted from days late before any fee starts. If days late are inside the grace window, the fee is $0 and total due equals the principal.',
+      },
+      {
+        question: 'Are late fee caps the same in every state?',
+        answer:
+          'No. Legal caps and collection rules vary by state and sometimes by industry. This tool claims none. Confirm local limits with a primary source or counsel before you collect.',
+      },
+      {
+        question: 'Is this late fee notice legal advice?',
+        answer:
+          'No. It is an educational calculator and editable notice template—not legal advice and not a substitute for an attorney.',
+      },
+      {
+        question: 'Can I export a PDF late fee notice?',
+        answer:
+          'Yes. Preview updates as you edit, then download PDF or DOCX. Drafts can stay in localStorage on your device; nothing is uploaded to Docuklin servers.',
+      },
+    ],
+    sources: estimateSources,
+  },
+  relatedSlugs: ['contractor-invoice', 'receipt-generator', 'quote-estimate-generator'],
+  publishedAt: '2026-11-19',
+  updatedAt: '2026-11-19',
 };
