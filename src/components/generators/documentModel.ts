@@ -68,6 +68,8 @@ export function buildDocumentBlocks(
       return buildServiceAgreement(values, blocks);
     case 'simple-nda':
       return buildNda(values, blocks);
+    case 'lien-waiver-generator':
+      return buildLienWaiver(values, blocks);
     case 'tattoo-consent-form-template':
       return buildTattoo(values, blocks);
     case 'rental-lease-application':
@@ -562,6 +564,61 @@ function buildNda(values: Record<string, unknown>, blocks: DocBlock[]): DocBlock
   });
   blocks.push({ type: 'paragraph', text: `Purpose: ${str(values.purpose)}` });
   blocks.push({ type: 'clauses', clauses: enabledClauses(values) });
+  return blocks;
+}
+
+function lienWaiverHeading(condition: string, scope: string): string {
+  const cond = condition.toLowerCase().includes('unconditional') ? 'Unconditional' : 'Conditional';
+  const isFinal = scope.toLowerCase().includes('final');
+  if (isFinal) {
+    return `${cond} Waiver and Release Upon Final Payment`;
+  }
+  return `${cond} Waiver and Release Upon Progress Payment`;
+}
+
+function buildLienWaiver(values: Record<string, unknown>, blocks: DocBlock[]): DocBlock[] {
+  const condition = str(values.waiverCondition) || 'Conditional';
+  const scope = str(values.waiverScope) || 'Partial';
+  blocks[0] = { type: 'heading', text: lienWaiverHeading(condition, scope) };
+  blocks.push({
+    type: 'kv',
+    pairs: [
+      { label: 'Condition', value: condition },
+      { label: 'Scope', value: scope },
+      { label: 'Claimant', value: str(values.claimantName) },
+      { label: 'Claimant address', value: str(values.claimantAddress) },
+      { label: 'Claimant role', value: str(values.claimantRole) },
+      { label: 'Customer / owner / GC', value: str(values.customerName) },
+      { label: 'Project', value: str(values.projectName) },
+      { label: 'Property / job address', value: str(values.propertyAddress) },
+      { label: 'Job / contract #', value: str(values.jobNumber) },
+      { label: 'Invoice / pay app #', value: str(values.invoiceNumber) },
+      { label: 'Payment amount', value: money(values.paymentAmount) },
+      { label: 'Through date', value: str(values.throughDate) },
+      { label: 'Waiver date', value: str(values.waiverDate) },
+      { label: 'Project state', value: str(values.governingState) },
+    ].filter((p) => p.value),
+  });
+  if (str(values.releaseText)) {
+    blocks.push({ type: 'subheading', text: 'Release' });
+    blocks.push({ type: 'paragraph', text: str(values.releaseText) });
+  }
+  if (str(values.exceptions)) {
+    blocks.push({ type: 'subheading', text: 'Exceptions' });
+    blocks.push({ type: 'paragraph', text: str(values.exceptions) });
+  }
+  blocks.push({ type: 'hr' });
+  blocks.push({
+    type: 'paragraph',
+    text:
+      'Notice: This is sample language only. State lien-waiver forms vary; use a statutory form when your project state requires one. Not legal advice.',
+  });
+  blocks.push({
+    type: 'paragraph',
+    text: `Claimant signer: ${str(values.signerName) || '__________________'}${
+      str(values.signerTitle) ? `, ${str(values.signerTitle)}` : ''
+    }  Signature __________________ Date ______`,
+  });
   return blocks;
 }
 
