@@ -3100,6 +3100,7 @@ export const guides: Guide[] =
     "legalNote": "This article is not legal or tax advice. Recordkeeping and tax rules vary by jurisdiction. Confirm requirements with a qualified professional for your situation.",
     "relatedToolSlugs": [
       "contractor-invoice",
+      "lien-waiver",
       "construction-estimate-template",
       "receipt-generator",
       "work-order"

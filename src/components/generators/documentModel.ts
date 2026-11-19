@@ -54,6 +54,8 @@ export function buildDocumentBlocks(
       return buildTimesheet(values, blocks);
     case 'change-order-template':
       return buildChangeOrder(values, blocks);
+    case 'lien-waiver':
+      return buildLienWaiver(values, blocks);
     case 'photography-contract-template':
       return buildPhotoContract(values, blocks);
     case 'videography-contract':
@@ -393,6 +395,93 @@ function buildChangeOrder(values: Record<string, unknown>, blocks: DocBlock[]): 
   blocks.push({
     type: 'paragraph',
     text: `Client: ${str(values.clientSigner) || '__________________'}  Signature __________________ Date ______`,
+  });
+  return blocks;
+}
+
+function lienWaiverHeading(waiverType: string): string {
+  const t = waiverType.toLowerCase();
+  const conditional = t.includes('unconditional') ? 'Unconditional' : 'Conditional';
+  const scope = t.includes('final') ? 'Final Payment' : 'Progress Payment';
+  return `${conditional} Lien Waiver and Release — ${scope}`;
+}
+
+function buildLienWaiver(values: Record<string, unknown>, blocks: DocBlock[]): DocBlock[] {
+  const waiverType = str(values.waiverType) || 'Conditional Progress';
+  blocks[0] = { type: 'heading', text: lienWaiverHeading(waiverType) };
+
+  const isUnconditional = /unconditional/i.test(waiverType);
+  const isFinal = /final/i.test(waiverType);
+
+  blocks.push({
+    type: 'paragraph',
+    text: isUnconditional
+      ? 'NOTICE TO CLAIMANT (sample): This document is labeled unconditional. Signing sample language may waive lien and related payment rights even if you have not been paid. Confirm funds cleared and use your state’s required form when applicable. Not legal advice.'
+      : 'NOTICE (sample): This document is labeled conditional and is intended to take effect only upon receipt of the payment described below. Rely on it only after confirming payment facts for your job. Not legal advice.',
+  });
+
+  blocks.push({
+    type: 'kv',
+    pairs: [
+      { label: 'Waiver type', value: waiverType },
+      { label: 'Waiver date', value: str(values.waiverDate) },
+      { label: 'Claimant', value: str(values.claimantName) },
+      { label: 'Claimant address', value: str(values.claimantAddress) },
+      { label: 'Customer', value: str(values.customerName) },
+      { label: 'Owner', value: str(values.ownerName) },
+      { label: 'Job location', value: str(values.jobLocation) },
+      { label: 'Project', value: str(values.projectName) },
+      { label: 'Contract / PO / invoice #', value: str(values.contractRef) },
+      {
+        label: isFinal ? 'Through / completion date' : 'Through date',
+        value: str(values.throughDate),
+      },
+      { label: 'Payment amount', value: money(values.paymentAmount) },
+      { label: 'Maker of check / payer', value: str(values.checkMaker) },
+      { label: 'Check payable to', value: str(values.checkPayableTo) },
+    ].filter((p) => p.value),
+  });
+
+  blocks.push({ type: 'subheading', text: 'Release (sample language)' });
+  if (isFinal) {
+    blocks.push({
+      type: 'paragraph',
+      text: isUnconditional
+        ? `Claimant states that the payment amount listed above has been received for the project described above and, subject to the Exceptions below, waives and releases lien and related stop-payment or payment-bond rights for labor, services, equipment, and materials furnished on this job through final payment. This sample is educational only and is not a statutory form.`
+        : `Subject to the Exceptions below, Claimant waives and releases lien and related stop-payment or payment-bond rights for labor, services, equipment, and materials furnished on this job through final payment. This sample waiver is intended to be effective only upon Claimant’s receipt of the payment amount listed above. This is educational sample language—not a statutory form.`,
+    });
+  } else {
+    blocks.push({
+      type: 'paragraph',
+      text: isUnconditional
+        ? `Claimant states that the progress payment listed above has been received and, subject to the Exceptions below, waives and releases lien and related stop-payment or payment-bond rights for labor, services, equipment, and materials furnished to the customer on this job through the Through Date. Rights for later work remain unless listed as released. This sample is educational only and is not a statutory form.`
+        : `Subject to the Exceptions below, Claimant waives and releases lien and related stop-payment or payment-bond rights for labor, services, equipment, and materials furnished to the customer on this job through the Through Date. This sample waiver is intended to be effective only upon Claimant’s receipt of the payment amount listed above. Rights for later work and amounts listed under Exceptions are not released. This is educational sample language—not a statutory form.`,
+    });
+  }
+
+  if (str(values.exceptions)) {
+    blocks.push({ type: 'subheading', text: 'Exceptions' });
+    blocks.push({ type: 'paragraph', text: str(values.exceptions) });
+  } else {
+    blocks.push({
+      type: 'paragraph',
+      text: 'Exceptions: None listed. Retainage, unpaid extras, and disputed amounts should be listed if they remain open.',
+    });
+  }
+
+  if (str(values.notes)) {
+    blocks.push({ type: 'paragraph', text: `Notes: ${str(values.notes)}` });
+  }
+
+  blocks.push({
+    type: 'paragraph',
+    text: 'Some U.S. states require statutory lien-waiver forms. Do not treat this PDF as compliant with any particular statute. Have a licensed attorney review before signing.',
+  });
+
+  blocks.push({ type: 'hr' });
+  blocks.push({
+    type: 'paragraph',
+    text: `Claimant signer: ${str(values.signerName) || '__________________'}${str(values.signerTitle) ? `, ${str(values.signerTitle)}` : ''}  Signature __________________ Date ______`,
   });
   return blocks;
 }

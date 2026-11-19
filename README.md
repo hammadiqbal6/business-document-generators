@@ -19,7 +19,7 @@ flowchart LR
   Form --> DOCX
 ```
 
-## Tools (21)
+## Tools (22)
 
 | Tool | Path |
 |------|------|
@@ -44,6 +44,7 @@ flowchart LR
 | Service agreement | `/tools/service-agreement-template/` |
 | Purchase order | `/tools/purchase-order-template/` |
 | Change order | `/tools/change-order-template/` |
+| Lien waiver | `/tools/lien-waiver/` |
 
 Hubs: `/hubs/estimates-invoices/`, `/hubs/contracts/`, `/hubs/forms/`, `/hubs/creative-templates/`
 
@@ -130,8 +131,9 @@ Short mirror of [`docs/GROWTH-STATUS.md`](docs/GROWTH-STATUS.md). **Every PR mus
 
 ### Done (as of 2026-11-19)
 
-- **CI / Workers Builds speedup (this PR):** parallel build+test, npm/Astro caches, faster `npm ci`, docs-only path skip with required-check gate, Playwright Chromium cache on Full checks; root `.npmrc` for Cloudflare install.
-- Homepage links all 21 tools by category; hubs’ which-document tables complete; home title/H1/tagline target contractor & freelancer templates (PR #35).
+- **Lien waiver generator** (`/tools/lien-waiver/`): conditional/unconditional × progress/final, legal-adjacent disclaimer, hub + KEYWORD-MAP + llms wiring (this PR).
+- **CI / Workers Builds speedup (PR #36):** parallel build+test, npm/Astro caches, faster `npm ci`, docs-only path skip with required-check gate, Playwright Chromium cache on Full checks; root `.npmrc` for Cloudflare install.
+- Homepage links all tools by category; hubs’ which-document tables complete; home title/H1/tagline target contractor & freelancer templates (PR #35).
 - Indexing audit in CI (`npm run audit:indexing`): sitemap URLs self-canonical + not noindex; embed/`/404/` intentional noindex + `X-Robots-Tag`; internal links avoid redirect sources.
 - IndexNow + GSC property verification in place; AdSense application **Getting ready**.
 - TinyLaunch badge removed from Workers Builds `PUBLIC_DIRECTORY_BADGES` (2026-11-19). TinyLaunch rejected **2026-11-08** (one product at a time); retry after YardTally **2026-12-07**.
@@ -140,7 +142,8 @@ Short mirror of [`docs/GROWTH-STATUS.md`](docs/GROWTH-STATUS.md). **Every PR mus
 
 ### Remaining
 
-- Confirm post-merge CI wall-clock vs baseline (~33–47s successful `CI` runs on main/PRs before this change); set Workers Builds **Install command** to flagged `npm ci` if the dashboard override ignores `.npmrc`.
+- After merge/deploy of lien-waiver: IndexNow ping + GSC URL Inspection for `/tools/lien-waiver/`.
+- Confirm Workers Builds **Install command** uses flagged `npm ci` if the dashboard override ignores `.npmrc` (PR #36).
 - Validate GSC indexing after PR #35 deploy (IndexNow + URL Inspection); expect embed/404 noindex exclusions to stay.
 - Bing verification **unset**; author/`sameAs` env vars **unset**; editorial backlinks still needed.
 - Pause Reddit promo/launch posts until karma recovers; r/SideProject launch was removed and not reposted.

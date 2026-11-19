@@ -105,6 +105,12 @@ export const toolToGuides: Record<string, string[]> = {
     'work-order-vs-invoice-vs-estimate',
     'invoice-vs-estimate',
   ],
+  'lien-waiver': [
+    'contractor-invoice-example',
+    'construction-estimate-that-wins-jobs',
+    'work-order-vs-invoice-vs-estimate',
+    'invoice-vs-estimate',
+  ],
 };
 
 /** Guide → related guide slugs (topic clusters, not identical lists). */

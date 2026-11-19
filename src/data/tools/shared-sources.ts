@@ -22,6 +22,19 @@ export const liiContract: SourceRef = {
   usedFor: 'basic elements of an enforceable agreement (offer, acceptance, consideration)',
 };
 
+export const liiMechanicsLien: SourceRef = {
+  label: 'Cornell LII Wex — Mechanic’s lien',
+  url: 'https://www.law.cornell.edu/wex/mechanic%27s_lien',
+  usedFor: 'plain-language overview of mechanics’ / construction liens (state law varies)',
+};
+
+/** Example of a state that publishes statutory waiver-and-release forms — not a claim that Docuklin matches them. */
+export const caCivilCode8132: SourceRef = {
+  label: 'California Civil Code § 8132 — Conditional waiver on progress payment',
+  url: 'https://leginfo.legislature.ca.gov/faces/codes_displaySection.xhtml?lawCode=CIV&sectionNum=8132',
+  usedFor: 'illustrates that some U.S. states require statutory lien-waiver forms; this site’s PDF is sample language only',
+};
+
 export const liiIndependentContractor: SourceRef = {
   label: 'Cornell LII Wex — Independent contractor',
   url: 'https://www.law.cornell.edu/wex/independent_contractor',
@@ -124,6 +137,15 @@ export const estimateSources: SourceRef[] = [
   irsRecordkeeping,
   irsWhatRecords,
   irsHowLongRecords,
+  sbaHome,
+];
+
+export const lienWaiverSources: SourceRef[] = [
+  liiMechanicsLien,
+  caCivilCode8132,
+  sbaStayCompliant,
+  irsRecordkeeping,
+  liiContract,
   sbaHome,
 ];
 
