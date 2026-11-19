@@ -43,7 +43,6 @@ const redirects = redirectSources();
 
 function resolveInternal(href) {
   const normalized = href.replace(/\/$/, '') || '/';
-  if (redirects.has(normalized)) return true;
   // Static asset (png/svg/ico/txt/xml/webmanifest/etc.)
   const asFile = path.join(dist, href.replace(/^\//, ''));
   if (fs.existsSync(asFile) && fs.statSync(asFile).isFile()) return true;
@@ -55,6 +54,11 @@ function resolveInternal(href) {
 }
 
 for (const href of hrefs) {
+  const normalized = href.replace(/\/$/, '') || '/';
+  if (redirects.has(normalized)) {
+    errors.push(`Internal link points at redirect source (use final 200 URL): ${href}`);
+    continue;
+  }
   if (!resolveInternal(href)) {
     errors.push(`Broken internal link: ${href}`);
   }

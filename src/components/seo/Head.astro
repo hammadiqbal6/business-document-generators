@@ -24,7 +24,10 @@ const {
   ogImagePath = siteConfig.ogImagePath,
   ogImageAlt = siteConfig.ogImageAlt,
 } = Astro.props;
-const canonical = absoluteUrl(path);
+/** Self-canonical path: trailing slash always (matches Worker 308 + sitemap). */
+const canonicalPath =
+  path === '/' ? '/' : path.endsWith('/') ? path : `${path}/`;
+const canonical = absoluteUrl(canonicalPath);
 const fullTitle = buildPageTitle(title);
 const metaDesc = description;
 const ogImage = absoluteUrl(ogImagePath);
