@@ -5,6 +5,7 @@
 | `/` | contractor freelancer document templates | free document templates, contractor PDF templates | sitewide; avoid head “invoice template” (KD 43) |
 | `/tools/construction-estimate-template/` | construction estimate template | contractor estimate form, building estimate PDF | 1,200/mo, KD 2 |
 | `/tools/contractor-invoice/` | contractor invoice | free invoice generator for contractors, construction invoice template, contractor invoice PDF | long-tail B2B |
+| `/tools/progress-invoice/` | progress invoice | progress billing invoice, progress invoice template, retainage invoice, construction progress invoice | long-tail B2B |
 | `/tools/photography-contract-template/` | photography contract template | wedding photography contract, photographer agreement | 1,100/mo, KD 6 |
 | `/tools/videography-contract/` | videography contract | video production agreement, wedding videography contract | profession long-tail |
 | `/tools/podcast-script-template/` | podcast script template | podcast episode outline, interview podcast script | 600/mo, KD 1 |
@@ -46,7 +47,7 @@
 | `/guides/freelance-web-design-contract-clauses/` | freelance web design contract clauses | scope IP revisions handover | freelance-web-design-contract |
 | `/guides/how-to-create-a-work-order/` | how to create a work order | how to write a work order | work-order |
 | `/guides/wedding-videography-contract/` | wedding videography contract | wedding video agreement deliverables | videography-contract |
-| `/guides/contractor-invoice-example/` | contractor invoice example | progress billing invoice | contractor-invoice |
+| `/guides/contractor-invoice-example/` | contractor invoice example | progress billing example, contractor draw sample | contractor-invoice, progress-invoice |
 
 Cannibalization rule: head terms like “invoice template” (KD 43) are not targeted; each page keeps a distinct profession or document type. Guides answer “when/why/how”; tools own “free template / generator” intent.
 

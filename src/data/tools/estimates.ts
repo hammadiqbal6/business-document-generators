@@ -226,6 +226,7 @@ export const contractorInvoice: ToolDefinition = {
       'Keep invoice numbers sequential and year-prefixed.',
       'Send PDF plus a plain-text payment reminder.',
       'Price the job first with the free quote generator at /tools/quote-estimate-generator/ or the construction estimate template at /tools/construction-estimate-template/.',
+      'For contract draws with retainage and balance-to-finish, use /tools/progress-invoice/.',
       'When a deposit clears, issue a payment receipt from /tools/receipt-generator/.',
     ],
     faq: [
@@ -252,7 +253,7 @@ export const contractorInvoice: ToolDefinition = {
       {
         question: 'How does progress billing work on a contractor invoice?',
         answer:
-          'Bill a percentage or completed-phase amount that matches your contract draws—e.g. after demo, rough-in, or substantial completion. Reference the estimate or PO and show prior payments so the balance due is obvious.',
+          'Bill a percentage or completed-phase amount that matches your contract draws—e.g. after demo, rough-in, or substantial completion. Reference the estimate or PO and show prior payments so the balance due is obvious. For retainage and balance-to-finish fields, use /tools/progress-invoice/.',
       },
       {
         question: 'When should a contractor send an invoice?',
@@ -262,7 +263,7 @@ export const contractorInvoice: ToolDefinition = {
     ],
     sources: estimateSources,
   },
-  relatedSlugs: ['quote-estimate-generator', 'construction-estimate-template', 'receipt-generator'],
+  relatedSlugs: ['progress-invoice', 'quote-estimate-generator', 'construction-estimate-template', 'receipt-generator'],
   publishedAt: '2026-10-19',
   updatedAt: '2026-11-18',
 };
@@ -1350,9 +1351,222 @@ export const changeOrderTemplate: ToolDefinition = {
   relatedSlugs: [
     'construction-estimate-template',
     'contractor-invoice',
+    'progress-invoice',
     'work-order',
     'lien-waiver-generator',
   ],
   publishedAt: '2026-11-13',
   updatedAt: '2026-11-13',
+};
+
+export const progressInvoice: ToolDefinition = {
+  slug: 'progress-invoice',
+  name: 'Progress Invoice Generator',
+  shortName: 'Progress Invoice',
+  category: 'estimates-invoices',
+  primaryKeyword: 'progress invoice',
+  secondaryKeywords: [
+    'progress billing invoice',
+    'progress invoice template',
+    'retainage invoice',
+    'construction progress invoice',
+  ],
+  title: 'Progress Invoice Generator (Free)',
+  metaDescription:
+    'Progress invoice with contract value, % or $ complete, prior billings, retainage, amount due, and balance to finish. Live preview; free PDF/DOCX export.',
+  h1: 'Free Progress Invoice Generator',
+  answerFirst:
+    'A progress invoice bills one contract draw: contract value, work done this period (percent or dollars), previously billed, retainage, amount due now, and balance to finish. Fill the fields, preview the schedule, and export PDF or DOCX—nothing leaves your browser.',
+  applicationCategory: 'BusinessApplication',
+  isLegalAdjacent: false,
+  documentTitle: 'Progress Invoice',
+  toolVersion: '1.0',
+  formulaNote:
+    'Work this period = percent of contract (contract value × percent ÷ 100) or the dollar amount you enter. Retainage this period = work this period × (retainage % ÷ 100). Amount due = work this period − retainage. Balance to finish = contract value − (previously billed + work this period). Previously billed is prior gross work billed, not retainage held.',
+  fields: [
+    { id: 'companyName', label: 'Company name', type: 'text', required: true, section: 'Your business' },
+    { id: 'companyAddress', label: 'Company address', type: 'textarea', rows: 2, section: 'Your business' },
+    { id: 'companyPhone', label: 'Phone', type: 'tel', section: 'Your business' },
+    { id: 'companyEmail', label: 'Email', type: 'email', section: 'Your business' },
+    { id: 'invoiceNumber', label: 'Invoice / application #', type: 'text', required: true, section: 'Invoice' },
+    { id: 'invoiceDate', label: 'Invoice date', type: 'date', required: true, section: 'Invoice' },
+    { id: 'dueDate', label: 'Due date', type: 'date', required: true, section: 'Invoice' },
+    { id: 'periodStart', label: 'Period start', type: 'date', section: 'Invoice' },
+    { id: 'periodEnd', label: 'Period end', type: 'date', section: 'Invoice' },
+    { id: 'poNumber', label: 'Contract / job #', type: 'text', required: true, section: 'Invoice' },
+    { id: 'clientName', label: 'Bill to', type: 'text', required: true, section: 'Client' },
+    { id: 'clientAddress', label: 'Client / job address', type: 'textarea', rows: 2, section: 'Client' },
+    { id: 'projectName', label: 'Project name', type: 'text', section: 'Client' },
+    {
+      id: 'contractValue',
+      label: 'Contract value',
+      type: 'currency',
+      inputMode: 'decimal',
+      min: 0,
+      required: true,
+      section: 'Progress billing',
+      help: 'Original (or revised) contract sum you are billing against.',
+    },
+    {
+      id: 'completeMode',
+      label: 'Complete this period as',
+      type: 'select',
+      required: true,
+      section: 'Progress billing',
+      options: [
+        { value: 'percent', label: 'Percent of contract' },
+        { value: 'amount', label: 'Dollar amount' },
+      ],
+    },
+    {
+      id: 'percentComplete',
+      label: 'Percent complete this period',
+      type: 'number',
+      inputMode: 'decimal',
+      min: 0,
+      max: 100,
+      step: 0.01,
+      section: 'Progress billing',
+      help: 'Used when mode is percent. Example: 25 means 25% of the contract value this draw.',
+    },
+    {
+      id: 'amountComplete',
+      label: 'Amount complete this period',
+      type: 'currency',
+      inputMode: 'decimal',
+      min: 0,
+      section: 'Progress billing',
+      help: 'Used when mode is dollar amount. Enter the gross work for this period before retainage.',
+    },
+    {
+      id: 'previouslyBilled',
+      label: 'Previously billed',
+      type: 'currency',
+      inputMode: 'decimal',
+      min: 0,
+      required: true,
+      section: 'Progress billing',
+      help: 'Gross work billed on prior progress invoices (before this period).',
+    },
+    {
+      id: 'retainagePercent',
+      label: 'Retainage (%)',
+      type: 'number',
+      inputMode: 'decimal',
+      min: 0,
+      max: 100,
+      step: 0.01,
+      section: 'Progress billing',
+      help: 'Percent withheld from this period’s work. Use 0 if your contract has no retainage.',
+    },
+    {
+      id: 'workDescription',
+      label: 'Work completed this period',
+      type: 'textarea',
+      rows: 3,
+      section: 'Progress billing',
+      help: 'Short note for the owner or GC (phase, rooms, or schedule-of-values lines).',
+    },
+    { id: 'paymentInstructions', label: 'Payment instructions', type: 'textarea', rows: 3, section: 'Payment' },
+    { id: 'notes', label: 'Notes', type: 'textarea', rows: 2, section: 'Payment' },
+  ],
+  defaults: {
+    companyName: 'Summit Build Co.',
+    companyAddress: '120 Industrial Way\nDenver, CO 80216',
+    companyPhone: '(303) 555-0142',
+    companyEmail: 'billing@summitbuild.example',
+    invoiceNumber: 'INV-2026-091 / App 2',
+    invoiceDate: '2026-11-19',
+    dueDate: '2026-12-03',
+    periodStart: '2026-11-01',
+    periodEnd: '2026-11-19',
+    poNumber: 'CE-2026-014',
+    clientName: 'Jordan Lee',
+    clientAddress: '88 Cedar Lane, Denver, CO 80220',
+    projectName: 'Kitchen remodel – cabinets & flooring',
+    contractValue: 42000,
+    completeMode: 'percent',
+    percentComplete: 25,
+    amountComplete: 0,
+    previouslyBilled: 12600,
+    retainagePercent: 10,
+    workDescription:
+      'Cabinet boxes set and secured; countertop template complete; flooring delivered and staged. Matches schedule-of-values lines for cabinetry labor and flooring materials for this draw.',
+    paymentInstructions: 'ACH to Summit Build Co. or check payable to Summit Build Co. Net 14. Reference INV-2026-091.',
+    notes: 'Retainage held per contract §4. Release of retainage billed on substantial completion.',
+  },
+  content: {
+    howToUse: [
+      'Enter contractor and client details, invoice number, and the contract or job reference.',
+      'Set the contract value, choose percent or dollar complete for this period, and enter previously billed plus retainage %.',
+      'Add a short work description and payment instructions.',
+      'Preview amount due and balance to finish, then export PDF/DOCX or print.',
+    ],
+    whatToInclude: [
+      {
+        heading: 'What a progress invoice has to show',
+        body: 'Owners and GCs expect the contract sum, what you are billing this period, what you already billed, retainage held, and what is still left on the job. Put the contract or estimate number on every draw so accounts payable can match applications. If you switched modes mid-job (percent one month, lump amount the next), say so in the work description so nobody re-runs the wrong math.',
+      },
+      {
+        heading: 'Retainage vs balance to finish',
+        body: 'Retainage is money earned but held back until a later release date in the contract. Balance to finish is the unpaid contract work still ahead—not the same as retainage sitting in escrow. This generator subtracts retainage from the current period only; track cumulative retainage in your ledger if the contract requires a running total.',
+      },
+      {
+        heading: 'When to use this vs a line-item contractor invoice',
+        body: 'Use progress billing when the deal is a fixed contract with draws. Use the regular contractor invoice when you are billing open line items, T&M extras, or a one-off deposit without a percent-complete schedule. After a signed change order raises the contract sum, update the contract value here before the next draw.',
+      },
+    ],
+    workedExample: {
+      heading: 'Worked example: kitchen remodel App 2',
+      body: 'Contract value $42,000. Previously billed $12,600. This period is 25% of the contract ($10,500). At 10% retainage, $1,050 is held and $9,450 is due. Total completed to date is $23,100, so balance to finish is $18,900. Rebuild the same numbers in the form defaults, then change the percent and watch amount due move.',
+    },
+    commonMistakes: [
+      'Billing percent of the original contract after a change order raised the sum—update contract value first.',
+      'Treating previously billed as net-of-retainage when your earlier invoices showed gross work.',
+      'Leaving retainage at zero when the signed contract still holds 5–10%.',
+      'Sending a progress draw that does not name the period or the work completed.',
+    ],
+    tips: [
+      'Keep application numbers sequential (App 1, App 2) even if invoice prefixes differ.',
+      'Mirror the same party names and job address you used on the estimate and change orders.',
+      'When the draw clears, issue a payment receipt from /tools/receipt-generator/.',
+      'For open line-item billing without percent complete, use /tools/contractor-invoice/ instead.',
+    ],
+    faq: [
+      {
+        question: 'What is a progress invoice?',
+        answer:
+          'It is a payment application against a fixed contract that shows contract value, work completed this period, prior billings, retainage, amount due now, and balance left to finish.',
+      },
+      {
+        question: 'Should I bill by percent or by dollar amount?',
+        answer:
+          'Use percent when your schedule of values is percent-complete. Use a dollar amount when this draw is a negotiated lump for a phase. Pick one mode per invoice and stick to it on that PDF.',
+      },
+      {
+        question: 'How does retainage affect amount due?',
+        answer:
+          'Amount due equals work this period minus retainage for this period. Retainage is still earned; it is just held until the contract says you can bill for release.',
+      },
+      {
+        question: 'What does balance to finish mean?',
+        answer:
+          'Contract value minus previously billed minus work this period. It is the gross work still left on the contract, not a statement of cash already paid.',
+      },
+      {
+        question: 'Is this the same as a contractor invoice?',
+        answer:
+          'Related, but different. The contractor invoice is built for line items, tax, and deposits. This progress invoice is built for contract draws with retainage. See /tools/contractor-invoice/ for line-item billing.',
+      },
+      {
+        question: 'Can I download a progress invoice PDF?',
+        answer:
+          'Yes. Preview updates as you edit, then export PDF or DOCX. Entries stay on your device; nothing is uploaded to our servers.',
+      },
+    ],
+    sources: estimateSources,
+  },
+  relatedSlugs: ['contractor-invoice', 'change-order-template', 'construction-estimate-template', 'receipt-generator'],
+  publishedAt: '2026-11-19',
+  updatedAt: '2026-11-19',
 };

@@ -13,7 +13,12 @@ import { siteConfig } from '../src/config/site';
 
 describe('YMYL disclaimers', () => {
   it('flags invoice and receipt tools for tax/legal disclaimer', () => {
-    for (const slug of ['contractor-invoice', 'cleaning-service-invoice', 'receipt-generator']) {
+    for (const slug of [
+      'contractor-invoice',
+      'cleaning-service-invoice',
+      'receipt-generator',
+      'progress-invoice',
+    ]) {
       const tool = getToolBySlug(slug)!;
       expect(isInvoiceOrReceiptTool(tool)).toBe(true);
       expect(toolDisclaimerBanner(tool)).toMatch(/not legal or tax advice/i);

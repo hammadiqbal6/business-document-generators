@@ -27,6 +27,7 @@ export function buildLlmsTxtBody(): string {
     `- How long is an estimate good for? → ${origin}/guides/how-to-write-a-business-estimate/`,
     `- How do you write a construction quote or estimate? → ${origin}/guides/construction-estimate-that-wins-jobs/`,
     `- How do you invoice as a contractor? → ${origin}/guides/contractor-invoice-example/`,
+    `- How do you create a progress invoice / progress billing with retainage? → ${origin}/tools/progress-invoice/`,
     `- How do you write a work order? → ${origin}/guides/how-to-create-a-work-order/`,
     `- How do you write a photography contract? → ${origin}/guides/photography-contract-clauses/`,
     `- Who owns the photos from a paid shoot? → ${origin}/guides/photography-contract-clauses/`,

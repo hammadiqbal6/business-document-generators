@@ -25,6 +25,7 @@ flowchart LR
 |------|------|
 | Construction estimate | `/tools/construction-estimate-template/` |
 | Contractor invoice | `/tools/contractor-invoice/` |
+| Progress invoice | `/tools/progress-invoice/` |
 | Photography contract | `/tools/photography-contract-template/` |
 | Videography contract | `/tools/videography-contract/` |
 | Podcast script | `/tools/podcast-script-template/` |
@@ -113,7 +114,7 @@ npm run proof   # rebuilds dist and regenerates docs/proof/
 
 ## Audits & CI
 
-PR / `main` CI runs a fast safety net only (`npm ci`, `npm run build`, `npm test`). Run `npm run audit`, `npm run proof`, and `npx lhci autorun` locally before opening PRs. The **Full checks** workflow (Actions → workflow_dispatch) still runs Playwright, audits, proof, and Lighthouse on demand.
+PR / `main` CI: path-filtered parallel `build` + `test` jobs (npm cache, Astro/Vite cache, `npm ci --prefer-offline --no-audit --fund=false`), with concurrency cancel-in-progress. Docs-only changes skip the heavy jobs but still report the required `build-test-audit-proof` check. Run `npm run audit`, `npm run proof`, and `npx lhci autorun` locally before opening PRs. The **Full checks** workflow (Actions → workflow_dispatch) caches Playwright Chromium and runs audits, proof, and Lighthouse on demand.
 
 ## SEO / AdSense / deploy
 
@@ -133,6 +134,9 @@ Short mirror of [`docs/GROWTH-STATUS.md`](docs/GROWTH-STATUS.md). **Every PR mus
 
 - **Lien waiver generator** (`/tools/lien-waiver-generator/`): conditional/unconditional × partial/final fill-in form, live preview, PDF/DOCX, state-forms-vary disclaimer, FAQ; wired into contracts hub, KEYWORD-MAP, llms question maps, related tools (this PR).
 - Homepage links tools by category; hubs’ which-document tables complete; home title/H1/tagline target contractor & freelancer templates (PR #35).
+- **Progress invoice generator** (`/tools/progress-invoice/`): contract value, percent or amount complete, previously billed, retainage %, amount due, balance to finish; PDF/DOCX (this PR).
+- **CI / Workers Builds speedup (merged to main):** parallel build+test, npm/Astro caches, faster `npm ci`, docs-only path skip with required-check gate, Playwright Chromium cache on Full checks; root `.npmrc` for Cloudflare install.
+- Homepage links all tools by category; hubs’ which-document tables complete; home title/H1/tagline target contractor & freelancer templates (PR #35).
 - Indexing audit in CI (`npm run audit:indexing`): sitemap URLs self-canonical + not noindex; embed/`/404/` intentional noindex + `X-Robots-Tag`; internal links avoid redirect sources.
 - IndexNow + GSC property verification in place; AdSense application **Getting ready**.
 - TinyLaunch badge removed from Workers Builds `PUBLIC_DIRECTORY_BADGES` (2026-11-19). TinyLaunch rejected **2026-11-08** (one product at a time); retry after YardTally **2026-12-07**.
@@ -143,9 +147,12 @@ Short mirror of [`docs/GROWTH-STATUS.md`](docs/GROWTH-STATUS.md). **Every PR mus
 
 - Dedicated “construction lien waiver basics” guide (SEO-GUIDE calendar) still open; tool currently Learn-mores to estimate/invoice/work-order guides.
 - Validate GSC indexing after PR #35 deploy (IndexNow + URL Inspection); expect embed/404 noindex exclusions to stay. After this tool ships, ping IndexNow and request indexing for `/tools/lien-waiver-generator/`.
+- Validate GSC indexing after deploy (IndexNow + URL Inspection for new `/tools/progress-invoice/`); expect embed/404 noindex exclusions to stay.
+- Confirm CI wall-clock vs baseline (~33–47s); set Workers Builds **Install command** to flagged `npm ci` if the dashboard override ignores `.npmrc`.
 - Bing verification **unset**; author/`sameAs` env vars **unset**; editorial backlinks still needed.
 - Pause Reddit promo/launch posts until karma recovers; r/SideProject launch was removed and not reposted.
 - GA4 Consent Mode cookieless measurement; AdSense approval; Uneed re-review; TinyLaunch resubmit after 2026-12-07.
+- Related tool variants / directory submissions — ongoing off-page (progress invoice shipped; other niches still open).
 
 GSC 28d → 2026-11-17 (owner): **0** clicks, **486** impressions, avg position **58.9**, **54** indexed / **7** not. GA4: **3** users (28d).
 

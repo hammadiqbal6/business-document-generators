@@ -1,6 +1,9 @@
 /**
  * Static assets + run-first Worker for legacy-host 301s and 308 trailing-slash
- * redirects. Workers Builds: npm run build → npx wrangler deploy && node scripts/indexnow.mjs
+ * redirects. Workers Builds:
+ *   install: npm ci --prefer-offline --no-audit --fund=false  (also via root .npmrc)
+ *   build:   npm run build
+ *   deploy:  npx wrangler deploy && node scripts/indexnow.mjs
  *
  * Build-time PUBLIC_* belong in Cloudflare Workers Builds → Variables
  * (.env.example). Do NOT put PUBLIC_* in top-level wrangler "vars" — that

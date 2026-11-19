@@ -18,6 +18,7 @@ env:
   PUBLIC_SITE_URL_HOME_GARDEN: https://getyardtally.com
   PUBLIC_SITE_URL_FIBER_ARTS: https://fiber-arts-calculators.hammadiqbal117.workers.dev
   PUBLIC_SITE_URL_PET: https://pet-calculators.hammadiqbal117.workers.dev
+  NPM_CONFIG_PREFER_OFFLINE: 'true'
 
 jobs:
   full-checks:
@@ -29,8 +30,32 @@ jobs:
         with:
           node-version: '22'
           cache: npm
-      - run: npm ci
-      - run: npx playwright install chromium
+      - name: Cache Astro / Vite build caches
+        uses: actions/cache@v4
+        with:
+          path: |
+            .astro
+            node_modules/.vite
+            node_modules/.astro
+          key: astro-vite-${{ runner.os }}-${{ hashFiles('package-lock.json') }}
+          restore-keys: |
+            astro-vite-${{ runner.os }}-
+      - name: Cache Playwright browsers
+        id: playwright-cache
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/ms-playwright
+          key: playwright-chromium-${{ runner.os }}-${{ hashFiles('package-lock.json') }}
+          restore-keys: |
+            playwright-chromium-${{ runner.os }}-
+      - run: npm ci --prefer-offline --no-audit --fund=false
+      # Chromium only (proof/OG/screenshots). Skip browser download on cache hit.
+      - name: Install Playwright Chromium
+        if: steps.playwright-cache.outputs.cache-hit != 'true'
+        run: npx playwright install --with-deps chromium
+      - name: Install Playwright system deps (cached browsers)
+        if: steps.playwright-cache.outputs.cache-hit == 'true'
+        run: npx playwright install-deps chromium
       - run: npm test
       - run: npm run audit
       - run: npm run proof
