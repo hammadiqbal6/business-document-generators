@@ -112,7 +112,7 @@ npm run proof   # rebuilds dist and regenerates docs/proof/
 
 ## Audits & CI
 
-PR / `main` CI runs a fast safety net only (`npm ci`, `npm run build`, `npm test`). Run `npm run audit`, `npm run proof`, and `npx lhci autorun` locally before opening PRs. The **Full checks** workflow (Actions → workflow_dispatch) still runs Playwright, audits, proof, and Lighthouse on demand.
+PR / `main` CI: path-filtered parallel `build` + `test` jobs (npm cache, Astro/Vite cache, `npm ci --prefer-offline --no-audit --fund=false`), with concurrency cancel-in-progress. Docs-only changes skip the heavy jobs but still report the required `build-test-audit-proof` check. Run `npm run audit`, `npm run proof`, and `npx lhci autorun` locally before opening PRs. The **Full checks** workflow (Actions → workflow_dispatch) caches Playwright Chromium and runs audits, proof, and Lighthouse on demand.
 
 ## SEO / AdSense / deploy
 
@@ -130,6 +130,7 @@ Short mirror of [`docs/GROWTH-STATUS.md`](docs/GROWTH-STATUS.md). **Every PR mus
 
 ### Done (as of 2026-11-19)
 
+- **CI / Workers Builds speedup (this PR):** parallel build+test, npm/Astro caches, faster `npm ci`, docs-only path skip with required-check gate, Playwright Chromium cache on Full checks; root `.npmrc` for Cloudflare install.
 - Homepage links all 21 tools by category; hubs’ which-document tables complete; home title/H1/tagline target contractor & freelancer templates (PR #35).
 - Indexing audit in CI (`npm run audit:indexing`): sitemap URLs self-canonical + not noindex; embed/`/404/` intentional noindex + `X-Robots-Tag`; internal links avoid redirect sources.
 - IndexNow + GSC property verification in place; AdSense application **Getting ready**.
@@ -139,6 +140,7 @@ Short mirror of [`docs/GROWTH-STATUS.md`](docs/GROWTH-STATUS.md). **Every PR mus
 
 ### Remaining
 
+- Confirm post-merge CI wall-clock vs baseline (~33–47s successful `CI` runs on main/PRs before this change); set Workers Builds **Install command** to flagged `npm ci` if the dashboard override ignores `.npmrc`.
 - Validate GSC indexing after PR #35 deploy (IndexNow + URL Inspection); expect embed/404 noindex exclusions to stay.
 - Bing verification **unset**; author/`sameAs` env vars **unset**; editorial backlinks still needed.
 - Pause Reddit promo/launch posts until karma recovers; r/SideProject launch was removed and not reposted.
