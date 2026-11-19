@@ -6,9 +6,11 @@ import {
   cleaningInvoice,
   constructionEstimate,
   contractorInvoice,
+  paintingEstimate,
   purchaseOrderTemplate,
   quoteEstimate,
   receiptGenerator,
+  roofingEstimate,
   timesheetTemplate,
   workOrder,
 } from './estimates';
@@ -50,6 +52,8 @@ export const allTools: ToolDefinition[] = [
   serviceAgreementTemplate,
   purchaseOrderTemplate,
   changeOrderTemplate,
+  roofingEstimate,
+  paintingEstimate,
 ];
 
 export function getToolBySlug(slug: string): ToolDefinition | undefined {

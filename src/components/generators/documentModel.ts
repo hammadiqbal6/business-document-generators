@@ -41,6 +41,8 @@ export function buildDocumentBlocks(
 
   switch (tool.slug) {
     case 'construction-estimate-template':
+    case 'roofing-estimate':
+    case 'painting-estimate':
     case 'contractor-invoice':
     case 'cleaning-service-invoice':
     case 'catering-quote':

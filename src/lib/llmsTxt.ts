@@ -43,6 +43,8 @@ export function buildLlmsTxtBody(): string {
     `- What is a construction change order? → ${origin}/tools/change-order-template/`,
     `- How do you write a free instant quote? → ${origin}/tools/quote-estimate-generator/`,
     `- What belongs on a catering quote? → ${origin}/tools/catering-quote/`,
+    `- How do you write a roofing estimate? → ${origin}/tools/roofing-estimate/`,
+    `- How do you write a painting estimate? → ${origin}/tools/painting-estimate/`,
     `- Wedding vendor contract checklist? → ${origin}/guides/wedding-vendor-contract-checklist/`,
   ];
 

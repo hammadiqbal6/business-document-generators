@@ -78,6 +78,8 @@ export const GET: APIRoute = () => {
     `- What should a service agreement include? → ${origin}/tools/service-agreement-template/`,
     `- Is a purchase order the same as a work order? → ${origin}/tools/purchase-order-template/ and ${origin}/guides/work-order-vs-invoice-vs-estimate/`,
     `- What is a construction change order? Change order vs work order? → ${origin}/tools/change-order-template/`,
+    `- How do you write a roofing estimate (tear-off, squares, flashing)? → ${origin}/tools/roofing-estimate/`,
+    `- How do you write a painting estimate (prep, primer, coats)? → ${origin}/tools/painting-estimate/`,
   ];
 
   const citedFigures = [
