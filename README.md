@@ -131,7 +131,7 @@ Short mirror of [`docs/GROWTH-STATUS.md`](docs/GROWTH-STATUS.md). **Every PR mus
 
 ### Done (as of 2026-11-19)
 
-- **Invoice late fee calculator** (`/tools/invoice-late-fee-calculator/`): flat / monthly % / annual→daily fees, grace days, days late + new total, copy-ready late-fee line and reminder; linked from contractor/cleaning invoice tools and estimates-invoices hub (this PR).
+- **Invoice late fee calculator** (`/tools/invoice-late-fee-calculator/`): flat / monthly % / annual→daily fees, grace days, days late + new total, copy-ready late-fee line and reminder; linked from contractor/cleaning invoice tools and estimates-invoices hub (PR #37).
 - Homepage links all tools by category; hubs’ which-document tables complete; home title/H1/tagline target contractor & freelancer templates (PR #35).
 - Indexing audit in CI (`npm run audit:indexing`): sitemap URLs self-canonical + not noindex; embed/`/404/` intentional noindex + `X-Robots-Tag`; internal links avoid redirect sources.
 - IndexNow + GSC property verification in place; AdSense application **Getting ready**.

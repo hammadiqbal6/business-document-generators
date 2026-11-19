@@ -29,7 +29,7 @@ As of **2026-11-17** (owner-reported GSC/GA4 window) unless noted.
 
 In-repo and confirmed off-repo completions.
 
-- **2026-11-19 — Invoice late fee calculator (this PR):**
+- **2026-11-19 — Invoice late fee calculator (PR #37):**
   - New tool `/tools/invoice-late-fee-calculator/`: invoice amount, due date, payment date (or today), fee type (flat / % per month prorated / annual→daily), optional grace period.
   - Outputs days past due, chargeable days, fee, new total, plus suggested late-fee line and payment-reminder wording (PDF/DOCX export).
   - Wired into `allTools`, estimates-invoices hub which-document table, related links on contractor/cleaning invoice + receipt tools, `KEYWORD-MAP`, `toolGuideMap`, `llms.txt` / `llms-full.txt` question maps. Not added to `featuredToolSlugs`.
