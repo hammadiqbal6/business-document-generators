@@ -25,22 +25,22 @@
     ],
     "sources": [
       {
-        "label": "IRS — What kind of records should I keep",
+        "label": "IRS - What kind of records should I keep",
         "url": "https://www.irs.gov/businesses/small-businesses-self-employed/what-kind-of-records-should-i-keep",
         "usedFor": "Keeping invoices and payment records that support gross receipts"
       },
       {
-        "label": "IRS — How long should I keep records",
+        "label": "IRS - How long should I keep records",
         "url": "https://www.irs.gov/businesses/small-businesses-self-employed/how-long-should-i-keep-records",
         "usedFor": "Retention timing for business records tied to returns"
       },
       {
-        "label": "SBA — Stay legally compliant",
+        "label": "SBA - Stay legally compliant",
         "url": "https://www.sba.gov/business-guide/manage-your-business/stay-legally-compliant",
         "usedFor": "Small-business compliance habits that include clear written terms and records"
       },
       {
-        "label": "Cornell LII — Contract",
+        "label": "Cornell LII - Contract",
         "url": "https://www.law.cornell.edu/wex/contract",
         "usedFor": "Offer, acceptance, and consideration basics when payment terms sit inside a contract"
       }
@@ -161,17 +161,17 @@
     ],
     "sources": [
       {
-        "label": "Cornell LII — Contract",
+        "label": "Cornell LII - Contract",
         "url": "https://www.law.cornell.edu/wex/contract",
         "usedFor": "Offer, acceptance, and consideration when a change modifies an existing agreement"
       },
       {
-        "label": "SBA — Stay legally compliant",
+        "label": "SBA - Stay legally compliant",
         "url": "https://www.sba.gov/business-guide/manage-your-business/stay-legally-compliant",
         "usedFor": "Compliance habits around clear written terms and business records"
       },
       {
-        "label": "IRS — What kind of records should I keep",
+        "label": "IRS - What kind of records should I keep",
         "url": "https://www.irs.gov/businesses/small-businesses-self-employed/what-kind-of-records-should-i-keep",
         "usedFor": "Keeping job documentation that supports income and expenses"
       }
@@ -292,22 +292,22 @@
     ],
     "sources": [
       {
-        "label": "IRS — What kind of records should I keep",
+        "label": "IRS - What kind of records should I keep",
         "url": "https://www.irs.gov/businesses/small-businesses-self-employed/what-kind-of-records-should-i-keep",
         "usedFor": "Keeping purchasing and billing records that support income and expenses"
       },
       {
-        "label": "IRS — How long should I keep records",
+        "label": "IRS - How long should I keep records",
         "url": "https://www.irs.gov/businesses/small-businesses-self-employed/how-long-should-i-keep-records",
         "usedFor": "Retention timing for business records"
       },
       {
-        "label": "Cornell LII — Contract",
+        "label": "Cornell LII - Contract",
         "url": "https://www.law.cornell.edu/wex/contract",
         "usedFor": "When written authorizations may form part of an enforceable agreement"
       },
       {
-        "label": "SBA — Stay legally compliant",
+        "label": "SBA - Stay legally compliant",
         "url": "https://www.sba.gov/business-guide/manage-your-business/stay-legally-compliant",
         "usedFor": "Compliance habits for clear business paperwork"
       }
@@ -420,27 +420,27 @@
     ],
     "sources": [
       {
-        "label": "IRS — Independent contractor defined",
+        "label": "IRS - Independent contractor defined",
         "url": "https://www.irs.gov/businesses/small-businesses-self-employed/independent-contractor-defined",
         "usedFor": "Employee vs independent contractor framing"
       },
       {
-        "label": "IRS — Self-employment tax",
+        "label": "IRS - Self-employment tax",
         "url": "https://www.irs.gov/businesses/small-businesses-self-employed/self-employment-tax-social-security-and-medicare-taxes",
         "usedFor": "Self-employment tax basics for people who work for themselves"
       },
       {
-        "label": "Cornell LII — Contract",
+        "label": "Cornell LII - Contract",
         "url": "https://www.law.cornell.edu/wex/contract",
         "usedFor": "Elements of an enforceable agreement"
       },
       {
-        "label": "Cornell LII — Independent contractor",
+        "label": "Cornell LII - Independent contractor",
         "url": "https://www.law.cornell.edu/wex/independent_contractor",
         "usedFor": "Plain-language contractor vs employee distinction"
       },
       {
-        "label": "SBA — Stay legally compliant",
+        "label": "SBA - Stay legally compliant",
         "url": "https://www.sba.gov/business-guide/manage-your-business/stay-legally-compliant",
         "usedFor": "Small-business compliance starting point"
       }
@@ -557,17 +557,17 @@
     ],
     "sources": [
       {
-        "label": "IRS — What kind of records should I keep",
+        "label": "IRS - What kind of records should I keep",
         "url": "https://www.irs.gov/businesses/small-businesses-self-employed/what-kind-of-records-should-i-keep",
         "usedFor": "Keeping estimates and job records that support income and expenses"
       },
       {
-        "label": "SBA — Stay legally compliant",
+        "label": "SBA - Stay legally compliant",
         "url": "https://www.sba.gov/business-guide/manage-your-business/stay-legally-compliant",
         "usedFor": "Clear written pricing and records as a compliance habit"
       },
       {
-        "label": "Cornell LII — Contract",
+        "label": "Cornell LII - Contract",
         "url": "https://www.law.cornell.edu/wex/contract",
         "usedFor": "Offer and acceptance when an estimate may become binding"
       }

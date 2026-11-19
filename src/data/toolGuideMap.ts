@@ -4,12 +4,14 @@
  */
 export const toolToGuides: Record<string, string[]> = {
   'construction-estimate-template': [
+    'how-to-create-a-contractor-estimate',
     'construction-estimate-that-wins-jobs',
+    'what-is-a-change-order',
     'line-item-totals-explained',
     'invoice-vs-estimate',
-    'contractor-invoice-example',
   ],
   'contractor-invoice': [
+    'invoice-payment-terms',
     'contractor-invoice-example',
     'invoice-vs-estimate',
     'line-item-totals-explained',
@@ -38,6 +40,7 @@ export const toolToGuides: Record<string, string[]> = {
     'what-to-include-on-a-receipt',
   ],
   'freelance-web-design-contract': [
+    'freelance-contract-what-to-include',
     'freelance-web-design-contract-clauses',
     'freelance-payment-schedule-milestones',
     'nda-basics-for-freelancers',
@@ -70,9 +73,9 @@ export const toolToGuides: Record<string, string[]> = {
   ],
   'work-order': [
     'how-to-create-a-work-order',
+    'work-order-vs-purchase-order-vs-invoice',
     'work-order-vs-invoice-vs-estimate',
     'invoice-vs-estimate',
-    'line-item-totals-explained',
   ],
   'receipt-generator': [
     'what-to-include-on-a-receipt',
@@ -80,13 +83,14 @@ export const toolToGuides: Record<string, string[]> = {
     'wedding-vendor-contract-checklist',
   ],
   'quote-estimate-generator': [
+    'how-to-create-a-contractor-estimate',
     'how-to-write-a-business-estimate',
     'invoice-vs-estimate',
     'work-order-vs-invoice-vs-estimate',
     'line-item-totals-explained',
-    'construction-estimate-that-wins-jobs',
   ],
   'independent-contractor-agreement': [
+    'freelance-contract-what-to-include',
     'freelance-payment-schedule-milestones',
     'nda-basics-for-freelancers',
     'freelance-web-design-contract-clauses',
@@ -102,11 +106,12 @@ export const toolToGuides: Record<string, string[]> = {
     'invoice-vs-estimate',
   ],
   'purchase-order-template': [
+    'work-order-vs-purchase-order-vs-invoice',
     'work-order-vs-invoice-vs-estimate',
     'invoice-vs-estimate',
-    'line-item-totals-explained',
   ],
   'change-order-template': [
+    'what-is-a-change-order',
     'construction-estimate-that-wins-jobs',
     'work-order-vs-invoice-vs-estimate',
     'invoice-vs-estimate',
@@ -219,28 +224,55 @@ export const guideToGuides: Record<string, string[]> = {
     'photography-contract-clauses',
   ],
   'contractor-invoice-example': [
+    'invoice-payment-terms',
     'invoice-vs-estimate',
     'construction-estimate-that-wins-jobs',
     'what-to-include-on-a-receipt',
+  ],
+  'invoice-payment-terms': [
+    'contractor-invoice-example',
+    'invoice-vs-estimate',
+    'what-to-include-on-a-receipt',
+  ],
+  'what-is-a-change-order': [
+    'construction-estimate-that-wins-jobs',
+    'how-to-create-a-contractor-estimate',
+    'work-order-vs-invoice-vs-estimate',
+  ],
+  'work-order-vs-purchase-order-vs-invoice': [
+    'work-order-vs-invoice-vs-estimate',
+    'how-to-create-a-work-order',
+    'invoice-vs-estimate',
+  ],
+  'freelance-contract-what-to-include': [
+    'freelance-web-design-contract-clauses',
+    'freelance-payment-schedule-milestones',
+    'nda-basics-for-freelancers',
+  ],
+  'how-to-create-a-contractor-estimate': [
+    'construction-estimate-that-wins-jobs',
+    'how-to-write-a-business-estimate',
+    'what-is-a-change-order',
+    'invoice-vs-estimate',
   ],
 };
 
 /** Hub slug → guide slugs to feature on the hub page. */
 export const hubToGuides: Record<string, string[]> = {
   'estimates-invoices': [
+    'how-to-create-a-contractor-estimate',
+    'invoice-payment-terms',
+    'what-is-a-change-order',
+    'work-order-vs-purchase-order-vs-invoice',
     'how-to-write-a-business-estimate',
     'invoice-vs-estimate',
-    'line-item-totals-explained',
     'construction-estimate-that-wins-jobs',
     'contractor-invoice-example',
-    'what-to-include-on-a-receipt',
-    'cleaning-invoice-rates-line-items',
     'how-to-create-a-work-order',
     'work-order-vs-invoice-vs-estimate',
-    'catering-quotation-example',
-    'catering-quote-deposits',
   ],
   contracts: [
+    'freelance-contract-what-to-include',
     'freelance-web-design-contract-clauses',
     'photography-contract-clauses',
     'videography-contract-clauses',
