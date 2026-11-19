@@ -19,7 +19,7 @@ flowchart LR
   Form --> DOCX
 ```
 
-## Tools (22)
+## Tools (23)
 
 | Tool | Path |
 |------|------|
@@ -132,9 +132,8 @@ Short mirror of [`docs/GROWTH-STATUS.md`](docs/GROWTH-STATUS.md). **Every PR mus
 
 ### Done (as of 2026-11-19)
 
-- **Lien waiver generator** (`/tools/lien-waiver-generator/`): conditional/unconditional × partial/final fill-in form, live preview, PDF/DOCX, state-forms-vary disclaimer, FAQ; wired into contracts hub, KEYWORD-MAP, llms question maps, related tools (this PR).
-- Homepage links tools by category; hubs’ which-document tables complete; home title/H1/tagline target contractor & freelancer templates (PR #35).
-- **Progress invoice generator** (`/tools/progress-invoice/`): contract value, percent or amount complete, previously billed, retainage %, amount due, balance to finish; PDF/DOCX (this PR).
+- **Lien waiver generator** (`/tools/lien-waiver-generator/`): conditional/unconditional × partial/final fill-in form, live preview, PDF/DOCX, state-forms-vary disclaimer, FAQ; wired into contracts hub, KEYWORD-MAP, llms question maps, related tools (this PR #38).
+- **Progress invoice generator** (`/tools/progress-invoice/`): contract value, percent or amount complete, previously billed, retainage %, amount due, balance to finish; PDF/DOCX (merged via #43).
 - **CI / Workers Builds speedup (merged to main):** parallel build+test, npm/Astro caches, faster `npm ci`, docs-only path skip with required-check gate, Playwright Chromium cache on Full checks; root `.npmrc` for Cloudflare install.
 - Homepage links all tools by category; hubs’ which-document tables complete; home title/H1/tagline target contractor & freelancer templates (PR #35).
 - Indexing audit in CI (`npm run audit:indexing`): sitemap URLs self-canonical + not noindex; embed/`/404/` intentional noindex + `X-Robots-Tag`; internal links avoid redirect sources.
@@ -146,13 +145,12 @@ Short mirror of [`docs/GROWTH-STATUS.md`](docs/GROWTH-STATUS.md). **Every PR mus
 ### Remaining
 
 - Dedicated “construction lien waiver basics” guide (SEO-GUIDE calendar) still open; tool currently Learn-mores to estimate/invoice/work-order guides.
-- Validate GSC indexing after PR #35 deploy (IndexNow + URL Inspection); expect embed/404 noindex exclusions to stay. After this tool ships, ping IndexNow and request indexing for `/tools/lien-waiver-generator/`.
-- Validate GSC indexing after deploy (IndexNow + URL Inspection for new `/tools/progress-invoice/`); expect embed/404 noindex exclusions to stay.
+- After deploy: IndexNow + GSC URL Inspection for `/tools/lien-waiver-generator/` and `/tools/progress-invoice/`; confirm embed/404 noindex exclusions stay intentional.
 - Confirm CI wall-clock vs baseline (~33–47s); set Workers Builds **Install command** to flagged `npm ci` if the dashboard override ignores `.npmrc`.
 - Bing verification **unset**; author/`sameAs` env vars **unset**; editorial backlinks still needed.
 - Pause Reddit promo/launch posts until karma recovers; r/SideProject launch was removed and not reposted.
 - GA4 Consent Mode cookieless measurement; AdSense approval; Uneed re-review; TinyLaunch resubmit after 2026-12-07.
-- Related tool variants / directory submissions — ongoing off-page (progress invoice shipped; other niches still open).
+- Related tool variants / directory submissions — ongoing off-page.
 
 GSC 28d → 2026-11-17 (owner): **0** clicks, **486** impressions, avg position **58.9**, **54** indexed / **7** not. GA4: **3** users (28d).
 
