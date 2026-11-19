@@ -29,6 +29,8 @@ As of **2026-11-17** (owner-reported GSC/GA4 window) unless noted.
 
 In-repo and confirmed off-repo completions.
 
+- **2026-11-19 — quote-estimate-generator upgrades (this PR):**
+  - Local logo (data URL / localStorage); valid-until; convert-to-invoice handoff; FAQ estimate≠invoice.
 - **2026-11-19 — Lien waiver generator (this PR):** `/tools/lien-waiver-generator/` — conditional/unconditional × partial/final fill-in form, live preview, PDF/DOCX export, plain-English “state forms vary / not legal advice” notice, FAQ; registered in `allTools`, contracts hub which-document table, KEYWORD-MAP, `toolGuideMap`, `llms.txt` / `llms-full.txt` question maps, change-order related tools; Vitest coverage in `tests/lien-waiver.test.ts`.
 - **2026-11-19 — Progress invoice generator (this PR):**
   - New tool `/tools/progress-invoice/`: contract value, percent or amount complete this period, previously billed, retainage %, amount due this period, balance to finish; live preview + PDF/DOCX.

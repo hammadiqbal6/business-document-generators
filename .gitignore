@@ -29,3 +29,4 @@ tmp/
 
 # Wrangler local state
 .wrangler/
+.worktrees/

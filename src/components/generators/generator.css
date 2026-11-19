@@ -393,6 +393,41 @@ body.has-cookie-banner .generator:has(.generator__mobile-bar) {
   }
 }
 
+.doc-preview__logo {
+  margin: 0 0 0.75rem;
+}
+
+.doc-preview__logo img {
+  display: block;
+  max-height: 56px;
+  max-width: min(180px, 100%);
+  width: auto;
+  height: auto;
+  object-fit: contain;
+}
+
+.logo-field {
+  display: grid;
+  gap: 0.5rem;
+}
+
+.logo-field__preview {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.logo-field__img {
+  display: block;
+  max-height: 48px;
+  max-width: 140px;
+  object-fit: contain;
+  border: 1px solid var(--border);
+  background: #fff;
+  padding: 0.25rem;
+}
+
 .doc-preview__h {
   margin: 0 0 0.75rem;
   font-family: var(--font-display);

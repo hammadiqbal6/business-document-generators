@@ -28,7 +28,25 @@ export async function exportPdf(filename: string, blocks: DocBlock[]): Promise<v
   };
 
   for (const block of blocks) {
-    if (block.type === 'heading' && block.text) {
+    if (block.type === 'image' && block.src?.startsWith('data:image/')) {
+      // PNG/JPEG data URLs work with jsPDF; WebP/GIF may fail — fall back to a note.
+      try {
+        const mime = block.src.slice(5, block.src.indexOf(';'));
+        const format =
+          mime === 'image/png' ? 'PNG' : mime === 'image/jpeg' || mime === 'image/jpg' ? 'JPEG' : '';
+        if (!format) {
+          writeWrapped('(Logo shown in on-screen preview; use PNG or JPEG for PDF.)', 9);
+        } else {
+          const maxW = 140;
+          const maxH = 56;
+          ensureSpace(maxH + 12);
+          doc.addImage(block.src, format, margin, y, maxW, maxH);
+          y += maxH + 10;
+        }
+      } catch {
+        writeWrapped('(Logo shown in on-screen preview only.)', 9);
+      }
+    } else if (block.type === 'heading' && block.text) {
       writeWrapped(block.text, 18, 'bold');
     } else if (block.type === 'subheading' && block.text) {
       writeWrapped(block.text, 13, 'bold');

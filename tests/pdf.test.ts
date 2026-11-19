@@ -16,6 +16,7 @@ vi.mock('jspdf', () => ({
     line() {}
     setDrawColor() {}
     addPage() {}
+    addImage() {}
     save = saveMock;
   },
 }));

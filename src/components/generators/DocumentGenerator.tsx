@@ -5,8 +5,21 @@ import { validateForm } from '../../lib/validation';
 import { trackEvent } from '../../lib/analytics';
 import { withTodayDateDefaults } from '../../lib/todayDefaults';
 import { toolDisclaimerBanner } from '../../lib/disclaimers';
+import {
+  ESTIMATE_TOOL_SLUG,
+  INVOICE_TOOL_SLUG,
+  consumeInvoiceHandoff,
+  draftStorageKey,
+  invoiceHandoffHref,
+  isEstimateHandoffUrl,
+  mapEstimateToInvoiceValues,
+  writeInvoiceHandoff,
+} from '../../lib/estimateToInvoiceHandoff';
 import { buildDocumentBlocks } from './documentModel';
 import './generator.css';
+
+/** Max data-URL size for logos (~384 KiB) so localStorage drafts stay reliable. */
+const LOGO_MAX_BYTES = 384 * 1024;
 
 function freshDefaults(tool: ToolDefinition): Record<string, unknown> {
   return withTodayDateDefaults(tool.fields, tool.defaults);
@@ -18,7 +31,13 @@ interface Props {
 }
 
 function storageKey(slug: string) {
-  return `docuforge:draft:${slug}`;
+  return draftStorageKey(slug);
+}
+
+/** Omit bulky logo data URLs from share links (still saved in local drafts). */
+function valuesForShare(values: Record<string, unknown>): Record<string, unknown> {
+  const { companyLogo: _logo, ...rest } = values;
+  return rest;
 }
 
 function serializeState(values: Record<string, unknown>): string {
@@ -63,12 +82,32 @@ export default function DocumentGenerator({ tool, embed = false }: Props) {
       setValues({ ...base, ...fromQuery });
       return;
     }
+
+    // Estimate → invoice handoff: consume one-shot key, then fall back to draft.
+    if (tool.slug === INVOICE_TOOL_SLUG) {
+      const handoff = consumeInvoiceHandoff();
+      if (handoff) {
+        setValues({ ...base, ...handoff });
+        setStatus(
+          isEstimateHandoffUrl(window.location.search, window.location.hash)
+            ? 'Loaded from estimate (Convert to invoice). Review dates and payment terms before export.'
+            : 'Loaded from estimate handoff. Review dates and payment terms before export.',
+        );
+        return;
+      }
+    }
+
     try {
       const raw = localStorage.getItem(storageKey(tool.slug));
       if (raw) {
         const parsed = JSON.parse(raw) as Record<string, unknown>;
         setValues({ ...base, ...parsed });
-        setStatus('Draft restored from this browser.');
+        setStatus(
+          tool.slug === INVOICE_TOOL_SLUG &&
+            isEstimateHandoffUrl(window.location.search, window.location.hash)
+            ? 'Draft restored from estimate handoff (this browser only).'
+            : 'Draft restored from this browser.',
+        );
         return;
       }
     } catch {
@@ -118,11 +157,25 @@ export default function DocumentGenerator({ tool, embed = false }: Props) {
 
   function shareUrl() {
     const url = new URL(window.location.href);
-    url.searchParams.set('d', serializeState(values));
+    url.searchParams.set('d', serializeState(valuesForShare(values)));
     navigator.clipboard?.writeText(url.toString()).then(
-      () => setStatus('Shareable link copied. Canonical page stays unparameterized for SEO.'),
+      () => setStatus('Shareable link copied (logo omitted from URL). Canonical page stays unparameterized for SEO.'),
       () => setStatus(url.toString()),
     );
+  }
+
+  function convertToInvoice() {
+    if (tool.slug !== ESTIMATE_TOOL_SLUG) return;
+    if (!runValidation()) return;
+    try {
+      const mapped = mapEstimateToInvoiceValues(values);
+      writeInvoiceHandoff(mapped);
+      trackEvent('tool_convert_to_invoice', { tool_slug: tool.slug });
+      setStatus('Opening contractor invoice with your line items (localStorage handoff)…');
+      window.location.assign(invoiceHandoffHref());
+    } catch {
+      setStatus('Could not hand off to invoice (storage full or blocked). Try Save locally first.');
+    }
   }
 
   function runValidation(): boolean {
@@ -238,6 +291,11 @@ export default function DocumentGenerator({ tool, embed = false }: Props) {
             <button type="button" className="btn" onClick={printPreview}>
               Print
             </button>
+            {tool.slug === ESTIMATE_TOOL_SLUG && !embed && (
+              <button type="button" className="btn" onClick={convertToInvoice} disabled={!!exporting}>
+                Convert to invoice
+              </button>
+            )}
             <button type="button" className={`btn ${savedFlash ? 'btn--flash' : ''}`} onClick={saveLocal}>
               Save locally
             </button>
@@ -254,7 +312,11 @@ export default function DocumentGenerator({ tool, embed = false }: Props) {
             {status}
           </p>
           <p className="generator__privacy">
-            Privacy: processing stays in your browser. Optional drafts use localStorage on this device only—nothing is uploaded to our servers.
+            Privacy: processing stays in your browser. Optional drafts and logos use localStorage on this device
+            only—nothing is uploaded to our servers.
+            {tool.slug === ESTIMATE_TOOL_SLUG
+              ? ' Convert to invoice copies fields into the contractor invoice tool via the same local handoff (?from=estimate#handoff).'
+              : ''}
           </p>
         </form>
 
@@ -457,6 +519,19 @@ function FieldControl({
     );
   }
 
+  if (field.type === 'logo') {
+    return (
+      <LogoFieldControl
+        id={id}
+        field={field}
+        value={value}
+        error={error}
+        describedBy={describedBy}
+        onChange={onChange}
+      />
+    );
+  }
+
   const common = {
     id,
     name: field.id,
@@ -526,8 +601,102 @@ function str(v: unknown) {
   return v == null ? '' : String(v);
 }
 
+function LogoFieldControl({
+  id,
+  field,
+  value,
+  error,
+  describedBy,
+  onChange,
+}: {
+  id: string;
+  field: FieldDef;
+  value: unknown;
+  error?: string;
+  describedBy?: string;
+  onChange: (v: unknown) => void;
+}) {
+  const [localError, setLocalError] = useState('');
+  const src = typeof value === 'string' ? value : '';
+  const helpId = field.help ? `${id}-help` : undefined;
+  const errId = error || localError ? `${id}-error` : undefined;
+
+  return (
+    <div className="field field--stack">
+      <label htmlFor={id}>{field.label}</label>
+      <div className="logo-field">
+        <input
+          id={id}
+          name={field.id}
+          type="file"
+          accept="image/png,image/jpeg,image/webp,image/gif"
+          aria-describedby={[describedBy, helpId, errId].filter(Boolean).join(' ') || undefined}
+          onChange={(e) => {
+            const file = e.target.files?.[0];
+            if (!file) return;
+            if (file.size > LOGO_MAX_BYTES) {
+              setLocalError('Logo must be under ~375 KB (stays in this browser only).');
+              onChange('');
+              e.target.value = '';
+              return;
+            }
+            const reader = new FileReader();
+            reader.onload = () => {
+              const result = typeof reader.result === 'string' ? reader.result : '';
+              if (!result.startsWith('data:image/') || result.length > LOGO_MAX_BYTES * 1.4) {
+                setLocalError('Could not read that image. Try a smaller PNG or JPEG.');
+                onChange('');
+                return;
+              }
+              setLocalError('');
+              onChange(result);
+            };
+            reader.onerror = () => {
+              setLocalError('Could not read that image.');
+              onChange('');
+            };
+            reader.readAsDataURL(file);
+          }}
+        />
+        {src ? (
+          <div className="logo-field__preview">
+            <img src={src} alt="Uploaded logo preview" className="logo-field__img" />
+            <button
+              type="button"
+              className="btn btn--ghost"
+              onClick={() => {
+                setLocalError('');
+                onChange('');
+              }}
+            >
+              Remove logo
+            </button>
+          </div>
+        ) : null}
+      </div>
+      {field.help && (
+        <p className="field__help" id={helpId}>
+          {field.help}
+        </p>
+      )}
+      {(error || localError) && (
+        <p className="field__error" id={errId}>
+          {error || localError}
+        </p>
+      )}
+    </div>
+  );
+}
+
 function PreviewBlock({ block }: { block: ReturnType<typeof buildDocumentBlocks>[number] }) {
   // Use non-heading elements so sample/live preview copy does not pollute page H2/H3 hierarchy.
+  if (block.type === 'image' && block.src) {
+    return (
+      <div className="doc-preview__logo">
+        <img src={block.src} alt={block.text || 'Company logo'} />
+      </div>
+    );
+  }
   if (block.type === 'heading') return <p className="doc-preview__h">{block.text}</p>;
   if (block.type === 'subheading') return <p className="doc-preview__h3">{block.text}</p>;
   if (block.type === 'paragraph') return <p className="doc-preview__p">{block.text}</p>;
