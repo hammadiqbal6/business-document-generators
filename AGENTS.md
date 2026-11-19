@@ -1,6 +1,6 @@
 # AGENTS.md — Docuklin
 
-Standing instructions for agents. Read **[`docs/GROWTH-STATUS.md`](docs/GROWTH-STATUS.md)** before planning growth, SEO, or content work (live metrics + Done / Remaining queue). **Mandatory on every change/PR:** update **[`README.md`](README.md)** and **[`docs/GROWTH-STATUS.md`](docs/GROWTH-STATUS.md)** in the **same PR** with what was done and what remains (clear **Done** / **Remaining** sections). Do not invent metrics. Also read **SEO state** below before rediscovering indexing, Bing/GSC, or re-litigating settled audit findings. `.cursor/rules/` points here.
+Standing instructions for agents. Read **[`docs/GROWTH-STATUS.md`](docs/GROWTH-STATUS.md)** before planning growth, SEO, or content work (live metrics + Done / Remaining queue). **Mandatory on every change/PR:** update **[`README.md`](README.md)** and **[`docs/GROWTH-STATUS.md`](docs/GROWTH-STATUS.md)** in the **same PR** with what was done and what remains (clear **Done** / **Remaining** sections). Do not invent metrics. Also read **SEO state** below before rediscovering indexing, Bing/GSC, or re-litigating settled audit findings. Guide and article voice: **[`docs/WRITING-GUIDE.md`](docs/WRITING-GUIDE.md)** (practitioner peer voice; banned filler; `scripts/audit/ai-style-check.mjs`). `.cursor/rules/` points here.
 
 ## 1. Project overview
 

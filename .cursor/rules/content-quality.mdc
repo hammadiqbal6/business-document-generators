@@ -4,7 +4,7 @@ globs: src/data/**/*.ts,src/pages/**/*.astro,src/components/content/**/*.astro
 ---
 # Content quality
 
-- Human voice: concrete, specific, scannable. No AI filler.
+- Human voice: concrete, specific, scannable. No AI filler. Full brief: `docs/WRITING-GUIDE.md`. Gate: `npm run audit:ai-style`.
 - Banned filler (examples): “in today’s digital landscape”, “delve into”, “leverage”, “unlock the power”, “comprehensive guide to”, “whether you’re a … or a …”, “it’s important to note that”, “navigate the complexities”, stacked “furthermore/moreover”, empty “in conclusion”.
 - No invented stats, rates, deadlines, or legal claims. Every number needs a primary source URL (IRS, SBA, FTC, HUD, Cornell LII, Copyright Office, OSHA, CDC preferred).
 - Guides: `answerFirst` ~40–60 words with the answer in sentence 1; `sources[]` rendered as Sources; byline “Reviewed by Hammad Iqbal · Last updated”; question-form H2s; worked example; FAQ matching visible Q&A.
