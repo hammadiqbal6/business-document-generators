@@ -27,6 +27,7 @@ import {
   rentalApplication,
   tattooConsent,
 } from './forms-creative';
+import { paintingEstimate, roofingEstimate } from './trade-estimate-presets';
 
 export const allTools: ToolDefinition[] = [
   constructionEstimate,
@@ -50,6 +51,8 @@ export const allTools: ToolDefinition[] = [
   serviceAgreementTemplate,
   purchaseOrderTemplate,
   changeOrderTemplate,
+  roofingEstimate,
+  paintingEstimate,
 ];
 
 export function getToolBySlug(slug: string): ToolDefinition | undefined {

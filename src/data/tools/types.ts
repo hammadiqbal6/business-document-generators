@@ -120,7 +120,7 @@ export const CATEGORY_META: Record<
     slug: 'estimates-invoices',
     name: 'Estimates & Invoices',
     description:
-      'Construction estimates, change orders, purchase orders, timesheets, contractor invoices, cleaning quotes, catering quotes, receipts, work orders, and general quote generators.',
+      'Construction, roofing, and painting estimates, change orders, purchase orders, timesheets, contractor invoices, cleaning quotes, catering quotes, receipts, work orders, and general quote generators.',
   },
   contracts: {
     slug: 'contracts',

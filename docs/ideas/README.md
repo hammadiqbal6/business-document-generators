@@ -30,9 +30,11 @@ Source files: `ideas.csv`, `MORE-IDEAS.md`, `../MARKET-RESEARCH.md`.
 
 ## Add-on tool backlog (this site)
 
-- Change order template generator  
+- Change order template generator *(shipped)*  
 - Model release (photography)  
 - Catering BEO (banquet event order)  
 - DJ / band performance contract  
 - Handyman estimate preset  
+- Roofing estimate template *(shipped)*  
+- Painting estimate template *(shipped)*  
 - Notary acknowledgment block (jurisdiction-specific, legal review required)

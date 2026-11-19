@@ -39,6 +39,8 @@ export const guides: Guide[] =
     "updatedAt": "2026-11-15",
     "relatedToolSlugs": [
       "construction-estimate-template",
+      "roofing-estimate-template",
+      "painting-estimate-template",
       "contractor-invoice",
       "work-order"
     ],
@@ -2389,6 +2391,8 @@ export const guides: Guide[] =
     "updatedAt": "2026-11-13",
     "relatedToolSlugs": [
       "quote-estimate-generator",
+      "painting-estimate-template",
+      "roofing-estimate-template",
       "contractor-invoice",
       "receipt-generator"
     ],

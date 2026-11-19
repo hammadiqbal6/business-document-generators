@@ -9,6 +9,18 @@ export const toolToGuides: Record<string, string[]> = {
     'invoice-vs-estimate',
     'contractor-invoice-example',
   ],
+  'roofing-estimate-template': [
+    'construction-estimate-that-wins-jobs',
+    'line-item-totals-explained',
+    'invoice-vs-estimate',
+    'how-to-write-a-business-estimate',
+  ],
+  'painting-estimate-template': [
+    'how-to-write-a-business-estimate',
+    'line-item-totals-explained',
+    'invoice-vs-estimate',
+    'construction-estimate-that-wins-jobs',
+  ],
   'contractor-invoice': [
     'contractor-invoice-example',
     'invoice-vs-estimate',

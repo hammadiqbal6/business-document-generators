@@ -19,11 +19,13 @@ flowchart LR
   Form --> DOCX
 ```
 
-## Tools (21)
+## Tools (23)
 
 | Tool | Path |
 |------|------|
 | Construction estimate | `/tools/construction-estimate-template/` |
+| Roofing estimate | `/tools/roofing-estimate-template/` |
+| Painting estimate | `/tools/painting-estimate-template/` |
 | Contractor invoice | `/tools/contractor-invoice/` |
 | Photography contract | `/tools/photography-contract-template/` |
 | Videography contract | `/tools/videography-contract/` |
@@ -130,8 +132,9 @@ Short mirror of [`docs/GROWTH-STATUS.md`](docs/GROWTH-STATUS.md). **Every PR mus
 
 ### Done (as of 2026-11-19)
 
-- **CI / Workers Builds speedup (this PR):** parallel build+test, npm/Astro caches, faster `npm ci`, docs-only path skip with required-check gate, Playwright Chromium cache on Full checks; root `.npmrc` for Cloudflare install.
-- Homepage links all 21 tools by category; hubs’ which-document tables complete; home title/H1/tagline target contractor & freelancer templates (PR #35).
+- **Roofing + painting estimate templates** (trade presets on the commercial estimate form): `/tools/roofing-estimate-template/`, `/tools/painting-estimate-template/` — KEYWORD-MAP, hub table, home links, llms question map, guides related tools (this PR).
+- **CI / Workers Builds speedup (PR #36):** parallel build+test, npm/Astro caches, faster `npm ci`, docs-only path skip with required-check gate, Playwright Chromium cache on Full checks; root `.npmrc` for Cloudflare install.
+- Homepage links all tools by category; hubs’ which-document tables complete; home title/H1/tagline target contractor & freelancer templates (PR #35).
 - Indexing audit in CI (`npm run audit:indexing`): sitemap URLs self-canonical + not noindex; embed/`/404/` intentional noindex + `X-Robots-Tag`; internal links avoid redirect sources.
 - IndexNow + GSC property verification in place; AdSense application **Getting ready**.
 - TinyLaunch badge removed from Workers Builds `PUBLIC_DIRECTORY_BADGES` (2026-11-19). TinyLaunch rejected **2026-11-08** (one product at a time); retry after YardTally **2026-12-07**.
@@ -140,11 +143,12 @@ Short mirror of [`docs/GROWTH-STATUS.md`](docs/GROWTH-STATUS.md). **Every PR mus
 
 ### Remaining
 
-- Confirm post-merge CI wall-clock vs baseline (~33–47s successful `CI` runs on main/PRs before this change); set Workers Builds **Install command** to flagged `npm ci` if the dashboard override ignores `.npmrc`.
-- Validate GSC indexing after PR #35 deploy (IndexNow + URL Inspection); expect embed/404 noindex exclusions to stay.
+- Validate GSC indexing after deploy (IndexNow + URL Inspection for new roofing/painting URLs + prior weak URLs); expect embed/404 noindex exclusions to stay.
+- Confirm CI wall-clock vs pre-#36 baseline; set Workers Builds **Install command** to flagged `npm ci` if the dashboard override ignores `.npmrc`.
 - Bing verification **unset**; author/`sameAs` env vars **unset**; editorial backlinks still needed.
 - Pause Reddit promo/launch posts until karma recovers; r/SideProject launch was removed and not reposted.
 - GA4 Consent Mode cookieless measurement; AdSense approval; Uneed re-review; TinyLaunch resubmit after 2026-12-07.
+- Other related tool variants (e.g. handyman estimate preset) still open — see `docs/ideas/README.md`.
 
 GSC 28d → 2026-11-17 (owner): **0** clicks, **486** impressions, avg position **58.9**, **54** indexed / **7** not. GA4: **3** users (28d).
 

@@ -182,6 +182,7 @@ fs.mkdirSync(outDir, { recursive: true });
 
 const toolFiles = [
   'src/data/tools/estimates.ts',
+  'src/data/tools/trade-estimate-presets.ts',
   'src/data/tools/contracts.ts',
   'src/data/tools/forms-creative.ts',
 ];
