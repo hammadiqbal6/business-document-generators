@@ -105,6 +105,18 @@ export const toolToGuides: Record<string, string[]> = {
     'work-order-vs-invoice-vs-estimate',
     'invoice-vs-estimate',
   ],
+  'roofing-estimate-template': [
+    'construction-estimate-that-wins-jobs',
+    'how-to-write-a-business-estimate',
+    'invoice-vs-estimate',
+    'line-item-totals-explained',
+  ],
+  'painting-estimate-template': [
+    'how-to-write-a-business-estimate',
+    'invoice-vs-estimate',
+    'line-item-totals-explained',
+    'construction-estimate-that-wins-jobs',
+  ],
 };
 
 /** Guide → related guide slugs (topic clusters, not identical lists). */

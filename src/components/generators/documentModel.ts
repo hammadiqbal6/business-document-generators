@@ -47,6 +47,8 @@ export function buildDocumentBlocks(
     case 'quote-estimate-generator':
     case 'receipt-generator':
     case 'work-order':
+    case 'roofing-estimate-template':
+    case 'painting-estimate-template':
       return buildCommercialDoc(tool, values, blocks);
     case 'purchase-order-template':
       return buildPurchaseOrder(values, blocks);

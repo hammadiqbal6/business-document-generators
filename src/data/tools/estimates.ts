@@ -134,7 +134,12 @@ export const constructionEstimate: ToolDefinition = {
     ],
     sources: estimateSources,
   },
-  relatedSlugs: ['contractor-invoice', 'quote-estimate-generator', 'change-order-template'],
+  relatedSlugs: [
+    'contractor-invoice',
+    'quote-estimate-generator',
+    'roofing-estimate-template',
+    'painting-estimate-template',
+  ],
   publishedAt: '2026-10-19',
   updatedAt: '2026-11-18',
 };
@@ -630,12 +635,12 @@ export const quoteEstimate: ToolDefinition = {
       },
       {
         heading: 'Industry variants that reuse the same form',
-        body: 'Consulting and IT: fixed assessment day plus hourly documentation, as in the sample defaults. Landscaping or handyman: units such as sq ft, hour, or lump sum with a site-visit exclusion. Cleaning: flat visit plus add-on lines—when you bill after the visit, switch to /tools/cleaning-service-invoice/. Catering events belong in /tools/catering-quote/ so guest count and service fee fields stay filled.\n\nQuote vs estimate wording: quotes are often firmer offers; estimates signal approximate cost. Say whether totals may change after discovery. After acceptance, reuse lines in /tools/contractor-invoice/ and send a payment receipt from /tools/receipt-generator/.',
+        body: 'Consulting and IT: fixed assessment day plus hourly documentation, as in the sample defaults. Landscaping or handyman: units such as sq ft, hour, or lump sum with a site-visit exclusion. Cleaning: flat visit plus add-on lines—when you bill after the visit, switch to /tools/cleaning-service-invoice/. Catering events belong in /tools/catering-quote/ so guest count and service fee fields stay filled. Roof tear-off and shingles by the square belong on /tools/roofing-estimate-template/; interior rooms and wall sq ft belong on /tools/painting-estimate-template/.\n\nQuote vs estimate wording: quotes are often firmer offers; estimates signal approximate cost. Say whether totals may change after discovery. After acceptance, reuse lines in /tools/contractor-invoice/ and send a payment receipt from /tools/receipt-generator/.',
       },
     ],
     workedExample: {
       heading: 'Worked example: free instant quote',
-      body: 'Sample estimate E-901 prices a half-day assessment at $450 plus four hours of documentation at $95/hr for an $830 pre-tax total, valid 14 days. Change the label to Quote for a free instant quote PDF the client can approve by email.\n\nIllustrative light construction variant (not a rate recommendation): fence repair with 16 linear feet of board replacement at your unit rate, two hours labor, haul-away as a lump sum, tax if you collect it, and a seven-day validity window. For multi-room remodel packages with allowances, switch to /tools/construction-estimate-template/.',
+      body: 'Sample estimate E-901 prices a half-day assessment at $450 plus four hours of documentation at $95/hr for an $830 pre-tax total, valid 14 days. Change the label to Quote for a free instant quote PDF the client can approve by email.\n\nIllustrative light construction variant (not a rate recommendation): fence repair with 16 linear feet of board replacement at your unit rate, two hours labor, haul-away as a lump sum, tax if you collect it, and a seven-day validity window. For multi-room remodel packages with allowances, switch to /tools/construction-estimate-template/. For square-based roof bids use /tools/roofing-estimate-template/; for room and sq-ft paint bids use /tools/painting-estimate-template/.',
     },
     commonMistakes: [
       'No validity date',
@@ -682,7 +687,12 @@ export const quoteEstimate: ToolDefinition = {
     ],
     sources: estimateSources,
   },
-  relatedSlugs: ['contractor-invoice', 'construction-estimate-template', 'receipt-generator'],
+  relatedSlugs: [
+    'contractor-invoice',
+    'construction-estimate-template',
+    'roofing-estimate-template',
+    'painting-estimate-template',
+  ],
   publishedAt: '2026-10-19',
   updatedAt: '2026-11-18',
 };
@@ -1350,4 +1360,299 @@ export const changeOrderTemplate: ToolDefinition = {
   relatedSlugs: ['construction-estimate-template', 'contractor-invoice', 'work-order'],
   publishedAt: '2026-11-13',
   updatedAt: '2026-11-13',
+};
+
+export const roofingEstimate: ToolDefinition = {
+  slug: 'roofing-estimate-template',
+  name: 'Roofing Estimate Template',
+  shortName: 'Roofing Estimate',
+  category: 'estimates-invoices',
+  primaryKeyword: 'roofing estimate template',
+  secondaryKeywords: [
+    'free roofing estimate',
+    'roofing quote generator',
+    'roof tear-off estimate',
+    'roofing bid template PDF',
+  ],
+  title: 'Free Roofing Estimate Template',
+  metaDescription:
+    'Free roofing estimate template: squares, tear-off, underlayment, shingles, tax, and deposit. Live preview, then PDF or DOCX—no signup.',
+  h1: 'Free Roofing Estimate Template',
+  answerFirst:
+    'A roofing estimate lists tear-off, underlayment, shingles by the square, disposal, tax, and a deposit so homeowners can compare bids before the crew starts. Fill this free template in your browser, preview live, and export PDF or DOCX. Nothing is uploaded.',
+  applicationCategory: 'BusinessApplication',
+  isLegalAdjacent: false,
+  documentTitle: 'Roofing Estimate',
+  toolVersion: '1.0',
+  formulaNote:
+    'Line-item amount = quantity × rate. Subtotal = sum of line amounts. Tax = subtotal × (tax rate ÷ 100). Deposit = total × (deposit % ÷ 100). Sample square and tear-off rates in the defaults are illustrative examples only—not market quotes.',
+  fields: [
+    { id: 'companyName', label: 'Company name', type: 'text', required: true, section: 'Your business' },
+    { id: 'companyAddress', label: 'Company address', type: 'textarea', rows: 2, section: 'Your business' },
+    { id: 'companyPhone', label: 'Phone', type: 'tel', section: 'Your business' },
+    { id: 'companyEmail', label: 'Email', type: 'email', section: 'Your business' },
+    { id: 'estimateNumber', label: 'Estimate #', type: 'text', required: true, section: 'Estimate details' },
+    { id: 'estimateDate', label: 'Date', type: 'date', required: true, section: 'Estimate details' },
+    { id: 'validUntil', label: 'Valid until', type: 'date', section: 'Estimate details' },
+    { id: 'clientName', label: 'Client name', type: 'text', required: true, section: 'Client' },
+    { id: 'clientAddress', label: 'Job / property address', type: 'textarea', rows: 2, section: 'Client' },
+    { id: 'projectName', label: 'Project name', type: 'text', required: true, section: 'Project' },
+    { id: 'scope', label: 'Scope of work', type: 'textarea', rows: 4, required: true, section: 'Project' },
+    { id: 'lineItems', label: 'Line items', type: 'lineItems', required: true, section: 'Pricing' },
+    { id: 'taxRate', label: 'Tax rate (%)', type: 'number', inputMode: 'decimal', min: 0, max: 100, step: 0.01, section: 'Pricing' },
+    { id: 'depositPercent', label: 'Deposit required (%)', type: 'number', inputMode: 'decimal', min: 0, max: 100, section: 'Pricing' },
+    { id: 'notes', label: 'Notes / exclusions', type: 'textarea', rows: 3, section: 'Notes' },
+  ],
+  defaults: {
+    companyName: 'RidgeLine Roofing LLC',
+    companyAddress: '410 Warehouse Rd\nAurora, CO 80011',
+    companyPhone: '(303) 555-0194',
+    companyEmail: 'bids@ridgeline.example',
+    estimateNumber: 'RF-2026-088',
+    estimateDate: '2026-11-19',
+    validUntil: '2026-12-03',
+    clientName: 'Morgan Ellis',
+    clientAddress: '214 Maple Court, Aurora, CO 80012',
+    projectName: 'Asphalt shingle reroof – main house',
+    scope:
+      'Tear off existing 3-tab shingles to deck; inspect decking and replace damaged sheets as needed; install synthetic underlayment and ice-and-water shield at eaves and valleys; install architectural shingles; ridge vent; haul debris. Pitch approx. 6/12. Access via driveway staging.',
+    lineItems: [
+      { description: 'Tear-off existing shingles (example rate)', quantity: 22, unit: 'square', rate: 85 },
+      { description: 'Synthetic underlayment (example rate)', quantity: 22, unit: 'square', rate: 45 },
+      { description: 'Architectural shingles + starter (example rate)', quantity: 22, unit: 'square', rate: 195 },
+      { description: 'Ice-and-water shield eaves/valleys (example)', quantity: 6, unit: 'square', rate: 70 },
+      { description: 'Ridge vent install (example rate)', quantity: 40, unit: 'lf', rate: 12 },
+      { description: 'Debris haul & dumpster (example lump sum)', quantity: 1, unit: 'ls', rate: 650 },
+    ],
+    taxRate: 8.31,
+    depositPercent: 30,
+    notes:
+      'Example unit rates above are placeholders for the sample PDF—not published market prices. Excludes fascia/soffit replacement, solar panel removal, and decking beyond 4 sheets. Decking replacement billed at time-and-material if needed. Permit fees by owner unless noted.',
+  },
+  content: {
+    howToUse: [
+      'Enter your roofing company and the property address, then name the reroof or repair project.',
+      'Describe tear-off layers, underlayment, shingle type, pitch, and access in the scope field.',
+      'Price by the square (100 sq ft of roof area), linear foot, or lump sum; set tax and deposit.',
+      'Preview totals, then export PDF or DOCX—or save a draft in this browser with localStorage.',
+    ],
+    whatToInclude: [
+      {
+        heading: 'What a roofing estimate should spell out',
+        body: 'Name the parties, property address, and whether the bid is tear-off or overlay. List squares of roof area, underlayment type, shingle product class, ice-and-water locations, ventilation, flashing, and disposal. Add tax, a deposit percent, a validity date, and written exclusions (fascia, solar, unknown decking). Ambiguous “reroof house” lines without measurable units invite change-order fights.',
+      },
+      {
+        heading: 'Squares, tear-off, and underlayment lines',
+        body: 'Roofers typically price material and labor per square (100 square feet of roof surface). Separate tear-off from new underlayment and shingles so the homeowner sees what each phase costs. Call out ice-and-water shield at eaves and valleys as its own line when you install it. Dumpster or haul-away is usually a lump sum. Replace the example rates in the form with your own numbers before you send the PDF.',
+      },
+      {
+        heading: 'When to use this vs the general or construction template',
+        body: 'Use this roofing estimate template when the job is primarily roofing with square-based lines. For mixed handyman scopes, start with /tools/quote-estimate-generator/. For multi-trade remodels with allowances, use /tools/construction-estimate-template/. After acceptance, bill the deposit with /tools/contractor-invoice/ and confirm payment with /tools/receipt-generator/.',
+      },
+    ],
+    workedExample: {
+      heading: 'Worked example: 22-square asphalt reroof',
+      body: 'Sample estimate RF-2026-088 prices a 22-square architectural reroof: tear-off, synthetic underlayment, shingles, ice-and-water at eaves/valleys, ridge vent, and haul-away. Unit rates in the defaults are labeled examples only so you can see the math—swap them for your crew’s actual costs. Subtotal sums quantity × rate; tax at 8.31% and a 30% deposit appear on the preview. Change any quantity or rate and the total updates immediately.',
+    },
+    commonMistakes: [
+      'Pricing “one roof” as a lump sum with no square count or pitch note.',
+      'Omitting tear-off layers or underlayment so change orders appear mid-job.',
+      'No validity date while asphalt and labor costs move.',
+      'Forgetting dumpster/haul lines that erase margin after the bid wins.',
+    ],
+    tips: [
+      'Photo existing layers and note pitch before you commit to a square count.',
+      'State how many decking sheets are included before time-and-material kicks in.',
+      'After the homeowner accepts, reuse lines on /tools/contractor-invoice/ for the deposit draw.',
+      'Interior painting or trim work belongs on /tools/painting-estimate-template/, not this roofing form.',
+    ],
+    faq: [
+      {
+        question: 'What is a roofing square on an estimate?',
+        answer:
+          'One square equals 100 square feet of roof surface. Measure or calculate roof area, convert to squares, and price tear-off, underlayment, and shingles per square so bids compare cleanly.',
+      },
+      {
+        question: 'Should tear-off and underlayment be separate line items?',
+        answer:
+          'Yes whenever you can. Separate tear-off, underlayment, and shingles so the client sees each phase. Combine only when your company always sells a fixed package and you still list what the package includes in the scope.',
+      },
+      {
+        question: 'Are the sample roofing rates real market prices?',
+        answer:
+          'No. Defaults use illustrative example rates so the PDF math is visible. Replace every rate with your own material and labor costs before sending a bid.',
+      },
+      {
+        question: 'Is this a free roofing estimate template with PDF download?',
+        answer:
+          'Yes. Fill the form in your browser, preview live, and export PDF or DOCX with no account. Optional drafts stay in localStorage on your device only.',
+      },
+      {
+        question: 'How do I turn a roofing estimate into an invoice?',
+        answer:
+          'After acceptance, open /tools/contractor-invoice/, reuse the same party names and line labels, and bill the deposit or progress draw. Send a receipt from /tools/receipt-generator/ when payment clears.',
+      },
+      {
+        question: 'When should I use the construction estimate instead?',
+        answer:
+          'Use /tools/construction-estimate-template/ for multi-trade remodels with allowances. Keep this page for roof-focused bids priced in squares, linear feet, and haul-away lump sums.',
+      },
+    ],
+    sources: estimateSources,
+  },
+  relatedSlugs: [
+    'construction-estimate-template',
+    'quote-estimate-generator',
+    'contractor-invoice',
+    'painting-estimate-template',
+  ],
+  publishedAt: '2026-11-19',
+  updatedAt: '2026-11-19',
+};
+
+export const paintingEstimate: ToolDefinition = {
+  slug: 'painting-estimate-template',
+  name: 'Painting Estimate Template',
+  shortName: 'Painting Estimate',
+  category: 'estimates-invoices',
+  primaryKeyword: 'painting estimate template',
+  secondaryKeywords: [
+    'free painting estimate',
+    'painting quote template',
+    'interior painting estimate',
+    'painter estimate form PDF',
+  ],
+  title: 'Free Painting Estimate Template',
+  metaDescription:
+    'Free painting estimate template: rooms, square footage, prep, primer, paint, tax, and deposit. Live preview, then PDF or DOCX—no signup.',
+  h1: 'Free Painting Estimate Template',
+  answerFirst:
+    'A painting estimate lists rooms or wall square footage, prep, primer, coats, trim, tax, and a deposit so clients can approve color and scope before you mask off. Fill this free template in your browser, preview live, and export PDF or DOCX. Nothing is uploaded.',
+  applicationCategory: 'BusinessApplication',
+  isLegalAdjacent: false,
+  documentTitle: 'Painting Estimate',
+  toolVersion: '1.0',
+  formulaNote:
+    'Line-item amount = quantity × rate. Subtotal = sum of line amounts. Tax = subtotal × (tax rate ÷ 100). Deposit = total × (deposit % ÷ 100). Sample per-sq-ft and per-room rates in the defaults are illustrative examples only—not market quotes.',
+  fields: [
+    { id: 'companyName', label: 'Company name', type: 'text', required: true, section: 'Your business' },
+    { id: 'companyAddress', label: 'Company address', type: 'textarea', rows: 2, section: 'Your business' },
+    { id: 'companyPhone', label: 'Phone', type: 'tel', section: 'Your business' },
+    { id: 'companyEmail', label: 'Email', type: 'email', section: 'Your business' },
+    { id: 'estimateNumber', label: 'Estimate #', type: 'text', required: true, section: 'Estimate details' },
+    { id: 'estimateDate', label: 'Date', type: 'date', required: true, section: 'Estimate details' },
+    { id: 'validUntil', label: 'Valid until', type: 'date', section: 'Estimate details' },
+    { id: 'clientName', label: 'Client name', type: 'text', required: true, section: 'Client' },
+    { id: 'clientAddress', label: 'Job / property address', type: 'textarea', rows: 2, section: 'Client' },
+    { id: 'projectName', label: 'Project name', type: 'text', required: true, section: 'Project' },
+    { id: 'scope', label: 'Scope of work', type: 'textarea', rows: 4, required: true, section: 'Project' },
+    { id: 'lineItems', label: 'Line items', type: 'lineItems', required: true, section: 'Pricing' },
+    { id: 'taxRate', label: 'Tax rate (%)', type: 'number', inputMode: 'decimal', min: 0, max: 100, step: 0.01, section: 'Pricing' },
+    { id: 'depositPercent', label: 'Deposit required (%)', type: 'number', inputMode: 'decimal', min: 0, max: 100, section: 'Pricing' },
+    { id: 'notes', label: 'Notes / exclusions', type: 'textarea', rows: 3, section: 'Notes' },
+  ],
+  defaults: {
+    companyName: 'BrightWall Painting Co.',
+    companyAddress: '88 Trade Center Blvd\nFort Collins, CO 80525',
+    companyPhone: '(970) 555-0166',
+    companyEmail: 'quotes@brightwall.example',
+    estimateNumber: 'PT-2026-041',
+    estimateDate: '2026-11-19',
+    validUntil: '2026-12-10',
+    clientName: 'Casey Nguyen',
+    clientAddress: '19 Willow Street, Fort Collins, CO 80521',
+    projectName: 'Interior repaint – living, dining, hallway',
+    scope:
+      'Prep and paint living room, dining room, and hallway (walls only). Includes patching nail holes, light sanding, primer on patched areas, two finish coats in client-selected eggshell, and trim touch-up where noted. Move furniture to room centers; protect floors. Ceilings and full trim repaint excluded unless added below.',
+    lineItems: [
+      { description: 'Surface prep – 3 rooms (example rate)', quantity: 3, unit: 'room', rate: 120 },
+      { description: 'Wall paint – living/dining/hall (example rate)', quantity: 780, unit: 'sq ft', rate: 1.85 },
+      { description: 'Primer on patched areas (example rate)', quantity: 120, unit: 'sq ft', rate: 0.75 },
+      { description: 'Door & casing touch-up (example rate)', quantity: 4, unit: 'door', rate: 55 },
+      { description: 'Materials allowance – paint/primer (example)', quantity: 1, unit: 'ls', rate: 280 },
+    ],
+    taxRate: 7.65,
+    depositPercent: 25,
+    notes:
+      'Example per-room and per-sq-ft rates above are placeholders for the sample PDF—not published market prices. Excludes ceilings, wallpaper removal, cabinet painting, and exterior work. Color changes after the first coat may add labor. Client supplies paint only if noted in writing.',
+  },
+  content: {
+    howToUse: [
+      'Enter your painting company and the job address, then name the rooms or exterior elevations.',
+      'Describe prep, primer, coats, sheen, and what is excluded (ceilings, trim, cabinets) in the scope.',
+      'Price by room, square foot, door, or lump sum; set tax and a deposit percent.',
+      'Preview totals, then export PDF or DOCX—or save a draft in this browser with localStorage.',
+    ],
+    whatToInclude: [
+      {
+        heading: 'What a painting estimate should spell out',
+        body: 'List rooms or elevations, wall vs ceiling vs trim, prep level, primer, number of coats, sheen, and who supplies paint. Add square footage when you price by area, tax, deposit, validity date, and exclusions (wallpaper, cabinets, exterior). Vague “paint house” lines without room or sq-ft detail cause callbacks.',
+      },
+      {
+        heading: 'Rooms vs square footage',
+        body: 'Per-room pricing works for similar-size interiors with standard prep. Per-square-foot wall area works when room sizes vary or the client wants to compare painters on the same area. Many painters mix both: prep per room, finish coats per sq ft, doors as each. Replace the example rates in the form with your own numbers before you send the PDF.',
+      },
+      {
+        heading: 'When to use this vs other estimate tools',
+        body: 'Use this painting estimate template for interior or exterior paint scopes measured in rooms and square feet. For mixed service quotes, use /tools/quote-estimate-generator/. For full remodels that include paint as one trade among many, use /tools/construction-estimate-template/. Roof work belongs on /tools/roofing-estimate-template/. After acceptance, bill with /tools/contractor-invoice/.',
+      },
+    ],
+    workedExample: {
+      heading: 'Worked example: three-room interior repaint',
+      body: 'Sample estimate PT-2026-041 prices prep for three rooms, 780 sq ft of wall paint at an example per-sq-ft rate, primer on patched areas, four door touch-ups, and a materials allowance. Those rates are labeled examples so the math is visible—swap them for your crew’s actual costs. Tax at 7.65% and a 25% deposit show on the preview. Change any quantity or rate and the total updates immediately.',
+    },
+    commonMistakes: [
+      'Omitting whether ceilings and trim are included.',
+      'No prep line so nail holes and stains become unpaid extras.',
+      'Forgetting a materials allowance when the painter supplies paint.',
+      'No validity date while paint brand or labor availability changes.',
+    ],
+    tips: [
+      'Measure wall area (length × height, minus large openings) before you commit to a sq-ft rate.',
+      'State how many color changes are included per room.',
+      'After acceptance, reuse lines on /tools/contractor-invoice/ for the deposit.',
+      'Roofing tear-off and shingles belong on /tools/roofing-estimate-template/, not this form.',
+    ],
+    faq: [
+      {
+        question: 'Should I price painting by the room or by square foot?',
+        answer:
+          'Use per-room when rooms are similar and prep is standard. Use per-square-foot wall area when sizes vary or clients compare bids on the same measured area. Many painters mix both on one estimate.',
+      },
+      {
+        question: 'What should every painting estimate include?',
+        answer:
+          'Rooms or elevations, prep level, primer, coats and sheen, wall vs ceiling vs trim, materials responsibility, tax, deposit, validity date, and exclusions such as wallpaper or cabinets.',
+      },
+      {
+        question: 'Are the sample painting rates real market prices?',
+        answer:
+          'No. Defaults use illustrative example rates so the PDF math is visible. Replace every rate with your own labor and material costs before sending a bid.',
+      },
+      {
+        question: 'Is this a free painting estimate template with PDF download?',
+        answer:
+          'Yes. Fill the form in your browser, preview live, and export PDF or DOCX with no account. Optional drafts stay in localStorage on your device only.',
+      },
+      {
+        question: 'How do I turn a painting estimate into an invoice?',
+        answer:
+          'After acceptance, open /tools/contractor-invoice/, reuse the same party names and line labels, and bill the deposit or final balance. Confirm payment with /tools/receipt-generator/.',
+      },
+      {
+        question: 'Can I use this for exterior painting?',
+        answer:
+          'Yes—list elevations or elevations’ sq ft, note pressure washing or scraping in prep lines, and state weather delays in Notes. Keep roofing scopes on /tools/roofing-estimate-template/.',
+      },
+    ],
+    sources: estimateSources,
+  },
+  relatedSlugs: [
+    'quote-estimate-generator',
+    'construction-estimate-template',
+    'contractor-invoice',
+    'roofing-estimate-template',
+  ],
+  publishedAt: '2026-11-19',
+  updatedAt: '2026-11-19',
 };

@@ -29,7 +29,11 @@ As of **2026-11-17** (owner-reported GSC/GA4 window) unless noted.
 
 In-repo and confirmed off-repo completions.
 
-- **2026-11-19 — PR #35 (this PR):**
+- **2026-11-19 — Trade estimate presets (this PR):**
+  - Added `/tools/roofing-estimate-template/` (squares, tear-off, underlayment presets) and `/tools/painting-estimate-template/` (rooms / sq-ft presets); both reuse `buildCommercialDoc` like `quote-estimate-generator`.
+  - Wired `allTools`, KEYWORD-MAP, relatedSlugs, toolGuideMap, estimates hub which-table, `llms.txt` / `llms-full.txt` question map, Vitest registration + preview tests. Tool count **23**.
+  - Sample line rates labeled as illustrative examples only (no invented market prices).
+- **2026-11-19 — PR #35:**
   - Homepage links every tool via all-templates-by-category (`getToolsByCategory` / `CATEGORY_META`; featured still `getFeaturedTools()`).
   - Hub “which document” tables completed for estimates-invoices + contracts (timesheet / PO / change-order stay on estimates-invoices per tool categories — not forms/contracts).
   - Homepage title/H1 + site tagline/`llms.txt` intro aligned to contractor & freelancer document templates (avoid head “invoice”).
@@ -51,8 +55,8 @@ In-repo and confirmed off-repo completions.
 
 | Bucket | What’s in it |
 |--------|----------------|
-| Sitemap / indexable | All ~56 sitemap URLs on `https://docuklin.com…/` with trailing slash, self-canonical, `index,follow`, matching `og:url`; all 21 tools included with `lastmod` |
-| Intentional noindex | `/tools/<slug>/embed/` (21) + `/404/` — meta robots + `X-Robots-Tag`; **not** in sitemap. Matches GSC “Excluded by noindex” for crawled embeds/404 |
+| Sitemap / indexable | **58** sitemap URLs on `https://docuklin.com…/` with trailing slash, self-canonical, `index,follow`, matching `og:url`; all **23** tools included with `lastmod` |
+| Intentional noindex | `/tools/<slug>/embed/` (23) + `/404/` (24 total) — meta robots + `X-Robots-Tag`; **not** in sitemap. Matches GSC “Excluded by noindex” for crawled embeds/404 |
 | Redirects (final 200 only in sitemap/links) | `/tools/invoice[/]`, `/tools/invoice-generator[/]` → contractor invoice; `/privacy-policy[/]` → `/privacy/`; `/sitemap.xml` & `/sitemap_index.xml` → `/sitemap-index.xml`; `/authors[/]` → `/about/`; Worker trailing-slash 308 |
 
 ---
@@ -61,7 +65,7 @@ In-repo and confirmed off-repo completions.
 
 Prioritized open work. Owner-confirmed gaps preferred over guesses.
 
-1. **GSC after deploy of PR #35:** ping IndexNow; URL Inspection → Request indexing for previously weak / “Discovered – not indexed” tool URLs; confirm the 5 noindex exclusions are embeds/404 only (intentional).
+1. **GSC after deploy:** ping IndexNow; URL Inspection → Request indexing for roofing + painting estimate URLs and any previously weak / “Discovered – not indexed” tool URLs; confirm noindex exclusions are embeds/404 only (intentional).
 2. **Bing Webmaster verification** — currently **unset** (owner); set `PUBLIC_BING_SITE_VERIFICATION` / console verification when ready.
 3. **Author / `sameAs` env vars** — currently **unset** (owner); wire when profiles are public and stable.
 4. **Backlinks** — site still has essentially none beyond minor directory/unroll mentions; outreach remains open.
@@ -79,7 +83,7 @@ Prioritized open work. Owner-confirmed gaps preferred over guesses.
 
 - **AdSense review** — **Getting ready** (Nov 2026).
 - **Uneed re-review** — pending owner reply to decline email.
-- No other in-repo SEO/growth code work beyond shipping PR #35.
+- Trade estimate presets shipping in this PR (roofing + painting).
 
 ---
 

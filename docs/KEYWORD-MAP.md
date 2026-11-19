@@ -24,6 +24,8 @@
 | `/tools/service-agreement-template/` | service agreement template | service contract template, business service agreement | long-tail |
 | `/tools/purchase-order-template/` | purchase order template | purchase order form, PO template free | long-tail |
 | `/tools/change-order-template/` | change order template | construction change order template, change order form | long-tail |
+| `/tools/roofing-estimate-template/` | roofing estimate template | free roofing estimate, roofing quote generator, roof tear-off estimate | long-tail trade preset |
+| `/tools/painting-estimate-template/` | painting estimate template | free painting estimate, painting quote template, interior painting estimate | long-tail trade preset |
 | `/guides/construction-estimate-that-wins-jobs/` | how to write a construction estimate | construction quote, construction estimate example | supports estimate tool |
 | `/guides/photography-contract-clauses/` | photography contract clauses | photography contract explained | supports photo contract |
 | `/guides/catering-quote-deposits/` | catering quote deposit | wedding catering pricing | supports catering quote |

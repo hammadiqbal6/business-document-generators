@@ -19,11 +19,13 @@ flowchart LR
   Form --> DOCX
 ```
 
-## Tools (21)
+## Tools (23)
 
 | Tool | Path |
 |------|------|
 | Construction estimate | `/tools/construction-estimate-template/` |
+| Roofing estimate | `/tools/roofing-estimate-template/` |
+| Painting estimate | `/tools/painting-estimate-template/` |
 | Contractor invoice | `/tools/contractor-invoice/` |
 | Photography contract | `/tools/photography-contract-template/` |
 | Videography contract | `/tools/videography-contract/` |
@@ -130,7 +132,8 @@ Short mirror of [`docs/GROWTH-STATUS.md`](docs/GROWTH-STATUS.md). **Every PR mus
 
 ### Done (as of 2026-11-19)
 
-- Homepage links all 21 tools by category; hubs’ which-document tables complete; home title/H1/tagline target contractor & freelancer templates (PR #35).
+- **This PR:** Roofing + painting trade estimate presets (`/tools/roofing-estimate-template/`, `/tools/painting-estimate-template/`) reuse the commercial estimate engine; KEYWORD-MAP, hubs, llms, tests, tool count **23**.
+- Homepage links all tools by category; hubs’ which-document tables complete; home title/H1/tagline target contractor & freelancer templates (PR #35).
 - Indexing audit in CI (`npm run audit:indexing`): sitemap URLs self-canonical + not noindex; embed/`/404/` intentional noindex + `X-Robots-Tag`; internal links avoid redirect sources.
 - IndexNow + GSC property verification in place; AdSense application **Getting ready**.
 - TinyLaunch badge removed from Workers Builds `PUBLIC_DIRECTORY_BADGES` (2026-11-19). TinyLaunch rejected **2026-11-08** (one product at a time); retry after YardTally **2026-12-07**.
@@ -139,7 +142,7 @@ Short mirror of [`docs/GROWTH-STATUS.md`](docs/GROWTH-STATUS.md). **Every PR mus
 
 ### Remaining
 
-- Validate GSC indexing after PR #35 deploy (IndexNow + URL Inspection); expect embed/404 noindex exclusions to stay.
+- After merge/deploy: IndexNow + GSC URL Inspection for the two new trade estimate URLs; confirm embed/404 noindex exclusions stay.
 - Bing verification **unset**; author/`sameAs` env vars **unset**; editorial backlinks still needed.
 - Pause Reddit promo/launch posts until karma recovers; r/SideProject launch was removed and not reposted.
 - GA4 Consent Mode cookieless measurement; AdSense approval; Uneed re-review; TinyLaunch resubmit after 2026-12-07.
