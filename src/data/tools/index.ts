@@ -6,6 +6,7 @@ import {
   cleaningInvoice,
   constructionEstimate,
   contractorInvoice,
+  progressInvoice,
   purchaseOrderTemplate,
   quoteEstimate,
   receiptGenerator,
@@ -31,6 +32,7 @@ import {
 export const allTools: ToolDefinition[] = [
   constructionEstimate,
   contractorInvoice,
+  progressInvoice,
   photographyContract,
   videographyContract,
   podcastScript,

@@ -134,9 +134,9 @@ export const constructionEstimate: ToolDefinition = {
     ],
     sources: estimateSources,
   },
-  relatedSlugs: ['contractor-invoice', 'quote-estimate-generator', 'change-order-template'],
+  relatedSlugs: ['contractor-invoice', 'progress-invoice', 'change-order-template'],
   publishedAt: '2026-10-19',
-  updatedAt: '2026-11-18',
+  updatedAt: '2026-11-19',
 };
 
 export const contractorInvoice: ToolDefinition = {
@@ -262,9 +262,194 @@ export const contractorInvoice: ToolDefinition = {
     ],
     sources: estimateSources,
   },
-  relatedSlugs: ['quote-estimate-generator', 'construction-estimate-template', 'receipt-generator'],
+  relatedSlugs: ['progress-invoice', 'quote-estimate-generator', 'construction-estimate-template'],
   publishedAt: '2026-10-19',
-  updatedAt: '2026-11-18',
+  updatedAt: '2026-11-19',
+};
+
+export const progressInvoice: ToolDefinition = {
+  slug: 'progress-invoice',
+  name: 'Progress Invoice Generator',
+  shortName: 'Progress Invoice',
+  category: 'estimates-invoices',
+  primaryKeyword: 'progress invoice template',
+  secondaryKeywords: [
+    'schedule of values invoice',
+    'progress billing invoice',
+    'construction progress invoice',
+    'percent complete invoice',
+    'retainage invoice template',
+  ],
+  title: 'Free Progress Invoice Template',
+  metaDescription:
+    'Free progress invoice template with schedule of values, % complete, previously billed, retainage, and amount due this period. Preview live, export PDF or DOCX.',
+  h1: 'Free Progress Invoice Template',
+  answerFirst:
+    'A progress invoice bills a draw against a fixed contract using a schedule of values: each line shows scheduled value and percent complete, then previously billed and retainage set the amount due this period. Fill the form here, preview live, and export PDF or DOCX—entries stay on your device.',
+  applicationCategory: 'BusinessApplication',
+  isLegalAdjacent: false,
+  documentTitle: 'Progress Invoice',
+  toolVersion: '1.0',
+  formulaNote:
+    'Per line: earned to date = scheduled value × (% complete ÷ 100). Contract sum = sum of scheduled values. This period (gross) = earned to date − previously billed. Retainage this period = this period × (retainage % ÷ 100). Amount due before tax = this period − retainage. Tax applies to amount due before tax; amount due this period adds tax.',
+  fields: [
+    { id: 'companyName', label: 'Company name', type: 'text', required: true, section: 'Your business' },
+    { id: 'companyAddress', label: 'Company address', type: 'textarea', rows: 2, section: 'Your business' },
+    { id: 'companyPhone', label: 'Phone', type: 'tel', section: 'Your business' },
+    { id: 'companyEmail', label: 'Email', type: 'email', section: 'Your business' },
+    { id: 'invoiceNumber', label: 'Invoice #', type: 'text', required: true, section: 'Invoice' },
+    { id: 'invoiceDate', label: 'Invoice date', type: 'date', required: true, section: 'Invoice' },
+    { id: 'dueDate', label: 'Due date', type: 'date', required: true, section: 'Invoice' },
+    { id: 'periodLabel', label: 'Billing period', type: 'text', section: 'Invoice', help: 'e.g. Draw 2 — through Oct 31' },
+    { id: 'contractNumber', label: 'Contract / estimate #', type: 'text', section: 'Invoice' },
+    { id: 'projectName', label: 'Project', type: 'text', section: 'Invoice' },
+    { id: 'clientName', label: 'Bill to', type: 'text', required: true, section: 'Client' },
+    { id: 'clientAddress', label: 'Client address', type: 'textarea', rows: 2, section: 'Client' },
+    {
+      id: 'lineItems',
+      label: 'Schedule of values',
+      type: 'lineItems',
+      required: true,
+      section: 'Schedule of values',
+      help: 'Quantity = % complete (0–100). Rate = scheduled value for that line. Unit is usually % or ls.',
+      lineItemColumns: {
+        description: 'Work item',
+        quantity: '% Complete',
+        unit: 'Unit',
+        rate: 'Scheduled value',
+      },
+    },
+    {
+      id: 'previouslyBilled',
+      label: 'Previously billed (certified)',
+      type: 'currency',
+      inputMode: 'decimal',
+      min: 0,
+      section: 'Billing',
+      help: 'Sum of prior progress invoices already approved or paid against this contract.',
+    },
+    {
+      id: 'retainagePercent',
+      label: 'Retainage (%)',
+      type: 'number',
+      inputMode: 'decimal',
+      min: 0,
+      max: 100,
+      step: 0.01,
+      section: 'Billing',
+      help: 'Withheld from this period’s gross billing (not from the full contract sum).',
+    },
+    {
+      id: 'taxRate',
+      label: 'Tax rate (%)',
+      type: 'number',
+      inputMode: 'decimal',
+      min: 0,
+      max: 100,
+      step: 0.01,
+      section: 'Billing',
+      help: 'Applied to amount due after retainage for this period.',
+    },
+    { id: 'paymentInstructions', label: 'Payment instructions', type: 'textarea', rows: 3, section: 'Payment' },
+    { id: 'notes', label: 'Notes', type: 'textarea', rows: 2, section: 'Payment' },
+  ],
+  defaults: {
+    companyName: 'Summit Build Co.',
+    companyAddress: '120 Industrial Way\nDenver, CO 80216',
+    companyPhone: '(303) 555-0142',
+    companyEmail: 'billing@summitbuild.example',
+    invoiceNumber: 'PI-2026-02',
+    invoiceDate: '2026-11-19',
+    dueDate: '2026-12-03',
+    periodLabel: 'Draw 2 — through Nov 15, 2026',
+    contractNumber: 'CE-2026-014',
+    projectName: 'Lee kitchen remodel',
+    clientName: 'Jordan Lee',
+    clientAddress: '88 Cedar Lane, Denver, CO 80220',
+    lineItems: [
+      { description: 'Demolition & haul-off', quantity: 100, unit: '%', rate: 5000 },
+      { description: 'Framing & rough carpentry', quantity: 75, unit: '%', rate: 12000 },
+      { description: 'Electrical rough-in', quantity: 40, unit: '%', rate: 8000 },
+    ],
+    previouslyBilled: 8000,
+    retainagePercent: 10,
+    taxRate: 0,
+    paymentInstructions: 'ACH to Summit Build Co. or check payable to Summit Build Co. Net 14. Reference PI-2026-02.',
+    notes: 'Retainage held per contract until substantial completion. Not a final invoice.',
+  },
+  content: {
+    howToUse: [
+      'Enter contractor, client, contract number, and billing period.',
+      'Add schedule-of-values lines: scheduled value in Rate, percent complete in Quantity (0–100).',
+      'Enter previously billed totals and retainage percent; add tax if your locality requires it on this draw.',
+      'Preview amount due this period, then export PDF or DOCX.',
+    ],
+    whatToInclude: [
+      {
+        heading: 'Schedule of values and percent complete',
+        body: 'List each contract category with its scheduled value and the percent complete through this billing date. Earned to date on a line is scheduled value times percent complete. Keep labels aligned with the accepted estimate or contract so accounts payable can match the draw.',
+      },
+      {
+        heading: 'Previously billed, retainage, and amount due',
+        body: 'Previously billed is the sum of prior approved draws. This period’s gross billing is earned to date minus previously billed. Retainage is withheld from that gross (not invented as a new contract total). Amount due this period is gross minus retainage, plus any tax you apply after retainage.',
+      },
+      {
+        heading: 'Progress invoice vs ordinary contractor invoice',
+        body: 'Use this template when the job has a fixed contract sum and percent-complete draws. For a simple deposit or lump progress line without an SOV, the free invoice generator for contractors at /tools/contractor-invoice/ is enough. Price the job first with /tools/construction-estimate-template/ or /tools/quote-estimate-generator/.',
+      },
+    ],
+    workedExample: {
+      heading: 'Worked example: Draw 2 kitchen remodel',
+      body: 'Contract CE-2026-014 has three SOV lines: demolition $5,000 at 100% ($5,000 earned), framing $12,000 at 75% ($9,000), electrical $8,000 at 40% ($3,200). Contract sum $25,000; earned to date $17,200. Previously billed $8,000 leaves $9,200 this period. At 10% retainage, $920 is held and $8,280 is due this period before tax. Recreate PI-2026-02 in the form above.',
+    },
+    commonMistakes: [
+      'Entering percent complete as a decimal (0.75) instead of 75.',
+      'Forgetting previously billed so the client is asked to pay the full earned-to-date again.',
+      'Applying retainage to the whole contract sum instead of this period’s gross.',
+      'Mixing estimate language on a progress invoice PDF.',
+    ],
+    tips: [
+      'Number progress invoices sequentially (PI-01, PI-02) and keep them with the signed estimate.',
+      'After a signed change order, add or revise SOV lines before the next draw—see /tools/change-order-template/.',
+      'When a draw clears, confirm payment with /tools/receipt-generator/ rather than editing a paid invoice.',
+    ],
+    faq: [
+      {
+        question: 'What is a progress invoice template?',
+        answer:
+          'It is a billing form for percent-complete or schedule-of-values draws against a fixed contract. Each line shows scheduled value and percent complete; previously billed and retainage determine the amount due this period.',
+      },
+      {
+        question: 'How do you calculate amount due this period?',
+        answer:
+          'Sum earned to date across SOV lines (scheduled value × percent complete ÷ 100). Subtract previously billed to get this period’s gross. Subtract retainage on that gross, then add tax if applicable. The generator shows each step in the preview totals.',
+      },
+      {
+        question: 'What is retainage on a progress invoice?',
+        answer:
+          'Retainage is a contract holdback—often a percent of each draw—held until substantial completion or punch-list closeout. This template withholds retainage from the current period’s gross billing. Confirm the percent in your signed agreement; this is not legal advice.',
+      },
+      {
+        question: 'Progress invoice vs contractor invoice—which should I use?',
+        answer:
+          'Use the progress invoice when you need an SOV, percent complete, prior draws, and retainage on one PDF. Use /tools/contractor-invoice/ for simpler line-item bills, deposits, or jobs without a formal schedule of values.',
+      },
+      {
+        question: 'Should I keep progress invoices for taxes?',
+        answer:
+          'Yes. The IRS recordkeeping pages for small businesses describe invoices and related documents as support for income. Keep each progress invoice with the contract, change orders, and payment proofs for the retention period that applies to your returns. This tool is not tax advice.',
+      },
+      {
+        question: 'Can I download a progress invoice PDF?',
+        answer:
+          'Yes. Fill the schedule of values, preview amount due this period, then export PDF or DOCX. Nothing is uploaded to a server.',
+      },
+    ],
+    sources: estimateSources,
+  },
+  relatedSlugs: ['contractor-invoice', 'construction-estimate-template', 'change-order-template'],
+  publishedAt: '2026-11-19',
+  updatedAt: '2026-11-19',
 };
 
 export const cleaningInvoice: ToolDefinition = {
@@ -1347,7 +1532,7 @@ export const changeOrderTemplate: ToolDefinition = {
     ],
     sources: estimateSources,
   },
-  relatedSlugs: ['construction-estimate-template', 'contractor-invoice', 'work-order'],
+  relatedSlugs: ['construction-estimate-template', 'contractor-invoice', 'progress-invoice'],
   publishedAt: '2026-11-13',
-  updatedAt: '2026-11-13',
+  updatedAt: '2026-11-19',
 };

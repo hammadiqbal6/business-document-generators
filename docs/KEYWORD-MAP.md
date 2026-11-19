@@ -5,6 +5,7 @@
 | `/` | contractor freelancer document templates | free document templates, contractor PDF templates | sitewide; avoid head “invoice template” (KD 43) |
 | `/tools/construction-estimate-template/` | construction estimate template | contractor estimate form, building estimate PDF | 1,200/mo, KD 2 |
 | `/tools/contractor-invoice/` | contractor invoice | free invoice generator for contractors, construction invoice template, contractor invoice PDF | long-tail B2B |
+| `/tools/progress-invoice/` | progress invoice template | schedule of values invoice, progress billing invoice, retainage invoice, percent complete invoice | long-tail B2B; distinct from contractor-invoice (SOV / % complete / retainage) |
 | `/tools/photography-contract-template/` | photography contract template | wedding photography contract, photographer agreement | 1,100/mo, KD 6 |
 | `/tools/videography-contract/` | videography contract | video production agreement, wedding videography contract | profession long-tail |
 | `/tools/podcast-script-template/` | podcast script template | podcast episode outline, interview podcast script | 600/mo, KD 1 |

@@ -1,5 +1,6 @@
 import type { ClauseItem, LineItem, ToolDefinition } from '../../data/tools/types';
 import { formatMoney, lineItemTotal, sumLineItems } from '../../lib/money';
+import { computeProgressInvoiceTotals } from '../../lib/progressInvoice';
 
 export interface DocBlock {
   type: 'heading' | 'subheading' | 'kv' | 'paragraph' | 'table' | 'clauses' | 'hr' | 'totals';
@@ -48,6 +49,8 @@ export function buildDocumentBlocks(
     case 'receipt-generator':
     case 'work-order':
       return buildCommercialDoc(tool, values, blocks);
+    case 'progress-invoice':
+      return buildProgressInvoice(values, blocks);
     case 'purchase-order-template':
       return buildPurchaseOrder(values, blocks);
     case 'timesheet-template':
@@ -248,6 +251,105 @@ function buildCommercialDoc(
             : 'Balance remaining: $0.00 (paid in full)',
       });
     }
+  }
+
+  return blocks;
+}
+
+function buildProgressInvoice(values: Record<string, unknown>, blocks: DocBlock[]): DocBlock[] {
+  blocks[0] = { type: 'heading', text: 'Progress Invoice' };
+
+  const companyPairs = [
+    { label: 'From', value: str(values.companyName) },
+    { label: 'Address', value: str(values.companyAddress) },
+    { label: 'Phone', value: str(values.companyPhone) },
+    { label: 'Email', value: str(values.companyEmail) },
+  ].filter((p) => p.value);
+  if (companyPairs.length) blocks.push({ type: 'kv', pairs: companyPairs });
+
+  const meta = [
+    { label: 'Invoice #', value: str(values.invoiceNumber) },
+    { label: 'Invoice date', value: str(values.invoiceDate) },
+    { label: 'Due date', value: str(values.dueDate) },
+    { label: 'Billing period', value: str(values.periodLabel) },
+    { label: 'Contract #', value: str(values.contractNumber) },
+  ].filter((p) => p.value);
+  if (meta.length) blocks.push({ type: 'kv', pairs: meta });
+
+  const clientBits = [
+    { label: 'Bill to', value: str(values.clientName) },
+    { label: 'Address', value: str(values.clientAddress) },
+  ].filter((p) => p.value);
+  if (clientBits.length) blocks.push({ type: 'kv', pairs: clientBits });
+
+  if (str(values.projectName)) {
+    blocks.push({ type: 'subheading', text: str(values.projectName) });
+  }
+
+  const lineItems = items(values);
+  const taxRate = Number(values.taxRate) || 0;
+  const totals = computeProgressInvoiceTotals({
+    lines: lineItems.map((i) => ({
+      description: i.description,
+      scheduledValue: Number(i.rate) || 0,
+      percentComplete: Number(i.quantity) || 0,
+      unit: i.unit,
+    })),
+    previouslyBilled: Number(values.previouslyBilled) || 0,
+    retainagePercent: Number(values.retainagePercent) || 0,
+    taxRate,
+  });
+
+  blocks.push({ type: 'subheading', text: 'Schedule of values' });
+  blocks.push({
+    type: 'table',
+    rows: [
+      ['Work item', '% Complete', 'Unit', 'Scheduled value', 'Earned to date'],
+      ...totals.lineRows.map((r) => [
+        r.description,
+        String(r.percentComplete),
+        r.unit,
+        money(r.scheduledValue),
+        money(r.earnedToDate),
+      ]),
+    ],
+  });
+
+  const retainagePct = Number(values.retainagePercent) || 0;
+  const totalRows: NonNullable<DocBlock['totals']> = [
+    { label: 'Contract sum', value: money(totals.contractSum) },
+    { label: 'Earned to date', value: money(totals.earnedToDate) },
+    { label: 'Previously billed', value: money(Number(values.previouslyBilled) || 0) },
+    { label: 'This period (gross)', value: money(totals.thisPeriodGross) },
+  ];
+  if (retainagePct > 0 || totals.retainageThisPeriod > 0) {
+    totalRows.push({
+      label: `Retainage this period (${retainagePct}%)`,
+      value: money(totals.retainageThisPeriod),
+    });
+  }
+  totalRows.push({
+    label: 'Amount due before tax',
+    value: money(totals.amountDueBeforeTax),
+  });
+  if (taxRate > 0) {
+    totalRows.push({ label: `Tax (${taxRate}%)`, value: money(totals.tax) });
+  }
+  totalRows.push({
+    label: 'Amount due this period',
+    value: money(totals.amountDueThisPeriod),
+    emphasize: true,
+  });
+  blocks.push({ type: 'totals', totals: totalRows });
+
+  if (str(values.paymentInstructions)) {
+    blocks.push({
+      type: 'paragraph',
+      text: `Payment instructions: ${str(values.paymentInstructions)}`,
+    });
+  }
+  if (str(values.notes)) {
+    blocks.push({ type: 'paragraph', text: `Notes: ${str(values.notes)}` });
   }
 
   return blocks;

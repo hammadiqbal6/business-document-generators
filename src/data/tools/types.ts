@@ -39,6 +39,13 @@ export interface FieldDef {
   section?: string;
   /** Default for clause/line-item templates */
   defaultValue?: string | number | boolean;
+  /** Optional column labels when type is lineItems (e.g. SOV % complete). */
+  lineItemColumns?: {
+    description?: string;
+    quantity?: string;
+    unit?: string;
+    rate?: string;
+  };
 }
 
 export interface LineItem {
@@ -120,7 +127,7 @@ export const CATEGORY_META: Record<
     slug: 'estimates-invoices',
     name: 'Estimates & Invoices',
     description:
-      'Construction estimates, change orders, purchase orders, timesheets, contractor invoices, cleaning quotes, catering quotes, receipts, work orders, and general quote generators.',
+      'Construction estimates, change orders, purchase orders, timesheets, contractor invoices, progress invoices (schedule of values), cleaning quotes, catering quotes, receipts, work orders, and general quote generators.',
   },
   contracts: {
     slug: 'contracts',

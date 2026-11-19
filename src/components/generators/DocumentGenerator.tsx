@@ -310,18 +310,28 @@ function FieldControl({
 
   if (field.type === 'lineItems') {
     const items = (value as LineItem[]) || [];
+    const cols = field.lineItemColumns || {};
+    const descLabel = cols.description || 'Description';
+    const qtyLabel = cols.quantity || 'Qty';
+    const unitLabel = cols.unit || 'Unit';
+    const rateLabel = cols.rate || 'Rate';
     return (
       <div className="field field--stack">
         <span className="field__label">{field.label}</span>
+        {field.help && (
+          <p className="field__help" id={`${id}-help`}>
+            {field.help}
+          </p>
+        )}
         <div className="line-items">
           {items.map((item, idx) => (
             <div className="line-items__row" key={idx}>
               <div className="line-items__cell line-items__desc">
-                <label htmlFor={`${id}-desc-${idx}`}>Description</label>
+                <label htmlFor={`${id}-desc-${idx}`}>{descLabel}</label>
                 <input
                   id={`${id}-desc-${idx}`}
                   value={item.description}
-                  placeholder="Description"
+                  placeholder={descLabel}
                   onChange={(e) => {
                     const next = [...items];
                     next[idx] = { ...next[idx], description: e.target.value };
@@ -330,7 +340,7 @@ function FieldControl({
                 />
               </div>
               <div className="line-items__cell">
-                <label htmlFor={`${id}-qty-${idx}`}>Qty</label>
+                <label htmlFor={`${id}-qty-${idx}`}>{qtyLabel}</label>
                 <input
                   id={`${id}-qty-${idx}`}
                   type="number"
@@ -344,11 +354,11 @@ function FieldControl({
                 />
               </div>
               <div className="line-items__cell">
-                <label htmlFor={`${id}-unit-${idx}`}>Unit</label>
+                <label htmlFor={`${id}-unit-${idx}`}>{unitLabel}</label>
                 <input
                   id={`${id}-unit-${idx}`}
                   value={item.unit}
-                  placeholder="hr / ls"
+                  placeholder="hr / ls / %"
                   onChange={(e) => {
                     const next = [...items];
                     next[idx] = { ...next[idx], unit: e.target.value };
@@ -357,7 +367,7 @@ function FieldControl({
                 />
               </div>
               <div className="line-items__cell">
-                <label htmlFor={`${id}-rate-${idx}`}>Rate</label>
+                <label htmlFor={`${id}-rate-${idx}`}>{rateLabel}</label>
                 <input
                   id={`${id}-rate-${idx}`}
                   type="number"

@@ -65,6 +65,7 @@ export const GET: APIRoute = () => {
     `- How do you write a business estimate? → ${origin}/guides/how-to-write-a-business-estimate/`,
     `- How do you write a construction quote or estimate? → ${origin}/guides/construction-estimate-that-wins-jobs/`,
     `- How do you invoice as a contractor (progress billing)? → ${origin}/guides/contractor-invoice-example/`,
+    `- What is a progress invoice template (schedule of values, retainage)? → ${origin}/tools/progress-invoice/`,
     `- How do you write a work order? → ${origin}/guides/how-to-create-a-work-order/`,
     `- Work order vs invoice vs estimate? → ${origin}/guides/work-order-vs-invoice-vs-estimate/`,
     `- How do you write a photography contract? Who owns the photos? → ${origin}/guides/photography-contract-clauses/ (Copyright Office: protection when fixed; photographer generally the author unless work made for hire)`,
