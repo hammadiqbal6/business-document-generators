@@ -1,4 +1,10 @@
 import type { ClauseItem, LineItem, ToolDefinition } from '../../data/tools/types';
+import {
+  buildLateFeeLine,
+  buildLateFeeReminder,
+  calculateLateFee,
+  type LateFeeType,
+} from '../../lib/lateFee';
 import { formatMoney, lineItemTotal, sumLineItems } from '../../lib/money';
 
 export interface DocBlock {
@@ -54,6 +60,8 @@ export function buildDocumentBlocks(
       return buildTimesheet(values, blocks);
     case 'change-order-template':
       return buildChangeOrder(values, blocks);
+    case 'invoice-late-fee-calculator':
+      return buildLateFeeDoc(values, blocks);
     case 'photography-contract-template':
       return buildPhotoContract(values, blocks);
     case 'videography-contract':
@@ -248,6 +256,85 @@ function buildCommercialDoc(
             : 'Balance remaining: $0.00 (paid in full)',
       });
     }
+  }
+
+  return blocks;
+}
+
+function buildLateFeeDoc(values: Record<string, unknown>, blocks: DocBlock[]): DocBlock[] {
+  blocks[0] = { type: 'heading', text: 'Late Fee Calculation' };
+
+  const invoiceAmount = Number(values.invoiceAmount) || 0;
+  const feeTypeRaw = str(values.feeType) || 'flat';
+  const feeType: LateFeeType =
+    feeTypeRaw === 'monthly_percent' || feeTypeRaw === 'annual_daily' || feeTypeRaw === 'flat'
+      ? feeTypeRaw
+      : 'flat';
+
+  const result = calculateLateFee({
+    invoiceAmount,
+    dueDate: str(values.invoiceDueDate),
+    paymentDate: str(values.paymentDate),
+    gracePeriodDays: Number(values.gracePeriodDays) || 0,
+    feeType,
+    flatFeeAmount: Number(values.flatFeeAmount) || 0,
+    monthlyPercent: Number(values.monthlyPercent) || 0,
+    annualPercent: Number(values.annualPercent) || 0,
+  });
+
+  const wordingCtx = {
+    companyName: str(values.companyName),
+    clientName: str(values.clientName),
+    invoiceNumber: str(values.invoiceNumber),
+    invoiceAmount,
+    dueDate: str(values.invoiceDueDate),
+    paymentDate: str(values.paymentDate),
+    result,
+  };
+
+  blocks.push({
+    type: 'kv',
+    pairs: [
+      { label: 'From', value: str(values.companyName) },
+      { label: 'Client', value: str(values.clientName) },
+      { label: 'Invoice #', value: str(values.invoiceNumber) },
+      { label: 'Invoice amount', value: money(invoiceAmount) },
+      { label: 'Due date', value: str(values.invoiceDueDate) },
+      { label: 'Payment date', value: str(values.paymentDate) },
+      {
+        label: 'Grace period',
+        value:
+          values.gracePeriodDays != null && str(values.gracePeriodDays) !== ''
+            ? `${Number(values.gracePeriodDays) || 0} day(s)`
+            : '',
+      },
+      { label: 'Fee method', value: result.feeMethodLabel },
+    ].filter((p) => p.value),
+  });
+
+  blocks.push({
+    type: 'totals',
+    totals: [
+      { label: 'Days past due', value: String(result.daysPastDue) },
+      { label: 'Chargeable days (after grace)', value: String(result.chargeableDays) },
+      { label: 'Late fee', value: money(result.fee) },
+      { label: 'New total due', value: money(result.newTotal), emphasize: true },
+    ],
+  });
+
+  blocks.push({ type: 'subheading', text: 'Suggested late-fee line' });
+  blocks.push({ type: 'paragraph', text: buildLateFeeLine(wordingCtx) });
+
+  blocks.push({ type: 'subheading', text: 'Suggested payment reminder' });
+  blocks.push({ type: 'paragraph', text: buildLateFeeReminder(wordingCtx) });
+
+  blocks.push({
+    type: 'paragraph',
+    text: 'Not legal or tax advice. Late-fee caps and notice rules vary by state and country—confirm your contract and local law before billing a fee.',
+  });
+
+  if (str(values.notes)) {
+    blocks.push({ type: 'paragraph', text: `Notes: ${str(values.notes)}` });
   }
 
   return blocks;

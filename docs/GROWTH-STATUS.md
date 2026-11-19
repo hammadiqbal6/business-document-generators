@@ -29,7 +29,12 @@ As of **2026-11-17** (owner-reported GSC/GA4 window) unless noted.
 
 In-repo and confirmed off-repo completions.
 
-- **2026-11-19 — PR #35 (this PR):**
+- **2026-11-19 — Invoice late fee calculator (this PR):**
+  - New tool `/tools/invoice-late-fee-calculator/`: invoice amount, due date, payment date (or today), fee type (flat / % per month prorated / annual→daily), optional grace period.
+  - Outputs days past due, chargeable days, fee, new total, plus suggested late-fee line and payment-reminder wording (PDF/DOCX export).
+  - Wired into `allTools`, estimates-invoices hub which-document table, related links on contractor/cleaning invoice + receipt tools, `KEYWORD-MAP`, `toolGuideMap`, `llms.txt` / `llms-full.txt` question maps. Not added to `featuredToolSlugs`.
+  - Disclaimer: not legal/tax advice; caps vary by state/country (invoice/receipt banner via slug).
+- **2026-11-19 — PR #35:**
   - Homepage links every tool via all-templates-by-category (`getToolsByCategory` / `CATEGORY_META`; featured still `getFeaturedTools()`).
   - Hub “which document” tables completed for estimates-invoices + contracts (timesheet / PO / change-order stay on estimates-invoices per tool categories — not forms/contracts).
   - Homepage title/H1 + site tagline/`llms.txt` intro aligned to contractor & freelancer document templates (avoid head “invoice”).
@@ -51,8 +56,8 @@ In-repo and confirmed off-repo completions.
 
 | Bucket | What’s in it |
 |--------|----------------|
-| Sitemap / indexable | All ~56 sitemap URLs on `https://docuklin.com…/` with trailing slash, self-canonical, `index,follow`, matching `og:url`; all 21 tools included with `lastmod` |
-| Intentional noindex | `/tools/<slug>/embed/` (21) + `/404/` — meta robots + `X-Robots-Tag`; **not** in sitemap. Matches GSC “Excluded by noindex” for crawled embeds/404 |
+| Sitemap / indexable | Sitemap URLs on `https://docuklin.com…/` with trailing slash, self-canonical, `index,follow`, matching `og:url`; all tools (22 including late-fee calculator) included with `lastmod` |
+| Intentional noindex | `/tools/<slug>/embed/` (one per tool) + `/404/` — meta robots + `X-Robots-Tag`; **not** in sitemap. Matches GSC “Excluded by noindex” for crawled embeds/404 |
 | Redirects (final 200 only in sitemap/links) | `/tools/invoice[/]`, `/tools/invoice-generator[/]` → contractor invoice; `/privacy-policy[/]` → `/privacy/`; `/sitemap.xml` & `/sitemap_index.xml` → `/sitemap-index.xml`; `/authors[/]` → `/about/`; Worker trailing-slash 308 |
 
 ---
@@ -61,7 +66,7 @@ In-repo and confirmed off-repo completions.
 
 Prioritized open work. Owner-confirmed gaps preferred over guesses.
 
-1. **GSC after deploy of PR #35:** ping IndexNow; URL Inspection → Request indexing for previously weak / “Discovered – not indexed” tool URLs; confirm the 5 noindex exclusions are embeds/404 only (intentional).
+1. **GSC after deploy of this PR + PR #35:** ping IndexNow; URL Inspection → Request indexing for `/tools/invoice-late-fee-calculator/` and previously weak / “Discovered – not indexed” tool URLs; confirm noindex exclusions are embeds/404 only (intentional).
 2. **Bing Webmaster verification** — currently **unset** (owner); set `PUBLIC_BING_SITE_VERIFICATION` / console verification when ready.
 3. **Author / `sameAs` env vars** — currently **unset** (owner); wire when profiles are public and stable.
 4. **Backlinks** — site still has essentially none beyond minor directory/unroll mentions; outreach remains open.
@@ -72,6 +77,7 @@ Prioritized open work. Owner-confirmed gaps preferred over guesses.
 9. **AdSense** — keep publishing; status **Getting ready**; expect review ~3–4 weeks.
 10. **Weekly GSC check** — record deltas in Baseline (do not invent numbers).
 11. **Directory submissions / blogger embed outreach / related tool variants** — ongoing off-page; record confirmed listings when known.
+12. **Other parallel agents’ tools/guides** — may still be in flight; keep this queue accurate when those PRs land (do not invent Done items).
 
 ---
 
@@ -79,7 +85,7 @@ Prioritized open work. Owner-confirmed gaps preferred over guesses.
 
 - **AdSense review** — **Getting ready** (Nov 2026).
 - **Uneed re-review** — pending owner reply to decline email.
-- No other in-repo SEO/growth code work beyond shipping PR #35.
+- Parallel agent PRs may still be open for other tools/content; this PR only ships the invoice late fee calculator.
 
 ---
 

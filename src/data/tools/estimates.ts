@@ -262,7 +262,12 @@ export const contractorInvoice: ToolDefinition = {
     ],
     sources: estimateSources,
   },
-  relatedSlugs: ['quote-estimate-generator', 'construction-estimate-template', 'receipt-generator'],
+  relatedSlugs: [
+    'invoice-late-fee-calculator',
+    'quote-estimate-generator',
+    'construction-estimate-template',
+    'receipt-generator',
+  ],
   publishedAt: '2026-10-19',
   updatedAt: '2026-11-18',
 };
@@ -383,7 +388,12 @@ export const cleaningInvoice: ToolDefinition = {
     ],
     sources: estimateSources,
   },
-  relatedSlugs: ['quote-estimate-generator', 'receipt-generator', 'catering-quote'],
+  relatedSlugs: [
+    'invoice-late-fee-calculator',
+    'quote-estimate-generator',
+    'receipt-generator',
+    'catering-quote',
+  ],
   publishedAt: '2026-10-19',
   updatedAt: '2026-11-13',
 };
@@ -836,7 +846,12 @@ export const receiptGenerator: ToolDefinition = {
     ],
     sources: estimateSources,
   },
-  relatedSlugs: ['contractor-invoice', 'quote-estimate-generator', 'catering-quote'],
+  relatedSlugs: [
+    'contractor-invoice',
+    'invoice-late-fee-calculator',
+    'quote-estimate-generator',
+    'catering-quote',
+  ],
   publishedAt: '2026-10-19',
   updatedAt: '2026-11-18',
 };
@@ -1350,4 +1365,209 @@ export const changeOrderTemplate: ToolDefinition = {
   relatedSlugs: ['construction-estimate-template', 'contractor-invoice', 'work-order'],
   publishedAt: '2026-11-13',
   updatedAt: '2026-11-13',
+};
+
+export const invoiceLateFeeCalculator: ToolDefinition = {
+  slug: 'invoice-late-fee-calculator',
+  name: 'Invoice Late Fee Calculator',
+  shortName: 'Late Fee Calculator',
+  category: 'estimates-invoices',
+  primaryKeyword: 'invoice late fee calculator',
+  secondaryKeywords: [
+    'late fee calculator invoice',
+    'invoice overdue fee',
+    'late payment fee calculator',
+    'invoice interest calculator',
+  ],
+  title: 'Invoice Late Fee Calculator',
+  metaDescription:
+    'Calculate invoice late fees from amount, due date, payment date, and flat, monthly %, or daily annual rate—with grace days, copy-ready wording, and PDF export.',
+  h1: 'Invoice Late Fee Calculator',
+  answerFirst:
+    'Enter the unpaid amount, due date, payment date (or today), fee type, and optional grace days. Get days late, the fee, the new total, and copy-ready reminder wording. Caps vary by state and country—this is math, not legal advice.',
+  applicationCategory: 'BusinessApplication',
+  isLegalAdjacent: false,
+  documentTitle: 'Late Fee Calculation',
+  toolVersion: '1.0',
+  formulaNote:
+    'Days past due = calendar days from due date to payment date. Chargeable days = max(0, days past due − grace). Flat fee applies once when chargeable days > 0. Monthly % = amount × (rate ÷ 100) × (chargeable days ÷ 30). Annual daily = amount × (annual % ÷ 100 ÷ 365) × chargeable days. Results round to cents.',
+  fields: [
+    { id: 'companyName', label: 'Your business name', type: 'text', section: 'Parties' },
+    { id: 'clientName', label: 'Client name', type: 'text', section: 'Parties' },
+    { id: 'invoiceNumber', label: 'Invoice #', type: 'text', section: 'Invoice' },
+    {
+      id: 'invoiceAmount',
+      label: 'Invoice amount due',
+      type: 'currency',
+      inputMode: 'decimal',
+      required: true,
+      min: 0,
+      section: 'Invoice',
+      help: 'Unpaid balance before any late fee.',
+    },
+    {
+      id: 'invoiceDueDate',
+      label: 'Due date',
+      type: 'date',
+      required: true,
+      section: 'Invoice',
+    },
+    {
+      id: 'paymentDate',
+      label: 'Payment date (or today)',
+      type: 'date',
+      required: true,
+      section: 'Invoice',
+      help: 'Use today’s date to see what is owed if they paid right now.',
+    },
+    {
+      id: 'gracePeriodDays',
+      label: 'Grace period (days)',
+      type: 'number',
+      inputMode: 'numeric',
+      min: 0,
+      max: 365,
+      step: 1,
+      section: 'Fee terms',
+      help: 'Days after the due date before a fee starts. 0 means fees start the day after due.',
+    },
+    {
+      id: 'feeType',
+      label: 'Fee type',
+      type: 'select',
+      required: true,
+      section: 'Fee terms',
+      options: [
+        { value: 'flat', label: 'Flat fee' },
+        { value: 'monthly_percent', label: '% per month (prorated)' },
+        { value: 'annual_daily', label: 'Annual rate → daily' },
+      ],
+    },
+    {
+      id: 'flatFeeAmount',
+      label: 'Flat fee amount',
+      type: 'currency',
+      inputMode: 'decimal',
+      min: 0,
+      section: 'Fee terms',
+      help: 'Used when fee type is Flat fee.',
+    },
+    {
+      id: 'monthlyPercent',
+      label: 'Monthly rate (%)',
+      type: 'number',
+      inputMode: 'decimal',
+      min: 0,
+      max: 100,
+      step: 0.01,
+      section: 'Fee terms',
+      help: 'Used when fee type is % per month. Prorated by chargeable days ÷ 30.',
+    },
+    {
+      id: 'annualPercent',
+      label: 'Annual rate (%)',
+      type: 'number',
+      inputMode: 'decimal',
+      min: 0,
+      max: 100,
+      step: 0.01,
+      section: 'Fee terms',
+      help: 'Used when fee type is Annual rate → daily (÷ 365 × chargeable days).',
+    },
+    {
+      id: 'notes',
+      label: 'Internal notes',
+      type: 'textarea',
+      rows: 2,
+      section: 'Notes',
+      help: 'Optional—stays on the exported summary for your file.',
+    },
+  ],
+  defaults: {
+    companyName: 'Summit Build Co.',
+    clientName: 'Jordan Lee',
+    invoiceNumber: 'INV-2026-088',
+    invoiceAmount: 4250,
+    invoiceDueDate: '2026-10-01',
+    paymentDate: '2026-11-13',
+    gracePeriodDays: 5,
+    feeType: 'monthly_percent',
+    flatFeeAmount: 50,
+    monthlyPercent: 1.5,
+    annualPercent: 18,
+    notes: 'Sample only—confirm the fee matches the signed terms before you bill it.',
+  },
+  content: {
+    howToUse: [
+      'Enter the unpaid invoice amount, due date, and payment date (or today’s date).',
+      'Set any grace period your contract allows, then pick flat fee, monthly %, or annual→daily.',
+      'Fill the matching rate or flat amount; leave unused rate fields alone.',
+      'Copy the suggested late-fee line or reminder from the preview, or export PDF/DOCX for your file.',
+    ],
+    whatToInclude: [
+      {
+        heading: 'What this calculator outputs',
+        body: 'You get calendar days past due, chargeable days after grace, the fee in dollars, and the new total (original amount + fee). The preview also drafts a one-line late-fee charge and a short payment reminder you can paste into email or onto a revised invoice from /tools/contractor-invoice/ or /tools/cleaning-service-invoice/.',
+      },
+      {
+        heading: 'Pick a fee method that matches your contract',
+        body: 'Flat fees are simple—“$50 after net 15”—and easy for clients to understand. A monthly percent fits many service agreements; this tool prorates by chargeable days ÷ 30 so a partial month is not billed as a full month. An annual rate converted daily suits interest-style clauses: annual % ÷ 100 ÷ 365 × chargeable days. Use the same method that already appears in your signed terms; do not invent a harsher rule after the fact.',
+      },
+      {
+        heading: 'Grace periods and legal caps',
+        body: 'A grace period is calendar days after the due date before chargeable days start. Caps, notice rules, and whether late fees are enforceable vary by state and country—and consumer jobs can differ from B2B. This page does arithmetic only. It is not legal or tax advice. If you are unsure whether your rate is allowed, ask a licensed attorney or accountant where you operate before you send the reminder.',
+      },
+    ],
+    workedExample: {
+      heading: 'Worked example: 1.5% per month after a 5-day grace',
+      body: 'INV-2026-088 still shows $4,250 due. Due date 2026-10-01; payment date 2026-11-13 = 43 days past due. With a 5-day grace, chargeable days = 38. At 1.5% per month prorated: $4,250 × 0.015 × (38 ÷ 30) = $80.75. New total = $4,330.75. Paste the preview’s late-fee line onto a revised contractor invoice, or send the reminder text first and keep the receipt tool ready when payment clears.',
+    },
+    commonMistakes: [
+      'Charging a fee that was never in the estimate, contract, or invoice terms.',
+      'Counting grace days wrong—or applying a full month when your terms say prorate.',
+      'Skipping the original invoice number so AP cannot match the balance.',
+      'Treating this calculator’s output as a legal opinion on usury or consumer-credit caps.',
+    ],
+    tips: [
+      'Put the late-fee rule on the original invoice so the reminder is not a surprise.',
+      'After they pay, issue a receipt from /tools/receipt-generator/ that references the same invoice number.',
+      'Keep the calculation PDF with the invoice in your records—IRS guidance expects documents that support gross receipts.',
+    ],
+    faq: [
+      {
+        question: 'How do you calculate an invoice late fee?',
+        answer:
+          'Measure calendar days from the due date to the payment date (or today). Subtract any grace days. Then apply your agreed method: a flat dollar amount, a monthly percent prorated by chargeable days ÷ 30, or an annual percent converted to a daily rate × chargeable days. This tool does that math and rounds to cents.',
+      },
+      {
+        question: 'What is a grace period on an overdue invoice?',
+        answer:
+          'Grace is the number of days after the due date before a late fee starts. If the due date was the 1st and grace is 5, chargeable days begin on the 7th. Set grace to 0 if your terms start fees the day after due.',
+      },
+      {
+        question: 'Flat fee vs monthly percent vs annual daily—which should I use?',
+        answer:
+          'Use whatever your signed terms already say. Flat fees are predictable. Monthly percent scales with the balance and, here, prorates partial months. Annual→daily mirrors interest-style wording. Switching methods after the invoice went out invites disputes.',
+      },
+      {
+        question: 'Are late fees legal? What caps apply?',
+        answer:
+          'It depends on where you and the client are, the contract language, and whether the job is consumer or commercial. Some places cap fees or require clear disclosure. This calculator does not check caps and is not legal advice—confirm local rules before you bill a fee.',
+      },
+      {
+        question: 'Can I add the fee to my contractor or cleaning invoice?',
+        answer:
+          'Yes. Copy the suggested late-fee line into notes or as its own line item on /tools/contractor-invoice/ or /tools/cleaning-service-invoice/, keep the same invoice number (or issue a clearly labeled revision), and export a fresh PDF.',
+      },
+      {
+        question: 'Does this store my client data?',
+        answer:
+          'No. Calculation, preview, and export run in your browser. Optional drafts use localStorage on your device only.',
+      },
+    ],
+    sources: estimateSources,
+  },
+  relatedSlugs: ['contractor-invoice', 'cleaning-service-invoice', 'receipt-generator'],
+  publishedAt: '2026-11-19',
+  updatedAt: '2026-11-19',
 };

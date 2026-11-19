@@ -19,12 +19,13 @@ flowchart LR
   Form --> DOCX
 ```
 
-## Tools (21)
+## Tools (22)
 
 | Tool | Path |
 |------|------|
 | Construction estimate | `/tools/construction-estimate-template/` |
 | Contractor invoice | `/tools/contractor-invoice/` |
+| Invoice late fee calculator | `/tools/invoice-late-fee-calculator/` |
 | Photography contract | `/tools/photography-contract-template/` |
 | Videography contract | `/tools/videography-contract/` |
 | Podcast script | `/tools/podcast-script-template/` |
@@ -130,7 +131,8 @@ Short mirror of [`docs/GROWTH-STATUS.md`](docs/GROWTH-STATUS.md). **Every PR mus
 
 ### Done (as of 2026-11-19)
 
-- Homepage links all 21 tools by category; hubs’ which-document tables complete; home title/H1/tagline target contractor & freelancer templates (PR #35).
+- **Invoice late fee calculator** (`/tools/invoice-late-fee-calculator/`): flat / monthly % / annual→daily fees, grace days, days late + new total, copy-ready late-fee line and reminder; linked from contractor/cleaning invoice tools and estimates-invoices hub (this PR).
+- Homepage links all tools by category; hubs’ which-document tables complete; home title/H1/tagline target contractor & freelancer templates (PR #35).
 - Indexing audit in CI (`npm run audit:indexing`): sitemap URLs self-canonical + not noindex; embed/`/404/` intentional noindex + `X-Robots-Tag`; internal links avoid redirect sources.
 - IndexNow + GSC property verification in place; AdSense application **Getting ready**.
 - TinyLaunch badge removed from Workers Builds `PUBLIC_DIRECTORY_BADGES` (2026-11-19). TinyLaunch rejected **2026-11-08** (one product at a time); retry after YardTally **2026-12-07**.
@@ -139,10 +141,11 @@ Short mirror of [`docs/GROWTH-STATUS.md`](docs/GROWTH-STATUS.md). **Every PR mus
 
 ### Remaining
 
-- Validate GSC indexing after PR #35 deploy (IndexNow + URL Inspection); expect embed/404 noindex exclusions to stay.
+- Validate GSC indexing after late-fee calculator + PR #35 deploy (IndexNow + URL Inspection); expect embed/404 noindex exclusions to stay.
 - Bing verification **unset**; author/`sameAs` env vars **unset**; editorial backlinks still needed.
 - Pause Reddit promo/launch posts until karma recovers; r/SideProject launch was removed and not reposted.
 - GA4 Consent Mode cookieless measurement; AdSense approval; Uneed re-review; TinyLaunch resubmit after 2026-12-07.
+- Other parallel tool/guide PRs may still be open—do not invent their Done items here.
 
 GSC 28d → 2026-11-17 (owner): **0** clicks, **486** impressions, avg position **58.9**, **54** indexed / **7** not. GA4: **3** users (28d).
 
