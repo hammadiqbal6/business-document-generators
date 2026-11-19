@@ -15,6 +15,12 @@ export const toolToGuides: Record<string, string[]> = {
     'line-item-totals-explained',
     'what-to-include-on-a-receipt',
   ],
+  'progress-invoice': [
+    'contractor-invoice-example',
+    'line-item-totals-explained',
+    'invoice-vs-estimate',
+    'construction-estimate-that-wins-jobs',
+  ],
   'photography-contract-template': [
     'photography-contract-clauses',
     'freelance-payment-schedule-milestones',

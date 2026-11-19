@@ -29,7 +29,10 @@ As of **2026-11-17** (owner-reported GSC/GA4 window) unless noted.
 
 In-repo and confirmed off-repo completions.
 
-- **2026-11-19 — CI / Cloudflare build speedup (this PR):**
+- **2026-11-19 — Progress invoice generator (this PR):**
+  - New tool `/tools/progress-invoice/`: contract value, percent or amount complete this period, previously billed, retainage %, amount due this period, balance to finish; live preview + PDF/DOCX.
+  - Wired into `allTools`, estimates-invoices hub which-document table, KEYWORD-MAP, `toolGuideMap`, `llms.txt` / `llms-full.txt` question maps; related from contractor invoice / change order; Vitest coverage for billing math.
+- **2026-11-19 — CI / Cloudflare build speedup (merged to main):**
   - Baseline (recent successful `CI` workflow): wall ~**33–47s**; job ~**29–41s**; steps ~`npm ci` **12–18s**, `build` **5–7s**, `test` **3–5s** (e.g. run `44535495168` on main: 33s / 29s job).
   - Parallel `build` + `test` jobs; setup-node npm cache kept; Astro/Vite cache; `npm ci --prefer-offline --no-audit --fund=false`; concurrency cancel-in-progress kept.
   - Docs-only path filter skips heavy jobs; required check id `build-test-audit-proof` still reports green.
@@ -56,8 +59,8 @@ In-repo and confirmed off-repo completions.
 
 | Bucket | What’s in it |
 |--------|----------------|
-| Sitemap / indexable | All ~56 sitemap URLs on `https://docuklin.com…/` with trailing slash, self-canonical, `index,follow`, matching `og:url`; all 21 tools included with `lastmod` |
-| Intentional noindex | `/tools/<slug>/embed/` (21) + `/404/` — meta robots + `X-Robots-Tag`; **not** in sitemap. Matches GSC “Excluded by noindex” for crawled embeds/404 |
+| Sitemap / indexable | All sitemap URLs on `https://docuklin.com…/` with trailing slash, self-canonical, `index,follow`, matching `og:url`; all tools included with `lastmod` (22 tools after progress invoice) |
+| Intentional noindex | `/tools/<slug>/embed/` (one per tool) + `/404/` — meta robots + `X-Robots-Tag`; **not** in sitemap. Matches GSC “Excluded by noindex” for crawled embeds/404 |
 | Redirects (final 200 only in sitemap/links) | `/tools/invoice[/]`, `/tools/invoice-generator[/]` → contractor invoice; `/privacy-policy[/]` → `/privacy/`; `/sitemap.xml` & `/sitemap_index.xml` → `/sitemap-index.xml`; `/authors[/]` → `/about/`; Worker trailing-slash 308 |
 
 ---
@@ -66,8 +69,8 @@ In-repo and confirmed off-repo completions.
 
 Prioritized open work. Owner-confirmed gaps preferred over guesses.
 
-1. **CI after this PR:** record after timings from the PR’s green `CI` run vs baseline above; if Workers Builds dashboard has a custom Install command, set `npm ci --prefer-offline --no-audit --fund=false` (`.npmrc` alone may be enough).
-2. **GSC after deploy of PR #35:** ping IndexNow; URL Inspection → Request indexing for previously weak / “Discovered – not indexed” tool URLs; confirm the 5 noindex exclusions are embeds/404 only (intentional).
+1. **GSC after deploy:** ping IndexNow; URL Inspection → Request indexing for `/tools/progress-invoice/` and any previously weak / “Discovered – not indexed” tool URLs; confirm noindex exclusions are embeds/404 only (intentional).
+2. **CI timings:** record after timings vs baseline (~33–47s); if Workers Builds dashboard has a custom Install command, set `npm ci --prefer-offline --no-audit --fund=false` (`.npmrc` alone may be enough).
 3. **Bing Webmaster verification** — currently **unset** (owner); set `PUBLIC_BING_SITE_VERIFICATION` / console verification when ready.
 4. **Author / `sameAs` env vars** — currently **unset** (owner); wire when profiles are public and stable.
 5. **Backlinks** — site still has essentially none beyond minor directory/unroll mentions; outreach remains open.
@@ -77,7 +80,7 @@ Prioritized open work. Owner-confirmed gaps preferred over guesses.
 9. **TinyLaunch resubmit** after YardTally launch **2026-12-07**.
 10. **AdSense** — keep publishing; status **Getting ready**; expect review ~3–4 weeks.
 11. **Weekly GSC check** — record deltas in Baseline (do not invent numbers).
-12. **Directory submissions / blogger embed outreach / related tool variants** — ongoing off-page; record confirmed listings when known.
+12. **Directory submissions / blogger embed outreach / related tool variants** — ongoing off-page (progress invoice tool shipped in-repo); record confirmed listings when known.
 
 ---
 
@@ -85,7 +88,7 @@ Prioritized open work. Owner-confirmed gaps preferred over guesses.
 
 - **AdSense review** — **Getting ready** (Nov 2026).
 - **Uneed re-review** — pending owner reply to decline email.
-- **CI speedup PR** — open for review; measure after timings on green Actions run.
+- Progress invoice generator shipped in this PR; CI speedup already on main — measure after timings when convenient.
 
 ---
 

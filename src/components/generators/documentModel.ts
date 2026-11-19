@@ -31,6 +31,47 @@ function taxFromSubtotal(subtotal: number, taxRate: number): number {
   return Math.round(subtotal * (taxRate / 100) * 100) / 100;
 }
 
+function roundCents(n: number): number {
+  return Math.round(n * 100) / 100;
+}
+
+/** Progress-billing math shared by preview/PDF and tests. */
+export function computeProgressBilling(values: Record<string, unknown>): {
+  contractValue: number;
+  previouslyBilled: number;
+  retainagePercent: number;
+  completeMode: string;
+  workThisPeriod: number;
+  retainageThisPeriod: number;
+  amountDue: number;
+  totalCompleted: number;
+  balanceToFinish: number;
+} {
+  const contractValue = Number(values.contractValue) || 0;
+  const previouslyBilled = Number(values.previouslyBilled) || 0;
+  const retainagePercent = Number(values.retainagePercent) || 0;
+  const completeMode = str(values.completeMode) || 'percent';
+  const workThisPeriod =
+    completeMode === 'amount'
+      ? Number(values.amountComplete) || 0
+      : roundCents(contractValue * ((Number(values.percentComplete) || 0) / 100));
+  const retainageThisPeriod = roundCents(workThisPeriod * (retainagePercent / 100));
+  const amountDue = roundCents(workThisPeriod - retainageThisPeriod);
+  const totalCompleted = roundCents(previouslyBilled + workThisPeriod);
+  const balanceToFinish = Math.max(0, roundCents(contractValue - totalCompleted));
+  return {
+    contractValue,
+    previouslyBilled,
+    retainagePercent,
+    completeMode,
+    workThisPeriod,
+    retainageThisPeriod,
+    amountDue,
+    totalCompleted,
+    balanceToFinish,
+  };
+}
+
 export function buildDocumentBlocks(
   tool: ToolDefinition,
   values: Record<string, unknown>,
@@ -48,6 +89,8 @@ export function buildDocumentBlocks(
     case 'receipt-generator':
     case 'work-order':
       return buildCommercialDoc(tool, values, blocks);
+    case 'progress-invoice':
+      return buildProgressInvoice(values, blocks);
     case 'purchase-order-template':
       return buildPurchaseOrder(values, blocks);
     case 'timesheet-template':
@@ -250,6 +293,85 @@ function buildCommercialDoc(
     }
   }
 
+  return blocks;
+}
+
+function buildProgressInvoice(values: Record<string, unknown>, blocks: DocBlock[]): DocBlock[] {
+  blocks[0] = { type: 'heading', text: 'Progress Invoice' };
+  const billing = computeProgressBilling(values);
+
+  blocks.push({
+    type: 'kv',
+    pairs: [
+      { label: 'From', value: str(values.companyName) },
+      { label: 'Address', value: str(values.companyAddress) },
+      { label: 'Phone', value: str(values.companyPhone) },
+      { label: 'Email', value: str(values.companyEmail) },
+    ].filter((p) => p.value),
+  });
+
+  blocks.push({
+    type: 'kv',
+    pairs: [
+      { label: 'Invoice / application #', value: str(values.invoiceNumber) },
+      { label: 'Invoice date', value: str(values.invoiceDate) },
+      { label: 'Due date', value: str(values.dueDate) },
+      { label: 'Period start', value: str(values.periodStart) },
+      { label: 'Period end', value: str(values.periodEnd) },
+      { label: 'Contract / job #', value: str(values.poNumber) },
+    ].filter((p) => p.value),
+  });
+
+  blocks.push({
+    type: 'kv',
+    pairs: [
+      { label: 'Bill to', value: str(values.clientName) },
+      { label: 'Address', value: str(values.clientAddress) },
+    ].filter((p) => p.value),
+  });
+
+  if (str(values.projectName)) {
+    blocks.push({ type: 'subheading', text: str(values.projectName) });
+  }
+
+  if (str(values.workDescription)) {
+    blocks.push({
+      type: 'paragraph',
+      text: `Work completed this period: ${str(values.workDescription)}`,
+    });
+  }
+
+  const completeLabel =
+    billing.completeMode === 'amount'
+      ? 'Amount complete this period'
+      : `Percent complete this period (${str(values.percentComplete) || 0}%)`;
+
+  blocks.push({ type: 'subheading', text: 'Progress billing' });
+  blocks.push({
+    type: 'totals',
+    totals: [
+      { label: 'Contract value', value: money(billing.contractValue) },
+      { label: completeLabel, value: money(billing.workThisPeriod) },
+      { label: 'Previously billed', value: money(billing.previouslyBilled) },
+      {
+        label: `Retainage this period (${billing.retainagePercent}%)`,
+        value: money(billing.retainageThisPeriod),
+      },
+      { label: 'Amount due this period', value: money(billing.amountDue), emphasize: true },
+      { label: 'Total completed to date', value: money(billing.totalCompleted) },
+      { label: 'Balance to finish', value: money(billing.balanceToFinish), emphasize: true },
+    ],
+  });
+
+  if (str(values.paymentInstructions)) {
+    blocks.push({
+      type: 'paragraph',
+      text: `Payment instructions: ${str(values.paymentInstructions)}`,
+    });
+  }
+  if (str(values.notes)) {
+    blocks.push({ type: 'paragraph', text: `Notes: ${str(values.notes)}` });
+  }
   return blocks;
 }
 
