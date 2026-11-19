@@ -1278,6 +1278,8 @@ export const changeOrderTemplate: ToolDefinition = {
     { id: 'projectName', label: 'Project name', type: 'text', required: true, section: 'Change' },
     { id: 'changeDescription', label: 'Description of change', type: 'textarea', rows: 4, required: true, section: 'Change' },
     { id: 'reason', label: 'Reason / discovery', type: 'textarea', rows: 2, section: 'Change' },
+    { id: 'originalAmount', label: 'Original contract amount', type: 'currency', inputMode: 'decimal', required: true, section: 'Impact' },
+    { id: 'priorChangeOrdersTotal', label: 'Prior change orders total', type: 'currency', inputMode: 'decimal', section: 'Impact' },
     { id: 'costImpact', label: 'Cost impact (+/−)', type: 'currency', inputMode: 'decimal', required: true, section: 'Impact' },
     { id: 'scheduleDays', label: 'Schedule impact (days)', type: 'number', inputMode: 'numeric', section: 'Impact' },
     { id: 'revisedTotal', label: 'Revised contract total', type: 'currency', inputMode: 'decimal', section: 'Impact' },
@@ -1299,6 +1301,8 @@ export const changeOrderTemplate: ToolDefinition = {
     changeDescription:
       'Replace damaged subfloor in the pantry (approx. 32 sq ft) discovered after vinyl removal; install matching LVP; haul debris. Work was not in the original scope exclusions for unknown substrate conditions beyond the $400 allowance.',
     reason: 'Concealed water damage under existing vinyl; photo log attached to job file.',
+    originalAmount: 12400,
+    priorChangeOrdersTotal: 2150,
     costImpact: 980,
     scheduleDays: 2,
     revisedTotal: 0,
@@ -1384,7 +1388,7 @@ export const changeOrderTemplate: ToolDefinition = {
     'lien-waiver-generator',
   ],
   publishedAt: '2026-11-13',
-  updatedAt: '2026-11-13',
+  updatedAt: '2026-11-19',
 };
 
 export const progressInvoice: ToolDefinition = {

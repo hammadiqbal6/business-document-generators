@@ -78,6 +78,39 @@ export function computeProgressBilling(values: Record<string, unknown>): {
   };
 }
 
+/** Running contract total for change orders: original + prior COs + this CO impact. */
+export function computeChangeOrderRevisedTotal(
+  originalAmount: number,
+  priorChangeOrdersTotal: number,
+  costImpact: number,
+): number {
+  const original = Number(originalAmount) || 0;
+  const prior = Number(priorChangeOrdersTotal) || 0;
+  const impact = Number(costImpact) || 0;
+  return Math.round((original + prior + impact) * 100) / 100;
+}
+
+export function changeOrderRunningTotals(values: Record<string, unknown>): {
+  originalAmount: number;
+  priorChangeOrdersTotal: number;
+  costImpact: number;
+  revisedTotal: number;
+} {
+  const originalAmount = Number(values.originalAmount) || 0;
+  const priorChangeOrdersTotal = Number(values.priorChangeOrdersTotal) || 0;
+  const costImpact = Number(values.costImpact) || 0;
+  return {
+    originalAmount,
+    priorChangeOrdersTotal,
+    costImpact,
+    revisedTotal: computeChangeOrderRevisedTotal(
+      originalAmount,
+      priorChangeOrdersTotal,
+      costImpact,
+    ),
+  };
+}
+
 export function buildDocumentBlocks(
   tool: ToolDefinition,
   values: Record<string, unknown>,
@@ -572,23 +605,32 @@ function buildChangeOrder(values: Record<string, unknown>, blocks: DocBlock[]): 
   if (str(values.reason)) {
     blocks.push({ type: 'paragraph', text: `Reason: ${str(values.reason)}` });
   }
+
+  const running = changeOrderRunningTotals(values);
+  const scheduleDays =
+    values.scheduleDays != null && str(values.scheduleDays) !== ''
+      ? str(values.scheduleDays)
+      : '0';
+
+  blocks.push({ type: 'subheading', text: 'Contract total' });
   blocks.push({
-    type: 'kv',
-    pairs: [
-      { label: 'Cost impact', value: money(values.costImpact) },
-      {
-        label: 'Schedule impact (days)',
-        value: values.scheduleDays != null && str(values.scheduleDays) !== '' ? str(values.scheduleDays) : '',
-      },
+    type: 'totals',
+    totals: [
+      { label: 'Original contract amount', value: money(running.originalAmount) },
+      { label: 'Prior change orders', value: money(running.priorChangeOrdersTotal) },
+      { label: 'This change order (cost impact)', value: money(running.costImpact) },
       {
         label: 'Revised contract total',
-        value:
-          values.revisedTotal != null && Number(values.revisedTotal) !== 0
-            ? money(values.revisedTotal)
-            : '',
+        value: money(running.revisedTotal),
+        emphasize: true,
       },
-    ].filter((p) => p.value),
+    ],
   });
+  blocks.push({
+    type: 'kv',
+    pairs: [{ label: 'Schedule impact (days)', value: scheduleDays }],
+  });
+
   const lineItems = items(values);
   if (lineItems.length) {
     blocks.push({ type: 'subheading', text: 'Price breakdown' });
@@ -599,16 +641,18 @@ function buildChangeOrder(values: Record<string, unknown>, blocks: DocBlock[]): 
     blocks.push({ type: 'paragraph', text: `Notes: ${str(values.notes)}` });
   }
   blocks.push({ type: 'hr' });
+  blocks.push({ type: 'subheading', text: 'Authorization signatures' });
   blocks.push({
     type: 'paragraph',
     text: `Contractor: ${str(values.contractorSigner) || '__________________'}  Signature __________________ Date ______`,
   });
   blocks.push({
     type: 'paragraph',
-    text: `Client: ${str(values.clientSigner) || '__________________'}  Signature __________________ Date ______`,
+    text: `Client / owner: ${str(values.clientSigner) || '__________________'}  Signature __________________ Date ______`,
   });
   return blocks;
 }
+
 
 function buildIndependentContractor(values: Record<string, unknown>, blocks: DocBlock[]): DocBlock[] {
   blocks.push({

@@ -139,6 +139,7 @@ Short mirror of [`docs/GROWTH-STATUS.md`](docs/GROWTH-STATUS.md). **Every PR mus
 - **PAA guides (this PR):** five AlsoAsked articles (payment terms, change order, WO vs PO vs invoice, freelance contract checklist, contractor estimate create) + `docs/WRITING-GUIDE.md` + `ai-style-check` in audit. Heuristic style **OK** for the five; HF detector not in CI image.
 - **Progress invoice generator** (`/tools/progress-invoice/`): merged via dedicated agent PR #43.
 - **CI / Workers Builds speedup (PR #36 merged):** parallel build+test, npm/Astro caches, faster `npm ci`, docs-only path skip with required-check gate, Playwright Chromium cache on Full checks; root `.npmrc` for Cloudflare install.
+- **Change order template upgrade (this PR):** running contract total (original + prior COs + this CO), schedule days, dual signatures, FAQ polish, tests.
 - **Lien waiver generator** (`/tools/lien-waiver-generator/`): conditional/unconditional × partial/final fill-in form, live preview, PDF/DOCX, state-forms-vary disclaimer, FAQ; wired into contracts hub, KEYWORD-MAP, llms question maps, related tools (this PR).
 - Homepage links tools by category; hubs’ which-document tables complete; home title/H1/tagline target contractor & freelancer templates (PR #35).
 - **Progress invoice generator** (`/tools/progress-invoice/`): contract value, percent or amount complete, previously billed, retainage %, amount due, balance to finish; PDF/DOCX (this PR).
