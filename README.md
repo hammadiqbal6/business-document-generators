@@ -135,8 +135,9 @@ PR / `main` CI: path-filtered parallel `build` + `test` jobs (npm cache, Astro/V
 
 Short mirror of [`docs/GROWTH-STATUS.md`](docs/GROWTH-STATUS.md). **Every PR must refresh both files** (see `AGENTS.md`). Do not invent metrics.
 
-### Done (as of 2026-11-19)
+### Done (as of 2026-11-20)
 
+- **Agathox ownership verification (this PR):** `<meta name="agathox-verification" content="agathox-verify-9f40b3ccd8788104">` in shared Head; `/.well-known/agathox-verification.txt` static file (same token). Worker already skips `.txt` slash-redirect; Vitest covers the path.
 - **PAA guides (this PR):** five AlsoAsked articles (payment terms, change order, WO vs PO vs invoice, freelance contract checklist, contractor estimate create) + `docs/WRITING-GUIDE.md` + `ai-style-check` in audit. Heuristic style **OK** for the five; HF detector not in CI image.
 - **Progress invoice generator** (`/tools/progress-invoice/`): merged via dedicated agent PR #43.
 - **CI / Workers Builds speedup (PR #36 merged):** parallel build+test, npm/Astro caches, faster `npm ci`, docs-only path skip with required-check gate, Playwright Chromium cache on Full checks; root `.npmrc` for Cloudflare install.
@@ -163,6 +164,7 @@ Short mirror of [`docs/GROWTH-STATUS.md`](docs/GROWTH-STATUS.md). **Every PR mus
 
 ### Remaining
 
+- After merge/deploy: confirm Agathox ownership check against live meta and/or `/.well-known/agathox-verification.txt`.
 - Legacy guide human-rewrite + HF &lt;30% AI; estimate-generator upgrades; change-order running total (separate PRs #48 / #47).
 - Validate GSC indexing after deploy (IndexNow + URL Inspection for new guides and `/tools/progress-invoice/`); expect embed/404 noindex exclusions to stay.
 - Confirm CI wall-clock vs baseline; set Workers Builds **Install command** to flagged `npm ci` if the dashboard override ignores `.npmrc`.

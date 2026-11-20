@@ -91,4 +91,14 @@ describe('trailing-slash helpers (canonical host behavior)', () => {
     expect(withTrailingSlashPath('/')).toBe('/');
     expect(needsTrailingSlashRedirect('/site.webmanifest')).toBe(false);
   });
+
+  it('does not slash-redirect .well-known verification .txt files', () => {
+    expect(withTrailingSlashPath('/.well-known/agathox-verification.txt')).toBe(
+      '/.well-known/agathox-verification.txt',
+    );
+    expect(needsTrailingSlashRedirect('/.well-known/agathox-verification.txt')).toBe(
+      false,
+    );
+    expect(needsTrailingSlashRedirect('/.well-known/security.txt')).toBe(false);
+  });
 });

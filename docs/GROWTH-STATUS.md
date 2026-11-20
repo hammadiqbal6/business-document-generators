@@ -4,7 +4,7 @@ Living tracker for Docuklin SEO and growth work. **Read this before planning gro
 
 Settled technical SEO policy (IndexNow wiring, jev-seo false alarms, title/schema rules) still lives under **SEO state** in `AGENTS.md`. This file holds current metrics and the work queue.
 
-Last updated: **2026-11-19**
+Last updated: **2026-11-20**
 
 ---
 
@@ -29,6 +29,7 @@ As of **2026-11-17** (owner-reported GSC/GA4 window) unless noted.
 
 In-repo and confirmed off-repo completions.
 
+- **2026-11-20 — Agathox ownership verification (this PR):** home `<head>` meta `agathox-verification` = `agathox-verify-9f40b3ccd8788104`; static `public/.well-known/agathox-verification.txt` (same token). Worker `FILE_EXT` already skips trailing-slash 308 for `.txt` (covered by Vitest). `_headers` cache rule only; no SEO/analytics/CSP changes.
 - **2026-11-19 — PAA question guides (this PR):** five AlsoAsked-based articles — invoice payment terms; what is a change order; work order vs PO vs invoice; freelance contract what to include; how to create a contractor estimate. Wired into `KEYWORD-MAP`, `toolGuideMap`, llms question maps. Added `docs/WRITING-GUIDE.md`, AGENTS.md human-writing rule, and `scripts/audit/ai-style-check.mjs` (in `npm run audit`). Heuristic style check: all five new guides **OK** (see PR detector table). HF classifier not available in CI image (no torch).
 - **2026-11-19 — Progress invoice generator (PR #43 merged):** `/tools/progress-invoice/` with retainage math; hub/KEYWORD-MAP/llms wiring (dedicated agent).
 - **2026-11-19 — CI / Cloudflare build speedup (PR #36 merged):**
@@ -124,7 +125,8 @@ In-repo and confirmed off-repo completions.
 
 Prioritized open work. Owner-confirmed gaps preferred over guesses.
 
-1. **Human rewrite of legacy guides** + HF detector scores &lt;30% AI; flip `ai-style-check` to `--strict-all` when done (separate PR).
+1. **After merge/deploy:** confirm Agathox finds the meta and/or `https://docuklin.com/.well-known/agathox-verification.txt` (200, no slash redirect).
+2. **Human rewrite of legacy guides** + HF detector scores &lt;30% AI; flip `ai-style-check` to `--strict-all` when done (separate PR).
 2. **Estimate generator upgrades** (logo upload, expiry, convert-to-invoice) — separate PR (#48).
 3. **Change order upgrades** (running contract total) — separate PR (#47).
 4. **GSC after deploy:** ping IndexNow; URL Inspection for new guide URLs and `/tools/progress-invoice/`; confirm embed/404 noindex exclusions stay intentional.
