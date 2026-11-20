@@ -74,6 +74,8 @@ const ogAlt = ogImageAlt;
 {siteConfig.bingSiteVerification && (
   <meta name="msvalidate.01" content={siteConfig.bingSiteVerification} />
 )}
+{/* Agathox ownership verification (also /.well-known/agathox-verification.txt). */}
+<meta name="agathox-verification" content="agathox-verify-9f40b3ccd8788104" />
 {jsonLd.map((ld) => (
   <script type="application/ld+json" set:html={JSON.stringify(ld)} />
 ))}

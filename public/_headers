@@ -73,6 +73,9 @@
 /.well-known/security.txt
   Cache-Control: public, max-age=86400
 
+/.well-known/agathox-verification.txt
+  Cache-Control: public, max-age=86400
+
 # Embeddable tool widgets must be iframe-able and stay out of the index.
 # Workers allow one splat (*) per rule; :slug matches one path segment.
 # Detach inherited X-Frame-Options — empty values are rejected; use "! Header".
