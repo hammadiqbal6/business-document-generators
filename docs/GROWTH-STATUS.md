@@ -31,7 +31,7 @@ In-repo and confirmed off-repo completions.
 
 - **2026-11-22 — Hubs / indexes / noindex / redirects (this PR stream):**
   - Hub titles/meta/FAQs refreshed (contracts, estimates-invoices, forms, creative); CATEGORY_META descriptions aligned.
-  - `/tools/` and `/guides/` index titles/meta; tools index uses `allTools.length` (no hard-coded count); homepage title/meta + hero CTA “Free estimate generator”.
+  - `/tools/` title locked to GSC query match **`Free Business Document Generators`** (count only in meta/body via `allTools.length`); `/guides/` index title/meta; homepage title/meta + hero CTA “Free estimate generator”.
   - `cookies` / `privacy` / `terms` → `noindex={true}` and excluded from sitemap; indexing/page-checklist/seo-guardrails audits updated.
   - `_redirects`: guessed estimate/quote URLs → `quote-estimate-generator`; `/tools/:slug/null` quiet redirects.
   - `toolGuideMap` strengthened (invoice-payment-terms on invoice tools; timesheet/service-agreement links); dropped `how-to-create-a-contractor-estimate` map refs (guide being 301’d elsewhere).

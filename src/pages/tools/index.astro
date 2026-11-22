@@ -14,7 +14,7 @@ const toolsDescription = `Browse ${toolCount} free document generators: estimate
 const jsonLd = [
   breadcrumbJsonLd(crumbs),
   collectionPageJsonLd({
-    name: 'All Free Document Generators',
+    name: 'Free Business Document Generators',
     description: toolsDescription,
     path,
     items: allTools.map((t) => ({ name: t.name, path: `/tools/${t.slug}/` })),
@@ -22,7 +22,7 @@ const jsonLd = [
 ];
 ---
 <BaseLayout
-  title="Free Document Generators: Estimate, Invoice, Contract"
+  title="Free Business Document Generators"
   description={toolsDescription}
   path={path}
   jsonLd={jsonLd}
