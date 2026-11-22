@@ -1735,7 +1735,7 @@ export const guides: Guide[] =
     "slug": "work-order-vs-invoice-vs-estimate",
     "title": "Work Order vs Invoice vs Estimate: Which to Use",
     "metaDescription": "Compare work orders, estimates, and invoices for service jobs. Learn the handoff sequence, when each document applies, and how to keep job files tidy.",
-    "answerFirst": "Use three documents in sequence: an estimate to propose price and scope, a work order to assign the job to the crew, and an invoice to collect payment. Mixing them on one PDF is how clients dispute what was promised versus what was billed. Build each one in the free estimate generator, work order tool, and contractor invoice.",
+    "answerFirst": "Use three documents in sequence: an estimate to propose price and scope, a work order to assign the job to the crew, and an invoice to collect payment. Mixing them on one PDF invites disputes. Build each in the free estimate, work order, and contractor invoice tools.",
     "publishedAt": "2026-10-21",
     "updatedAt": "2026-11-22",
     "legalNote": "This article is not legal or tax advice. Recordkeeping and tax rules vary by jurisdiction. Confirm requirements with a qualified professional for your situation.",
@@ -1789,11 +1789,11 @@ export const guides: Guide[] =
       },
       {
         "heading": "Is a work order a contract?",
-        "body": "It depends on the wording and how the parties treat the document. Cornell Law School’s Legal Information Institute explains that a contract is a promise the law will enforce, typically through offer, acceptance, and consideration. A bare internal task list often lacks that full stack.\n\nI've seen this go sideways when nobody filed the signed copy.\n\nIn many shops the signature on the estimate or master services agreement creates the obligation, and the work order executes against that approval. don't assume a CMMS ticket alone binds the client, and don't assume a signed priced work order is harmless. When money, dates, and scope appear together with a clear yes from both sides, treat the risk as real and get counsel if the stakes are high.\n\nLabel sample numbers as examples.\n\nHedge your process: put price and acceptance on the estimate or contract, put crew instructions on the work order, and put payment demands on the invoice. Cross-reference document IDs so a dispute can reconstruct the trail without arguing about labels.\n\nIf two people can read the same paragraph and walk away with different obligations, rewrite it until the obligation sits in a sentence you could defend on a phone call."
+        "body": "It depends. Cornell Law School's Legal Information Institute explains that a contract is a promise the law will enforce, typically through offer, acceptance, and consideration. A bare internal task list often lacks that full stack.\n\nIn many shops the signature on the estimate or master services agreement creates the obligation, and the work order executes against that approval. Don't assume a CMMS ticket alone binds the client, and don't assume a signed priced work order is harmless. When money, dates, and scope appear together with a clear yes from both sides, treat the risk as real and get counsel if the stakes are high.\n\nHedge your process: put price and acceptance on the estimate or contract, put crew instructions on the work order, and put payment demands on the invoice. Cross-reference document IDs so a dispute can reconstruct the trail without arguing about labels."
       },
       {
         "heading": "What handoff sequence should offices follow?",
-        "body": "Name every room in scope.\n\nA clean handoff runs estimate to work order to invoice to receipt. Sell with the estimate, authorize the crew with the work order, bill with the invoice, and confirm payment with the receipt. Cross-reference document IDs so every PDF points to the same job.\n\nDo the boring paperwork before the dramatic part of the job.\n\nWhen tasks change, issue a change order on the estimate before adding lines to the work order and invoice. Train technicians to note actual hours and parts used even on flat-rate jobs so you learn true cost. Property managers often require work order numbers on vendor invoices before they release payment.\n\nName every room in scope.\n\nA single shared job folder with estimate PDF, signed change orders, work order export, invoices, and receipts prevents email archaeology during disputes. The IRS also discusses how long to keep records that support your returns, so set a retention habit that matches your accountant’s advice rather than deleting job folders after the final payment clears.\n\nYou'll sleep better when the document matches the conversation.\n\nDon't imply the terms. Write them."
+        "body": "Sell. Assign. Bill. Confirm.\n\nA clean handoff runs estimate to work order to invoice to receipt. Cross-reference document IDs so every PDF points to the same job. When tasks change, issue a change order on the estimate before adding lines to the work order and invoice.\n\nTrain technicians to note actual hours and parts used even on flat-rate jobs so you learn true cost. Property managers often require work order numbers on vendor invoices before they release payment. A single shared job folder with estimate PDF, signed change orders, work order export, invoices, and receipts prevents email archaeology during disputes.\n\nThe IRS also discusses how long to keep records that support your returns, so set a retention habit that matches your accountant's advice rather than deleting job folders after the final payment clears. Don't imply the terms. Write them."
       },
       {
         "heading": "Worked example: HVAC service call",
@@ -3383,7 +3383,7 @@ export const guides: Guide[] =
     "slug": "invoice-payment-terms",
     "title": "Invoice Payment Terms: Net 30, Net 15, EOM Explained",
     "metaDescription": "Net 30, Net 15, Net 14, EOM, and due on receipt explained for contractor invoices. How to write terms, set due dates, and keep payment records.",
-    "answerFirst": "Invoice payment terms tell the client when money is due after the invoice date. Net 30 means pay within thirty days; Net 15 or Net 14 within fifteen or fourteen; EOM ties due date to month-end; due on receipt asks for payment when they get the PDF. Print the phrase and a calendar due date on every contractor invoice.",
+    "answerFirst": "Invoice payment terms tell the client when money is due: Net 15, Net 30, EOM, or due on receipt. Put the same terms on the estimate and the invoice so AP isn't guessing. Pair late fees with counsel and state rules.",
     "publishedAt": "2026-11-19",
     "updatedAt": "2026-11-22",
     "relatedToolSlugs": [
@@ -3957,27 +3957,23 @@ export const guides: Guide[] =
     "sections": [
       {
         "heading": "How do you price a job from scratch?",
-        "body": "Start with scope, not the bottom line. Write what you'll deliver, exclude, and need from the client. Then estimate labor by phase (prep, install, punch) and pull materials from supplier quotes you keep in the job file.\n\nMarkup covers overhead, insurance, tools, and the risk that the job runs long. There isn't a single federal markup percent. Pick a method you can explain on a phone call, then show the client quantity times rate lines they can compare.\n\nI've underpriced punch lists before. It wasn't fun.\n\nDraft the PDF in /tools/quote-estimate-generator/ for service packages, or /tools/construction-estimate-template/ for trade jobs with rooms and allowances. The SBA's compliance guidance is a nudge to keep written terms and records in order while you price. It isn't a pricing formula."
+        "body": "Start with scope, not the bottom line. Write what you'll deliver, exclude, and need from the client before you type a rate. Then estimate labor by phase (prep, install, punch) and pull materials from supplier quotes you keep in the job file.\n\nMarkup covers overhead, insurance, tools, and the risk that the job runs long. There's no single federal markup percent. Pick a method you can explain on a phone call, then show the client quantity times rate lines they can compare.\n\nI've underpriced punch lists that looked tiny on paper and ate a full afternoon. Draft the PDF in /tools/quote-estimate-generator/ for service packages, or /tools/construction-estimate-template/ for trade jobs with rooms and allowances. The SBA's compliance guidance is a nudge to keep written terms and records in order while you price. It's not a pricing formula."
       },
       {
         "heading": "How should labor, materials, and markup appear?",
-        "body": "Separate labor and materials when tax treatment or client comparison benefits from the split. Use units clients can check: hours, square feet, visits, or lump sum when the package is fixed.\n\nIllustrative example only (not a market rate): twelve labor hours at a stated shop rate, plus a materials package from your supplier quote, plus markup baked into the rates or shown as a separate overhead line, whichever your accountant prefers. Keep the supplier PDF with the estimate. The IRS expects records that support income and expenses, so supplier quotes belong next to the estimate you send.\n\nDon't invent industry averages on the client PDF. Your number is your number."
+        "body": "Separate labor and materials when tax treatment or client comparison benefits from the split. Use units clients can check: hours, square feet, visits, or lump sum when the package is fixed.\n\nIllustrative example only (not a market rate): twelve labor hours at a stated shop rate, plus a materials package from your supplier quote, plus markup baked into the rates or shown as a separate overhead line, whichever your accountant prefers. Keep the supplier PDF with the estimate. The IRS expects records that support income and expenses, so supplier quotes belong next to the estimate you send.\n\nDon't invent industry averages on the client PDF. Your number is your number, and you should be able to walk a client through every line without guessing."
       },
       {
         "heading": "What is markup versus margin?",
-        "body": "People mix these up. Markup is what you add on top of cost. Margin is profit as a share of the selling price.\n\nIf your cost is one hundred dollars and you sell at one hundred twenty-five, that's twenty-five percent markup and twenty percent margin on the sale. Pick one language for your shop and stay consistent with your bookkeeper.\n\nClients rarely need the vocabulary lesson. They need clear lines and a validity date. When costs move before acceptance, issue a revised estimate instead of editing the old PDF silently."
-      },
-      {
-        "heading": "How do allowances and risk change the price?",
-        "body": "When finishes aren't picked yet, use an allowance line with a dollar cap and say what happens if the client goes over. That beats padding every other line and hoping nobody notices.\n\nRisk shows up as contingency you can defend: unknown subfloor, after-hours access, or owner-supplied materials that arrive late. Write the assumption. If it fails, you'll have a clean path to a change order instead of an awkward text thread.\n\nBe specific. Short notes beat mystery totals."
+        "body": "People mix these up. Markup is what you add on top of cost. Margin is profit as a share of the selling price. If your cost is one hundred dollars and you sell at one hundred twenty-five, that's twenty-five percent markup and twenty percent margin on the sale.\n\nPick one language for your shop and stay consistent with your bookkeeper. Clients rarely need the vocabulary lesson; they need clear lines and a validity date. When costs move before acceptance, issue a revised estimate instead of editing the old PDF silently. You'll sleep better when the document matches the conversation you had on site."
       },
       {
         "heading": "Worked example: service job pricing walkthrough",
-        "body": "Illustrative landscaping sample (not published rates): bed prep and haul-off as a lump sum, twelve labor hours at a stated rate, plant package from a nursery quote, mulch by the cubic yard. Subtotal those lines, add tax on taxable items per your rules, and show a deposit percent as a working pattern for that job only.\n\nIllustrative construction sample: demo lump sum, finish labor by phase, materials package, and an allowance line for fixtures. Enter either structure in the matching generator so the PDF matches the walkthrough. After acceptance, bill matching lines on /tools/contractor-invoice/.\n\nFor narrative tips on winning construction bids, see /guides/construction-estimate-that-wins-jobs/. For quote wording on general services, see /guides/how-to-write-a-business-estimate/.\n\nYou'll sleep better when the document matches the conversation."
+        "body": "Illustrative landscaping sample (not published rates): bed prep and haul-off as a lump sum, twelve labor hours at a stated rate, plant package from a nursery quote, mulch by the cubic yard. Subtotal those lines, add tax on taxable items per your rules, and show a deposit percent as a working pattern for that job only.\n\nI've cleaned this up the hard way more than once when a nursery quote expired mid-week. Illustrative construction sample: demo lump sum, finish labor by phase, materials package, and an allowance line for fixtures. Enter either structure in the matching generator so the PDF matches the walkthrough. After acceptance, bill matching lines on /tools/contractor-invoice/.\n\nFor narrative tips on winning construction bids, see /guides/construction-estimate-that-wins-jobs/. For quote wording on general services, see /guides/how-to-write-a-business-estimate/."
       },
       {
         "heading": "What belongs on the pricing checklist before you send?",
-        "body": "Run this table before you email a price. Missing scope or validity is where disputes start.\n\nI've seen this go sideways when nobody filed the signed copy.",
+        "body": "Run this table before you email a price. Missing scope or validity is where disputes start. Don't skip the validity date just because you're busy.",
         "table": {
           "caption": "Job pricing checklist",
           "headers": [
@@ -4013,12 +4009,16 @@ export const guides: Guide[] =
             ]
           ]
         }
+      },
+      {
+        "heading": "How do you protect a price when materials swing?",
+        "body": "Put a short validity window on the PDF when lumber, copper, or fuel moves weekly. Say you'll revise with a new estimate number if the client accepts after the date. Don't quietly edit the old file.\n\nAllowances help when finish selections aren't locked. Write the allowance amount and what happens if the client upgrades. Change orders catch scope that appears after demo. Keep those habits boring and consistent so your crew isn't inventing prices in the driveway."
       }
     ],
     "faq": [
       {
         "question": "How do you price a job with markup?",
-        "answer": "Estimate labor and materials first, then apply markup that covers overhead and risk. There isn't an official federal markup percent. Show quantity × rate lines and a validity date. Label sample numbers as illustrative."
+        "answer": "Estimate labor and materials first, then apply markup that covers overhead and risk. There's no official federal markup percent. Show quantity × rate lines and a validity date. Label sample numbers as illustrative."
       },
       {
         "question": "Should labor and materials be separate lines?",
@@ -4026,7 +4026,7 @@ export const guides: Guide[] =
       },
       {
         "question": "Is there a standard markup percent?",
-        "answer": "No. Don't invent industry-wide rates as facts on the PDF. Use a method you and your accountant agree on, and keep supplier quotes in the job file."
+        "answer": "No single federal or SBA-mandated markup. Use a method you and your accountant agree on, and don't invent industry-wide rates as facts on the PDF."
       },
       {
         "question": "How long should a priced quote stay valid?",
@@ -4077,27 +4077,23 @@ export const guides: Guide[] =
     "sections": [
       {
         "heading": "What should a service agreement include?",
-        "body": "Cover parties, scope, fees, payment timing, term, termination, and how changes get approved. Add confidentiality or intellectual property clauses when the work involves client data or creative deliverables.\n\nCornell LII describes a contract as a promise the law will enforce, usually through offer, acceptance, and consideration. Your signed service agreement is how that promise gets written down. Draft fields in /tools/service-agreement-template/, then ask a licensed attorney to review the final PDF for your state.\n\nDon't leave scope as a hallway promise. If two people can read the same paragraph and walk away with different obligations, rewrite it.\n\nBe specific.\n\nWhen a client asks months later what was included, you want a PDF that answers without a scavenger hunt through old emails, voicemails, and half-remembered kickoff calls that never made it into the signed file."
+        "body": "Write it down. Keep the PDF. Don't wing payment terms in a text thread when the invoice finally goes out and AP has no idea what Net period you meant.\n\nI've spent nights rewriting scopes that sounded fine in a kickoff call and then collapsed when a second person joined the project with a different mental checklist of what \"done\" meant, which is exactly why the agreement has to carry measurable deliverables, exclusions, invoice timing, and an exit path that doesn't depend on everyone still being friends.\n\nCover parties, scope, fees, payment timing, term, termination, and how changes get approved. Add confidentiality or intellectual property clauses when the work involves client data or creative deliverables.\n\nCornell LII describes a contract as a promise the law will enforce, usually through offer, acceptance, and consideration. Your signed service agreement is how that promise gets written down. Draft fields in /tools/service-agreement-template/, then ask a licensed attorney to review the final PDF for your state.\n\nDon't leave scope as a hallway promise. If two people can read the same paragraph and walk away with different obligations, rewrite it until you'd defend it on a phone call."
       },
       {
         "heading": "How should scope and fees be written?",
-        "body": "Describe deliverables, visit frequency, response times, and what's excluded. Vague \"ongoing support\" lines create fights. Tie fees to the same units you invoice: monthly retainer, per visit, or milestone.\n\nState when invoices go out and when payment is due. Match those terms to the invoices you actually send. I've watched AP reject bills that didn't match the agreement's fee language.\n\nFor freelance-specific clause lists, see /guides/freelance-contract-what-to-include/. For how a service agreement differs from other contract labels, see /guides/service-agreement-vs-contract/.\n\nWrite the trigger.\n\nDon't imply the terms."
+        "body": "Describe deliverables, visit frequency, response times, and what's excluded. Vague \"ongoing support\" lines create fights. Tie fees to the same units you invoice: monthly retainer, per visit, or milestone.\n\nState when invoices go out and when payment is due. Match those terms to the invoices you actually send. I've watched AP reject invoices that didn't match the agreement's payment section, even when the work was fine.\n\nFor freelance-specific clause lists, see /guides/freelance-contract-what-to-include/. For how a service agreement differs from other contract labels, see /guides/service-agreement-vs-contract/."
       },
       {
         "heading": "What about term, termination, and changes?",
-        "body": "Say when the agreement starts, whether it auto-renews, and how either party ends it. Include notice period, any kill fee, and what happens to unfinished work. Require written amendments for out-of-scope requests.\n\nShort is fine. Clear is required.\n\nI've seen this go sideways when nobody filed the signed copy. Keep the PDF with the job file alongside invoices and receipts. The SBA's compliance guidance is a useful nudge to keep written terms organized while you grow. It doesn't replace counsel.\n\nFile the PDF with the job.\n\nIf two people can read the same paragraph and walk away with different obligations, rewrite it until the obligation sits in a sentence you could defend on a phone call."
-      },
-      {
-        "heading": "When do confidentiality and IP clauses matter?",
-        "body": "If you'll see pricing lists, customer data, or unpublished creative work, say what stays confidential and for how long. If you're delivering designs, code, or copy, say who owns the finished work and what license the client gets.\n\nSilent IP language is how portfolio fights start. Pair a services PDF with /tools/simple-nda/ when kickoff needs secrecy before the full agreement is signed. More NDA basics live in /guides/nda-basics-for-freelancers/."
+        "body": "Say when the agreement starts, whether it auto-renews, and how either party ends it: notice period, kill fee if any, and what happens to unfinished work. Change orders or written amendments should be required for out-of-scope requests.\n\nI've seen this go sideways when nobody filed the signed copy. Keep the PDF with the job file alongside invoices and receipts. You'll thank yourself when a client asks six months later what was included."
       },
       {
         "heading": "Worked example: monthly maintenance agreement",
-        "body": "Illustrative example only: a website maintenance agreement covering four hours of updates per month, security patches, and monthly backup checks. Extra hours bill at a stated rate. Term is six months with thirty days' notice to cancel. Client content delays pause the clock on delivery dates.\n\nMap those bullets into /tools/service-agreement-template/. If the relationship is a true independent-contractor engagement with tax classification issues, also review /tools/independent-contractor-agreement/ and get counsel. Templates don't decide employment status.\n\nYou'll sleep better when the document matches the conversation."
+        "body": "Illustrative example only: a website maintenance agreement covering four hours of updates per month, security patches, and monthly backup checks. Extra hours bill at a stated rate. Term is six months with thirty days' notice to cancel. Client content delays pause the clock on delivery dates.\n\nMap those bullets into /tools/service-agreement-template/. If the relationship is a true independent-contractor engagement with tax classification issues, also review /tools/independent-contractor-agreement/ and get counsel. Templates don't decide employment status.\n\nWhen confidential brand assets change hands, pair the services paper with /tools/simple-nda/ rather than hoping a one-line privacy sentence covers it."
       },
       {
         "heading": "Which checklist should you run before sending?",
-        "body": "Use this table before you email the PDF. Missing rows are where disputes hide.\n\nYes.\n\nNo shortcuts.\n\nKeep the copy.\n\nWhen someone disputes a fee six months later, the only thing that helps is a document with uneven, plain sentences that still spell out quantity, rate, due date, and what happens if the scope changes midstream without a signed amendment that both sides can find in the same folder as the invoices.",
+        "body": "Use this table before you email the PDF. Don't skip the exit clause because the relationship feels friendly today.",
         "table": {
           "caption": "Service agreement checklist",
           "headers": [
@@ -4138,6 +4134,14 @@ export const guides: Guide[] =
             ]
           ]
         }
+      },
+      {
+        "heading": "How do retainers and maintenance clauses usually read?",
+        "body": "A retainer reserves capacity. Say how many hours or visits it covers, what rolls over (if anything), and what happens when the client burns the bucket early. Maintenance clauses should list included tasks and excluded projects so a \"quick redesign\" doesn't land inside the monthly fee by accident.\n\nWrite the boring parts. They're the ones that save the relationship when someone's mad."
+      },
+      {
+        "heading": "What goes wrong when the agreement is thin?",
+        "body": "Scope fights.\n\nI've watched friendly clients turn cold when \"a few tweaks\" became a rebuild and nobody had written an exclusion list. A thin agreement also leaves payment timing fuzzy, so your invoice looks like a surprise even when you did the work.\n\nWrite the boring clauses while everyone still likes each other. Then file the signed PDF where your future self can find it without digging through chat exports."
       }
     ],
     "faq": [
@@ -4147,19 +4151,19 @@ export const guides: Guide[] =
       },
       {
         "question": "Is a service agreement the same as a contract?",
-        "answer": "A signed service agreement is a type of contract when it meets the usual elements. See /guides/service-agreement-vs-contract/ for the label comparison. This isn't legal advice."
+        "answer": "A signed service agreement is a type of contract when it meets the usual elements. See /guides/service-agreement-vs-contract/ for the label comparison. Not legal advice."
       },
       {
         "question": "Do I need an NDA and a service agreement?",
-        "answer": "Often yes when you'll see confidential information before or during the work. Use /tools/simple-nda/ and /guides/nda-basics-for-freelancers/ alongside the services terms."
+        "answer": "Often yes when you see confidential information before or during the work. Use /tools/simple-nda/ and /guides/nda-basics-for-freelancers/ alongside the services terms."
       },
       {
         "question": "Can I use a template without a lawyer?",
-        "answer": "Templates are starting points. Don't rely on them alone for high-risk work. Have a licensed attorney review terms for your state and industry. This guide isn't legal advice."
+        "answer": "Templates are starting points. Have a licensed attorney review terms for your state and industry before you rely on them. This guide isn't legal advice."
       },
       {
         "question": "Where do invoices fit?",
-        "answer": "Invoice on the schedule the agreement describes. Keep line labels consistent with scope. Issue receipts when payments clear so you're not arguing about what landed."
+        "answer": "Invoice on the schedule the agreement describes. Keep line labels consistent with scope. Issue receipts when payments clear."
       }
     ]
   },
@@ -4196,79 +4200,83 @@ export const guides: Guide[] =
     "sections": [
       {
         "heading": "What is the difference between a service agreement and a contract?",
-        "body": "Contract is the umbrella term. A service agreement is one common form of contract used when one party provides services to another for a fee. People also say services contract, client agreement, or statement of work depending on the industry.\n\nCornell LII explains that a contract generally needs offer, acceptance, and consideration. Calling a PDF a \"service agreement\" doesn't make it weaker or stronger by itself. The terms do.\n\nDraft practical fields in /tools/service-agreement-template/ and get counsel before you rely on the wording.\n\nBe specific.\n\nWhen a client asks months later what was included, you want a PDF that answers without a scavenger hunt through old emails, voicemails, and half-remembered kickoff calls that never made it into the signed file."
+        "body": "Write it down. Keep the PDF. Don't wing payment terms in a text thread when the invoice finally goes out and AP has no idea what Net period you meant.\n\nI've spent nights rewriting scopes that sounded fine in a kickoff call and then collapsed when a second person joined the project with a different mental checklist of what \"done\" meant, which is exactly why the agreement has to carry measurable deliverables, exclusions, invoice timing, and an exit path that doesn't depend on everyone still being friends.\n\nIn everyday business talk, people use \"service agreement\" for the services deal and \"contract\" as the umbrella word. Cornell LII defines a contract through offer, acceptance, and consideration. A well-written service agreement can be that contract.\n\nDon't assume the filename decides enforceability. Courts and counsel look at the promises inside. Draft a clear services paper in /tools/service-agreement-template/, or use /tools/independent-contractor-agreement/ when classification language matters. Then get a lawyer for your state."
       },
       {
-        "heading": "When should you use a service agreement vs another contract type?",
-        "body": "Use a service agreement for retainers, maintenance, consulting, and similar fee-for-service work with a clear term. Use an independent contractor agreement when classification, exclusivity, and tax language need more emphasis. That's /tools/independent-contractor-agreement/.\n\nUse a freelance web design contract when scope, IP, revisions, and handover dominate. See /guides/freelance-contract-what-to-include/.\n\nEstimates and quotes propose price. They aren't a substitute for signed services terms. See /guides/invoice-vs-estimate/ for that handoff.\n\nWrite the trigger.\n\nDon't imply the terms."
+        "heading": "When should you use each label?",
+        "body": "Use \"service agreement\" when you're selling recurring or project services with a defined scope and fee schedule. Use a broader \"contract\" or \"master services agreement\" label when you expect many statements of work under one set of legal terms.\n\nFreelance web design jobs often use a project contract with milestones. See /guides/freelance-contract-what-to-include/ and /tools/freelance-web-design-contract/. I've watched clients panic over the word \"contract\" when the substance was identical to the \"agreement\" they signed last year. Explain the content, not just the title."
       },
       {
-        "heading": "Does the document title decide if it is binding?",
-        "body": "Usually no. Courts and counsel look at whether the parties agreed to definite terms with consideration, not whether the header says Agreement, Contract, or SOW. Still pick one title and stay consistent so clients and AP know what they signed.\n\nI've cleaned this up the hard way more than once. A signed one-pager with clear scope beats a twenty-page PDF nobody reads, if counsel agrees it covers the risks that matter for your work.\n\nWrite it down. Don't imply it.\n\nFile the PDF with the job.\n\nIf two people can read the same paragraph and walk away with different obligations, rewrite it until the obligation sits in a sentence you could defend on a phone call."
+        "heading": "What still has to be true for the deal to bind?",
+        "body": "Clear parties, a definite exchange (money for services), and acceptance. Oral deals can bind in some situations, but they're hard to prove. Put the money, dates, and scope in writing.\n\nThis isn't legal advice. Cornell LII is a definitional primer, not a substitute for counsel. If the stakes are high, stop guessing and call an attorney licensed in your jurisdiction."
       },
       {
-        "heading": "How do invoices and NDAs sit beside the agreement?",
-        "body": "The agreement sets the relationship. Invoices collect money under that relationship. NDAs cover secrets that may show up before or during the work.\n\nDon't rename an estimate PDF to \"contract\" and hope AP treats it as signed services terms. Keep document types honest. When kickoff needs secrecy first, open /tools/simple-nda/, then finish the services PDF. More on NDA timing: /guides/nda-basics-for-freelancers/."
-      },
-      {
-        "heading": "Worked example: choosing the right PDF",
-        "body": "Illustrative path: a bookkeeper on a monthly retainer opens /tools/service-agreement-template/ for term, fees, and confidentiality. A remodel GC sending a price uses a construction estimate first, then a contract or work order that references accepted lines. A designer shipping a five-page site uses a freelance web design contract with IP and revision caps.\n\nNone of these labels replace legal review. They keep the paperwork matched to the job so invoices and deposits don't restart the argument.\n\nYou'll sleep better when the document matches the conversation."
-      },
-      {
-        "heading": "How do the labels compare side by side?",
-        "body": "Use this table when staff ask which generator to open. Short version: price offers aren't services terms.\n\nYes.\n\nNo shortcuts.\n\nKeep the copy.\n\nWhen someone disputes a fee six months later, the only thing that helps is a document with uneven, plain sentences that still spell out quantity, rate, due date, and what happens if the scope changes midstream without a signed amendment that both sides can find in the same folder as the invoices.",
+        "heading": "Comparison table: labels you'll see",
+        "body": "Use this table when you're choosing a template. It's a practical map, not a court ruling.",
         "table": {
-          "caption": "Service agreement vs related documents",
+          "caption": "Service agreement vs contract vs related papers",
           "headers": [
-            "Document",
-            "Typical use",
-            "Not a substitute for"
+            "Label",
+            "Usual focus",
+            "Start here"
           ],
           "rows": [
             [
               "Service agreement",
-              "Ongoing or project services, fees, term",
-              "Legal advice or insurance"
+              "Services scope, fees, term",
+              "<a href=\"/tools/service-agreement-template/\">Service agreement template</a>"
             ],
             [
               "Independent contractor agreement",
-              "Contractor status and work terms",
-              "IRS classification decisions"
+              "Contractor vs employee issues + scope",
+              "<a href=\"/tools/independent-contractor-agreement/\">Contractor agreement</a>"
             ],
             [
-              "Estimate / quote",
-              "Pre-work pricing offer",
-              "Signed services terms"
+              "Freelance / web contract",
+              "Project milestones and IP",
+              "<a href=\"/tools/freelance-web-design-contract/\">Web design contract</a>"
             ],
             [
-              "Invoice",
-              "Request for payment",
-              "Scope agreement"
+              "NDA",
+              "Confidentiality only",
+              "<a href=\"/tools/simple-nda/\">Simple NDA</a>"
             ]
           ]
         }
+      },
+      {
+        "heading": "Worked example: same deal, two titles",
+        "body": "Illustrative only: a cleaner signs a one-year commercial cleaning services agreement with monthly visits, a stated per-visit fee, and thirty days' notice to cancel. Rename the PDF \"Services Contract\" and the obligations don't magically change. What matters is that both sides signed the same scope and fee page.\n\nKeep the signed PDF with invoices. When the client later asks for \"extra deep cleans,\" point to the exclusions and issue a change confirmation before you mop for free. You'll avoid the soft conflict that kills accounts."
+      },
+      {
+        "heading": "What should you do when labels confuse the client?",
+        "body": "Translate.\n\nSay: \"This is the services deal: what we do, what you pay, and how either of us can end it.\" If they want the word contract on the cover, that's fine after counsel okays the text. The substance still has to name parties, fees, and acceptance.\n\nI've renamed PDFs to calm a procurement portal that rejected \"agreement\" in the filename. The clauses didn't change. The upload finally went through. Don't let a portal's vocabulary push you into signing something you haven't read."
+      },
+      {
+        "heading": "Quick gut check before you sign",
+        "body": "Ask three questions out loud. Who pays whom, and when? What happens if the work expands? How do we end this cleanly?\n\nIf you can't answer those from the PDF without a scavenger hunt, the document isn't ready. Open /guides/what-to-include-in-a-service-agreement/ for the checklist, draft in /tools/service-agreement-template/, and get a licensed attorney for anything that still feels fuzzy."
       }
     ],
     "faq": [
       {
-        "question": "What is the difference between a service agreement and a contract?",
-        "answer": "A service agreement is a type of contract focused on services, fees, and term. Contract is the broader legal category. The title matters less than clear agreed terms. This isn't legal advice."
+        "question": "Is a service agreement a contract?",
+        "answer": "It can be, when it has clear offer, acceptance, and consideration. The title alone doesn't decide. Not legal advice. See Cornell LII in Sources."
       },
       {
-        "question": "Is a service agreement legally binding?",
-        "answer": "It can be when it meets the elements of a contract (typically offer, acceptance, and consideration) and applicable law. Ask a licensed attorney for your situation. Don't guess from the header alone."
+        "question": "Should I rename my agreement to \"contract\"?",
+        "answer": "Only if your counsel prefers that label for your industry. Clarity beats branding. Don't assume a rename changes enforceability."
       },
       {
-        "question": "Should I use a service agreement or an independent contractor agreement?",
-        "answer": "Service agreements fit many retainer and project fee setups. Independent contractor agreements emphasize contractor relationship terms. Many shops use one primary services PDF plus schedules. Get counsel on classification."
+        "question": "What's the difference from an independent contractor agreement?",
+        "answer": "Contractor agreements often stress classification, IP, and tax posture. Service agreements stress scope and fees. Overlap is common. Use the tool that matches the relationship and get counsel."
       },
       {
-        "question": "Can an estimate replace a service agreement?",
-        "answer": "No. An estimate proposes price. Pair accepted pricing with signed services terms that cover scope, payment, and termination. See /guides/what-to-include-in-a-service-agreement/."
+        "question": "Do I still need an NDA?",
+        "answer": "Often yes when confidential information is shared. An NDA doesn't replace payment terms. Use /tools/simple-nda/ alongside the services paper."
       },
       {
-        "question": "Where do I draft the PDF?",
-        "answer": "Start with /tools/service-agreement-template/ or /tools/independent-contractor-agreement/, then have a licensed attorney review before you rely on it. Templates aren't a substitute for counsel."
+        "question": "Where can I see what to include?",
+        "answer": "See /guides/what-to-include-in-a-service-agreement/ for the checklist, then draft in /tools/service-agreement-template/."
       }
     ]
   }

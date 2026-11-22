@@ -1,0 +1,66 @@
+---
+description: Durable SEO + AI Overview / generative-search rules for Docuklin tools, guides, hubs, and indexes
+globs: src/pages/**/*.{astro,ts,tsx},src/data/**/*.{ts,js},src/components/content/**/*.{astro,tsx},src/lib/seo.ts,src/lib/llmsTxt.ts,public/_redirects,public/_headers,astro.config.mjs,docs/KEYWORD-MAP.md,docs/PAGE-CHECKLIST.md,docs/GROWTH-STATUS.md
+---
+
+# SEO + AI answer engines (Docuklin)
+
+Read `docs/GROWTH-STATUS.md` before planning growth/SEO/content work; update it in the same PR. Settled IndexNow / jev-seo notes: **SEO state** in `AGENTS.md`. Full page checklist: `docs/PAGE-CHECKLIST.md`. Step-by-step: `.cursor/skills/add-seo-page/SKILL.md`. Companion rules: `seo-pages.mdc` (research-first), `seo-guardrails.mdc`, `page-seo.mdc`, `content-quality.mdc`.
+
+## Titles, H1, meta (unique per page)
+
+- One primary query per URL; map in `docs/KEYWORD-MAP.md`. Aim titles at **real query wording** (autocomplete / GSC), not internal labels.
+- Source `title` ≤60 chars (prefer ≤54 so `buildPageTitle()` can append ` | Docuklin` without clipping past 65). Prefer colon over en dash.
+- Unique **title**, **H1**, and **meta description** on every indexable page. Meta ~70–160 chars; lead with the benefit or definition.
+- Flagship estimate tool leads with “Free Estimate Generator” and “no signup, no watermark” near the top.
+- Never hard-code inventory counts (“16+ tools”). Derive from `allTools.length` / `guides.length`.
+- **`/tools/`** title stays **`Free Business Document Generators`** (GSC: only click was query “business document generator” → `/tools/`). Fix the stale count; do not retarget away from that phrase.
+- Do **not** add geotargeting from GSC country mix (e.g. high Nigeria impression share is observational only).
+
+## Cannibalization and merges
+
+- One primary page per query cluster. Before creating a URL, check KEYWORD-MAP and existing tools/guides.
+- Prefer merge + **301** in `public/_redirects` over near-duplicate guides (example: contractor-estimate → construction-estimate master; quote angle on business-estimate; estimate-vs-quote folded into invoice-vs-estimate).
+- Tool = template/generator; guide = how-to / checklist / example. Differentiate title intent words (template / example / checklist / how to).
+
+## Internal links and discovery
+
+- Every new tool/guide: wire `src/data/toolGuideMap.ts` (tool→guides and guide→guides); hub feature list; **2–3 related pages** linking in with topical anchors.
+- Weak pages (few inbound) need hub + sibling links — do not leave orphans at 3–12 inbound.
+- New indexable URLs must appear in the sitemap (Astro sitemap from real routes; `updatedAt` drives lastmod — never “now”).
+- Keep `/llms.txt` + `llms-full.txt` (+ `/.well-known/llms.txt` same body) question maps in sync. Do **not** block AI crawlers in `robots.txt` (GPTBot, Google-Extended, OAI-SearchBot, etc. stay Allow).
+
+## Hubs and indexes
+
+- When adding a tool to a hub, update hub title/intro/`whichTable`/FAQ in `src/pages/hubs/[category].astro` and `CATEGORY_META` if the hub name/description is stale.
+- Contracts hub must name videography + service agreement (not only photo/freelance/NDA).
+
+## Thin content ban + AEO structure
+
+- Do not ship thin tools/guides. Answer real user questions in visible FAQ and question-form H2s.
+- **Answer-first under every question H2:** first 1–2 sentences state the direct answer; then detail, examples, caveats.
+- Prefer plain-HTML **comparison tables** (estimate vs quote, agreement vs contract, WO vs invoice) and **checklists** of what to include.
+- Give concrete examples: sample line items, sample clauses, worked numbers labeled illustrative when not sourced.
+- Visible **Reviewed by** / author + **Last updated** (`updatedAt`) and a short link to `/methodology/`.
+- Legal / consent / rental / health: general information only — `legalNote` / `isLegalAdjacent`; never “attorney-reviewed.”
+- **GSC generative AI features (last 28d):** strengthen — do not thin or drop — `line-item-totals-explained`, `tattoo-consent-documentation` (**keep URL**), `work-order-vs-invoice-vs-estimate`. Answer-first H2s, comparison tables, and clear links to matching tools (contractor invoice, quote/estimate generator, construction estimate, tattoo consent form).
+
+## Structured data and URLs
+
+- Tools: WebApplication (or SoftwareApplication) + BreadcrumbList; FAQPage/HowTo only when matching visible content.
+- Guides: Article + BreadcrumbList; HowTo/FAQPage only when on-page.
+- Self-canonical, https, non-www, **trailing slash** everywhere (Worker 308 + `trailingSlash: 'always'`).
+- Never build hrefs from possibly `null`/`undefined` values. Optional quiet redirect: `/tools/:slug/null/` → tool.
+- Utility pages (cookies / privacy / terms): prefer `noindex, follow` so they do not inflate “discovered not indexed.” Keep methodology/about/contact indexable when they support E-E-A-T.
+
+## IndexNow + GSC (after deploy only)
+
+- Existing script: `scripts/indexnow.mjs` + key `public/4d6f1ea5473a0968a83c67ceda5a0387.txt` — **do not change the key**; do not add a second submitter.
+- New/changed sitemap URLs (including **redirect targets**) are submitted automatically once built into `dist/` sitemaps. Bump `updatedAt` on edited pages.
+- After production deploy: run `npm run indexnow` (or Workers Builds deploy command) and **Request indexing** in GSC for changed pages. Do not run IndexNow from a PR before deploy.
+
+## Verify
+
+```bash
+npm test && npm run audit
+```

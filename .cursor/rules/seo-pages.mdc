@@ -5,6 +5,8 @@ globs: src/pages/**/*.{astro,ts,tsx,md,mdx},src/data/**/*.{ts,js},src/components
 
 # SEO pages (research first)
 
+Durable sitewide SEO + AI Overview rules (titles, cannibalization, linking, answer-first H2s, null URLs, `/tools/` title): **`.cursor/rules/seo.mdc`** and skill **`add-seo-page`**. This file is the research-first gate before writing.
+
 Before planning growth, SEO, or content work, read `docs/GROWTH-STATUS.md` and update it in the same PR when queue items change. Before rediscovering indexing / Bing / GSC wiring or settled false alarms, read **SEO state (as of 2026-11-15)** in `AGENTS.md`.
 
 Before adding or substantially rewriting any tool, guide, hub, or landing page:

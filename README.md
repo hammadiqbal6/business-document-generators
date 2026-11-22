@@ -19,8 +19,7 @@ flowchart LR
   Form --> DOCX
 ```
 
-## Tools (22)
-## Tools (23)
+## Tools (26)
 
 | Tool | Path |
 |------|------|
@@ -130,14 +129,23 @@ PR / `main` CI: path-filtered parallel `build` + `test` jobs (npm cache, Astro/V
 - [docs/SEO-PLAYBOOK.md](docs/SEO-PLAYBOOK.md)
 - [docs/KEYWORD-MAP.md](docs/KEYWORD-MAP.md)
 - [docs/ideas/README.md](docs/ideas/README.md) — all 23 research ideas (#20 built here)
+- **Agent SEO rules:** [`AGENTS.md`](AGENTS.md) §5, [`.cursor/rules/seo.mdc`](.cursor/rules/seo.mdc), skill [`.cursor/skills/add-seo-page/SKILL.md`](.cursor/skills/add-seo-page/SKILL.md)
+
+### After every production deploy (IndexNow + GSC)
+
+1. IndexNow already runs on Workers Builds (`npx wrangler deploy && node scripts/indexnow.mjs`). Or run `npm run indexnow` against a fresh `dist/`. The script submits **every sitemap URL** (new pages + **redirect targets**). Do **not** change the key file `public/4d6f1ea5473a0968a83c67ceda5a0387.txt`. Do not run IndexNow from a PR before deploy.
+2. In Google Search Console: URL Inspection → **Request indexing** for each new or substantially changed page.
 
 ## Done / Remaining (growth & SEO)
 
 Short mirror of [`docs/GROWTH-STATUS.md`](docs/GROWTH-STATUS.md). **Every PR must refresh both files** (see `AGENTS.md`). Do not invent metrics.
 
-### Done (as of 2026-11-20)
+### Done (as of 2026-11-22)
 
-- **Agathox ownership verification (this PR):** `<meta name="agathox-verification" content="agathox-verify-9f40b3ccd8788104">` in shared Head; `/.well-known/agathox-verification.txt` static file (same token). Worker already skips `.txt` slash-redirect; Vitest covers the path.
+- **Sitewide SEO plan (this PR):** tool titles/H1s/metas/FAQs; expanded videography / NDA / service agreement; contractor-estimate guide 301 → construction master; business-estimate quote angle; new guides `how-to-price-a-job`, `what-to-include-in-a-service-agreement`, `service-agreement-vs-contract`; hubs + `/tools/` title **Free Business Document Generators** with derived count; cookies/privacy/terms noindex; estimate URL + `/tools/:slug/null/` redirects; durable rules in `AGENTS.md`, `.cursor/rules/seo.mdc`, `.cursor/skills/add-seo-page/`.
+- **AI Overviews / GSC generative features:** strengthened answer-first + tool links on `line-item-totals-explained`, `tattoo-consent-documentation` (URL kept), `work-order-vs-invoice-vs-estimate`. No geotargeting changes (Nigeria impression share is data only).
+- **IndexNow docs:** clarified that new sitemap URLs and redirect targets are submitted post-deploy; key unchanged; GSC Request indexing after deploy (not run in this PR).
+- **Agathox ownership verification (earlier):** `<meta name="agathox-verification" content="agathox-verify-9f40b3ccd8788104">` in shared Head; `/.well-known/agathox-verification.txt` static file (same token). Worker already skips `.txt` slash-redirect; Vitest covers the path.
 - **PAA guides (this PR):** five AlsoAsked articles (payment terms, change order, WO vs PO vs invoice, freelance contract checklist, contractor estimate create) + `docs/WRITING-GUIDE.md` + `ai-style-check` in audit. Heuristic style **OK** for the five; HF detector not in CI image.
 - **Progress invoice generator** (`/tools/progress-invoice/`): merged via dedicated agent PR #43.
 - **CI / Workers Builds speedup (PR #36 merged):** parallel build+test, npm/Astro caches, faster `npm ci`, docs-only path skip with required-check gate, Playwright Chromium cache on Full checks; root `.npmrc` for Cloudflare install.
@@ -164,28 +172,13 @@ Short mirror of [`docs/GROWTH-STATUS.md`](docs/GROWTH-STATUS.md). **Every PR mus
 
 ### Remaining
 
-- After merge/deploy: confirm Agathox ownership check against live meta and/or `/.well-known/agathox-verification.txt`.
-- Legacy guide human-rewrite + HF &lt;30% AI; estimate-generator upgrades; change-order running total (separate PRs #48 / #47).
-- Validate GSC indexing after deploy (IndexNow + URL Inspection for new guides and `/tools/progress-invoice/`); expect embed/404 noindex exclusions to stay.
-- Confirm CI wall-clock vs baseline; set Workers Builds **Install command** to flagged `npm ci` if the dashboard override ignores `.npmrc`.
-- Dedicated “construction lien waiver basics” guide (SEO-GUIDE calendar) still open; tool currently Learn-mores to estimate/invoice/work-order guides.
-- After deploy: IndexNow + GSC URL Inspection for `/tools/lien-waiver-generator/` and `/tools/progress-invoice/`; confirm embed/404 noindex exclusions stay intentional.
-- Five new PAA article slugs (separate PR #46); estimate/change-order upgrade PRs (#47/#48) still open.
-- Dedicated “construction lien waiver basics” guide (SEO-GUIDE calendar) still open.
-- Validate GSC indexing after deploys (IndexNow + URL Inspection for `/tools/lien-waiver-generator/`, `/tools/progress-invoice/`); expect embed/404 noindex exclusions to stay.
-- Confirm CI wall-clock vs baseline (~33–47s); set Workers Builds **Install command** to flagged `npm ci` if the dashboard override ignores `.npmrc`.
-- Validate GSC indexing after late-fee calculator + PR #35 deploy (IndexNow + URL Inspection); expect embed/404 noindex exclusions to stay.
-- After merge/deploy of roofing + painting estimate presets: IndexNow ping; GSC URL Inspection for the two new tool URLs.
-- Validate GSC indexing after PR #35 deploy (IndexNow + URL Inspection); expect embed/404 noindex exclusions to stay.
-- Bing verification **unset**; author/`sameAs` env vars **unset**; editorial backlinks still needed.
-- Pause Reddit promo/launch posts until karma recovers; r/SideProject launch was removed and not reposted.
-- GA4 Consent Mode cookieless measurement; AdSense approval; Uneed re-review; TinyLaunch resubmit after 2026-12-07.
-- Related tool variants / directory submissions — ongoing off-page (progress invoice shipped; other niches still open).
-- Other parallel tool/guide PRs may still be open—do not invent their Done items here.
-- Related tool variants / directory submissions / blogger embed outreach — ongoing off-page.
-- Related tool variants / directory submissions — ongoing off-page.
+- After merge/deploy: IndexNow (key unchanged) + GSC Request indexing for new/changed URLs and redirect targets; confirm cookies/privacy/terms noindex.
+- Construction lien waiver basics guide still open; Bing verification / author sameAs unset; backlinks needed.
+- Pause Reddit promo until karma recovers; GA4 cookieless; AdSense approval; Uneed / TinyLaunch (after 2026-12-07).
+- Weekly GSC check — record owner-reported deltas only. No geotargeting from Nigeria impression share.
 
-GSC 28d → 2026-11-17 (owner): **0** clicks, **486** impressions, avg position **58.9**, **54** indexed / **7** not. GA4: **3** users (28d).
+GSC 28d → 2026-11-17 (owner): **0** clicks, **486** impressions, avg position **58.9**, **54** indexed / **7** not. GA4: **3** users (28d). Generative AI features (later window, owner): 3 impressions on line-item-totals, tattoo-consent-documentation, work-order-vs-invoice-vs-estimate; only click query **business document generator** → `/tools/`.
+
 
 ## Research in repo
 

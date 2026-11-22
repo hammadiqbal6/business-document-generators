@@ -88,14 +88,45 @@ Shortcut: `npm run check` → `test` + `audit`.
 
 ## 5. SEO / AEO rules
 
-- One primary keyword per URL; map in `docs/KEYWORD-MAP.md`. Research first: `.cursor/rules/seo-pages.mdc`.
-- **Titles:** Pass through `buildPageTitle()` (`src/lib/seo.ts`); leave room for ` | Docuklin`; aim ≤60 chars at source (CI 25–65). Do not strip the brand.
-- **Schema:** FAQPage only for visible FAQs. HowTo only from on-page steps (`tool.content.howToUse` / `guide.howTo`). Guides also get Article. Tools get WebApplication/SoftwareApplication.
-- **Featured tools:** `featuredToolSlugs` / `getFeaturedTools()` in `src/data/tools/index.ts` — never `allTools.slice(0, N)`.
-- **Sitemap lastmod:** From real `updatedAt` via `scripts/lib/content-dates.mjs` + `astro.config.mjs`. Never set lastmod to “now”.
-- **IndexNow:** After production deploy (`npm run indexnow` / Workers Builds deploy command).
-- **llms:** Keep `llms.txt` / `llms-full.txt` question maps in sync when adding intent pages; `/.well-known/llms.txt` serves the same plain-text body as `/llms.txt` (do not use an Astro API 301 — static builds turn those into HTML meta-refresh).
-- **OG images:** PNG only (`/og/guide-*.png`, `/og/tool-*.png`). Generated in `prebuild`; do not point social tags at SVG.
+Durable rules from the Nov 2026 sitewide audit + GSC. Detail + globs: **`.cursor/rules/seo.mdc`**. Checklist skill: **`.cursor/skills/add-seo-page/SKILL.md`**. Research-first companion: `.cursor/rules/seo-pages.mdc`. Map keywords in `docs/KEYWORD-MAP.md`.
+
+### Titles, uniqueness, counts
+
+- One primary keyword per URL. Titles/H1/meta unique and aimed at **real query wording** (GSC / autocomplete), not internal labels.
+- Pass titles through `buildPageTitle()`; leave room for ` | Docuklin`; source title ≤60 chars (prefer ≤54; CI 25–65). Prefer colon over en dash. Do not strip the brand.
+- **`/tools/`** targets the query **business document generator** → title **`Free Business Document Generators`**. Never hard-code “16+ tools” (or similar) — derive from `allTools.length` / data.
+- Flagship `/tools/quote-estimate-generator/`: lead with “Free Estimate Generator” and “no signup, no watermark.”
+
+### Cannibalization and merges
+
+- One primary page per query cluster. Check KEYWORD-MAP before creating a page; merge with a **301** in `public/_redirects` instead of duplicating (e.g. contractor-estimate guide → construction-estimate master; quote angle on business-estimate; estimate-vs-quote folded into invoice-vs-estimate).
+- Tool = template/generator; guide = how-to / checklist / example.
+
+### Internal links, hubs, sitemap
+
+- Every new tool/guide: wire `src/data/toolGuideMap.ts`; link from its hub + **2–3** related pages (many pages historically had only 3–12 inbound). Update hub title/copy/`whichTable` when adding tools (contracts hub must name videography + service agreement).
+- New indexable URLs must be in the sitemap. `lastmod` from real `updatedAt` (`scripts/lib/content-dates.mjs`) — never “now.”
+- Self-canonical, https, trailing-slash URLs. Never build hrefs from null/undefined (optional `/tools/:slug/null/` → tool redirect).
+- Cookies / privacy / terms: prefer `noindex, follow`. Keep about / contact / methodology indexable for E-E-A-T.
+- Do **not** add geotargeting from GSC country skew (e.g. high Nigeria share is data only).
+
+### Thin content ban + AI Overviews / generative search
+
+- Do not ship thin pages. Answer real questions in FAQ and question-form H2s.
+- **Answer-first under every question H2:** 1–2 sentence direct answer, then detail. Page lead answers in sentence 1.
+- Plain-HTML **comparison tables** and **what-to-include checklists**; concrete sample lines/clauses (label illustrative when unsourced).
+- Visible Reviewed by / author + Last updated + methodology link (`/methodology/`).
+- Legal content = general information (`legalNote` / `isLegalAdjacent`); never attorney-reviewed.
+- Keep AI crawlers **Allow** in `robots.txt` (GPTBot, Google-Extended, OAI-SearchBot, etc.). Maintain `/llms.txt` (+ `llms-full.txt`, `/.well-known/llms.txt` same body as `/llms.txt` — not an Astro API 301).
+- Pages already in Google generative AI features (GSC): strengthen — do not thin — `line-item-totals-explained`, `tattoo-consent-documentation` (keep URL), `work-order-vs-invoice-vs-estimate`, with clear links to invoice / estimate / quote / consent tools.
+
+### Schema, featured, IndexNow, OG
+
+- FAQPage only for visible FAQs. HowTo only from on-page steps (`tool.content.howToUse` / `guide.howTo`). Guides: Article. Tools: WebApplication/SoftwareApplication. BreadcrumbList on tools/guides.
+- **Featured tools:** `featuredToolSlugs` / `getFeaturedTools()` — never `allTools.slice(0, N)`.
+- **IndexNow (existing — do not add a second submitter; do not change the key file `public/4d6f1ea5473a0968a83c67ceda5a0387.txt`):** `scripts/indexnow.mjs` reads `dist/` sitemaps and POSTs every sitemap URL. New tools/guides are included automatically after build once they are in the sitemap. **Redirect targets** (canonical pages) are included; redirect sources are not (they 301). Bump `updatedAt` on changed pages so lastmod moves.
+- **After every production deploy:** run IndexNow (`npm run indexnow`, or rely on Workers Builds `npx wrangler deploy && node scripts/indexnow.mjs`), then in Google Search Console use URL Inspection → Request indexing for each **new or substantially changed** URL (and confirm redirect targets resolve). Do **not** run IndexNow from a PR agent before deploy.
+- **OG images:** PNG only (`/og/guide-*.png`, `/og/tool-*.png`) from `prebuild`; never point social tags at SVG.
 - Origin for canonicals/sitemap/robots/llms/JSON-LD/OG: **only** `PUBLIC_SITE_URL` / `siteDefaults.mjs`.
 
 ## 6. Security & consent
@@ -124,6 +155,7 @@ Follow the skill — do not skip files:
 
 | Task | Skill |
 |------|--------|
+| Add/edit any tool or guide (SEO/AEO checklist) | `.cursor/skills/add-seo-page/SKILL.md` |
 | New generator tool | `.cursor/skills/add-a-new-generator-tool/SKILL.md` |
 | New guide | `.cursor/skills/add-a-new-guide/SKILL.md` |
 | Refresh existing guide | `.cursor/skills/refresh-an-existing-guide/SKILL.md` |

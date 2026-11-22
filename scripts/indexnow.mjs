@@ -2,13 +2,24 @@
 /**
  * Post-deploy IndexNow ping.
  * Reads built sitemap(s) from dist/, POSTs URL batches to api.indexnow.org.
- * New or updated guide/tool URLs are included automatically once they appear
- * in the Astro sitemap with per-URL lastmod from scripts/lib/content-dates.mjs.
+ *
+ * Coverage (do not change the key file in public/):
+ * - Every indexable URL in the Astro sitemap is submitted each run (tools, guides,
+ *   hubs, indexes). New pages appear automatically after `npm run build` once the
+ *   route exists and is not filtered (embeds are excluded).
+ * - Redirect *targets* (canonical pages) are submitted because they are real
+ *   sitemap entries. Bump their `updatedAt` when content changes so lastmod moves.
+ * - Redirect *sources* in public/_redirects are NOT in the sitemap (correct —
+ *   they 301 to the target). IndexNow does not need the old URL listed.
+ *
  * Never fails the build/deploy: all errors are caught and the process exits 0.
+ * Agents must NOT run this until production is deployed; Workers Builds already
+ * runs `npx wrangler deploy && node scripts/indexnow.mjs` on merge to main.
  *
  * Usage:
  *   node scripts/indexnow.mjs
  *   node scripts/indexnow.mjs --dry-run
+ *   npm run indexnow
  *
  * Env:
  *   INDEXNOW_KEY      — override key (default: 4d6f1ea5473a0968a83c67ceda5a0387)

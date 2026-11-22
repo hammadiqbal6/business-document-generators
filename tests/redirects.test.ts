@@ -33,4 +33,10 @@ describe('public/_redirects live-404 aliases', () => {
   it('quiets crawler /tools/:slug/null paths', () => {
     expect(redirects).toMatch(/\/tools\/:slug\/null\/?\s+\/tools\/:slug\/\s+301\b/);
   });
+
+  it('merges contractor-estimate guide into construction estimate guide', () => {
+    expect(redirects).toMatch(
+      /\/guides\/how-to-create-a-contractor-estimate\/\s+\/guides\/construction-estimate-that-wins-jobs\/\s+301\b/,
+    );
+  });
 });
