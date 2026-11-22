@@ -29,12 +29,12 @@
 | `/tools/invoice-late-fee-calculator/` | invoice late fee calculator | late fee calculator invoice, invoice overdue fee, late payment fee calculator | long-tail |
 | `/tools/roofing-estimate/` | roofing estimate template | roofing estimate, roof replacement estimate, shingle roof quote | trade preset of construction estimate |
 | `/tools/painting-estimate/` | painting estimate template | painting estimate, house painting quote, interior painting estimate | trade preset of construction estimate |
-| `/guides/construction-estimate-that-wins-jobs/` | how to write a construction estimate | construction quote, construction estimate example | supports estimate tool |
+| `/guides/construction-estimate-that-wins-jobs/` | how to write a construction estimate | construction quote, construction estimate example, how to create a contractor estimate (301 from retired slug) | supports estimate tool |
 | `/guides/photography-contract-clauses/` | photography contract clauses | photography contract explained | supports photo contract |
 | `/guides/catering-quote-deposits/` | catering quote deposit | wedding catering pricing | supports catering quote |
 | `/guides/tattoo-consent-documentation/` | tattoo consent form requirements | tattoo waiver explained | supports consent tool |
 | `/guides/rental-application-fair-housing/` | rental application fair housing | what to ask on rental application | supports rental form |
-| `/guides/invoice-vs-estimate/` | invoice vs estimate | quote vs estimate, when to use estimate or invoice | differentiates estimate vs invoice tools |
+| `/guides/invoice-vs-estimate/` | invoice vs estimate vs quote | quote vs estimate, estimate vs invoice, when to use estimate or invoice | differentiates estimate vs invoice tools |
 | `/guides/line-item-totals-explained/` | what is a line total | line item total, estimate tax deposit math | supports all commercial generators |
 | `/guides/freelance-payment-schedule-milestones/` | freelance payment schedule | web design contract milestones | supports freelance contract tool |
 | `/guides/what-to-include-on-a-receipt/` | how to write a receipt of payment | payment receipt, PDF receipt | receipt-generator, contractor-invoice |
@@ -45,7 +45,7 @@
 | `/guides/wedding-vendor-contract-checklist/` | wedding vendor contract checklist | event vendor agreement checklist | event-wedding-vendor-contract, catering-quote |
 | `/guides/podcast-script-structure/` | podcast script structure | episode outline segments | podcast-script-template |
 | `/guides/real-estate-flyer-what-to-include/` | real estate flyer what to include | property flyer checklist | real-estate-flyer-template |
-| `/guides/how-to-write-a-business-estimate/` | how to write a business estimate | quote vs estimate, estimate validity | quote-estimate-generator |
+| `/guides/how-to-write-a-business-estimate/` | how to write a business estimate or quote | how to write a quote, commercial cleaning quote, estimate validity | quote-estimate-generator |
 | `/guides/catering-quotation-example/` | catering quotation example | catering quote sample line items | catering-quote |
 | `/guides/freelance-web-design-contract-clauses/` | freelance web design contract clauses | scope IP revisions handover | freelance-web-design-contract |
 | `/guides/how-to-create-a-work-order/` | how to create a work order | how to write a work order | work-order |
@@ -55,7 +55,11 @@
 | `/guides/what-is-a-change-order/` | what is a change order | who prepares change order, RFI vs change order | change-order-template |
 | `/guides/work-order-vs-purchase-order-vs-invoice/` | work order vs purchase order vs invoice | PO vs work order, work order vs invoice | work-order, purchase-order-template |
 | `/guides/freelance-contract-what-to-include/` | what should a freelance contract include | can I write my own freelance contract | freelance-web-design-contract |
-| `/guides/how-to-create-a-contractor-estimate/` | how to create a contractor estimate | free estimate template Word Google Docs | construction-estimate-template, quote-estimate-generator |
+| `/guides/how-to-price-a-job/` | how to price a job | job markup, labor materials markup | quote-estimate-generator, construction-estimate-template |
+| `/guides/what-to-include-in-a-service-agreement/` | what to include in a service agreement | service agreement checklist | service-agreement-template |
+| `/guides/service-agreement-vs-contract/` | service agreement vs contract | is a service agreement a contract | service-agreement-template, independent-contractor-agreement |
+
+Retired (301): `/guides/how-to-create-a-contractor-estimate/` → `/guides/construction-estimate-that-wins-jobs/` (Word/Docs + bid-vs-estimate content folded into construction guide).
 
 Cannibalization rule: head terms like “invoice template” (KD 43) are not targeted; each page keeps a distinct profession or document type. Guides answer “when/why/how”; tools own “free template / generator” intent.
 

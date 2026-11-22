@@ -5,7 +5,7 @@
 export const toolToGuides: Record<string, string[]> = {
   'construction-estimate-template': [
     'construction-estimate-that-wins-jobs',
-    'how-to-write-a-business-estimate',
+    'how-to-price-a-job',
     'what-is-a-change-order',
     'line-item-totals-explained',
     'invoice-vs-estimate',
@@ -18,7 +18,6 @@ export const toolToGuides: Record<string, string[]> = {
     'what-to-include-on-a-receipt',
   ],
   'progress-invoice': [
-    'invoice-payment-terms',
     'contractor-invoice-example',
     'line-item-totals-explained',
     'invoice-vs-estimate',
@@ -48,7 +47,6 @@ export const toolToGuides: Record<string, string[]> = {
   ],
   'cleaning-service-invoice': [
     'cleaning-invoice-rates-line-items',
-    'invoice-payment-terms',
     'line-item-totals-explained',
     'invoice-vs-estimate',
   ],
@@ -86,28 +84,28 @@ export const toolToGuides: Record<string, string[]> = {
   ],
   'quote-estimate-generator': [
     'how-to-write-a-business-estimate',
-    'construction-estimate-that-wins-jobs',
+    'how-to-price-a-job',
     'invoice-vs-estimate',
+    'construction-estimate-that-wins-jobs',
     'work-order-vs-invoice-vs-estimate',
     'line-item-totals-explained',
   ],
   'independent-contractor-agreement': [
     'freelance-contract-what-to-include',
+    'service-agreement-vs-contract',
+    'what-to-include-in-a-service-agreement',
     'freelance-payment-schedule-milestones',
     'nda-basics-for-freelancers',
-    'freelance-web-design-contract-clauses',
   ],
   'timesheet-template': [
-    'contractor-invoice-example',
-    'invoice-payment-terms',
     'line-item-totals-explained',
-    'how-to-create-a-work-order',
-    'work-order-vs-invoice-vs-estimate',
+    'contractor-invoice-example',
+    'what-to-include-on-a-receipt',
   ],
   'service-agreement-template': [
+    'what-to-include-in-a-service-agreement',
+    'service-agreement-vs-contract',
     'freelance-contract-what-to-include',
-    'freelance-payment-schedule-milestones',
-    'freelance-web-design-contract-clauses',
     'nda-basics-for-freelancers',
   ],
   'purchase-order-template': [
@@ -136,15 +134,15 @@ export const toolToGuides: Record<string, string[]> = {
   ],
   'roofing-estimate': [
     'construction-estimate-that-wins-jobs',
+    'how-to-price-a-job',
     'line-item-totals-explained',
     'invoice-vs-estimate',
-    'how-to-write-a-business-estimate',
   ],
   'painting-estimate': [
     'how-to-write-a-business-estimate',
+    'how-to-price-a-job',
     'line-item-totals-explained',
     'invoice-vs-estimate',
-    'construction-estimate-that-wins-jobs',
   ],
 };
 
@@ -152,6 +150,7 @@ export const toolToGuides: Record<string, string[]> = {
 export const guideToGuides: Record<string, string[]> = {
   'construction-estimate-that-wins-jobs': [
     'how-to-write-a-business-estimate',
+    'how-to-price-a-job',
     'line-item-totals-explained',
     'invoice-vs-estimate',
     'contractor-invoice-example',
@@ -176,6 +175,7 @@ export const guideToGuides: Record<string, string[]> = {
   ],
   'invoice-vs-estimate': [
     'how-to-write-a-business-estimate',
+    'how-to-price-a-job',
     'work-order-vs-invoice-vs-estimate',
     'line-item-totals-explained',
     'what-to-include-on-a-receipt',
@@ -204,6 +204,8 @@ export const guideToGuides: Record<string, string[]> = {
   'nda-basics-for-freelancers': [
     'freelance-web-design-contract-clauses',
     'freelance-payment-schedule-milestones',
+    'what-to-include-in-a-service-agreement',
+    'service-agreement-vs-contract',
   ],
   'work-order-vs-invoice-vs-estimate': [
     'how-to-create-a-work-order',
@@ -225,6 +227,7 @@ export const guideToGuides: Record<string, string[]> = {
   'real-estate-flyer-what-to-include': ['podcast-script-structure'],
   'how-to-write-a-business-estimate': [
     'invoice-vs-estimate',
+    'how-to-price-a-job',
     'construction-estimate-that-wins-jobs',
     'line-item-totals-explained',
   ],
@@ -236,6 +239,7 @@ export const guideToGuides: Record<string, string[]> = {
   'freelance-web-design-contract-clauses': [
     'freelance-payment-schedule-milestones',
     'nda-basics-for-freelancers',
+    'freelance-contract-what-to-include',
   ],
   'how-to-create-a-work-order': [
     'work-order-vs-invoice-vs-estimate',
@@ -260,7 +264,7 @@ export const guideToGuides: Record<string, string[]> = {
   ],
   'what-is-a-change-order': [
     'construction-estimate-that-wins-jobs',
-    'how-to-write-a-business-estimate',
+    'how-to-price-a-job',
     'work-order-vs-invoice-vs-estimate',
   ],
   'work-order-vs-purchase-order-vs-invoice': [
@@ -272,12 +276,31 @@ export const guideToGuides: Record<string, string[]> = {
     'freelance-web-design-contract-clauses',
     'freelance-payment-schedule-milestones',
     'nda-basics-for-freelancers',
+    'what-to-include-in-a-service-agreement',
+    'service-agreement-vs-contract',
+  ],
+  'how-to-price-a-job': [
+    'how-to-write-a-business-estimate',
+    'construction-estimate-that-wins-jobs',
+    'invoice-vs-estimate',
+    'line-item-totals-explained',
+  ],
+  'what-to-include-in-a-service-agreement': [
+    'service-agreement-vs-contract',
+    'freelance-contract-what-to-include',
+    'nda-basics-for-freelancers',
+  ],
+  'service-agreement-vs-contract': [
+    'what-to-include-in-a-service-agreement',
+    'freelance-contract-what-to-include',
+    'nda-basics-for-freelancers',
   ],
 };
 
 /** Hub slug → guide slugs to feature on the hub page. */
 export const hubToGuides: Record<string, string[]> = {
   'estimates-invoices': [
+    'how-to-price-a-job',
     'invoice-payment-terms',
     'what-is-a-change-order',
     'work-order-vs-purchase-order-vs-invoice',
@@ -289,6 +312,8 @@ export const hubToGuides: Record<string, string[]> = {
     'work-order-vs-invoice-vs-estimate',
   ],
   contracts: [
+    'what-to-include-in-a-service-agreement',
+    'service-agreement-vs-contract',
     'freelance-contract-what-to-include',
     'freelance-web-design-contract-clauses',
     'photography-contract-clauses',

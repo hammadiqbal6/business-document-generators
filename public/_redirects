@@ -17,6 +17,10 @@
 /privacy-policy /privacy/ 301
 /privacy-policy/ /privacy/ 301
 
+# Merged contractor-estimate guide → construction estimate guide
+/guides/how-to-create-a-contractor-estimate /guides/construction-estimate-that-wins-jobs/ 301
+/guides/how-to-create-a-contractor-estimate/ /guides/construction-estimate-that-wins-jobs/ 301
+
 # Guessed estimate/quote URLs → flagship generator
 /tools/estimate-generator /tools/quote-estimate-generator/ 301
 /tools/estimate-generator/ /tools/quote-estimate-generator/ 301
