@@ -7,12 +7,13 @@ import { breadcrumbJsonLd, collectionPageJsonLd } from '../../lib/seo';
 
 const path = '/guides/';
 const crumbs = [{ name: 'Home', path: '/' }, { name: 'Guides', path }];
+const guidesDescription =
+  'Plain-English guides on writing estimates and quotes, invoices, contracts and forms, each linked to a free generator.';
 const jsonLd = [
   breadcrumbJsonLd(crumbs),
   collectionPageJsonLd({
-    name: 'Guides',
-    description:
-      'Original guides on construction estimates, contracts, invoices, consent forms, and more—linked to free generators.',
+    name: 'Business Guides: Estimates, Invoices, Contracts',
+    description: guidesDescription,
     path,
     items: guides.map((g) => ({ name: g.title, path: `/guides/${g.slug}/` })),
   }),
@@ -48,8 +49,8 @@ if (leftover.length) {
 }
 ---
 <BaseLayout
-  title="Guides for Business Documents & Contracts"
-  description="Original guides on construction estimates, photography contracts, catering quotes, tattoo consent, and rental applications—linked to our free generators."
+  title="Business Guides: Estimates, Invoices, Contracts"
+  description={guidesDescription}
   path={path}
   jsonLd={jsonLd}
   ogImagePath="/og/guides.png"
@@ -58,7 +59,7 @@ if (leftover.length) {
   <Breadcrumbs items={crumbs} />
   <h1>Guides</h1>
   <p class="lead answer-first">
-    Answer-first articles that explain what to include on estimates, contracts, and forms—and link to the matching free generator.
+    Plain-English how-tos for estimates and quotes, invoices and payment terms, contracts and NDAs, work orders, receipts, consent forms, rental applications, and creative templates—each linked to a matching free generator.
   </p>
   {grouped.map((g) =>
     g.items.length ? (

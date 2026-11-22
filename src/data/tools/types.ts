@@ -120,24 +120,24 @@ export const CATEGORY_META: Record<
     slug: 'estimates-invoices',
     name: 'Estimates & Invoices',
     description:
-      'Construction, roofing, and painting estimates, change orders, purchase orders, timesheets, contractor invoices, progress invoices, late fee calculator, cleaning quotes, catering quotes, receipts, work orders, and general quote generators.',
+      'Free quote and estimate generators, construction/roofing/painting estimates, change orders, purchase orders, timesheets, contractor and progress invoices, late fee calculator, cleaning and catering quotes, receipts, and work orders.',
   },
   contracts: {
     slug: 'contracts',
     name: 'Contracts & Agreements',
     description:
-      'Independent contractor and service agreements, photography, videography, freelance/web design, event/wedding vendor contracts, simple NDAs, and construction lien waivers — editable samples, not legal advice.',
+      'Videography, photography, service agreement, freelance/web design, event/wedding vendor, independent contractor, simple NDA, and lien waiver templates — editable samples, not legal advice.',
   },
   forms: {
     slug: 'forms',
     name: 'Forms & Applications',
     description:
-      'Tattoo consent forms, rental/lease applications, and other fillable client forms with PDF export.',
+      'Fillable tattoo consent and rental application forms with PDF export in your browser.',
   },
   'creative-templates': {
     slug: 'creative-templates',
     name: 'Creative Templates',
     description:
-      'Podcast script templates and real estate flyer layouts you can fill and export.',
+      'Podcast episode script planner and real estate flyer maker you can fill and export as PDF.',
   },
 };

@@ -4,8 +4,8 @@
  */
 export const toolToGuides: Record<string, string[]> = {
   'construction-estimate-template': [
-    'how-to-create-a-contractor-estimate',
     'construction-estimate-that-wins-jobs',
+    'how-to-write-a-business-estimate',
     'what-is-a-change-order',
     'line-item-totals-explained',
     'invoice-vs-estimate',
@@ -18,6 +18,7 @@ export const toolToGuides: Record<string, string[]> = {
     'what-to-include-on-a-receipt',
   ],
   'progress-invoice': [
+    'invoice-payment-terms',
     'contractor-invoice-example',
     'line-item-totals-explained',
     'invoice-vs-estimate',
@@ -47,6 +48,7 @@ export const toolToGuides: Record<string, string[]> = {
   ],
   'cleaning-service-invoice': [
     'cleaning-invoice-rates-line-items',
+    'invoice-payment-terms',
     'line-item-totals-explained',
     'invoice-vs-estimate',
   ],
@@ -83,8 +85,8 @@ export const toolToGuides: Record<string, string[]> = {
     'wedding-vendor-contract-checklist',
   ],
   'quote-estimate-generator': [
-    'how-to-create-a-contractor-estimate',
     'how-to-write-a-business-estimate',
+    'construction-estimate-that-wins-jobs',
     'invoice-vs-estimate',
     'work-order-vs-invoice-vs-estimate',
     'line-item-totals-explained',
@@ -96,14 +98,17 @@ export const toolToGuides: Record<string, string[]> = {
     'freelance-web-design-contract-clauses',
   ],
   'timesheet-template': [
-    'line-item-totals-explained',
     'contractor-invoice-example',
-    'what-to-include-on-a-receipt',
+    'invoice-payment-terms',
+    'line-item-totals-explained',
+    'how-to-create-a-work-order',
+    'work-order-vs-invoice-vs-estimate',
   ],
   'service-agreement-template': [
+    'freelance-contract-what-to-include',
     'freelance-payment-schedule-milestones',
     'freelance-web-design-contract-clauses',
-    'invoice-vs-estimate',
+    'nda-basics-for-freelancers',
   ],
   'purchase-order-template': [
     'work-order-vs-purchase-order-vs-invoice',
@@ -123,6 +128,7 @@ export const toolToGuides: Record<string, string[]> = {
     'invoice-vs-estimate',
   ],
   'invoice-late-fee-calculator': [
+    'invoice-payment-terms',
     'contractor-invoice-example',
     'invoice-vs-estimate',
     'what-to-include-on-a-receipt',
@@ -254,7 +260,7 @@ export const guideToGuides: Record<string, string[]> = {
   ],
   'what-is-a-change-order': [
     'construction-estimate-that-wins-jobs',
-    'how-to-create-a-contractor-estimate',
+    'how-to-write-a-business-estimate',
     'work-order-vs-invoice-vs-estimate',
   ],
   'work-order-vs-purchase-order-vs-invoice': [
@@ -267,18 +273,11 @@ export const guideToGuides: Record<string, string[]> = {
     'freelance-payment-schedule-milestones',
     'nda-basics-for-freelancers',
   ],
-  'how-to-create-a-contractor-estimate': [
-    'construction-estimate-that-wins-jobs',
-    'how-to-write-a-business-estimate',
-    'what-is-a-change-order',
-    'invoice-vs-estimate',
-  ],
 };
 
 /** Hub slug → guide slugs to feature on the hub page. */
 export const hubToGuides: Record<string, string[]> = {
   'estimates-invoices': [
-    'how-to-create-a-contractor-estimate',
     'invoice-payment-terms',
     'what-is-a-change-order',
     'work-order-vs-purchase-order-vs-invoice',

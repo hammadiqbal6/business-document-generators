@@ -4,7 +4,7 @@ Living tracker for Docuklin SEO and growth work. **Read this before planning gro
 
 Settled technical SEO policy (IndexNow wiring, jev-seo false alarms, title/schema rules) still lives under **SEO state** in `AGENTS.md`. This file holds current metrics and the work queue.
 
-Last updated: **2026-11-20**
+Last updated: **2026-11-22**
 
 ---
 
@@ -29,6 +29,12 @@ As of **2026-11-17** (owner-reported GSC/GA4 window) unless noted.
 
 In-repo and confirmed off-repo completions.
 
+- **2026-11-22 — Hubs / indexes / noindex / redirects (this PR stream):**
+  - Hub titles/meta/FAQs refreshed (contracts, estimates-invoices, forms, creative); CATEGORY_META descriptions aligned.
+  - `/tools/` and `/guides/` index titles/meta; tools index uses `allTools.length` (no hard-coded count); homepage title/meta + hero CTA “Free estimate generator”.
+  - `cookies` / `privacy` / `terms` → `noindex={true}` and excluded from sitemap; indexing/page-checklist/seo-guardrails audits updated.
+  - `_redirects`: guessed estimate/quote URLs → `quote-estimate-generator`; `/tools/:slug/null` quiet redirects.
+  - `toolGuideMap` strengthened (invoice-payment-terms on invoice tools; timesheet/service-agreement links); dropped `how-to-create-a-contractor-estimate` map refs (guide being 301’d elsewhere).
 - **2026-11-20 — Agathox ownership verification (this PR):** home `<head>` meta `agathox-verification` = `agathox-verify-9f40b3ccd8788104`; static `public/.well-known/agathox-verification.txt` (same token). Worker `FILE_EXT` already skips trailing-slash 308 for `.txt` (covered by Vitest). `_headers` cache rule only; no SEO/analytics/CSP changes.
 - **2026-11-19 — PAA question guides (this PR):** five AlsoAsked-based articles — invoice payment terms; what is a change order; work order vs PO vs invoice; freelance contract what to include; how to create a contractor estimate. Wired into `KEYWORD-MAP`, `toolGuideMap`, llms question maps. Added `docs/WRITING-GUIDE.md`, AGENTS.md human-writing rule, and `scripts/audit/ai-style-check.mjs` (in `npm run audit`). Heuristic style check: all five new guides **OK** (see PR detector table). HF classifier not available in CI image (no torch).
 - **2026-11-19 — Progress invoice generator (PR #43 merged):** `/tools/progress-invoice/` with retainage math; hub/KEYWORD-MAP/llms wiring (dedicated agent).
@@ -114,10 +120,10 @@ In-repo and confirmed off-repo completions.
 | Bucket | What’s in it |
 |--------|----------------|
 | Sitemap / indexable | All sitemap URLs on `https://docuklin.com…/` with trailing slash, self-canonical, `index,follow`, matching `og:url`; all tools included with `lastmod` (23 tools after lien waiver + progress invoice) |
-| Intentional noindex | `/tools/<slug>/embed/` (one per tool) + `/404/` — meta robots + `X-Robots-Tag`; **not** in sitemap. Matches GSC “Excluded by noindex” for crawled embeds/404 |
+| Intentional noindex | `/tools/<slug>/embed/` (one per tool) + `/404/` + `/cookies/` `/privacy/` `/terms/` — meta robots (+ `X-Robots-Tag` on embeds/404); **not** in sitemap |
 | Sitemap / indexable | Sitemap URLs on `https://docuklin.com…/` with trailing slash, self-canonical, `index,follow`, matching `og:url`; all tools (22 including late-fee calculator) included with `lastmod` |
 | Sitemap / indexable | All sitemap URLs on `https://docuklin.com…/` with trailing slash, self-canonical, `index,follow`, matching `og:url`; all tools included with `lastmod` (23 after roofing/painting presets) |
-| Redirects (final 200 only in sitemap/links) | `/tools/invoice[/]`, `/tools/invoice-generator[/]` → contractor invoice; `/privacy-policy[/]` → `/privacy/`; `/sitemap.xml` & `/sitemap_index.xml` → `/sitemap-index.xml`; `/authors[/]` → `/about/`; Worker trailing-slash 308 |
+| Redirects (final 200 only in sitemap/links) | `/tools/invoice[/]`, `/tools/invoice-generator[/]` → contractor invoice; `/tools/estimate-generator[/]`, `/tools/quote-generator[/]`, `/tools/estimate[/]` → quote-estimate-generator; `/tools/:slug/null[/]` → `/tools/:slug/`; `/privacy-policy[/]` → `/privacy/`; `/sitemap.xml` & `/sitemap_index.xml` → `/sitemap-index.xml`; `/authors[/]` → `/about/`; Worker trailing-slash 308 |
 
 ---
 
@@ -125,6 +131,7 @@ In-repo and confirmed off-repo completions.
 
 Prioritized open work. Owner-confirmed gaps preferred over guesses.
 
+1. **After merge/deploy (hubs/indexes/noindex stream):** ping IndexNow; confirm `/cookies/` `/privacy/` `/terms/` stay noindex and out of sitemap; URL Inspection for refreshed hub/home/tools/guides titles.
 1. **After merge/deploy:** confirm Agathox finds the meta and/or `https://docuklin.com/.well-known/agathox-verification.txt` (200, no slash redirect).
 2. **Human rewrite of legacy guides** + HF detector scores &lt;30% AI; flip `ai-style-check` to `--strict-all` when done (separate PR).
 2. **Estimate generator upgrades** (logo upload, expiry, convert-to-invoice) — separate PR (#48).

@@ -352,8 +352,12 @@ for (const file of htmlFiles) {
     if (words < 800) fail(`${rel}: guide too thin (${words} words in main; need ≥800)`);
   }
 
-  // Page path should be in sitemap (skip 404, embed)
-  if (!is404 && !isEmbed) {
+  // Page path should be in sitemap (skip 404, embed, intentional noindex legal pages)
+  const isLegalUtility =
+    rel === 'cookies/index.html' ||
+    rel === 'privacy/index.html' ||
+    rel === 'terms/index.html';
+  if (!is404 && !isEmbed && !isLegalUtility) {
     const urlPath =
       '/' +
       rel

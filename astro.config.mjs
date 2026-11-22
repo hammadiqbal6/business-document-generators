@@ -15,7 +15,10 @@ export default defineConfig({
   integrations: [
     react(),
     sitemap({
-      filter: (page) => !page.includes('/embed/'),
+      // Embeds + legal utility pages are noindex (cookies/privacy/terms).
+      filter: (page) =>
+        !page.includes('/embed/') &&
+        !/\/(cookies|privacy|terms)\/?$/.test(new URL(page).pathname),
       serialize(item) {
         // Prefer real content dates; omit lastmod when we have no reliable source.
         try {

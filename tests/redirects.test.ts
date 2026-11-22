@@ -19,4 +19,18 @@ describe('public/_redirects live-404 aliases', () => {
   it('aliases privacy-policy to /privacy/', () => {
     expect(redirects).toMatch(/\/privacy-policy\/\s+\/privacy\/\s+301\b/);
   });
+
+  it('sends guessed estimate/quote URLs to quote-estimate-generator', () => {
+    expect(redirects).toMatch(
+      /\/tools\/estimate-generator\/\s+\/tools\/quote-estimate-generator\/\s+301\b/,
+    );
+    expect(redirects).toMatch(
+      /\/tools\/quote-generator\/\s+\/tools\/quote-estimate-generator\/\s+301\b/,
+    );
+    expect(redirects).toMatch(/\/tools\/estimate\/\s+\/tools\/quote-estimate-generator\/\s+301\b/);
+  });
+
+  it('quiets crawler /tools/:slug/null paths', () => {
+    expect(redirects).toMatch(/\/tools\/:slug\/null\/?\s+\/tools\/:slug\/\s+301\b/);
+  });
 });
