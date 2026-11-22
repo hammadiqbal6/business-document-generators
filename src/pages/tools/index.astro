@@ -9,12 +9,13 @@ import { breadcrumbJsonLd, collectionPageJsonLd } from '../../lib/seo';
 const crumbs = [{ name: 'Home', path: '/' }, { name: 'Tools', path: '/tools/' }];
 const byCat = Object.keys(CATEGORY_META) as ToolCategory[];
 const path = '/tools/';
+const toolCount = allTools.length;
+const toolsDescription = `Browse ${toolCount} free document generators: estimates, quotes, invoices, contracts, forms. PDF/Word in your browser, no signup.`;
 const jsonLd = [
   breadcrumbJsonLd(crumbs),
   collectionPageJsonLd({
-    name: 'All document generators',
-    description:
-      'Browse free niche document generators: estimates, invoices, contracts, forms, and creative templates. Export PDF or DOCX in your browser.',
+    name: 'Free Business Document Generators',
+    description: toolsDescription,
     path,
     items: allTools.map((t) => ({ name: t.name, path: `/tools/${t.slug}/` })),
   }),
@@ -22,16 +23,16 @@ const jsonLd = [
 ---
 <BaseLayout
   title="Free Business Document Generators"
-  description="Browse 16+ free niche document generators: estimates, invoices, contracts, forms, and creative templates. Export PDF or DOCX in your browser."
+  description={toolsDescription}
   path={path}
   jsonLd={jsonLd}
   ogImagePath="/og/home.png"
   ogImageAlt={`${siteConfig.siteName} — all free document generators`}
 >
   <Breadcrumbs items={crumbs} />
-  <h1>All document generators</h1>
+  <h1>All Free Document Generators</h1>
   <p class="lead answer-first">
-    Pick a template, fill the form, preview live, and export PDF or DOCX. Nothing is stored on our servers—optional drafts save in your browser only.
+    Browse {toolCount} free templates: pick one, fill the form, preview live, and export PDF or DOCX. Nothing is stored on our servers—optional drafts save in your browser only.
   </p>
   <div class="summary-box">
     <p>

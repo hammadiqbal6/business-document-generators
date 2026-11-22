@@ -4,13 +4,14 @@ description: Add a new SEO/AEO guide article to Docuklin with answer-first struc
 ---
 # Add a new guide
 
-Use this instead of inventing a new outline. Companion: `refresh-an-existing-guide`, `pre-merge-seo-aeo-checklist`, `document-generator-niche`.
+Use this instead of inventing a new outline. Companion: **`add-seo-page`** (full SEO/AEO checklist), `refresh-an-existing-guide`, `pre-merge-seo-aeo-checklist`, `document-generator-niche`. Rules: `AGENTS.md` §5, `.cursor/rules/seo.mdc`.
 
 ## Research
 
-1. One primary query; check `docs/KEYWORD-MAP.md` for cannibalization.
+1. One primary query; check `docs/KEYWORD-MAP.md` for cannibalization (merge + 301 if cluster already covered).
 2. Collect 3–6 real search questions (GSC / PAA) for H2s + FAQ.
 3. Gather primary sources (IRS, SBA, FTC, HUD, Cornell LII, Copyright Office, etc.) — no invented stats.
+4. Run through `add-seo-page` for titles, toolGuideMap, hub links, sitemap, and AI Overview answer-first H2s.
 
 ## Implement
 
@@ -20,8 +21,8 @@ Use this instead of inventing a new outline. Companion: `refresh-an-existing-gui
    - `legalNote` when contract/consent/rental/health-adjacent
    - `howTo` only if steps appear on-page (feeds HowTo JSON-LD)
    - `sources[]` with `label` + `url` (+ optional `usedFor`)
-   - `sections[]` with question H2s, worked example, optional `table`
-   - `faq` (4–6; visible Q&A)
+   - `sections[]` with question H2s (**first 1–2 sentences = direct answer**), worked example, optional comparison `table` / checklist
+   - `faq` (4–6; visible Q&A; answers start with the direct reply)
    - `relatedToolSlugs` (matching tool first), `relatedGuideSlugs`
    - `publishedAt` / `updatedAt` as real `YYYY-MM-DD` (drives sitemap lastmod)
 2. Wire `src/data/toolGuideMap.ts` (tool → guide and reverse where needed).

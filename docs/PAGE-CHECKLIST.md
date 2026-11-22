@@ -18,10 +18,12 @@ Enforced in CI by `npm run audit:pages` (`scripts/audit/page-checklist.mjs`).
 - [ ] Answer first: opening 40–60 words answer the query directly, with a number or definition where one exists.
 - [ ] On a tool page, the editor/form is usable above the fold on mobile (390×844); no “Open editor” click gate; ≤60 words before the first input.
 - [ ] H2/H3 in order with no skipped levels. Phrase H2s as questions where people search that way.
-- [ ] Worked example with real numbers.
-- [ ] At least one table, chart, or diagram you made yourself.
+- [ ] **Under each question H2, the first 1–2 sentences answer directly** (AI Overviews / AI Mode), then detail.
+- [ ] Worked example with real numbers or sample clauses (label illustrative when unsourced).
+- [ ] At least one plain-HTML comparison table or what-to-include checklist you made yourself.
+- [ ] Clear links to the matching generator tool(s) with topical anchor text.
 - [ ] Page-specific content; keep sitewide boilerplate short or link out.
-- [ ] Visible published / last updated dates matching schema and sitemap lastmod.
+- [ ] Visible Reviewed by / author + last updated dates matching schema and sitemap lastmod; methodology link where relevant.
 
 ## 3. Metadata
 

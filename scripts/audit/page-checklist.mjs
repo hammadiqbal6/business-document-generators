@@ -97,9 +97,18 @@ for (const file of htmlFiles) {
   const is404 = rel === '404.html' || rel.endsWith('/404.html');
   const html = fs.readFileSync(file, 'utf8');
 
+  const isLegalUtility =
+    rel === 'cookies/index.html' ||
+    rel === 'privacy/index.html' ||
+    rel === 'terms/index.html';
+
   if (isEmbed) {
     if (!/noindex/i.test(html)) fail(`${rel}: embed page should be noindex`);
     continue;
+  }
+
+  if (isLegalUtility) {
+    if (!/noindex/i.test(html)) fail(`${rel}: cookies/privacy/terms should be noindex`);
   }
 
   const titleMatch = html.match(/<title>([^<]*)<\/title>/i);
@@ -141,7 +150,12 @@ for (const file of htmlFiles) {
         .replace(/index\.html$/, '')
         .replace(/\\/g, '/');
     const normalized = urlPath === '/' ? '/' : urlPath.endsWith('/') ? urlPath : `${urlPath}/`;
-    if (sitemapPaths.size && ![...sitemapPaths].some((p) => p === normalized || p === normalized.replace(/\/$/, ''))) {
+    // Legal utility pages are intentionally noindex and excluded from the sitemap.
+    if (
+      !isLegalUtility &&
+      sitemapPaths.size &&
+      ![...sitemapPaths].some((p) => p === normalized || p === normalized.replace(/\/$/, ''))
+    ) {
       fail(`${rel}: page path ${normalized} missing from sitemap`);
     }
   }

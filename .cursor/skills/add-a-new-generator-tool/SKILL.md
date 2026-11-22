@@ -4,7 +4,7 @@ description: Add a new in-browser document generator tool page with fields, prev
 ---
 # Add a new generator tool
 
-Replaces ad-hoc checklists. Also read `document-generator-niche` for legal-adjacent tools and `ui-ux-pro-max` for UI.
+Replaces ad-hoc checklists. Run **`add-seo-page`** for cannibalization, titles/meta, toolGuideMap, hub copy, and AEO answer-first rules. Also read `document-generator-niche` for legal-adjacent tools and `ui-ux-pro-max` for UI. Standing rules: `AGENTS.md` §5, `.cursor/rules/seo.mdc`.
 
 ## Files to touch
 

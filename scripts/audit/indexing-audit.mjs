@@ -2,7 +2,7 @@
 /**
  * Indexing audit over dist/:
  * - Every sitemap URL must be self-canonical, indexable, and absolute on PUBLIC_SITE_URL / siteDefaults origin with trailing slash
- * - noindex pages must not appear in the sitemap (embeds + 404 are intentional)
+ * - noindex pages must not appear in the sitemap (embeds + 404 + cookies/privacy/terms)
  * - Redirect sources must not appear in the sitemap
  * Prints URL buckets for the PR/report.
  */
@@ -159,13 +159,23 @@ for (const file of htmlFiles) {
   const ogUrl = readOgUrl(html);
   const isEmbed = pagePath.includes('/embed/');
   const is404 = pagePath === '/404/' || path.basename(file) === '404.html';
+  const isLegalUtility =
+    pagePath === '/cookies/' || pagePath === '/privacy/' || pagePath === '/terms/';
   const isNoindex = /noindex/i.test(robots);
 
-  if (isEmbed || is404) {
-    if (!isNoindex) fail(`${pagePath}: expected noindex (embed/404)`);
+  if (isEmbed || is404 || isLegalUtility) {
+    if (!isNoindex) {
+      fail(
+        `${pagePath}: expected noindex (${isEmbed ? 'embed' : is404 ? '404' : 'legal utility'})`,
+      );
+    }
     intentionalNoindex.push({
       path: pagePath,
-      reason: isEmbed ? 'embed widget (canonical → parent tool)' : '404 utility',
+      reason: isEmbed
+        ? 'embed widget (canonical → parent tool)'
+        : is404
+          ? '404 utility'
+          : 'cookies/privacy/terms (noindex utility)',
     });
     continue;
   }

@@ -16,3 +16,19 @@
 # Common privacy policy alias
 /privacy-policy /privacy/ 301
 /privacy-policy/ /privacy/ 301
+
+# Merged contractor-estimate guide → construction estimate guide
+/guides/how-to-create-a-contractor-estimate /guides/construction-estimate-that-wins-jobs/ 301
+/guides/how-to-create-a-contractor-estimate/ /guides/construction-estimate-that-wins-jobs/ 301
+
+# Guessed estimate/quote URLs → flagship generator
+/tools/estimate-generator /tools/quote-estimate-generator/ 301
+/tools/estimate-generator/ /tools/quote-estimate-generator/ 301
+/tools/quote-generator /tools/quote-estimate-generator/ 301
+/tools/quote-generator/ /tools/quote-estimate-generator/ 301
+/tools/estimate /tools/quote-estimate-generator/ 301
+/tools/estimate/ /tools/quote-estimate-generator/ 301
+
+# Quiet crawler null path 404s
+/tools/:slug/null /tools/:slug/ 301
+/tools/:slug/null/ /tools/:slug/ 301
