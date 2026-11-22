@@ -19,9 +19,9 @@ export const photographyContract: ToolDefinition = {
     'wedding photography contract',
     'portrait photography agreement',
   ],
-  title: 'Free Photography Contract Template (PDF)',
+  title: 'Photography Contract Template (Free PDF)',
   metaDescription:
-    'Create a photography contract with retainer, deliverables, usage rights and cancellation clauses. Edit every clause, preview live, download PDF or DOCX free.',
+    'Photography contract with retainer, deliverables, usage rights and cancellation. Free PDF/Word generator for photographers.',
   h1: 'Free Photography Contract Template',
   answerFirst:
     'A photography contract template sets the shoot date, location, fee, deliverables, turnaround, cancellation terms, and image usage rights between photographer and client. Customize the editable clauses below, preview the agreement, and export PDF or DOCX. Not legal advice—review with counsel before signing.',
@@ -160,7 +160,7 @@ export const photographyContract: ToolDefinition = {
   },
   relatedSlugs: ['videography-contract', 'event-wedding-vendor-contract', 'freelance-web-design-contract'],
   publishedAt: '2026-10-19',
-  updatedAt: '2026-10-20',
+  updatedAt: '2026-11-22',
 };
 
 export const videographyContract: ToolDefinition = {
@@ -170,9 +170,9 @@ export const videographyContract: ToolDefinition = {
   category: 'contracts',
   primaryKeyword: 'videography contract',
   secondaryKeywords: ['videographer contract template', 'video production agreement', 'wedding videography contract'],
-  title: 'Videography Contract Template – Free Generator',
+  title: 'Videography Contract Template (Free Wedding & Video)',
   metaDescription:
-    'Create a videography contract: shoot details, deliverables, revisions, licensing, editable clauses. Export PDF/DOCX. Not legal advice.',
+    'Videography contract with shoot details, deliverables, deposit, copyright, revisions and cancellation. Free PDF/Word, wedding and corporate presets.',
   h1: 'Free Videography Contract Template',
   answerFirst:
     'A videography contract defines filming dates, crew, deliverable formats, revision rounds, payment, and licensing for footage. Customize clauses in this free browser tool and export PDF or DOCX. Not legal advice—get local counsel before use.',
@@ -215,27 +215,69 @@ export const videographyContract: ToolDefinition = {
   },
   content: {
     howToUse: [
-      'Enter parties, shoot dates, and fee structure.',
-      'Define deliverables, revisions, and license summary.',
-      'Edit clauses; export for signature workflow.',
+      'Enter parties, shoot dates, locations, and fee structure.',
+      'Define deliverables, revision rounds, and the license summary in plain language.',
+      'Edit deposit, copyright, raw-footage, cancellation, and weather clauses to match how you work.',
+      'Export PDF or Word and have both parties review with their own counsel before signing.',
     ],
     whatToInclude: [
       {
-        heading: 'Video-specific clauses',
-        body: 'Cover revision rounds, music licensing responsibility, talent releases, raw footage ownership, overtime, and weather holds for outdoor shoots.',
+        heading: 'What to include in a videography contract',
+        body: 'Name the parties, shoot date(s), locations, crew size if it matters, deliverable formats and runtimes, included revision rounds, total fee, deposit, remaining balance timing, and who owns or licenses the finished film. Add music licensing responsibility, talent or location releases, overtime, and how cancellations or weather holds work.\n\nWedding coverage and corporate brand films use the same skeleton with different deliverables. A wedding PDF often lists ceremony-to-reception hours, highlight length, and speech cutdowns. A corporate PDF lists hero runtime, social cutdowns, and channel licenses. Start from this generator either way, then swap the sample defaults.',
+      },
+      {
+        heading: 'Deposit and payment schedule',
+        body: 'Spell out the deposit amount, when it is due, and whether it is refundable. Many videographers take roughly one-third on signing to hold the calendar, with the balance due on delivery or a few days before the shoot. Put the same numbers in the fee fields and the payment clause so the client is not reading two stories.\n\nIf the job has milestones (rough cut, picture lock, final files), tie each invoice to a deliverable. Late-payment pauses on non-critical edits are fine when you state them up front.',
+      },
+      {
+        heading: 'Copyright, licence, and portfolio use',
+        body: 'In many freelance U.S. arrangements the videographer keeps copyright and grants the client a license for listed channels. Say whether the license is perpetual, worldwide, and limited to owned sites and paid social—or broader. Commercial resale, stock, or white-label reuse usually needs a separate written license.\n\nPortfolio and showreel use is common; give the client a clear opt-out in writing before the shoot if they need confidentiality. Credits on YouTube or the project page help when both sides want the work shown. This is general information, not legal advice—confirm ownership rules for your country and any work-for-hire facts.',
+      },
+      {
+        heading: 'Raw footage, revisions, permits, and weather',
+        body: 'Raw footage is often excluded unless the client buys an add-on. Say how long project files stay archived (for example 90 days) and what a revision round means versus a new cut. Two included rounds is a common working pattern for brand films and wedding highlights; price extras hourly before post starts.\n\nPermits and location access: state who books city film permits, venue permissions, and drone authorizations. Outdoor shoots need a weather hold or backup indoor plan so a washout does not turn into an unpaid reshoot fight. Music licensing responsibility belongs in writing—client-supplied cleared tracks versus stock you license.',
       },
     ],
     workedExample: {
-      heading: 'Worked example',
-      body: 'A $5,400 brand film with $1,800 deposit, two revision rounds, and social cutdowns illustrates how to separate creative fee from licensing limits.',
+      heading: 'Worked example: corporate brand film (and a wedding variant)',
+      body: 'Frame & Field Films prices North Shore Wellness a $5,400 brand story: one 90-second 4K hero, three 15-second cutdowns, two revision rounds, and a worldwide license for owned channels and paid social. Deposit $1,800 on signing; balance on final delivery. Raw footage stays with the company unless the client buys an addendum. Weather hold sits on the outdoor plaza day.\n\nWedding variant (illustrative): same generator, swap project title to “Wedding day film,” list 8 hours of coverage, a 5–7 minute highlight, speech cutdowns, and personal-use sharing. Pair the signed video agreement with /tools/photography-contract-template/ when a stills photographer is on the same day, and with /tools/event-wedding-vendor-contract/ for other vendors.',
     },
-    commonMistakes: ['Unlimited revisions with no hourly overflow', 'Silent music license responsibility'],
-    tips: [legalNotice],
+    commonMistakes: [
+      'Unlimited revisions with no hourly overflow',
+      'Silent music license responsibility',
+      'Promising raw footage without pricing storage and license limits',
+      'No weather or permit language on outdoor or venue-restricted shoots',
+    ],
+    tips: [
+      legalNotice,
+      'Attach a shot list or rundown as an exhibit instead of stuffing every beat into the fee clause.',
+      'Collect talent and location releases when faces or private property will appear in marketing cuts.',
+    ],
     faq: [
+      {
+        question: 'What should a videography contract include?',
+        answer:
+          'Parties, shoot dates and locations, deliverables and formats, revision rounds, fee and deposit schedule, copyright or license summary, cancellation and weather terms, music licensing responsibility, and whether raw footage is included. Edit the clauses here, then have counsel review before you rely on them.',
+      },
+      {
+        question: 'How much deposit should a videographer ask for?',
+        answer:
+          'There is no single correct percent. Many shops take about one-third on signing to hold the date, with the balance due before the shoot or on delivery. State the amount, due date, and refund rule in both the fee fields and the payment clause.',
+      },
+      {
+        question: 'Who owns the copyright in the video?',
+        answer:
+          'In many U.S. freelance jobs the videographer owns copyright unless a written transfer says otherwise; the client receives a license for listed uses. Work-for-hire and employment facts can change that. Confirm for your country—this is not legal advice.',
+      },
+      {
+        question: 'Can the videographer use the film in a portfolio?',
+        answer:
+          'Often yes when the contract says so. Give the client a written portfolio opt-out before the shoot if they need confidentiality, and note credit expectations on public pages.',
+      },
       {
         question: 'Should clients get raw footage?',
         answer:
-          'Only if priced and licensed. Raw files increase storage and misuse risk; many videographers sell raw as an add-on.',
+          'Only if priced and licensed. Raw files increase storage and misuse risk; many videographers sell raw as an add-on and keep project archives for a stated window (for example 90 days).',
       },
       {
         question: 'How many revision rounds should a videography contract include?',
@@ -243,26 +285,26 @@ export const videographyContract: ToolDefinition = {
           'Two rounds is a common default for branded films and wedding highlights. Spell out what counts as a revision versus a new cut, and set an hourly rate for extra rounds before post begins.',
       },
       {
-        question: 'Who is responsible for music licensing?',
-        answer:
-          'State whether the client supplies cleared tracks or the videographer licenses stock/sync music. Unclear music clauses are a frequent source of takedown risk on social platforms.',
-      },
-      {
         question: 'What cancellation terms are typical for video shoots?',
         answer:
-          'Many agreements make the deposit non-refundable inside 14 days of the first shoot date, with weather holds for outdoor work. Mirror deposit and cancel math in both the fee and cancellation clauses.',
+          'Many agreements make the deposit non-refundable inside about 14 days of the first shoot date, with weather holds for outdoor work. Mirror deposit and cancel math in both the fee and cancellation clauses.',
       },
       {
-        question: 'Should delivery format and timeline be in the contract?',
+        question: 'Who handles permits and location access?',
         answer:
-          'Yes—list resolution (e.g. 4K), file types, transfer method, and delivery window in business days. Vague “when ready” language invites scope creep on rush edits.',
+          'Say it in writing. Some clients book venue and city permits; some productions include them. Drone, music, and talent releases are easy to forget until a platform takedown or a venue turns the crew away.',
       },
     ],
     sources: contractSources,
   },
-  relatedSlugs: ['photography-contract-template', 'freelance-web-design-contract', 'event-wedding-vendor-contract'],
+  relatedSlugs: [
+    'photography-contract-template',
+    'event-wedding-vendor-contract',
+    'freelance-web-design-contract',
+    'simple-nda',
+  ],
   publishedAt: '2026-10-19',
-  updatedAt: '2026-10-20',
+  updatedAt: '2026-11-22',
 };
 
 export const freelanceWebContract: ToolDefinition = {
@@ -272,10 +314,10 @@ export const freelanceWebContract: ToolDefinition = {
   category: 'contracts',
   primaryKeyword: 'freelance web design contract',
   secondaryKeywords: ['web design contract template', 'freelance contract template', 'website development agreement'],
-  title: 'Freelance Web Design Contract – Free Template',
+  title: 'Freelance Web Design Contract Template (Free)',
   metaDescription:
-    'Generate a freelance web design contract with scope, milestones, IP transfer, and editable clauses. PDF/DOCX export. Not legal advice.',
-  h1: 'Freelance & Web Design Contract Template',
+    'Web design contract with scope, milestones, revisions, IP transfer and kill fee. Free PDF/Word generator.',
+  h1: 'Free Freelance Web Design Contract',
   answerFirst:
     'A freelance web design contract defines scope, milestones, payment schedule, revision limits, and when intellectual property transfers to the client. Use this editable template to draft terms, preview them, and export PDF or DOCX. Not legal advice.',
   applicationCategory: 'BusinessApplication',
@@ -360,7 +402,7 @@ export const freelanceWebContract: ToolDefinition = {
   },
   relatedSlugs: ['independent-contractor-agreement', 'simple-nda', 'service-agreement-template'],
   publishedAt: '2026-10-19',
-  updatedAt: '2026-10-20',
+  updatedAt: '2026-11-22',
 };
 
 export const eventVendorContract: ToolDefinition = {
@@ -370,10 +412,10 @@ export const eventVendorContract: ToolDefinition = {
   category: 'contracts',
   primaryKeyword: 'wedding vendor contract',
   secondaryKeywords: ['event vendor contract template', 'wedding vendor agreement', 'vendor services contract'],
-  title: 'Wedding Vendor Contract – Free Template',
+  title: 'Wedding Vendor Contract Template (Free PDF)',
   metaDescription:
-    'Draft an event or wedding vendor contract: date, venue, fee, setup times, cancellation clauses. Editable; PDF/DOCX. Not legal advice.',
-  h1: 'Event & Wedding Vendor Contract Template',
+    'Vendor contract for weddings and events: date, venue, fee, deposit, cancellation, insurance and force majeure. Free PDF/Word.',
+  h1: 'Free Wedding & Event Vendor Contract',
   answerFirst:
     'An event or wedding vendor contract locks the event date, service window, fee, deposit, setup/teardown times, and cancellation rules between vendor and client. Customize editable clauses here and export PDF or DOCX. Not legal advice.',
   applicationCategory: 'BusinessApplication',
@@ -466,9 +508,14 @@ export const eventVendorContract: ToolDefinition = {
     ],
     sources: contractSources,
   },
-  relatedSlugs: ['photography-contract-template', 'catering-quote', 'receipt-generator'],
+  relatedSlugs: [
+    'photography-contract-template',
+    'videography-contract',
+    'catering-quote',
+    'receipt-generator',
+  ],
   publishedAt: '2026-10-19',
-  updatedAt: '2026-11-15',
+  updatedAt: '2026-11-22',
 };
 
 export const simpleNda: ToolDefinition = {
@@ -478,9 +525,9 @@ export const simpleNda: ToolDefinition = {
   category: 'contracts',
   primaryKeyword: 'simple NDA',
   secondaryKeywords: ['NDA template free', 'non disclosure agreement template', 'mutual NDA generator'],
-  title: 'Simple NDA Template – Free Generator',
+  title: 'Simple NDA Template: Free Mutual or One-Way Generator',
   metaDescription:
-    'Generate a simple mutual or one-way NDA with editable definitions and term length. Preview and export PDF/DOCX. Not legal advice.',
+    'Generate a simple mutual or one-way NDA with editable definitions and term. Free PDF/Word, not legal advice.',
   h1: 'Simple NDA (Non-Disclosure Agreement) Generator',
   answerFirst:
     'A simple NDA (non-disclosure agreement) defines confidential information, permitted use, exclusions, and how long secrecy lasts between parties. Draft a mutual or one-way NDA here with editable clauses and export PDF or DOCX. Not legal advice.',
@@ -528,38 +575,58 @@ export const simpleNda: ToolDefinition = {
         heading: 'NDA clause explanations',
         body: 'Definitions and exclusions prevent overreach. Purpose limits use. Term sets duration. Return/destruction handles offboarding. Non-solicit and IP assignment are separate issues—don’t overload a “simple” NDA unless counsel recommends it.',
       },
+      {
+        heading: 'Freelancer / simple one-page checklist',
+        body: 'For a short freelance discovery call or proposal review, keep the NDA to one page when you can: parties, effective date, narrow purpose (“evaluating a website redesign”), definition of confidential information, exclusions, care standard, term in years, and return-or-destruction. Skip non-compete language unless counsel says you need it.\n\nOne-way fits when only the client shares brand strategy or pricing. Mutual fits when you also disclose your process docs, rates, or unreleased work. Mark the type at the top so nobody signs the wrong flavor.',
+      },
+      {
+        heading: 'Exclusions that keep the NDA fair',
+        body: 'Carve out information that is already public, independently developed without use of the disclosure, rightfully received from a third party without a duty, or required by law (with notice where legally permitted). Without those exclusions, everyday industry knowledge gets trapped and the other side may refuse to sign.',
+      },
     ],
     workedExample: {
-      heading: 'Worked example',
-      body: 'A mutual 3-year NDA for evaluating a web redesign keeps the purpose narrow so marketing lists aren’t swept in unintentionally.',
+      heading: 'Worked example: mutual NDA before a web redesign',
+      body: 'Rivercode Studio and Pine & Co. Retail sign a mutual 3-year NDA to evaluate a website redesign. Purpose stays narrow so marketing email lists are not swept in. Exclusions cover public info and independent development. After the engagement starts, the parties move fee and IP language into a freelance web design contract rather than stretching the NDA into a full services agreement.',
     },
-    commonMistakes: ['Eternal NDAs with no exclusions', 'Using NDAs instead of employment/IP agreements'],
-    tips: [legalNotice],
+    commonMistakes: [
+      'Eternal NDAs with no exclusions',
+      'Using NDAs instead of employment/IP agreements',
+      'A purpose so broad that ordinary business chat becomes “confidential”',
+    ],
+    tips: [
+      legalNotice,
+      'Pair a signed NDA with the service or freelance contract that actually describes the paid work.',
+    ],
     faq: [
       {
-        question: 'Is a simple NDA enough for investors or employees?',
+        question: 'How do I write a simple NDA?',
         answer:
-          'Often no. Investors may refuse broad NDAs; employees usually need invention-assignment and confidentiality in employment docs. Seek counsel.',
+          'Name the parties, choose mutual or one-way, state a narrow purpose, define confidential information with exclusions, set the term, and add return-or-destruction. Export PDF from this generator and have counsel review before you rely on it.',
       },
       {
-        question: 'When should I use a mutual vs one-way NDA?',
+        question: 'What is the difference between a mutual and one-way NDA?',
         answer:
-          'Use one-way when only one party discloses secrets; use mutual when both sides will share confidential materials (for example a studio and a brand exchanging strategy docs).',
+          'One-way protects disclosures from one party (often the client). Mutual protects both sides when each will share confidential materials—common when a freelancer and a brand exchange strategy docs.',
       },
       {
-        question: 'How long should NDA confidentiality last?',
+        question: 'How long should an NDA last?',
         answer:
           'Many freelance NDAs use a 2–5 year term after disclosure, with trade secrets protected longer while they remain secrets under applicable law. Eternal terms without exclusions are often hard to negotiate.',
       },
       {
-        question: 'What should the confidential-information definition include?',
+        question: 'Is an NDA enforceable without a signature?',
         answer:
-          'Non-public business, technical, or financial information that is marked confidential or that a reasonable person would treat as confidential—plus clear exclusions for public, independently developed, or legally required disclosures.',
+          'Usually you want a signed writing. Some places recognize other forms of agreement, but an unsigned PDF is a weak place to stand in a dispute. This is general information, not legal advice.',
       },
       {
-        question: 'Do I need a return-or-destruction clause?',
+        question: 'What is excluded from confidential information?',
         answer:
-          'It helps at offboarding: on written request, the recipient returns or destroys materials, with ordinary backup copies still subject to the NDA. Pair it with a narrow purpose clause so use stays limited.',
+          'Typical exclusions: information that is public through no fault of the recipient, independently developed, rightfully received from a third party without duty, or required to be disclosed by law (with notice where legally permitted).',
+      },
+      {
+        question: 'Is a simple NDA enough for investors or employees?',
+        answer:
+          'Often no. Investors may refuse broad NDAs; employees usually need invention-assignment and confidentiality in employment docs. Seek counsel.',
       },
     ],
     sources: contractSources,
@@ -570,7 +637,7 @@ export const simpleNda: ToolDefinition = {
     'independent-contractor-agreement',
   ],
   publishedAt: '2026-10-19',
-  updatedAt: '2026-10-20',
+  updatedAt: '2026-11-22',
 };
 
 export const independentContractorAgreement: ToolDefinition = {
@@ -584,10 +651,10 @@ export const independentContractorAgreement: ToolDefinition = {
     'contractor agreement form',
     'freelance contractor contract',
   ],
-  title: 'Independent Contractor Agreement',
+  title: 'Independent Contractor Agreement Template (Free)',
   metaDescription:
-    'Create an independent contractor agreement with scope, pay, IP, and termination clauses. Edit in your browser, then export PDF or DOCX. Not legal advice.',
-  h1: 'Independent Contractor Agreement Template',
+    'Independent contractor agreement with scope, pay, IP, confidentiality and termination. Free PDF/Word; not legal advice.',
+  h1: 'Free Independent Contractor Agreement',
   answerFirst:
     'An independent contractor agreement names the parties, describes the work, sets pay and invoices, clarifies who owns deliverables, and states how either side can end the engagement. Customize the editable clauses below, preview the agreement, and export PDF or DOCX. Not legal advice—classification and wording depend on your facts and jurisdiction.',
   applicationCategory: 'BusinessApplication',
@@ -724,7 +791,7 @@ export const independentContractorAgreement: ToolDefinition = {
   },
   relatedSlugs: ['freelance-web-design-contract', 'simple-nda', 'service-agreement-template'],
   publishedAt: '2026-11-13',
-  updatedAt: '2026-11-13',
+  updatedAt: '2026-11-22',
 };
 
 export const serviceAgreementTemplate: ToolDefinition = {
@@ -738,9 +805,9 @@ export const serviceAgreementTemplate: ToolDefinition = {
     'service contract template',
     'business service agreement',
   ],
-  title: 'Service Agreement Template (Free)',
+  title: 'Service Agreement Template (Free, Word & PDF)',
   metaDescription:
-    'Draft a service agreement with parties, scope, fees, term, and editable clauses. Preview live and download PDF or DOCX. Not legal advice.',
+    'Service agreement with parties, scope, fees, term, IP and termination. Free Word and PDF generator, not legal advice.',
   h1: 'Free Service Agreement Template',
   answerFirst:
     'A service agreement template sets who is hiring whom, what services are included, how fees and invoices work, how long the term runs, and what happens if either party ends early. Fill the fields, edit clauses, and export PDF or DOCX in your browser. Not legal advice.',
@@ -821,12 +888,16 @@ export const serviceAgreementTemplate: ToolDefinition = {
     ],
     whatToInclude: [
       {
-        heading: 'What a service agreement should include',
-        body: 'Identify the parties, effective date, service description, location, fees, invoice timing, term or renewal, and exit notice. Add access duties, warranty limits, and how change orders work. Cornell LII’s contract overview still centers offer, acceptance, and consideration—your PDF should make those elements obvious in plain language rather than hiding them in jargon.',
+        heading: 'Service agreement checklist (what to include)',
+        body: 'Identify the parties, effective date, service description, location, fees, invoice timing, term or renewal, and exit notice. Add access duties, warranty limits, IP or work-product ownership if deliverables are unique, and how change orders work. Cornell LII’s contract overview still centers offer, acceptance, and consideration—your PDF should make those elements obvious in plain language rather than hiding them in jargon.',
+      },
+      {
+        heading: 'Services you sell: retainers and maintenance',
+        body: 'Use this template when you sell ongoing services—monthly maintenance, consulting retainers, facilities visits, landscaping rounds, or IT support blocks. Flat monthly fees, hourly buckets, and retainer-plus-overage all fit if the billing terms say how invoices run.\n\nWrite the visit list or hours included so “general maintenance” is not a blank check. Attach an exhibit for equipment lists or response-time targets instead of stuffing every SLA metric into one paragraph.',
       },
       {
         heading: 'Service agreement vs niche contracts',
-        body: 'Use this general service agreement when the work is ongoing maintenance, consulting, or multi-visit services that do not already fit a specialized Docuklin template (photography, videography, wedding vendor, or web design). If the relationship is clearly a project freelance build with IP handoff, prefer the freelance web design contract or independent contractor agreement instead.',
+        body: 'Use this general service agreement when the work is ongoing maintenance, consulting, or multi-visit services that do not already fit a specialized Docuklin template (photography, videography, wedding vendor, or web design). If the relationship is clearly a project freelance build with IP handoff, prefer the freelance web design contract. If worker classification is the main risk, start from the independent contractor agreement.',
       },
       {
         heading: 'Deposits, renewals, and proof',
@@ -855,31 +926,36 @@ export const serviceAgreementTemplate: ToolDefinition = {
           'Parties, effective date, detailed services, fees and invoice timing, term or renewal, client access duties, warranty or re-performance limits, change-order rules, and termination notice. Add governing law only after counsel confirms it fits your situation.',
       },
       {
-        question: 'Is a service agreement the same as an SLA?',
+        question: 'Is a service agreement the same as a contract?',
         answer:
-          'Not exactly. A service-level agreement usually adds measurable uptime or response targets. This template focuses on commercial terms for performing services; you can attach SLA metrics as an exhibit when needed.',
+          'A signed service agreement is a type of contract when it has offer, acceptance, and consideration under your local rules. People often say “contract” for any signed deal; this template is the commercial services version. Enforceability depends on jurisdiction and facts—not legal advice.',
       },
       {
-        question: 'Do I need a deposit on a service agreement?',
+        question: 'Can freelancers use a service agreement?',
         answer:
-          'Only if your cash-flow or scheduling risk requires it. State the amount, when it is due, and whether it credits the first invoice. Recurring monthly services often skip deposits and use Net terms instead.',
+          'Yes for ongoing services you sell (retainers, maintenance, consulting). If classification, IP assignment, or 1099 issues are central, use /tools/independent-contractor-agreement/ or /tools/freelance-web-design-contract/ instead.',
       },
       {
-        question: 'Can I use this for freelance or contractor work?',
+        question: 'How do retainer or maintenance fees work in a service agreement?',
         answer:
-          'You can adapt it, but if classification, IP assignment, or 1099 issues are central, use the independent contractor agreement or freelance web design contract templates, which emphasize those clauses.',
+          'State the monthly or periodic fee, what visits or hours are included, what counts as overage, and when invoices go out (for example Net 15). Recurring maintenance often skips a large deposit and relies on clear Net terms.',
       },
       {
-        question: 'Is this service agreement template legal advice?',
+        question: 'Is a service agreement legally binding?',
         answer:
-          'No. It produces editable sample language for discussion. Laws and enforceability vary. Have an attorney licensed in your jurisdiction review before you rely on it.',
+          'A signed agreement can be binding if it meets your jurisdiction’s contract requirements, but enforceability depends on local law and the real relationship. This generator is editable sample language only—not legal advice.',
+      },
+      {
+        question: 'How long should a service agreement last?',
+        answer:
+          'Pick a term that matches the work: a fixed 6–12 months with renewal notice, or month-to-month after an initial period. Put the notice window in calendar days so neither side is guessing.',
       },
     ],
     sources: contractSources,
   },
   relatedSlugs: ['independent-contractor-agreement', 'freelance-web-design-contract', 'quote-estimate-generator'],
   publishedAt: '2026-11-13',
-  updatedAt: '2026-11-13',
+  updatedAt: '2026-11-22',
 };
 
 export const lienWaiverGenerator: ToolDefinition = {
@@ -895,9 +971,9 @@ export const lienWaiverGenerator: ToolDefinition = {
     'partial lien waiver',
     'final lien waiver',
   ],
-  title: 'Free Lien Waiver Generator (PDF)',
+  title: 'Lien Waiver Form: Free Generator (Conditional & Final)',
   metaDescription:
-    'Fill a conditional or unconditional, partial or final lien waiver. Live preview, PDF/DOCX export. State forms vary; not legal advice.',
+    'Fill a conditional or unconditional, partial or final lien waiver. Free PDF. State rules vary; not legal advice.',
   h1: 'Free Lien Waiver Generator',
   answerFirst:
     'A lien waiver releases mechanic’s-lien rights for a stated payment—conditional until funds clear or unconditional after payment, and partial through a date or final at closeout. Pick the type, fill parties and amount, preview, export PDF or DOCX. State forms vary; not legal advice.',
@@ -1078,5 +1154,5 @@ export const lienWaiverGenerator: ToolDefinition = {
     'construction-estimate-template',
   ],
   publishedAt: '2026-11-19',
-  updatedAt: '2026-11-19',
+  updatedAt: '2026-11-22',
 };

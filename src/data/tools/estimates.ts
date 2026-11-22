@@ -14,9 +14,9 @@ export const constructionEstimate: ToolDefinition = {
     'contractor estimate form',
     'building estimate template PDF',
   ],
-  title: 'Free Construction Estimate Template',
+  title: 'Free Construction Estimate Template (PDF & Word)',
   metaDescription:
-    'Free contractor estimate generator for remodel bids: scope, labor, materials, tax, and deposit. Live preview, then download PDF or DOCX—no signup.',
+    'Free construction estimate template: scope, labor, materials, allowances, tax, deposit and validity. Fill it online, download PDF or Word.',
   h1: 'Free Construction Estimate & Quote Template',
   answerFirst:
     'A construction estimate or construction quote lists project scope, labor and material line items, allowances, tax, and a total so you can present pricing before work starts. Use this free generator to fill those fields in your browser, preview the document, and export PDF or DOCX. Nothing is uploaded.',
@@ -102,34 +102,39 @@ export const constructionEstimate: ToolDefinition = {
     ],
     faq: [
       {
-        question: 'What should every construction estimate include?',
+        question: 'How do I make a construction estimate?',
         answer:
-          'Job address, dated scope with exclusions, measurable line items (labor vs materials), tax, deposit or draw schedule, validity window, and assumptions about access, permits, and owner-supplied items.',
+          'Name the parties and job address, write a measurable scope with exclusions, add labor and material lines with quantities and rates, then set tax, deposit, and a validity date. Preview the totals here and export PDF or Word. For lighter single-trade quotes, /tools/quote-estimate-generator/ is often enough.',
       },
       {
-        question: 'Is this a free contractor estimate generator?',
+        question: 'What should a construction estimate include?',
         answer:
-          'Yes. Fill the construction estimate template in your browser, preview live, and download PDF or DOCX with no account. For faster mixed-service quotes without remodel allowances, use /tools/quote-estimate-generator/.',
+          'Job address, dated scope with exclusions, measurable line items (labor vs materials), allowances, tax, deposit or draw schedule, validity window, and assumptions about access, permits, and owner-supplied items.',
       },
       {
-        question: 'Quote vs estimate vs invoice on a remodel?',
+        question: 'Is a construction estimate legally binding?',
         answer:
-          'Use this estimate (or quote) before work. Switch to /tools/contractor-invoice/ when you bill a deposit or progress draw. A receipt confirms money already received. See /guides/invoice-vs-estimate/.',
+          'Often an estimate is an invitation to agree on price, not a contract—unless your wording or local law treats it as an offer you both accept. Pair accepted estimates with a signed contract or work order. This is general information, not legal advice.',
+      },
+      {
+        question: 'How do contractors price labor and materials?',
+        answer:
+          'Many shops list materials at cost (or cost plus a materials markup) and labor as hours × crew rate or a lump sum per phase. Keep labor and materials on separate lines so the client can compare bids and so change orders stay auditable.',
+      },
+      {
+        question: 'How much markup or profit goes on an estimate?',
+        answer:
+          'There is no single correct markup. Contractors set margin from overhead, risk, and market. Put your chosen rates on each line rather than hiding a mystery uplift in one lump-sum “project” line.',
+      },
+      {
+        question: 'How do allowances and exclusions work?',
+        answer:
+          'An allowance is a dollar budget for an unknown (substrate repair, fixtures, permits). An exclusion names work you are not pricing. When actual cost exceeds the allowance, document the overage on a change order before you buy extras.',
       },
       {
         question: 'Can I download a construction estimate PDF?',
         answer:
           'Yes. Export PDF or DOCX from the live preview. Keep the PDF with the job file so later invoices can reuse the same line labels.',
-      },
-      {
-        question: 'How long should an estimate stay valid?',
-        answer:
-          'Many contractors use 14–30 days. Material-heavy jobs may need shorter windows when lumber or appliance prices move quickly.',
-      },
-      {
-        question: 'Is a construction estimate legally binding?',
-        answer:
-          'Often an estimate is an invitation to agree on price, not a contract—unless your wording or local law treats it as an offer you both accept. Pair accepted estimates with a signed contract or work order.',
       },
     ],
     sources: estimateSources,
@@ -142,7 +147,7 @@ export const constructionEstimate: ToolDefinition = {
     'painting-estimate',
   ],
   publishedAt: '2026-10-19',
-  updatedAt: '2026-11-18',
+  updatedAt: '2026-11-22',
 };
 
 export const contractorInvoice: ToolDefinition = {
@@ -157,9 +162,9 @@ export const contractorInvoice: ToolDefinition = {
     'free contractor invoice',
     'free invoice generator for contractors',
   ],
-  title: 'Free Invoice Generator for Contractors',
+  title: 'Free Contractor Invoice Generator (PDF), No Signup',
   metaDescription:
-    'Free invoice generator for contractors: line items, tax, deposits, balance due, and payment terms. Live preview, then download PDF or DOCX—no signup.',
+    'Create a contractor invoice with line items, tax, deposit and payment terms. Free PDF, no signup. Progress billing and lien waiver links.',
   h1: 'Free Invoice Generator for Contractors',
   answerFirst:
     'A contractor invoice bills for completed or progress-billed work: invoice number, dates, client, line items, tax, amount due, and payment instructions. Generate yours here in the browser, preview it live, and download PDF or DOCX without uploading data.',
@@ -237,24 +242,19 @@ export const contractorInvoice: ToolDefinition = {
     ],
     faq: [
       {
-        question: 'Is this a free invoice generator for contractors?',
-        answer:
-          'Yes. Fill line items, tax, deposits, and payment terms in your browser, preview live, and download PDF or DOCX with no account. Entries stay on your device.',
-      },
-      {
         question: 'What should a contractor invoice include?',
         answer:
           'Unique invoice number, dates, bill-to, line items with quantity × rate, tax, amount already paid, balance due, payment instructions, and a reference to the estimate or PO when you have one.',
       },
       {
-        question: 'Quote vs estimate vs invoice—which do I send?',
+        question: 'How do I write an independent contractor invoice?',
         answer:
-          'Send a quote or estimate before work (see /tools/quote-estimate-generator/). Switch to this contractor invoice when you bill a deposit, progress draw, or completed work. A receipt confirms money already received.',
+          'Use your business name (not the client’s), a unique invoice number, the job or PO reference, priced lines for labor and materials, tax if you collect it, Net terms, and how to pay. Keep the same line labels as the accepted estimate.',
       },
       {
-        question: 'Can I download a contractor invoice PDF?',
+        question: 'What are Net 15 and Net 30 payment terms?',
         answer:
-          'Yes. Export PDF or DOCX from the live preview. Keep the PDF with the estimate so accounts payable can match line labels.',
+          'Net 15 means payment is due 15 days after the invoice date; Net 30 means 30 days. Put the due date next to the Net term so accounts payable does not have to guess. For overdue math, see /tools/invoice-late-fee-calculator/.',
       },
       {
         question: 'How does progress billing work on a contractor invoice?',
@@ -262,9 +262,19 @@ export const contractorInvoice: ToolDefinition = {
           'Bill a percentage or completed-phase amount that matches your contract draws—e.g. after demo, rough-in, or substantial completion. Reference the estimate or PO and show prior payments so the balance due is obvious. For retainage and balance-to-finish fields, use /tools/progress-invoice/.',
       },
       {
-        question: 'When should a contractor send an invoice?',
+        question: 'Can I add a late fee to a contractor invoice?',
         answer:
-          'Follow the payment schedule in your contract—deposit, progress, or final. Send promptly after each milestone so cash flow stays predictable.',
+          'Only if your signed terms already allow it. Calculate the fee with /tools/invoice-late-fee-calculator/, then add a clearly labeled late-fee line (or revised invoice) that references the original number. Caps and notice rules vary by place—this is not legal advice.',
+      },
+      {
+        question: 'Do I charge sales tax on labor?',
+        answer:
+          'It depends on your jurisdiction and whether the labor is taxable with materials or separately. Ask your accountant or tax office which lines are taxable; do not invent a rate. Show tax as its own line so the client can see the base.',
+      },
+      {
+        question: 'When should a contractor send a lien waiver with an invoice?',
+        answer:
+          'Many GCs ask for a conditional waiver with each pay app and an unconditional waiver after funds clear. Build the form at /tools/lien-waiver-generator/; state rules vary, and this is not legal advice.',
       },
     ],
     sources: estimateSources,
@@ -272,12 +282,13 @@ export const contractorInvoice: ToolDefinition = {
   relatedSlugs: [
     'progress-invoice',
     'invoice-late-fee-calculator',
+    'lien-waiver-generator',
     'quote-estimate-generator',
     'construction-estimate-template',
     'receipt-generator',
   ],
   publishedAt: '2026-10-19',
-  updatedAt: '2026-11-18',
+  updatedAt: '2026-11-22',
 };
 
 export const cleaningInvoice: ToolDefinition = {
@@ -287,9 +298,9 @@ export const cleaningInvoice: ToolDefinition = {
   category: 'estimates-invoices',
   primaryKeyword: 'cleaning service invoice',
   secondaryKeywords: ['house cleaning invoice', 'commercial cleaning invoice', 'maid service invoice template'],
-  title: 'Free Cleaning Service Invoice Template (PDF)',
+  title: 'Cleaning Service Invoice Template (Free PDF)',
   metaDescription:
-    'Create a cleaning service invoice with rooms, frequency, line items and tax. Live preview in your browser, then download PDF or DOCX—no signup.',
+    'Cleaning invoice template: rooms, hourly or flat rate, recurring schedule, supplies and tax. Fill online, download PDF.',
   h1: 'Free Cleaning Service Invoice Template',
   answerFirst:
     'A cleaning service invoice spells out the property, service frequency, rooms or square footage, add-ons, rate, tax, and total due. Build one free here with a live preview and PDF or DOCX export; your entries stay on your device.',
@@ -353,10 +364,14 @@ export const cleaningInvoice: ToolDefinition = {
         heading: 'Cleaning quotes clients actually understand',
         body: 'List rooms, what’s included vs add-ons (oven, fridge, windows), frequency discounts, and supply policy (you bring products vs green products only).',
       },
+      {
+        heading: 'Rate-by-service examples (illustrative)',
+        body: 'These dollar figures are teaching examples only—not market surveys. Recurring maintenance: flat per visit by home size (sample bi-weekly 3BR at $165). Deep or move-out: higher flat or hourly crew rate because prep and appliances take longer. Add-ons: fridge, oven, interior windows on their own lines.\n\nIllustrative move-out package: empty 2BR apartment, fridge and oven interiors, inside cabinets, baseboards—flat $285 plus $40 for balcony glass. Put the checklist in the scope so the client knows what “move-out clean” means on that PDF.',
+      },
     ],
     workedExample: {
-      heading: 'Worked example',
-      body: 'Sample bi-weekly clean at $165 plus a $35 fridge add-on produces a clear $200 pre-tax estimate with exclusions listed in the scope.',
+      heading: 'Worked example: bi-weekly visit plus fridge add-on',
+      body: 'Sample bi-weekly clean at $165 plus a $35 fridge add-on produces a clear $200 pre-tax invoice with exclusions listed in the scope. Swap the numbers for a move-out flat rate when the job is a one-time empty-home clean.',
     },
     commonMistakes: [
       'Not listing exclusions, leading to “I thought windows were included.”',
@@ -369,14 +384,19 @@ export const cleaningInvoice: ToolDefinition = {
     ],
     faq: [
       {
-        question: 'Should cleaning estimates include supplies?',
+        question: 'How do I write a cleaning service invoice?',
         answer:
-          'State whether pricing includes supplies or if the client provides preferred products. Call out eco-friendly product upcharges.',
+          'Name your business, the client and service address, the service date and frequency, rooms or checklist, priced lines, tax if you collect it, and how to pay. Keep the same labels you used on the quote.',
       },
       {
-        question: 'How do cleaning services usually set rates?',
+        question: 'Should I charge per hour or per room?',
         answer:
-          'Common approaches are flat per-visit pricing by home size, hourly crew rates, or per-room packages. Deep cleans and first visits often cost more than recurring maintenance cleans—list both so clients are not surprised.',
+          'Flat per-visit or per-room packages are easier for homeowners to approve. Hourly crew rates fit deep cleans or unknown mess. Many shops use flat for recurring visits and hourly (or a higher flat) for move-outs.',
+      },
+      {
+        question: 'What should a cleaning invoice include?',
+        answer:
+          'Business name and contact, invoice number and date, client and service address, frequency, scope or rooms cleaned, priced line items, tax if applicable, amount due, and payment instructions.',
       },
       {
         question: 'How should recurring cleans appear on an invoice?',
@@ -384,14 +404,9 @@ export const cleaningInvoice: ToolDefinition = {
           'Show frequency (weekly, bi-weekly, monthly), the service date, and the same line labels used on the original quote. Note any skipped visits, holiday fees, or one-time add-ons on separate lines.',
       },
       {
-        question: 'Is tipping expected for house cleaners?',
+        question: 'Should supplies be separate on a cleaning invoice?',
         answer:
-          'Tips are optional and separate from the invoice total. If your team pools tips, say so on the receipt or booking confirmation; never bury a mandatory “tip” inside a service fee without labeling it clearly.',
-      },
-      {
-        question: 'What should a cleaning invoice include?',
-        answer:
-          'Business name and contact, invoice number and date, client and service address, frequency, scope or rooms cleaned, priced line items, tax if applicable, amount due, and payment instructions.',
+          'State whether pricing includes supplies or if the client provides preferred products. Call out eco-friendly product upcharges on their own line so the base visit rate stays comparable.',
       },
     ],
     sources: estimateSources,
@@ -403,7 +418,7 @@ export const cleaningInvoice: ToolDefinition = {
     'catering-quote',
   ],
   publishedAt: '2026-10-19',
-  updatedAt: '2026-11-13',
+  updatedAt: '2026-11-22',
 };
 
 export const cateringQuote: ToolDefinition = {
@@ -419,9 +434,9 @@ export const cateringQuote: ToolDefinition = {
     'event catering quote',
     'per guest catering quote',
   ],
-  title: 'Catering Quote Template – Free Generator',
+  title: 'Catering Quote Template: Per-Guest Pricing (Free)',
   metaDescription:
-    'Build a catering quote with guest count, menu packages, service fees, and deposit terms. Live preview plus PDF/DOCX export in your browser.',
+    'Catering quote with guest count, per-head menu packages, service fee, tax and deposit. Free PDF/Word generator with a sample quote.',
   h1: 'Free Catering Quote Template Generator',
   answerFirst:
     'A catering quote lists event date, guest count, menu, per-guest or package pricing, staff or delivery fees, service charge versus gratuity, tax, and deposit terms. Fill those fields here, preview live, and export PDF or DOCX in your browser. Deposit percents in the sample are a working pattern for that job, not an official rule.',
@@ -513,32 +528,27 @@ export const cateringQuote: ToolDefinition = {
     ],
     faq: [
       {
-        question: 'Is a catering quote a contract?',
+        question: 'How do I write a catering quote?',
         answer:
-          'Usually not until the client accepts and pays a deposit under clear terms. Convert accepted quotes into a catering or event agreement covering cancellation and force majeure—see /tools/event-wedding-vendor-contract/.',
+          'List event date, venue, guest guarantee, menu package, per-guest or package lines, staff and delivery, service charge vs gratuity, tax, deposit, and the final-count deadline. Export PDF from this generator, then pair accepted quotes with a signed vendor agreement when cancellation language matters.',
       },
       {
-        question: 'What deposit percentage should I put on a catering quote?',
+        question: 'What deposit should I put on a catering quote?',
         answer:
-          'There is no official federal percentage. Many caterers use a working pattern such as 25–50% to reserve the date, with the balance due about 7–14 days before the event or on the final guest-count deadline. State the percentage, due dates, and refund rules on the quote. Deeper deposit language is in /guides/catering-quote-deposits/.',
+          'There is no official federal percentage. State the percent, due date, and refund rule on the PDF. For deposit timing patterns and sample wording, see /guides/catering-quote-deposits/.',
       },
       {
         question: 'What is the difference between a service charge and gratuity?',
         answer:
-          'A service charge is often a house fee that may go to the business; gratuity is typically a tip for staff. Label each clearly, say whether tax applies, and note if the service charge is in lieu of tipping.',
+          'A service charge is often a house fee that may go to the business; gratuity is typically a tip for staff. Label each clearly. More deposit and fee language: /guides/catering-quote-deposits/.',
       },
       {
-        question: 'When is the final headcount due?',
+        question: 'Is a catering quote a contract?',
         answer:
-          'A common working pattern is a guaranteed guest count 7–14 days before the event, with billing on that number (or actual attendance if higher). Put the deadline and overage rate on the quote so food and staffing can scale.',
+          'Usually not until the client accepts and pays a deposit under clear terms. Convert accepted quotes into a catering or event agreement covering cancellation and force majeure—see /tools/event-wedding-vendor-contract/. This is general information, not legal advice.',
       },
       {
-        question: 'Should I use a catering quote or a full contract?',
-        answer:
-          'Use the quote to lock menu, pricing, and deposit math; use a signed catering or event contract for cancellation, force majeure, allergens, and venue rules. Couples comparing multiple vendors can run /guides/wedding-vendor-contract-checklist/ before paying.',
-      },
-      {
-        question: 'How do I show per-guest pricing on a catering quote?',
+        question: 'How do I price catering per head?',
         answer:
           'Add a line with unit “guest,” quantity equal to the guarantee, and your per-guest rate. Keep children’s meals, staff meals, and bar packages on separate lines so the client can trim without rewriting the whole PDF.',
       },
@@ -547,17 +557,12 @@ export const cateringQuote: ToolDefinition = {
         answer:
           'Open /guides/catering-quotation-example/ for a line-by-line corporate lunch sample, then recreate the fields in this generator and export PDF or DOCX.',
       },
-      {
-        question: 'What should I send after the client pays the catering deposit?',
-        answer:
-          'Issue a payment receipt from /tools/receipt-generator/ that references the quote number and deposit amount. Field checklist: /guides/what-to-include-on-a-receipt/.',
-      },
     ],
     sources: estimateSources,
   },
   relatedSlugs: ['event-wedding-vendor-contract', 'receipt-generator', 'quote-estimate-generator'],
   publishedAt: '2026-10-19',
-  updatedAt: '2026-11-15',
+  updatedAt: '2026-11-22',
 };
 
 export const quoteEstimate: ToolDefinition = {
@@ -575,12 +580,12 @@ export const quoteEstimate: ToolDefinition = {
     'free instant quote',
     'construction quote generator',
   ],
-  title: 'Free Quote & Estimate Generator',
+  title: 'Free Estimate Generator: Quote Online, No Signup',
   metaDescription:
-    'Free quote generator and estimate template: line items, tax, validity date, live preview, PDF/DOCX. No signup. Works for services and light contractor quotes.',
-  h1: 'Free Quote & Estimate Generator',
+    'Make a professional estimate or quote in minutes: line items, tax, discounts, deposit and expiry date. Free PDF/Word, no signup, no watermark.',
+  h1: 'Free Estimate Generator (Quote & Estimate Maker)',
   answerFirst:
-    'A free quote and estimate generator builds a priced document in your browser: parties, job description, line items, tax, total, and how long the price holds. Preview live for an instant quote PDF, then export DOCX if needed. Nothing is uploaded to a server.',
+    'Make a professional estimate or quote in minutes with no signup and no watermark: parties, job description, line items, tax, total, and how long the price holds. Preview live, then export PDF or Word. Nothing is uploaded to a server.',
   applicationCategory: 'BusinessApplication',
   isLegalAdjacent: false,
   documentTitle: 'Estimate',
@@ -666,6 +671,10 @@ export const quoteEstimate: ToolDefinition = {
         heading: 'Industry variants that reuse the same form',
         body: 'Consulting and IT: fixed assessment day plus hourly documentation, as in the sample defaults. Landscaping or handyman: units such as sq ft, hour, or lump sum with a site-visit exclusion. Cleaning: flat visit plus add-on lines—when you bill after the visit, switch to /tools/cleaning-service-invoice/. Catering events belong in /tools/catering-quote/ so guest count and service fee fields stay filled.\n\nQuote vs estimate wording: quotes are often firmer offers; estimates signal approximate cost. Say whether totals may change after discovery. After acceptance, reuse lines in /tools/contractor-invoice/ and send a payment receipt from /tools/receipt-generator/.',
       },
+      {
+        heading: 'By trade: when to switch to a dedicated template',
+        body: 'Painting interiors with prep, primer, and sq ft coats: /tools/painting-estimate/. Roof tear-off and shingles by the square: /tools/roofing-estimate/. Multi-trade remodel bids with allowances: /tools/construction-estimate-template/. Per-guest catering with service fee: /tools/catering-quote/. Stay on this page for mixed services, consulting, and light single-trade scopes that do not need those niche fields.',
+      },
     ],
     workedExample: {
       heading: 'Worked example: free instant quote',
@@ -685,39 +694,44 @@ export const quoteEstimate: ToolDefinition = {
     ],
     faq: [
       {
-        question: 'What should I include in a quote or estimate?',
+        question: 'How do I write an estimate for a job?',
         answer:
-          'Parties, a measurable job description, line items with quantity × rate, tax if you collect it, a grand total, and a valid-until date. Say whether prices can change after discovery. Full walkthrough: /guides/how-to-write-a-business-estimate/.',
+          'Name the parties, describe measurable scope, add line items with quantity × rate, set tax if you collect it, show a grand total, and put a valid-until date. Say whether prices can change after discovery. Full walkthrough: /guides/how-to-write-a-business-estimate/.',
+      },
+      {
+        question: 'What is the difference between an estimate and a quote?',
+        answer:
+          'Both propose price before work. Quotes are often firmer offers; estimates signal approximate cost that may move after discovery. Label the document clearly and say which rules apply. See /guides/invoice-vs-estimate/.',
+      },
+      {
+        question: 'Is a quote legally binding?',
+        answer:
+          'It depends on your wording and local law. Many quotes become binding only when the client accepts (and often pays a deposit) under clear terms. Pair accepted pricing with a signed contract when the job needs one. This is general information, not legal advice.',
+      },
+      {
+        question: 'How long should an estimate be valid (30 days)?',
+        answer:
+          'Many service businesses use about 14–30 days. Material-heavy jobs may need a shorter window when supplier prices move. Put a calendar date on the PDF rather than “valid for a while.”',
+      },
+      {
+        question: 'Should I use hourly or flat rate on an estimate?',
+        answer:
+          'Flat (or unit) rates work when scope is clear. Hourly fits discovery, T&M, or unknown conditions—cap hours or note a not-to-exceed figure so the client is not surprised. You can mix both on one estimate.',
+      },
+      {
+        question: 'How much deposit should I ask for?',
+        answer:
+          'There is no single correct percent. Common working patterns are enough to cover materials or reserve the calendar (often roughly 20–50% depending on the trade). State the amount, due date, and refund rule on the estimate.',
+      },
+      {
+        question: 'Is this free with no signup and no watermark?',
+        answer:
+          'Yes. Fill the form, preview live, and export PDF or Word with no account and no watermark. Optional drafts and logos use localStorage on your device only; nothing is uploaded to a server.',
       },
       {
         question: 'Can an estimate be used as an invoice?',
         answer:
           'No. An estimate proposes price; it does not request payment. Issue a separate invoice after acceptance—use Convert to invoice on this page or /tools/contractor-invoice/, and keep the estimate number as a reference. See /guides/invoice-vs-estimate/.',
-      },
-      {
-        question: 'What is the difference between a quote, estimate, and invoice?',
-        answer:
-          'Quotes and estimates propose price before work; quotes are often firmer. An invoice requests payment after acceptance or completed work—reuse lines in /tools/contractor-invoice/. See /guides/invoice-vs-estimate/.',
-      },
-      {
-        question: 'Is this free quote generator really free with no signup?',
-        answer:
-          'Yes. Fill the form, preview live, and export PDF or DOCX with no account. Optional drafts and logos use localStorage on your device only; nothing is uploaded to a server.',
-      },
-      {
-        question: 'Can I download a quote or estimate as a PDF?',
-        answer:
-          'Yes. Export PDF or DOCX from the live preview for an instant quote you can email the same day. Archive the PDF so the later invoice matches what the client accepted. Logos appear in the HTML preview; PDF includes PNG/JPEG when supported.',
-      },
-      {
-        question: 'Can I turn this quote into an invoice later?',
-        answer:
-          'Yes—use Convert to invoice to copy line items, company, and client into /tools/contractor-invoice/ via localStorage on this device (see ?from=estimate#handoff), or confirm payment with /tools/receipt-generator/.',
-      },
-      {
-        question: 'Can I use this as a contractor estimate generator?',
-        answer:
-          'Yes for light or single-trade scopes with clear units. For full remodel bids with allowances and change-order workflows, use /tools/construction-estimate-template/. For roofing or painting line defaults, use /tools/roofing-estimate/ or /tools/painting-estimate/.',
       },
     ],
     sources: estimateSources,
@@ -727,10 +741,11 @@ export const quoteEstimate: ToolDefinition = {
     'construction-estimate-template',
     'roofing-estimate',
     'painting-estimate',
+    'catering-quote',
     'receipt-generator',
   ],
   publishedAt: '2026-10-19',
-  updatedAt: '2026-11-19',
+  updatedAt: '2026-11-22',
 };
 
 export const receiptGenerator: ToolDefinition = {
@@ -746,10 +761,10 @@ export const receiptGenerator: ToolDefinition = {
     'service receipt PDF',
     'PDF receipt generator',
   ],
-  title: 'Free Receipt Generator – Payment PDF',
+  title: 'Free Receipt Generator: Payment Receipt PDF',
   metaDescription:
-    'Free receipt generator for cash, card, or transfer payments. Itemize charges, show amount paid and balance, then download PDF or DOCX—no signup.',
-  h1: 'Free Receipt Generator',
+    'Make a payment receipt in seconds: payer, amount, date, method and itemised lines. Free PDF, no signup.',
+  h1: 'Free Receipt Generator (Cash, Card or Transfer)',
   answerFirst:
     'A payment receipt confirms who paid whom, when, how much, for what, and by which method. Generate a clean receipt here, preview it live, and download PDF or DOCX without sending data to a server. Pair it with the field checklist in the payment receipt guide.',
   applicationCategory: 'BusinessApplication',
@@ -850,34 +865,34 @@ export const receiptGenerator: ToolDefinition = {
     ],
     faq: [
       {
-        question: 'What should a payment receipt include?',
+        question: 'How do I write a payment receipt?',
+        answer:
+          'Enter your business name, the payer, a unique receipt number, the date, what was paid for, amount paid, and payment method. Add an invoice reference when the payment applies to a prior bill. Preview, then export PDF.',
+      },
+      {
+        question: 'What should be on a receipt?',
         answer:
           'Unique receipt number, date, business name, payer name, description of goods or services, amount paid, payment method, tax if shown, invoice reference when applicable, and remaining balance if the payment was partial. Full checklist: /guides/what-to-include-on-a-receipt/.',
+      },
+      {
+        question: 'Is a receipt legally required?',
+        answer:
+          'Rules vary by place and payment type. Many businesses issue receipts as proof of payment and for bookkeeping even when not strictly required. The IRS lists receipts among supporting documents for gross receipts. This is general information, not legal or tax advice.',
+      },
+      {
+        question: 'How is a receipt different from an invoice?',
+        answer:
+          'An estimate or quote proposes price; an invoice requests payment; a receipt confirms money was received. Price with /tools/quote-estimate-generator/, bill with /tools/contractor-invoice/, then receipt here.',
+      },
+      {
+        question: 'Can I make a rent or cash receipt?',
+        answer:
+          'Yes. Choose Cash (or another method), name the payer, describe the period or unit in the line items, and set amount paid. For rent, note the month covered and any balance remaining.',
       },
       {
         question: 'Is this receipt generator free with no signup?',
         answer:
           'Yes. Build the receipt in your browser, preview live, and download PDF or DOCX with no account. Optional drafts stay in localStorage on your device.',
-      },
-      {
-        question: 'Can I download a PDF payment receipt?',
-        answer:
-          'Yes. Export PDF or DOCX from the live preview and file it with the related invoice. The IRS lists receipts among supporting documents for gross receipts.',
-      },
-      {
-        question: 'How is a receipt different from an invoice or estimate?',
-        answer:
-          'An estimate or quote proposes price; an invoice requests payment; a receipt confirms money was received. Price with /tools/quote-estimate-generator/, bill with /tools/contractor-invoice/, then receipt here.',
-      },
-      {
-        question: 'How do I generate a receipt of payment?',
-        answer:
-          'Enter your business name, the payer, a unique receipt number, the date, what was paid for, amount paid, and payment method. Add an invoice reference when the payment applies to a prior bill. Preview, then export PDF.',
-      },
-      {
-        question: 'Should wedding or catering deposits get a receipt?',
-        answer:
-          'Yes. Reference the catering quote or vendor contract number, state whether the deposit is refundable, and keep the PDF with the signed agreement. Build the catering PDF in /tools/catering-quote/.',
       },
     ],
     sources: estimateSources,
@@ -889,7 +904,7 @@ export const receiptGenerator: ToolDefinition = {
     'catering-quote',
   ],
   publishedAt: '2026-10-19',
-  updatedAt: '2026-11-18',
+  updatedAt: '2026-11-22',
 };
 
 export const workOrder: ToolDefinition = {
@@ -899,9 +914,9 @@ export const workOrder: ToolDefinition = {
   category: 'estimates-invoices',
   primaryKeyword: 'work order',
   secondaryKeywords: ['work order template', 'job work order form', 'service work order PDF'],
-  title: 'Work Order Template – Free Generator',
+  title: 'Work Order Template: Free Generator (PDF)',
   metaDescription:
-    'Create a service work order with job details, assigned tech, tasks, and authorization. Live preview and PDF/DOCX export—client-side only.',
+    'Create a work order with job address, scope, assigned tech, parts and sign-off. Free PDF and Word, no signup.',
   h1: 'Free Work Order Generator',
   answerFirst:
     'A work order authorizes and tracks a job: who requested it, where, what tasks, who is assigned, materials, and customer approval. Fill this template in your browser, preview it, and export PDF or DOCX without uploading.',
@@ -963,47 +978,51 @@ export const workOrder: ToolDefinition = {
       },
     ],
     workedExample: {
-      heading: 'Worked example',
-      body: 'WO-331 schedules a one-hour callback to adjust a cabinet hinge, listing a replacement part at $18 and labor at $85.',
+      heading: 'Worked example: cabinet hinge callback and maintenance visit',
+      body: 'WO-331 schedules a one-hour callback to adjust a cabinet hinge, listing a replacement part at $18 and labor at $85. For a quarterly HVAC filter maintenance ticket, use the same form: job address, assigned tech, checklist tasks (replace filters, test thermostat, note static pressure), parts lines for filters, and a customer sign-off before you leave the site.',
     },
     commonMistakes: ['Vague problem descriptions', 'No on-site contact number'],
-    tips: ['Link WO numbers to the original estimate number.'],
+    tips: [
+      'Link WO numbers to the original estimate number.',
+      'After the crew signs off, bill completed lines on /tools/contractor-invoice/.',
+    ],
     faq: [
+      {
+        question: 'What is a work order?',
+        answer:
+          'A work order is a job ticket that authorizes and tracks work: who requested it, the site address, the problem, tasks, assigned tech, parts, and sign-off. It is not a bill.',
+      },
+      {
+        question: 'How do I fill out a work order?',
+        answer:
+          'Enter customer and site address, priority, problem statement, task list, assigned tech, scheduled window, parts/labor lines, and an authorization name. Export PDF for the crew.',
+      },
       {
         question: 'Is a work order the same as an invoice?',
         answer:
           'No. A work order directs the job; an invoice bills for it afterward. Many shops convert completed work orders into invoices.',
       },
       {
-        question: 'Should the technician sign off on the work order?',
+        question: 'What should a work order include?',
         answer:
-          'Yes—tech sign-off plus customer authorization (when required) creates a clear record of who did the work, what was completed, and any follow-up needed before invoicing.',
-      },
-      {
-        question: 'How should parts and materials appear on a work order?',
-        answer:
-          'List each part with quantity and planned rate or cost, plus labor lines. Note serial numbers or warranty swaps when relevant so the later invoice matches what was installed.',
+          'Customer and site address, on-site contact, priority, problem statement, task list, assigned tech, scheduled window, parts/labor lines, and an authorization signature line before overtime starts.',
       },
       {
         question: 'How do I convert a work order into an invoice?',
         answer:
-          'Copy completed labor and parts lines into your invoice tool, drop unused estimates, add tax and payment terms, and reference the work-order number so AP can match the job ticket.',
-      },
-      {
-        question: 'What fields do crews need on a work order?',
-        answer:
-          'Customer and site address, on-site contact, priority, problem statement, task list, assigned tech, scheduled window, parts/labor lines, and an authorization signature line before overtime starts.',
+          'Copy completed labor and parts lines into /tools/contractor-invoice/, drop unused estimates, add tax and payment terms, and reference the work-order number so AP can match the job ticket.',
       },
     ],
     sources: estimateSources,
   },
   relatedSlugs: [
     'construction-estimate-template',
+    'contractor-invoice',
     'purchase-order-template',
     'change-order-template',
   ],
   publishedAt: '2026-10-19',
-  updatedAt: '2026-10-20',
+  updatedAt: '2026-11-22',
 };
 
 export const timesheetTemplate: ToolDefinition = {
@@ -1017,9 +1036,9 @@ export const timesheetTemplate: ToolDefinition = {
     'weekly timesheet template',
     'employee timesheet PDF',
   ],
-  title: 'Free Timesheet Template (PDF)',
+  title: 'Free Timesheet Template: Weekly Hours Calculator (PDF)',
   metaDescription:
-    'Fill a free timesheet template with hours by day, hourly rate, and totals. Preview live, then download PDF or DOCX—nothing uploads to a server.',
+    'Weekly timesheet with hours by day, hourly rate, overtime and totals. Fill online, download PDF. No signup.',
   h1: 'Free Timesheet Template',
   answerFirst:
     'A timesheet template records who worked, which days, how many hours, the hourly rate, and the period total so payroll or client billing can match time to money. Enter hours by day below, review the live total, and export PDF or DOCX in your browser.',
@@ -1103,11 +1122,6 @@ export const timesheetTemplate: ToolDefinition = {
     ],
     faq: [
       {
-        question: 'What is a timesheet?',
-        answer:
-          'A timesheet is a record of hours worked by day (or shift) for a stated period, often with a rate and approval signature so payroll or client billing can verify time.',
-      },
-      {
         question: 'How do you calculate a timesheet total?',
         answer:
           'Add the hours for each day, then multiply by the hourly rate—or sum each line’s hours × rate when rates differ. This generator shows both the hour total and the dollar total from your lines.',
@@ -1118,21 +1132,31 @@ export const timesheetTemplate: ToolDefinition = {
           'Set the period start and end (often Monday–Sunday), add one line per workday with hours and rate, note the job code, and have a supervisor approve before you export the PDF.',
       },
       {
-        question: 'Should overtime be a separate line?',
+        question: 'How should overtime appear on a timesheet?',
         answer:
-          'Yes when your policy uses a different OT rate. Keep regular hours on their lines and add OT hours at the OT rate so the math stays auditable.',
+          'When your policy uses a different OT rate, keep regular hours on their lines and add OT hours at the OT rate so the math stays auditable. This template does not invent OT multipliers for you.',
+      },
+      {
+        question: 'Can contractors use this timesheet?',
+        answer:
+          'Yes. Freelancers and field crews can log hours by day, then copy billable lines onto a contractor invoice after approval. Keep the same job number across estimate, timesheet, and invoice.',
+      },
+      {
+        question: 'Is this a substitute for Excel or Google Sheets?',
+        answer:
+          'It is a fill-online PDF/Word timesheet, not a spreadsheet workbook. If your payroll team lives in Excel or Sheets, export PDF for the signed copy and keep your spreadsheet for formulas they already trust.',
       },
       {
         question: 'Is a timesheet the same as an invoice?',
         answer:
-          'No. A timesheet proves time; an invoice bills for it. Many contractors copy approved hours into a contractor invoice after the period closes.',
+          'No. A timesheet proves time; an invoice bills for it. Many contractors copy approved hours into /tools/contractor-invoice/ after the period closes.',
       },
     ],
     sources: estimateSources,
   },
   relatedSlugs: ['contractor-invoice', 'work-order', 'receipt-generator'],
   publishedAt: '2026-11-13',
-  updatedAt: '2026-11-13',
+  updatedAt: '2026-11-22',
 };
 
 export const purchaseOrderTemplate: ToolDefinition = {
@@ -1146,9 +1170,9 @@ export const purchaseOrderTemplate: ToolDefinition = {
     'PO template free',
     'business purchase order PDF',
   ],
-  title: 'Purchase Order Template (Free)',
+  title: 'Purchase Order Template (Free PDF & Word)',
   metaDescription:
-    'Create a purchase order with PO number, vendor, ship-to address, line items, and totals. Live preview plus free PDF or DOCX export.',
+    'Purchase order with PO number, vendor, ship-to, line items, tax and terms. Free PDF/Word, no signup.',
   h1: 'Free Purchase Order Template',
   answerFirst:
     'A purchase order (PO) tells a vendor what to supply: PO number, dates, bill-to and ship-to addresses, line items with quantities and rates, tax, and a total. Fill this template in your browser, preview the PO, and download PDF or DOCX without uploading data.',
@@ -1262,7 +1286,7 @@ export const purchaseOrderTemplate: ToolDefinition = {
   },
   relatedSlugs: ['work-order', 'contractor-invoice', 'quote-estimate-generator'],
   publishedAt: '2026-11-13',
-  updatedAt: '2026-11-13',
+  updatedAt: '2026-11-22',
 };
 
 export const changeOrderTemplate: ToolDefinition = {
@@ -1276,9 +1300,9 @@ export const changeOrderTemplate: ToolDefinition = {
     'change order form',
     'contract change order PDF',
   ],
-  title: 'Change Order Template (Free)',
+  title: 'Change Order Template (Free PDF & Word)',
   metaDescription:
-    'Document a construction change order with original contract reference, change description, cost and time impact, and signature lines. Export PDF/DOCX free.',
+    'Document a construction change order: original contract, scope change, cost and schedule impact and signatures. Free PDF/Word.',
   h1: 'Free Change Order Template',
   answerFirst:
     'A change order records a written change to an existing contract or estimate: the original reference, what is changing, the cost impact, any schedule impact, and signatures from both parties. Fill this template, preview it, and export PDF or DOCX before the extra work starts.',
@@ -1380,19 +1404,24 @@ export const changeOrderTemplate: ToolDefinition = {
           'It is a written amendment to an existing construction contract or accepted estimate that describes new or changed work, the price adjustment, and any change to the schedule, with authorization signatures.',
       },
       {
-        question: 'When should I issue a change order?',
+        question: 'How do I write a change order?',
         answer:
-          'Before performing work that was not in the original scope or that exceeds a stated allowance—especially after concealed conditions, owner upgrades, or code-driven revisions.',
+          'Reference the original contract or estimate, describe the change and why it appeared, enter cost and schedule impact, add priced lines if helpful, then collect contractor and client signatures before the extra work starts.',
+      },
+      {
+        question: 'Is a change order legally binding?',
+        answer:
+          'A signed change order can amend the deal when it meets your jurisdiction’s contract rules, but enforceability depends on local law and the facts. This template is general information, not legal advice.',
+      },
+      {
+        question: 'Who pays for a change order?',
+        answer:
+          'Usually the party that requested the change, or the owner when concealed conditions exceed a stated allowance—follow the original contract. Spell out the dollar impact and who authorizes payment on the CO itself.',
       },
       {
         question: 'Is a change order the same as a work order?',
         answer:
           'No. Change orders amend price and scope on the contract; work orders direct field labor. Many jobs need both: a signed CO, then an updated work order for the crew.',
-      },
-      {
-        question: 'How do I show cost and time impact?',
-        answer:
-          'Enter the net dollar change, days added (or zero), and optional line items that sum to the cost impact. State whether prior allowances apply.',
       },
       {
         question: 'Do both parties need to sign?',
@@ -1410,7 +1439,7 @@ export const changeOrderTemplate: ToolDefinition = {
     'lien-waiver-generator',
   ],
   publishedAt: '2026-11-13',
-  updatedAt: '2026-11-19',
+  updatedAt: '2026-11-22',
 };
 
 export const progressInvoice: ToolDefinition = {
@@ -1425,9 +1454,9 @@ export const progressInvoice: ToolDefinition = {
     'retainage invoice',
     'construction progress invoice',
   ],
-  title: 'Progress Invoice Generator (Free)',
+  title: 'Progress Invoice Generator: % Complete Billing (Free)',
   metaDescription:
-    'Progress invoice with contract value, % or $ complete, prior billings, retainage, amount due, and balance to finish. Live preview; free PDF/DOCX export.',
+    'Bill a contract in stages: contract value, % or $ complete, prior billings, retainage and balance due. Free PDF and Word.',
   h1: 'Free Progress Invoice Generator',
   answerFirst:
     'A progress invoice bills one contract draw: contract value, work done this period (percent or dollars), previously billed, retainage, amount due now, and balance to finish. Fill the fields, preview the schedule, and export PDF or DOCX—nothing leaves your browser.',
@@ -1593,41 +1622,42 @@ export const progressInvoice: ToolDefinition = {
           'It is a payment application against a fixed contract that shows contract value, work completed this period, prior billings, retainage, amount due now, and balance left to finish.',
       },
       {
-        question: 'Should I bill by percent or by dollar amount?',
+        question: 'How does percent-complete billing work?',
         answer:
-          'Use percent when your schedule of values is percent-complete. Use a dollar amount when this draw is a negotiated lump for a phase. Pick one mode per invoice and stick to it on that PDF.',
+          'You bill a percent of the contract value for this period (or a dollar amount for a phase). Previously billed plus this period should not exceed the contract sum. Pick percent or dollar mode per invoice and stick to it on that PDF.',
       },
       {
-        question: 'How does retainage affect amount due?',
+        question: 'What is retainage on a progress invoice?',
         answer:
-          'Amount due equals work this period minus retainage for this period. Retainage is still earned; it is just held until the contract says you can bill for release.',
+          'Retainage is money earned but held back until a later release date in the contract. Amount due equals work this period minus retainage for this period. Track cumulative retainage in your ledger if the contract requires a running total.',
       },
       {
-        question: 'What does balance to finish mean?',
+        question: 'How is a progress invoice different from a regular invoice?',
         answer:
-          'Contract value minus previously billed minus work this period. It is the gross work still left on the contract, not a statement of cash already paid.',
+          'A regular contractor invoice is built for open line items, tax, and deposits. A progress invoice is built for contract draws with percent complete, prior billings, retainage, and balance to finish. See /tools/contractor-invoice/ for line-item billing.',
       },
       {
-        question: 'Is this the same as a contractor invoice?',
+        question: 'What is a schedule of values?',
         answer:
-          'Related, but different. The contractor invoice is built for line items, tax, and deposits. This progress invoice is built for contract draws with retainage. See /tools/contractor-invoice/ for line-item billing.',
+          'A schedule of values breaks the contract into priced phases or line items so each draw can cite what percent of each phase is complete. Put a short note in the work-description field that matches those lines.',
       },
       {
         question: 'Can I download a progress invoice PDF?',
         answer:
-          'Yes. Preview updates as you edit, then export PDF or DOCX. Entries stay on your device; nothing is uploaded to our servers.',
+          'Yes. Preview updates as you edit, then export PDF or Word. Entries stay on your device; nothing is uploaded to our servers.',
       },
     ],
     sources: estimateSources,
   },
   relatedSlugs: [
     'contractor-invoice',
+    'invoice-late-fee-calculator',
     'change-order-template',
     'lien-waiver-generator',
     'construction-estimate-template',
   ],
   publishedAt: '2026-11-19',
-  updatedAt: '2026-11-19',
+  updatedAt: '2026-11-22',
 };
 
 export const invoiceLateFeeCalculator: ToolDefinition = {
@@ -1642,9 +1672,9 @@ export const invoiceLateFeeCalculator: ToolDefinition = {
     'late payment fee calculator',
     'invoice interest calculator',
   ],
-  title: 'Invoice Late Fee Calculator',
+  title: 'Invoice Late Fee Calculator: Interest & Penalty',
   metaDescription:
-    'Calculate invoice late fees from amount, due date, payment date, and flat, monthly %, or daily annual rate—with grace days, copy-ready wording, and PDF export.',
+    'Calculate a late fee from invoice amount, due date and rate (flat or % per month). Copy the wording for your invoice terms.',
   h1: 'Invoice Late Fee Calculator',
   answerFirst:
     'Enter the unpaid amount, due date, payment date (or today), fee type, and optional grace days. Get days late, the fee, the new total, and copy-ready reminder wording. Caps vary by state and country—this is math, not legal advice.',
@@ -1830,9 +1860,9 @@ export const invoiceLateFeeCalculator: ToolDefinition = {
     ],
     sources: estimateSources,
   },
-  relatedSlugs: ['contractor-invoice', 'cleaning-service-invoice', 'receipt-generator'],
+  relatedSlugs: ['contractor-invoice', 'progress-invoice', 'cleaning-service-invoice', 'receipt-generator'],
   publishedAt: '2026-11-19',
-  updatedAt: '2026-11-19',
+  updatedAt: '2026-11-22',
 };
 
 /** Trade preset of the construction estimate fields — roofing defaults only. */
@@ -1848,9 +1878,9 @@ export const roofingEstimate: ToolDefinition = {
     'roofing quote template',
     'shingle roof estimate PDF',
   ],
-  title: 'Free Roofing Estimate Template',
+  title: 'Roofing Estimate Template (Free Tear-Off)',
   metaDescription:
-    'Free roofing estimate template with tear-off, underlayment, shingles per square, flashing, and disposal. Live preview, then PDF or DOCX—no signup.',
+    'Roofing estimate with tear-off, underlayment, shingles, flashing, labor and permits. Free PDF/Word template.',
   h1: 'Free Roofing Estimate Template',
   answerFirst:
     'A roofing estimate prices a reroof or repair by the square: tear-off, underlayment, shingles, flashing, disposal, and any decking allowance. Fill those lines here, preview the totals, and export PDF or DOCX in your browser. Sample rates are illustrative—use your supplier quotes.',
@@ -1919,6 +1949,10 @@ export const roofingEstimate: ToolDefinition = {
         heading: 'Squares, waste, and allowances',
         body: 'Measure planes, adjust for pitch, then add waste for hips, valleys, and cuts. Many crews show field shingles a little higher than measured squares so the waste is visible on the PDF. Keep the decking allowance small and honest; photograph bad sheets before you cover them and bill extras with a change order when the count climbs.\n\nFor a general remodel layout with allowances outside roofing, use /tools/construction-estimate-template/. After the homeowner accepts, bill the deposit on /tools/contractor-invoice/.',
       },
+      {
+        heading: 'What “per square” means on a roofing estimate',
+        body: 'One roofing square equals 100 sq ft of roof surface. Price tear-off, underlayment, and shingles by the square so homeowners can compare bids on the same unit. Field shingle quantity is often a few squares higher than measured area to cover waste on hips, valleys, and starter. Say whether permit fees sit on the estimate or are paid by the owner.',
+      },
     ],
     workedExample: {
       heading: 'Worked example: 24-square asphalt reroof (illustrative)',
@@ -1971,12 +2005,13 @@ export const roofingEstimate: ToolDefinition = {
   },
   relatedSlugs: [
     'construction-estimate-template',
+    'quote-estimate-generator',
     'contractor-invoice',
     'change-order-template',
     'painting-estimate',
   ],
   publishedAt: '2026-11-19',
-  updatedAt: '2026-11-19',
+  updatedAt: '2026-11-22',
 };
 
 /** Trade preset of the construction estimate fields — painting defaults only. */
@@ -1992,9 +2027,9 @@ export const paintingEstimate: ToolDefinition = {
     'interior painting estimate',
     'painter estimate PDF',
   ],
-  title: 'Free Painting Estimate Template',
+  title: 'Painting Estimate Template (Free, With Sq Ft Pricing)',
   metaDescription:
-    'Free painting estimate template with prep, primer, finish coats, rooms or sq ft, and materials. Live preview, then PDF or DOCX—no signup.',
+    'Painting estimate with prep, primer, coats, paint cost, labor and tax. Free PDF/Word template with a worked interior example.',
   h1: 'Free Painting Estimate Template',
   answerFirst:
     'A painting estimate lists prep, primer, finish coats, rooms or square footage, and materials so the client sees what is in the price. Build yours here with a live preview and PDF or DOCX export. Sample rates teach the math—swap in your labor and paint costs.',
@@ -2119,5 +2154,5 @@ export const paintingEstimate: ToolDefinition = {
     'roofing-estimate',
   ],
   publishedAt: '2026-11-19',
-  updatedAt: '2026-11-19',
+  updatedAt: '2026-11-22',
 };

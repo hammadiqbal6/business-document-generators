@@ -13,9 +13,9 @@ export const tattooConsent: ToolDefinition = {
     'tattoo waiver template',
     'tattoo client consent PDF',
   ],
-  title: 'Tattoo Consent Form Template – Free Generator',
+  title: 'Tattoo Consent Form Template (Free PDF)',
   metaDescription:
-    'Fill a tattoo consent and release form: client details, design notes, health acknowledgements, editable clauses. Export PDF/DOCX. Not legal or medical advice.',
+    'Tattoo consent and release form: client details, design, health disclosure, aftercare and signature. Free printable PDF.',
   h1: 'Free Tattoo Consent Form Template',
   answerFirst:
     'A tattoo consent form records client identity, design placement, acknowledgements about risks and aftercare, and permission to proceed. Customize this template in your browser and export PDF or DOCX. It is not legal or medical advice—follow your local licensing rules.',
@@ -126,7 +126,7 @@ export const tattooConsent: ToolDefinition = {
   },
   relatedSlugs: ['simple-nda', 'photography-contract-template', 'receipt-generator'],
   publishedAt: '2026-10-19',
-  updatedAt: '2026-11-13',
+  updatedAt: '2026-11-22',
 };
 
 export const rentalApplication: ToolDefinition = {
@@ -140,10 +140,10 @@ export const rentalApplication: ToolDefinition = {
     'tenant application form',
     'residential rental application PDF',
   ],
-  title: 'Rental Application Form – Free Generator',
+  title: 'Rental Application Form: Free Template (PDF)',
   metaDescription:
-    'Create a residential rental application: applicant info, employment, references, authorization. Live preview, PDF/DOCX. Not a lease; follow fair housing laws.',
-  h1: 'Free Rental / Lease Application Form',
+    'Residential rental application with applicant info, employment, rental history, references and screening consent. Free PDF.',
+  h1: 'Free Rental Application Form Generator',
   answerFirst:
     'A rental or lease application collects applicant contact details, desired unit, employment/income, rental history, references, and authorization to verify information. Fill this form in your browser and export PDF or DOCX. It is not a lease and must be used in line with fair housing laws.',
   applicationCategory: 'BusinessApplication',
@@ -251,7 +251,7 @@ export const rentalApplication: ToolDefinition = {
   },
   relatedSlugs: ['simple-nda', 'receipt-generator', 'quote-estimate-generator'],
   publishedAt: '2026-10-19',
-  updatedAt: '2026-10-20',
+  updatedAt: '2026-11-22',
 };
 
 export const podcastScript: ToolDefinition = {
@@ -265,7 +265,7 @@ export const podcastScript: ToolDefinition = {
     'interview podcast outline',
     'podcast show notes template',
   ],
-  title: 'Podcast Script Template – Free Episode Planner',
+  title: 'Podcast Script Template: Free Episode Planner',
   metaDescription:
     'Plan a podcast episode script: cold open, segments, interview cues, CTA, and show notes. Live preview; export PDF/DOCX in your browser.',
   h1: 'Free Podcast Script Template',
@@ -365,7 +365,7 @@ export const podcastScript: ToolDefinition = {
   },
   relatedSlugs: ['real-estate-flyer-template', 'videography-contract', 'quote-estimate-generator'],
   publishedAt: '2026-10-19',
-  updatedAt: '2026-11-13',
+  updatedAt: '2026-11-22',
 };
 
 export const realEstateFlyer: ToolDefinition = {
@@ -379,7 +379,7 @@ export const realEstateFlyer: ToolDefinition = {
     'house for sale flyer',
     'open house flyer generator',
   ],
-  title: 'Real Estate Flyer Template – Free Generator',
+  title: 'Real Estate Flyer Template: Free Listing Flyer Maker',
   metaDescription:
     'Build a real estate listing flyer: price, beds/baths, features, agent contact, open house. Live preview; export PDF/DOCX.',
   h1: 'Free Real Estate Flyer Template',
@@ -472,5 +472,5 @@ export const realEstateFlyer: ToolDefinition = {
   },
   relatedSlugs: ['podcast-script-template', 'rental-lease-application', 'quote-estimate-generator'],
   publishedAt: '2026-10-19',
-  updatedAt: '2026-10-20',
+  updatedAt: '2026-11-22',
 };
