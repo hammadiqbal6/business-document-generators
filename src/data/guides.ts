@@ -207,7 +207,7 @@ export const guides: Guide[] =
     "metaDescription": "Learn retainer, cancellation, copyright, and usage clauses for photography contracts. Free editable template. Not legal advice.",
     "answerFirst": "Most photography contracts need six core clauses: scope with date, hours, and locations; payment and retainer; deliverables and timeline; image usage or license; cancellation; and liability limits. Add model releases when recognizable people appear outside the paying client. Draft yours in the free photography contract template, then have counsel review. You'll keep the same labels when you bill.",
     "publishedAt": "2026-10-19",
-    "updatedAt": "2026-11-22",
+    "updatedAt": "2026-11-25",
     "relatedToolSlugs": [
       "photography-contract-template",
       "videography-contract",
@@ -304,6 +304,14 @@ export const guides: Guide[] =
       {
         "heading": "How should timeline, backup gear, and file delivery be stated?",
         "body": "Check the validity date.\n\nDelivery timelines should account for peak season backlog, so state calendar days or business days and what happens if illness delays editing. Backup camera bodies, cards, and batteries belong in scope when weddings can't be reshot, and gallery download rules should match the usage license you sold. Backup camera bodies, cards, and batteries are operational details that belong in scope when weddings can't be reshot. File delivery method matters: gallery host, download expiration, and whether social-sized crops are included. If clients need DNG or TIFF for print shops, price that as an add-on. State reactivation fees and how long you keep backups after delivery so clients who delay downloads know the archive limit. Ready to lock your clauses? Start with the editable photography contract template, then ask a licensed attorney to review your final agreement for your state and session types.\n\nI've cleaned this up the hard way more than once.\n\nCheck the validity date.\n\nIf two people can read the same paragraph and walk away with different obligations, rewrite it until the obligation sits in a sentence you could defend on a phone call."
+      },
+      {
+        "heading": "How do travel, overtime, and second-shooter fees show up in the contract?",
+        "body": "Travel beyond a stated radius, overtime past coverage hours, and second-shooter fees are the three lines couples and commercial clients most often assume are “included.” Put a free travel radius in miles or minutes, then a per-mile or flat fee for destination days. Overtime needs an hourly rate and a clear clock—ceremony end, reception end, or total coverage hours—so midnight dances do not become a surprise invoice.\n\nSecond shooters should appear in scope only when you are actually booking them. If the package is one shooter, say so. When a stills photographer and a videographer share the same wedding day, keep photo clauses here and video terms in /tools/wedding-videography-contract-template/ or /guides/wedding-videography-contract/ so usage rights do not collide.\n\nMirror travel and overtime dollars on the later invoice from /tools/contractor-invoice/ so AP sees the same labels."
+      },
+      {
+        "heading": "What belongs in a pre-send photography contract checklist?",
+        "body": "Before you email the booking link, confirm six items on the PDF: parties and session date, countable deliverables, retainer and balance dates, usage or license wording, cancellation window, and gallery or file delivery rules. Cross-check that the retainer on the contract matches the invoice you will send the same day.\n\nIf recognizable people will appear in ads or stock, queue a model release alongside the services agreement. For commercial campaigns, list media, territory, and duration in the license section so marketing teams stop asking whether LinkedIn ads are covered. Open /tools/photography-contract-template/, fill those fields, and walk the client through the PDF on a kickoff call before money moves."
       }
     ],
     "faq": [
@@ -963,12 +971,13 @@ export const guides: Guide[] =
     "metaDescription": "A line total is quantity × rate for one row. See subtotal, tax, deposit, and amount due with a remodel example you can rebuild in free generators.",
     "answerFirst": "A line total is quantity times the unit rate for that row. Add line totals for the subtotal; tax (if you charge it) is taxable subtotal × rate ÷ 100; amount due is total minus deposits already paid. Rebuild the same math in the free estimate generator or contractor invoice before you export the PDF.",
     "publishedAt": "2026-10-20",
-    "updatedAt": "2026-11-22",
+    "updatedAt": "2026-11-25",
     "relatedToolSlugs": [
       "quote-estimate-generator",
       "contractor-invoice",
       "construction-estimate-template",
-      "receipt-generator"
+      "receipt-generator",
+      "flooring-estimate"
     ],
     "relatedGuideSlugs": [
       "invoice-vs-estimate",
@@ -1065,6 +1074,14 @@ export const guides: Guide[] =
       {
         "heading": "How do you check math before you export?",
         "body": "Practical version:\n\nSort lines by dollar amount and verify the top three manually each time you send a large PDF. Typos in quantity (twenty instead of two) hide until the client pays. When you import supplier CSVs, confirm unit of measure matches your template. Sheets sold by the box should not use per-sheet rates without converting units.\n\nI've seen this go sideways when nobody filed the signed copy.\n\nField staff who understand quantity times rate catch typos before clients do. When clients ask why the total changed, walk them line by line rather than debating the bottom number. Export PDFs from the same generator for estimates and invoices so formatting stays familiar. Store those PDFs with the job. Invoices help support income records once work is billed.\n\nBe specific.\n\nYou'll sleep better when the document matches the conversation.\n\nDon't imply the terms. Write them.\n\nYes.\n\nWhen someone disputes a number six months later, the only thing that helps is a document with uneven, plain sentences that still spell out quantity, rate, due date, and what happens if the scope changes midstream."
+      },
+      {
+        "heading": "How do trade presets keep the same math with different units?",
+        "body": "Roofing prices by the square, painting by the room or wall square foot, flooring by measured area plus waste, and landscaping by yards of mulch or square feet of hardscape. The formula does not change: each line is still quantity × rate, then subtotal, tax, and deposit.\n\nWhat changes is the unit label and the sample defaults. Rebuild a flooring tear-out line in /tools/flooring-estimate/ or a plant list in /tools/landscaping-estimate/ and you should see the same chain as the flagship free estimate generator at /tools/quote-estimate-generator/. When a remodel mixes trades, keep allowances on /tools/construction-estimate-template/ and push specialty unit prices onto the trade preset so the client can compare apples to apples."
+      },
+      {
+        "heading": "How should progress billing reuse estimate line labels?",
+        "body": "When you convert an accepted estimate into a progress invoice, keep the same description text on billed lines so AP can match the pay app to the bid. Percent-complete billing still rests on line totals: if cabinets were $4,200 on the estimate and you bill 50% complete, the progress line should equal $2,100 before retainage.\n\nUse /tools/progress-invoice/ for contract value, percent complete, previously billed, and retainage. Issue a receipt from /tools/receipt-generator/ when a draw clears so the next invoice’s amount paid stays honest."
       }
     ],
     "faq": [
@@ -2207,7 +2224,7 @@ export const guides: Guide[] =
     "metaDescription": "Use a free podcast script template to outline hooks, segments, questions, CTAs, and outros. Timed example plus IAB-ready sponsor notes.",
     "answerFirst": "Structure every episode in about eight blocks: goal, cold open hook, intro, timed segment blocks, guest questions or talking points, transitions, CTA or sponsor read, and outro. Assign minutes to each block so producers catch missing ad reads before record day. Build the outline in the free podcast script template. You'll keep the same labels when you bill.",
     "publishedAt": "2026-10-22",
-    "updatedAt": "2026-11-22",
+    "updatedAt": "2026-11-25",
     "relatedToolSlugs": [
       "podcast-script-template",
       "real-estate-flyer-template"
@@ -2297,6 +2314,14 @@ export const guides: Guide[] =
       {
         "heading": "How do solo scripts, transcripts, and reuse fit together?",
         "body": "Solo scripts benefit from a hook sentence, three teaching points, and a recap that repeats the call to action. Read the full script once standing up to catch breathless paragraphs. Batch-record solo episodes from one template day by swapping only segment bullets for brand consistency.\n\nDon't leave this as a hallway promise.\n\nScripts make transcript generation faster for accessible show notes. Mark speaker names consistently in interview scripts so automated tools attribute quotes correctly. Sound effect descriptions in brackets help readers when transcripts publish. Spell proper nouns and URLs phonetically in the script margin when guests have unusual names or long product links. That reduces retakes and transcript typos.\n\nLabel sample numbers as examples.\n\nSegment bullets become show notes, blog posts, and newsletter blurbs with light editing. Evergreen explainer blocks can become library inserts. Tag reusable blocks with episode IDs so you remember what already published. Ready to outline the next episode? Open /tools/podcast-script-template/, drop in your eight blocks, and mark every sponsor disclosure before you hit record.\n\nYou'll sleep better when the document matches the conversation.\n\nDon't imply the terms. Write them.\n\nWrite the trigger.\n\nWhen someone disputes a number six months later, the only thing that helps is a document with uneven, plain sentences that still spell out quantity, rate, due date, and what happens if the scope changes midstream."
+      },
+      {
+        "heading": "How do you time a mid-roll without wrecking the story?",
+        "body": "Place mid-roll ads at a natural beat change—after a guest finishes a story beat, not mid-sentence. Mark the slot in the script with an AD READ header, estimated seconds, and whether the host will cold-read or play a pre-recorded spot. If the segment before the ad runs long in rehearsal, trim that segment rather than sliding the ad into a cliffhanger.\n\nPre-roll and post-roll need the same discipline: write the exact offer URL and discount code so you do not improvise on air. When the read endorses a product, keep disclosure language aligned with 16 CFR Part 255 in the same block. Editors should see the same labels in /tools/podcast-script-template/ every episode."
+      },
+      {
+        "heading": "What does a remote interview tech checklist look like?",
+        "body": "Remote interviews fail on audio more often than on content. Add a short tech block to the script: platform link, backup phone number, who records locally, and a 60-second levels check before the cold open. Note whether the guest should use headphones and mute notifications.\n\nIf you capture a separate backup track, write who owns that file and how long you keep it—same habit as archive windows on video contracts. After the call, stamp chapter markers in the script for audiogram clips so social cuts match the outline you already approved."
       }
     ],
     "faq": [
@@ -3085,10 +3110,11 @@ export const guides: Guide[] =
     "slug": "wedding-videography-contract",
     "title": "Wedding Videography Contract: What to Include (Guide)",
     "metaDescription": "Wedding videography contracts: day timeline, ceremony audio, raw footage, highlight film, and rain plan. Free templates. Not legal advice.",
-    "answerFirst": "A wedding videography contract should lock the day timeline, ceremony audio plan, deliverables such as highlight film and raw footage policy, payment timing, and a rain or venue-change plan before the date is held. Cross-read general videography clauses, then draft wedding fields in the videography contract tool. You'll keep the same labels when you bill.",
+    "answerFirst": "A wedding videography contract should lock the day timeline, ceremony audio plan, deliverables such as highlight film and raw footage policy, payment timing, and a rain or venue-change plan before the date is held. Cross-read general videography clauses, then draft wedding fields in the wedding videography contract template. You'll keep the same labels when you bill.",
     "publishedAt": "2026-11-13",
-    "updatedAt": "2026-11-22",
+    "updatedAt": "2026-11-25",
     "relatedToolSlugs": [
+      "wedding-videography-contract-template",
       "videography-contract",
       "event-wedding-vendor-contract",
       "photography-contract-template"
@@ -3126,7 +3152,7 @@ export const guides: Guide[] =
     "sections": [
       {
         "heading": "What should a wedding videography contract cover?",
-        "body": "Cover the wedding date, coverage hours, locations, crew, day timeline, ceremony audio method, deliverables such as highlight film and raw footage rules, revision rounds, payment, cancellation, and a rain or venue-change plan. Couples compare vendors on those specifics, not on a single package name.\n\nDon't leave this as a hallway promise.\n\nThis page focuses on wedding-day details. For general videography topics such as music licensing, corporate approval chains, and archive policy, see /guides/videography-contract-clauses/ and cross-link from there rather than duplicating every clause here. Draft wedding fields in /tools/videography-contract/. When you need a broader vendor agreement alongside catering or DJ terms, use /tools/event-wedding-vendor-contract/ and the checklist at /guides/wedding-vendor-contract-checklist/.\n\nLabel sample numbers as examples.\n\nYou'll sleep better when the document matches the conversation.\n\nDon't imply the terms. Write them."
+        "body": "Cover the wedding date, coverage hours, locations, crew, day timeline, ceremony audio method, deliverables such as highlight film and raw footage rules, revision rounds, payment, cancellation, and a rain or venue-change plan. Couples compare vendors on those specifics, not on a single package name.\n\nDon't leave this as a hallway promise.\n\nThis page focuses on wedding-day details. For general videography topics such as music licensing, corporate approval chains, and archive policy, see /guides/videography-contract-clauses/ and cross-link from there rather than duplicating every clause here. Draft wedding fields in /tools/wedding-videography-contract-template/ (or the general /tools/videography-contract/ when the job is mixed). Brand and commercial films belong on /tools/video-production-contract/. When you need a broader vendor agreement alongside catering or DJ terms, use /tools/event-wedding-vendor-contract/ and the checklist at /guides/wedding-vendor-contract-checklist/.\n\nLabel sample numbers as examples.\n\nYou'll sleep better when the document matches the conversation.\n\nDon't imply the terms. Write them."
       },
       {
         "heading": "How do you write the wedding day timeline into the contract?",
@@ -3220,7 +3246,7 @@ export const guides: Guide[] =
       },
       {
         "question": "Which tools should I use?",
-        "answer": "Draft the film agreement in /tools/videography-contract/. Use /tools/event-wedding-vendor-contract/ when you need a broader wedding vendor services agreement. Put the rule on the PDF."
+        "answer": "Draft the film agreement in /tools/wedding-videography-contract-template/ (or /tools/videography-contract/ for mixed jobs). Use /tools/event-wedding-vendor-contract/ when you need a broader wedding vendor services agreement. Put the rule on the PDF."
       },
       {
         "question": "Do I need music licensing language?",

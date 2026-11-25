@@ -3,11 +3,13 @@
 | URL | Primary keyword | Secondary cluster | Ahrefs evidence |
 |-----|---------------|-------------------|-----------------|
 | `/` | contractor freelancer document templates | free document templates, contractor PDF templates | sitewide; avoid head “invoice template” (KD 43) |
-| `/tools/construction-estimate-template/` | construction estimate template | contractor estimate form, building estimate PDF | 1,200/mo, KD 2 |
+| `/tools/construction-estimate-template/` | construction estimate template | construction quote generator, contractor estimate form, building estimate PDF | 1,200/mo, KD 2; GSC: construction quote generator |
 | `/tools/contractor-invoice/` | contractor invoice | free invoice generator for contractors, construction invoice template, contractor invoice PDF | long-tail B2B |
 | `/tools/progress-invoice/` | progress invoice | progress billing invoice, progress invoice template, retainage invoice, construction progress invoice | long-tail B2B |
 | `/tools/photography-contract-template/` | photography contract template | wedding photography contract, photographer agreement | 1,100/mo, KD 6 |
-| `/tools/videography-contract/` | videography contract | video production agreement, wedding videography contract | profession long-tail |
+| `/tools/videography-contract/` | videography contract | videographer contract template, video contract template | profession long-tail; wedding → wedding-videography-contract-template; commercial → video-production-contract |
+| `/tools/wedding-videography-contract-template/` | wedding videography contract template | contract for wedding videographer, wedding video agreement, wedding videographer contract | GSC: wedding videography / wedding videographer; guide keeps how-to primary |
+| `/tools/video-production-contract/` | video production contract | video production agreement, video production contract template, corporate video contract | GSC: video production contract |
 | `/tools/podcast-script-template/` | podcast script template | podcast episode outline, interview podcast script | 600/mo, KD 1 |
 | `/tools/real-estate-flyer-template/` | real estate flyer template | property flyer, open house flyer | 350/mo, KD 8 |
 | `/tools/tattoo-consent-form-template/` | tattoo consent form template | tattoo release form, tattoo waiver | 150/mo, KD 0 |
@@ -19,7 +21,7 @@
 | `/tools/simple-nda/` | simple NDA | NDA template free, mutual NDA generator | long-tail |
 | `/tools/work-order/` | work order | work order template, service work order form | long-tail |
 | `/tools/receipt-generator/` | receipt generator | payment receipt template, service receipt PDF, PDF receipt generator | long-tail |
-| `/tools/quote-estimate-generator/` | free estimate generator | estimate generator free, free instant quote, quote estimate generator, free quote generator; light construction quote generator (deep remodel bids → construction-estimate-template) | long-tail |
+| `/tools/quote-estimate-generator/` | free estimate generator | estimate generator free, free instant quote, quote estimate generator, free quote generator, free estimate maker, free estimates online, billing quote; light construction quote → construction-estimate-template | long-tail; do not chase head “estimate generator free” alone |
 | `/tools/independent-contractor-agreement/` | independent contractor agreement | independent contractor agreement template, contractor agreement form | long-tail |
 | `/tools/timesheet-template/` | timesheet template | timesheet generator, weekly timesheet PDF | long-tail |
 | `/tools/service-agreement-template/` | service agreement template | service contract template, business service agreement | long-tail |
@@ -29,6 +31,8 @@
 | `/tools/invoice-late-fee-calculator/` | invoice late fee calculator | late fee calculator invoice, invoice overdue fee, late payment fee calculator | long-tail |
 | `/tools/roofing-estimate/` | roofing estimate template | roofing estimate, roof replacement estimate, shingle roof quote | trade preset of construction estimate |
 | `/tools/painting-estimate/` | painting estimate template | painting estimate, house painting quote, interior painting estimate | trade preset of construction estimate |
+| `/tools/landscaping-estimate/` | landscaping estimate template | landscaping estimate, landscape quote, hardscape estimate | trade preset; estimate-cluster long-tail |
+| `/tools/flooring-estimate/` | flooring estimate template | flooring estimate, flooring quote, LVP flooring quote | trade preset; estimate-cluster long-tail |
 | `/guides/construction-estimate-that-wins-jobs/` | how to write a construction estimate | construction quote, construction estimate example, how to create a contractor estimate (301 from retired slug) | supports estimate tool |
 | `/guides/photography-contract-clauses/` | photography contract clauses | photography contract explained | supports photo contract |
 | `/guides/catering-quote-deposits/` | catering quote deposit | wedding catering pricing | supports catering quote |

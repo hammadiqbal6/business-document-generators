@@ -125,6 +125,8 @@ export function buildDocumentBlocks(
     case 'construction-estimate-template':
     case 'roofing-estimate':
     case 'painting-estimate':
+    case 'landscaping-estimate':
+    case 'flooring-estimate':
     case 'contractor-invoice':
     case 'cleaning-service-invoice':
     case 'catering-quote':
@@ -145,6 +147,8 @@ export function buildDocumentBlocks(
     case 'photography-contract-template':
       return buildPhotoContract(values, blocks);
     case 'videography-contract':
+    case 'wedding-videography-contract-template':
+    case 'video-production-contract':
       return buildVideoContract(values, blocks);
     case 'freelance-web-design-contract':
       return buildWebContract(values, blocks);

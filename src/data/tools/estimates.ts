@@ -83,6 +83,10 @@ export const constructionEstimate: ToolDefinition = {
         heading: 'Allowances and exclusions',
         body: 'Call out allowances for unknown conditions (rot, asbestos testing, permit fees) and list exclusions such as painting, fixtures, or owner-supplied materials. State whether prices include dumpster fees and sales tax.',
       },
+      {
+        heading: 'Construction quote vs construction estimate',
+        body: 'In many trades “construction quote” and “construction estimate” describe the same priced PDF—parties, scope, line items, tax, deposit, and a validity window. Some shops use “quote” when the price is firmer and “estimate” when allowances remain. Either way, measurable lines beat a one-line lump sum.\n\nThis generator is the remodel-oriented construction quote / estimate path on Docuklin (GSC often shows “construction quote generator” for this intent). For a lighter mixed-service quote without remodel allowances, use /tools/quote-estimate-generator/. Trade presets with product-specific defaults: /tools/roofing-estimate/, /tools/painting-estimate/, /tools/landscaping-estimate/, /tools/flooring-estimate/.',
+      },
     ],
     workedExample: {
       heading: 'Worked example: kitchen remodel estimate',
@@ -136,6 +140,11 @@ export const constructionEstimate: ToolDefinition = {
         answer:
           'Yes. Export PDF or DOCX from the live preview. Keep the PDF with the job file so later invoices can reuse the same line labels.',
       },
+      {
+        question: 'Is this also a construction quote generator?',
+        answer:
+          'Yes. Use this page when you need a construction quote or estimate with remodel-style allowances, labor/material lines, tax, and deposit. Label the PDF “Quote” or “Estimate” to match how you talk to the client. For a lighter service quote, use /tools/quote-estimate-generator/.',
+      },
     ],
     sources: estimateSources,
   },
@@ -145,9 +154,11 @@ export const constructionEstimate: ToolDefinition = {
     'change-order-template',
     'roofing-estimate',
     'painting-estimate',
+    'landscaping-estimate',
+    'flooring-estimate',
   ],
   publishedAt: '2026-10-19',
-  updatedAt: '2026-11-22',
+  updatedAt: '2026-11-25',
 };
 
 export const contractorInvoice: ToolDefinition = {
@@ -741,11 +752,13 @@ export const quoteEstimate: ToolDefinition = {
     'construction-estimate-template',
     'roofing-estimate',
     'painting-estimate',
+    'landscaping-estimate',
+    'flooring-estimate',
     'catering-quote',
     'receipt-generator',
   ],
   publishedAt: '2026-10-19',
-  updatedAt: '2026-11-22',
+  updatedAt: '2026-11-25',
 };
 
 export const receiptGenerator: ToolDefinition = {
@@ -2009,9 +2022,11 @@ export const roofingEstimate: ToolDefinition = {
     'contractor-invoice',
     'change-order-template',
     'painting-estimate',
+    'landscaping-estimate',
+    'flooring-estimate',
   ],
   publishedAt: '2026-11-19',
-  updatedAt: '2026-11-22',
+  updatedAt: '2026-11-25',
 };
 
 /** Trade preset of the construction estimate fields — painting defaults only. */
@@ -2152,7 +2167,289 @@ export const paintingEstimate: ToolDefinition = {
     'quote-estimate-generator',
     'contractor-invoice',
     'roofing-estimate',
+    'landscaping-estimate',
+    'flooring-estimate',
   ],
   publishedAt: '2026-11-19',
   updatedAt: '2026-11-22',
+};
+
+/** Trade preset — landscaping / hardscape estimate (supports estimate cluster; long-tail). */
+export const landscapingEstimate: ToolDefinition = {
+  slug: 'landscaping-estimate',
+  name: 'Landscaping Estimate Template',
+  shortName: 'Landscaping Estimate',
+  category: 'estimates-invoices',
+  primaryKeyword: 'landscaping estimate template',
+  secondaryKeywords: [
+    'landscaping estimate',
+    'landscape quote template',
+    'lawn and hardscape estimate',
+    'landscaping quote PDF',
+  ],
+  title: 'Landscaping Estimate Template (Free Quote PDF)',
+  metaDescription:
+    'Landscaping estimate with demo, grading, plants, mulch, hardscape and labor lines. Free PDF/Word template with a worked backyard example.',
+  h1: 'Free Landscaping Estimate Template',
+  answerFirst:
+    'A landscaping estimate prices demo, grading, plant material, mulch, hardscape, and labor so the client sees what is in the bid. Build yours here with a live preview and PDF or DOCX export. Sample rates are illustrative—swap in your nursery and crew costs.',
+  applicationCategory: 'BusinessApplication',
+  isLegalAdjacent: false,
+  documentTitle: 'Landscaping Estimate',
+  toolVersion: '1.0',
+  formulaNote:
+    'Line-item amount = quantity × rate. Subtotal = sum of line amounts. Tax = subtotal × (tax rate ÷ 100). Deposit = total × (deposit % ÷ 100).',
+  fields: [
+    { id: 'companyName', label: 'Company name', type: 'text', required: true, section: 'Your business' },
+    { id: 'companyAddress', label: 'Company address', type: 'textarea', rows: 2, section: 'Your business' },
+    { id: 'companyPhone', label: 'Phone', type: 'tel', section: 'Your business' },
+    { id: 'companyEmail', label: 'Email', type: 'email', section: 'Your business' },
+    { id: 'estimateNumber', label: 'Estimate #', type: 'text', required: true, section: 'Estimate details' },
+    { id: 'estimateDate', label: 'Date', type: 'date', required: true, section: 'Estimate details' },
+    { id: 'validUntil', label: 'Valid until', type: 'date', section: 'Estimate details' },
+    { id: 'clientName', label: 'Client name', type: 'text', required: true, section: 'Client' },
+    { id: 'clientAddress', label: 'Job / client address', type: 'textarea', rows: 2, section: 'Client' },
+    { id: 'projectName', label: 'Project name', type: 'text', required: true, section: 'Project' },
+    { id: 'scope', label: 'Scope of work', type: 'textarea', rows: 4, required: true, section: 'Project' },
+    { id: 'lineItems', label: 'Line items', type: 'lineItems', required: true, section: 'Pricing' },
+    { id: 'taxRate', label: 'Tax rate (%)', type: 'number', inputMode: 'decimal', min: 0, max: 100, step: 0.01, section: 'Pricing' },
+    { id: 'depositPercent', label: 'Deposit required (%)', type: 'number', inputMode: 'decimal', min: 0, max: 100, section: 'Pricing' },
+    { id: 'notes', label: 'Notes / exclusions', type: 'textarea', rows: 3, section: 'Notes' },
+  ],
+  defaults: {
+    companyName: 'GreenEdge Landscapes',
+    companyAddress: '210 Nursery Road\nBend, OR 97701',
+    companyPhone: '(541) 555-0142',
+    companyEmail: 'bids@greenedge.example',
+    estimateNumber: 'LS-2026-044',
+    estimateDate: '2026-11-25',
+    validUntil: '2026-12-16',
+    clientName: 'Riley Nguyen',
+    clientAddress: '88 Cascade Ave, Bend, OR 97702',
+    projectName: 'Backyard refresh – beds, mulch, patio pavers',
+    scope:
+      'Remove existing bark and spent shrubs in rear beds (approx. 420 sq ft). Regrade low spots for drainage away from the foundation. Install drip irrigation repair on two zones, plant list per attached exhibit (18 shrubs, 24 perennials), 3 yards of dark mulch, and a 120 sq ft permeable paver patio pad. Sod and tree removal not included.',
+    lineItems: [
+      { description: 'Demo & haul-off (beds + scrap hardscape)', quantity: 1, unit: 'ls', rate: 680 },
+      { description: 'Fine grading & soil amend', quantity: 420, unit: 'sq ft', rate: 1.35 },
+      { description: 'Plant material (shrubs & perennials)', quantity: 1, unit: 'ls', rate: 1450 },
+      { description: 'Mulch install (delivered)', quantity: 3, unit: 'yd', rate: 95 },
+      { description: 'Permeable paver patio (incl. base)', quantity: 120, unit: 'sq ft', rate: 18.5 },
+      { description: 'Irrigation repair – 2 zones', quantity: 1, unit: 'ls', rate: 420 },
+    ],
+    taxRate: 0,
+    depositPercent: 30,
+    notes:
+      'Sample rates for the template only—replace with nursery quotes and crew costs. Plant warranty (if any) should match your nursery policy. Excludes tree work, sod, lighting, and HOA permit fees paid by owner.',
+  },
+  content: {
+    howToUse: [
+      'Enter company and job address, then name the landscape project.',
+      'Write scope: demo, grading, plant list, hardscape, irrigation, and exclusions.',
+      'Add line items for labor and materials with units (sq ft, yards, lump sum).',
+      'Set tax and deposit, preview totals, then export PDF or DOCX.',
+    ],
+    whatToInclude: [
+      {
+        heading: 'What belongs on a landscaping estimate',
+        body: 'Separate demo and haul-off from new plant material and hardscape so the client can compare bids. Name plant counts or attach a plant list exhibit. Show mulch by the yard, patio or path by the square foot, and irrigation as its own line when zones change.\n\nState access notes (gate width, material staging), watering responsibility after install, and a validity window—nursery stock and fuel move. For mixed remodel bids with landscaping as one trade among many, use /tools/construction-estimate-template/. For a quick mixed-service quote, use /tools/quote-estimate-generator/.',
+      },
+      {
+        heading: 'Hardscape vs softscape lines',
+        body: 'Pavers, walls, and concrete read clearer as hardscape lines with unit prices. Softscape (plants, sod, mulch) should show quantities the client can count on delivery day. Allowances for rock or specialty specimens keep change orders honest when the client upgrades mid-job.\n\nBill accepted work on /tools/contractor-invoice/. Scope shifts after dig day belong on /tools/change-order-template/.',
+      },
+    ],
+    workedExample: {
+      heading: 'Worked example: backyard beds + patio pad (illustrative)',
+      body: 'GreenEdge Landscapes quotes Riley Nguyen for bed refresh and a 120 sq ft paver pad. Sample math: demo $680, grading 420 × $1.35, plants $1,450, mulch 3 yd × $95, pavers 120 × $18.50, irrigation repair $420. Tax as applicable in your area; 30% deposit to order materials. Replace every rate with your yard quotes before you send the PDF.',
+    },
+    commonMistakes: [
+      'Bundling plants into a single “landscaping” lump sum with no counts.',
+      'Skipping haul-off so dump fees surprise the client.',
+      'No note on watering or plant warranty after install.',
+      'Forgetting access limits that force hand-carry pricing.',
+    ],
+    tips: [
+      'Photo existing grades and irrigation heads before you dig.',
+      'Match line labels on the later contractor invoice so AP can follow the job.',
+      'When the client adds a retaining wall mid-job, use /tools/change-order-template/.',
+    ],
+    faq: [
+      {
+        question: 'What should a landscaping estimate include?',
+        answer:
+          'Job address, scope (demo, grading, plants, mulch, hardscape, irrigation), unit-priced lines, tax, deposit, validity date, access notes, and clear exclusions such as tree work or sod.',
+      },
+      {
+        question: 'Should plants be lump sum or itemized?',
+        answer:
+          'Itemize or attach a plant list when counts matter. A lump sum is fine for small refresh jobs if the PDF still names species counts in the scope.',
+      },
+      {
+        question: 'Is this landscaping estimate template free?',
+        answer:
+          'Yes. Edit in the browser, preview live, and download PDF or DOCX with no account. Entries stay on your device.',
+      },
+      {
+        question: 'Landscaping estimate vs construction estimate?',
+        answer:
+          'Use this page for yard and hardscape bids. For multi-trade remodels with allowances, start at /tools/construction-estimate-template/.',
+      },
+      {
+        question: 'How long should a landscaping estimate stay valid?',
+        answer:
+          'Many crews use two to four weeks while nursery stock and fuel are stable. Put the calendar date on the PDF.',
+      },
+    ],
+    sources: estimateSources,
+  },
+  relatedSlugs: [
+    'construction-estimate-template',
+    'quote-estimate-generator',
+    'painting-estimate',
+    'flooring-estimate',
+    'contractor-invoice',
+  ],
+  publishedAt: '2026-11-25',
+  updatedAt: '2026-11-25',
+};
+
+/** Trade preset — flooring estimate (supports estimate / quote long-tails). */
+export const flooringEstimate: ToolDefinition = {
+  slug: 'flooring-estimate',
+  name: 'Flooring Estimate Template',
+  shortName: 'Flooring Estimate',
+  category: 'estimates-invoices',
+  primaryKeyword: 'flooring estimate template',
+  secondaryKeywords: [
+    'flooring estimate',
+    'flooring quote template',
+    'hardwood flooring estimate',
+    'LVP flooring quote',
+  ],
+  title: 'Flooring Estimate Template (Free Sq Ft Pricing)',
+  metaDescription:
+    'Flooring estimate with tear-out, underlayment, material, labor and trim. Free PDF/Word template with a worked LVP example.',
+  h1: 'Free Flooring Estimate Template',
+  answerFirst:
+    'A flooring estimate lists tear-out, prep, underlayment, material by the square foot, labor, and trim so the client can compare bids. Build yours here with live totals and PDF or DOCX export. Sample rates teach the math—use your supplier quotes.',
+  applicationCategory: 'BusinessApplication',
+  isLegalAdjacent: false,
+  documentTitle: 'Flooring Estimate',
+  toolVersion: '1.0',
+  formulaNote:
+    'Line-item amount = quantity × rate. Subtotal = sum of line amounts. Tax = subtotal × (tax rate ÷ 100). Deposit = total × (deposit % ÷ 100). Add waste to material quantity when the product line requires it.',
+  fields: [
+    { id: 'companyName', label: 'Company name', type: 'text', required: true, section: 'Your business' },
+    { id: 'companyAddress', label: 'Company address', type: 'textarea', rows: 2, section: 'Your business' },
+    { id: 'companyPhone', label: 'Phone', type: 'tel', section: 'Your business' },
+    { id: 'companyEmail', label: 'Email', type: 'email', section: 'Your business' },
+    { id: 'estimateNumber', label: 'Estimate #', type: 'text', required: true, section: 'Estimate details' },
+    { id: 'estimateDate', label: 'Date', type: 'date', required: true, section: 'Estimate details' },
+    { id: 'validUntil', label: 'Valid until', type: 'date', section: 'Estimate details' },
+    { id: 'clientName', label: 'Client name', type: 'text', required: true, section: 'Client' },
+    { id: 'clientAddress', label: 'Job / client address', type: 'textarea', rows: 2, section: 'Client' },
+    { id: 'projectName', label: 'Project name', type: 'text', required: true, section: 'Project' },
+    { id: 'scope', label: 'Scope of work', type: 'textarea', rows: 4, required: true, section: 'Project' },
+    { id: 'lineItems', label: 'Line items', type: 'lineItems', required: true, section: 'Pricing' },
+    { id: 'taxRate', label: 'Tax rate (%)', type: 'number', inputMode: 'decimal', min: 0, max: 100, step: 0.01, section: 'Pricing' },
+    { id: 'depositPercent', label: 'Deposit required (%)', type: 'number', inputMode: 'decimal', min: 0, max: 100, section: 'Pricing' },
+    { id: 'notes', label: 'Notes / exclusions', type: 'textarea', rows: 3, section: 'Notes' },
+  ],
+  defaults: {
+    companyName: 'LevelLine Floors',
+    companyAddress: '55 Mill Street\nColumbus, OH 43215',
+    companyPhone: '(614) 555-0198',
+    companyEmail: 'estimates@levelline.example',
+    estimateNumber: 'FL-2026-207',
+    estimateDate: '2026-11-25',
+    validUntil: '2026-12-09',
+    clientName: 'Sam Ortiz',
+    clientAddress: '419 Oak Street, Columbus, OH 43206',
+    projectName: 'Main floor LVP – living, hall, kitchen',
+    scope:
+      'Remove existing sheet vinyl in living, hall, and kitchen (approx. 680 sq ft measured). Prep slab, skim minor cracks, install underlayment as required by product, and install waterproof LVP with manufacturer-recommended waste. Reinstall existing base where reusable; new quarter-round included. Stairs, closets behind doors, and upstairs rooms not included.',
+    lineItems: [
+      { description: 'Tear-out & disposal – sheet vinyl', quantity: 680, unit: 'sq ft', rate: 1.1 },
+      { description: 'Slab prep / skim & level (minor)', quantity: 1, unit: 'ls', rate: 350 },
+      { description: 'Underlayment', quantity: 680, unit: 'sq ft', rate: 0.45 },
+      { description: 'LVP material (incl. ~8% waste)', quantity: 735, unit: 'sq ft', rate: 3.85 },
+      { description: 'Install labor – LVP', quantity: 680, unit: 'sq ft', rate: 2.75 },
+      { description: 'Quarter-round & transitions', quantity: 1, unit: 'ls', rate: 280 },
+    ],
+    taxRate: 7.5,
+    depositPercent: 35,
+    notes:
+      'Sample rates only—replace with your supplier and labor costs. Extra leveling beyond minor skim billed at a unit price after prep photos. Excludes furniture moving beyond light pieces, stairs, and moisture mitigation systems.',
+  },
+  content: {
+    howToUse: [
+      'Fill company and client details, then name the rooms and product line.',
+      'Spell out tear-out, prep limits, underlayment, waste percent, and trim.',
+      'Price material with waste and labor by the square foot (or by room).',
+      'Set tax and deposit, check the preview, and export PDF or DOCX.',
+    ],
+    whatToInclude: [
+      {
+        heading: 'What a flooring estimate should spell out',
+        body: 'List every room and measured square footage. Say what comes out (carpet, vinyl, hardwood), how much prep is included, and which underlayment the product requires. Show material quantity with waste so a low labor number is not hiding thin coverage.\n\nTransitions, stair nosings, and base/quarter-round create punch-list fights—name them. Moisture testing on slabs belongs in scope when the product warranty requires it. For multi-trade remodels, the construction estimate or construction quote path at /tools/construction-estimate-template/ may fit better.',
+      },
+      {
+        heading: 'Waste, stairs, and change orders',
+        body: 'Add manufacturer waste (often 5–10% on plank products) on the material line, not as a surprise on install day. Stairs and landings usually need separate labor rates. When the client upgrades plank thickness mid-job, use /tools/change-order-template/ before you order more boxes.\n\nAfter acceptance, bill the deposit on /tools/contractor-invoice/. Line-item math is explained in /guides/line-item-totals-explained/.',
+      },
+    ],
+    workedExample: {
+      heading: 'Worked example: 680 sq ft LVP main floor (illustrative)',
+      body: 'LevelLine Floors quotes Sam Ortiz for living, hall, and kitchen—about 680 measured sq ft. Sample math: tear-out 680 × $1.10, prep $350, underlayment 680 × $0.45, material 735 × $3.85 (waste included), labor 680 × $2.75, trim $280. Tax at a local rate you confirm; 35% deposit to order product. Change every figure to your costs before you send it.',
+    },
+    commonMistakes: [
+      'Material quantity that matches measured area with no waste.',
+      'Omitting transitions and quarter-round.',
+      'No prep limit, then eating major leveling for free.',
+      'Silent stair exclusion when the client expected them.',
+    ],
+    tips: [
+      'Photo slab cracks and moisture meter readings before you lock a price.',
+      'Match product SKU on the estimate and the later invoice.',
+      'For a mixed service quote outside flooring, use /tools/quote-estimate-generator/.',
+    ],
+    faq: [
+      {
+        question: 'What should a flooring estimate include?',
+        answer:
+          'Rooms and sq ft, tear-out, prep limits, underlayment, material with waste, install labor, trim/transitions, tax, deposit, validity date, and exclusions such as stairs.',
+      },
+      {
+        question: 'How much waste should I add?',
+        answer:
+          'Follow the manufacturer. Many plank products need about 5–10% extra for cuts and defects. Show the higher material quantity on the PDF.',
+      },
+      {
+        question: 'Is this flooring estimate template free?',
+        answer:
+          'Yes. Fill it in the browser, preview live, and download PDF or DOCX with no signup.',
+      },
+      {
+        question: 'Flooring estimate vs construction quote?',
+        answer:
+          'Use this preset for floor-only bids. For whole-home remodels with allowances across trades, use /tools/construction-estimate-template/ (also used as a construction quote generator).',
+      },
+      {
+        question: 'Should tear-out be a separate line?',
+        answer:
+          'Yes. Tear-out cost depends on the existing floor and disposal. A separate line helps clients compare remodel vs overlay bids.',
+      },
+    ],
+    sources: estimateSources,
+  },
+  relatedSlugs: [
+    'construction-estimate-template',
+    'quote-estimate-generator',
+    'landscaping-estimate',
+    'painting-estimate',
+    'contractor-invoice',
+  ],
+  publishedAt: '2026-11-25',
+  updatedAt: '2026-11-25',
 };

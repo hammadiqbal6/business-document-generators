@@ -33,35 +33,40 @@ const hubCopy: Record<
   'estimates-invoices': {
     title: 'Free Estimate & Invoice Templates (PDF)',
     description:
-      'Free estimate, quote, invoice, receipt and work order templates for contractors and small businesses. PDF/Word, no signup.',
+      'Free contractor estimate, quote, invoice, receipt and work order templates—construction, roofing, painting, landscaping, flooring and more. PDF/Word, no signup.',
     intro:
-      'Start with the free quote & estimate generator when you need a priced PDF today, then move to invoices, receipts, and work orders as the job progresses. Also here: construction, roofing, and painting estimates, change orders, purchase orders, timesheets, progress invoices, cleaning and catering quotes—all with live preview and PDF/DOCX export.',
+      'Start with the free quote & estimate generator when you need a priced PDF today, then move to invoices, receipts, and work orders as the job progresses. Also here: construction quotes/estimates, roofing, painting, landscaping, and flooring presets, change orders, purchase orders, timesheets, progress invoices, cleaning and catering quotes—all with live preview and PDF/DOCX export for contractors and freelancers.',
     whenToUse:
-      'Lead with the free quote & estimate generator for mixed service scopes. Use the construction estimate template for remodel bids with allowances, the roofing or painting estimate presets for trade-specific line items, the change-order template when scope shifts after approval, the purchase-order template when buying materials, the timesheet when tracking hours, the free invoice generator for contractors for deposits and line-item billing, the progress invoice generator for contract draws with retainage, cleaning or catering tools when line items are service packages, and the receipt or work order when you need a simple confirmation or job ticket.',
+      'Lead with the free quote & estimate generator for mixed service scopes. Use the construction estimate template as your construction quote generator for remodel bids with allowances; roofing, painting, landscaping, or flooring presets for trade-specific line items; the change-order template when scope shifts after approval; the purchase-order template when buying materials; the timesheet when tracking hours; the free invoice generator for contractors for deposits and line-item billing; the progress invoice generator for contract draws with retainage; cleaning or catering tools when line items are service packages; and the receipt or work order when you need a simple confirmation or job ticket.',
     whatFor: [
-      'An estimate or quote proposes price and scope before work starts so the client can approve (or revise) before you mobilize.',
-      'An invoice requests payment for a deposit, progress draw, or completed work and should match what was previously agreed.',
+      'An estimate or quote proposes price and scope before work starts so the client can approve (or revise) before you mobilize—critical for contractors comparing labor and materials across bids.',
+      'An invoice requests payment for a deposit, progress draw, or completed work and should match what was previously agreed on the estimate or quote.',
       'A receipt confirms money already received; a work order tells the crew what to do on site without doubling as a tax invoice.',
+      'Trade presets (roofing, painting, landscaping, flooring) reuse the same commercial math with product-specific defaults so freelancers and specialty crews are not starting from a blank kitchen remodel sample.',
     ],
     whatToInclude: [
       'Parties and contact details, dates, and a clear document number or revision label.',
       'Line items with units, quantities, and rates—plus tax, deposits, and balance due when you are billing.',
       'Validity or payment terms, exclusions or allowances, and how change orders will be handled.',
+      'For construction quotes: measurable scope, labor vs materials where helpful, and written assumptions about access and owner-supplied items.',
     ],
     commonMistakes: [
       'Sending an invoice before the client accepted an estimate (or sending an estimate that looks like a demand for payment).',
       'Omitting tax, deposit math, or a due date so the client cannot tell what is still owed.',
       'Vague line items (“misc labor”) that invite disputes—name rooms, packages, or phases instead.',
+      'Using one generic remodel sample for a specialty trade when a roofing, flooring, or landscaping preset would show the right units.',
     ],
     workedExample:
-      'A remodeler sends a construction estimate with allowances for tile, then a contractor invoice for a 30% deposit after acceptance, and later a receipt when the deposit clears. Each document reuses the same party names and job address so the paper trail stays consistent.',
+      'A remodeler sends a construction estimate (also labeled as a construction quote) with allowances for tile, then a contractor invoice for a 30% deposit after acceptance, and later a receipt when the deposit clears. A landscaper or flooring crew can start from the matching trade preset so plant counts or waste square footage already sit on the PDF. Each document reuses the same party names and job address so the paper trail stays consistent.',
     whichTable: {
       headers: ['Need', 'Use this tool', 'Why'],
       rows: [
         { need: 'Free instant quote / estimate', toolLabel: 'Free quote & estimate generator', toolSlug: 'quote-estimate-generator', why: 'Mixed scopes with validity date' },
-        { need: 'Remodel bid with allowances', toolLabel: 'Free construction estimate template', toolSlug: 'construction-estimate-template', why: 'Scope + labor/materials + deposit' },
+        { need: 'Construction quote / remodel bid', toolLabel: 'Free construction estimate template', toolSlug: 'construction-estimate-template', why: 'Scope + labor/materials + deposit' },
         { need: 'Roof replacement / repair bid', toolLabel: 'Roofing estimate template', toolSlug: 'roofing-estimate', why: 'Tear-off, squares, flashing, disposal' },
         { need: 'Interior or exterior paint bid', toolLabel: 'Painting estimate template', toolSlug: 'painting-estimate', why: 'Prep, primer, coats, rooms/sq ft' },
+        { need: 'Yard / hardscape bid', toolLabel: 'Landscaping estimate template', toolSlug: 'landscaping-estimate', why: 'Demo, plants, mulch, pavers' },
+        { need: 'Flooring install bid', toolLabel: 'Flooring estimate template', toolSlug: 'flooring-estimate', why: 'Tear-out, underlayment, sq ft + waste' },
         { need: 'Scope change after approval', toolLabel: 'Change order template', toolSlug: 'change-order-template', why: 'Delta price, revised timeline' },
         { need: 'Buy materials / supplies', toolLabel: 'Purchase order template', toolSlug: 'purchase-order-template', why: 'Vendor PO with quantities' },
         { need: 'Track labor hours', toolLabel: 'Timesheet template', toolSlug: 'timesheet-template', why: 'Daily/weekly hours PDF' },
@@ -93,7 +98,7 @@ const hubCopy: Record<
       {
         question: 'Where do I start for a free estimate generator?',
         answer:
-          'Use the free quote & estimate generator for mixed service scopes. For remodel bids with allowances, use the construction estimate template instead.',
+          'Use the free quote & estimate generator for mixed service scopes. For remodel bids or a construction quote with allowances, use the construction estimate template instead. Specialty crews can open roofing, painting, landscaping, or flooring presets.',
       },
       {
         question: 'Do these tools store my client data?',
@@ -105,11 +110,11 @@ const hubCopy: Record<
   contracts: {
     title: 'Free Contract Templates: Video, Service, Photo, NDA',
     description:
-      'Free editable contract templates: videography, photography, service agreement, freelance, NDA, event vendor and contractor. PDF/Word, no signup.',
+      'Free editable contract templates: videography, wedding video, video production, photography, service agreement, freelance, NDA and more. PDF/Word, no signup.',
     intro:
-      'Start with a videography or photography contract when usage rights matter, or a service agreement for ongoing B2B work. Also here: freelance web design, event/wedding vendor, independent contractor, simple NDA, and lien waiver samples you can edit—then export PDF or DOCX. Not attorney-reviewed.',
+      'Start with a videography, wedding videography, or video production contract when usage rights matter, or a photography contract for stills. Also here: service agreements for freelancers and B2B retainers, freelance web design, event/wedding vendor, independent contractor, simple NDA, and lien waiver samples you can edit—then export PDF or DOCX. Not attorney-reviewed.',
     whenToUse:
-      'Use photography or videography contracts when usage rights matter, the freelance web design contract for project milestones and IP, the event/wedding vendor contract for venue dates and force majeure style notes, the independent contractor agreement or service agreement for broader B2B scopes, the simple NDA when you only need a mutual confidentiality starting point, and the lien waiver generator for conditional/unconditional progress or final releases on construction pay apps.',
+      'Use the general videography contract for mixed video jobs; the wedding videography contract template for ceremony-to-reception coverage; the video production contract for brand films and milestone billing; photography contracts when still usage rights matter; the freelance web design contract for project milestones and IP; the event/wedding vendor contract for venue dates and force majeure style notes; the independent contractor agreement or service agreement for broader B2B scopes; the simple NDA when you only need a mutual confidentiality starting point; and the lien waiver generator for conditional/unconditional progress or final releases on construction pay apps.',
     whatFor: [
       'Service contracts set deliverables, payment schedule, cancellation, and who owns the work product after delivery.',
       'Creative contracts also need usage or licensing language so clients know how they may publish photos or video.',
@@ -131,7 +136,9 @@ const hubCopy: Record<
       headers: ['Situation', 'Use this tool', 'Focus'],
       rows: [
         { need: 'Photo shoot or wedding day', toolLabel: 'Photography contract', toolSlug: 'photography-contract-template', why: 'Coverage hours, usage, retainer' },
-        { need: 'Video project', toolLabel: 'Videography contract', toolSlug: 'videography-contract', why: 'Revisions, music, raw footage' },
+        { need: 'General video project', toolLabel: 'Videography contract', toolSlug: 'videography-contract', why: 'Revisions, music, raw footage' },
+        { need: 'Wedding day film', toolLabel: 'Wedding videography contract', toolSlug: 'wedding-videography-contract-template', why: 'Timeline, highlight, rain plan' },
+        { need: 'Brand / commercial video', toolLabel: 'Video production contract', toolSlug: 'video-production-contract', why: 'Milestones, channel license' },
         { need: 'Website build', toolLabel: 'Web design contract', toolSlug: 'freelance-web-design-contract', why: 'Milestones, IP, content deadlines' },
         { need: 'Wedding / event vendor', toolLabel: 'Event vendor contract', toolSlug: 'event-wedding-vendor-contract', why: 'Date, overtime, force majeure' },
         { need: 'Hire a 1099 contractor', toolLabel: 'Independent contractor agreement', toolSlug: 'independent-contractor-agreement', why: 'Scope, payment, IP starting point' },
@@ -144,7 +151,7 @@ const hubCopy: Record<
       {
         question: 'Which contract do I need?',
         answer:
-          'Match the job: photography or videography for creative shoots with usage rights; service agreement or independent contractor for broader B2B scopes; freelance web design for site builds; event/wedding vendor for date-bound gigs; NDA for confidentiality only; lien waiver for construction pay apps.',
+          'Match the job: photography for stills; wedding videography for ceremony-to-reception films; video production for brand/commercial work; general videography when the job spans both; service agreement or independent contractor for broader B2B scopes; freelance web design for site builds; event/wedding vendor for date-bound gigs; NDA for confidentiality only; lien waiver for construction pay apps.',
       },
       {
         question: 'What is the difference between a contract and an agreement?',
@@ -176,28 +183,31 @@ const hubCopy: Record<
   forms: {
     title: 'Free Client Forms: Tattoo Consent & Rental Application',
     description:
-      'Free fillable client forms: tattoo consent and rental application. PDF export in your browser.',
+      'Free fillable client forms for studios and landlords: tattoo consent and rental application with PDF/Word export in your browser—no signup.',
     intro:
-      'Capture client acknowledgements and rental screening details with fillable forms you preview live and export as PDF or DOCX—then follow your local health or fair-housing rules. Timesheets and purchase orders live under Estimates & Invoices, not this forms hub.',
+      'Capture client acknowledgements and rental screening details with fillable forms you preview live and export as PDF or DOCX—then follow your local health or fair-housing rules. These forms sit beside Docuklin’s contractor and freelancer paperwork (estimates, invoices, contracts) but keep operational records separate from pricing PDFs. Timesheets and purchase orders live under Estimates & Invoices, not this forms hub.',
     whenToUse:
-      'The tattoo consent form is for studio risk acknowledgements and aftercare notes. The rental application gathers employment, income, and household details for screening—pair it with official fair-housing guidance and your local landlord-tenant rules.',
+      'The tattoo consent form is for studio risk acknowledgements and aftercare notes before a session. The rental application gathers employment, income, and household details for screening—pair it with official fair-housing guidance and your local landlord-tenant rules. If you also need to price a job or bill a client, jump to the estimates & invoices hub rather than stretching a consent form into an invoice.',
     whatFor: [
-      'Consent forms document that a client received risk and aftercare information before a body-art procedure—rules vary by jurisdiction.',
-      'Rental applications collect screening details so a landlord can evaluate an applicant; they do not create a tenancy by themselves.',
+      'Consent forms document that a client received risk and aftercare information before a body-art procedure—rules vary by jurisdiction and are not medical advice.',
+      'Rental applications collect screening details so a landlord can evaluate an applicant; they do not create a tenancy by themselves and must follow fair-housing rules.',
       'Both are operational records you should store in your own system after export—this site does not keep form submissions.',
+      'Freelancers and small contractors often keep these alongside contracts and invoices; use the matching hubs when you need pricing or agreement language instead.',
     ],
     whatToInclude: [
       'Studio or property identity, client/applicant name, date, and contact details.',
       'For tattoo consent: procedure description, risk acknowledgements, aftercare notes, and signature lines your local rules require.',
       'For rental applications: household members, employment/income fields, authorization to screen, and any locally required disclosures.',
+      'A retention note in your own process—export PDF/DOCX and file it where you keep other client records.',
     ],
     commonMistakes: [
       'Using one generic consent form without checking state or county body-art requirements.',
       'Treating a completed rental application as a lease, or collecting screening data without a lawful purpose and fair-housing compliance.',
       'Leaving filled PDFs only in browser drafts instead of exporting into your retention process.',
+      'Asking for information your local rules forbid (for example certain protected-class questions on rental forms).',
     ],
     workedExample:
-      'A studio prints a tattoo consent PDF with aftercare notes before a session. Separately, a small landlord exports a rental application, pairs it with their screening criteria checklist, and keeps the file with other applicant records—not on this website.',
+      'A studio prints a tattoo consent PDF with aftercare notes before a session, then keeps the signed copy with the appointment record. Separately, a small landlord exports a rental application, pairs it with their screening criteria checklist and HUD fair-housing notes, and stores the file with other applicant records—not on this website. When the same landlord later hires a contractor for a unit turn, they price the work from the estimates hub and keep those PDFs in a different folder.',
     whichTable: {
       headers: ['Need', 'Use this tool', 'Remember'],
       rows: [
@@ -226,38 +236,46 @@ const hubCopy: Record<
         answer:
           'Start with HUD Fair Housing materials and our rental fair-housing guide, then confirm state and local requirements.',
       },
+      {
+        question: 'Do these forms replace contracts or invoices?',
+        answer:
+          'No. Consent and rental applications are operational records. For pricing and payment, use the estimates & invoices hub; for service terms, use the contracts hub.',
+      },
     ],
   },
   'creative-templates': {
     title: 'Podcast Script & Real Estate Flyer Templates (Free)',
     description:
-      'Free podcast episode script planner and real estate flyer maker. PDF export, no signup.',
+      'Free podcast episode script planner and real estate / property flyer maker for creators and agents. PDF/Word export in your browser, no signup.',
     intro:
-      'Structure a podcast episode or a one-page property flyer without starting from a blank page—fill fields, preview the layout, then download PDF or DOCX.',
+      'Structure a podcast episode or a one-page property flyer without starting from a blank page—fill fields, preview the layout, then download PDF or DOCX. These creative tools sit alongside Docuklin’s contractor and freelancer document generators when you need show notes or listing handouts rather than estimates or contracts.',
     whenToUse:
-      'Use the podcast script when you need cold open, segment timings, and CTA placeholders. Use the real estate flyer when you want beds, baths, price, and highlight bullets laid out for a one-page handout.',
+      'Use the podcast script when you need cold open, segment timings, guest prompts, and CTA placeholders before record day. Use the real estate flyer (property flyer maker) when you want beds, baths, price, and highlight bullets laid out for a one-page open-house or email handout. For listing agreements or vendor contracts, switch to the contracts hub instead of stretching a flyer into a legal form.',
     whatFor: [
-      'A podcast script (or run-of-show) keeps openings, segments, and calls-to-action on time so recording stays focused.',
-      'A real estate flyer is a marketing handout for open houses or email—distinct from an MLS sheet or purchase contract.',
-      'Both tools help you draft layout and wording; final brokerage, MLS, or show-notes rules still apply outside this site.',
+      'A podcast script (or run-of-show) keeps openings, segments, sponsor reads, and calls-to-action on time so recording stays focused.',
+      'A real estate flyer is a marketing handout for open houses or email—distinct from an MLS sheet, purchase contract, or contractor estimate.',
+      'Both tools help you draft layout and wording; final brokerage, MLS, endorsement disclosure, or show-notes rules still apply outside this site.',
+      'Creators who also sell services can pair a finished script outline with Docuklin invoices or service agreements when a client sponsors an episode.',
     ],
     whatToInclude: [
-      'Podcast: episode title, cold open, timed segments, guest prompts, and a clear CTA or show-notes list.',
+      'Podcast: episode title, cold open, timed segments, guest prompts, sponsor-read slots, and a clear CTA or show-notes list.',
       'Flyer: headline, price, beds/baths/sq ft, feature bullets, agent contact, and any required brokerage disclosure text.',
-      'Export PDF for sharing or DOCX when you need to keep editing in Word.',
+      'Export PDF for sharing or DOCX when you need to keep editing in Word or your notes app.',
+      'A short checklist of photos or audio assets you will add after export (this generator does not host media).',
     ],
     commonMistakes: [
       'Over-scripting interview episodes so the conversation never breathes—use a run-of-show instead of a full teleprompter script.',
       'Shipping a flyer without brokerage or MLS-required disclosures, or using photos without usage rights.',
       'Treating the flyer generator as a substitute for listing-agreement paperwork.',
+      'Leaving sponsor or endorsement disclosures off the script when a paid read is involved.',
     ],
     workedExample:
-      'A host fills cold open, three segment prompts, and a newsletter CTA in the podcast script, then exports DOCX into their notes app. An agent fills beds, price, and highlights in the flyer tool, exports PDF for an open-house stack, and adds photos in their design tool afterward.',
+      'A host fills cold open, three segment prompts, a mid-roll sponsor slot, and a newsletter CTA in the podcast script, then exports DOCX into their notes app and marks timestamps after recording. An agent fills beds, price, and highlights in the flyer tool, exports PDF for an open-house stack, and adds photos in their design tool afterward. If the agent also hires a photographer, they pull a photography contract from the contracts hub rather than inventing usage terms on the flyer.',
     whichTable: {
       headers: ['Goal', 'Use this tool', 'Output'],
       rows: [
         { need: 'Plan an episode', toolLabel: 'Podcast script', toolSlug: 'podcast-script-template', why: 'Cold open, segments, CTA outline' },
-        { need: 'Market a listing', toolLabel: 'Real estate flyer', toolSlug: 'real-estate-flyer-template', why: 'One-page PDF/DOCX handout' },
+        { need: 'Market a listing / property flyer', toolLabel: 'Real estate flyer', toolSlug: 'real-estate-flyer-template', why: 'One-page PDF/DOCX handout' },
       ],
     },
     faq: [
@@ -280,6 +298,11 @@ const hubCopy: Record<
         question: 'Do these tools require an account?',
         answer:
           'No signup. Everything runs in your browser with optional local drafts only.',
+      },
+      {
+        question: 'Where do contractor estimates and contracts live?',
+        answer:
+          'Pricing PDFs are under the estimates & invoices hub; agreements are under the contracts hub. This creative hub stays on scripts and flyers.',
       },
     ],
   },

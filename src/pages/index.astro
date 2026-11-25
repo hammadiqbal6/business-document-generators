@@ -2,12 +2,13 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import AdSlot from '../components/ads/AdSlot.astro';
 import { siteConfig } from '../config/site';
-import { CATEGORY_META, getFeaturedTools, getToolsByCategory } from '../data/tools';
+import { CATEGORY_META, getFeaturedTools, getToolsByCategory, allTools } from '../data/tools';
 import type { ToolCategory } from '../data/tools/types';
 import { homeGraphJsonLd } from '../lib/seo';
 
 const featured = getFeaturedTools();
 const cats = Object.keys(CATEGORY_META) as ToolCategory[];
+const toolCount = allTools.length;
 ---
 <BaseLayout
   title="Free Estimate, Invoice & Contract Generator, No Signup"
@@ -48,7 +49,7 @@ const cats = Object.keys(CATEGORY_META) as ToolCategory[];
   <section aria-labelledby="all-tools-h">
     <h2 id="all-tools-h">All templates by category</h2>
     <p>
-      Every generator on {siteConfig.siteName} is listed below. Featured cards above are a shortlist;
+      Every generator on {siteConfig.siteName} is listed below ({toolCount} tools). Featured cards above are a shortlist;
       open a hub for category guidance, or jump straight to a template.
     </p>
     {cats.map((c) => {
@@ -82,15 +83,53 @@ const cats = Object.keys(CATEGORY_META) as ToolCategory[];
       confirm payment with a
       <a href="/tools/receipt-generator/">free receipt generator</a>,
       or price a remodel with a
-      <a href="/tools/construction-estimate-template/">construction estimate template</a>.
-      Also: cleaning and catering quotes, photography and videography contracts, simple NDAs, tattoo
-      consent forms, rental applications, podcast scripts, and real estate flyers.
+      <a href="/tools/construction-estimate-template/">construction estimate / construction quote template</a>.
+      Trade presets cover
+      <a href="/tools/roofing-estimate/">roofing</a>,
+      <a href="/tools/painting-estimate/">painting</a>,
+      <a href="/tools/landscaping-estimate/">landscaping</a>, and
+      <a href="/tools/flooring-estimate/">flooring</a>
+      estimates with product-specific line items.
+    </p>
+    <p>
+      Creative and service freelancers can open a
+      <a href="/tools/photography-contract-template/">photography contract</a>,
+      <a href="/tools/videography-contract/">videography contract</a>,
+      <a href="/tools/wedding-videography-contract-template/">wedding videography contract</a>,
+      <a href="/tools/video-production-contract/">video production contract</a>,
+      <a href="/tools/service-agreement-template/">service agreement</a>,
+      or simple NDA. Also: cleaning and catering quotes, tattoo consent forms, rental applications,
+      podcast scripts, and real estate flyers.
     </p>
     <p>
       Choose a category below, or open the
       <a href="/hubs/estimates-invoices/">estimates &amp; invoices hub</a>
-      for quote-to-invoice workflows. Every tool uses the same privacy model: validation, preview, and
+      for quote-to-invoice workflows and the
+      <a href="/hubs/contracts/">contracts hub</a>
+      for video, photo, and service agreements. Every tool uses the same privacy model: validation, preview, and
       PDF/DOCX export run entirely client-side.
+    </p>
+  </section>
+
+  <section>
+    <h2>How a contractor or freelancer usually uses these tools</h2>
+    <ol>
+      <li>
+        Price the job with an estimate or quote (flagship free estimate generator, construction quote/estimate, or a trade preset).
+      </li>
+      <li>
+        Lock scope with a matching contract when the work needs usage rights, milestones, or cancellation terms.
+      </li>
+      <li>
+        Bill deposits and progress with a contractor invoice or progress invoice; confirm payments with a receipt.
+      </li>
+      <li>
+        Document scope changes on a change order before you buy extras or extend the schedule.
+      </li>
+    </ol>
+    <p>
+      Guides under <a href="/guides/">How-to guides</a> walk through line-item math, photography and videography clauses,
+      and invoice vs estimate wording without inventing legal requirements.
     </p>
   </section>
 

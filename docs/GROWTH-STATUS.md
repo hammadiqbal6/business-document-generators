@@ -4,13 +4,13 @@ Living tracker for Docuklin SEO and growth work. **Read this before planning gro
 
 Settled technical SEO policy (IndexNow wiring, jev-seo false alarms, title/schema rules) still lives under **SEO state** in `AGENTS.md`. This file holds current metrics and the work queue.
 
-Last updated: **2026-11-22**
+Last updated: **2026-11-25**
 
 ---
 
 ## Baseline metrics
 
-As of **2026-11-17** (owner-reported GSC/GA4 window) unless noted.
+As of **2026-11-17** (owner-reported GSC/GA4 window) unless noted; **3-month GSC** row from owner on **2026-11-25**.
 
 | Source | Fact |
 |--------|------|
@@ -19,8 +19,9 @@ As of **2026-11-17** (owner-reported GSC/GA4 window) unless noted.
 | GA4 | Measurement ID `G-HR4DDMD97H` (property `559564505`) |
 | Build env | Build-time `PUBLIC_*` in Workers Builds env (production env overrides `siteDefaults`) |
 | GSC (last 28 days → 2026-11-17) | **0** clicks, **486** impressions, avg position **58.9** |
+| GSC (last 3 months → ~2026-11-25, owner) | **1** click, **763** impressions, avg position **62.4**; top queries: estimate generator, estimate generator free, wedding videography contract, construction quote generator, free estimate, video production contract; top pages: `/tools/videography-contract/`, `/hubs/contracts/`, `/tools/quote-estimate-generator/` |
 | Indexing (GSC) | **54** pages indexed, **7** not indexed (5 Excluded by noindex tag; 2 Discovered – currently not indexed); earlier “Page with redirect” notices on intentional aliases |
-| GA4 (28 days) | **3** users (GA4 only fires after cookie consent Accept; Cloudflare page views include bots) |
+| GA4 (28 days) | **3** users (pre–Consent Mode always-load; Cloudflare page views include bots) |
 | Domain rating | Ahrefs-style DR **2** (owner-reported, earlier window) |
 
 ---
@@ -29,7 +30,13 @@ As of **2026-11-17** (owner-reported GSC/GA4 window) unless noted.
 
 In-repo and confirmed off-repo completions.
 
-- **2026-11-22 — Sitewide SEO plan + AEO rules (this PR):**
+- **2026-11-25 — SEO authority / Consent Mode / GSC variants (this PR):**
+  - **GA4 Consent Mode v2:** always load `gtag.js` on idle with denied defaults (`ad_storage`, `ad_user_data`, `ad_personalization`, `analytics_storage`); Accept → `consent update` granted; Reject keeps denied. Cookies + privacy copy updated. No second CMP.
+  - **Author / sameAs:** defaults `PUBLIC_AUTHOR_SAME_AS` = GitHub + Reddit `u/ihammadiqbal117` (already in growth notes); About bio block expanded from in-repo facts only; hooks for LinkedIn/X/org sameAs/`PUBLIC_AUTHOR_BIO` documented.
+  - **Variants (additive, no URL/title/H1 churn on existing pages):** wedding videography contract template, video production contract, landscaping estimate, flooring estimate; construction estimate gained construction-quote FAQ/section without title change; near-page-1 guides expanded (`photography-contract-clauses`, `line-item-totals-explained`, `podcast-script-structure`); wedding videography guide CTA → new wedding tool.
+  - **Thin pages:** thicker `/`, `/methodology/`, `/hubs/forms/`, `/hubs/creative-templates/` (+ estimates/contracts hub rows); forms/creative meta descriptions lengthened to ~140–160 chars.
+  - Wired: `allTools`, hubs, `toolGuideMap`, `KEYWORD-MAP`, llms question map, Vitest `tests/gsc-variant-tools.test.ts`. Tool count 26 → 30.
+- **2026-11-22 — Sitewide SEO plan + AEO rules (earlier PR):**
   - Tool titles/H1s/metas/FAQs across estimates, contracts, forms; expanded videography, simple NDA, service agreement; flagship estimate leads with “Free Estimate Generator” / no signup, no watermark.
   - Merged `how-to-create-a-contractor-estimate` → `construction-estimate-that-wins-jobs` (301 in `_redirects`); business-estimate quote angle; invoice-vs-estimate covers quote; new guides `how-to-price-a-job`, `what-to-include-in-a-service-agreement`, `service-agreement-vs-contract` (+ KEYWORD-MAP, toolGuideMap, llms).
   - GSC generative AI pages strengthened (answer-first H2s, tables, tool links): `line-item-totals-explained`, `tattoo-consent-documentation` (URL kept), `work-order-vs-invoice-vs-estimate`.
@@ -134,13 +141,12 @@ In-repo and confirmed off-repo completions.
 
 Prioritized open work. Owner-confirmed gaps preferred over guesses.
 
-1. **After merge/deploy of this SEO plan PR:** run IndexNow (`npm run indexnow` / Workers Builds) — do not change the key; then GSC URL Inspection → Request indexing for new guides (`how-to-price-a-job`, `what-to-include-in-a-service-agreement`, `service-agreement-vs-contract`), refreshed flagship/tools/hubs, and redirect targets (`construction-estimate-that-wins-jobs`, `quote-estimate-generator`). Confirm cookies/privacy/terms stay noindex and out of sitemap; embeds/404 stay intentional noindex.
-2. **Construction lien waiver basics guide** (SEO-GUIDE content calendar) — still open.
-3. **Bing Webmaster verification** — currently **unset** (owner).
-4. **Author / `sameAs` env vars** — currently **unset** (owner).
+1. **After merge/deploy of this PR:** run IndexNow (`npm run indexnow` / Workers Builds) — do not change the key; then GSC URL Inspection → Request indexing for new tools (`wedding-videography-contract-template`, `video-production-contract`, `landscaping-estimate`, `flooring-estimate`) and substantially thickened pages (home, hubs, methodology, expanded guides). Confirm cookies/privacy/terms stay noindex and out of sitemap; embeds/404 stay intentional noindex.
+2. **Owner must supply (when real profiles exist):** LinkedIn URL(s), X/Twitter profile URL + `PUBLIC_TWITTER_HANDLE`, optional longer `PUBLIC_AUTHOR_BIO`, optional brand `PUBLIC_ORG_SAME_AS`. Defaults already ship GitHub + Reddit; do not invent missing socials.
+3. **Construction lien waiver basics guide** (SEO-GUIDE content calendar) — still open.
+4. **Bing Webmaster verification** — currently **unset** (owner).
 5. **Backlinks / directory / embed outreach** — ongoing off-page; site still has essentially none beyond minor listings.
 6. **Reddit:** pause promo/launch posts until karma recovers.
-7. **GA4 Consent Mode v2** cookieless pings (optional measurement without Accept).
-8. **Uneed re-review** / **TinyLaunch resubmit** after YardTally **2026-12-07** (owner).
-9. **AdSense** — status **Getting ready**; keep publishing.
-10. **Weekly GSC check** — record deltas in Baseline (do not invent numbers). No geotargeting from country mix.
+7. **Uneed re-review** / **TinyLaunch resubmit** after YardTally **2026-12-07** (owner).
+8. **AdSense** — status **Getting ready**; keep publishing.
+9. **Weekly GSC check** — record deltas in Baseline (do not invent numbers). No geotargeting from country mix. After Consent Mode always-load ships, re-check GA4 users (owner).

@@ -39,9 +39,10 @@ export const DEFAULT_AUTHOR_EMAIL = DEFAULT_CONTACT_EMAIL;
 /**
  * Honest short bio for Person / About.
  * Owner: override with PUBLIC_AUTHOR_BIO for a longer personal bio (no invented credentials).
+ * Only facts already used on this site (one-person maintainer, client-side tools, cited public sources).
  */
 export const DEFAULT_AUTHOR_BIO =
-  'Builds and maintains free in-browser document tools from published public sources, with citations on each page. Not a lawyer, accountant, or licensed professional advisor.';
+  'Builds and maintains Docuklin and related free in-browser tool sites. Turns published public sources (IRS, SBA, Cornell LII, HUD, CDC, U.S. Copyright Office, FTC) into practical generators with citations on each page. One-person project—not a lawyer, accountant, or licensed professional advisor.';
 
 /** Primary profile URL (Person @id / sameAs). */
 export const DEFAULT_AUTHOR_URL = 'https://github.com/hammadiqbal6';
@@ -49,10 +50,16 @@ export const DEFAULT_AUTHOR_URL = 'https://github.com/hammadiqbal6';
 /**
  * Comma-separated profile URLs for Person.sameAs (and default Organization.sameAs).
  * First entry should usually match DEFAULT_AUTHOR_URL.
+ * Only URLs already documented in-repo (GitHub + Reddit u/ihammadiqbal117 from growth notes).
+ * Owner: append LinkedIn / X (Twitter) via PUBLIC_AUTHOR_SAME_AS when those profiles exist—do not invent them.
  */
-export const DEFAULT_AUTHOR_SAME_AS = DEFAULT_AUTHOR_URL;
+export const DEFAULT_AUTHOR_SAME_AS =
+  'https://github.com/hammadiqbal6,https://www.reddit.com/user/ihammadiqbal117/';
 
-/** Comma-separated Organization.sameAs; empty → reuse author sameAs. */
+/**
+ * Comma-separated Organization.sameAs; empty → reuse author sameAs.
+ * Owner: set PUBLIC_ORG_SAME_AS to brand social URLs (LinkedIn company page, X) when available.
+ */
 export const DEFAULT_ORG_SAME_AS = '';
 
 /** Footer © owner; empty → use site name. */

@@ -6,8 +6,10 @@ import {
   cleaningInvoice,
   constructionEstimate,
   contractorInvoice,
+  flooringEstimate,
   progressInvoice,
   invoiceLateFeeCalculator,
+  landscapingEstimate,
   paintingEstimate,
   purchaseOrderTemplate,
   quoteEstimate,
@@ -24,7 +26,9 @@ import {
   photographyContract,
   serviceAgreementTemplate,
   simpleNda,
+  videoProductionContract,
   videographyContract,
+  weddingVideographyContract,
 } from './contracts';
 import {
   podcastScript,
@@ -60,6 +64,10 @@ export const allTools: ToolDefinition[] = [
   invoiceLateFeeCalculator,
   roofingEstimate,
   paintingEstimate,
+  landscapingEstimate,
+  flooringEstimate,
+  weddingVideographyContract,
+  videoProductionContract,
 ];
 
 export function getToolBySlug(slug: string): ToolDefinition | undefined {
