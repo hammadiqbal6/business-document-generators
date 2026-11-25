@@ -35,10 +35,11 @@ const canonical = absoluteUrl(`/tools/${tool.slug}/`);
   </head>
   <body style="margin:0;padding:0.5rem;font-family:system-ui,sans-serif;">
     <h1 class="sr-only">{tool.h1}</h1>
-    <p style="font-size:0.85rem;margin:0 0 0.5rem;">
+    <p class="embed-credit" style="font-size:0.85rem;margin:0 0 0.5rem;">
       <a href={`/tools/${tool.slug}/`} target="_top" rel="noopener">{tool.name}</a>
       —
-      <a href={canonical} target="_top" rel="nofollow">Powered by {siteConfig.siteName}</a>
+      {/* Visible dofollow credit → canonical tool page (backlink support). */}
+      <a href={canonical} target="_top">Made with {siteConfig.siteName}</a>
     </p>
     <DocumentGeneratorLazy tool={tool} embed={true} />
   </body>

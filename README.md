@@ -1,5 +1,7 @@
 # Docuklin
 
+Live site: **[https://docuklin.com](https://docuklin.com)**
+
 Free **niche business document generators**: fill a form in the browser, live preview, export **PDF** or **DOCX**. Nothing is stored server-side; optional **localStorage** drafts stay on your device.
 
 Brand, domain, and related identity are configured via environment variables — see [`docs/CONFIGURATION.md`](docs/CONFIGURATION.md) and `.env.example`.
@@ -55,6 +57,19 @@ flowchart LR
 | Lien waiver | `/tools/lien-waiver-generator/` |
 
 Hubs: `/hubs/estimates-invoices/`, `/hubs/contracts/`, `/hubs/forms/`, `/hubs/creative-templates/`
+
+## Embed this tool
+
+Every tool page has an **Embed this tool** section with a copy-paste iframe snippet. The embeddable URL is `/tools/<slug>/embed/` (e.g. [https://docuklin.com/tools/quote-estimate-generator/embed/](https://docuklin.com/tools/quote-estimate-generator/embed/)).
+
+- Embed pages are `noindex, follow` and canonical to the parent tool.
+- A visible **Made with Docuklin** credit links to the canonical tool page (dofollow). Keep that line when you paste the snippet.
+- Example snippet shape:
+
+```html
+<iframe src="https://docuklin.com/tools/quote-estimate-generator/embed/" title="Free Estimate Generator" width="100%" height="720" loading="lazy" style="border:0;max-width:100%;"></iframe>
+<p>Made with <a href="https://docuklin.com/tools/quote-estimate-generator/">Docuklin</a></p>
+```
 
 ## Stack
 
@@ -149,6 +164,7 @@ Short mirror of [`docs/GROWTH-STATUS.md`](docs/GROWTH-STATUS.md). **Every PR mus
 - **GA4 Consent Mode v2 (this PR):** `Analytics.astro` always loads gtag on idle with denied defaults (cookieless pings); Accept grants `analytics_storage`; Reject keeps storage denied. Cookies/privacy copy updated. No existing URL/title/H1 changes.
 - **Author / sameAs (this PR):** defaults include GitHub + Reddit (`u/ihammadiqbal117`); About bio block strengthened from in-repo facts; env hooks for LinkedIn/X/`PUBLIC_AUTHOR_BIO` remain. Owner must still supply LinkedIn, X handle, longer bio when available.
 - **GSC-priority variants (this PR):** `/tools/wedding-videography-contract-template/`, `/tools/video-production-contract/`, `/tools/landscaping-estimate/`, `/tools/flooring-estimate/`; construction estimate quote-angle content (no title/H1 change); expanded near-page-1 guides; thicker hubs/home/methodology; forms/creative hub metas lengthened. Additive only—no redirects/merges.
+- **Embed backlink credit (this PR):** visible **Made with Docuklin** on embed pages + copy snippet → canonical tool URL, dofollow; README links https://docuklin.com and documents embed usage.
 - **Sitewide SEO plan (earlier):** tool titles/H1s/metas/FAQs; expanded videography / NDA / service agreement; contractor-estimate guide 301 → construction master; business-estimate quote angle; new guides `how-to-price-a-job`, `what-to-include-in-a-service-agreement`, `service-agreement-vs-contract`; hubs + `/tools/` title **Free Business Document Generators** with derived count; cookies/privacy/terms noindex; estimate URL + `/tools/:slug/null/` redirects; durable rules in `AGENTS.md`, `.cursor/rules/seo.mdc`, `.cursor/skills/add-seo-page/`.
 - **AI Overviews / GSC generative features:** strengthened answer-first + tool links on `line-item-totals-explained`, `tattoo-consent-documentation` (URL kept), `work-order-vs-invoice-vs-estimate`. No geotargeting changes (Nigeria impression share is data only).
 - **IndexNow docs:** clarified that new sitemap URLs and redirect targets are submitted post-deploy; key unchanged; GSC Request indexing after deploy (not run in this PR).

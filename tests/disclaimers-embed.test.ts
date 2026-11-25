@@ -49,16 +49,17 @@ describe('YMYL disclaimers', () => {
 });
 
 describe('embed attribution', () => {
-  it('ships a Powered by credit with rel="nofollow" in the copy snippet', () => {
+  it('ships a Made with credit (dofollow) in the copy snippet', () => {
     const src = readFileSync(resolve('src/components/content/EmbedSnippet.astro'), 'utf8');
-    expect(src).toMatch(/Powered by <a href="\$\{pageUrl\}" rel="nofollow">/);
+    expect(src).toMatch(/Made with <a href="\$\{pageUrl\}">/);
+    expect(src).not.toMatch(/Made with <a[^>]*rel="nofollow"/);
     expect(src).toContain('Embed this tool');
   });
 
-  it('marks the embed-page credit as nofollow', () => {
+  it('shows a visible Made with credit on the embed page (dofollow)', () => {
     const src = readFileSync(resolve('src/pages/tools/[slug]/embed.astro'), 'utf8');
-    expect(src).toMatch(/rel="nofollow"/);
-    expect(src).toMatch(/Powered by \{siteConfig\.siteName\}/);
+    expect(src).toMatch(/Made with \{siteConfig\.siteName\}/);
+    expect(src).not.toMatch(/Made with[\s\S]{0,80}rel="nofollow"/);
   });
 
   it('does not load ungated gtag/GA4 on embed pages', () => {
