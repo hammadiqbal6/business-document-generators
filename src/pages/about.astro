@@ -7,13 +7,14 @@ import { profilePageJsonLd } from '../lib/seo';
 const path = '/about/';
 const crumbs = [{ name: 'Home', path: '/' }, { name: 'About', path }];
 const author = siteConfig.author;
-const aboutUpdatedAt = '2026-11-15';
+const aboutUpdatedAt = '2026-11-25';
 const jsonLd = [
   profilePageJsonLd({
     dateCreated: `${siteConfig.launchedAt}T00:00:00+05:00`,
     dateModified: `${aboutUpdatedAt}T00:00:00+05:00`,
   }),
 ];
+const profileLinks = author.sameAs.filter(Boolean);
 ---
 <BaseLayout
   title={`About ${siteConfig.siteName} – Free Document Generators`}
@@ -35,18 +36,53 @@ const jsonLd = [
   <h2 id="maintainer">Who builds this site</h2>
   <p>
     {siteConfig.siteName} is built and maintained by {author.name}. It is a one-person project, not a
-    law firm, accounting practice, or licensed advisory service.
-  </p>
-  <p>
-    Contact: <a href={`mailto:${siteConfig.contactEmail}`}>{siteConfig.contactEmail}</a>
-    · Profiles:
-    <a href={author.canonicalPersonUrl} rel="noopener noreferrer">GitHub</a>
+    law firm, accounting practice, or licensed advisory service. The public launch baseline for this
+    site is <time datetime={siteConfig.launchedAt}>{siteConfig.launchedAt}</time>.
   </p>
   {/* Owner: set PUBLIC_AUTHOR_BIO in Workers Builds / .env to replace the short bio below. */}
-  <p id="personal-bio">{author.shortBio}</p>
+  <div id="personal-bio" class="author-bio">
+    <h3>{author.name}</h3>
+    <p>{author.shortBio}</p>
+    <p>
+      Day-to-day work on {siteConfig.siteName} means shipping fillable contractor and freelancer
+      templates (estimates, invoices, change orders, photography and videography contracts, NDAs),
+      citing primary public sources on each page, and keeping exports client-side so filled forms
+      never hit a Docuklin server. Sister free-tool sites by the same maintainer are listed below.
+    </p>
+    <p>
+      Contact: <a href={`mailto:${siteConfig.contactEmail}`}>{siteConfig.contactEmail}</a>
+      {profileLinks.length > 0 && (
+        <>
+          {' '}
+          · Profiles:{' '}
+          {profileLinks.map((url, i) => {
+            const label = /github\.com/i.test(url)
+              ? 'GitHub'
+              : /reddit\.com/i.test(url)
+                ? 'Reddit'
+                : /linkedin\.com/i.test(url)
+                  ? 'LinkedIn'
+                  : /(?:twitter|x)\.com/i.test(url)
+                    ? 'X'
+                    : 'Profile';
+            return (
+              <>
+                {i > 0 && ' · '}
+                <a href={url} rel="noopener noreferrer me">
+                  {label}
+                </a>
+              </>
+            );
+          })}
+        </>
+      )}
+    </p>
+  </div>
   <p>
     There is no headshot here on purpose. This page does not invent credentials, expert titles, or
-    stock photos.
+    stock photos. LinkedIn, X (Twitter), and a longer personal bio can be added via site config when
+    the owner publishes those profiles—see <a href="/methodology/">Methodology</a> and deployment
+    configuration docs.
   </p>
 
   <h2>How the templates are made</h2>
@@ -86,3 +122,19 @@ const jsonLd = [
     fixes are listed in the <a href="/methodology/#corrections">correction log</a>.
   </p>
 </BaseLayout>
+
+<style>
+  .author-bio {
+    margin: 1rem 0 1.25rem;
+    padding: 1rem 1.1rem;
+    border-left: 3px solid var(--brand, #0f6b5c);
+    background: var(--surface, #f8faf9);
+  }
+  .author-bio h3 {
+    margin: 0 0 0.5rem;
+    font-size: 1.15rem;
+  }
+  .author-bio p:last-child {
+    margin-bottom: 0;
+  }
+</style>

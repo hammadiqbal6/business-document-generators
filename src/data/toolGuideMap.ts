@@ -144,6 +144,30 @@ export const toolToGuides: Record<string, string[]> = {
     'line-item-totals-explained',
     'invoice-vs-estimate',
   ],
+  'landscaping-estimate': [
+    'how-to-write-a-business-estimate',
+    'how-to-price-a-job',
+    'line-item-totals-explained',
+    'construction-estimate-that-wins-jobs',
+  ],
+  'flooring-estimate': [
+    'construction-estimate-that-wins-jobs',
+    'line-item-totals-explained',
+    'how-to-price-a-job',
+    'invoice-vs-estimate',
+  ],
+  'wedding-videography-contract-template': [
+    'wedding-videography-contract',
+    'videography-contract-clauses',
+    'wedding-vendor-contract-checklist',
+    'photography-contract-clauses',
+  ],
+  'video-production-contract': [
+    'videography-contract-clauses',
+    'freelance-contract-what-to-include',
+    'nda-basics-for-freelancers',
+    'freelance-payment-schedule-milestones',
+  ],
 };
 
 /** Guide → related guide slugs (topic clusters, not identical lists). */

@@ -120,13 +120,13 @@ export const CATEGORY_META: Record<
     slug: 'estimates-invoices',
     name: 'Estimates & Invoices',
     description:
-      'Free quote and estimate generators, construction/roofing/painting estimates, change orders, purchase orders, timesheets, contractor and progress invoices, late fee calculator, cleaning and catering quotes, receipts, and work orders.',
+      'Free quote and estimate generators, construction/roofing/painting/landscaping/flooring estimates, change orders, purchase orders, timesheets, contractor and progress invoices, late fee calculator, cleaning and catering quotes, receipts, and work orders.',
   },
   contracts: {
     slug: 'contracts',
     name: 'Contracts & Agreements',
     description:
-      'Videography, photography, service agreement, freelance/web design, event/wedding vendor, independent contractor, simple NDA, and lien waiver templates — editable samples, not legal advice.',
+      'Videography, wedding video, video production, photography, service agreement, freelance/web design, event/wedding vendor, independent contractor, simple NDA, and lien waiver templates — editable samples, not legal advice.',
   },
   forms: {
     slug: 'forms',

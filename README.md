@@ -1,5 +1,7 @@
 # Docuklin
 
+Live site: **[https://docuklin.com](https://docuklin.com)**
+
 Free **niche business document generators**: fill a form in the browser, live preview, export **PDF** or **DOCX**. Nothing is stored server-side; optional **localStorage** drafts stay on your device.
 
 Brand, domain, and related identity are configured via environment variables — see [`docs/CONFIGURATION.md`](docs/CONFIGURATION.md) and `.env.example`.
@@ -19,18 +21,22 @@ flowchart LR
   Form --> DOCX
 ```
 
-## Tools (26)
+## Tools (30)
 
 | Tool | Path |
 |------|------|
 | Construction estimate | `/tools/construction-estimate-template/` |
 | Roofing estimate | `/tools/roofing-estimate/` |
 | Painting estimate | `/tools/painting-estimate/` |
+| Landscaping estimate | `/tools/landscaping-estimate/` |
+| Flooring estimate | `/tools/flooring-estimate/` |
 | Contractor invoice | `/tools/contractor-invoice/` |
 | Progress invoice | `/tools/progress-invoice/` |
 | Invoice late fee calculator | `/tools/invoice-late-fee-calculator/` |
 | Photography contract | `/tools/photography-contract-template/` |
 | Videography contract | `/tools/videography-contract/` |
+| Wedding videography contract | `/tools/wedding-videography-contract-template/` |
+| Video production contract | `/tools/video-production-contract/` |
 | Podcast script | `/tools/podcast-script-template/` |
 | Real estate flyer | `/tools/real-estate-flyer-template/` |
 | Tattoo consent form | `/tools/tattoo-consent-form-template/` |
@@ -51,6 +57,19 @@ flowchart LR
 | Lien waiver | `/tools/lien-waiver-generator/` |
 
 Hubs: `/hubs/estimates-invoices/`, `/hubs/contracts/`, `/hubs/forms/`, `/hubs/creative-templates/`
+
+## Embed this tool
+
+Every tool page has an **Embed this tool** section with a copy-paste iframe snippet. The embeddable URL is `/tools/<slug>/embed/` (e.g. [https://docuklin.com/tools/quote-estimate-generator/embed/](https://docuklin.com/tools/quote-estimate-generator/embed/)).
+
+- Embed pages are `noindex, follow` and canonical to the parent tool.
+- A visible **Made with Docuklin** credit links to the canonical tool page (dofollow). Keep that line when you paste the snippet.
+- Example snippet shape:
+
+```html
+<iframe src="https://docuklin.com/tools/quote-estimate-generator/embed/" title="Free Estimate Generator" width="100%" height="720" loading="lazy" style="border:0;max-width:100%;"></iframe>
+<p>Made with <a href="https://docuklin.com/tools/quote-estimate-generator/">Docuklin</a></p>
+```
 
 ## Stack
 
@@ -140,9 +159,13 @@ PR / `main` CI: path-filtered parallel `build` + `test` jobs (npm cache, Astro/V
 
 Short mirror of [`docs/GROWTH-STATUS.md`](docs/GROWTH-STATUS.md). **Every PR must refresh both files** (see `AGENTS.md`). Do not invent metrics.
 
-### Done (as of 2026-11-22)
+### Done (as of 2026-11-25)
 
-- **Sitewide SEO plan (this PR):** tool titles/H1s/metas/FAQs; expanded videography / NDA / service agreement; contractor-estimate guide 301 → construction master; business-estimate quote angle; new guides `how-to-price-a-job`, `what-to-include-in-a-service-agreement`, `service-agreement-vs-contract`; hubs + `/tools/` title **Free Business Document Generators** with derived count; cookies/privacy/terms noindex; estimate URL + `/tools/:slug/null/` redirects; durable rules in `AGENTS.md`, `.cursor/rules/seo.mdc`, `.cursor/skills/add-seo-page/`.
+- **GA4 Consent Mode v2 (this PR):** `Analytics.astro` always loads gtag on idle with denied defaults (cookieless pings); Accept grants `analytics_storage`; Reject keeps storage denied. Cookies/privacy copy updated. No existing URL/title/H1 changes.
+- **Author / sameAs (this PR):** defaults include GitHub + Reddit (`u/ihammadiqbal117`); About bio block strengthened from in-repo facts; env hooks for LinkedIn/X/`PUBLIC_AUTHOR_BIO` remain. Owner must still supply LinkedIn, X handle, longer bio when available.
+- **GSC-priority variants (this PR):** `/tools/wedding-videography-contract-template/`, `/tools/video-production-contract/`, `/tools/landscaping-estimate/`, `/tools/flooring-estimate/`; construction estimate quote-angle content (no title/H1 change); expanded near-page-1 guides; thicker hubs/home/methodology; forms/creative hub metas lengthened. Additive only—no redirects/merges.
+- **Embed backlink credit (this PR):** visible **Made with Docuklin** on embed pages + copy snippet → canonical tool URL, dofollow; README links https://docuklin.com and documents embed usage.
+- **Sitewide SEO plan (earlier):** tool titles/H1s/metas/FAQs; expanded videography / NDA / service agreement; contractor-estimate guide 301 → construction master; business-estimate quote angle; new guides `how-to-price-a-job`, `what-to-include-in-a-service-agreement`, `service-agreement-vs-contract`; hubs + `/tools/` title **Free Business Document Generators** with derived count; cookies/privacy/terms noindex; estimate URL + `/tools/:slug/null/` redirects; durable rules in `AGENTS.md`, `.cursor/rules/seo.mdc`, `.cursor/skills/add-seo-page/`.
 - **AI Overviews / GSC generative features:** strengthened answer-first + tool links on `line-item-totals-explained`, `tattoo-consent-documentation` (URL kept), `work-order-vs-invoice-vs-estimate`. No geotargeting changes (Nigeria impression share is data only).
 - **IndexNow docs:** clarified that new sitemap URLs and redirect targets are submitted post-deploy; key unchanged; GSC Request indexing after deploy (not run in this PR).
 - **Agathox ownership verification (earlier):** `<meta name="agathox-verification" content="agathox-verify-9f40b3ccd8788104">` in shared Head; `/.well-known/agathox-verification.txt` static file (same token). Worker already skips `.txt` slash-redirect; Vitest covers the path.
@@ -172,12 +195,13 @@ Short mirror of [`docs/GROWTH-STATUS.md`](docs/GROWTH-STATUS.md). **Every PR mus
 
 ### Remaining
 
-- After merge/deploy: IndexNow (key unchanged) + GSC Request indexing for new/changed URLs and redirect targets; confirm cookies/privacy/terms noindex.
-- Construction lien waiver basics guide still open; Bing verification / author sameAs unset; backlinks needed.
-- Pause Reddit promo until karma recovers; GA4 cookieless; AdSense approval; Uneed / TinyLaunch (after 2026-12-07).
-- Weekly GSC check — record owner-reported deltas only. No geotargeting from Nigeria impression share.
+- After merge/deploy: IndexNow (key unchanged) + GSC Request indexing for new variant tools and thickened pages; confirm cookies/privacy/terms noindex.
+- Owner: set `PUBLIC_AUTHOR_SAME_AS` / `PUBLIC_ORG_SAME_AS` / `PUBLIC_TWITTER_HANDLE` / longer `PUBLIC_AUTHOR_BIO` when LinkedIn/X profiles exist (defaults already include GitHub + Reddit).
+- Construction lien waiver basics guide still open; Bing verification unset; backlinks needed.
+- Pause Reddit promo until karma recovers; AdSense approval; Uneed / TinyLaunch (after 2026-12-07).
+- Weekly GSC check — record owner-reported deltas only. No geotargeting from country mix.
 
-GSC 28d → 2026-11-17 (owner): **0** clicks, **486** impressions, avg position **58.9**, **54** indexed / **7** not. GA4: **3** users (28d). Generative AI features (later window, owner): 3 impressions on line-item-totals, tattoo-consent-documentation, work-order-vs-invoice-vs-estimate; only click query **business document generator** → `/tools/`.
+GSC last 3 months (owner, 2026-11-25): **763** impressions, **1** click, avg pos **62.4**. Top queries include estimate generator / free, wedding videography contract, construction quote generator, video production contract. Top pages: videography-contract, contracts hub, quote-estimate-generator. Earlier 28d → 2026-11-17: **0** clicks, **486** impressions. GA4: **3** users (28d, pre–Consent Mode always-load).
 
 
 ## Research in repo

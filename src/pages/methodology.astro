@@ -2,9 +2,13 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Breadcrumbs from '../components/content/Breadcrumbs.astro';
 import { siteConfig } from '../config/site';
+import { allTools } from '../data/tools';
+import { guides } from '../data/guides';
 
 const path = '/methodology/';
 const author = siteConfig.author;
+const toolCount = allTools.length;
+const guideCount = guides.length;
 ---
 <BaseLayout
   title={`Methodology & Correction Log | ${siteConfig.siteShortName}`}
@@ -31,6 +35,12 @@ const author = siteConfig.author;
     checked it. “Last reviewed” on a page changes only when the formula, sources, or substantive
     text actually change—not to look fresh.
   </p>
+  <p>
+    Sample dollar amounts, deposit percents, and crew rates on templates are illustrative working
+    patterns for teaching math and layout. They are not market surveys, not IRS/SBA required rates,
+    and not legal advice. When a guide states a retention period or regulation, the Sources list
+    points at the primary page that supports the claim.
+  </p>
 
   <h2>What the tools leave out</h2>
   <ul>
@@ -38,6 +48,7 @@ const author = siteConfig.author;
     <li>Tax advice, filing obligations, or employer/contractor classification determinations.</li>
     <li>Attorney review, notarization, e-sign compliance, or enforceability guarantees.</li>
     <li>Server-side storage of your filled documents—exports stay on your device.</li>
+    <li>Invented credentials, expert headshots, or fabricated “editorial board” bylines.</li>
   </ul>
 
   <h2>How a generator works</h2>
@@ -47,11 +58,27 @@ const author = siteConfig.author;
     <li>PDF/DOCX engines load only when you export.</li>
     <li>Optional drafts use <code>localStorage</code> under a per-tool key—never uploaded to our servers.</li>
   </ol>
+  <p>
+    Trade and niche presets (for example roofing or wedding videography) reuse the same field and
+    preview machinery as their parent tool with different defaults and educational copy. That keeps
+    formulas consistent while answering trade-specific questions. Inventory today: {toolCount} tools
+    and {guideCount} guides, counted from the live data files—not a marketing claim.
+  </p>
+
+  <h2>Author profile and sameAs</h2>
+  <p>
+    Person and Organization schema use configurable profile URLs (<code>PUBLIC_AUTHOR_URL</code>,
+    <code>PUBLIC_AUTHOR_SAME_AS</code>, <code>PUBLIC_ORG_SAME_AS</code>). Defaults include the
+    maintainer’s GitHub and the Reddit profile documented in growth notes. LinkedIn, X (Twitter), and
+    a longer personal bio are owner-supplied when those profiles exist—this site does not invent them.
+    See the About page for the visible bio block.
+  </p>
 
   <h2>AI / automation disclosure</h2>
   <p>
     Drafts may be written with AI assistance. Every formula, sample default, and reference link is
-    checked by {author.name} against the sources listed on each page before publication.
+    checked by {author.name} against the sources listed on each page before publication. Style gates
+    in <code>npm run audit</code> flag banned filler phrases; they do not replace human review.
   </p>
 
   <h2 id="changelog">Changelog</h2>
@@ -64,6 +91,14 @@ const author = siteConfig.author;
         </tr>
       </thead>
       <tbody>
+        <tr>
+          <td><time datetime="2026-11-25">2026-11-25</time></td>
+          <td>
+            Consent Mode v2 always loads GA4 with denied defaults; wedding videography and video
+            production contract presets; landscaping and flooring estimate presets; thicker hubs,
+            homepage, About bio, and methodology notes.
+          </td>
+        </tr>
         <tr>
           <td><time datetime="2026-10-20">2026-10-20</time></td>
           <td>

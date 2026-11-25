@@ -79,6 +79,12 @@ describe('brand defaults (Docuklin live output)', () => {
     expect(org.alternateName).toEqual([siteConfig.siteShortName]);
     expect(org.logo.url).toBe(`${siteConfig.siteUrl}${siteConfig.logoPath}`);
     expect(org.sameAs).toEqual([...siteConfig.organizationSameAs]);
+    expect(siteConfig.author.sameAs).toEqual(
+      expect.arrayContaining([
+        'https://github.com/hammadiqbal6',
+        'https://www.reddit.com/user/ihammadiqbal117/',
+      ]),
+    );
 
     const home = homeGraphJsonLd();
     const graphOrg = home['@graph'].find((n: { '@type'?: string }) => n['@type'] === 'Organization');

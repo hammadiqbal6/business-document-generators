@@ -104,6 +104,13 @@ for (const file of htmlFiles) {
 
   if (isEmbed) {
     if (!/noindex/i.test(html)) fail(`${rel}: embed page should be noindex`);
+    // Visible dofollow "Made with" credit → canonical tool (text inside the <a>).
+    if (!/<a\b[^>]*href=[^>]*>[\s\S]{0,40}?Made with/i.test(html)) {
+      fail(`${rel}: missing visible Made with credit link`);
+    }
+    if (/<a\b[^>]*rel=["']nofollow["'][^>]*>[\s\S]{0,40}?Made with/i.test(html)) {
+      fail(`${rel}: Made with credit must be dofollow (no rel=nofollow)`);
+    }
     continue;
   }
 
@@ -191,12 +198,17 @@ for (const file of htmlFiles) {
     if (!/Embed this tool/i.test(html)) {
       fail(`${rel}: missing visible “Embed this tool” section`);
     }
-    // Snippet lives in a textarea, so quotes are often HTML-escaped as &quot;.
-    const hasNofollowCredit =
-      /Powered by[\s\S]{0,200}?rel=(?:["']|&quot;)nofollow(?:["']|&quot;)/i.test(html) ||
-      /rel=(?:["']|&quot;)nofollow(?:["']|&quot;)[\s\S]{0,200}?Powered by/i.test(html);
-    if (!hasNofollowCredit) {
-      fail(`${rel}: embed snippet must include branded Powered by credit with rel="nofollow"`);
+    // Snippet lives in a textarea (HTML-escaped); credit must be "Made with" → tool URL (dofollow).
+    const hasMadeWithCredit =
+      /Made with\s*(?:<a\b|&lt;a\b)[\s\S]{0,120}?href=/i.test(html);
+    const madeWithIsNofollow =
+      /Made with[\s\S]{0,200}?rel=(?:["']|&quot;)nofollow(?:["']|&quot;)/i.test(html) ||
+      /rel=(?:["']|&quot;)nofollow(?:["']|&quot;)[\s\S]{0,200}?Made with/i.test(html);
+    if (!hasMadeWithCredit) {
+      fail(`${rel}: embed snippet must include branded Made with credit link`);
+    }
+    if (madeWithIsNofollow) {
+      fail(`${rel}: Made with embed credit must be dofollow (no rel=nofollow)`);
     }
     // Answer-first: static form shell with real inputs (no click-only "Open editor" gate).
     if (!/data-auto-open=["']1["']/.test(html) && !/generator--shell|data-generator-shell/.test(html)) {

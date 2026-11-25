@@ -88,29 +88,29 @@ const consentRegions = [...CONSENT_MODE_REGIONS];
       }
 
       /**
-       * Load gating:
-       * - EEA/UK/CH: load with denied defaults so Consent Mode + Google CMP (TCF) can operate.
-       * - Elsewhere: load only after Accept (or a prior Accept in localStorage). Grant BEFORE
-       *   the first config so the initial page_view is not dropped under denied storage.
+       * Consent Mode v2 load path:
+       * - Always load gtag.js (idle) with denied defaults so cookieless pings can work.
+       * - If the visitor already Accepted, grant analytics_storage before/with config.
+       * - If they Rejected, keep storage denied (tag still loads; no storage cookies).
+       * - EEA/UK/CH: Google CMP / TCF may update consent later; denied defaults stay until then.
        */
       function scheduleTagLoad() {
         var run = function () {
           try {
-            var geo = window.__docuklinGeo;
-            if (geo && geo.consentRegion) {
-              loadGaTag();
-              return;
+            var v = null;
+            try {
+              v = localStorage.getItem(CONSENT_KEY);
+            } catch (e) {
+              /* ignore */
             }
-            var v = localStorage.getItem(CONSENT_KEY);
             if (v === '1') {
               gtag('consent', 'update', { analytics_storage: 'granted' });
-              loadGaTag();
             } else if (v === '0') {
               denyAnalytics();
             }
-            // No preference yet: wait for Accept / Reject. Do not load gtag.js.
+            loadGaTag();
           } catch (e) {
-            /* ignore */
+            loadGaTag();
           }
         };
         if ('requestIdleCallback' in window) {

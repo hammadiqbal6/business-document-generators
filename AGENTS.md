@@ -22,7 +22,8 @@ Snapshot of settled technical SEO so agents do not re-probe finished wiring or f
 - **Google Search Console:** verified (meta token in `siteConfig.googleSiteVerification`); **43 pages indexed**; impressions started **2026-11-08** (owner).
 - **jev-seo audit → PR #30** (merged): titles ≤60 with brand via `buildPageTitle()`, expanded `/contact/`, tool JSON-LD `@graph` uses `@id` refs (no duplicate Person/Org blobs), `/.well-known/llms.txt` serves the same plain text as `/llms.txt` (`src/pages/.well-known/llms.txt.ts` — not an Astro API 301). **Known false alarms — do not “fix” again:** R23 cannibalization (guide/tool pairs follow `docs/KEYWORD-MAP.md`); trailing-slash R08/R25/R44 (Worker 308 + `trailingSlash: 'always'`); R19/R20/R55 heuristics.
 - **PR #31** (merged): GSC-impression content — wedding vendor contract checklist; receipt generator + receipt guide (cross-linked); quote/estimate long-tails (“free instant quote”, construction); catering quote samples with illustrative per-head pricing.
-- **This PR (#32):** embed credit `Powered by Docuklin` with `rel="nofollow"` (keep nofollow); factual About/trust page; “not legal or tax advice” on invoice/receipt tools + guides (`src/lib/disclaimers.ts`).
+- **PR #32:** factual About/trust page; “not legal or tax advice” on invoice/receipt tools + guides (`src/lib/disclaimers.ts`).
+- **Embed credit (updated):** visible **Made with Docuklin** on `/tools/<slug>/embed/` and in the copy snippet, linking to the canonical tool page **dofollow** (no `rel="nofollow"`). Audits enforce the Made with credit and reject nofollow on it.
 - **`/tools/<slug>/embed/`** pages are intentionally `noindex, follow` (`src/pages/tools/[slug]/embed.astro`); audits enforce this.
 - **Contact:** `hello@docuklin.com` (`DEFAULT_CONTACT_EMAIL`); forwarded via Cloudflare Email Routing (owner).
 

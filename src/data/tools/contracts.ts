@@ -169,7 +169,11 @@ export const videographyContract: ToolDefinition = {
   shortName: 'Videography Contract',
   category: 'contracts',
   primaryKeyword: 'videography contract',
-  secondaryKeywords: ['videographer contract template', 'video production agreement', 'wedding videography contract'],
+  secondaryKeywords: [
+    'videographer contract template',
+    'video contract template',
+    'freelance videographer agreement',
+  ],
   title: 'Videography Contract Template (Free Wedding & Video)',
   metaDescription:
     'Videography contract with shoot details, deliverables, deposit, copyright, revisions and cancellation. Free PDF/Word, wedding and corporate presets.',
@@ -223,7 +227,7 @@ export const videographyContract: ToolDefinition = {
     whatToInclude: [
       {
         heading: 'What to include in a videography contract',
-        body: 'Name the parties, shoot date(s), locations, crew size if it matters, deliverable formats and runtimes, included revision rounds, total fee, deposit, remaining balance timing, and who owns or licenses the finished film. Add music licensing responsibility, talent or location releases, overtime, and how cancellations or weather holds work.\n\nWedding coverage and corporate brand films use the same skeleton with different deliverables. A wedding PDF often lists ceremony-to-reception hours, highlight length, and speech cutdowns. A corporate PDF lists hero runtime, social cutdowns, and channel licenses. Start from this generator either way, then swap the sample defaults.',
+        body: 'Name the parties, shoot date(s), locations, crew size if it matters, deliverable formats and runtimes, included revision rounds, total fee, deposit, remaining balance timing, and who owns or licenses the finished film. Add music licensing responsibility, talent or location releases, overtime, and how cancellations or weather holds work.\n\nWedding coverage and corporate brand films use the same skeleton with different deliverables. For a wedding-day preset (ceremony-to-reception hours, highlight length, rain plan), use /tools/wedding-videography-contract-template/. For commercial / brand video production (hero runtime, social cutdowns, channel licenses, milestone billing), use /tools/video-production-contract/. This page stays the general videography starting point.',
       },
       {
         heading: 'Deposit and payment schedule',
@@ -298,13 +302,349 @@ export const videographyContract: ToolDefinition = {
     sources: contractSources,
   },
   relatedSlugs: [
+    'wedding-videography-contract-template',
+    'video-production-contract',
     'photography-contract-template',
     'event-wedding-vendor-contract',
-    'freelance-web-design-contract',
     'simple-nda',
   ],
   publishedAt: '2026-10-19',
-  updatedAt: '2026-11-22',
+  updatedAt: '2026-11-25',
+};
+
+/** Wedding-day preset of the videography contract fields — GSC: wedding videography / wedding videographer. */
+export const weddingVideographyContract: ToolDefinition = {
+  slug: 'wedding-videography-contract-template',
+  name: 'Wedding Videography Contract Template',
+  shortName: 'Wedding Video Contract',
+  category: 'contracts',
+  primaryKeyword: 'wedding videography contract template',
+  secondaryKeywords: [
+    'contract for wedding videographer',
+    'wedding video agreement',
+    'wedding videographer contract',
+    'freelance videographer contract template',
+  ],
+  title: 'Wedding Videography Contract Template (Free)',
+  metaDescription:
+    'Wedding videography contract with day timeline, highlight film, ceremony audio, deposit, rain plan and cancellation. Free PDF/Word. Not legal advice.',
+  h1: 'Free Wedding Videography Contract Template',
+  answerFirst:
+    'A wedding videography contract locks the day timeline, coverage hours, highlight and speech deliverables, deposit, rain or venue-change plan, and usage rights before the date is held. Fill those fields here, preview live, and export PDF or DOCX. Not legal advice—have counsel review before you rely on it.',
+  applicationCategory: 'BusinessApplication',
+  isLegalAdjacent: true,
+  documentTitle: 'Wedding Videography Services Agreement',
+  toolVersion: '1.0',
+  fields: [
+    { id: 'companyName', label: 'Videographer / company', type: 'text', required: true, section: 'Parties' },
+    { id: 'clientName', label: 'Couple / client', type: 'text', required: true, section: 'Parties' },
+    { id: 'projectTitle', label: 'Project title', type: 'text', required: true, section: 'Project' },
+    { id: 'shootDates', label: 'Wedding date(s)', type: 'text', required: true, section: 'Project' },
+    { id: 'locations', label: 'Locations & timeline', type: 'textarea', rows: 3, section: 'Project' },
+    { id: 'fee', label: 'Total fee', type: 'currency', inputMode: 'decimal', required: true, section: 'Fees' },
+    { id: 'deposit', label: 'Retainer / deposit', type: 'currency', inputMode: 'decimal', section: 'Fees' },
+    { id: 'deliverables', label: 'Deliverables', type: 'textarea', rows: 3, required: true, section: 'Deliverables' },
+    { id: 'revisions', label: 'Included revision rounds', type: 'number', inputMode: 'numeric', min: 0, section: 'Deliverables' },
+    { id: 'license', label: 'License summary', type: 'textarea', rows: 2, section: 'Deliverables' },
+    { id: 'clauses', label: 'Clauses', type: 'clauses', section: 'Clauses' },
+  ],
+  defaults: {
+    companyName: 'Evergreen Wedding Films',
+    clientName: 'Jordan & Avery Patel',
+    projectTitle: 'Wedding day film – highlight + ceremony',
+    shootDates: '2026-09-12 (ceremony 3:30pm; reception to 11:00pm)',
+    locations:
+      'Getting ready: Harbor Inn suite (10:00–13:00). Ceremony: Lakeside Pavilion (15:30). Cocktail + reception: Pavilion ballroom and patio. Travel between venues ≤20 minutes.',
+    fee: 4200,
+    deposit: 1680,
+    deliverables:
+      '8 hours of coverage with one lead + one second shooter. 5–7 minute highlight film (1080p/4K download) within 90 days. Full ceremony edit optional add-on. Speech cutdowns for two toasts. Raw footage not included unless purchased.',
+    revisions: 2,
+    license:
+      'Couple receives a personal-use license for sharing with family and on personal social accounts. Commercial use, resale, or stock licensing requires a separate written license.',
+    clauses: [
+      clause(
+        'scope',
+        'Scope & timeline',
+        'Company will film the wedding day within the stated coverage hours and locations. A shot-list or timeline exhibit may be attached. Overtime beyond package hours is billed at the hourly rate disclosed before the event.',
+      ),
+      clause(
+        'payment',
+        'Retainer & balance',
+        'Retainer is due on signing to reserve the date. Remaining balance is due 30 days before the wedding unless otherwise agreed in writing. Late balance may pause editing until paid.',
+      ),
+      clause(
+        'revisions',
+        'Revisions',
+        'Fee includes the stated revision rounds for the highlight film (song choice and length). Additional revisions are billed hourly before work continues.',
+      ),
+      clause(
+        'raw',
+        'Raw footage',
+        'Raw footage remains Company property unless Client purchases a raw-footage addendum. Project files are archived for 90 days after final delivery.',
+      ),
+      clause(
+        'weather',
+        'Weather & venue change',
+        'Outdoor segments follow the couple’s rain plan or move indoors at the same venue when weather prevents safe filming. A venue change more than 50 miles may require a travel addendum.',
+      ),
+      clause(
+        'cancel',
+        'Cancellation',
+        'If Client cancels more than 60 days before the wedding date, retainer is transferable once to a new date within 12 months subject to availability. Cancellation inside 60 days: retainer is non-refundable. Company cancellation without cause results in a full refund of fees paid.',
+      ),
+      clause(
+        'credit',
+        'Credits & portfolio',
+        'Client will credit Company where customary (YouTube description, wedding website). Company may use short clips in a portfolio unless Client delivers a written portfolio opt-out before the wedding day.',
+      ),
+    ],
+  },
+  content: {
+    howToUse: [
+      'Enter the couple’s names, wedding date, and multi-location timeline.',
+      'List coverage hours, highlight length, speech cutdowns, and whether raw footage is sold.',
+      'Set retainer, balance due date, rain plan, and cancellation windows in the clauses.',
+      'Export PDF or Word and have both parties review with their own counsel before signing.',
+    ],
+    whatToInclude: [
+      {
+        heading: 'What a wedding videography contract should lock',
+        body: 'Wedding-day video fights usually start with timeline, overtime, and deliverable length—not with fancy legalese. Write getting-ready start, ceremony call time, reception end, and travel between venues. Name crew count (lead + second). State highlight runtime, ceremony edit policy, speech cutdowns, and delivery window in days.\n\nRetainer amount, balance due date, rain or venue-change plan, music licensing responsibility, and personal-vs-commercial usage belong on the same PDF. For general clause vocabulary across wedding and commercial jobs, see /tools/videography-contract/ and /guides/videography-contract-clauses/. For wedding logistics narrative, see /guides/wedding-videography-contract/.',
+      },
+      {
+        heading: 'Retainer, overtime, and rain plans',
+        body: 'Many wedding studios take about 40% on signing to hold the calendar, with balance due about 30 days before the event—treat those percents as a working pattern, not a rule. Put overtime hourly rates in writing before the reception runs late. Outdoor vows need a rain plan so a washout does not become an unpaid reshoot.\n\nWhen a stills photographer is on the same day, pair this video agreement with /tools/photography-contract-template/. Other vendors can use /tools/event-wedding-vendor-contract/.',
+      },
+      {
+        heading: 'Rights for couples vs commercial reuse',
+        body: 'Couples usually need personal sharing rights for family and social posts. Commercial reuse (ads, stock, white-label) should be excluded unless priced. Portfolio use is common; give a written opt-out before the day if the couple needs privacy. This is general information, not legal advice.',
+      },
+    ],
+    workedExample: {
+      heading: 'Worked example: 8-hour wedding highlight package (illustrative)',
+      body: 'Evergreen Wedding Films books Jordan & Avery Patel for 8 hours with a lead and second shooter. Sample package: $4,200 total, $1,680 retainer (~40%), balance 30 days before 12 Sep 2026. Deliverables: 5–7 minute highlight within 90 days, two speech cutdowns, two revision rounds. Rain plan moves patio vows indoors. Raw footage sold only as an add-on. Swap every number for your own rates before you send the PDF.',
+    },
+    commonMistakes: [
+      'Coverage hours without ceremony and reception end times.',
+      'Silent overtime rate when the reception runs late.',
+      'No rain or venue-change language for outdoor segments.',
+      'Promising raw footage without pricing storage and license limits.',
+    ],
+    tips: [
+      legalNotice,
+      'Attach the day-of timeline as an exhibit instead of stuffing every cue into the fee clause.',
+      'Collect location and talent releases when private property or recognizable guests appear in marketing cuts.',
+    ],
+    faq: [
+      {
+        question: 'What should a wedding videography contract include?',
+        answer:
+          'Couple and studio names, wedding date, locations and coverage hours, crew count, highlight and speech deliverables, revision rounds, retainer and balance dates, rain or venue-change plan, usage rights, cancellation window, and whether raw footage is included.',
+      },
+      {
+        question: 'How much retainer should a wedding videographer take?',
+        answer:
+          'There is no single correct percent. Many studios take about 40% on signing with balance due about 30 days before the wedding. State amount, due date, and refund rules in both the fee fields and the payment clause.',
+      },
+      {
+        question: 'Who owns the wedding video copyright?',
+        answer:
+          'In many U.S. freelance jobs the videographer owns copyright and grants the couple a personal-use license unless a written transfer says otherwise. Confirm for your country—this is not legal advice.',
+      },
+      {
+        question: 'Should couples get raw footage?',
+        answer:
+          'Only if priced and licensed. Many wedding videographers sell raw as an add-on and keep project archives for a stated window (for example 90 days).',
+      },
+      {
+        question: 'Is this wedding videography contract template free?',
+        answer:
+          'Yes. Edit in the browser, preview live, and download PDF or DOCX with no account. Not attorney-reviewed.',
+      },
+      {
+        question: 'Wedding video contract vs general videography contract?',
+        answer:
+          'This preset ships with wedding-day timeline, rain plan, and personal-use defaults. For mixed or commercial brand films, start at /tools/videography-contract/ or /tools/video-production-contract/.',
+      },
+    ],
+    sources: contractSources,
+  },
+  relatedSlugs: [
+    'videography-contract',
+    'video-production-contract',
+    'photography-contract-template',
+    'event-wedding-vendor-contract',
+  ],
+  publishedAt: '2026-11-25',
+  updatedAt: '2026-11-25',
+};
+
+/** Commercial / brand video preset — GSC: video production contract. */
+export const videoProductionContract: ToolDefinition = {
+  slug: 'video-production-contract',
+  name: 'Video Production Contract Template',
+  shortName: 'Video Production Contract',
+  category: 'contracts',
+  primaryKeyword: 'video production contract',
+  secondaryKeywords: [
+    'video production agreement',
+    'video production contract template',
+    'freelance videographer contract template',
+    'corporate video contract',
+  ],
+  title: 'Video Production Contract Template (Free)',
+  metaDescription:
+    'Video production contract for brand films: shoot days, deliverables, milestones, license, revisions and cancellation. Free PDF/Word. Not legal advice.',
+  h1: 'Free Video Production Contract Template',
+  answerFirst:
+    'A video production contract sets shoot days, deliverable runtimes, revision rounds, milestone fees, and channel licenses for commercial or brand films. Fill the form here, preview live, and export PDF or DOCX. Not legal advice—get local counsel before you rely on the PDF.',
+  applicationCategory: 'BusinessApplication',
+  isLegalAdjacent: true,
+  documentTitle: 'Video Production Services Agreement',
+  toolVersion: '1.0',
+  fields: [
+    { id: 'companyName', label: 'Production company', type: 'text', required: true, section: 'Parties' },
+    { id: 'clientName', label: 'Client', type: 'text', required: true, section: 'Parties' },
+    { id: 'projectTitle', label: 'Project title', type: 'text', required: true, section: 'Project' },
+    { id: 'shootDates', label: 'Shoot date(s)', type: 'text', required: true, section: 'Project' },
+    { id: 'locations', label: 'Locations', type: 'textarea', rows: 2, section: 'Project' },
+    { id: 'fee', label: 'Total fee', type: 'currency', inputMode: 'decimal', required: true, section: 'Fees' },
+    { id: 'deposit', label: 'Deposit / kickoff fee', type: 'currency', inputMode: 'decimal', section: 'Fees' },
+    { id: 'deliverables', label: 'Deliverables', type: 'textarea', rows: 3, required: true, section: 'Deliverables' },
+    { id: 'revisions', label: 'Included revision rounds', type: 'number', inputMode: 'numeric', min: 0, section: 'Deliverables' },
+    { id: 'license', label: 'License summary', type: 'textarea', rows: 2, section: 'Deliverables' },
+    { id: 'clauses', label: 'Clauses', type: 'clauses', section: 'Clauses' },
+  ],
+  defaults: {
+    companyName: 'Northframe Production Co.',
+    clientName: 'BrightLedger Software Inc.',
+    projectTitle: 'Product launch – 60s hero + social cutdowns',
+    shootDates: '2026-10-08 (studio), 2026-10-09 (customer site B-roll)',
+    locations: 'Rented sound stage, Building B; client HQ lobby and open office (floor 3)',
+    fee: 12500,
+    deposit: 4167,
+    deliverables:
+      '1× 60-second hero (4K), 4× 15-second vertical cutdowns, captioned masters, project archive 120 days. Rough cut and picture-lock milestones listed in payment clause.',
+    revisions: 2,
+    license:
+      'Client receives a worldwide, perpetual license for owned websites, product UI, and paid social. Broadcast, resale, and white-label redistribution excluded unless amended in writing.',
+    clauses: [
+      clause(
+        'scope',
+        'Scope',
+        'Company will produce and edit video as described in the project title and deliverables. Client will provide brand assets, product access, releases, and feedback by agreed deadlines.',
+      ),
+      clause(
+        'payment',
+        'Milestones & payment',
+        'Kickoff deposit is due on signing. Remaining balance is due on delivery of final files unless milestones are listed: rough cut invoice, picture-lock invoice, then final delivery. Work may pause if a milestone invoice is more than 10 business days overdue.',
+      ),
+      clause(
+        'revisions',
+        'Revisions',
+        'Fee includes the stated revision rounds after the first rough cut. Brand-compliance notes that change approved creative direction may be billed as a new cut at an hourly rate disclosed before work continues.',
+      ),
+      clause(
+        'raw',
+        'Raw footage & archives',
+        'Raw footage remains Company property unless Client purchases a raw-footage addendum. Project files are archived for 120 days after final delivery, then may be deleted.',
+      ),
+      clause(
+        'music',
+        'Music & talent',
+        'Client warrants rights to logos and talent likenesses it supplies. Stock music licensed by Company is cleared for the listed channels only; broadcast or paid media upgrades are Client’s responsibility unless added in writing.',
+      ),
+      clause(
+        'cancel',
+        'Cancellation',
+        'If Client cancels after kickoff, deposit is non-refundable and completed milestone work is invoiced. Company cancellation without cause results in a full refund of unearned fees paid.',
+      ),
+      clause(
+        'credit',
+        'Credits',
+        'Client will credit Company where customary (YouTube description, case study page) unless a no-credit addendum is signed for confidential launches.',
+      ),
+    ],
+  },
+  content: {
+    howToUse: [
+      'Enter production company and client names, shoot days, and locations.',
+      'Define hero runtime, social cutdowns, milestones, and the channel license.',
+      'Edit deposit, revision, music, and cancellation clauses to match how you bill.',
+      'Export PDF or Word and have both parties review with their own counsel before signing.',
+    ],
+    whatToInclude: [
+      {
+        heading: 'What belongs in a video production contract',
+        body: 'Commercial video jobs need shoot days, call times, locations, deliverable runtimes and formats, included revision rounds, total fee, kickoff deposit, and milestone billing if you invoice at rough cut and picture lock. Spell out who clears music, logos, and talent releases.\n\nLicense language should name channels (owned web, paid social, broadcast) and exclude resale or white-label reuse unless priced. For wedding-day coverage, use /tools/wedding-videography-contract-template/ instead. For a general videography starting point, use /tools/videography-contract/.',
+      },
+      {
+        heading: 'Milestones vs single delivery payment',
+        body: 'Brand films often invoice in stages: kickoff, rough cut, picture lock, final files. Tie each invoice to a deliverable so AP can match the PO. Late-payment pauses on non-critical edits are fine when you state them up front. Put the same dollars in the fee fields and the payment clause.',
+      },
+      {
+        heading: 'License, portfolio, and confidential launches',
+        body: 'Say whether the license is perpetual and worldwide for listed channels. Confidential product launches may need a portfolio opt-out and NDA—pair with /tools/simple-nda/ when you only need confidentiality before the full production agreement. This page is sample language, not legal advice.',
+      },
+    ],
+    workedExample: {
+      heading: 'Worked example: product launch hero film (illustrative)',
+      body: 'Northframe Production Co. prices BrightLedger a $12,500 launch package: 60-second 4K hero, four 15-second vertical cutdowns, two revision rounds, and a worldwide license for owned web and paid social. Kickoff deposit about one-third ($4,167); balance on final delivery (or split across rough-cut and picture-lock invoices if the client’s AP requires it). Music cleared for listed channels only. Swap rates and runtimes for your crew before you send the PDF.',
+    },
+    commonMistakes: [
+      'Unlimited brand revisions with no hourly overflow.',
+      'Silent music or talent clearance responsibility.',
+      'License that forgets paid social or broadcast limits.',
+      'No milestone language when AP will not pay a single balloon invoice.',
+    ],
+    tips: [
+      legalNotice,
+      'Attach a shot list or creative brief as an exhibit instead of stuffing every beat into the fee clause.',
+      'Collect talent and location releases before marketing cuts go live.',
+    ],
+    faq: [
+      {
+        question: 'What should a video production contract include?',
+        answer:
+          'Parties, shoot dates and locations, deliverable runtimes and formats, revision rounds, fee and deposit or milestone schedule, license channels, music and talent clearance, cancellation terms, and whether raw footage is included.',
+      },
+      {
+        question: 'How is a video production contract different from a wedding video contract?',
+        answer:
+          'Production agreements emphasize brand deliverables, milestone billing, and channel licenses. Wedding agreements emphasize day timeline, overtime, and personal-use sharing. Use /tools/wedding-videography-contract-template/ for nuptials.',
+      },
+      {
+        question: 'Who owns copyright in a branded video?',
+        answer:
+          'In many U.S. freelance jobs the production company owns copyright and grants the client a license for listed uses unless a written transfer says otherwise. Work-for-hire facts can change that. Not legal advice.',
+      },
+      {
+        question: 'How many revision rounds should a production contract include?',
+        answer:
+          'Two rounds after the first rough cut is a common working pattern for brand films. Define what counts as a revision versus a new creative direction, and price extras hourly.',
+      },
+      {
+        question: 'Is this video production contract template free?',
+        answer:
+          'Yes. Fill it in the browser, preview live, and download PDF or DOCX with no signup. Not attorney-reviewed.',
+      },
+      {
+        question: 'Do I still need an NDA?',
+        answer:
+          'If you only need confidentiality before pitching, start with /tools/simple-nda/. A production agreement covers scope, payment, and licenses; an NDA does not replace those terms.',
+      },
+    ],
+    sources: contractSources,
+  },
+  relatedSlugs: [
+    'videography-contract',
+    'wedding-videography-contract-template',
+    'simple-nda',
+    'freelance-web-design-contract',
+  ],
+  publishedAt: '2026-11-25',
+  updatedAt: '2026-11-25',
 };
 
 export const freelanceWebContract: ToolDefinition = {
@@ -511,11 +851,12 @@ export const eventVendorContract: ToolDefinition = {
   relatedSlugs: [
     'photography-contract-template',
     'videography-contract',
+    'wedding-videography-contract-template',
     'catering-quote',
     'receipt-generator',
   ],
   publishedAt: '2026-10-19',
-  updatedAt: '2026-11-22',
+  updatedAt: '2026-11-25',
 };
 
 export const simpleNda: ToolDefinition = {
