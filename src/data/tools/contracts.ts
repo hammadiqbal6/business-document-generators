@@ -174,7 +174,7 @@ export const videographyContract: ToolDefinition = {
     'video contract template',
     'freelance videographer agreement',
   ],
-  title: 'Videography Contract Template (Free Wedding & Video)',
+  title: 'Videography Contract Template (Free)',
   metaDescription:
     'Videography contract with shoot details, deliverables, deposit, copyright, revisions and cancellation. Free PDF/Word, wedding and corporate presets.',
   h1: 'Free Videography Contract Template',
@@ -309,7 +309,7 @@ export const videographyContract: ToolDefinition = {
     'simple-nda',
   ],
   publishedAt: '2026-10-19',
-  updatedAt: '2026-11-25',
+  updatedAt: '2026-11-27',
 };
 
 /** Wedding-day preset of the videography contract fields — GSC: wedding videography / wedding videographer. */

@@ -161,7 +161,8 @@ Short mirror of [`docs/GROWTH-STATUS.md`](docs/GROWTH-STATUS.md). **Every PR mus
 
 ### Done (as of 2026-11-27)
 
-- **GA4 geo consent + reliability (this PR):** Consent Mode v2 region defaults — EEA/UK/CH denied (ads + analytics) until CMP/Accept; elsewhere analytics (and ad storage) **granted** by default with Accept + **Reject / Do not sell or share** opt-out. GA loads promptly (no idle deferral). `trackEvent` queues via `dataLayer` when gtag is not ready. Cookies/privacy/rules updated. Owner decision (Sidney, 2026-11-27).
+- **SEO title fixes (this PR):** `/tools/videography-contract/` title → `Videography Contract Template (Free)` (drops wedding bleed; KEYWORD-MAP primary stays videography contract; branded ≤60). `/guides/wedding-videography-contract/` title → `Wedding Videography Contract: What to Include` (branded ≤60). Bumped `updatedAt`. IndexNow not run.
+- **GA4 geo consent + reliability (merged #56):** Consent Mode v2 region defaults — EEA/UK/CH denied (ads + analytics) until CMP/Accept; elsewhere analytics (and ad storage) **granted** by default with Accept + **Reject / Do not sell or share** opt-out. GA loads promptly (no idle deferral). `trackEvent` queues via `dataLayer` when gtag is not ready. Cookies/privacy/rules updated. Owner decision (Sidney, 2026-11-27).
 - **Earlier — GA4 Consent Mode v2 (2026-11-25):** always-load with denied defaults; superseded by geo policy above.
 
 ### Done (as of 2026-11-25)
@@ -199,7 +200,9 @@ Short mirror of [`docs/GROWTH-STATUS.md`](docs/GROWTH-STATUS.md). **Every PR mus
 
 ### Remaining
 
-- After merge/deploy of geo-consent PR: IndexNow (key unchanged) + confirm GA4 Realtime counts non-EEA visits; GSC Request indexing only if pages changed.
+- After merge/deploy of title PR: IndexNow (key unchanged) + GSC Request indexing for `/tools/videography-contract/` and `/guides/wedding-videography-contract/`.
+- After merge/deploy of geo-consent (#56): confirm GA4 Realtime counts non-EEA visits; IndexNow only if sitemap URLs changed.
+- After merge/deploy (earlier variants): IndexNow + GSC Request indexing for new variant tools and thickened pages; confirm cookies/privacy/terms noindex.
 - Owner: set `PUBLIC_AUTHOR_SAME_AS` / `PUBLIC_ORG_SAME_AS` / `PUBLIC_TWITTER_HANDLE` / longer `PUBLIC_AUTHOR_BIO` when LinkedIn/X profiles exist (defaults already include GitHub + Reddit).
 - Construction lien waiver basics guide still open; Bing verification unset; backlinks needed.
 - Pause Reddit promo until karma recovers; AdSense approval; Uneed / TinyLaunch (after 2026-12-07).

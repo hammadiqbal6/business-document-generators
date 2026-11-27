@@ -3108,11 +3108,11 @@ export const guides: Guide[] =
   },
   {
     "slug": "wedding-videography-contract",
-    "title": "Wedding Videography Contract: What to Include (Guide)",
+    "title": "Wedding Videography Contract: What to Include",
     "metaDescription": "Wedding videography contracts: day timeline, ceremony audio, raw footage, highlight film, and rain plan. Free templates. Not legal advice.",
     "answerFirst": "A wedding videography contract should lock the day timeline, ceremony audio plan, deliverables such as highlight film and raw footage policy, payment timing, and a rain or venue-change plan before the date is held. Cross-read general videography clauses, then draft wedding fields in the wedding videography contract template. You'll keep the same labels when you bill.",
     "publishedAt": "2026-11-13",
-    "updatedAt": "2026-11-25",
+    "updatedAt": "2026-11-27",
     "relatedToolSlugs": [
       "wedding-videography-contract-template",
       "videography-contract",

@@ -30,7 +30,11 @@ As of **2026-11-17** (owner-reported GSC/GA4 window) unless noted; **3-month GSC
 
 In-repo and confirmed off-repo completions.
 
-- **2026-11-27 — GA4 geo consent + analytics reliability (this PR):**
+- **2026-11-27 — SEO title fixes (this PR):**
+  - `/tools/videography-contract/` title: `Videography Contract Template (Free)` — removed `(Free Wedding & Video)` (KEYWORD-MAP: wedding → wedding-videography-contract-template; branded title ≤60).
+  - `/guides/wedding-videography-contract/` title: `Wedding Videography Contract: What to Include` (was 64 with brand; now ≤60).
+  - Bumped `updatedAt` on both; Vitest asserts branded titles ≤60. IndexNow not run.
+- **2026-11-27 — GA4 geo consent + analytics reliability (merged #56):**
   - **Policy (owner / Sidney):** EEA/UK/CH keep analytics + ad storage **denied** by default (Google CMP when ads on). Everywhere else: analytics (and ad storage) **granted** by default; banner **Reject / Do not sell or share** denies and remembers (`docuforge:cookie-ok=0`).
   - **Implementation:** Consent Mode region defaults in `Analytics.astro`; Worker `__docuklinGeo` unchanged; GA loads promptly (removed idle deferral); `trackEvent` queues via `dataLayer` when gtag stub missing; cookies/privacy/methodology + `AGENTS.md` / `.cursor/rules/consent-and-csp.mdc` / DEPLOYMENT updated. Vitest for `trackEvent` queue.
   - Did **not** run IndexNow.
@@ -146,7 +150,8 @@ In-repo and confirmed off-repo completions.
 
 Prioritized open work. Owner-confirmed gaps preferred over guesses.
 
-1. **After merge/deploy of this PR:** run IndexNow (`npm run indexnow` / Workers Builds) — do not change the key; then GSC URL Inspection → Request indexing for new tools (`wedding-videography-contract-template`, `video-production-contract`, `landscaping-estimate`, `flooring-estimate`) and substantially thickened pages (home, hubs, methodology, expanded guides). Confirm cookies/privacy/terms stay noindex and out of sitemap; embeds/404 stay intentional noindex.
+1. **After merge/deploy of title PR:** run IndexNow (`npm run indexnow` / Workers Builds) — do not change the key; then GSC URL Inspection → Request indexing for `/tools/videography-contract/` and `/guides/wedding-videography-contract/`.
+1b. **After merge/deploy of earlier variant PR (if not done):** IndexNow + GSC Request indexing for new tools (`wedding-videography-contract-template`, `video-production-contract`, `landscaping-estimate`, `flooring-estimate`) and substantially thickened pages. Confirm cookies/privacy/terms stay noindex and out of sitemap; embeds/404 stay intentional noindex.
 2. **Owner must supply (when real profiles exist):** LinkedIn URL(s), X/Twitter profile URL + `PUBLIC_TWITTER_HANDLE`, optional longer `PUBLIC_AUTHOR_BIO`, optional brand `PUBLIC_ORG_SAME_AS`. Defaults already ship GitHub + Reddit; do not invent missing socials.
 3. **Construction lien waiver basics guide** (SEO-GUIDE content calendar) — still open.
 4. **Bing Webmaster verification** — currently **unset** (owner).
@@ -154,6 +159,5 @@ Prioritized open work. Owner-confirmed gaps preferred over guesses.
 6. **Reddit:** pause promo/launch posts until karma recovers.
 7. **Uneed re-review** / **TinyLaunch resubmit** after YardTally **2026-12-07** (owner).
 8. **AdSense** — status **Getting ready**; keep publishing.
-9. **Weekly GSC check** — record deltas in Baseline (do not invent numbers). No geotargeting from country mix. After geo-consent PR merges/deploys, re-check GA4 users (owner); IndexNow only if deploy includes sitemap URL changes.
-10. **SEO title polish** — videography contract + wedding videography guide titles over 60 with brand / KEYWORD-MAP wedding bleed (separate PR).
-11. **Sister-site defaults** — YardTally already `https://getyardtally.com` on main; FeeCalc/FiberCalc/PetCalc still workers.dev until their custom domains exist (owner).
+9. **Weekly GSC check** — record deltas in Baseline (do not invent numbers). No geotargeting from country mix. After geo-consent deploy, re-check GA4 users (owner); IndexNow only if deploy includes sitemap URL changes.
+10. **Sister-site defaults** — YardTally already `https://getyardtally.com` on main; FeeCalc/FiberCalc/PetCalc still workers.dev until their custom domains exist (owner).
