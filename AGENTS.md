@@ -145,9 +145,10 @@ Keep the allowlist tight. Widen only for a live console violation + vendor docs.
 
 ### Consent
 
-- Consent Mode v2: **denied by default** (`ad_storage`, `ad_user_data`, `ad_personalization`, `analytics_storage`) in `Analytics.astro`.
-- **EEA / UK (`GB`) / CH:** Google AdSense Privacy & messaging (Funding Choices / IAB TCF v2.2) is the CMP. Worker injects `window.__docuklinGeo` (`consentRegions.ts`); site cookie bar suppressed there when ads are on.
-- **Elsewhere:** site Accept/Reject cookie banner.
+- Consent Mode v2 uses **region-specific defaults** in `Analytics.astro`:
+  - **EEA / UK (`GB`) / CH:** `ad_storage`, `ad_user_data`, `ad_personalization`, and `analytics_storage` **denied** by default (Google AdSense Privacy & messaging / Funding Choices / IAB TCF v2.2 is the CMP when ads are on). Worker injects `window.__docuklinGeo` (`consentRegions.ts`); site cookie bar suppressed there when ads are on.
+  - **Everywhere else:** `analytics_storage` (and ad storage signals) **granted** by default so GA4 counts users; site banner offers Accept plus **Reject / Do not sell or share** (denies all four; remembers via `docuforge:cookie-ok`).
+- Load GA promptly (no idle deferral). Custom events queue through `dataLayer` (`src/lib/analytics.ts`) so early `tool_opened` hits are not dropped.
 - See `docs/ADSENSE.md`, `docs/DEPLOYMENT.md`, `.cursor/rules/consent-and-csp.mdc`.
 
 ## 7. Adding pages / tools

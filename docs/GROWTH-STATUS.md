@@ -4,7 +4,7 @@ Living tracker for Docuklin SEO and growth work. **Read this before planning gro
 
 Settled technical SEO policy (IndexNow wiring, jev-seo false alarms, title/schema rules) still lives under **SEO state** in `AGENTS.md`. This file holds current metrics and the work queue.
 
-Last updated: **2026-11-25**
+Last updated: **2026-11-27**
 
 ---
 
@@ -21,7 +21,7 @@ As of **2026-11-17** (owner-reported GSC/GA4 window) unless noted; **3-month GSC
 | GSC (last 28 days → 2026-11-17) | **0** clicks, **486** impressions, avg position **58.9** |
 | GSC (last 3 months → ~2026-11-25, owner) | **1** click, **763** impressions, avg position **62.4**; top queries: estimate generator, estimate generator free, wedding videography contract, construction quote generator, free estimate, video production contract; top pages: `/tools/videography-contract/`, `/hubs/contracts/`, `/tools/quote-estimate-generator/` |
 | Indexing (GSC) | **54** pages indexed, **7** not indexed (5 Excluded by noindex tag; 2 Discovered – currently not indexed); earlier “Page with redirect” notices on intentional aliases |
-| GA4 (28 days) | **3** users (pre–Consent Mode always-load; Cloudflare page views include bots) |
+| GA4 (28 days) | **3** users (pre–geo consent grant outside EEA/UK/CH; Cloudflare page views include bots) |
 | Domain rating | Ahrefs-style DR **2** (owner-reported, earlier window) |
 
 ---
@@ -30,8 +30,12 @@ As of **2026-11-17** (owner-reported GSC/GA4 window) unless noted; **3-month GSC
 
 In-repo and confirmed off-repo completions.
 
-- **2026-11-25 — SEO authority / Consent Mode / GSC variants (this PR):**
-  - **GA4 Consent Mode v2:** always load `gtag.js` on idle with denied defaults (`ad_storage`, `ad_user_data`, `ad_personalization`, `analytics_storage`); Accept → `consent update` granted; Reject keeps denied. Cookies + privacy copy updated. No second CMP.
+- **2026-11-27 — GA4 geo consent + analytics reliability (this PR):**
+  - **Policy (owner / Sidney):** EEA/UK/CH keep analytics + ad storage **denied** by default (Google CMP when ads on). Everywhere else: analytics (and ad storage) **granted** by default; banner **Reject / Do not sell or share** denies and remembers (`docuforge:cookie-ok=0`).
+  - **Implementation:** Consent Mode region defaults in `Analytics.astro`; Worker `__docuklinGeo` unchanged; GA loads promptly (removed idle deferral); `trackEvent` queues via `dataLayer` when gtag stub missing; cookies/privacy/methodology + `AGENTS.md` / `.cursor/rules/consent-and-csp.mdc` / DEPLOYMENT updated. Vitest for `trackEvent` queue.
+  - Did **not** run IndexNow.
+- **2026-11-25 — SEO authority / Consent Mode / GSC variants (earlier PR):**
+  - **GA4 Consent Mode v2 (superseded by 2026-11-27 geo policy):** always load `gtag.js` on idle with denied defaults; Accept → granted; Reject keeps denied. Cookies + privacy copy updated. No second CMP.
   - **Author / sameAs:** defaults `PUBLIC_AUTHOR_SAME_AS` = GitHub + Reddit `u/ihammadiqbal117` (already in growth notes); About bio block expanded from in-repo facts only; hooks for LinkedIn/X/org sameAs/`PUBLIC_AUTHOR_BIO` documented.
   - **Variants (additive, no URL/title/H1 churn on existing pages):** wedding videography contract template, video production contract, landscaping estimate, flooring estimate; construction estimate gained construction-quote FAQ/section without title change; near-page-1 guides expanded (`photography-contract-clauses`, `line-item-totals-explained`, `podcast-script-structure`); wedding videography guide CTA → new wedding tool.
   - **Thin pages:** thicker `/`, `/methodology/`, `/hubs/forms/`, `/hubs/creative-templates/` (+ estimates/contracts hub rows); forms/creative meta descriptions lengthened to ~140–160 chars.
@@ -150,4 +154,6 @@ Prioritized open work. Owner-confirmed gaps preferred over guesses.
 6. **Reddit:** pause promo/launch posts until karma recovers.
 7. **Uneed re-review** / **TinyLaunch resubmit** after YardTally **2026-12-07** (owner).
 8. **AdSense** — status **Getting ready**; keep publishing.
-9. **Weekly GSC check** — record deltas in Baseline (do not invent numbers). No geotargeting from country mix. After Consent Mode always-load ships, re-check GA4 users (owner).
+9. **Weekly GSC check** — record deltas in Baseline (do not invent numbers). No geotargeting from country mix. After geo-consent PR merges/deploys, re-check GA4 users (owner); IndexNow only if deploy includes sitemap URL changes.
+10. **SEO title polish** — videography contract + wedding videography guide titles over 60 with brand / KEYWORD-MAP wedding bleed (separate PR).
+11. **Sister-site defaults** — YardTally already `https://getyardtally.com` on main; FeeCalc/FiberCalc/PetCalc still workers.dev until their custom domains exist (owner).

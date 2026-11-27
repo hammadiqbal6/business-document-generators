@@ -14,8 +14,7 @@ const consentRegions = [...CONSENT_MODE_REGIONS];
       }
       window.gtag = gtag;
 
-      // Consent Mode v2 — region-scoped defaults for EEA/UK/CH (Google CMP / Funding Choices
-      // updates these via TCF). Longer wait_for_update so the certified message can settle.
+      // Consent Mode v2 — EEA/UK/CH: denied analytics + ads until Google CMP / opt-in.
       gtag('consent', 'default', {
         ad_storage: 'denied',
         ad_user_data: 'denied',
@@ -24,12 +23,13 @@ const consentRegions = [...CONSENT_MODE_REGIONS];
         wait_for_update: 2000,
         region: consentRegions,
       });
-      // Everywhere else: same denied defaults until the site cookie banner Accept.
+      // Everywhere else: analytics granted by default (owner policy 2026-11-27).
+      // Ads also granted outside CMP regions so AdSense can measure; Reject / DNS flips all to denied.
       gtag('consent', 'default', {
-        ad_storage: 'denied',
-        ad_user_data: 'denied',
-        ad_personalization: 'denied',
-        analytics_storage: 'denied',
+        ad_storage: 'granted',
+        ad_user_data: 'granted',
+        ad_personalization: 'granted',
+        analytics_storage: 'granted',
         wait_for_update: 500,
       });
       gtag('js', new Date());
@@ -69,9 +69,11 @@ const consentRegions = [...CONSENT_MODE_REGIONS];
       function grantAnalytics() {
         gtag('consent', 'update', {
           analytics_storage: 'granted',
+          ad_storage: 'granted',
+          ad_user_data: 'granted',
+          ad_personalization: 'granted',
         });
         if (configured) {
-          // Tag already configured under denied consent — fire the page view now.
           sendPageView();
         } else {
           loadGaTag();
@@ -89,39 +91,36 @@ const consentRegions = [...CONSENT_MODE_REGIONS];
 
       /**
        * Consent Mode v2 load path:
-       * - Always load gtag.js (idle) with denied defaults so cookieless pings can work.
-       * - If the visitor already Accepted, grant analytics_storage before/with config.
-       * - If they Rejected, keep storage denied (tag still loads; no storage cookies).
-       * - EEA/UK/CH: Google CMP / TCF may update consent later; denied defaults stay until then.
+       * - Apply stored Accept/Reject preference (if any), then load gtag.js promptly
+       *   (no idle delay — short visits were lost when the tag waited for requestIdleCallback).
+       * - EEA/UK/CH defaults stay denied until Google CMP or Accept.
+       * - Elsewhere defaults grant analytics (and ad storage); Reject / DNS denies and remembers.
        */
-      function scheduleTagLoad() {
-        var run = function () {
+      function bootTag() {
+        try {
+          var v = null;
           try {
-            var v = null;
-            try {
-              v = localStorage.getItem(CONSENT_KEY);
-            } catch (e) {
-              /* ignore */
-            }
-            if (v === '1') {
-              gtag('consent', 'update', { analytics_storage: 'granted' });
-            } else if (v === '0') {
-              denyAnalytics();
-            }
-            loadGaTag();
+            v = localStorage.getItem(CONSENT_KEY);
           } catch (e) {
-            loadGaTag();
+            /* ignore */
           }
-        };
-        if ('requestIdleCallback' in window) {
-          requestIdleCallback(run, { timeout: 4000 });
-        } else {
-          setTimeout(run, 1500);
+          if (v === '1') {
+            gtag('consent', 'update', {
+              analytics_storage: 'granted',
+              ad_storage: 'granted',
+              ad_user_data: 'granted',
+              ad_personalization: 'granted',
+            });
+          } else if (v === '0') {
+            denyAnalytics();
+          }
+          loadGaTag();
+        } catch (e) {
+          loadGaTag();
         }
       }
 
-      if (document.readyState === 'complete') scheduleTagLoad();
-      else window.addEventListener('load', scheduleTagLoad, { once: true });
+      bootTag();
 
       window.__docuforgeGrantAnalytics = grantAnalytics;
       window.__docuforgeDenyAnalytics = denyAnalytics;
