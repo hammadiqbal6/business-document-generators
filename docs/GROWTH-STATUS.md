@@ -30,7 +30,12 @@ As of **2026-11-17** (owner-reported GSC/GA4 window) unless noted; **3-month GSC
 
 In-repo and confirmed off-repo completions.
 
-- **2026-11-27 — SEO title fixes (this PR):**
+- **2026-11-27 — Sitemap completeness + quote-estimate SEO (this PR):**
+  - Investigated live + GSC: `https://docuklin.com/sitemap-index.xml` → `sitemap-0.xml` already lists **69** URLs including canonical `https://docuklin.com/tools/quote-estimate-generator/` (trailing slash, https, non-www); robots.txt already points at sitemap-index; URL Inspection shows Submitted and indexed with that sitemap. GSC sitemap “indexed: 0” count on the index feed is a console lag quirk, not a missing-loc bug.
+  - Hardened CI: `scripts/lib/expected-sitemap-paths.mjs` + `tests/sitemap-completeness.test.ts`; `indexing-audit.mjs` fails if any expected tool/guide/static path is absent from dist sitemap (exact origin + trailing slash).
+  - Flagship `/tools/quote-estimate-generator/`: tighter title/meta/H1 for free estimate / quote estimate queries (no stuffing); `updatedAt` 2026-11-27; inbound links from estimates hub CTA + FAQ, `/tools/` index, work-order / change-order / progress-invoice related lists, and invoice-vs-estimate prose paths.
+  - IndexNow not run in this PR (post-deploy only).
+- **2026-11-27 — SEO title fixes (earlier PR #57):**
   - `/tools/videography-contract/` title: `Videography Contract Template (Free)` — removed `(Free Wedding & Video)` (KEYWORD-MAP: wedding → wedding-videography-contract-template; branded title ≤60).
   - `/guides/wedding-videography-contract/` title: `Wedding Videography Contract: What to Include` (was 64 with brand; now ≤60).
   - Bumped `updatedAt` on both; Vitest asserts branded titles ≤60. IndexNow not run.
@@ -150,7 +155,7 @@ In-repo and confirmed off-repo completions.
 
 Prioritized open work. Owner-confirmed gaps preferred over guesses.
 
-1. **After merge/deploy of title PR:** run IndexNow (`npm run indexnow` / Workers Builds) — do not change the key; then GSC URL Inspection → Request indexing for `/tools/videography-contract/` and `/guides/wedding-videography-contract/`.
+1. **After merge/deploy of this sitemap/SEO PR:** run IndexNow (`npm run indexnow` / Workers Builds) — do not change the key; then GSC URL Inspection → Request indexing for `/tools/quote-estimate-generator/` (and confirm sitemap association). Also still request indexing for `/tools/videography-contract/` and `/guides/wedding-videography-contract/` if not done after #57.
 1b. **After merge/deploy of earlier variant PR (if not done):** IndexNow + GSC Request indexing for new tools (`wedding-videography-contract-template`, `video-production-contract`, `landscaping-estimate`, `flooring-estimate`) and substantially thickened pages. Confirm cookies/privacy/terms stay noindex and out of sitemap; embeds/404 stay intentional noindex.
 2. **Owner must supply (when real profiles exist):** LinkedIn URL(s), X/Twitter profile URL + `PUBLIC_TWITTER_HANDLE`, optional longer `PUBLIC_AUTHOR_BIO`, optional brand `PUBLIC_ORG_SAME_AS`. Defaults already ship GitHub + Reddit; do not invent missing socials.
 3. **Construction lien waiver basics guide** (SEO-GUIDE content calendar) — still open.
