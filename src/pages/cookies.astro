@@ -20,9 +20,9 @@ const path = '/cookies/';
 
   <h2>What we use cookies for</h2>
   <p>
-    Cookies and similar storage fall into two buckets on this site: (1) optional analytics if you accept
-    cookies, and (2) advertising cookies only if Google AdSense is enabled in site configuration. Generators
-    themselves rely on in-page JavaScript and optional <code>localStorage</code> drafts—not cookies—to work.
+    Cookies and similar storage fall into two buckets on this site: (1) analytics (GA4 when configured), and
+    (2) advertising cookies only if Google AdSense is enabled in site configuration. Generators themselves rely
+    on in-page JavaScript and optional <code>localStorage</code> drafts—not cookies—to work.
   </p>
 
   <h2>Which consent tool you see</h2>
@@ -30,27 +30,29 @@ const path = '/cookies/';
     <strong>EEA, United Kingdom, and Switzerland:</strong> when AdSense is enabled, we use Google’s
     certified Privacy &amp; messaging GDPR consent message (Funding Choices / adsbygoogle.js, IAB TCF v2.2).
     That is the only consent UI for those visitors. The site’s own Accept/Reject cookie bar is not shown there,
-    so you do not get two popups.
+    so you do not get two popups. Analytics and ad storage stay denied until that CMP (or Accept when ads are off)
+    updates consent.
   </p>
   <p>
-    <strong>Everywhere else:</strong> the site cookie bar (Accept / Reject) remains the control for analytics
-    consent. Behaviour outside EEA/UK/CH is unchanged.
+    <strong>Everywhere else:</strong> the site cookie bar shows Accept and <strong>Reject / Do not sell or
+    share</strong>. Analytics is on by default in these regions; Reject / Do not sell or share turns it off and
+    remembers your choice.
   </p>
 
   <h2>Analytics and Consent Mode</h2>
   <p>
-    If Google Analytics (GA4) is configured, Consent Mode v2 defaults deny <code>analytics_storage</code>,
-    <code>ad_storage</code>, <code>ad_user_data</code>, and <code>ad_personalization</code> before the tag
-    configures. The GA script loads on idle for every region with those denied defaults so cookieless
-    measurement pings can work. For EEA/UK/CH the defaults are region-scoped and stay denied until Google’s
-    CMP updates consent. Elsewhere, storage stays denied until you Accept the site cookie bar (or on later
-    visits if you already accepted); Accept grants <code>analytics_storage</code> and a full page view is sent.
+    If Google Analytics (GA4) is configured, Consent Mode v2 sets region-specific defaults before the tag
+    configures. For EEA/UK/CH, defaults deny <code>analytics_storage</code>, <code>ad_storage</code>,
+    <code>ad_user_data</code>, and <code>ad_personalization</code> until Google’s CMP updates consent. For all
+    other countries, those signals default to <strong>granted</strong> so basic traffic measurement works; the GA
+    script loads promptly (not deferred until idle). Choosing <strong>Reject / Do not sell or share</strong>
+    updates consent to denied for all four signals.
   </p>
   <p>
     Outside EEA/UK/CH, choosing <strong>Accept</strong> stores <code>docuforge:cookie-ok=1</code> in
-    localStorage and grants <code>analytics_storage</code>. Choosing <strong>Reject</strong> stores
-    <code>docuforge:cookie-ok=0</code> and keeps storage denied (the tag may still load for cookieless pings
-    only). Clearing site data shows the bar again. That localStorage key is an internal preference flag, not a
+    localStorage and keeps storage granted. Choosing <strong>Reject / Do not sell or share</strong> stores
+    <code>docuforge:cookie-ok=0</code> and denies storage (the tag may still load for cookieless pings only).
+    Clearing site data shows the bar again. That localStorage key is an internal preference flag, not a
     third-party tracking cookie.
   </p>
 
@@ -77,9 +79,9 @@ const path = '/cookies/';
 
   <h2>Your choices</h2>
   <p>
-    In EEA/UK/CH, use Google’s consent message controls. Elsewhere, use the on-site Accept / Reject controls,
-    then browser settings to block or delete cookies if you change your mind. Rejecting analytics does not
-    disable the document generators. For corrections or privacy questions, see
+    In EEA/UK/CH, use Google’s consent message controls. Elsewhere, use the on-site Accept or Reject / Do not
+    sell or share controls, then browser settings to block or delete cookies if you change your mind. Rejecting
+    analytics does not disable the document generators. For corrections or privacy questions, see
     <a href="/contact/">Contact</a> and the <a href="/privacy/">privacy policy</a>.
   </p>
 </BaseLayout>

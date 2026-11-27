@@ -39,13 +39,13 @@ const path = '/privacy/';
 
   <h2>Google Analytics (optional)</h2>
   <p>
-    If enabled, we use Google Analytics 4 to understand aggregate traffic (for example, which tools are opened). Consent Mode v2 keeps
-    analytics and ad-related storage denied by default. The GA script loads with those denied defaults (including cookieless pings). In the
-    EEA, UK, and Switzerland those defaults are region-scoped and stay denied until Google’s certified CMP updates consent. Elsewhere,
-    storage stays denied until you Accept the site cookie bar (or on later visits if you already accepted); Accept grants
-    <code>analytics_storage</code> and a full page view is sent. Reject keeps storage denied. You can opt out via browser settings or
-    Google’s tools. Measurement ID is configured in site settings. We may record events such as opening a tool editor, exporting PDF/DOCX,
-    copying an embed snippet, and clicking outbound reference links.
+    If enabled, we use Google Analytics 4 to understand aggregate traffic (for example, which tools are opened). Consent Mode v2 uses
+    region-specific defaults. In the EEA, UK, and Switzerland, analytics and ad-related storage stay denied until Google’s certified CMP
+    updates consent (or until you Accept the site cookie bar when ads are off). Everywhere else, <code>analytics_storage</code> (and
+    related ad storage signals) default to granted so visits are counted; the site banner offers Accept and
+    <strong>Reject / Do not sell or share</strong>, which denies storage and stores your choice for later visits. You can also opt out via
+    browser settings or Google’s tools. Measurement ID is configured in site settings. We may record events such as opening a tool editor,
+    exporting PDF/DOCX, copying an embed snippet, and clicking outbound reference links.
   </p>
 
   <h2>Google AdSense and advertising cookies</h2>

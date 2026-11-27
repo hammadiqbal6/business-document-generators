@@ -74,7 +74,7 @@ const allLd = includeSiteGraph
       aria-label="Cookie notice"
       hidden
     >
-      <p>
+      <p data-cookie-copy>
         We use cookies for analytics.
         <a href="/cookies/">Privacy</a>
       </p>
@@ -144,11 +144,32 @@ const allLd = includeSiteGraph
           }, 800);
         }
 
+        function adaptBannerForRegion() {
+          var copy = banner.querySelector('[data-cookie-copy]');
+          var reject = banner.querySelector('[data-cookie-reject]');
+          var inConsentRegion = geoSaysConsentRegion();
+          if (inConsentRegion) {
+            if (copy) {
+              copy.innerHTML =
+                'We use cookies for analytics. <a href="/cookies/">Privacy</a>';
+            }
+            if (reject) reject.textContent = 'Reject';
+            return;
+          }
+          // Rest of world: analytics is granted by default — banner is an opt-out notice.
+          if (copy) {
+            copy.innerHTML =
+              'We use cookies for analytics. You can reject or opt out of sale/sharing. <a href="/cookies/">Privacy</a>';
+          }
+          if (reject) reject.textContent = 'Reject / Do not sell or share';
+        }
+
         shouldDeferToGoogleCmp(function (defer) {
           if (defer) {
             dismissBanner();
             return;
           }
+          adaptBannerForRegion();
           try {
             if (!localStorage.getItem(KEY)) showBanner();
           } catch (e) {
@@ -157,7 +178,7 @@ const allLd = includeSiteGraph
         });
 
         var accept = banner.querySelector('[data-cookie-accept]');
-        var reject = banner.querySelector('[data-cookie-reject]');
+        var rejectBtn = banner.querySelector('[data-cookie-reject]');
         if (accept) {
           accept.addEventListener('click', function () {
             try {
@@ -171,8 +192,8 @@ const allLd = includeSiteGraph
             }
           });
         }
-        if (reject) {
-          reject.addEventListener('click', function () {
+        if (rejectBtn) {
+          rejectBtn.addEventListener('click', function () {
             try {
               localStorage.setItem(KEY, '0');
             } catch (e) {

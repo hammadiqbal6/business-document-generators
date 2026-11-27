@@ -6,9 +6,12 @@ globs: public/_headers,src/components/seo/**,src/layouts/**,src/lib/consentRegio
 
 ## Consent
 
-- Consent Mode v2 defaults are **denied** (`ad_storage`, `ad_user_data`, `ad_personalization`, `analytics_storage`) in `Analytics.astro`.
-- EEA / UK (`GB`) / CH: Google AdSense Privacy & messaging (Funding Choices / IAB TCF) is the CMP. Worker sets `window.__docuklinGeo` via `consentRegions.ts`; hide the site cookie bar there when ads are enabled.
-- Other regions: site Accept/Reject banner. Do not invent a second CMP stack.
+- Consent Mode v2 uses **region-specific defaults** in `Analytics.astro` (gtag `consent default` + `region`):
+  - **EEA / UK (`GB`) / CH:** `ad_storage`, `ad_user_data`, `ad_personalization`, and `analytics_storage` are **denied** until Google’s CMP (or Accept when ads are off) updates them.
+  - **Everywhere else:** `analytics_storage` (and ad storage signals) are **granted** by default so GA4 counts users; the site banner offers **Reject / Do not sell or share**, which denies all four and stores `docuforge:cookie-ok=0`.
+- EEA / UK / CH: Google AdSense Privacy & messaging (Funding Choices / IAB TCF) is the CMP when ads are on. Worker sets `window.__docuklinGeo` via `consentRegions.ts`; hide the site cookie bar there when ads are enabled.
+- Other regions: site Accept + Reject / Do not sell or share banner (opt-out). Do not invent a second CMP stack.
+- Load `gtag.js` promptly (no `requestIdleCallback` deferral). Queue custom events through `dataLayer` when the gtag stub is not ready (`src/lib/analytics.ts`).
 
 ## CSP (`public/_headers`)
 
