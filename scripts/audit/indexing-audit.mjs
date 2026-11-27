@@ -9,10 +9,15 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import { DEFAULT_SITE_URL } from '../../src/config/siteDefaults.mjs';
+import {
+  expectedIndexablePaths,
+  isExcludedFromSitemap,
+} from '../lib/expected-sitemap-paths.mjs';
 
 const dist = path.resolve('dist');
 const origin = (process.env.PUBLIC_SITE_URL || DEFAULT_SITE_URL).replace(/\/$/, '');
 const errors = [];
+const { paths: expectedPaths, toolSlugs, guideSlugs } = expectedIndexablePaths();
 
 function fail(msg) {
   errors.push(msg);
@@ -234,23 +239,35 @@ for (const pagePath of indexablePages) {
   if (!sitemapLocs.has(url)) fail(`indexable page missing from sitemap: ${url}`);
 }
 
+// Data-driven inventory: every expected tool/guide/static path must be listed
+// with the exact canonical origin + trailing slash (GSC “URL not in sitemap” guard).
+for (const pagePath of expectedPaths) {
+  const url = `${origin}${pagePath === '/' ? '/' : pagePath}`;
+  if (!sitemapLocs.has(url)) {
+    fail(`expected indexable route missing from sitemap: ${url}`);
+  }
+  if (isExcludedFromSitemap(pagePath)) {
+    fail(`excluded path wrongly listed as expected: ${pagePath}`);
+  }
+}
+
 // Tool pages must all be in the sitemap with lastmod
-const toolDirs = fs.existsSync(path.join(dist, 'tools'))
-  ? fs
-      .readdirSync(path.join(dist, 'tools'), { withFileTypes: true })
-      .filter((d) => d.isDirectory() && d.name !== 'index.html')
-      .map((d) => d.name)
-  : [];
-for (const slug of toolDirs) {
-  if (slug === 'embed') continue;
+for (const slug of toolSlugs) {
   const toolUrl = `${origin}/tools/${slug}/`;
-  const embedHtml = path.join(dist, 'tools', slug, 'embed', 'index.html');
-  // skip if this is somehow not a tool folder
-  if (!fs.existsSync(path.join(dist, 'tools', slug, 'index.html'))) continue;
   if (!sitemapLocs.has(toolUrl)) fail(`tool missing from sitemap: ${toolUrl}`);
   const entry = sitemapEntries.find((e) => e.loc === toolUrl);
   if (entry && !entry.lastmod) fail(`tool sitemap entry missing lastmod: ${toolUrl}`);
-  void embedHtml;
+}
+
+for (const slug of guideSlugs) {
+  const guideUrl = `${origin}/guides/${slug}/`;
+  if (!sitemapLocs.has(guideUrl)) fail(`guide missing from sitemap: ${guideUrl}`);
+}
+
+// Flagship estimate URL must match the page canonical form exactly
+const flagship = `${origin}/tools/quote-estimate-generator/`;
+if (!sitemapLocs.has(flagship)) {
+  fail(`flagship quote-estimate-generator missing from sitemap: ${flagship}`);
 }
 
 console.log('=== Indexing buckets ===');

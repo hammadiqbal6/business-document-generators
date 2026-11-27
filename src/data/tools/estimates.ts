@@ -591,12 +591,12 @@ export const quoteEstimate: ToolDefinition = {
     'free instant quote',
     'construction quote generator',
   ],
-  title: 'Free Estimate Generator: Quote Online, No Signup',
+  title: 'Free Estimate Generator: Quote Estimate PDF',
   metaDescription:
-    'Make a professional estimate or quote in minutes: line items, tax, discounts, deposit and expiry date. Free PDF/Word, no signup, no watermark.',
-  h1: 'Free Estimate Generator (Quote & Estimate Maker)',
+    'Free estimate generator for quotes online: line items, tax, deposit, and expiry date. Quote estimate generator with PDF/Word export—no signup, no watermark.',
+  h1: 'Free Estimate Generator (Quote Estimate Maker)',
   answerFirst:
-    'Make a professional estimate or quote in minutes with no signup and no watermark: parties, job description, line items, tax, total, and how long the price holds. Preview live, then export PDF or Word. Nothing is uploaded to a server.',
+    'Use this free estimate generator to make a quote or estimate in minutes with no signup and no watermark: parties, job description, line items, tax, total, and how long the price holds. Preview live, then export PDF or Word. Nothing is uploaded to a server.',
   applicationCategory: 'BusinessApplication',
   isLegalAdjacent: false,
   documentTitle: 'Estimate',
@@ -758,7 +758,7 @@ export const quoteEstimate: ToolDefinition = {
     'receipt-generator',
   ],
   publishedAt: '2026-10-19',
-  updatedAt: '2026-11-25',
+  updatedAt: '2026-11-27',
 };
 
 export const receiptGenerator: ToolDefinition = {
@@ -1029,6 +1029,7 @@ export const workOrder: ToolDefinition = {
     sources: estimateSources,
   },
   relatedSlugs: [
+    'quote-estimate-generator',
     'construction-estimate-template',
     'contractor-invoice',
     'purchase-order-template',
@@ -1445,6 +1446,7 @@ export const changeOrderTemplate: ToolDefinition = {
     sources: estimateSources,
   },
   relatedSlugs: [
+    'quote-estimate-generator',
     'construction-estimate-template',
     'contractor-invoice',
     'progress-invoice',
@@ -1609,7 +1611,7 @@ export const progressInvoice: ToolDefinition = {
       },
       {
         heading: 'When to use this vs a line-item contractor invoice',
-        body: 'Use progress billing when the deal is a fixed contract with draws. Use the regular contractor invoice when you are billing open line items, T&M extras, or a one-off deposit without a percent-complete schedule. After a signed change order raises the contract sum, update the contract value here before the next draw.',
+        body: 'Use progress billing when the deal is a fixed contract with draws. Use the regular contractor invoice when you are billing open line items, T&M extras, or a one-off deposit without a percent-complete schedule. Price the job first with /tools/quote-estimate-generator/ (or /tools/construction-estimate-template/ for remodel allowances) so the contract value on this draw matches what the client accepted. After a signed change order raises the contract sum, update the contract value here before the next draw.',
       },
     ],
     workedExample: {
@@ -1663,6 +1665,7 @@ export const progressInvoice: ToolDefinition = {
     sources: estimateSources,
   },
   relatedSlugs: [
+    'quote-estimate-generator',
     'contractor-invoice',
     'invoice-late-fee-calculator',
     'change-order-template',

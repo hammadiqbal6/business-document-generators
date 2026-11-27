@@ -161,7 +161,8 @@ Short mirror of [`docs/GROWTH-STATUS.md`](docs/GROWTH-STATUS.md). **Every PR mus
 
 ### Done (as of 2026-11-27)
 
-- **SEO title fixes (this PR):** `/tools/videography-contract/` title → `Videography Contract Template (Free)` (drops wedding bleed; KEYWORD-MAP primary stays videography contract; branded ≤60). `/guides/wedding-videography-contract/` title → `Wedding Videography Contract: What to Include` (branded ≤60). Bumped `updatedAt`. IndexNow not run.
+- **Sitemap completeness + quote-estimate SEO (this PR):** Confirmed live sitemap-index → 69 locs including canonical `/tools/quote-estimate-generator/`; robots already references sitemap-index. Added expected-path inventory + Vitest + stronger `audit:indexing` gate. Tightened flagship estimate title/meta/H1 and added contextual inbound links (hub, `/tools/`, related tools, invoice-vs-estimate). IndexNow post-deploy only.
+- **SEO title fixes (merged #57):** `/tools/videography-contract/` title → `Videography Contract Template (Free)` (drops wedding bleed; KEYWORD-MAP primary stays videography contract; branded ≤60). `/guides/wedding-videography-contract/` title → `Wedding Videography Contract: What to Include` (branded ≤60). Bumped `updatedAt`. IndexNow not run.
 - **GA4 geo consent + reliability (merged #56):** Consent Mode v2 region defaults — EEA/UK/CH denied (ads + analytics) until CMP/Accept; elsewhere analytics (and ad storage) **granted** by default with Accept + **Reject / Do not sell or share** opt-out. GA loads promptly (no idle deferral). `trackEvent` queues via `dataLayer` when gtag is not ready. Cookies/privacy/rules updated. Owner decision (Sidney, 2026-11-27).
 - **Earlier — GA4 Consent Mode v2 (2026-11-25):** always-load with denied defaults; superseded by geo policy above.
 
@@ -200,7 +201,7 @@ Short mirror of [`docs/GROWTH-STATUS.md`](docs/GROWTH-STATUS.md). **Every PR mus
 
 ### Remaining
 
-- After merge/deploy of title PR: IndexNow (key unchanged) + GSC Request indexing for `/tools/videography-contract/` and `/guides/wedding-videography-contract/`.
+- After merge/deploy of this sitemap/SEO PR: IndexNow (key unchanged) + GSC Request indexing for `/tools/quote-estimate-generator/` (confirm sitemap association). Also `/tools/videography-contract/` + `/guides/wedding-videography-contract/` if not done after #57.
 - After merge/deploy of geo-consent (#56): confirm GA4 Realtime counts non-EEA visits; IndexNow only if sitemap URLs changed.
 - After merge/deploy (earlier variants): IndexNow + GSC Request indexing for new variant tools and thickened pages; confirm cookies/privacy/terms noindex.
 - Owner: set `PUBLIC_AUTHOR_SAME_AS` / `PUBLIC_ORG_SAME_AS` / `PUBLIC_TWITTER_HANDLE` / longer `PUBLIC_AUTHOR_BIO` when LinkedIn/X profiles exist (defaults already include GitHub + Reddit).

@@ -98,7 +98,7 @@ const hubCopy: Record<
       {
         question: 'Where do I start for a free estimate generator?',
         answer:
-          'Use the free quote & estimate generator for mixed service scopes. For remodel bids or a construction quote with allowances, use the construction estimate template instead. Specialty crews can open roofing, painting, landscaping, or flooring presets.',
+          'Use /tools/quote-estimate-generator/ for mixed service scopes (the free estimate / quote estimate generator). For remodel bids or a construction quote with allowances, use /tools/construction-estimate-template/ instead. Specialty crews can open roofing, painting, landscaping, or flooring presets.',
       },
       {
         question: 'Do these tools store my client data?',
@@ -334,6 +334,22 @@ const jsonLd = [
   ...(faqLd ? [faqLd] : []),
 ];
 const ogImagePath = `/og/hub-${meta.slug}.png`;
+
+function escapeHtml(s: string): string {
+  return s
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;');
+}
+
+/** Turn bare /tools/.../ and /guides/.../ /hubs/.../ paths in hub FAQ into links. */
+function linkInternalPaths(para: string): string {
+  return escapeHtml(para)
+    .replace(/\/tools\/[a-z0-9-]+\//g, (p) => `<a href="${p}">${p}</a>`)
+    .replace(/\/guides\/[a-z0-9-]+\//g, (p) => `<a href="${p}">${p}</a>`)
+    .replace(/\/hubs\/[a-z0-9-]+\//g, (p) => `<a href="${p}">${p}</a>`);
+}
 ---
 <BaseLayout
   title={copy.title}
@@ -346,6 +362,13 @@ const ogImagePath = `/og/hub-${meta.slug}.png`;
   <Breadcrumbs items={crumbs} />
   <h1>{meta.name}</h1>
   <p class="lead answer-first">{copy.intro}</p>
+  {category === 'estimates-invoices' && (
+    <p>
+      Need a priced PDF today? Open the{' '}
+      <a href="/tools/quote-estimate-generator/">free estimate generator</a>
+      {' '}(quote estimate generator)—no signup, no watermark—then move to invoices and receipts as the job progresses.
+    </p>
+  )}
 
   <h2>When to use which document</h2>
   <p>{copy.whenToUse}</p>
@@ -426,7 +449,7 @@ const ogImagePath = `/og/hub-${meta.slug}.png`;
     {copy.faq.map((f) => (
       <details>
         <summary>{f.question}</summary>
-        <p>{f.answer}</p>
+        <p set:html={linkInternalPaths(f.answer)} />
       </details>
     ))}
   </div>
