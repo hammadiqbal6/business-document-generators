@@ -377,8 +377,8 @@ This site is wired for **Google’s certified AdSense GDPR consent message** (Pr
 
 1. Publish the European regulations message in AdSense → Privacy & messaging for `docuklin.com`.
 2. Keep `PUBLIC_ADS_ENABLED=true` and a publisher ID so `adsbygoogle.js` loads (that script hosts Funding Choices).
-3. The Worker injects `window.__docuklinGeo` from Cloudflare `request.cf.country`. In EEA/UK/CH the site cookie bar stays hidden so visitors see only Google’s message. Elsewhere the existing Accept/Reject bar is unchanged.
-4. Consent Mode v2 uses region-scoped denied defaults for those countries (`src/components/seo/Analytics.astro`); Google’s CMP updates consent via TCF.
+3. The Worker injects `window.__docuklinGeo` from Cloudflare `request.cf.country`. In EEA/UK/CH the site cookie bar stays hidden so visitors see only Google’s message. Elsewhere the Accept + Reject / Do not sell or share bar is shown (analytics granted by default; Reject denies and remembers).
+4. Consent Mode v2 uses region-scoped **denied** defaults for EEA/UK/CH and **granted** analytics (and ad storage) defaults elsewhere (`src/components/seo/Analytics.astro`); Google’s CMP updates consent via TCF in CMP regions.
 5. CSP in `public/_headers` allows `fundingchoicesmessages.google.com` for script, frame, and connect.
 
 Document the CMP choice on `/privacy/` and `/cookies/` (already described).

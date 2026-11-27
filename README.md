@@ -162,11 +162,12 @@ Short mirror of [`docs/GROWTH-STATUS.md`](docs/GROWTH-STATUS.md). **Every PR mus
 ### Done (as of 2026-11-27)
 
 - **SEO title fixes (this PR):** `/tools/videography-contract/` title → `Videography Contract Template (Free)` (drops wedding bleed; KEYWORD-MAP primary stays videography contract; branded ≤60). `/guides/wedding-videography-contract/` title → `Wedding Videography Contract: What to Include` (branded ≤60). Bumped `updatedAt`. IndexNow not run.
+- **GA4 geo consent + reliability (merged #56):** Consent Mode v2 region defaults — EEA/UK/CH denied (ads + analytics) until CMP/Accept; elsewhere analytics (and ad storage) **granted** by default with Accept + **Reject / Do not sell or share** opt-out. GA loads promptly (no idle deferral). `trackEvent` queues via `dataLayer` when gtag is not ready. Cookies/privacy/rules updated. Owner decision (Sidney, 2026-11-27).
+- **Earlier — GA4 Consent Mode v2 (2026-11-25):** always-load with denied defaults; superseded by geo policy above.
 
 ### Done (as of 2026-11-25)
 
-- **GA4 Consent Mode v2 (earlier PR):** `Analytics.astro` always loads gtag on idle with denied defaults (cookieless pings); Accept grants `analytics_storage`; Reject keeps storage denied. Cookies/privacy copy updated. No existing URL/title/H1 changes.
-- **Author / sameAs (this PR):** defaults include GitHub + Reddit (`u/ihammadiqbal117`); About bio block strengthened from in-repo facts; env hooks for LinkedIn/X/`PUBLIC_AUTHOR_BIO` remain. Owner must still supply LinkedIn, X handle, longer bio when available.
+- **Author / sameAs (earlier PR):** defaults include GitHub + Reddit (`u/ihammadiqbal117`); About bio block strengthened from in-repo facts; env hooks for LinkedIn/X/`PUBLIC_AUTHOR_BIO` remain. Owner must still supply LinkedIn, X handle, longer bio when available.
 - **GSC-priority variants (this PR):** `/tools/wedding-videography-contract-template/`, `/tools/video-production-contract/`, `/tools/landscaping-estimate/`, `/tools/flooring-estimate/`; construction estimate quote-angle content (no title/H1 change); expanded near-page-1 guides; thicker hubs/home/methodology; forms/creative hub metas lengthened. Additive only—no redirects/merges.
 - **Embed backlink credit (this PR):** visible **Made with Docuklin** on embed pages + copy snippet → canonical tool URL, dofollow; README links https://docuklin.com and documents embed usage.
 - **Sitewide SEO plan (earlier):** tool titles/H1s/metas/FAQs; expanded videography / NDA / service agreement; contractor-estimate guide 301 → construction master; business-estimate quote angle; new guides `how-to-price-a-job`, `what-to-include-in-a-service-agreement`, `service-agreement-vs-contract`; hubs + `/tools/` title **Free Business Document Generators** with derived count; cookies/privacy/terms noindex; estimate URL + `/tools/:slug/null/` redirects; durable rules in `AGENTS.md`, `.cursor/rules/seo.mdc`, `.cursor/skills/add-seo-page/`.
@@ -200,13 +201,14 @@ Short mirror of [`docs/GROWTH-STATUS.md`](docs/GROWTH-STATUS.md). **Every PR mus
 ### Remaining
 
 - After merge/deploy of title PR: IndexNow (key unchanged) + GSC Request indexing for `/tools/videography-contract/` and `/guides/wedding-videography-contract/`.
+- After merge/deploy of geo-consent (#56): confirm GA4 Realtime counts non-EEA visits; IndexNow only if sitemap URLs changed.
 - After merge/deploy (earlier variants): IndexNow + GSC Request indexing for new variant tools and thickened pages; confirm cookies/privacy/terms noindex.
 - Owner: set `PUBLIC_AUTHOR_SAME_AS` / `PUBLIC_ORG_SAME_AS` / `PUBLIC_TWITTER_HANDLE` / longer `PUBLIC_AUTHOR_BIO` when LinkedIn/X profiles exist (defaults already include GitHub + Reddit).
 - Construction lien waiver basics guide still open; Bing verification unset; backlinks needed.
 - Pause Reddit promo until karma recovers; AdSense approval; Uneed / TinyLaunch (after 2026-12-07).
-- Weekly GSC check — record owner-reported deltas only. No geotargeting from country mix.
+- Weekly GSC check — record owner-reported deltas only. No geotargeting from country mix. Re-check GA4 users after geo consent ships (owner).
 
-GSC last 3 months (owner, 2026-11-25): **763** impressions, **1** click, avg pos **62.4**. Top queries include estimate generator / free, wedding videography contract, construction quote generator, video production contract. Top pages: videography-contract, contracts hub, quote-estimate-generator. Earlier 28d → 2026-11-17: **0** clicks, **486** impressions. GA4: **3** users (28d, pre–Consent Mode always-load).
+GSC last 3 months (owner, 2026-11-25): **763** impressions, **1** click, avg pos **62.4**. Top queries include estimate generator / free, wedding videography contract, construction quote generator, video production contract. Top pages: videography-contract, contracts hub, quote-estimate-generator. Earlier 28d → 2026-11-17: **0** clicks, **486** impressions. GA4: **3** users (28d, pre–geo consent grant outside EEA/UK/CH).
 
 
 ## Research in repo
