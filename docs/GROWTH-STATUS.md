@@ -4,7 +4,7 @@ Living tracker for Docuklin SEO and growth work. **Read this before planning gro
 
 Settled technical SEO policy (IndexNow wiring, jev-seo false alarms, title/schema rules) still lives under **SEO state** in `AGENTS.md`. This file holds current metrics and the work queue.
 
-Last updated: **2026-11-25**
+Last updated: **2026-11-27**
 
 ---
 
@@ -30,7 +30,11 @@ As of **2026-11-17** (owner-reported GSC/GA4 window) unless noted; **3-month GSC
 
 In-repo and confirmed off-repo completions.
 
-- **2026-11-25 — SEO authority / Consent Mode / GSC variants (this PR):**
+- **2026-11-27 — SEO title fixes (this PR):**
+  - `/tools/videography-contract/` title: `Videography Contract Template (Free)` — removed `(Free Wedding & Video)` (KEYWORD-MAP: wedding → wedding-videography-contract-template; branded title ≤60).
+  - `/guides/wedding-videography-contract/` title: `Wedding Videography Contract: What to Include` (was 64 with brand; now ≤60).
+  - Bumped `updatedAt` on both; Vitest asserts branded titles ≤60. IndexNow not run.
+- **2026-11-25 — SEO authority / Consent Mode / GSC variants (earlier PR):**
   - **GA4 Consent Mode v2:** always load `gtag.js` on idle with denied defaults (`ad_storage`, `ad_user_data`, `ad_personalization`, `analytics_storage`); Accept → `consent update` granted; Reject keeps denied. Cookies + privacy copy updated. No second CMP.
   - **Author / sameAs:** defaults `PUBLIC_AUTHOR_SAME_AS` = GitHub + Reddit `u/ihammadiqbal117` (already in growth notes); About bio block expanded from in-repo facts only; hooks for LinkedIn/X/org sameAs/`PUBLIC_AUTHOR_BIO` documented.
   - **Variants (additive, no URL/title/H1 churn on existing pages):** wedding videography contract template, video production contract, landscaping estimate, flooring estimate; construction estimate gained construction-quote FAQ/section without title change; near-page-1 guides expanded (`photography-contract-clauses`, `line-item-totals-explained`, `podcast-script-structure`); wedding videography guide CTA → new wedding tool.
@@ -142,7 +146,8 @@ In-repo and confirmed off-repo completions.
 
 Prioritized open work. Owner-confirmed gaps preferred over guesses.
 
-1. **After merge/deploy of this PR:** run IndexNow (`npm run indexnow` / Workers Builds) — do not change the key; then GSC URL Inspection → Request indexing for new tools (`wedding-videography-contract-template`, `video-production-contract`, `landscaping-estimate`, `flooring-estimate`) and substantially thickened pages (home, hubs, methodology, expanded guides). Confirm cookies/privacy/terms stay noindex and out of sitemap; embeds/404 stay intentional noindex.
+1. **After merge/deploy of title PR:** run IndexNow (`npm run indexnow` / Workers Builds) — do not change the key; then GSC URL Inspection → Request indexing for `/tools/videography-contract/` and `/guides/wedding-videography-contract/`.
+1b. **After merge/deploy of earlier variant PR (if not done):** IndexNow + GSC Request indexing for new tools (`wedding-videography-contract-template`, `video-production-contract`, `landscaping-estimate`, `flooring-estimate`) and substantially thickened pages. Confirm cookies/privacy/terms stay noindex and out of sitemap; embeds/404 stay intentional noindex.
 2. **Owner must supply (when real profiles exist):** LinkedIn URL(s), X/Twitter profile URL + `PUBLIC_TWITTER_HANDLE`, optional longer `PUBLIC_AUTHOR_BIO`, optional brand `PUBLIC_ORG_SAME_AS`. Defaults already ship GitHub + Reddit; do not invent missing socials.
 3. **Construction lien waiver basics guide** (SEO-GUIDE content calendar) — still open.
 4. **Bing Webmaster verification** — currently **unset** (owner).

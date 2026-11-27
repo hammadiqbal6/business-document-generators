@@ -20,4 +20,15 @@ describe('buildPageTitle', () => {
     const title = buildPageTitle('Contact Docuklin – Email and Corrections');
     expect(title).toBe('Contact Docuklin – Email and Corrections');
   });
+
+  it('keeps videography tool and wedding guide titles ≤60 with brand', () => {
+    const tool = buildPageTitle('Videography Contract Template (Free)');
+    const guide = buildPageTitle('Wedding Videography Contract: What to Include');
+    expect(tool).not.toContain('…');
+    expect(guide).not.toContain('…');
+    expect(tool.length).toBeLessThanOrEqual(60);
+    expect(guide.length).toBeLessThanOrEqual(60);
+    expect(tool).toBe('Videography Contract Template (Free) | Docuklin');
+    expect(guide).toBe('Wedding Videography Contract: What to Include | Docuklin');
+  });
 });
